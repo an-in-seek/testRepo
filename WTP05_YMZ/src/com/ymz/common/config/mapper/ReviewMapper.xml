@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="review.dao.ReviewMapper">
+
+	<sql id="review-select">
+		select  review_no, 
+				title, 
+				content, 
+				picture_name, 
+				hits, 
+				recommend, 
+				to_char(to_date(reg_date, 'yyyymmdd'), 'yyyy-mm-dd')reg_date, 
+				member_id
+		from review
+	</sql>
+	
+	<resultMap type="review" id="review-resultmap">
+		<id column="review_no" property="number"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="picture_name" property="pictureName"/>
+		<result column="hits" property="hits"/>
+		<result column="recommend" property="recommend"/>
+		<result column="reg_date" property="regDate"/>
+		<result column="member_id" property="memberId"/>
+	</resultMap>
+	
+	<!-- 등록 -->
+	<insert id="insertReview" parameterType="review">
+		insert into review (review_no, title, content, picture_name, hits, recommend, reg_date, member_id)
+		values (#{number}, #{title}, #{content}, #{pictureName, jdbcType=VARCHAR}, #{hits}, #{recommend}, to_char(sysdate, 'yyyymmdd'), #{memberId})
+	</insert>
+	
+	<!-- 수정 -->
+	
+	
+	
+	<!-- 삭제 -->
 </mapper>

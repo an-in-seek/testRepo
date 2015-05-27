@@ -1,5 +1,5 @@
 package com.ymz.review.service;
 
-public class A {
+public interface ReviewService {
 
 }
