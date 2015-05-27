@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.ymz.member.vo.Member;
 
-public class qna implements Serializable{
+public class QNA implements Serializable{
 
 	private int number;
 	private String title;
@@ -14,9 +14,9 @@ public class qna implements Serializable{
 	private int hits;
 	private String registrationDate;
 	
-	public qna(){}
+	public QNA(){}
 	
-	public qna(int number, String title, String content, String category,
+	public QNA(int number, String title, String content, String category,
 			Member memberId, int hits, String registrationDate) {
 		this.number = number;
 		this.title = title;
@@ -117,7 +117,7 @@ public class qna implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		qna other = (qna) obj;
+		QNA other = (QNA) obj;
 		if (category == null) {
 			if (other.category != null)
 				return false;
