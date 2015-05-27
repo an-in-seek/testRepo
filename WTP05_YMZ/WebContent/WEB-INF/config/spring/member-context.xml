@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+	<context:component-scan base-package="com.mycom.member.model, com.mycom.member.controller, com.mycom.faq.model, com.mycom.bbs"/>
+	
+	<mvc:annotation-driven/>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/login/**/*"/>
+			<bean class="com.mycom.common.interceptor.LoginCheckInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	<!-- Link controller들 설정 -->
+	
+	<mvc:view-controller path="/index.do" view-name="main.tiles"/>
+	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>
+	<mvc:view-controller path="/member/loginForm.do" view-name="member/login_form.tiles"/>
+	<mvc:view-controller path="/faq/registerForm.do" view-name="faq/register_form.tiles"/>
+	<!-- 로그인 후 요청하는 페이지중 로그인 체크 부분이 interceptor로 빠지면 단순 링크로 바뀌는 것들 view-controller로 처리 -->
+	
+	<!-- 자기정보 조회 -->
+	<mvc:view-controller path="/member/login/getMemberInfo.do" view-name="member/member_info.tiles"/>
+	
+	<!-- 회원정보 수정 폼 -->
+	<mvc:view-controller path="/member/login/modifyForm.do" view-name="member/modify_form.tiles"/>
+	
+	<!-- file upload 처리 multipartResolver 등록 -->
+	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
+	<!-- Validator에서 사용할 properties 파일 등록 -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
+		      p:basename="com.mycom.common.message.error" p:defaultEncoding="UTF-8"/>
+		      
+		      
+	<!-- TilesConfigurer 설정 -->
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/config/tiles/tiles-defs.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ViewResolver등록 -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="2"/>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="3"/>
+	
+	<!-- 
+	BasicDataSource&mapper위치<-SqlSessionFactoryBean<-SqlSessionTemplate<-MemberDAO<-MemberService
+	 -->
+	 <!-- BasicDataSource -->
+	 <bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+	 			p:driverClassName="oracle.jdbc.driver.OracleDriver"
+	 			p:url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
+	 			p:username="scott" p:password="tiger"
+	 			p:maxActive="50" p:initialSize="20"/>
+	 			
+	<!-- SqlSessionFactoryBean : SqlSessionFactoryBuilder의 역할. SqlSessionFactory를 생성한다. -->
+	 <bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+	 		   p:configLocation="/WEB-INF/config/mybatis/mybatis-config.xml"
+	 		   p:dataSource-ref="dataSource" />
+	 
+	<!-- SqlSessionTemplate 생성 - 생성자로 sqlSessionFactoryBean을 주입 -->
+	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" c:sqlSessionFactory-ref="sqlSessionFactory"/>
+		      
+	<!-- Transaction 처리 -->
+	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource"/>
+	
+	<!-- Annotation 기반 Tx  -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>		
+	
+</beans>
