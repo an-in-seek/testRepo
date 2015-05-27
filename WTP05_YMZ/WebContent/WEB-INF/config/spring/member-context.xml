@@ -11,13 +11,13 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 
-	<context:component-scan base-package="com.mycom.member.model, com.mycom.member.controller, com.mycom.faq.model, com.mycom.bbs"/>
+	<context:component-scan base-package="com.ymz.member.model, com.ymz.member.controller, com.ymz.faq.model, com.ymz.bbs"/>
 	
 	<mvc:annotation-driven/>
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**/login/**/*"/>
-			<bean class="com.mycom.common.interceptor.LoginCheckInterceptor"/>
+			<bean class="com.ymz.common.interceptor.LoginCheckInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- Link controller들 설정 -->
@@ -39,7 +39,7 @@
 	
 	<!-- Validator에서 사용할 properties 파일 등록 -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-		      p:basename="com.mycom.common.message.error" p:defaultEncoding="UTF-8"/>
+		      p:basename="com.ymz.common.message.error" p:defaultEncoding="UTF-8"/>
 		      
 		      
 	<!-- TilesConfigurer 설정 -->
