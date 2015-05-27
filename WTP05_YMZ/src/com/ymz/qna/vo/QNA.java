@@ -8,23 +8,24 @@ public class QNA implements Serializable{
 
 	private int number;
 	private String title;
-	private String content;
 	private String category;
-	private Member memberId;
-	private int hits;
 	private String registrationDate;
+	private int hits;
+	private String content;
+	private Member memberId;
 	
 	public QNA(){}
-	
-	public QNA(int number, String title, String content, String category,
-			Member memberId, int hits, String registrationDate) {
+
+	public QNA(int number, String title, String category,
+			String registrationDate, int hits, String content, Member memberId) {
+		super();
 		this.number = number;
 		this.title = title;
-		this.content = content;
 		this.category = category;
-		this.memberId = memberId;
-		this.hits = hits;
 		this.registrationDate = registrationDate;
+		this.hits = hits;
+		this.content = content;
+		this.memberId = memberId;
 	}
 
 	public int getNumber() {
@@ -43,36 +44,12 @@ public class QNA implements Serializable{
 		this.title = title;
 	}
 
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
 	public String getCategory() {
 		return category;
 	}
 
 	public void setCategory(String category) {
 		this.category = category;
-	}
-
-	public Member getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(Member memberId) {
-		this.memberId = memberId;
-	}
-
-	public int getHits() {
-		return hits;
-	}
-
-	public void setHits(int hits) {
-		this.hits = hits;
 	}
 
 	public String getRegistrationDate() {
@@ -83,12 +60,36 @@ public class QNA implements Serializable{
 		this.registrationDate = registrationDate;
 	}
 
+	public int getHits() {
+		return hits;
+	}
+
+	public void setHits(int hits) {
+		this.hits = hits;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Member getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(Member memberId) {
+		this.memberId = memberId;
+	}
+
 	@Override
 	public String toString() {
-		return "qna [number=" + number + ", title=" + title + ", content="
-				+ content + ", category=" + category + ", memberId=" + memberId
-				+ ", hits=" + hits + ", registrationDate=" + registrationDate
-				+ "]";
+		return "QNA [number=" + number + ", title=" + title + ", category="
+				+ category + ", registrationDate=" + registrationDate
+				+ ", hits=" + hits + ", content=" + content + ", memberId="
+				+ memberId + "]";
 	}
 
 	@Override

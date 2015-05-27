@@ -2,9 +2,13 @@ package com.ymz.qna.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ymz.qna.service.QNAService;
+import com.ymz.qna.vo.QNA;
 
 @Controller
 @RequestMapping("/qna/")
@@ -14,14 +18,14 @@ public class QNAController {
 	private QNAService service;
 	
 	//QNA게시물 등록
-/*	@RequestMapping(value="register.do", method=RequestMethod.POST)
+	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerQNA(@ModelAttribute QNA qna, Errors errors){
 		if(errors.hasErrors()){
 			return "qna/register_form.tiles";
 		}
 		service.registerQNA(qna);
 		return "redirect:/qna/registerSuccess.do?number="+qna.getNumber();
-	}*/
+	}
 	
 /*	//QNA게시판 전체 조회
 	public ModelAndView QNAList(){
