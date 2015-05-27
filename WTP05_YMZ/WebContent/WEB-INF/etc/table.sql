@@ -1,3 +1,4 @@
+한번지워봐
 /* 회원 */
 CREATE TABLE MEMBER (
 	MEMBER_ID VARCHAR2(10) NOT NULL, /* 회원_ID */
