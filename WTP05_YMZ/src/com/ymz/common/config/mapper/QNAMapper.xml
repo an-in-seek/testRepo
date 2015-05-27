@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="qna.dao.QNAMapper">
+
+	<sql id="qna-select">
+		select qna_no, title, category, registration_date, hits, content, member_id
+		from qna
+	</sql>
+	
+	<resultMap type="qna" id="qna-resultmap">
+		<id column="qna_no" property="number"/>
+		<result column="qna_title" property="title"/>
+		<result column="qna_category" property="category"/>
+		<result column="qna_registration_date" property="registrationDate"/>
+		<result column="qna_hits" property="hits"/>
+		<result column="qna_content" property="content"/>
+		<result column="qna_member_id" property="memberId"/>
+	</resultMap>
+	
+	<insert id="insertQNA" parameterType="qna">
+		insert into qna (qna_no, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id)
+		values (#{number}, #{title}, #{category}, #{registrationDate}, #{hits}, #{content}, #{memberId})
+	</insert>
+	
+	<update id="updateQNA" parameterType="qna">
+		update 	qna
+		set			qna_no=#{number}, qna_title=#{title}, qna_category=#{category}, qna_registration_date=#{registrationDate}, qna_hits=#{hits}, qna_content=#{content}
+		where		qna_no=#{number}
+	</update>
+	
+	<delete id="deleteQNAById" parameterType="string">
+		delete from qna where qna_no=#{number}
+	</delete>
+	
+	<select id="selectAllQNA" resultMap="qna-resultmap">
+		<include refid="qna-select"/>
+	</select>
 </mapper>
