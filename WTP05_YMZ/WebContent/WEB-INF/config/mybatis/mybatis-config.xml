@@ -2,12 +2,19 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 	<typeAliases>
-		<package name="com.ymz.member.vo"/>
 		<package name="com.ymz.faq.vo"/>
+		<package name="com.ymz.member.vo"/>
+		<package name="com.ymz.qna.vo"/>
+		<package name="com.ymz.reportedbbs.vo"/>
+		<package name="com.ymz.reportedreply.vo"/>
+		<package name="com.ymz.restaurant.vo"/>
+		<package name="com.ymz.review.vo"/>
+		<package name="com.ymz.reviewreply.vo"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="com/ymz/common/config/mapper/memberMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/FAQMapper.xml"/>
+		<mapper resource=""/>
 	</mappers>
 </configuration>
