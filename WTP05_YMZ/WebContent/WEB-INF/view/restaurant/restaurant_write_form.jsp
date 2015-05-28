@@ -4,11 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-<h3>기본정보</h3>
 <script type="text/javascript">
 var pic_count = 1;
+var menu_count = 1;
 $(document).ready(function(){
 	$("#picture_add").on("click",function(){
 		if(pic_count<5) {
@@ -22,8 +20,29 @@ $(document).ready(function(){
 		$("#picture").html("<input type='file' name='pictureName'>");
 		pic_count = 1;
 	});
+	
+	$("#menu_table").on("click", "#menu_add", function(){
+		if(menu_count<10) {
+			$("#menu_table").append("<tr><td><input type='text' name='foodName' maxlength='10'></td><td><input type='text' name='foodPrice' maxlength='10'>원</td><td><input type='text' name='discription' style='width:300px'></td><td><button id='menu_add'>＋</button> <button id='menu_del'>－</button></td></tr>");
+			$("#menu_table tr:nth-child("+menu_count+") td:last-child").html("");
+			menu_count++;
+		} else {
+			alert("메뉴는 최대 10개까지 추가할 수 있습니다");
+		}
+	});
+	
+	$("#menu_table").on("click", "#menu_del", function(){
+		if(menu_count>1) {
+			$("#menu_table tr:last-child").remove();
+			$("#menu_table tr:nth-child("+(menu_count-1)+") td:last-child").html("<button id='menu_add'>＋</button> <button id='menu_del'>－</button>");
+			menu_count--;
+		}
+	});
 });
 </script>
+</head>
+<body>
+<h3>기본정보</h3>
 <table>
 <tr>
 	<td>업체명</td>
@@ -71,5 +90,26 @@ $(document).ready(function(){
 <input type="file" name="pictureName">
 </div>
 <h3>메뉴</h3>
+<table>
+<thead>
+<tr>
+<td>메뉴</td>
+<td>가격</td>
+<td>설명</td>
+<td></td>
+</tr>
+</thead>
+<tbody id="menu_table">
+<tr>
+	<td><input type="text" name="foodName" maxlength="10"></td>
+	<td><input type="text" name="foodPrice" maxlength="10">원</td>
+	<td><input type="text" name="discription" style="width:300px"></td>
+	<td>
+		<button id="menu_add">＋</button>
+		<button id="menu_del">－</button>
+	</td>
+</tr>
+</tbody>
+</table>
 </body>
 </html>

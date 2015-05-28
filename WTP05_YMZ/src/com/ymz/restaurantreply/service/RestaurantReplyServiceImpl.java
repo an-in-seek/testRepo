@@ -1,5 +1,5 @@
 package com.ymz.restaurantreply.service;
 
-public class RestaurantReply {
+public class RestaurantReplyServiceImpl {
 
 }

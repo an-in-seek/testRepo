@@ -35,7 +35,7 @@ article{
 <h2 align="center">고객센터(Q&A)</h2>
 
 <c:if test="${fn:length(requestScope.qna_list) != 0 }">
-	<table align="center" id="listTB" style="width: 700px">
+	<table align="center" id="listTB" style="width: 700px" border="1">
 		<thead>
 			<tr align="center">
 				<td>NO</td>
@@ -60,14 +60,31 @@ article{
 		</tbody>
 	</table>
 
-	<form action="${initParam.rootPath }/qna/writeForm.do" method="post">
-		<table width="100%" cellpadding="2" cellspacing="2" border="2">
-			<tr height="10" align="center"></tr>
-			<tr align="center">
-				<td><input type="submit" value="글쓰기"></td>
-			</tr>
-		</table>
-	</form>
+	<table width="100%" >
+		<tr height="10" align="center"></tr>
+	</table>
+
+	
+
+	<table>
+		<tr>
+			<td>
+			<select id="searchSort">
+					<option>정렬방식</option>
+					<option value="추천수">추천수</option>
+					<option value="조회수">조회수</option>
+					<option value="최신글">최신글</option>
+			</select>
+			</td>
+			<td><input type="text" id="searchText"></td>
+			<td><input type="button" id="searchBtn" value="검색"></td>
+			<td>
+				<form action="${initParam.rootPath }/qna/writeForm.do" method="post">
+					<input type="submit" value="글쓰기">
+				</form>
+			</td>
+		</tr>
+	</table>
 </c:if>
 
 <p align="center">

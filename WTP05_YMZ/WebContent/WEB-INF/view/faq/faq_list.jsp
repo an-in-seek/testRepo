@@ -36,7 +36,7 @@ article{
 <h2 align="center">고객센터(FAQ)</h2> 	
 
 <c:if test="${fn:length(requestScope.faq_list) != 0 }">
-	<table align="center" id="listTB" style="width:700px">
+	<table align="center" id="listTB" style="width:700px" border="1">
 		<thead>
 			<tr align="center">
 				<td>NO</td>
@@ -55,11 +55,14 @@ article{
 		</tbody>
 	</table>
 
+	<table width="100%" border="0">
+		<tr height="10" align="center"></tr>
+	</table>
+
 	<form action="${initParam.rootPath }/faq/writeForm.do" method="post">
-		<table width="100%" cellpadding="2" cellspacing="2" border="2">
-			<tr height="10" align="center"></tr>
-			<tr align="center">
-				<td><input type="submit" value="글쓰기"></td>
+		<table width="100%" border="0">
+			<tr>
+				<td align="center"><input type="submit" value="글쓰기"></td>
 			</tr>
 		</table>
 	</form>

@@ -30,7 +30,6 @@ a{
 
 /*테이블 기본 스타일*/
 table, td, th{
-	border: 1px solid black;
 	border-collapse: collapse;
 }
 td, th{
