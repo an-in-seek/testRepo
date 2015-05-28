@@ -1,5 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="member.dao.memberMapper">
+
+<sql id="restaurant_reply">
+select restaurant_reply_no,
+reg_date,
+content,
+score,
+member_id,
+restaurant_no,
+
+from restaurant_reply
+
+
+</sql>
+
+<resultMap type="restaurant_reply" id="restaurantReply-resultmap">
+<id column ="restaurant_reply_no" property="replyNo"/>
+<result column ="reg_date" property="regDate"/>
+<result column ="content" property="content"/>
+<result column ="score" property="score"/>
+<result column = "member_id" property="id"/>
+<result column = "restaurant_reply" property="restaurantReply"/>
+
+</resultMap>
+<insert id="insertRestaurant_reply" parameterType="restaurant_reply">
+insert into restaurant_reply (replyNo, regDate, content, score,id,restaurantReply)
+values(#{replyNo},#{regDate},#{content},#{score},#{id},#{restauranReply})
+</insert>
+
+<update id="updateRestaurant_reply" parameterType="restaurant_reply">
+update restaurant_reply
+
+set content=#{content}
+
+where reply = #{replyNo}
+
+</update>
+
+<delete id ="deleteRestaurant_replyByReplyNo" parameterType="int">
+delete from restaurant_reply where reply = #{replyNo}
+</delete>
+
+
+<select id="selectRestaurant_replyByReplyNo" parameterType="string" resultMap="restauranReply-resultmap">
+select restaurant_reply
+
+set content=#{content}
+
+where reply = #{replyNo}
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>
