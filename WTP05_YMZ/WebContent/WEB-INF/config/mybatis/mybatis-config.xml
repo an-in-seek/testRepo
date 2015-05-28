@@ -5,26 +5,32 @@
 		<package name="com.ymz.faq.vo"/>
 		<package name="com.ymz.member.vo"/>
 		<package name="com.ymz.restaurant.vo"/>
-		<!--  
 		<package name="com.ymz.qna.vo"/>
+	</typeAliases>
+	
+		<!--  
 		<package name="com.ymz.reportedbbs.vo"/>
 		<package name="com.ymz.reportedreply.vo"/>
 		<package name="com.ymz.restaurantreply.vo"/>
 		<package name="com.ymz.review.vo"/>
 		<package name="com.ymz.reviewreply.vo"/>
+		
+		<typeAlias type="com.ymz.faq.vo.FAQ" alias="FAQ"/>
+		<typeAlias type="com.ymz.faq.vo.Member" alias="Member"/>
+		<typeAlias type="com.ymz.faq.vo.QNA" alias="QNA"/>
 		-->
-	</typeAliases>
+	
 	
 	<mappers>
 		<mapper resource="com/ymz/common/config/mapper/FAQMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/MemberMapper.xml"/>		
 		<mapper resource="com/ymz/common/config/mapper/RestaurantMapper.xml"/>
-		<!--  
 		<mapper resource="com/ymz/common/config/mapper/QNAMapper.xml"/>
+		<mapper resource="com/ymz/common/config/mapper/ReviewMapper.xml"/>
+		<!--  
 		<mapper resource="com/ymz/common/config/mapper/ReportedBBSMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/ReportedReplyMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/RestaurantReplyMapper.xml"/>
-		<mapper resource="com/ymz/common/config/mapper/ReviewMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/ReviewReplyMapper.xml"/>
 		-->
 	</mappers>

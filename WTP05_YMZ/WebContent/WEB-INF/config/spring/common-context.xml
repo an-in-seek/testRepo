@@ -38,6 +38,7 @@
 	<mvc:view-controller path="/member/loginForm.do" view-name="member/login_form.tiles"/>
 	<mvc:view-controller path="/faq/writeForm.do" view-name="faq/faq_write_form.tiles"/>
 	<mvc:view-controller path="/qna/writeForm.do" view-name="qna/qna_write_form.tiles"/>
+	<mvc:view-controller path="/review/review_write_form.do" view-name="review/review_write_form.tiles"/>
 	<!-- 로그인 후 요청하는 페이지중 로그인 체크 부분이 interceptor로 빠지면 단순 링크로 바뀌는 것들 view-controller로 처리 -->
 	
 	<!-- 자기정보 조회 -->

@@ -1,5 +1,7 @@
 package com.ymz.review.service;
 
-public interface ReviewService {
+import java.util.Map;
 
+public interface ReviewService {
+	public Map<String, Object> getReviewListPaging(int currentPage);
 }

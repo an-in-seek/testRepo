@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,9 +59,9 @@ table#listTB tbody tr{
 		</thead>
 		<tbody>
 			<!-- 여기 수정해야행 -->
-			<c:forEach items="${requestScope.review_list }" var="review">
+			<c:forEach items="${requestScope.reviewList }" var="review">
 				<tr>
-					<td>${review.number }</td>
+					<td>${review.reviewNo }</td>
 					<td>${review.title}</td>
 					<td>${review.memberId}</td>
 					<td>${review.regDate}</td>
@@ -83,6 +84,8 @@ table#listTB tbody tr{
 		</select>
 <input type="text" id="searchText">
 <input type="button" id="searchBtn" value="검색">
-<input type="button" id="writeBtn" value="글쓰기">
+<form method="post" action="${initParam.rootPath }/review/review_write_form.do">
+<input type="submit" id="writeBtn" value="글쓰기">
+</form>
 </body>
 </html>
