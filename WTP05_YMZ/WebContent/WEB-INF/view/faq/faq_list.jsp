@@ -5,10 +5,29 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <script type="text/javascript">
+var state = false;
 $(document).ready(function(){
 	$("table#listTB tbody tr").on("mouseover", function(){
 		$("table#listTB tbody tr").css("background-color", "white");
 		$(this).css("background-color", "silver");
+	});
+	
+	$("table#listTB tbody tr").on("click", function(){
+		var id = this.value;
+		$.ajax({
+			url:"${initParam.rootPath}/member/idDuplicateCheck.do",
+			data:{"id":id},
+			dataType:"JSON",
+			beforeSend:function(){
+				$("#tr1").hide();
+			},
+			success:function(obj){
+				if(obj != null){
+				var txt = obj.productInfo;
+				$("#product_info_layer").html(txt).show();
+				}
+			}
+		})
 	});
 });
 </script>
@@ -51,6 +70,11 @@ article{
 					<td>${qna.title}</td>
 					<td>${qna.content}</td>
 				</tr> 
+				
+<!-- 				<tr id="tr1">
+					<td></td>
+				</tr> -->
+				
 			</c:forEach>
 		</tbody>
 	</table>
