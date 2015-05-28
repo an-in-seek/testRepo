@@ -1,5 +1,5 @@
 package com.ymz.reviewreply.controller;
 
-public class A {
+public class ReviewReplyController {
 
 }
