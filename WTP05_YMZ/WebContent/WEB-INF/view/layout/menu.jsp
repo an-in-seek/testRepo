@@ -31,5 +31,5 @@ function removeConfirm(){
 	</c:otherwise>
 </c:choose>
 <a href="${initParam.rootPath }/restaurant/listByType.do" class="menu">맛집정보</a>&nbsp;&nbsp;
-<a href="${initParam.rootPath }/member/memberListPaging.do" class="menu">맛집리뷰</a>&nbsp;&nbsp;
+<a href="${initParam.rootPath }/review/reviewList.do" class="menu">맛집리뷰</a>&nbsp;&nbsp;
 <a href="${initParam.rootPath }/faq/faqList.do" class="menu">고객센터</a>&nbsp;&nbsp;
