@@ -19,33 +19,41 @@ public class Member implements Serializable{
 	private int mileage;
 	private String grade;
 	private String joinDate;
-	/*****************************
-	 * 업로드 사진 관련 property 추가
-	 *****************************/
-	private MultipartFile picture;
-	private String pictureName; //변경된 파일명
 	
+	/*
+	 * no-arg 생성자
+	 */
 	public Member(){}
 	
-	public Member(String id, String password, String name, String email) {
+	/*
+	 * favoriteFood를 제외한 생성자 
+	 */
+	public Member(String id, String password, String name, String nickname,
+			String birth, String sex, String address, String email,
+			String phoneNo, int mileage, String grade, String joinDate) {
+		super();
 		this.id = id;
 		this.password = password;
 		this.name = name;
+		this.nickname = nickname;
+		this.birth = birth;
+		this.sex = sex;
+		this.address = address;
 		this.email = email;
-	}
-	
-	public Member(String id, String password, String name, String email, String joinDate, MultipartFile picture, String pictureName) {
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.email = email;
+		this.phoneNo = phoneNo;
+		this.mileage = mileage;
+		this.grade = grade;
 		this.joinDate = joinDate;
-		this.picture = picture;
-		this.pictureName = pictureName;
 	}
 	
-	public Member(String id, String password, String name, String nickname, String birth, String sex, String address, String email,
-			String phoneNo, String favoriteFood, int mileage, String grade, String joinDate, MultipartFile picture, String pictureName) {
+	/*
+	 * 생성자
+	 */
+	public Member(String id, String password, String name, String nickname,
+			String birth, String sex, String address, String email,
+			String phoneNo, String favoriteFood, int mileage, String grade,
+			String joinDate) {
+		super();
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -59,10 +67,12 @@ public class Member implements Serializable{
 		this.mileage = mileage;
 		this.grade = grade;
 		this.joinDate = joinDate;
-		this.picture = picture;
-		this.pictureName = pictureName;
 	}
 
+	
+	/*
+	 * setter, getter
+	 */
 	public String getId() {
 		return id;
 	}
@@ -167,22 +177,6 @@ public class Member implements Serializable{
 		this.joinDate = joinDate;
 	}
 
-	public MultipartFile getPicture() {
-		return picture;
-	}
-
-	public void setPicture(MultipartFile picture) {
-		this.picture = picture;
-	}
-
-	public String getPictureName() {
-		return pictureName;
-	}
-
-	public void setPictureName(String pictureName) {
-		this.pictureName = pictureName;
-	}
-	
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", password=" + password + ", name=" + name
@@ -190,8 +184,7 @@ public class Member implements Serializable{
 				+ sex + ", address=" + address + ", email=" + email
 				+ ", phoneNo=" + phoneNo + ", favoriteFood=" + favoriteFood
 				+ ", mileage=" + mileage + ", grade=" + grade + ", joinDate="
-				+ joinDate + ", picture=" + picture + ", pictureName="
-				+ pictureName + "]";
+				+ joinDate + "]";
 	}
 
 	@Override
@@ -214,9 +207,6 @@ public class Member implements Serializable{
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phoneNo == null) ? 0 : phoneNo.hashCode());
-		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
-		result = prime * result
-				+ ((pictureName == null) ? 0 : pictureName.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		return result;
 	}
@@ -287,16 +277,6 @@ public class Member implements Serializable{
 				return false;
 		} else if (!phoneNo.equals(other.phoneNo))
 			return false;
-		if (picture == null) {
-			if (other.picture != null)
-				return false;
-		} else if (!picture.equals(other.picture))
-			return false;
-		if (pictureName == null) {
-			if (other.pictureName != null)
-				return false;
-		} else if (!pictureName.equals(other.pictureName))
-			return false;
 		if (sex == null) {
 			if (other.sex != null)
 				return false;
@@ -304,5 +284,7 @@ public class Member implements Serializable{
 			return false;
 		return true;
 	}
+	
+	
 	
 }
