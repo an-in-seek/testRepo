@@ -39,7 +39,7 @@
 				<if test="pictureName!=null">
 				,picture_name=#{pictureName}
 				</if>
-		where	member_id=#{memberID}
+		where	member_id=#{memberId}
 	</update>
 	
 	<!-- 삭제 -->
