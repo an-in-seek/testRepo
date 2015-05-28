@@ -26,13 +26,13 @@ public class QNAController {
 	private QNAService service;
 	
 	//QNA게시물 등록
-	@RequestMapping(value="qna_write.do", method=RequestMethod.POST)
+	@RequestMapping(value="qnaWrite.do", method=RequestMethod.POST)
 	public String registerQNA(@ModelAttribute QNA qna, Errors errors) throws Exception{
 		if(errors.hasErrors()){
 			return "qna/qna_write_form.tiles";
 		}
 		service.registerQNA(qna);
-		return "redirect:/qna/qna_view.do?number="+qna.getNumber();
+		return "redirect:/qna/qnaView.do?number="+qna.getNumber();
 	}
 	
 	//QNA게시물 전체목록 조회(페이징)
