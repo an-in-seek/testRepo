@@ -13,11 +13,11 @@
 
 	<context:component-scan base-package="com.ymz.faq.dao, com.ymz.faq.service, com.ymz.faq.controller"/>
 	<context:component-scan base-package="com.ymz.member.dao, com.ymz.member.service, com.ymz.member.controller"/>
+	<context:component-scan base-package="com.ymz.restaurant.dao, com.ymz.restaurant.service, com.ymz.restaurant.controller"/>
 	<!--  
 	<context:component-scan base-package="com.ymz.qna.dao, com.ymz.qna.service, com.ymz.qna.controller"/>
 	<context:component-scan base-package="com.ymz.reportedbbs.dao, com.ymz.reportedbbs.service, com.ymz.reportedbbs.controller"/>
 	<context:component-scan base-package="com.ymz.reportedreply.dao, com.ymz.reportedreply.service, com.ymz.reportedreply.controller"/>
-	<context:component-scan base-package="com.ymz.restaurant.dao, com.ymz.restaurant.service, com.ymz.restaurant.controller"/>
 	<context:component-scan base-package="com.ymz.restaurantreply.dao, com.ymz.restaurantreply.service, com.ymz.restaurantreply.controller"/>
 	<context:component-scan base-package="com.ymz.review.dao, com.ymz.review.service, com.ymz.review.controller"/>
 	<context:component-scan base-package="com.ymz.reviewreply.dao, com.ymz.reviewreply.service, com.ymz.reviewreply.controller"/>
