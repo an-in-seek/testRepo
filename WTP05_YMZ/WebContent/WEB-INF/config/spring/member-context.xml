@@ -13,11 +13,11 @@
 
 	<context:component-scan base-package="com.ymz.faq.dao, com.ymz.faq.service, com.ymz.faq.controller"/>
 	<context:component-scan base-package="com.ymz.member.dao, com.ymz.member.service, com.ymz.member.controller"/>
+	<context:component-scan base-package="com.ymz.restaurant.dao, com.ymz.restaurant.service, com.ymz.restaurant.controller"/>
 	<!--  
 	<context:component-scan base-package="com.ymz.qna.dao, com.ymz.qna.service, com.ymz.qna.controller"/>
 	<context:component-scan base-package="com.ymz.reportedbbs.dao, com.ymz.reportedbbs.service, com.ymz.reportedbbs.controller"/>
 	<context:component-scan base-package="com.ymz.reportedreply.dao, com.ymz.reportedreply.service, com.ymz.reportedreply.controller"/>
-	<context:component-scan base-package="com.ymz.restaurant.dao, com.ymz.restaurant.service, com.ymz.restaurant.controller"/>
 	<context:component-scan base-package="com.ymz.restaurantreply.dao, com.ymz.restaurantreply.service, com.ymz.restaurantreply.controller"/>
 	<context:component-scan base-package="com.ymz.review.dao, com.ymz.review.service, com.ymz.review.controller"/>
 	<context:component-scan base-package="com.ymz.reviewreply.dao, com.ymz.reviewreply.service, com.ymz.reviewreply.controller"/>
@@ -36,6 +36,7 @@
 	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>
 	<mvc:view-controller path="/member/loginForm.do" view-name="member/login_form.tiles"/>
 	<mvc:view-controller path="/faq/registerForm.do" view-name="faq/register_form.tiles"/>
+	
 	<!-- 로그인 후 요청하는 페이지중 로그인 체크 부분이 interceptor로 빠지면 단순 링크로 바뀌는 것들 view-controller로 처리 -->
 	
 	<!-- 자기정보 조회 -->
@@ -64,7 +65,8 @@
 	<!-- ViewResolver등록 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="2"/>
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="3"/>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="3"
+		p:prefix="/WEB-INF/view/"/>
 	
 	<!-- 
 	BasicDataSource&mapper위치<-SqlSessionFactoryBean<-SqlSessionTemplate<-MemberDAO<-MemberService
