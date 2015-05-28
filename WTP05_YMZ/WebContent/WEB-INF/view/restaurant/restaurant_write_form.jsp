@@ -4,9 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-<h3>기본정보</h3>
 <script type="text/javascript">
 var pic_count = 1;
 $(document).ready(function(){
@@ -24,6 +21,9 @@ $(document).ready(function(){
 	});
 });
 </script>
+</head>
+<body>
+<h3>기본정보</h3>
 <table>
 <tr>
 	<td>업체명</td>
@@ -71,5 +71,21 @@ $(document).ready(function(){
 <input type="file" name="pictureName">
 </div>
 <h3>메뉴</h3>
+<table>
+<tr>
+	<td>메뉴</td>
+	<td><input type="text" name="foodName" maxlength="10"></td>
+	<td>가격</td>
+	<td><input type="text" name="foodPrice" maxlength="10"></td>
+	<td rowspan="2">
+		<button id="menu_add">＋</button>
+		<button id="menu_del">－</button>
+	</td>
+</tr>
+<tr>
+	<td>설명</td>
+	<td colspan="3"><input type="text" style="width:99%"></td>
+</tr>
+</table>
 </body>
 </html>
