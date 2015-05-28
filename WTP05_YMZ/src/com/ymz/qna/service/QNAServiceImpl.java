@@ -1,13 +1,16 @@
 package com.ymz.qna.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ymz.common.util.PagingBean;
 import com.ymz.qna.dao.QNADAO;
 import com.ymz.qna.vo.QNA;
 
@@ -37,9 +40,15 @@ public class QNAServiceImpl implements QNAService {
 
 	//QNA게시판 글 전체목록 조회
 	@Override
-	public List<QNA> getQNAList() {
-		List<QNA> list = dao.selectAllQNA();
-		return list;
+	public Map<String, Object> getQNAListPaging(int pageNo) {
+		List<QNA> list = dao.selectAllQNA(pageNo);
+		int totalContent = dao.selectTotalQNACount();
+		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
+		
+		HashMap map = new HashMap();
+		map.put("qna_list", list);
+		map.put("pagingBean1", pagingBean); //5개
+		return map;
 	}
 	
 	//QNA게시판 글 번호로 조회

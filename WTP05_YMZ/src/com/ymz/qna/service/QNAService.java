@@ -1,6 +1,6 @@
 package com.ymz.qna.service;
 
-import java.util.List;
+import java.util.Map;
 
 import com.ymz.qna.vo.QNA;
 
@@ -16,10 +16,11 @@ public interface QNAService {
 		public abstract void removeQNAByNo(int number);
 		
 		//게시물 조회
-		public abstract List<QNA> getQNAList();
+		public abstract Map<String, Object> getQNAListPaging(int pageNo);
 		
 		//게시물 ID번호로 조회
 		public abstract QNA getQNAByNo(int number);
 		
 		public abstract void transactionTest(QNA q1, QNA q2) throws Exception;
+
 }

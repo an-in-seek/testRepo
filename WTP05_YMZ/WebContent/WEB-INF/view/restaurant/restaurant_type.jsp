@@ -70,6 +70,6 @@
 </c:choose>
 <p>
 
-<a href="">맛집등록</a>
+<a href="${initParam.rootPath }/restaurant/addNewRestaurant.do">맛집등록</a>
 </body>
 </html>

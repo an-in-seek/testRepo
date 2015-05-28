@@ -2,8 +2,6 @@ package com.ymz.qna.vo;
 
 import java.io.Serializable;
 
-import com.ymz.member.vo.Member;
-
 public class QNA implements Serializable{
 
 	private int number;
@@ -12,12 +10,12 @@ public class QNA implements Serializable{
 	private String registrationDate;
 	private int hits;
 	private String content;
-	private Member memberId;
+	private String memberId;
 	
 	public QNA(){}
 
 	public QNA(int number, String title, String category,
-			String registrationDate, int hits, String content, Member memberId) {
+			String registrationDate, int hits, String content, String memberId) {
 		super();
 		this.number = number;
 		this.title = title;
@@ -76,11 +74,11 @@ public class QNA implements Serializable{
 		this.content = content;
 	}
 
-	public Member getMemberId() {
+	public String getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(Member memberId) {
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 
@@ -150,5 +148,6 @@ public class QNA implements Serializable{
 			return false;
 		return true;
 	}
+	
 	
 }
