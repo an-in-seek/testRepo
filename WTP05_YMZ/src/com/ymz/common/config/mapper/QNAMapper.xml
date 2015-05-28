@@ -28,11 +28,17 @@
 		where		qna_no=#{number}
 	</update>
 	
-	<delete id="deleteQNAById" parameterType="string">
+	<delete id="deleteQNAByNo" parameterType="int">
 		delete from qna where qna_no=#{number}
 	</delete>
 	
 	<select id="selectAllQNA" resultMap="qna-resultmap">
 		<include refid="qna-select"/>
 	</select>
+	
+	<select id="selectQNAByNo" resultMap="qna-resultmap" parameterType="int">
+		<include refid="qna-select"/>
+		where qna_no=#{number}
+	</select>
+	
 </mapper>
