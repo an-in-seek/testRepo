@@ -7,42 +7,52 @@
 <script type="text/javascript">
 var pic_count = 1;
 var menu_count = 1;
-$(document).ready(function(){
-	$("#picture_add").on("click",function(){
-		if(pic_count<5) {
-			$("<br><input type='file' name='pictureName'>").appendTo("#picture");
+$(document).ready(function(){	
+	$("#picture_table").on("click","#picture_add",function(){
+		if(pic_count<5){
+			$("#picture_table").append("<tr><td><input type='file' name='pictureName'></td><td><button id='picture_add'>＋</button><button id='picture_del'>－</button></td></tr>");
+			$("#picture_table tr:nth-child("+pic_count+") td:last-child").html("");
 			pic_count++;
-		} else {
+		}else{
 			alert("사진은 최대 5장까지 첨부할 수 있습니다");
 		}
 	});
-	$("#picture_del").on("click",function(){
-		$("#picture").html("<input type='file' name='pictureName'>");
-		pic_count = 1;
+	
+	$("#picture_table").on("click","#picture_del",function(){
+		if(pic_count>1){
+			$("#picture_table tr:last-child").remove();
+			$("#picture_table tr:nth-child("+(pic_count-1)+") td:last-child").html("<button id='picture_add'>＋</button> <button id='picture_del'>－</button>");
+			pic_count--;
+		}
 	});
 	
-	$("#menu_table").on("click", "#menu_add", function(){
-		if(menu_count<10) {
+	$("#menu_table").on("click","#menu_add",function(){
+		if(menu_count<10){
 			$("#menu_table").append("<tr><td><input type='text' name='foodName' maxlength='10'></td><td><input type='text' name='foodPrice' maxlength='10'>원</td><td><input type='text' name='discription' style='width:300px'></td><td><button id='menu_add'>＋</button> <button id='menu_del'>－</button></td></tr>");
 			$("#menu_table tr:nth-child("+menu_count+") td:last-child").html("");
 			menu_count++;
-		} else {
+		}else{
 			alert("메뉴는 최대 10개까지 추가할 수 있습니다");
 		}
 	});
 	
-	$("#menu_table").on("click", "#menu_del", function(){
-		if(menu_count>1) {
+	$("#menu_table").on("click","#menu_del",function(){
+		if(menu_count>1){
 			$("#menu_table tr:last-child").remove();
 			$("#menu_table tr:nth-child("+(menu_count-1)+") td:last-child").html("<button id='menu_add'>＋</button> <button id='menu_del'>－</button>");
 			menu_count--;
 		}
 	});
+	
+	$("#btn_cancel").on("click",function(){
+		history.back();
+	});
 });
 </script>
 </head>
 <body>
-<h3>기본정보</h3>
+<form action="" method="post">
+<p><font size="5"><b>기본정보</b></font></p>
 <table>
 <tr>
 	<td>업체명</td>
@@ -83,13 +93,23 @@ $(document).ready(function(){
 	</td>
 </tr>
 </table>
-<h3>사진첨부&nbsp;&nbsp;
-<button id="picture_add">추가</button>
-<button id="picture_del">초기화</button></h3>
-<div id="picture">
-<input type="file" name="pictureName">
-</div>
-<h3>메뉴</h3>
+
+<hr>
+
+<p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능)</p>
+<table id="picture_table">
+<tr>
+	<td><input type="file" name="pictureName"></td>
+	<td>
+		<button id="picture_add">＋</button>
+		<button id="picture_del">－</button>
+	</td>
+</tr>
+</table>
+
+<hr>
+
+<p><font size="5"><b>메뉴</b></font>&nbsp;&nbsp;(최대 10개 등록 가능)</p>
 <table>
 <thead>
 <tr>
@@ -111,5 +131,11 @@ $(document).ready(function(){
 </tr>
 </tbody>
 </table>
+<hr>
+<p align="center">
+<input type="submit" value="등록" style="width:100px;height:50px;">
+<button id="btn_cancel" style="width:100px;height:50px;">취소</button>
+</p>
+</form>
 </body>
 </html>

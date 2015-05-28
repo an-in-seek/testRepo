@@ -9,7 +9,7 @@
 <body>
 <a href="">한식</a> <a href="">양식</a> <a href="">중식</a> <a href="">일식</a>
 <p>
-<table>
+<table border="1">
 	<thead>
 		<tr>
 			<td>번호</td>
