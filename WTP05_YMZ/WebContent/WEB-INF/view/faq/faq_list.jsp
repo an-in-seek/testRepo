@@ -32,7 +32,9 @@ article{
 }
 </style>
 
+
 <h2 align="center">고객센터(FAQ)</h2> 	
+
 <c:if test="${fn:length(requestScope.faq_list) != 0 }">
 	<table align="center" id="listTB" style="width:700px">
 		<thead>
@@ -43,15 +45,23 @@ article{
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.faq_list }" var="faq">
+			<c:forEach items="${requestScope.faq_list }" var="qna">
 				<tr align="center">
-					<td>${faq.number }</td>
-					<td>${faq.title}</td>
-					<td>${faq.content}</td>
+					<td>${qna.number }</td>
+					<td>${qna.title}</td>
+					<td>${qna.content}</td>
 				</tr> 
 			</c:forEach>
 		</tbody>
 	</table>
-</c:if>
 
+	<form action="${initParam.rootPath }/faq/writeForm.do" method="post">
+		<table width="100%" cellpadding="2" cellspacing="2" border="2">
+			<tr height="10" align="center"></tr>
+			<tr align="center">
+				<td><input type="submit" value="글쓰기"></td>
+			</tr>
+		</table>
+	</form>
+</c:if>
 
