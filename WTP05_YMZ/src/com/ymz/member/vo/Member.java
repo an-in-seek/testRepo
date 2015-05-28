@@ -12,7 +12,9 @@ public class Member implements Serializable{
 	private String nickname;
 	private String birth;
 	private String sex;
+	private String zipcode;
 	private String address;
+	private String detailAddress;
 	private String email;
 	private String phoneNo;
 	private String favoriteFood;
@@ -24,21 +26,23 @@ public class Member implements Serializable{
 	 * no-arg 생성자
 	 */
 	public Member(){}
-	
+
 	/*
 	 * favoriteFood를 제외한 생성자 
 	 */
 	public Member(String id, String password, String name, String nickname,
-			String birth, String sex, String address, String email,
-			String phoneNo, int mileage, String grade, String joinDate) {
-		super();
+			String birth, String sex, String zipcode, String address,
+			String detailAddress, String email, String phoneNo, int mileage,
+			String grade, String joinDate) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.nickname = nickname;
 		this.birth = birth;
 		this.sex = sex;
+		this.zipcode = zipcode;
 		this.address = address;
+		this.detailAddress = detailAddress;
 		this.email = email;
 		this.phoneNo = phoneNo;
 		this.mileage = mileage;
@@ -50,17 +54,18 @@ public class Member implements Serializable{
 	 * 생성자
 	 */
 	public Member(String id, String password, String name, String nickname,
-			String birth, String sex, String address, String email,
-			String phoneNo, String favoriteFood, int mileage, String grade,
-			String joinDate) {
-		super();
+			String birth, String sex, String zipcode, String address,
+			String detailAddress, String email, String phoneNo,
+			String favoriteFood, int mileage, String grade, String joinDate) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.nickname = nickname;
 		this.birth = birth;
 		this.sex = sex;
+		this.zipcode = zipcode;
 		this.address = address;
+		this.detailAddress = detailAddress;
 		this.email = email;
 		this.phoneNo = phoneNo;
 		this.favoriteFood = favoriteFood;
@@ -68,11 +73,11 @@ public class Member implements Serializable{
 		this.grade = grade;
 		this.joinDate = joinDate;
 	}
-
 	
 	/*
-	 * setter, getter
+	 * setter, getter, toString, hashCode
 	 */
+
 	public String getId() {
 		return id;
 	}
@@ -121,12 +126,28 @@ public class Member implements Serializable{
 		this.sex = sex;
 	}
 
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
 	public String getAddress() {
 		return address;
 	}
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
 	}
 
 	public String getEmail() {
@@ -181,7 +202,8 @@ public class Member implements Serializable{
 	public String toString() {
 		return "Member [id=" + id + ", password=" + password + ", name=" + name
 				+ ", nickname=" + nickname + ", birth=" + birth + ", sex="
-				+ sex + ", address=" + address + ", email=" + email
+				+ sex + ", zipcode=" + zipcode + ", address=" + address
+				+ ", detailAddress=" + detailAddress + ", email=" + email
 				+ ", phoneNo=" + phoneNo + ", favoriteFood=" + favoriteFood
 				+ ", mileage=" + mileage + ", grade=" + grade + ", joinDate="
 				+ joinDate + "]";
@@ -193,6 +215,8 @@ public class Member implements Serializable{
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((birth == null) ? 0 : birth.hashCode());
+		result = prime * result
+				+ ((detailAddress == null) ? 0 : detailAddress.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
 				+ ((favoriteFood == null) ? 0 : favoriteFood.hashCode());
@@ -208,6 +232,7 @@ public class Member implements Serializable{
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phoneNo == null) ? 0 : phoneNo.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
+		result = prime * result + ((zipcode == null) ? 0 : zipcode.hashCode());
 		return result;
 	}
 
@@ -229,6 +254,11 @@ public class Member implements Serializable{
 			if (other.birth != null)
 				return false;
 		} else if (!birth.equals(other.birth))
+			return false;
+		if (detailAddress == null) {
+			if (other.detailAddress != null)
+				return false;
+		} else if (!detailAddress.equals(other.detailAddress))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -282,8 +312,16 @@ public class Member implements Serializable{
 				return false;
 		} else if (!sex.equals(other.sex))
 			return false;
+		if (zipcode == null) {
+			if (other.zipcode != null)
+				return false;
+		} else if (!zipcode.equals(other.zipcode))
+			return false;
 		return true;
 	}
+	
+	
+
 	
 	
 	

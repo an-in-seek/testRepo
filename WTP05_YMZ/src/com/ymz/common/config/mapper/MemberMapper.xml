@@ -2,12 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member.dao.memberMapper">
 	<sql id="member-select">
-		select 	id,
-					password,
+		select 	member_id,
+					member_password,
 					name,
+					nickname,
+					birth,
+					sex,
+					zipcode,
+					address,
+					detail_address,
 					email,
+					phoneNo,
+					favorite_food,
+					mileage,
+					grade,
 					to_char(to_date(join_date, 'yyyymmdd'), 'yyyy-mm-dd') join_date,
-					picture_name
 		from		member			
 	</sql>
 	
