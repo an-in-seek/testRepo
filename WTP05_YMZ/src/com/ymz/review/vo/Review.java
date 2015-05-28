@@ -3,17 +3,15 @@ package com.ymz.review.vo;
 import java.io.Serializable;
 import java.util.List;
 
-import com.ymz.member.vo.Member;
-
 public class Review implements Serializable{
 	
-	private int number;
+	private int reviewNo;
 	private String title;
 	private String regDate;
 	private int hits;
 	private String content;
 	private int recommend;
-	private Member memberId;
+	private String memberId;
 	/* 사진 관련*/
 	private String pictureName;
 	private List upfile; // 파일정보를 담을 변수 (같은 이름으로 여러개가 넘어올때 List 사용)
@@ -22,25 +20,10 @@ public class Review implements Serializable{
 		
 	}
 
-	// 사진 X 생성자
-	public Review(int number, String title, String regDate, int hits,
-			String content, int recommend, Member memberId) {
+	public Review(int reviewNo, String title, String regDate, int hits,
+			String content, int recommend, String memberId, String pictureName) {
 		super();
-		this.number = number;
-		this.title = title;
-		this.regDate = regDate;
-		this.hits = hits;
-		this.content = content;
-		this.recommend = recommend;
-		this.memberId = memberId;
-	}
-	
-	// 사진 O 생성자
-	public Review(int number, String title, String regDate, int hits,
-			String content, int recommend, Member memberId, String pictureName,
-			List upfile) {
-		super();
-		this.number = number;
+		this.reviewNo = reviewNo;
 		this.title = title;
 		this.regDate = regDate;
 		this.hits = hits;
@@ -48,15 +31,14 @@ public class Review implements Serializable{
 		this.recommend = recommend;
 		this.memberId = memberId;
 		this.pictureName = pictureName;
-		this.upfile = upfile;
 	}
 
-	public int getNumber() {
-		return number;
+	public int getReviewNo() {
+		return reviewNo;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public void setReviewNo(int reviewNo) {
+		this.reviewNo = reviewNo;
 	}
 
 	public String getTitle() {
@@ -99,11 +81,11 @@ public class Review implements Serializable{
 		this.recommend = recommend;
 	}
 
-	public Member getMemberId() {
+	public String getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(Member memberId) {
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 
@@ -131,11 +113,11 @@ public class Review implements Serializable{
 		result = prime * result + hits;
 		result = prime * result
 				+ ((memberId == null) ? 0 : memberId.hashCode());
-		result = prime * result + number;
 		result = prime * result
 				+ ((pictureName == null) ? 0 : pictureName.hashCode());
 		result = prime * result + recommend;
 		result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
+		result = prime * result + reviewNo;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((upfile == null) ? 0 : upfile.hashCode());
 		return result;
@@ -162,8 +144,6 @@ public class Review implements Serializable{
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
-		if (number != other.number)
-			return false;
 		if (pictureName == null) {
 			if (other.pictureName != null)
 				return false;
@@ -175,6 +155,8 @@ public class Review implements Serializable{
 			if (other.regDate != null)
 				return false;
 		} else if (!regDate.equals(other.regDate))
+			return false;
+		if (reviewNo != other.reviewNo)
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -191,13 +173,13 @@ public class Review implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Review [number=" + number + ", title=" + title + ", regDate="
-				+ regDate + ", hits=" + hits + ", content=" + content
-				+ ", recommend=" + recommend + ", memberId=" + memberId
-				+ ", pictureName=" + pictureName + ", upfile=" + upfile + "]";
+		return "Review [reviewNo=" + reviewNo + ", title=" + title
+				+ ", regDate=" + regDate + ", hits=" + hits + ", content="
+				+ content + ", recommend=" + recommend + ", memberId="
+				+ memberId + ", pictureName=" + pictureName + ", upfile="
+				+ upfile + "]";
 	}
 
 	
-
 	
 }

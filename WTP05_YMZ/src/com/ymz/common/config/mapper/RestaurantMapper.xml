@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="restaurant.dao.RestaurantMapper">
+	<sql id="restaurant-select">
+		select	restaurant_no, restaurant_name, category, phone_no, address, description,
+				picture_name, score, hits, theme, reg_date, reply_count, building_name, floor
+		from	restaurant
+	</sql>
+	
+	<resultMap type="restaurant" id="restaurant-resultmap">
+		<id column="restaurant_no" property="restaurantNo"/>
+		<result column="restaurant_name" property="restaurantName"/>
+		<result column="category" property="category"/>
+		<result column="phone_no" property="phoneNo"/>
+		<result column="address" property="address"/>
+		<result column="description" property="description"/>
+		<result column="picture_name" property="pictureName"/>
+		<result column="score" property="score"/>
+		<result column="hits" property="hits"/>
+		<result column="theme" property="theme"/>
+		<result column="reg_date" property="regDate"/>
+		<result column="reply_count" property="replyCount"/>
+		<result column="building_name" property="buildingName"/>
+		<result column="floor" property="floor"/>
+	</resultMap>
+	
+	<select id="selectAllRestaurantPaging" resultMap="restaurant-resultmap">
+		select	restaurant_no, restaurant_name, category, phone_no, address, description,
+				picture_name, score, hits, theme, reg_date, reply_count, building_name, floor
+		from	(
+					select	ceil(rownum/#{contentsPerPage}) page, restaurant_no, restaurant_name, category, phone_no, address,
+							description, picture_name, score, hits, theme, reg_date, reply_count, building_name, floor
+					from	(
+								<include refid="restaurant-select"/>
+								order by reg_date
+							)
+				)
+		where	page = #{currentPage}
+	</select>
+	
+	<select id="selectTotalRestaurantCount" resultType="_int">
+		select count(restaurant_no) from restaurant
+	</select>
+	
 </mapper>

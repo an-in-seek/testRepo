@@ -24,15 +24,15 @@ public class FAQController {
 
 	@Autowired
 	private FAQService service;
-	//ddfasd
+
 	// FAQ게시물 등록
-	@RequestMapping(value="register.do", method=RequestMethod.POST)
+	@RequestMapping(value="write.do", method=RequestMethod.POST)
 	public String registerFAQ(@ModelAttribute FAQ faq, Errors errors, HttpServletRequest request) throws Exception{
 		if(errors.hasErrors()){
-			return "faq/register_form.tiles";
+			return "faq/faq_write_form.tiles";
 		}
-		service.registerFAQ(faq);
-		return "redirect:/faq/registerSuccess.do?number="+faq.getNumber();
+		//service.registerFAQ(faq);
+		return "faq/faq_view.tiles";
 	}
 	
 	// 게시물 등록 성공
@@ -52,7 +52,7 @@ public class FAQController {
 	}
 	
 	// 게시물 수정
-	@RequestMapping(value="login/modifyFAQInfo.do", method=RequestMethod.POST)
+	@RequestMapping(value="login/modifyFaqInfo.do", method=RequestMethod.POST)
 	public String modifyFAQInfo(@ModelAttribute FAQ faq, Errors errors,  HttpServletRequest request)																													throws Exception{
 		//로그인 체크 - interceptor가 처리
 		service.modifyFAQ(faq);//수정 처리
@@ -60,7 +60,7 @@ public class FAQController {
 	}
 	
 	// 게시물 삭제
-	@RequestMapping("login/removeFAQ.do")
+	@RequestMapping("login/removeFaq.do")
 	public String removeFAQByNo(@ModelAttribute FAQ faq, HttpServletRequest request, ModelMap map){
 		//로그인 처리는 interceptor가 처리
 		int number = Integer.parseInt(request.getParameter("number"));
@@ -69,7 +69,7 @@ public class FAQController {
 	}
 	
 	// 리스트에서 id로 회원정보 요청한 것 처리 -Ajax 요청처리
-	@RequestMapping("findFAQByNo")
+	@RequestMapping("findFaqByNo")
 	@ResponseBody
 	public FAQ findFAQByNo(@RequestParam int number){
 		return service.getFAQByNo(number);

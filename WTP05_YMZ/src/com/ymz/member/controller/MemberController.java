@@ -1,6 +1,5 @@
 package com.ymz.member.controller;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.common.validator.MemberValidator;
@@ -39,15 +37,7 @@ public class MemberController {
 		if(errors.hasErrors()){
 			return "member/join_form.tiles";
 		}
-		// 파일 업로드 처리
-		MultipartFile file = member.getPicture();
-		if(file != null && !file.isEmpty()){
-			String path = request.getServletContext().getRealPath("/uploadPhoto");
-			String fileName = System.currentTimeMillis()+"";
-			File pic = new File(path, fileName);
-			file.transferTo(pic);//파일 이동
-			member.setPictureName(fileName);
-		}
+
 		service.joinMember(member);
 		return "redirect:/member/joinSuccess.do?id="+member.getId();
 	}
@@ -106,32 +96,7 @@ public class MemberController {
 		if(errors.hasErrors()){
 			return "member/modify_form.tiles";
 		}
-		/**********************************************************************
-		 * 파일 업로드 처리
-		 * 업로드된 파일이 있으면 사진을 변경하는 것이고 없으면 기존 사진을 유지하는 것으로 처리
-		 * 1-1사진이 사진 변경 처리와 기존 사진 삭제를 처리한다.
-		 * 		파일명을 현재일시(밀리초)로 수정후 사진을 uploadPoto 경로로 옮긴다.
-		 * 		session에서 기존사진의 파일명을 가져와 uploadPhoto 에서 삭제한다. 
-		 * 1-2사진이 없으면 pictureName을 수정하지 않는다.
-		 * 
-		 **********************************************************************/
-		MultipartFile file = member.getPicture();
-		
-		String newFileName = null;
-		if(file!=null && !file.isEmpty()){
-			//파일 uploadPhoto로 옮기기
-			newFileName = System.currentTimeMillis()+"";
-			System.out.println(newFileName+" : "+file.getOriginalFilename()+" : "+loginInfo.getPictureName());
-			File picture = new File(request.getServletContext().getRealPath("/uploadPhoto"), newFileName);
-			file.transferTo(picture);
-			//기존 사진이 있는 경우 삭제
-			if(loginInfo.getPictureName()!=null){
-				File oldPic = new File(request.getServletContext().getRealPath("/uploadPhoto"), loginInfo.getPictureName());
-				oldPic.delete();
-			}
-			member.setPictureName(newFileName);//DAO로 넘길 VO의 사진이름 값 변경
-		}
-		
+
 		//로그인 체크 - interceptor가 처리
 		service.modifyMember(member);//수정 처리
 		
@@ -139,9 +104,7 @@ public class MemberController {
 		loginInfo.setName(member.getName());
 		loginInfo.setEmail(member.getEmail());
 		loginInfo.setPassword(member.getPassword());
-		if(newFileName != null){//업로드된 사진이 있어 newFileName의 값이 설정 되 있으면
-			loginInfo.setPictureName(newFileName);//세션에 사진 이름 값 변경
-		}
+
 		return "member/member_info.tiles";
 	}
 	

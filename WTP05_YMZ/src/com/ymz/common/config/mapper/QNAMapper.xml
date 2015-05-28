@@ -1,38 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="qna.dao.QNAMapper">
 
 	<sql id="qna-select">
-		select qna_no, title, category, registration_date, hits, content, member_id
+		select qna_no, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id
 		from qna
 	</sql>
 	
-	<resultMap type="qna" id="qna-resultmap">
+	<resultMap type="QNA" id="qna-resultmap">
 		<id column="qna_no" property="number"/>
 		<result column="qna_title" property="title"/>
 		<result column="qna_category" property="category"/>
 		<result column="qna_registration_date" property="registrationDate"/>
 		<result column="qna_hits" property="hits"/>
 		<result column="qna_content" property="content"/>
-		<result column="qna_member_id" property="memberId"/>
+		<result column="member_id" property="memberId"/>
 	</resultMap>
 	
-	<insert id="insertQNA" parameterType="qna">
+	<insert id="insertQNA" parameterType="QNA">
 		insert into qna (qna_no, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id)
 		values (#{number}, #{title}, #{category}, #{registrationDate}, #{hits}, #{content}, #{memberId})
 	</insert>
 	
-	<update id="updateQNA" parameterType="qna">
+	<update id="updateQNA" parameterType="QNA">
 		update 	qna
 		set			qna_no=#{number}, qna_title=#{title}, qna_category=#{category}, qna_registration_date=#{registrationDate}, qna_hits=#{hits}, qna_content=#{content}
 		where		qna_no=#{number}
 	</update>
 	
-	<delete id="deleteQNAById" parameterType="string">
+	<delete id="deleteQNAByNo" parameterType="int">
 		delete from qna where qna_no=#{number}
 	</delete>
 	
-	<select id="selectAllQNA" resultMap="qna-resultmap">
-		<include refid="qna-select"/>
+	<select id="selectAllQNA" parameterType="map" resultMap="qna-resultmap">
+		select qna_no, qna_title, qna_category, member_id, qna_registration_date,  qna_hits
+		from (
+			select ceil(rownum/#{contentsPerPage}) page, qna_no, qna_title, qna_category, member_id, qna_registration_date,  qna_hits
+			from (
+					<include refid="qna-select"/>
+					order by qna_no
+			)
+		) 
+		where page = #{pageNo}
 	</select>
+
+	<select id="selectTotalQNACount" resultType="_int">
+		select count(qna_no) from qna
+	</select>
+	
+	<select id="selectQNAByNo" resultMap="qna-resultmap" parameterType="int">
+		<include refid="qna-select"/>
+		where qna_no=#{number}
+	</select>
+	
 </mapper>
+

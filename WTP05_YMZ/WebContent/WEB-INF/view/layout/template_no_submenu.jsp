@@ -30,6 +30,7 @@ a{
 
 /*테이블 기본 스타일*/
 table, td, th{
+	border: 1px solid black;
 	border-collapse: collapse;
 }
 td, th{
@@ -50,17 +51,7 @@ header.template{
 	text-align:center;
 	padding: 5px;
 }
-nav.template{
-	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
-	background-color:#F5F5DC;
-	padding: 15px;
-	height:500px;
-	width:150px;
-	font-weight:bold;
-	text-align:center;
-	border-bottom:1px  solid gray;
-	float:left;   /*왼쪽으로 띄움 */
-}
+
 section.template{
 	padding: 15px;
 	margin:10px;
@@ -84,10 +75,8 @@ footer.template{
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="menu" />
 		</header>
-
-		<nav class="template">
-			<tiles:insertAttribute name="sub_menu" /><!-- 서브메뉴로 -->
-		</nav>
+		
+		
 
 		<section class="template">
 			<tiles:insertAttribute name="body" />

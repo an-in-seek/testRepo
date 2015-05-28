@@ -12,56 +12,71 @@ public class Member implements Serializable{
 	private String nickname;
 	private String birth;
 	private String sex;
+	private String zipcode;
 	private String address;
+	private String detailAddress;
 	private String email;
 	private String phoneNo;
 	private String favoriteFood;
 	private int mileage;
 	private String grade;
 	private String joinDate;
-	/*****************************
-	 * 업로드 사진 관련 property 추가
-	 *****************************/
-	private MultipartFile picture;
-	private String pictureName; //변경된 파일명
 	
+	/*
+	 * no-arg 생성자
+	 */
 	public Member(){}
-	
-	public Member(String id, String password, String name, String email) {
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.email = email;
-	}
-	
-	public Member(String id, String password, String name, String email, String joinDate, MultipartFile picture, String pictureName) {
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.email = email;
-		this.joinDate = joinDate;
-		this.picture = picture;
-		this.pictureName = pictureName;
-	}
-	
-	public Member(String id, String password, String name, String nickname, String birth, String sex, String address, String email,
-			String phoneNo, String favoriteFood, int mileage, String grade, String joinDate, MultipartFile picture, String pictureName) {
+
+	/*
+	 * favoriteFood를 제외한 생성자 
+	 */
+	public Member(String id, String password, String name, String nickname,
+			String birth, String sex, String zipcode, String address,
+			String detailAddress, String email, String phoneNo, int mileage,
+			String grade, String joinDate) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.nickname = nickname;
 		this.birth = birth;
 		this.sex = sex;
+		this.zipcode = zipcode;
 		this.address = address;
+		this.detailAddress = detailAddress;
+		this.email = email;
+		this.phoneNo = phoneNo;
+		this.mileage = mileage;
+		this.grade = grade;
+		this.joinDate = joinDate;
+	}
+	
+	/*
+	 * 생성자
+	 */
+	public Member(String id, String password, String name, String nickname,
+			String birth, String sex, String zipcode, String address,
+			String detailAddress, String email, String phoneNo,
+			String favoriteFood, int mileage, String grade, String joinDate) {
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.nickname = nickname;
+		this.birth = birth;
+		this.sex = sex;
+		this.zipcode = zipcode;
+		this.address = address;
+		this.detailAddress = detailAddress;
 		this.email = email;
 		this.phoneNo = phoneNo;
 		this.favoriteFood = favoriteFood;
 		this.mileage = mileage;
 		this.grade = grade;
 		this.joinDate = joinDate;
-		this.picture = picture;
-		this.pictureName = pictureName;
 	}
+	
+	/*
+	 * setter, getter, toString, hashCode
+	 */
 
 	public String getId() {
 		return id;
@@ -111,12 +126,28 @@ public class Member implements Serializable{
 		this.sex = sex;
 	}
 
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
 	public String getAddress() {
 		return address;
 	}
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
 	}
 
 	public String getEmail() {
@@ -167,31 +198,15 @@ public class Member implements Serializable{
 		this.joinDate = joinDate;
 	}
 
-	public MultipartFile getPicture() {
-		return picture;
-	}
-
-	public void setPicture(MultipartFile picture) {
-		this.picture = picture;
-	}
-
-	public String getPictureName() {
-		return pictureName;
-	}
-
-	public void setPictureName(String pictureName) {
-		this.pictureName = pictureName;
-	}
-	
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", password=" + password + ", name=" + name
 				+ ", nickname=" + nickname + ", birth=" + birth + ", sex="
-				+ sex + ", address=" + address + ", email=" + email
+				+ sex + ", zipcode=" + zipcode + ", address=" + address
+				+ ", detailAddress=" + detailAddress + ", email=" + email
 				+ ", phoneNo=" + phoneNo + ", favoriteFood=" + favoriteFood
 				+ ", mileage=" + mileage + ", grade=" + grade + ", joinDate="
-				+ joinDate + ", picture=" + picture + ", pictureName="
-				+ pictureName + "]";
+				+ joinDate + "]";
 	}
 
 	@Override
@@ -200,6 +215,8 @@ public class Member implements Serializable{
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((birth == null) ? 0 : birth.hashCode());
+		result = prime * result
+				+ ((detailAddress == null) ? 0 : detailAddress.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
 				+ ((favoriteFood == null) ? 0 : favoriteFood.hashCode());
@@ -214,10 +231,8 @@ public class Member implements Serializable{
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phoneNo == null) ? 0 : phoneNo.hashCode());
-		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
-		result = prime * result
-				+ ((pictureName == null) ? 0 : pictureName.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
+		result = prime * result + ((zipcode == null) ? 0 : zipcode.hashCode());
 		return result;
 	}
 
@@ -239,6 +254,11 @@ public class Member implements Serializable{
 			if (other.birth != null)
 				return false;
 		} else if (!birth.equals(other.birth))
+			return false;
+		if (detailAddress == null) {
+			if (other.detailAddress != null)
+				return false;
+		} else if (!detailAddress.equals(other.detailAddress))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -287,22 +307,22 @@ public class Member implements Serializable{
 				return false;
 		} else if (!phoneNo.equals(other.phoneNo))
 			return false;
-		if (picture == null) {
-			if (other.picture != null)
-				return false;
-		} else if (!picture.equals(other.picture))
-			return false;
-		if (pictureName == null) {
-			if (other.pictureName != null)
-				return false;
-		} else if (!pictureName.equals(other.pictureName))
-			return false;
 		if (sex == null) {
 			if (other.sex != null)
 				return false;
 		} else if (!sex.equals(other.sex))
 			return false;
+		if (zipcode == null) {
+			if (other.zipcode != null)
+				return false;
+		} else if (!zipcode.equals(other.zipcode))
+			return false;
 		return true;
 	}
+	
+	
+
+	
+	
 	
 }
