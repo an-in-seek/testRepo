@@ -14,7 +14,6 @@ $(document).ready(function(){
 		if(pic_count<5) {
 			$("<br><input type='file' name='pictureName'>").appendTo("#picture");
 			pic_count++;
-			alert(pic_count);
 		} else {
 			alert("사진은 최대 5장까지 첨부할 수 있습니다");
 		}
