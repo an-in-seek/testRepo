@@ -16,26 +16,38 @@
 		<th align="left">이름</th>
 		<td>${requestScope.member.name}</td>
 	</tr>
+		<tr>
+		<th align="left">닉네임</th>
+		<td>${requestScope.member.nickname}</td>
+	</tr>
+		<tr>
+		<th align="left">생년월일</th>
+		<td>${requestScope.member.birth}</td>
+	</tr>
+		<tr>
+		<th align="left">성별</th>
+		<td>${requestScope.member.sex}</td>
+	</tr>
+	<tr>
+		<th align="left">주소</th>
+		<td>${requestScope.member.zipcode}<br>
+			${requestScope.member.address}<br>
+			${requestScope.member.detailAddress}
+		</td>
+	</tr>
 	<tr>
 		<th align="left">이메일</th>
 		<td>${requestScope.member.email}</td>
 	</tr>
 	<tr>
+		<th align="left">전화번호</th>
+		<td>${requestScope.member.phoneNo}</td>
+	</tr>
+	<tr>
 		<th align="left">가입일</th>
 		<td>${requestScope.member.joinDate}</td>
 	</tr>
-	<tr>
-		<td colspan="2">
-			<c:choose>
-				<c:when test="${empty requestScope.member.pictureName }">
-					<img src="${initParam.rootPath }/uploadPhoto/no-photo.png">
-				</c:when>
-				<c:otherwise>
-					<img src="${initParam.rootPath }/uploadPhoto/${requestScope.member.pictureName }">
-				</c:otherwise>
-			</c:choose>
-		</td>
-	</tr>
+
 </table>
 
 

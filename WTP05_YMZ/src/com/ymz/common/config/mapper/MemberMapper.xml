@@ -12,11 +12,11 @@
 					address,
 					detail_address,
 					email,
-					phoneNo,
+					phone_no,
 					favorite_food,
 					mileage,
 					grade,
-					to_char(to_date(join_date, 'yyyymmdd'), 'yyyy-mm-dd') join_date,
+					to_char(to_date(join_date, 'yyyymmdd'), 'yyyy-mm-dd') join_date
 		from		member			
 	</sql>
 	
@@ -24,25 +24,25 @@
 		<id column="member_id" property="id"/>
 		<result column="member_password" property="password"/>
 		<result column="name" property="name"/>
-		<result column="nickname" property="name"/>
+		<result column="nickname" property="nickname"/>
 		<result column="birth" property="birth"/>
 		<result column="sex" property="sex"/>
 		<result column="zipcode" property="zipcode"/>
 		<result column="address" property="address"/>
-		<result column="detail_address" property="detail_Address"/>
+		<result column="detail_address" property="detailAddress"/>
 		<result column="email" property="email"/>
 		<result column="phone_no" property="phoneNo"/>
 		<result column="favorite_food" property="favoriteFood"/>
 		<result column="mileage" property="mileage"/>
-		<result column="grade" property="address"/>
+		<result column="grade" property="grade"/>
 		<result column="join_date" property="joinDate"/>	
 	</resultMap>
 	
 	<insert id="insertMember" parameterType="member">
-		insert into member (id, password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
+		insert into member (member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
 							 favorite_food, mileage, grade, join_date)
-		values (#{id}, #{password}, #{name},#{nickname},#{birth},#{sex},#{zipcode},#{address},#{detailAddress},#{email},#{phoneNo},
-				#{favoriteFood},#{mileage},#{grade}, to_char(sysdate, 'yyyymmdd'),jdbcType=VARCHAR})
+		values (#{id}, #{password}, #{name},#{nickname},#{birth},#{sex},#{zipcode},#{address},#{detailAddress},
+		#{email},#{phoneNo},#{favoriteFood},#{mileage},#{grade}, to_char(sysdate, 'yyyymmdd'))
 	</insert>
 	
 	<update id="updateMember" parameterType="member">
@@ -55,17 +55,17 @@
 					detail_address=#{detailAddress},
 					email=#{email},
 					phone_no=#{phoneNo},
-					favorite_food=#{favoriteFood},
-		where	id=#{id}
+					mileage=#{mileage}
+		where	member_id=#{id}
 	</update>
 	
 	<delete id="deleteMemberById" parameterType="string">
-		delete from member where id=#{id}
+		delete from member where member_id=#{id}
 	</delete>
 		
 	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
 		<include refid="member-select"/>
-		where	id=#{id}
+		where	member_id=#{id}
 	</select>
 	
 	<select id="selectAllMember" resultMap="member-resultmap">
@@ -73,10 +73,10 @@
 	</select>
 	<!-- Paging 추가 -->
 	<select id="selectAllMemberPaging" parameterType="map" resultMap="member-resultmap">
-		select id, password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
+		select member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
 							 favorite_food, mileage, grade, join_date
 		from (
-			select ceil(rownum/#{contentsPerPage}) page, iid, password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
+			select ceil(rownum/#{contentsPerPage}) page, member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
 							 favorite_food, mileage, grade, join_date
 			from (
 					<include refid="member-select"/>
@@ -86,6 +86,6 @@
 		where page = #{pageNo}
 	</select>
 	<select id="selectTotalMemberCount" resultType="_int">
-		select count(id) from member
+		select count(member_id) from member
 	</select>
 </mapper>

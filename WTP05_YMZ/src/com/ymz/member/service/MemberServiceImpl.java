@@ -38,6 +38,7 @@ public class MemberServiceImpl implements MemberService {
 			throw new DuplicatedIdException(member.getId()+"는 이미 등록된 아이디입니다. ID를 변경하세요");
 		}
 		//2. 디비에 회원정보 등록 처리
+	
 		dao.insertMember(member);
 		
 		//3. connection close

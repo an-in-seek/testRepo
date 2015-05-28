@@ -25,8 +25,6 @@ public class MemberValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNo", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mileage", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "grade", "required");
 		
 	}
 

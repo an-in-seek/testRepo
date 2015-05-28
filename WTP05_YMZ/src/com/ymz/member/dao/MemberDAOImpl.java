@@ -33,6 +33,7 @@ public class MemberDAOImpl implements MemberDAO {
 	 */
 	@Override
 	public int insertMember(Member member){
+		
 		return session.insert(namespace+"insertMember", member);
 	}
 	/**

@@ -39,10 +39,44 @@ public class MemberController {
 		if(errors.hasErrors()){
 			return "member/join_form.tiles";
 		}
-
-		service.joinMember(member);
+		String post1 = (String) request.getParameter("postcode1");
+		System.out.println(post1);
+		String post2 = (String) request.getParameter("postcode2");
+		String zipcode = post1+"-"+post2;
+		member.setZipcode(zipcode);
+		System.out.println(member.getAddress());
+		member.setGrade("일반");
+		String recommend = (String)request.getParameter("recommend");
+		System.out.println(recommend);
+		if(service.getMemberById(recommend)!=null){
+			Member rm =service.getMemberById(recommend);
+			String id =rm.getId();
+			String password = rm.getPassword();
+			String name = rm.getPassword();
+			String nickname = rm.getNickname();
+			String birth = rm.getBirth();
+			String sex = rm.getSex();
+			String zipcode2 = rm.getZipcode();
+			String address = rm.getAddress();
+			String detailAddress = rm.getDetailAddress();
+			String email = rm.getEmail();
+			String phoneNo = rm.getPhoneNo();
+			String favoriteFood = rm.getFavoriteFood();
+			int mileage = rm.getMileage()+100;
+			String grade = rm.getGrade();
+			String joinDate = rm.getJoinDate();
+			Member newRm = new Member(id,password,name,nickname,birth,sex,zipcode2,address,detailAddress,email,phoneNo,favoriteFood,mileage,grade,joinDate);
+			
+			service.modifyMember(newRm);
+			member.setMileage(10);
+			service.joinMember(member);
+		}else{
+			member.setMileage(0);
+			service.joinMember(member);
+		}
 		return "redirect:/member/joinSuccess.do?id="+member.getId();
 	}
+
 	
 	// 등록 성공
 	@RequestMapping("joinSuccess.do")
@@ -142,6 +176,19 @@ public class MemberController {
 	@ResponseBody
 	public Member findMemberById(@RequestParam String id){
 		return service.getMemberById(id);
+	}
+	
+	/**********************리스트에서 id로 회원정보 존재 유무 요청 처리 -Ajax 요청처리********************/
+	@RequestMapping("idExistCheck.do")
+	@ResponseBody
+	public Map<String , Boolean> idExistCheck(@RequestParam String recommend2){
+		HashMap<String , Boolean> result = new HashMap<String , Boolean>();
+		if(recommend2==null || service.getMemberById(recommend2)!=null){
+			result.put("result", true);
+		}else{
+			result.put("result", false);
+		}
+		return result;
 	}
 
 }
