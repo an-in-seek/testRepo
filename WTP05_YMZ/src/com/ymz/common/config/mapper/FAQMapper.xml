@@ -24,12 +24,17 @@
 		where		faq_no=#{number}
 	</update>
 	
-	<delete id="deleteFAQById" parameterType="string">
+	<delete id="deleteFAQByNo" parameterType="int">
 		delete from faq where faq_no=#{number}
 	</delete>
 	
 	<select id="selectAllFAQ" resultMap="faq-resultmap">
 		<include refid="faq-select"/>
+	</select>
+	
+	<select id="selectFAQByNo" resultMap="faq-resultmap" parameterType="int">
+		<include refid="faq-select"/>
+		where faq_no=#{number}
 	</select>
 	
 </mapper>
