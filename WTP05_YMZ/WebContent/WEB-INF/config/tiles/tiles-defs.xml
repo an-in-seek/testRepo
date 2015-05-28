@@ -13,6 +13,12 @@
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 	</definition>
 	
+	<definition name="template_nosubmenu" template="/WEB-INF/view/layout/template_no_submenu.jsp">
+		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
+	</definition>
+	
 	<definition name="*.tiles" extends="template">
 		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp"/>
 	</definition>
@@ -37,5 +43,19 @@
 		<put-attribute name="body" value="/WEB-INF/view/restaurant/{1}.jsp"/>
 	</definition>
 	<!-- 여기까지 지훈이코드 -->
+	
+	<!-- 맛집리뷰 : 코스타 롤 대장 -->
+	<definition name="review_template" template="/WEB-INF/view/layout/template_no_submenu.jsp">
+		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="review/*.tiles" extends="review_template">
+		<put-attribute name="body" value="/WEB-INF/view/review/{1}.jsp"/>
+	</definition>
+	<!-- 맛집리뷰 끝 -->
+	
+	
 	
 </tiles-definitions>

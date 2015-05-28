@@ -30,6 +30,10 @@ function removeConfirm(){
 		<a href="javascript:removeConfirm();" class="menu">회원 탈퇴</a>&nbsp;&nbsp;
 	</c:otherwise>
 </c:choose>
+<<<<<<< HEAD
 <a href="${initParam.rootPath }/restaurant/showListByType.do" class="menu">맛집정보</a>&nbsp;&nbsp;
+=======
+<a href="${initParam.rootPath }/restaurant/listByType.do" class="menu">맛집정보</a>&nbsp;&nbsp;
+>>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 <a href="${initParam.rootPath }/review/reviewList.do" class="menu">맛집리뷰</a>&nbsp;&nbsp;
 <a href="${initParam.rootPath }/faq/faqList.do" class="menu">고객센터</a>&nbsp;&nbsp;

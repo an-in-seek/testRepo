@@ -30,10 +30,20 @@
 		insert into review (review_no, title, content, picture_name, hits, recommend, reg_date, member_id)
 		values (#{number}, #{title}, #{content}, #{pictureName, jdbcType=VARCHAR}, #{hits}, #{recommend}, to_char(sysdate, 'yyyymmdd'), #{memberId})
 	</insert>
-	
+
 	<!-- 수정 -->
-	
-	
+	<update id="updateReview" parameterType="review">
+		update review
+		set		title=#{title},
+				content=#{content},
+				<if test="pictureName!=null">
+				,picture_name=#{pictureName}
+				</if>
+		where	member_id=#{memberID}
+	</update>
 	
 	<!-- 삭제 -->
+	<delete id="deleteReviewByNo" parameterType="int">
+		delete from review where review_no=#{number}
+	</delete>
 </mapper>
