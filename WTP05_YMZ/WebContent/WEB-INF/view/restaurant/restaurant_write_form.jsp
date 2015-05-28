@@ -15,6 +15,7 @@ $(document).ready(function(){
 			pic_count++;
 		}else{
 			alert("사진은 최대 5장까지 첨부할 수 있습니다");
+			return false;
 		}
 	});
 	
@@ -33,6 +34,7 @@ $(document).ready(function(){
 			menu_count++;
 		}else{
 			alert("메뉴는 최대 10개까지 추가할 수 있습니다");
+			return false;
 		}
 	});
 	
