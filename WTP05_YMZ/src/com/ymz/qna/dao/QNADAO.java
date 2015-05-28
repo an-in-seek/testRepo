@@ -16,8 +16,12 @@ public interface QNADAO {
 	public abstract int deleteQNAByNo(int number);
 	
 	//게시물 조회
-	public abstract List<QNA> selectAllQNA();
+	public abstract List<QNA> selectAllQNA(int pageNO);
 	
 	//게시물 ID번호로 조회
 	public abstract QNA selectQNAByNo(int number);
+
+	//게시판 DB에 있는 모든 정보들의 개수를 카운트
+	public abstract int selectTotalQNACount();
+
 }

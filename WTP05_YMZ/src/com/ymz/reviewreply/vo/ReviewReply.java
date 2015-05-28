@@ -1,37 +1,34 @@
-package com.ymz.restaurantreply.vo;
+package com.ymz.reviewreply.vo;
 
-public class RestaurantReply {
+/**
+ * @author 쭈욘
+ *
+ */
+public class ReviewReply {
 
-	private int number;
+	private int replyNo;
 	private String regDate;
 	private String content;
-	private int score;
 	private String memberId;
-	private int restaurantNo;
+	private int reviewNo;
 	
-	
-	
-	public RestaurantReply(int number, String regDate, String content,
-			int score, String memberId, int restaurantNo) {
+	public ReviewReply(int replyNo, String regDate, String content,
+			String memberId, int reviewNo) {
 		super();
-		this.number = number;
+		this.replyNo = replyNo;
 		this.regDate = regDate;
 		this.content = content;
-		this.score = score;
 		this.memberId = memberId;
-		this.restaurantNo = restaurantNo;
-	}
-	public RestaurantReply() {
-		super();
+		this.reviewNo = reviewNo;
 	}
 	
+	public ReviewReply(){ 	}
 	
-	
-	public int getNumber() {
-		return number;
+	public int getReplyNo() {
+		return replyNo;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setReplyNo(int replyNo) {
+		this.replyNo = replyNo;
 	}
 	public String getRegDate() {
 		return regDate;
@@ -45,29 +42,23 @@ public class RestaurantReply {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
-	}
 	public String getMemberId() {
 		return memberId;
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public int getRestaurantNo() {
-		return restaurantNo;
+	public int getReviewNo() {
+		return reviewNo;
 	}
-	public void setRestaurantNo(int restaurantNo) {
-		this.restaurantNo = restaurantNo;
+	public void setReviewNo(int reviewNo) {
+		this.reviewNo = reviewNo;
 	}
 	@Override
 	public String toString() {
-		return "RestaurantReply [number=" + number + ", regDate=" + regDate
-				+ ", content=" + content + ", score=" + score + ", memberId="
-				+ memberId + ", restaurantNo=" + restaurantNo + "]";
+		return "ReviewReply [replyNo=" + replyNo + ", regDate=" + regDate
+				+ ", content=" + content + ", memberId=" + memberId
+				+ ", reviewNo=" + reviewNo + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -76,10 +67,9 @@ public class RestaurantReply {
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result
 				+ ((memberId == null) ? 0 : memberId.hashCode());
-		result = prime * result + number;
 		result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
-		result = prime * result + restaurantNo;
-		result = prime * result + score;
+		result = prime * result + replyNo;
+		result = prime * result + reviewNo;
 		return result;
 	}
 	@Override
@@ -90,7 +80,7 @@ public class RestaurantReply {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RestaurantReply other = (RestaurantReply) obj;
+		ReviewReply other = (ReviewReply) obj;
 		if (content == null) {
 			if (other.content != null)
 				return false;
@@ -101,23 +91,15 @@ public class RestaurantReply {
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
-		if (number != other.number)
-			return false;
 		if (regDate == null) {
 			if (other.regDate != null)
 				return false;
 		} else if (!regDate.equals(other.regDate))
 			return false;
-		if (restaurantNo != other.restaurantNo)
+		if (replyNo != other.replyNo)
 			return false;
-		if (score != other.score)
+		if (reviewNo != other.reviewNo)
 			return false;
 		return true;
 	}
-	
-
-	
-	
-	
-	
 }

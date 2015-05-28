@@ -30,6 +30,7 @@ function removeConfirm(){
 		<a href="javascript:removeConfirm();" class="menu">회원 탈퇴</a>&nbsp;&nbsp;
 	</c:otherwise>
 </c:choose>
-<a href="${initParam.rootPath }/member/memberList.do" class="menu">맛집정보</a>&nbsp;&nbsp;
-<a href="${initParam.rootPath }/member/memberListPaging.do" class="menu">맛집리뷰</a>&nbsp;&nbsp;
+
+<a href="${initParam.rootPath }/restaurant/showListByType.do" class="menu">맛집정보</a>&nbsp;&nbsp;
+<a href="${initParam.rootPath }/review/reviewList.do" class="menu">맛집리뷰</a>&nbsp;&nbsp;
 <a href="${initParam.rootPath }/faq/faqList.do" class="menu">고객센터</a>&nbsp;&nbsp;

@@ -1,11 +1,14 @@
 package com.ymz.qna.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ymz.common.util.PagingBean;
 import com.ymz.qna.vo.QNA;
 
 @Repository
@@ -34,15 +37,23 @@ public class QNADAOImpl implements QNADAO {
 		return session.delete(namespace+"deleteQNAByNo", number);
 	}
 
-	//QNA게시판 글 전체목록 조회
-	@Override
-	public List<QNA> selectAllQNA() {
-		return session.selectList(namespace+"selectAllQNA");
-	}
-
-	//QNA게시판 글 번호로 조회
+	// QNA게시판 글 번호로 조회
 	@Override
 	public QNA selectQNAByNo(int number) {
-		return session.selectOne(namespace+"selectQNAByNo", number);
+		return session.selectOne(namespace + "selectQNAByNo", number);
+	}
+		
+	//QNA게시판 글 전체목록 조회
+	@Override
+	public List<QNA> selectAllQNA(int pageNo) {
+		Map map = new HashMap();
+		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		map.put("pageNo", pageNo);
+		return session.selectList(namespace+"selectAllQNA", map);
+	}
+	
+	@Override
+	public int selectTotalQNACount(){
+		return session.selectOne(namespace+"selectTotalQNACount");
 	}
 }
