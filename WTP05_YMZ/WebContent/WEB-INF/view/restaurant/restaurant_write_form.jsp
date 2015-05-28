@@ -10,7 +10,7 @@ var menu_count = 1;
 $(document).ready(function(){	
 	$("#picture_table").on("click","#picture_add",function(){
 		if(pic_count<5){
-			$("#picture_table").append("<tr><td><input type='file' name='pictureName'></td><td><button id='picture_add'>＋</button><button id='picture_del'>－</button></td></tr>");
+			$("#picture_table").append("<tr><td><input type='file' name='pictureName'></td><td><button id='picture_add'>＋</button> <button id='picture_del'>－</button></td></tr>");
 			$("#picture_table tr:nth-child("+pic_count+") td:last-child").html("");
 			pic_count++;
 		}else{
@@ -114,8 +114,8 @@ $(document).ready(function(){
 <p><font size="5"><b>메뉴</b></font>&nbsp;&nbsp;(최대 10개 등록 가능)</p>
 <table>
 <thead>
-<tr>
-<td>메뉴</td>
+<tr align="center">
+<td>메뉴명</td>
 <td>가격</td>
 <td>설명</td>
 <td></td>

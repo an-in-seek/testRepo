@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>야먹자~!~!</title>
 <!-- jQuery Library import -->
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery.js"></script>
 
@@ -30,7 +30,6 @@ a{
 
 /*테이블 기본 스타일*/
 table, td, th{
-	border: 1px solid black;
 	border-collapse: collapse;
 }
 td, th{
@@ -38,27 +37,25 @@ td, th{
 }
 
 
-div.template{
+div.template2{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	width:1024px;
 	
 }
-header.template{
+header.template2{
 	background-color:skyblue;
 	color:white;
 	text-align:center;
 	padding: 5px;
 }
 
-section.template{
-	padding: 15px;
-	margin:10px;
-	height: auto; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+section.template2{
+	width:1024px;
 	float:left;   /*왼쪽으로 띄움 */
 }
-footer.template{
+footer.template2{
 	background-color:skyblue;
 	color:white;
 	padding-top:20px;
@@ -70,19 +67,17 @@ footer.template{
 </head>
 <body>
 
-	<div class="template">
-		<header class="template">
+	<div class="template2">
+		<header class="template2">
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="menu" />
 		</header>
-		
-		
-
-		<section class="template">
+	
+		<section class="template2">
 			<tiles:insertAttribute name="body" />
 		</section>
 
-		<footer class="template">
+		<footer class="template2">
 			<tiles:insertAttribute name="footer" />
 		</footer>
 	</div>

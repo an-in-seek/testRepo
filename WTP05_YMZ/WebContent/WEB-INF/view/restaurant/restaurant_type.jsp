@@ -6,18 +6,24 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body><div align="center">
 <a href="">한식</a> <a href="">양식</a> <a href="">중식</a> <a href="">일식</a>
-<p>
+<p/>
+<table style="width:100%;">
+<tr>
+<td width="50%" align="left"></td>
+<td width="50%" align="right"><a href="${initParam.rootPath }/restaurant/addNewRestaurant.do"><button>맛집등록</button></a></td>
+</tr>
+</table>
 <table border="1">
 	<thead>
-		<tr>
-			<td>번호</td>
-			<td>분류</td>
-			<td>상호명</td>
-			<td>전화번호</td>
-			<td>평점</td>
-			<td>조회수</td>
+		<tr align="center">
+			<td width="70px">번호</td>
+			<td width="70px">분류</td>
+			<td width="250px">상호명</td>
+			<td width="150px">전화번호</td>
+			<td width="80px">평점</td>
+			<td width="70px">조회수</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -68,8 +74,5 @@
 		▶
 	</c:otherwise>
 </c:choose>
-<p>
-
-<a href="${initParam.rootPath }/restaurant/addNewRestaurant.do">맛집등록</a>
-</body>
+</div></body>
 </html>

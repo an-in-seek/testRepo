@@ -13,15 +13,20 @@ $(document).ready(function(){
 	
 });
 </script>
+<style type="text/css">
+h2{
+	text-align: center;
+}
+</style>
 </head>
 <body>
-리뷰 글쓰기 폼
+<h2>리뷰 글쓰기 폼</h2>
 
 <form method="post" action="${initParam.rootPath }/review/review_write.do">
 제목 : <input type="text" id="title"><br>
 내용 : <textarea name="description" style="width:500px; height:100px"></textarea><br>
-<input type="submit" id="submitBtn" value="등록">
-<input type="button" id="cancelBtn" value="취소">
+<input type="submit" value="등록">
+<input type="button" value="취소" onclick="javascript:history.back(-1);">
 </form>
 </body>
 </html>

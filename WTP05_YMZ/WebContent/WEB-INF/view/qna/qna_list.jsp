@@ -34,7 +34,7 @@ article{
 
 <h2 align="center">고객센터(Q&A)</h2>
 
-<c:if test="${fn:length(requestScope.qna_list) != 0 }">
+<%-- <c:if test="${fn:length(requestScope.qna_list) != 0 }"> --%>
 	<table align="center" id="listTB" style="width: 700px" border="1">
 		<thead>
 			<tr align="center">
@@ -85,7 +85,7 @@ article{
 			</td>
 		</tr>
 	</table>
-</c:if>
+<%-- </c:if> --%>
 
 <p align="center">
 	<!-- 페이징 처리 -->
