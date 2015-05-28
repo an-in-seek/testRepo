@@ -34,13 +34,16 @@ table#listTB thead tr{
 table#listTB tbody tr{
 	cursor: pointer;
 }
+h2{
+	text-align: center;
+}
 </style>
 
 
 </head>
 <body>
-<h2>리뷰 목록이다.</h2>
-
+<h2>리뷰 목록</h2>
+<div align="center">
 <!-- 테이블 시작 -->
 <table id="listTB" style="width:700px">
 		<thead>
@@ -72,7 +75,7 @@ table#listTB tbody tr{
 <!-- 테이블 끝 -->
 
 <!-- 기능 -->
-<form method="post" action="${initParam.rootPath }/review/review_write_form.do">
+<form method="post" action="    ">
 <select id="searchSort">
 			<option>정렬방식</option>
 			<option value="추천수">추천수</option>
@@ -80,8 +83,8 @@ table#listTB tbody tr{
 			<option value="최신글">최신글</option>
 </select>
 <input type="text" id="searchText">
-<input type="button" id="searchBtn" value="검색">
-<input type="submit" id="writeBtn" value="글쓰기">
-</form>
+<input type="submit" id="searchBtn" value="검색">
+</form><a href="${initParam.rootPath }/review/review_write_form.do"><button>글쓰기</button></a>
+</div>
 </body>
 </html>
