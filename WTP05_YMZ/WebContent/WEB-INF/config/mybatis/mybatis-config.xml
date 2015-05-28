@@ -4,11 +4,7 @@
 	<typeAliases>
 		<package name="com.ymz.faq.vo"/>
 		<package name="com.ymz.member.vo"/>
-<<<<<<< HEAD
-=======
 		<package name="com.ymz.restaurant.vo"/>
-		<!--  
->>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 		<package name="com.ymz.qna.vo"/>
 	</typeAliases>
 	
@@ -28,11 +24,7 @@
 	<mappers>
 		<mapper resource="com/ymz/common/config/mapper/FAQMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/MemberMapper.xml"/>		
-<<<<<<< HEAD
-=======
 		<mapper resource="com/ymz/common/config/mapper/RestaurantMapper.xml"/>
-		<!--  
->>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 		<mapper resource="com/ymz/common/config/mapper/QNAMapper.xml"/>
 		<!--  
 		<mapper resource="com/ymz/common/config/mapper/ReportedBBSMapper.xml"/>

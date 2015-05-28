@@ -13,13 +13,8 @@
 
 	<context:component-scan base-package="com.ymz.faq.dao, com.ymz.faq.service, com.ymz.faq.controller"/>
 	<context:component-scan base-package="com.ymz.member.dao, com.ymz.member.service, com.ymz.member.controller"/>
-<<<<<<< HEAD
-=======
 	<context:component-scan base-package="com.ymz.restaurant.dao, com.ymz.restaurant.service, com.ymz.restaurant.controller"/>
 	<context:component-scan base-package="com.ymz.review.dao, com.ymz.review.service, com.ymz.review.controller"/>
-
-	<!--  
->>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 	<context:component-scan base-package="com.ymz.qna.dao, com.ymz.qna.service, com.ymz.qna.controller"/>
 	<!--  
 	<context:component-scan base-package="com.ymz.reportedbbs.dao, com.ymz.reportedbbs.service, com.ymz.reportedbbs.controller"/>
