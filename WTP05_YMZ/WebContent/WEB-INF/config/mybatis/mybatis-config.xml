@@ -6,13 +6,13 @@
 		<package name="com.ymz.member.vo"/>
 		<package name="com.ymz.restaurant.vo"/>
 		<package name="com.ymz.qna.vo"/>
+		<package name="com.ymz.review.vo"/>
 	</typeAliases>
 	
 		<!--  
 		<package name="com.ymz.reportedbbs.vo"/>
 		<package name="com.ymz.reportedreply.vo"/>
 		<package name="com.ymz.restaurantreply.vo"/>
-		<package name="com.ymz.review.vo"/>
 		<package name="com.ymz.reviewreply.vo"/>
 		
 		<typeAlias type="com.ymz.faq.vo.FAQ" alias="FAQ"/>

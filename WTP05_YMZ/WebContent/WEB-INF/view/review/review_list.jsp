@@ -16,10 +16,6 @@ $(document).ready(function(){
 		alert("검색");
 	});
 	
-	// 글쓰기 버튼 이벤트
-	$("#writeBtn").on("click", function(){
-		alert("글쓰기");
-	});
 	
 	// 정렬방식 셀렉터 이벤트
 	$("#searchSort").on("change", function(){
@@ -75,16 +71,16 @@ table#listTB tbody tr{
 	<p>
 <!-- 테이블 끝 -->
 
-<!-- 테이블 기능 -->
+<!-- 기능 -->
+<form method="post" action="${initParam.rootPath }/review/review_write_form.do">
 <select id="searchSort">
 			<option>정렬방식</option>
 			<option value="추천수">추천수</option>
 			<option value="조회수">조회수</option>
 			<option value="최신글">최신글</option>
-		</select>
+</select>
 <input type="text" id="searchText">
 <input type="button" id="searchBtn" value="검색">
-<form method="post" action="${initParam.rootPath }/review/review_write_form.do">
 <input type="submit" id="writeBtn" value="글쓰기">
 </form>
 </body>

@@ -11,14 +11,17 @@ $(document).ready(function(){
 	
 	
 	
-	
-	
-	
-	
 });
 </script>
 </head>
 <body>
 리뷰 글쓰기 폼
+
+<form method="post" action="${initParam.rootPath }/review/review_write.do">
+제목 : <input type="text" id="title"><br>
+내용 : <textarea name="description" style="width:500px; height:100px"></textarea><br>
+<input type="submit" id="submitBtn" value="등록">
+<input type="button" id="cancelBtn" value="취소">
+</form>
 </body>
 </html>
