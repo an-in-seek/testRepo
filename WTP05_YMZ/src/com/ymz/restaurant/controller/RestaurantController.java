@@ -26,4 +26,9 @@ public class RestaurantController {
 		
 		return "restaurant/restaurant_type.restiles";
 	}
+	
+	@RequestMapping("/addNewRestaurant.do")
+	public String addNewRestaurant() {
+		return "restaurant/restaurant_write_form.restiles";
+	}
 }
