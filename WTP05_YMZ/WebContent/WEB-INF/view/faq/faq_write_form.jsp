@@ -1,86 +1,80 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 
-<script type="text/javascript">
-	// 자바 스크립트 시작
-	function writeCheck() {
-		var form = document.writeform;
-
-		if (!form.name.value) // form 에 있는 name 값이 없을 때
-		{
-			alert("이름을 적어주세요"); // 경고창 띄움
-			form.name.focus(); // form 에 있는 name 위치로 이동
-			return;
+<script type="text/javascript" >
+$(document).ready(function(){
+	$("#writeForm").on("submit", function() {
+		if (!$("#title").val()) {
+			alert("제목을 입력하세요");
+			$("#title").focus();
+			return false;
 		}
 
-		if (!form.password.value) {
-			alert("비밀번호를 적어주세요");
-			form.password.focus();
-			return;
+		if (!$("#content").val()) {
+			alert("내용을 입력하세요");
+			$("#content").focus();
+			return false;
 		}
-
-		if (!form.title.value) {
-			alert("제목을 적어주세요");
-			form.title.focus();
-			return;
-		}
-
-		if (!form.memo.value) {
-			alert("내용을 적어주세요");
-			form.memo.focus();
-			return;
-		}
-
-		form.submit();
-	}
+	});
+});
 </script>
 
-<h2 align="center">고객센터(Q&A)</h2>
+<style type="text/css">
+table#tb thead tr{
+	font-weight: bold;
+	background: lightgray;
+}
+table#tb tbody tr{
+	cursor: pointer;
+}
+div#dialog{
+	width:400px;
+	display: none;
+}
+article{
+	border-bottom: 1px solid black;
+	padding: 5px;
+	padding-left: 10px;
+}
+</style>
 
-<table align="center">
-	<tr align="center">
-		<td align="center">
-			<table width="100%" cellpadding="0" cellspacing="0" border="0">
-				<tr style="text-align: center;">
-					<td>글쓰기</td>
-				</tr>
-			</table>
-			<table>
-				<tr>
-					<td align="center">제목</td>
-					<td><input name="title" size="50" maxlength="100"></td>
-				</tr>
-				<tr height="1" bgcolor="#dddddd">
-					<td colspan="4"></td>
-				</tr>
-				<tr>
-					<td align="center">이름</td>
-					<td><input name="name" size="50" maxlength="50"></td>
-				</tr>
-				<tr height="1" bgcolor="#dddddd">
-					<td colspan="4"></td>
-				</tr>
-				<tr>
-					<td align="center">비밀번호</td>
-					<td><input name="password" size="50" maxlength="50"></td>
-				</tr>
-				<tr height="1" bgcolor="#dddddd">
-					<td colspan="4"></td>
-				</tr>
-				<tr>
-					<td align="center">내용</td>
-					<td><textarea name="memo" cols="50" rows="13"></textarea></td>
-				</tr>
-				<tr height="1" bgcolor="#dddddd">
-					<td colspan="4"></td>
-				</tr>
-				<tr height="1" bgcolor="#82B5DF">
-					<td colspan="4"></td>
-				</tr>
-				<tr align="center">
-					<td colspan="2"><input type=button value="등록"> <input
-						type=button value="취소">
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+<h2 align="center">고객센터(FAQ)</h2>
+
+<form method="post" action="${initParam.rootPath}/faq/write.do" id="writeForm">
+
+	<table id="tb" width="100%" style="border:solid 2px #050099">
+		<thead>
+			<tr style="text-align: center;">
+				<td colspan="4"><font size="bold">글쓰기</font></td>
+			</tr>
+		</thead>
+		<tr height="1" >
+			<td colspan="4"></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td align="center">제목</td>
+			<td><input type="text" id="title" name="title" size="80" maxlength="100" style="height:20px;"></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr height="1" bgcolor="#dddddd">
+			<td colspan="4"></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td align="center">내용</td>
+			<td><textarea id="content" name="content" cols="80" rows="15"></textarea></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr height="1" bgcolor="#dddddd">
+			<td colspan="4"></td>
+		</tr>
+		<tr align="center">
+			<td>&nbsp;</td>
+			<td colspan="2">
+			<input type="submit" value="등록"> 
+			<input type="button" value="취소" onclick="javascript:history.back(-1);">
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</form>
