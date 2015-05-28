@@ -1,15 +1,18 @@
-insert into FAQ (faq_no, faq_title, faq_content) values(1, '마일리지 충전하는 방법', '마일리지를 충전하려면 어떻게 해야되나요?');
-insert into FAQ (faq_no, faq_title, faq_content) values(2, '마일리지 충전하는 방법', '마일리지를 충전하려면 어떻게 해야되나요?');
-insert into FAQ (faq_no, faq_title, faq_content) values(3, '마일리지 충전하는 방법', '마일리지를 충전하려면 어떻게 해야되나요?');
-insert into FAQ (faq_no, faq_title, faq_content) values(4, '마일리지 충전하는 방법', '마일리지를 충전하려면 어떻게 해야되나요?');
-insert into FAQ (faq_no, faq_title, faq_content) values(5, '마일리지 충전하는 방법', '마일리지를 충전하려면 어떻게 해야되나요?');
-insert into FAQ (faq_no, faq_title, faq_content) values(6, '마일리지 충전하는 방법', '마일리지를 충전하려면 어떻게 해야되나요?');
-insert into FAQ (faq_no, faq_title, faq_content) values(7, '마일리지 충전하는 방법', '마일리지를 충전하려면 어떻게 해야되나요?');
-insert into FAQ (faq_no, faq_title, faq_content) values(8, '마일리지 충전하는 방법', '마일리지를 충전하려면 어떻게 해야되나요?');
-insert into FAQ (faq_no, faq_title, faq_content) values(9, '마일리지 충전하는 방법', '마일리지를 충전하려면 어떻게 해야되나요?');
-insert into FAQ (faq_no, faq_title, faq_content) values(10, '마일리지 충전하는 방법', '마일리지를 충전하려면 어떻게 해야되나요?');
+insert into FAQ (faq_no, faq_title, faq_content) values(1, '1마일리지 충전하는 방법', '11마일리지를 충전하려면 어떻게 해야되나요?');
+insert into FAQ (faq_no, faq_title, faq_content) values(2, '2마일리지 충전하는 방법', '22마일리지를 충전하려면 어떻게 해야되나요?');
+insert into FAQ (faq_no, faq_title, faq_content) values(3, '3마일리지 충전하는 방법', '33마일리지를 충전하려면 어떻게 해야되나요?');
+insert into FAQ (faq_no, faq_title, faq_content) values(4, '4마일리지 충전하는 방법', '44마일리지를 충전하려면 어떻게 해야되나요?');
+insert into FAQ (faq_no, faq_title, faq_content) values(5, '5마일리지 충전하는 방법', '55마일리지를 충전하려면 어떻게 해야되나요?');
+insert into FAQ (faq_no, faq_title, faq_content) values(6, '6마일리지 충전하는 방법', '66마일리지를 충전하려면 어떻게 해야되나요?');
+insert into FAQ (faq_no, faq_title, faq_content) values(7, '7마일리지 충전하는 방법', '77마일리지를 충전하려면 어떻게 해야되나요?');
+insert into FAQ (faq_no, faq_title, faq_content) values(8, '8마일리지 충전하는 방법', '88마일리지를 충전하려면 어떻게 해야되나요?');
+insert into FAQ (faq_no, faq_title, faq_content) values(9, '9마일리지 충전하는 방법', '99마일리지를 충전하려면 어떻게 해야되나요?');
+insert into FAQ (faq_no, faq_title, faq_content) values(10, '10마일리지 충전하는 방법', '1010마일리지를 충전하려면 어떻게 해야되나요?');
 
+delete from faq
 delete from faq where faq_no=0;
+
+select * from FAQ
 
 insert into QNA (qna_no, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
 values(1, '회원탈퇴 어떻게 해요?', '회원관련', '20150505', 1, '안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user01');

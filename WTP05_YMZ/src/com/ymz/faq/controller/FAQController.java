@@ -61,9 +61,9 @@ public class FAQController {
 	
 	// 게시물 삭제
 	@RequestMapping("login/removeFaq.do")
-	public String removeFAQByNo(@ModelAttribute FAQ faq, HttpServletRequest request, ModelMap map){
+	public String removeFAQByNo(@ModelAttribute FAQ faq, HttpServletRequest request){
 		//로그인 처리는 interceptor가 처리
-		int number = Integer.parseInt(request.getParameter("number"));
+		int number = faq.getNumber();
 		service.removeFAQByNo(number);
 		return "main.tiles";//삭제후 메인페이지로 이동
 	}

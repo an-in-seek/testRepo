@@ -31,8 +31,9 @@
 	
 	<select id="selectAllFAQ" resultMap="faq-resultmap">
 		<include refid="faq-select"/>
+		order by faq_no
 	</select>
-	
+
 	<select id="selectFAQByNo" resultMap="faq-resultmap" parameterType="int">
 		<include refid="faq-select"/>
 		where faq_no=#{number}
