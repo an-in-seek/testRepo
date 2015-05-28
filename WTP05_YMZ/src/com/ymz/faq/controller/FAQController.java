@@ -26,13 +26,13 @@ public class FAQController {
 	private FAQService service;
 	//ddfasd
 	// FAQ게시물 등록
-	@RequestMapping(value="register.do", method=RequestMethod.POST)
+	@RequestMapping(value="faq_write.do", method=RequestMethod.POST)
 	public String registerFAQ(@ModelAttribute FAQ faq, Errors errors, HttpServletRequest request) throws Exception{
 		if(errors.hasErrors()){
-			return "faq/register_form.tiles";
+			return "faq/faq_write_form.tiles";
 		}
 		service.registerFAQ(faq);
-		return "redirect:/faq/registerSuccess.do?number="+faq.getNumber();
+		return "redirect:/faq/faq_view.do?number="+faq.getNumber();
 	}
 	
 	// 게시물 등록 성공

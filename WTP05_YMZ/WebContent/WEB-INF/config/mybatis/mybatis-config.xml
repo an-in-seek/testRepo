@@ -17,8 +17,7 @@
 	
 	<mappers>
 		<mapper resource="com/ymz/common/config/mapper/FAQMapper.xml"/>
-		<mapper resource="com/ymz/common/config/mapper/MemberMapper.xml"/>
-		
+		<mapper resource="com/ymz/common/config/mapper/MemberMapper.xml"/>		
 		<!--  
 		<mapper resource="com/ymz/common/config/mapper/QNAMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/ReportedBBSMapper.xml"/>
