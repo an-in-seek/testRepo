@@ -27,9 +27,9 @@
 		<mapper resource="com/ymz/common/config/mapper/RestaurantMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/QNAMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/ReviewMapper.xml"/>
-		<mapper resource="com/ymz/common/config/mapper/ReviewReplyMapper.xml"/>
 
 		<!--  
+		<mapper resource="com/ymz/common/config/mapper/ReviewReplyMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/ReportedBBSMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/ReportedReplyMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/RestaurantReplyMapper.xml"/>
