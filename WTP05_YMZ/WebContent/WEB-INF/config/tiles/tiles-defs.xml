@@ -48,12 +48,19 @@
 	</definition>
 	<!-- 맛집리뷰 끝 -->
 	
-	
-	<definition name="*.tiles" extends="template">
+	<!-- 메인페이지:달이 -->
+	<definition name="main_template" template="/WEB-INF/view/layout/main_template.jsp">
+		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
+		<put-attribute name="sub_menu" value="/WEB-INF/view/layout/sub_menu.jsp" />
+		<put-attribute name="empty_menu" value="/WEB-INF/view/layout/empty_menu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
+	</definition>
+	<definition name="*.tiles" extends="main_template">
 		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp"/>
 	</definition>
 
-	<definition name="*/*.tiles" extends="template">
+	<definition name="*/*.tiles" extends="main_template">
 		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp"/>
 	</definition>
 	 
