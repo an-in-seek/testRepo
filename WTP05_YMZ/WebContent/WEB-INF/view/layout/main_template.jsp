@@ -34,14 +34,13 @@ table, td, th{
 td, th{
 	padding: 5px;
 }
-div.template{
+div.template3{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	width:1024px;
-	
 }
-header.template{
+header.template3{
 	background-color:skyblue;
 	color:white;
 	text-align:center;
@@ -53,17 +52,7 @@ header.template{
 	text-align:center;
 	padding: 5px;
 }
-#left{
-	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
-	background-color:#F5F5DC;
-	padding: 15px;
-	height:580px;
-	width:150px;
-	font-weight:bold;
-	text-align:center;
-	float:left;  
-}
-section.template{
+section.template3{
 	padding: 15px;
 	margin:10px;
 	height: 550px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
@@ -79,7 +68,7 @@ section.template{
 	text-align:center;
 	float:right;   /*왼쪽으로 띄움 */
 }
-footer.template{
+footer.template3{
 	background-color:skyblue;
 	color:white;
 	padding-top:20px;
@@ -90,23 +79,20 @@ footer.template{
 </style>
 </head>
 <body>
-	<div class="template">
-		<header class="template">
+	<div class="template3">
+		<header class="template3">
 			<tiles:insertAttribute name="header" />
 		</header>
-		<nav id="menu">
+		<nav id="menu" class="template3">
 			<tiles:insertAttribute name="menu" />
 		</nav>
-		<aside id="left">
-			<tiles:insertAttribute name="sub_menu" /><!-- 서브메뉴로 -->
-		</aside>
-		<%-- <aside id="right">
+		<aside id="right" class="template3">
 			<tiles:insertAttribute name="login_menu" /><!-- 서브메뉴로 -->
-		</aside> --%>
-		<section class="template">
+		</aside>
+		<section class="template3">
 			<tiles:insertAttribute name="body" />
 		</section>
-		<footer class="template">
+		<footer class="template3">
 			<tiles:insertAttribute name="footer" />
 		</footer>
 	</div>

@@ -38,7 +38,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<a href=""><font size="1">아이디찾기</font></a>
+				<a href=""><font size="1">아이디찾기 | </font></a>
 				<a href=""><font size="1">비밀번호찾기</font></a>
 			</td>
 		</tr>
