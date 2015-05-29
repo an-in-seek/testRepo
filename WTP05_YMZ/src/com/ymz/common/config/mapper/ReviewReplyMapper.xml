@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="review.dao.ReviewReplyMapper">
-
+<!-- 
 	<sql id="reviewReply-select">
 		select review_reply_no,
 				 reg_date,
@@ -19,22 +19,22 @@
 		<result column="review_no" property="reviewNo"/>
 	</resultMap>
 	
-	<!-- 댓글 등록 -->
+	댓글 등록
 	<insert id="insertReply" parameterType="review_reply">
 		insert into review_reply (review_reply_no, reg_date, content, member_id, review_no)
 		values (#{replyNo}, to_char(sysdate, 'yyyymmdd'), #{content}, #{memberId}, #{reviewNo})
 	</insert>
 	
-	<!-- 댓글 수정 -->
+	댓글 수정
 	<update id="updateReply" parameterType="review_reply">
 		updaet review_reply
 		set content=#{content}
 		where member_id=#{memberId}
 	</update>
 	
-	<!-- 댓글 삭제 -->
+	댓글 삭제
 	<delete id="deleteReview" parameterType="String">
 		delete from review_reply 		
 		where member_id=#{memberId}
-	</delete>
+	</delete> -->
 </mapper>
