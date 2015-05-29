@@ -29,11 +29,11 @@ public class ReviewController {
 	//리뷰 등록
 	@RequestMapping(value="register.do", method=RequestMethod.POST)
 	public String registerReview(@ModelAttribute Review review, Errors errors, HttpServletRequest request){
-		if(errors.hasErrors()){
-			return "review/review_write_form.tiles";
-		}
-		service.registerReview(review);
-		return "";
+//		if(errors.hasErrors()){
+//			return "review/review_write_form.tiles";
+//		}
+//		service.registerReview(review);
+		return "review/review_list.tiles"; // 임시
 	}
 	
 	//리뷰 등록 성공
