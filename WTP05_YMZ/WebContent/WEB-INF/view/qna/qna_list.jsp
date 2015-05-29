@@ -8,7 +8,7 @@
 	$(document).ready(function() {
 		$("table#listTB tbody tr").on("mouseover", function() {
 			$("table#listTB tbody tr").css("background-color", "white");
-			$(this).css("background-color", "silver");
+			$(this).css("background-color", "lightgray");
 		});
 	});
 </script>
@@ -16,7 +16,7 @@
 <style type="text/css">
 table#listTB thead tr{
 	font-weight: bold;
-	background: lightgray;
+	background: silver;
 }
 table#listTB tbody tr{
 	cursor: pointer;
@@ -50,7 +50,7 @@ article{
 			<c:forEach items="${requestScope.qna_list }" var="qna">
 				<tr align="center">
 					<td>${qna.number }</td>
-					<td>${qna.title}</td>
+					<td><a href="${initParam.rootPath}/qna/qnaView.do?qnaNo=${qna.number}">${qna.title}</a></td>
 					<td>${qna.category}</td>
 					<td>${qna.memberId}</td>
 					<td>${qna.registrationDate}</td>
@@ -66,14 +66,15 @@ article{
 
 	
 
-	<table>
+	<table align="center">
 		<tr>
 			<td>
 			<select id="searchSort">
 					<option>정렬방식</option>
-					<option value="추천수">추천수</option>
-					<option value="조회수">조회수</option>
-					<option value="최신글">최신글</option>
+					<option value="날짜순서">날짜순서</option>
+					<option value="회원관련">회원관련</option>
+					<option value="맛집관련">맛집관련</option>
+					<option value="리뷰관련">리뷰관련</option>
 			</select>
 			</td>
 			<td><input type="text" id="searchText"></td>

@@ -16,7 +16,7 @@
 	
 	<insert id="insertFAQ" parameterType="FAQ">
 		insert into faq (faq_no, faq_title, faq_content)
-		values (#{number}, #{title}, #{content})
+		values (faq_no_seq.nextval, #{title}, #{content})
 	</insert>
 	
 	<update id="updateFAQ" parameterType="FAQ">

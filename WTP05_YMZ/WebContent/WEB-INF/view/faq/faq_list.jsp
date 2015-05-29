@@ -5,12 +5,11 @@
 <script type="text/javascript" src="${initParam.rootPath}/script/jquery-ui.js"></script>
 <link type="text/css" href="${initParam.rootPath}/css/jquery-ui.css" rel="stylesheet"></link>	
 <script type="text/javascript">
+
 $(document).ready(function(){
-	$("table#listTB tbody tr").on("mouseover", function(){
-		$("table#listTB tbody tr").css("background-color", "white");
-		$(this).css("background-color", "silver");
-	});
 	$("table#listTB tbody tr").on("click", function(){
+		$("table#listTB tbody tr").css("background-color", "white");
+		$(this).css("background-color", "lightgray");
 		var number = $(this).find(":first-child").text();
 		$.ajax({
 			url:"${initParam.rootPath}/faq/findFaqByNo.do", //요청 url 설정
@@ -23,14 +22,22 @@ $(document).ready(function(){
 				//return false;
 			},
 			success:function(obj){
-				var before = "<table width='100%' border='1'><tr><td align='center' bgcolor='lightgray'><b>내용</b></td></tr><tr height='10' align='center'><td>";
-				var after ="</td></tr></table>";
 				var content = obj.content;
-				var txt = before+content+after;
-				$("#product_info_layer").html(txt).show(); 
+				var txt = content;
+				$("#table_info_layer").show();
+				$("#product_info_layer").text(txt).show();
 				//$("#product_info_layer").text("아이디 : "+obj.content);
 			}
 		});
+	});
+
+	$("#removeForm").on("submit", function(){
+		alert("번호 값이 없습니다.");
+	});
+		
+	$("#xButton").on("click", function(){
+		$("#table_info_layer").hide();
+		$("#product_info_layer").text(txt).hide();
 	});
 });
 </script>
@@ -38,7 +45,7 @@ $(document).ready(function(){
 <style type="text/css">
 table#listTB thead tr{
 	font-weight: bold;
-	background: lightgray;
+	background: silver;
 }
 table#listTB tbody tr{
 	cursor: pointer;
@@ -55,33 +62,47 @@ article{
 #product_info_layer{
 	display: none;/*최초로딩시에는 안보이도록 처리*/
 }
+#table_info_layer{
+	display: none;/*최초로딩시에는 안보이도록 처리*/
+}
 </style>
 
 <h2 align="center">고객센터(FAQ)</h2> 	
 
 <%-- <c:if test="${fn:length(requestScope.faq_list) != 0 }"> --%>
-	<table align="center" id="listTB" style="width:700px" border="1">
+<form id="removeForm" method=post action="removeFaq.do">
+	<table align="center" id="listTB" style="width: 700px" border="1">
 		<thead>
 			<tr align="center">
 				<td>NO</td>
 				<td>제목</td>
+				<td width="100px">삭제(관리자)</td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${requestScope.faq_list }" var="qna">
 				<tr align="center">
-					<td>${qna.number }</td>
-					<td>${qna.title}</td>
-				</tr> 
+					<td id="td1">${qna.number}</td>
+					<td id="td2">${qna.title}</td>
+					<td align='center'><input type="submit" id="number" name="number" value="${qna.number}" ></td>
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	
-	<table width="100%" border="0">
+</form>
+
+<table width="100%" border="0">
 		<tr height="10" align="center"></tr>
 	</table>
-	
-	<div id="product_info_layer" align="center"></div>	
+
+	<table id="table_info_layer" width='100%' border='1'>
+		<tr>
+			<td align='center' bgcolor='silver'><b>내용</b><button id="xButton">X</button></td>
+		</tr>
+		<tr height='10' align='center'>
+			<td><div id="product_info_layer" align="center"></div></td>
+		</tr>
+	</table>
 	
 	<table width="100%" border="0">
 		<tr height="10" align="center"></tr>
