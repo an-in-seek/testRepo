@@ -33,7 +33,7 @@
 	</update>
 	
 	<!-- 댓글 삭제 -->
-	<delete id="deleteReview" parameterType="review_reply">
+	<delete id="deleteReview" parameterType="String">
 		delete from review_reply 		
 		where member_id=#{memberId}
 	</delete>

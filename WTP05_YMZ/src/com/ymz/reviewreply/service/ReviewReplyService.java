@@ -1,14 +1,16 @@
 package com.ymz.reviewreply.service;
 
+import com.ymz.reviewreply.vo.ReviewReply;
+
 public interface ReviewReplyService {
 
-	//게시물 등록
+	//댓글 등록
+	public abstract void registerReviewReply(ReviewReply reply);
+
+	//댓글 수정
+	public abstract void modifyReviewReply(ReviewReply reply);
 	
-	//게시물 수정
+	//댓글 삭제
+	public abstract void removeReviewReply(String memberId);
 	
-	//게시물 삭제
-	
-	//게시물 신고
-	
-	//게시물 평점
 }

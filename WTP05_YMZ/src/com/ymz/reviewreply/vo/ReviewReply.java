@@ -1,10 +1,12 @@
 package com.ymz.reviewreply.vo;
 
+import java.io.Serializable;
+
 /**
  * @author 쭈욘
  *
  */
-public class ReviewReply {
+public class ReviewReply implements Serializable{
 
 	private int replyNo;
 	private String regDate;
