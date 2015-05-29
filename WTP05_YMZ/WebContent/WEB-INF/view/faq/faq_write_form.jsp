@@ -23,13 +23,6 @@ table#tb thead tr{
 	font-weight: bold;
 	background: lightgray;
 }
-table#tb tbody tr{
-	cursor: pointer;
-}
-div#dialog{
-	width:400px;
-	display: none;
-}
 article{
 	border-bottom: 1px solid black;
 	padding: 5px;
