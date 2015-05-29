@@ -75,16 +75,26 @@ h2{
 <!-- 테이블 끝 -->
 
 <!-- 기능 -->
-<form method="post" action="    ">
-<select id="searchSort">
-			<option>정렬방식</option>
-			<option value="추천수">추천수</option>
-			<option value="조회수">조회수</option>
-			<option value="최신글">최신글</option>
-</select>
-<input type="text" id="searchText">
-<input type="submit" id="searchBtn" value="검색">
-</form><a href="${initParam.rootPath }/review/review_write_form.do"><button>글쓰기</button></a>
+<table>
+		<tr>
+			<td>
+			<select id="searchSort">
+					<option>정렬방식</option>
+					<option value="추천수">추천수</option>
+					<option value="조회수">조회수</option>
+					<option value="최신글">최신글</option>
+			</select>
+			</td>
+			<td><input type="text" id="searchText"></td>
+			<td><input type="button" id="searchBtn" value="검색"></td>
+			<td>
+				<form action="${initParam.rootPath }/review/review_write_form.do" method="post">
+					<input type="submit" value="글쓰기">
+				</form>
+			</td>
+		</tr>
+</table>
+	
 </div>
 </body>
 </html>
