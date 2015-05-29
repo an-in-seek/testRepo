@@ -23,8 +23,8 @@ article {
 	</thead>
 	<tr>
 		<td width="1">&nbsp;</td>
-		<td align="center" width="60">글번호</td>
-		<td width="300">number</td>
+		<td align="center" width="100">글번호</td>
+		<td width="550">${requestScope.qna.number}번</td>
 		<td width="1">&nbsp;</td>
 	</tr>
 	<tr height="1" bgcolor="#dddddd">
@@ -33,7 +33,7 @@ article {
 	<tr>
 		<td>&nbsp;</td>
 		<td align="center">조회수</td>
-		<td>hits</td>
+		<td>${requestScope.qna.hits}명</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr height="1" bgcolor="#dddddd">
@@ -41,8 +41,8 @@ article {
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td align="center">이름</td>
-		<td>name</td>
+		<td align="center">아이디</td>
+		<td>${requestScope.qna.memberId}</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr height="1" bgcolor="#dddddd">
@@ -51,7 +51,7 @@ article {
 	<tr>
 		<td>&nbsp;</td>
 		<td align="center">작성일</td>
-		<td>date</td>
+		<td>${requestScope.qna.registrationDate}</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr height="1" bgcolor="#dddddd">
@@ -60,7 +60,7 @@ article {
 	<tr>
 		<td>&nbsp;</td>
 		<td align="center">제목</td>
-		<td>title</td>
+		<td>${requestScope.qna.title}</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr height="1" bgcolor="#dddddd">
@@ -69,13 +69,10 @@ article {
 	<tr>
 		<td></td>
 		<td align="center" height="200">내용</td>
-		<td colspan="2">content</td>
+		<td colspan="2">${requestScope.qna.content}</td>
 	</tr>
 
-	<tr height="1" bgcolor="#dddddd">
-		<td colspan="4"></td>
-	</tr>
-	<tr height="1" bgcolor="#82B5DF">
+	<tr height="2" bgcolor="#dddddd">
 		<td colspan="4"></td>
 	</tr>
 	<tr align="center">

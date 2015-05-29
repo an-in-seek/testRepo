@@ -27,7 +27,6 @@ img{
 a{
 	text-decoration: none;
 }
-
 /*테이블 기본 스타일*/
 table, td, th{
 	border-collapse: collapse;
@@ -35,14 +34,11 @@ table, td, th{
 td, th{
 	padding: 5px;
 }
-
-
 div.template{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	width:1024px;
-	
 }
 header.template{
 	background-color:skyblue;
@@ -54,17 +50,16 @@ nav.template{
 	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	background-color:#F5F5DC;
 	padding: 15px;
-	height:500px;
-	width:150px;
+	height:580px;
+	width:120px;
 	font-weight:bold;
 	text-align:center;
-	border-bottom:1px  solid gray;
 	float:left;   /*왼쪽으로 띄움 */
 }
 section.template{
 	padding: 15px;
 	margin:10px;
-	height: auto; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	height:550px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	float:left;   /*왼쪽으로 띄움 */
 }
 footer.template{

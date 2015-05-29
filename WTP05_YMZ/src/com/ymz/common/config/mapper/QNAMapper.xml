@@ -4,7 +4,13 @@
 <mapper namespace="qna.dao.QNAMapper">
 
 	<sql id="qna-select">
-		select qna_no, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id
+		select	qna_no, 
+				qna_title, 
+				qna_category, 
+				to_char(to_date(qna_registration_date, 'yyyymmdd'), 'yyyy-mm-dd') qna_registration_date, 
+				qna_hits, 
+				qna_content, 
+				member_id
 		from qna
 	</sql>
 	
@@ -20,7 +26,7 @@
 	
 	<insert id="insertQNA" parameterType="QNA">
 		insert into qna (qna_no, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id)
-		values (faq_no_qna.nextval, #{title}, #{category}, #{registrationDate}, #{hits}, #{content}, #{memberId})
+		values (faq_no_qna.nextval, #{title}, #{category}, to_char(sysdate, 'yyyymmdd'), #{hits}, #{content}, #{memberId})
 	</insert>
 	
 	<update id="updateQNA" parameterType="QNA">

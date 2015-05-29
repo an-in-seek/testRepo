@@ -32,7 +32,7 @@ $(document).ready(function(){
 	});
 
 	$("#removeForm").on("submit", function(){
-		alert("번호 값이 없습니다.");
+		alert("게시물을 삭제했습니다.");
 	});
 		
 	$("#xButton").on("click", function(){
