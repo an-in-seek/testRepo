@@ -133,12 +133,12 @@ $(document).ready(function(){
 
 </script>
 
-<h2>가입양식</h2>
+<h2>회원가입</h2>
 
 <form method="post" action="${initParam.rootPath }/member/join.do"  id="registerForm" enctype="multipart/form-data">
-	<table style="width:600px">
+	<table style="width:500px">
 		<tr>
-			<td width="100">ID</td>
+			<td>ID</td>
 			<td>
 				<input type="text" name="id" id='id'> <span id="dupMessageLayer"> </span><span class="errorMessage"><form:errors path="member.id"/></span>
 				

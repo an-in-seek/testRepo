@@ -49,8 +49,15 @@ header.template{
 	background-color:skyblue;
 	color:white;
 	text-align:center;
+	padding: 10px;
+}
+#menu{
+	background-color:skyblue;
+	color:white;
+	text-align:center;
 	padding: 5px;
 }
+
 #left{
 	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	background-color:#F5F5DC;
@@ -60,9 +67,8 @@ header.template{
 	font-weight:bold;
 	text-align:center;
 	border-bottom:1px  solid gray;
-	float:left;   /*왼쪽으로 띄움 */
+	float:left;   /*오른쪽으로 띄움 */
 }
-
 section.template{
 	padding: 15px;
 	margin:10px;
@@ -70,12 +76,11 @@ section.template{
 	float:left;
 }
 
-
 #right{
-	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
-	background-color:#F5F5DC;
+	margin:10px;
+	background-color:#faebd7;
 	padding: 15px;
-	height:500px;
+	height:110px;
 	width:150px;
 	font-weight:bold;
 	text-align:center;
@@ -97,20 +102,20 @@ footer.template{
 	<div class="template">
 		<header class="template">
 			<tiles:insertAttribute name="header" />
-			<tiles:insertAttribute name="menu" />
 		</header>
-
-		<nav id="left">
-			<tiles:insertAttribute name="empty_menu" /><!-- 서브메뉴로 -->
+		<nav id="menu">
+			<tiles:insertAttribute name="menu" />
 		</nav>
-		
+		<aside id="left">
+			<tiles:insertAttribute name="sub_menu" /><!-- 서브메뉴로 -->
+		</aside>
+		<aside id="right">
+			<tiles:insertAttribute name="login_menu" /><!-- 서브메뉴로 -->
+		</aside>
 		<section class="template">
 			<tiles:insertAttribute name="body" />
 		</section>
 		
-		<nav id="right">
-			<tiles:insertAttribute name="sub_menu" /><!-- 서브메뉴로 -->
-		</nav>
 		<footer class="template">
 			<tiles:insertAttribute name="footer" />
 		</footer>

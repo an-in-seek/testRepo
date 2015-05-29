@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${sessionScope.login_info != null}">
-	<jsp:forward page="/res/member_info.jsp"/>
-</c:if>
+
  
 로그인 폼<br>   
 <hr noshade="noshade" width="30%" align="left"> 
