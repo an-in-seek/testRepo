@@ -51,4 +51,27 @@
 		select distinct building_name from location order by building_name
 	</select>
 	
+	<select id="selectFloorsByBuildingName" parameterType="String" resultType="String">
+		select floor from location where building_name=#{buildingName}
+	</select>
+	
+	<select id="selectLocationNo" parameterType="Map" resultType="_int">
+		select location_no from location
+		where building_name=#{buildingName} and floor=#{floor}
+	</select>
+	
+	<insert id="insertRestaurant" parameterType="restaurant">
+		<selectKey keyProperty="restaurantNo" resultType="_int" order="BEFORE">
+			select restaurant_no_seq.nextval from dual
+		</selectKey>
+		insert into restaurant values(#{restaurantNo},#{restaurantName},#{category},#{phoneNo},#{address},#{description},#{pictureName},0,0,#{theme},to_char(sysdate,'yyyymmdd'),0,#{locationNo})
+	</insert>
+	
+	<insert id="insertFood" parameterType="food">
+		<selectKey keyProperty="foodNo" resultType="_int" order="BEFORE">
+			select food_no_seq.nextval from dual
+		</selectKey>
+		insert into food values(#{foodNo}, #{foodName}, #{foodPrice}, #{foodDescription}, #{restaurantNo})
+	</insert>
+	
 </mapper>

@@ -16,14 +16,13 @@ public class Restaurant implements Serializable {
 	private String theme;
 	private String regDate;
 	private int replyCount;
-	private String buildingName;
-	private int floor;
+	private int locationNo;
 	
 	public Restaurant() {}
 	public Restaurant(int restaurantNo, String restaurantName, String category,
 			String phoneNo, String address, String description,
 			String pictureName, int score, int hits, String theme,
-			String regDate, int replyCount, String buildingName, int floor) {
+			String regDate, int replyCount, int locationNo) {
 		this.restaurantNo = restaurantNo;
 		this.restaurantName = restaurantName;
 		this.category = category;
@@ -36,8 +35,7 @@ public class Restaurant implements Serializable {
 		this.theme = theme;
 		this.regDate = regDate;
 		this.replyCount = replyCount;
-		this.buildingName = buildingName;
-		this.floor = floor;
+		this.locationNo = locationNo;
 	}
 
 	public int getRestaurantNo() {
@@ -136,20 +134,12 @@ public class Restaurant implements Serializable {
 		this.replyCount = replyCount;
 	}
 
-	public String getBuildingName() {
-		return buildingName;
+	public int getLocationNo() {
+		return locationNo;
 	}
 
-	public void setBuildingName(String buildingName) {
-		this.buildingName = buildingName;
-	}
-
-	public int getFloor() {
-		return floor;
-	}
-
-	public void setFloor(int floor) {
-		this.floor = floor;
+	public void setLocationNo(int locationNo) {
+		this.locationNo = locationNo;
 	}
 
 	@Override
@@ -158,13 +148,11 @@ public class Restaurant implements Serializable {
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result
-				+ ((buildingName == null) ? 0 : buildingName.hashCode());
-		result = prime * result
 				+ ((category == null) ? 0 : category.hashCode());
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result + floor;
 		result = prime * result + hits;
+		result = prime * result + locationNo;
 		result = prime * result + ((phoneNo == null) ? 0 : phoneNo.hashCode());
 		result = prime * result
 				+ ((pictureName == null) ? 0 : pictureName.hashCode());
@@ -192,11 +180,6 @@ public class Restaurant implements Serializable {
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
-		if (buildingName == null) {
-			if (other.buildingName != null)
-				return false;
-		} else if (!buildingName.equals(other.buildingName))
-			return false;
 		if (category == null) {
 			if (other.category != null)
 				return false;
@@ -207,9 +190,9 @@ public class Restaurant implements Serializable {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (floor != other.floor)
-			return false;
 		if (hits != other.hits)
+			return false;
+		if (locationNo != other.locationNo)
 			return false;
 		if (phoneNo == null) {
 			if (other.phoneNo != null)
@@ -252,7 +235,7 @@ public class Restaurant implements Serializable {
 				+ phoneNo + ", address=" + address + ", description="
 				+ description + ", pictureName=" + pictureName + ", score="
 				+ score + ", hits=" + hits + ", theme=" + theme + ", regDate="
-				+ regDate + ", replyCount=" + replyCount + ", buildingName="
-				+ buildingName + ", floor=" + floor + "]";
+				+ regDate + ", replyCount=" + replyCount + ", locationNo="
+				+ locationNo + "]";
 	}
 }

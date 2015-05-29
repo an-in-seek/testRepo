@@ -9,4 +9,8 @@ public interface RestaurantDAO {
 	public int selectTotalRestaurantCount();
 	public Restaurant selectRestaurantByName(String name);
 	public List<String> selectBuildingNames();
+	public List<String> selectFloorsByBuildingName(String buildingName);
+	public int selectLocationNo(String buildingName, String floor);
+	public int insertRestaurant(Restaurant restaurant);
+	public int insertFood(int restaurantNo, String foodName, int foodPrice, String foodDescription);
 }

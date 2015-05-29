@@ -16,7 +16,10 @@ var phoneCheck1 = false;
 var phoneCheck2 = false;
 var phoneCheck3 = false;
 var addressCheck = false;
+var themeCheck = false;
+var locationCheck = false;
 var infoCheck = false;
+var pictureCheck = false;
 
 $(document).ready(function(){
 	$("#restaurantName").on("blur",function(){
@@ -94,12 +97,44 @@ $(document).ready(function(){
 		}
 	});
 	
+	$("input[type=checkbox]").on("click",function(){
+		if($("input[type=checkbox]:checked").length>0){
+			themeCheck = true;
+			$("#themeMessage").text("");
+		}else{
+			themeCheck = false;
+		}
+	});
+	
+	$("#building").on("change",function(){
+		locationCheck = false;
+	});
+	$("#floor").on("change",function(){
+		if($(this).val()!="default"){
+			locationCheck = true;
+			$("#locationMessage").text("");
+		}else{
+			locationCheck = false;
+		}
+	});
+	
 	$("#description").on("blur",function(){
 		if($(this).val().trim()!=""){
 			infoCheck = true;
 			$("#infoMessage").text("");
 		}else{
 			infoCheck = false;
+		}
+	});
+	
+	$("#picture_table").on("change","[name=pictureName]",function(){
+		pictureCheck = false;
+		for(var i=1; i<$("#picture_table input[name=pictureName]").length+1; i++){
+			if($("#picture_table tr:nth-child("+i+") input[name=pictureName]").val()!=""){
+				pictureCheck = true;
+				$("#pictureMessage").text("");
+				break;
+			}
 		}
 	});
 	////////////////////////////////////////
@@ -116,11 +151,20 @@ $(document).ready(function(){
 		if(!addressCheck){
 			$("#addressMessage").text("주소를 입력하세요");
 		}
+		if(!themeCheck){
+			$("#themeMessage").text("테마를 1개 이상 선택하세요");
+		}
+		if(!locationCheck){
+			$("#locationMessage").text("위치를 선택하세요");
+		}
 		if(!infoCheck){
 			$("#infoMessage").text("소개를 입력하세요");
 		}
+		if(!pictureCheck){
+			$("#pictureMessage").text("사진을 한장 이상 등록하세요");
+		}
 		
-		if(!nameCheck||!categoryCheck||!phoneCheck1||!phoneCheck2||!phoneCheck3||!addressCheck||!infoCheck){
+		if(!nameCheck||!categoryCheck||!phoneCheck1||!phoneCheck2||!phoneCheck3||!addressCheck||!themeCheck||!locationCheck||!infoCheck||!pictureCheck){
 			return false;
 		}
 	});
@@ -142,6 +186,19 @@ $(document).ready(function(){
 			$("#picture_table tr:last-child").remove();
 			$("#picture_table tr:nth-child("+(pic_count-1)+") td:last-child").html("<button id='picture_add'>＋</button> <button id='picture_del'>－</button>");
 			pic_count--;
+		}else{
+			return false;
+		}
+		
+		var count = 0;
+		for(var i=1; i<$("#picture_table input[name=pictureName]").length+1; i++){
+			if($("#picture_table tr:nth-child("+i+") input[name=pictureName]").val()!=""){
+				count++;
+				break;
+			}
+		}
+		if(count==0){
+			pictureCheck = false;
 		}
 	});
 	
@@ -161,11 +218,35 @@ $(document).ready(function(){
 			$("#menu_table tr:last-child").remove();
 			$("#menu_table tr:nth-child("+(menu_count-1)+") td:last-child").html("<button id='menu_add'>＋</button> <button id='menu_del'>－</button>");
 			menu_count--;
+		}else{
+			return false;
 		}
 	});
 	
 	$("#btn_cancel").on("click",function(){
 		history.back();
+	});
+	/////////////////////////////////////////////////////////////
+	$("#building").on("change",function(){
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/getFloorsByBuildingName.do",
+			type:"post",
+			data:"buildingName="+$("#building").val(),
+			dataType:"json",
+			beforeSend:function(){
+				if($("#building").val()=="default"){
+					$("#floor").html("<option value='default'>층을 선택하세요</option>");
+					return false;
+				}
+			},
+			success:function(floors){
+				var temp = "<option value='default'>층을 선택하세요</option>";
+				for(var i=0; i<floors.length; i++) {
+					temp = temp+"<option>"+floors[i]+"</option>";
+				}
+				$("#floor").html(temp);
+			}
+		});
 	});
 });
 </script>
@@ -213,10 +294,10 @@ $(document).ready(function(){
 <tr>
 	<td>테마</td>
 	<td>
-		<label><input type="checkbox" name="theme">가족</label>
-		<label><input type="checkbox" name="theme">연인</label>
-		<label><input type="checkbox" name="theme">친구</label>
-		<label><input type="checkbox" name="theme">회식</label>
+		<label><input type="checkbox" name="theme" value="가족">가족</label>
+		<label><input type="checkbox" name="theme" value="연인">연인</label>
+		<label><input type="checkbox" name="theme" value="친구">친구</label>
+		<label><input type="checkbox" name="theme" value="회식">회식</label>
 		<font color="red"><span id="themeMessage"></span></font>
 	</td>
 </tr>
@@ -246,7 +327,8 @@ $(document).ready(function(){
 
 <hr>
 
-<p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능)</p>
+<p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능)
+<font color="red"><span id="pictureMessage"></span></font></p>
 <table id="picture_table">
 <tr>
 	<td><input type="file" name="pictureName"></td>
