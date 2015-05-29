@@ -44,28 +44,21 @@ $(document).ready(function(){
 			
 		})
 	});
+	
 	//ID 존재 유무 체크
 	$("#recommend").on("keyup", function(){
 		var recommend2 = this.value;
-		alert(recommend2);
+		
+	
 		$.ajax({
 			url:"${initParam.rootPath}/member/idExistCheck.do",
 			data:{"recommend2":recommend2},
-			dataType:"JSON",
-			beforeSend:function(){
-				if($("#recommend")==null){
-					return false;
-				}
-			},
+			dataType:"text",
 			success:function(ret2){
-				idExi = ret2.result;
-				alert(idExi);
-				if(idExi==false){
-					return idExi==false;
-				}else {
-					alert("asdfasdfa");
-					alert(idExi);					
-					return idExi==true;
+				if(ret2=="false"){
+					idExi=false;
+				}else{
+					idExi=true;
 				}
 			}
 		})
@@ -126,15 +119,12 @@ $(document).ready(function(){
 			$("#id").focus();
 			return false;
 		}
-		/*
-		if(idExi==false){
-			alert("존재하지 않는 아이디입니다.");
+		
+		if(!idExi){
+			alert("잘못된 추천인입니다.")
 			$("#recommend").focus();
 			return false;
-	
 		}
-		*/
-		
 		
 	})
 
@@ -228,7 +218,7 @@ $(document).ready(function(){
 		<tr>
 			<td>추천인</td>
 			<td>
-				<input type="text" name="recommend" id="recommend"><span id="existMessageLayer"> </span> <span class="errorMessage"><form:errors path="member.recommend"/></span>
+				<input type="text" name="recommend" id="recommend">
 			</td>
 		</tr>
 		<tr>

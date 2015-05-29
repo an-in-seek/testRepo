@@ -45,7 +45,7 @@ public class MemberController {
 		System.out.println(member.getAddress());
 		member.setGrade("일반");
 		String recommend = (String)request.getParameter("recommend");
-		System.out.println(recommend);
+		
 		if(service.getMemberById(recommend)!=null){
 			Member rm =service.getMemberById(recommend);
 			String id =rm.getId();
@@ -179,12 +179,14 @@ public class MemberController {
 	/**********************리스트에서 id로 회원정보 존재 유무 요청 처리 -Ajax 요청처리********************/
 	@RequestMapping("idExistCheck.do")
 	@ResponseBody
-	public Map<String , Boolean> idExistCheck(@RequestParam String recommend2){
-		HashMap<String , Boolean> result = new HashMap<String , Boolean>();
-		if(recommend2==null || service.getMemberById(recommend2)!=null){
-			result.put("result", true);
+	public String idExistCheck(@RequestParam String recommend2){
+		String result = null;
+		if(recommend2=="" || service.getMemberById(recommend2)!=null){
+			result = "true";
+			System.out.println(result);
 		}else{
-			result.put("result", false);
+			result = "false";
+			System.out.println(result);
 		}
 		return result;
 	}
