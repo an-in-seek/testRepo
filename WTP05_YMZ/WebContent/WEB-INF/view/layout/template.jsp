@@ -49,16 +49,15 @@ header.template{
 nav.template{
 	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	background-color:#F5F5DC;
-	padding: 15px;
+	padding:20px;
 	height:580px;
-	width:120px;
+	width:100px;
 	font-weight:bold;
 	text-align:center;
 	float:left;   /*왼쪽으로 띄움 */
 }
 section.template{
-	padding: 15px;
-	margin:10px;
+	padding: 20px;
 	height:550px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	float:left;   /*왼쪽으로 띄움 */
 }

@@ -4,35 +4,27 @@
 <c:if test="${sessionScope.login_info!=null }">
 	<table  width="1024" cellspacing="0" cellpadding="0">
 	<tr>
-		<td width="100"></td>
-		<td width="100"></td>
-		<td rowspan="2"><h2 align="center"><a href='${initParam.rootPath }/index.do'>YA MEOK ZA!</a></h2></td>
-		<td valign="top" align="right"><a href=""><font size="2">마이페이지</font></a></td>
-		<td valign="top" align="left"><a href="${initParam.rootPath }/member/logout.do"><font size="2">로그아웃</font></a></td>
+		<td rowspan="3"><h2 align="center"><a href='${initParam.rootPath }/index.do'>YA MEOK ZA!</a></h2></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td align="center">
+		<a href=""><font size="2">마이페이지 | </font></a>
+		<a href="${initParam.rootPath }/member/logout.do"><font size="2">로그아웃</font></a>
+		</td>
 	</tr>
 </table>
 </c:if>
 <c:choose>
 	<c:when test="${sessionScope.login_info==null }">
-<table  width="1024" cellspacing="0" cellpadding="0">
+<table width="1024" cellspacing="0" cellpadding="0">
 	<tr>
-		<td width="100"></td>
-		<td width="100"></td>
-		<td rowspan="2"><h2 align="center"><a href='${initParam.rootPath }/index.do'>YA MEOK ZA!</a></h2></td>
-		<td valign="top" align="right"><a href="${initParam.rootPath }/member/loginForm.do"><font size="2">로그인</font></a></td>
-		<td valign="top" align="left"><a href="${initParam.rootPath }/member/joinForm.do"><font size="2">회원가입</font></a></td>
+		<td colspan="3"><h2 align="center"><a href='${initParam.rootPath }/index.do'>YA MEOK ZA!</a></h2></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td align="center">
+		<a href="${initParam.rootPath }/member/loginForm.do"><font size="2">로그인 | </font></a>
+		<a href="${initParam.rootPath }/member/joinForm.do"><font size="2">회원가입</font></a>
+		</td>
 	</tr>
 </table>
 </c:when>
