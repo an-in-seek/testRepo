@@ -31,4 +31,14 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		return session.selectOne(namespace+"selectTotalRestaurantCount");
 	}
 
+	@Override
+	public Restaurant selectRestaurantByName(String name) {
+		return session.selectOne(namespace+"selectRestaurantByName", name);
+	}
+
+	@Override
+	public List<String> selectBuildingNames() {
+		return session.selectList(namespace+"selectBuildingNames");
+	}
+
 }

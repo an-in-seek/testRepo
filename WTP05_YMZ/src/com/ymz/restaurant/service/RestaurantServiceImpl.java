@@ -27,4 +27,14 @@ public class RestaurantServiceImpl implements RestaurantService {
 		map.put("pagingBean", pagingBean);
 		return map;
 	}
+
+	@Override
+	public Restaurant getRestaurantByName(String name) {
+		return dao.selectRestaurantByName(name);
+	}
+
+	@Override
+	public List<String> getBuildingNames() {
+		return dao.selectBuildingNames();
+	}
 }

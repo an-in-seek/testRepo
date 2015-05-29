@@ -3,7 +3,7 @@
 <mapper namespace="restaurant.dao.RestaurantMapper">
 	<sql id="restaurant-select">
 		select	restaurant_no, restaurant_name, category, phone_no, address, description,
-				picture_name, score, hits, theme, reg_date, reply_count, building_name, floor
+				picture_name, score, hits, theme, reg_date, reply_count, location_no
 		from	restaurant
 	</sql>
 	
@@ -26,10 +26,10 @@
 	
 	<select id="selectAllRestaurantPaging" resultMap="restaurant-resultmap">
 		select	restaurant_no, restaurant_name, category, phone_no, address, description,
-				picture_name, score, hits, theme, reg_date, reply_count, building_name, floor
+				picture_name, score, hits, theme, reg_date, reply_count, location_no
 		from	(
 					select	ceil(rownum/#{contentsPerPage}) page, restaurant_no, restaurant_name, category, phone_no, address,
-							description, picture_name, score, hits, theme, reg_date, reply_count, building_name, floor
+							description, picture_name, score, hits, theme, reg_date, reply_count, location_no
 					from	(
 								<include refid="restaurant-select"/>
 								order by reg_date
@@ -40,6 +40,15 @@
 	
 	<select id="selectTotalRestaurantCount" resultType="_int">
 		select count(restaurant_no) from restaurant
+	</select>
+	
+	<select id="selectRestaurantByName" parameterType="String" resultMap="restaurant-resultmap">
+		<include refid="restaurant-select"/>
+		where restaurant_name = #{restaurantName}
+	</select>
+	
+	<select id="selectBuildingNames" resultType="String">
+		select distinct building_name from location order by building_name
 	</select>
 	
 </mapper>

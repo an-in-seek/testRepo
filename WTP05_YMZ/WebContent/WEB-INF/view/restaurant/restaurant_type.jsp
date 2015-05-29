@@ -12,7 +12,7 @@
 <table style="width:100%;">
 <tr>
 <td width="50%" align="left"></td>
-<td width="50%" align="right"><a href="${initParam.rootPath }/restaurant/addNewRestaurant.do"><button>맛집등록</button></a></td>
+<td width="50%" align="right"><a href="${initParam.rootPath }/restaurant/addNewRestaurantForm.do"><button>맛집등록</button></a></td>
 </tr>
 </table>
 <table border="1">
