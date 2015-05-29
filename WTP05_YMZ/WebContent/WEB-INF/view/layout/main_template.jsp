@@ -55,7 +55,7 @@ header.template3{
 section.template3{
 	padding: 15px;
 	margin:10px;
-	height: 550px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	height: 500px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	float:left;
 }
 #right{

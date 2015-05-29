@@ -60,7 +60,7 @@ article{
 		</tbody>
 	</table>
 
-	<table width="100%" >
+	<table style="width: 700px">
 		<tr height="10" align="center"></tr>
 	</table>
 
@@ -102,7 +102,7 @@ article{
 	<c:forEach begin="${pagingBean1.startPageOfPageGroup }" end="${pagingBean1.endPageOfPageGroup}" var="pageNum">
 		<c:choose>
 			<c:when test="${pageNum == pagingBean1.currentPage }">
-				<b>[${pageNum}]</b>
+				<font color="red"><b>${pageNum}</b></font>
 			</c:when>
 			<c:otherwise>
 				<a href="${initParam.rootPath }/qna/qnaList.do?page=${pageNum}">${pageNum} </a>

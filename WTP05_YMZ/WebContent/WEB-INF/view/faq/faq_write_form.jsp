@@ -34,7 +34,7 @@ article{
 
 <form method="post" action="${initParam.rootPath}/faq/write.do" id="writeForm">
 
-	<table id="tb" width="100%" style="border:solid 2px #050099">
+	<table id="tb" align="center" width="700px" style="border:solid 2px #050099">
 		<thead>
 			<tr style="text-align: center;">
 				<td colspan="4"><font size="bold">글쓰기</font></td>
@@ -55,7 +55,7 @@ article{
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center">내용</td>
-			<td><textarea id="content" name="content" cols="80" rows="15"></textarea></td>
+			<td><textarea id="content" name="content" cols="80" rows="20"></textarea></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">

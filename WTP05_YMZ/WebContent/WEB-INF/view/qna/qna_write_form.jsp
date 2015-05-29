@@ -27,9 +27,9 @@ $(document).ready(function(){
 				fCreator : "createSEditor2"
 			});
 			// 등록버튼 클릭시 form 전송
-			$("#save").click(function() {
+/* 			$("#save").click(function() {
 				oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-			});
+			}); */
 	});
 </script>
 <style type="text/css">
@@ -44,7 +44,7 @@ table#t1 {
 <div align="center">
 	<h2>QNA게시물 등록</h2>
 	<!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
-	<form id="write" method="post" action="${initParam.rootPath }/qna/insert.do">
+	<form id="write" method="post" action="${initParam.rootPath }/qna/qnaWrite.do">
 		<!-- 테이블 -->
 		<table id="t1">
 			<tr>
@@ -53,7 +53,8 @@ table#t1 {
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea name="content" id="content" rows="10" cols="100" style="width: 700px; height: 350px;">
+				<td>
+				<textarea name="content" id="content" rows="10" cols="100" style="width: 700px; height: 350px;">
 				에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.
 				</textarea><br>
 				</td>

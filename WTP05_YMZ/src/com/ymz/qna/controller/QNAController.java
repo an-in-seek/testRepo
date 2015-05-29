@@ -32,7 +32,7 @@ public class QNAController {
 			return "qna/qna_write_form.tiles";
 		}
 		service.registerQNA(qna);
-		return "redirect:/qna/qnaView.do?number="+qna.getNumber();
+		return "qna/qnaList.do";
 	}
 	
 	//QNA게시물 전체목록 조회(페이징)

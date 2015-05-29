@@ -15,7 +15,7 @@ article {
 
 <h2 align="center">게시물 내용</h2>
 
-<table id="tb" width="100%" style="border:solid 2px #050099">
+<table id="tb" align="center" width="700px" style="border:solid 2px #050099">
 	<thead>
 		<tr style="text-align:center">
 			<td colspan="4"><font size="bold">글쓰기</font></td>

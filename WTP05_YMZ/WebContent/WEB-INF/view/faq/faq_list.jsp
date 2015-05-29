@@ -71,7 +71,7 @@ article{
 
 <%-- <c:if test="${fn:length(requestScope.faq_list) != 0 }"> --%>
 <form id="removeForm" method=post action="removeFaq.do">
-	<table align="center" id="listTB" style="width: 700px" border="1">
+	<table id="listTB" style="width:700px" border="1" align="center">
 		<thead>
 			<tr align="center">
 				<td>NO</td>
@@ -91,11 +91,11 @@ article{
 	</table>
 </form>
 
-<table width="100%" border="0">
+<table>
 		<tr height="10" align="center"></tr>
 	</table>
 
-	<table id="table_info_layer" width='100%' border='1'>
+	<table id="table_info_layer" style="width:700px" border="1" align="center">
 		<tr>
 			<td align='center' bgcolor='silver'><b>내용</b><button id="xButton">X</button></td>
 		</tr>
@@ -104,12 +104,12 @@ article{
 		</tr>
 	</table>
 	
-	<table width="100%" border="0">
+	<table>
 		<tr height="10" align="center"></tr>
 	</table>
 
 	<form action="${initParam.rootPath }/faq/writeForm.do" method="post">
-		<table width="100%" border="0">
+		<table style="width:700px" align="center">
 			<tr>
 				<td align="center"><input type="submit" value="글쓰기"></td>
 			</tr>

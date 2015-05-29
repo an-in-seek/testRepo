@@ -49,8 +49,8 @@ header.template{
 nav.template{
 	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	background-color:#F5F5DC;
-	padding:20px;
-	height:580px;
+	padding:10px;
+	height:600px;
 	width:100px;
 	font-weight:bold;
 	text-align:center;
@@ -58,7 +58,8 @@ nav.template{
 }
 section.template{
 	padding: 20px;
-	height:550px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	height:580px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	width:840px;
 	float:left;   /*왼쪽으로 띄움 */
 }
 footer.template{
