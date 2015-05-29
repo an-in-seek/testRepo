@@ -31,17 +31,8 @@ public class FAQController {
 		if(errors.hasErrors()){
 			return "faq/faq_write_form.tiles";
 		}
-		//service.registerFAQ(faq);
-		return "faq/faq_view.tiles";
-	}
-	
-	// 게시물 등록 성공
-	@RequestMapping("registerSuccess.do")
-	public String registerSuccess(@RequestParam int number, ModelMap map) throws Exception{
-		FAQ faq = service.getFAQByNo(number);
-		System.out.println(faq);
-		map.addAttribute("faq", faq);
-		return "faq/register_success.tiles";
+		service.registerFAQ(faq);
+		return "/faq/faqList.do";//등록후 원래페이지로 이동
 	}
 	
 	// FAQ게시판 전체 조회
@@ -60,12 +51,11 @@ public class FAQController {
 	}
 	
 	// 게시물 삭제
-	@RequestMapping("login/removeFaq.do")
+	@RequestMapping(value="removeFaq.do", method=RequestMethod.POST) //login/removeFaq.do
 	public String removeFAQByNo(@ModelAttribute FAQ faq, HttpServletRequest request){
 		//로그인 처리는 interceptor가 처리
-		int number = faq.getNumber();
-		service.removeFAQByNo(number);
-		return "main.tiles";//삭제후 메인페이지로 이동
+		service.removeFAQByNo(faq.getNumber());
+		return "/faq/faqList.do";//삭제후 원래 페이지로 이동
 	}
 	
 	// 리스트에서 id로 회원정보 요청한 것 처리 -Ajax 요청처리

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,124 @@
 <script type="text/javascript">
 var pic_count = 1;
 var menu_count = 1;
-$(document).ready(function(){	
+
+var nameMessage = "업체명을 입력하세요";
+var nameCheck = false;
+var categoryCheck = false;
+var phoneCheck1 = false;
+var phoneCheck2 = false;
+var phoneCheck3 = false;
+var addressCheck = false;
+var infoCheck = false;
+
+$(document).ready(function(){
+	$("#restaurantName").on("blur",function(){
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/checkName.do",
+			type:"post",
+			data:"name="+$("#restaurantName").val(),
+			dataType:"text",
+			beforeSend:function(){
+				if($("#restaurantName").val().trim()==""){
+					nameMessage = "업체명을 입력하세요";
+					nameCheck = false;
+					return false;
+				}
+			},
+			success:function(check){
+				if(eval(check)){
+					$("#nameMessage").text("");
+					nameCheck = true;
+				}else{
+					nameMessage = "이미 존재하는 업체명입니다";
+					$("#nameMessage").text(nameMessage);
+					nameCheck = false;
+				}
+			}
+		});
+	});
+	
+	$("#category").on("change",function(){
+		if($(this).val()!="default"){
+			categoryCheck = true;
+			$("#categoryMessage").text("");
+		}else{
+			categoryCheck = false;
+		}
+	});
+	
+	$("#phoneNo1").on("blur",function(){
+		if($(this).val().trim()!=""){
+			phoneCheck1 = true;
+			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
+				$("#phoneMessage").text("");
+			}
+		}else{
+			phoneCheck1 = false;
+		}
+	});
+	$("#phoneNo2").on("blur",function(){
+		if($(this).val().trim()!=""){
+			phoneCheck2 = true;
+			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
+				$("#phoneMessage").text("");
+			}
+		}else{
+			phoneCheck2 = false;
+		}
+	});
+	$("#phoneNo3").on("blur",function(){
+		if($(this).val().trim()!=""){
+			phoneCheck3 = true;
+			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
+				$("#phoneMessage").text("");
+			}
+		}else{
+			phoneCheck3 = false;
+		}
+	});
+	
+	$("#address").on("blur",function(){
+		if($(this).val().trim()!=""){
+			addressCheck = true;
+			$("#addressMessage").text("");
+		}else{
+			addressCheck = false;
+		}
+	});
+	
+	$("#description").on("blur",function(){
+		if($(this).val().trim()!=""){
+			infoCheck = true;
+			$("#infoMessage").text("");
+		}else{
+			infoCheck = false;
+		}
+	});
+	////////////////////////////////////////
+	$("#regForm").on("submit",function(){
+		if(!nameCheck){
+			$("#nameMessage").text(nameMessage);
+		}
+		if(!categoryCheck){
+			$("#categoryMessage").text("업종을 선택하세요");
+		}
+		if(!(phoneCheck1&&phoneCheck2&&phoneCheck3)){
+			$("#phoneMessage").text("전화번호를 입력하세요");
+		}
+		if(!addressCheck){
+			$("#addressMessage").text("주소를 입력하세요");
+		}
+		if(!infoCheck){
+			$("#infoMessage").text("소개를 입력하세요");
+		}
+		
+		if(!nameCheck||!categoryCheck||!phoneCheck1||!phoneCheck2||!phoneCheck3||!addressCheck||!infoCheck){
+			return false;
+		}
+	});
+	////////////////////////////////////////
+	
 	$("#picture_table").on("click","#picture_add",function(){
 		if(pic_count<5){
 			$("#picture_table").append("<tr><td><input type='file' name='pictureName'></td><td><button id='picture_add'>＋</button> <button id='picture_del'>－</button></td></tr>");
@@ -29,7 +147,7 @@ $(document).ready(function(){
 	
 	$("#menu_table").on("click","#menu_add",function(){
 		if(menu_count<10){
-			$("#menu_table").append("<tr><td><input type='text' name='foodName' maxlength='10'></td><td><input type='text' name='foodPrice' maxlength='10'>원</td><td><input type='text' name='discription' style='width:300px'></td><td><button id='menu_add'>＋</button> <button id='menu_del'>－</button></td></tr>");
+			$("#menu_table").append("<tr><td><input type='text' name='foodName' maxlength='10'></td><td><input type='text' name='foodPrice' maxlength='10'>원</td><td><input type='text' name='foodDescription' style='width:300px'></td><td><button id='menu_add'>＋</button> <button id='menu_del'>－</button></td></tr>");
 			$("#menu_table tr:nth-child("+menu_count+") td:last-child").html("");
 			menu_count++;
 		}else{
@@ -53,45 +171,75 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<form action="" method="post">
+<form id="regForm" action="${initParam.rootPath }/restaurant/addNewRestaurant.do" method="post" enctype="multipart/form-data">
 <p><font size="5"><b>기본정보</b></font></p>
 <table>
 <tr>
 	<td>업체명</td>
 	<td>
-		<input type="text" name="restaurantName" maxlength="10">
+		<input type="text" id="restaurantName" name="restaurantName" maxlength="10">
+		<font color="red"><span id="nameMessage"></span></font>
 	</td>
 </tr>
 <tr>
 	<td>업종</td>
 	<td>
-		<select>
+		<select id="category" name="category">
 			<option value="default">업종을 선택하세요</option>
 			<option>한식</option>
 			<option>양식</option>
 			<option>중식</option>
 			<option>일식</option>
 		</select>
+		<font color="red"><span id="categoryMessage"></span></font>
 	</td>
 </tr>
 <tr>
 	<td>전화번호</td>
 	<td>
-		<input type="text" name="phoneNo1" maxlength="3" style="width: 50px"> -
-		<input type="text" name="phoneNo2" maxlength="4" style="width: 50px"> -
-		<input type="text" name="phoneNo3" maxlength="4" style="width: 50px">
+		<input type="text" id="phoneNo1" name="phoneNo1" maxlength="3" style="width: 50px"> -
+		<input type="text" id="phoneNo2" name="phoneNo2" maxlength="4" style="width: 50px"> -
+		<input type="text" id="phoneNo3" name="phoneNo3" maxlength="4" style="width: 50px">
+		<font color="red"><span id="phoneMessage"></span></font>
 	</td>
 </tr>
 <tr>
 	<td>주소</td>
 	<td>
-		<input type="text" name="address" style="width:500px">
+		<input type="text" id="address" name="address" style="width:500px">
+		<font color="red"><span id="addressMessage"></span></font>
+	</td>
+</tr>
+<tr>
+	<td>테마</td>
+	<td>
+		<label><input type="checkbox" name="theme">가족</label>
+		<label><input type="checkbox" name="theme">연인</label>
+		<label><input type="checkbox" name="theme">친구</label>
+		<label><input type="checkbox" name="theme">회식</label>
+		<font color="red"><span id="themeMessage"></span></font>
+	</td>
+</tr>
+<tr>
+	<td>위치</td>
+	<td>
+		<select id="building" name="building">
+			<option value="default">건물을 선택하세요</option>
+			<c:forEach items="${requestScope.buildingNames }" var="buildingName">
+				<option>${buildingName }</option>
+			</c:forEach>
+		</select>
+		<select id="floor" name="floor">
+			<option value="default">층을 선택하세요</option>
+		</select>
+		<font color="red"><span id="locationMessage"></span></font>
 	</td>
 </tr>
 <tr>
 	<td>소개</td>
 	<td>
-		<textarea name="description" style="width:500px;height:100px"></textarea>
+		<textarea id="description" name="description" style="width:500px;height:100px"></textarea>
+		<font color="red"><span id="infoMessage"></span></font>
 	</td>
 </tr>
 </table>
@@ -125,7 +273,7 @@ $(document).ready(function(){
 <tr>
 	<td><input type="text" name="foodName" maxlength="10"></td>
 	<td><input type="text" name="foodPrice" maxlength="10">원</td>
-	<td><input type="text" name="discription" style="width:300px"></td>
+	<td><input type="text" name="foodDescription" style="width:300px"></td>
 	<td>
 		<button id="menu_add">＋</button>
 		<button id="menu_del">－</button>

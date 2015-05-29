@@ -42,6 +42,13 @@ public class QNAController {
 		return new ModelAndView("qna/qna_list.tiles", map);
 	}
 	
+	//QNA게시물 번호로 정보조회
+		@RequestMapping("qnaView.do")
+		public ModelAndView QNAView(@RequestParam int qnaNo){
+			QNA qna = service.getQNAByNo(qnaNo);
+			return new ModelAndView("qna/qna_view.tiles", "qna", qna);
+		}
+	
 	// 게시물 수정
 		@RequestMapping(value="login/modifyQnaInfo.do", method=RequestMethod.POST)
 		public String modifyQNAInfo(@ModelAttribute QNA qna, Errors errors,  HttpServletRequest request)																													throws Exception{
