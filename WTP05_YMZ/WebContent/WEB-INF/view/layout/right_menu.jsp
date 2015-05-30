@@ -11,7 +11,7 @@
 				<a href=""><font size="1">마이페이지</font></a>
 			</td>
 			<td>
-				<a href="${initParam.rootPath }/member/logoutForm.do"><font size="1">로그아웃</font></a>
+				<a href="${initParam.rootPath }/member/login/logout.do"><font size="1">로그아웃</font></a>
 			</td>
 		</tr>
 		</table>

@@ -9,7 +9,7 @@
 	<tr>
 		<td align="center">
 		<a href=""><font size="2">마이페이지 | </font></a>
-		<a href="${initParam.rootPath }/member/logout.do"><font size="2">로그아웃</font></a>
+		<a href="${initParam.rootPath }/member/login/logout.do"><font size="2">로그아웃</font></a>
 		</td>
 	</tr>
 </table>

@@ -34,13 +34,13 @@ table, td, th{
 td, th{
 	padding: 5px;
 }
-div.main_template{
+div.member_template{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	width:1024px;
 }
-header.main_template{
+header.member_template{
 	background-color:skyblue;
 	color:white;
 	text-align:center;
@@ -53,20 +53,14 @@ header.main_template{
 	padding: 5px;
 }
 #right{
-	margin:10px;
-	background-color:#faebd7;
-	padding: 15px;
-	height:110px;
-	width:150px;
-	font-weight:bold;
-	text-align:center;
+	background-color:white;
 	float:right;   /*오른쪽으로 띄움 */
 }
 #body{
 	padding: 15px;
 	margin:10px;
 	height: 500px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-	float:left;
+	float:right;
 }
 #left{
 	margin:10px;
@@ -77,7 +71,7 @@ header.main_template{
 	text-align:center;
 	float:left;   /*왼쪽으로 띄움 */
 }
-footer.main_template{
+footer.member_template{
 	background-color:skyblue;
 	color:white;
 	padding-top:20px;
@@ -88,23 +82,24 @@ footer.main_template{
 </style>
 </head>
 <body>
-	<div class="main_template">
-		<header class="main_template">
+	<div class="member_template">
+		<header class="member_template">
 			<tiles:insertAttribute name="header" />
 		</header>
-		<nav id="menu" class="main_template">
+		<nav id="menu" class="member_template">
 			<tiles:insertAttribute name="menu" />
 		</nav>
-		<aside id="left" class="main_template">
-			<tiles:insertAttribute name="aside_menu" /><!-- 서브메뉴로 -->
+		<aside id="left" class="member_template">
+			<tiles:insertAttribute name="aside_menu"/>
 		</aside>
-		<section id="body" class="main_template">
+		<section id="body" class="member_template">
 			<tiles:insertAttribute name="body" />
 		</section>
-		<aside id="right" class="main_template">
-			<tiles:insertAttribute name="right_menu" /><!-- 서브메뉴로 -->
+		<aside id="right" class="member_template">
+			<tiles:insertAttribute name="empty_menu"/>
 		</aside>
-		<footer class="main_template">
+		
+		<footer class="member_template">
 			<tiles:insertAttribute name="footer" />
 		</footer>
 	</div>
