@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <style type="text/css">
 	a.menu:link {text-decoration:none; color: white;}/*방문하지 않은 페이지*/
@@ -6,7 +6,7 @@
 	a.menu:active	{text-decoration:none; color: white;}/*링크 클릭시*/
 	a.menu:visited {text-decoration:none; color: white;}/*방문한 링크 표시*/
 </style>
-<table align="center" width="200" height="600" cellspacing="0" cellpadding="0">
+<table align="center" width="200" height="500" cellspacing="0" cellpadding="0">
 	<tr>
 		<td><a href='${initParam.rootPath }/member/myPage.do' class="menu"><font color="black" size="3">메인(활동내역)</font></a></td>
 	</tr>
@@ -14,12 +14,12 @@
 		<td><a href="${initParam.rootPath }/member/login/modifyForm.do"  class="menu"><font color="black" size="3">회원기본수정</font></a></td>
 	</tr>
 	<tr>
-		<td><a href=""  class="menu"><font color="black" size="3">비밀번호수정</font></a></td>
+		<td><a href="${initParam.rootPath }/member/login/modifyPassword.do"  class="menu"><font color="black" size="3">비밀번호수정</font></a></td>
 	</tr>
 	<tr>
-		<td><a href=""  class="menu"><font color="black" size="3">쿠폰교환</font></a></td>
+		<td><a href="${initParam.rootPath }/member/login/tradeCoupon.do"  class="menu"><font color="black" size="3">쿠폰교환</font></a></td>
 	</tr>
 	<tr>
-		<td><a href=""  class="menu"><font color="black" size="3">회원탈퇴</font></a></td>
+		<td><font color="red" size="3">회원탈퇴</font></td>
 	</tr>
 </table>    

@@ -47,6 +47,12 @@
 	<!-- 회원정보 수정 폼 -->
 	<mvc:view-controller path="/member/login/modifyForm.do" view-name="member/info/modify_info.tiles"/>
 	
+	<!-- 비밀번호수정 폼 -->
+	<mvc:view-controller path="/member/login/modifyPassword.do" view-name="member/info/modify_password.tiles"/>
+	
+	<!-- 쿠폰교환 폼 -->
+	<mvc:view-controller path="/member/login/tradeCoupon.do" view-name="member/info/trade_coupon.tiles"/>
+	
 	<!-- 마이페이지 폼-->
 	<mvc:view-controller path="/member/myPage.do" view-name="member/info/mypage.tiles"/>
 	
