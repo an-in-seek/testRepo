@@ -82,7 +82,7 @@ public class RestaurantController {
 		String pictureNameTemp = "";
 		String path = request.getServletContext().getRealPath("/uploadPhoto");
 		for(int i=0; i<pictureName.length; i++) {
-			String fileName = System.currentTimeMillis()+"";
+			String fileName = System.nanoTime()+"";
 			File file = new File(path, fileName);
 			pictureName[i].transferTo(file);
 			pictureNameTemp += fileName+",";
@@ -103,6 +103,10 @@ public class RestaurantController {
 		String location = service.getLocationByNo(restaurant.getLocationNo());
 		model.addAttribute("restaurant_location", location);
 		
+		String[] pictures = restaurant.getPictureName().split(",");
+		for(int i=0; i<pictures.length; i++) {
+			model.addAttribute("pic"+(i+1), pictures[i]);
+		}
 		return "restaurant/restaurant_view.tiles";
 	}
 }

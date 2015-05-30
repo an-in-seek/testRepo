@@ -24,14 +24,31 @@
 		<result column="member_id" property="memberId"/>
 	</resultMap>
 	
+	<!-- Member 테이블과  join 처리를 할 resultMap -->
+	<resultMap type="QNA" id="qna-member-resultmap" extends="qna-resultmap">
+		<association property="member" javaType="member" resultMap="member.dao.memberMapper.member-resultmap"/>
+	</resultMap>
+	
 	<insert id="insertQNA" parameterType="QNA">
-		insert into qna (qna_no, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id)
-		values (faq_no_qna.nextval, #{title}, #{category}, to_char(sysdate, 'yyyymmdd'), 0, #{content}, #{memberId})
+		insert into qna (	qna_no, 
+								qna_title, 
+								qna_category, 
+								qna_registration_date, 
+								qna_hits, 
+								qna_content, 
+								member_id)
+		values (	faq_no_qna.nextval, 
+					#{title}, 
+					#{category}, 
+					to_char(sysdate, 'yyyymmdd'), 
+					0, 
+					#{content}, 
+					#{memberId})
 	</insert>
 	
 	<update id="updateQNA" parameterType="QNA">
 		update 	qna
-		set			qna_no=#{number}, qna_title=#{title}, qna_category=#{category}, qna_registration_date=#{registrationDate}, qna_hits=#{hits}, qna_content=#{content}
+		set			qna_title=#{title}, qna_category=#{category}, qna_content=#{content}
 		where		qna_no=#{number}
 	</update>
 	

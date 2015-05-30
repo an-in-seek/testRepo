@@ -46,36 +46,25 @@ header.main_template{
 	text-align:center;
 	padding: 5px;
 }
-#menu{
-	background-color:skyblue;
-	color:white;
-	text-align:center;
-	padding: 5px;
-}
-#right{
-	margin:10px;
-	background-color:#faebd7;
-	padding: 15px;
-	height:110px;
-	width:150px;
+
+nav.main_template{
 	font-weight:bold;
-	text-align:center;
-	float:right;   /*오른쪽으로 띄움 */
+	float:right;  /*오른쪽으로 띄움 */
 }
 #body{
-	padding: 15px;
-	margin:10px;
-	height: 500px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-	float:left;
+	padding: 20px;
+	height:580px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	width:500px;
+	float:left;   /*왼쪽으로 띄움 */
 }
 #left{
-	margin:10px;
-	padding: 15px;
-	height:110px;
-	width:150px;
+	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
+	padding:10px;
+	height:600px;
+	width:100px;
 	font-weight:bold;
 	text-align:center;
-	float:left;   /*왼쪽으로 띄움 */
+	float:left;  /*왼쪽으로 띄움 */
 }
 footer.main_template{
 	background-color:skyblue;
@@ -91,19 +80,17 @@ footer.main_template{
 	<div class="main_template">
 		<header class="main_template">
 			<tiles:insertAttribute name="header" />
-		</header>
-		<nav id="menu" class="main_template">
 			<tiles:insertAttribute name="menu" />
-		</nav>
+		</header>
 		<aside id="left" class="main_template">
 			<tiles:insertAttribute name="aside_menu" /><!-- 서브메뉴로 -->
 		</aside>
 		<section id="body" class="main_template">
 			<tiles:insertAttribute name="body" />
 		</section>
-		<aside id="right" class="main_template">
+		<nav id="right" class="main_template">
 			<tiles:insertAttribute name="right_menu" /><!-- 서브메뉴로 -->
-		</aside>
+		</nav>
 		<footer class="main_template">
 			<tiles:insertAttribute name="footer" />
 		</footer>

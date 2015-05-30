@@ -22,14 +22,14 @@ $(document).ready(function(){
 				},
 				fOnAppLoad : function() {
 					// 기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할 때 사용
-					oEditors.getById["content"].exec("PASTE_HTML", [ "첫번째 에디터! 기존 DB에 저장된 내용을 에디터에 적용할 문구" ]);
+					oEditors.getById["content"].exec("PASTE_HTML", []);
 				},
 				fCreator : "createSEditor2"
 			});
 			// 등록버튼 클릭시 form 전송
-/* 			$("#save").click(function() {
-				oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-			}); */
+ 			$("#save").click(function() {
+				oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD");
+			}); 
 	});
 </script>
 <style type="text/css">
@@ -44,9 +44,18 @@ table#t1 {
 <div align="center">
 	<h2>QNA게시물 등록</h2>
 	<!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
-	<form id="write" method="post" action="${initParam.rootPath }/qna/qnaWrite.do">
+	<form id="write" method="post" action="${initParam.rootPath}/qna/write.do">
 		<!-- 테이블 -->
 		<table id="t1">
+			<tr>
+				<td>분류</td>
+				<td><select id="category" name="category">
+					<option>분류</option>
+					<option value="회원관련">회원관련</option>
+					<option value="맛집관련">맛집관련</option>
+					<option value="리뷰관련">리뷰관련</option>
+				</select></td>
+			</tr>
 			<tr>
 				<td width="60px">제목</td>
 				<td><input type="text" id="title" name="title" style="width: 700px"></td>
@@ -54,9 +63,7 @@ table#t1 {
 			<tr>
 				<td>내용</td>
 				<td>
-				<textarea name="content" id="content" rows="10" cols="100" style="width: 700px; height: 350px;">
-				에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.
-				</textarea><br>
+				<textarea name="content" id="content" rows="10" cols="100" style="width: 700px; height: 350px;"></textarea><br>
 				</td>
 			</tr>
 			<tr align="center">

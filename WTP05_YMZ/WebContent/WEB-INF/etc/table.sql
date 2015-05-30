@@ -79,7 +79,7 @@ CREATE TABLE RESTAURANT (
 	PHONE_NO VARCHAR2(20) NOT NULL, /* 전화번호 */
 	ADDRESS VARCHAR2(100) NOT NULL, /* 주소 */
 	DESCRIPTION CLOB NOT NULL, /* 설명 */
-	PICTURE_NAME VARCHAR2(70), /* 사진 이름 */
+	PICTURE_NAME VARCHAR2(80), /* 사진 이름 */
 	SCORE NUMBER(2) NOT NULL, /* 평점 */
 	HITS NUMBER(10) NOT NULL, /* 조회수 */
 	THEME VARCHAR2(30) NOT NULL, /* 테마 */
@@ -349,3 +349,4 @@ drop sequence restaurant_no_seq;
 drop sequence food_no_seq;
 create sequence restaurant_no_seq;
 create sequence food_no_seq;
+
