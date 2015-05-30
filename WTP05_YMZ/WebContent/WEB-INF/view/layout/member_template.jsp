@@ -5,10 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>야먹자~!~!</title>
+<script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
+<script type="text/javascript">
+
+
+
+</script>
 <!-- jQuery Library import -->
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery.js"></script>
 
 <style type="text/css">
+
 /*메세지 스타일*/
 .errorMessage{
 	font-size: 12px;
@@ -90,13 +97,13 @@ footer.member_template{
 			<tiles:insertAttribute name="menu" />
 		</nav>
 		<aside id="left" class="member_template">
-			<tiles:insertAttribute name="aside_menu"/>
+			<tiles:insertAttribute name="aside_menu" /><!-- 서브메뉴로 -->
 		</aside>
 		<section id="body" class="member_template">
 			<tiles:insertAttribute name="body" />
 		</section>
 		<aside id="right" class="member_template">
-			<tiles:insertAttribute name="empty_menu"/>
+			<tiles:insertAttribute name="right_menu" /><!-- 서브메뉴로 -->
 		</aside>
 		
 		<footer class="member_template">
