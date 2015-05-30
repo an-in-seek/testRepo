@@ -42,10 +42,19 @@
 	
 	<!-- 로그인 후 요청하는 페이지중 로그인 체크 부분이 interceptor로 빠지면 단순 링크로 바뀌는 것들 view-controller로 처리 -->
 	<!-- 자기정보 조회 -->
-	<mvc:view-controller path="/member/login/getMemberInfo.do" view-name="member/member_info.tiles"/>
+	<mvc:view-controller path="/member/login/getMemberInfo.do" view-name="member/info/member_info.tiles"/>
 	
 	<!-- 회원정보 수정 폼 -->
-	<mvc:view-controller path="/member/login/modifyForm.do" view-name="member/modify_form.tiles"/>
+	<mvc:view-controller path="/member/login/modifyForm.do" view-name="member/info/modify_info.tiles"/>
+	
+	<!-- 비밀번호수정 폼 -->
+	<mvc:view-controller path="/member/login/modifyPassword.do" view-name="member/info/modify_password.tiles"/>
+	
+	<!-- 쿠폰교환 폼 -->
+	<mvc:view-controller path="/member/login/tradeCoupon.do" view-name="member/info/trade_coupon.tiles"/>
+	
+	<!-- 마이페이지 폼-->
+	<mvc:view-controller path="/member/myPage.do" view-name="member/info/mypage.tiles"/>
 	
 	<!-- file upload 처리 multipartResolver 등록 -->
 	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>

@@ -38,13 +38,13 @@ table, td, th{
 td, th{
 	padding: 5px;
 }
-div.member_template{
+div.mypage_template{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	width:1024px;
 }
-header.member_template{
+header.mypage_template{
 	background-color:skyblue;
 	color:white;
 	text-align:center;
@@ -76,7 +76,7 @@ header.member_template{
 	text-align:center;
 	float:left;  /*왼쪽으로 띄움 */
 }
-footer.member_template{
+footer.mypage_template{
 	background-color:skyblue;
 	color:white;
 	padding-top:20px;
@@ -87,20 +87,18 @@ footer.member_template{
 </style>
 </head>
 <body>
-	<div class="member_template">
-		<header class="member_template">
+	<div class="mypage_template">
+		<header class="mypage_template">
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="menu" />
 		</header>
-		<aside id="left" class="member_template">
+		<aside id="left" class="mypage_template">
 			<tiles:insertAttribute name="aside_menu" /><!-- 서브메뉴로 -->
 		</aside>
-		<section id="body" class="member_template">
+		<section id="body" class="mypage_template">
 			<tiles:insertAttribute name="body" />
 		</section>
-	
-		
-		<footer class="member_template">
+		<footer class="mypage_template">
 			<tiles:insertAttribute name="footer" />
 		</footer>
 	</div>
