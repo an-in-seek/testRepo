@@ -24,18 +24,18 @@ insert into location values(9, '아브뉴프랑', '1');
 insert into location values(10, '유스페이스 2B동', '2');
 
 
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1','새마을식당','1','1','1','20150528','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('2','버거킹','1','221','0','20140420','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('3','맥도날드','1','15','11','20130311','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('4','롯데리아','1','542','22','20120715','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('5','차지족발','1','412','6','20110622','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('6','재스기네치킨','1','333','31','20101127','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('7','한솥도시락','1','12','2','20061208','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('8','코스타국밥','1','53','0','20040203','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('9','파리바게트','1','111','4','20070101','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('10','대게나라','1','245','44','20090928','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('11','면사무소','1','311','38','20001114','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('12','중국성','1','444','14','19981212','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('91','새마을식당','1','1','1','20150528','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('92','버거킹','1','221','0','20140420','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('93','맥도날드','1','15','11','20130311','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('94','롯데리아','1','542','22','20120715','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('95','차지족발','1','412','6','20110622','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('96','재스기네치킨','1','333','31','20101127','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('97','한솥도시락','1','12','2','20061208','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('98','코스타국밥','1','53','0','20040203','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('99','파리바게트','1','111','4','20070101','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('100','대게나라','1','245','44','20090928','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('101','면사무소','1','311','38','20001114','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('102','중국성','1','444','14','19981212','user01');
 
 
 insert into FAQ (faq_no, faq_title, faq_content) values(faq_no_seq.nextval, '개명으로 인한 이름을 변경하고 싶습니다.', 

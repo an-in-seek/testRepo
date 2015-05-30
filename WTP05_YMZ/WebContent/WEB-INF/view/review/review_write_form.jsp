@@ -62,7 +62,7 @@ table#t1{
 <h2>리뷰 글쓰기 폼</h2>
 
 <!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
-<form id="write" method="post" action="${initParam.rootPath }/review/insert.do">
+<form id="write" method="post" action="${initParam.rootPath }/review/login/write.do">
 
 <!-- 테이블 -->
 <table id="t1">

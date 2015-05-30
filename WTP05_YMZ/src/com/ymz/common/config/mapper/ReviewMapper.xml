@@ -27,6 +27,9 @@
 	
 	<!-- 등록 -->
 	<insert id="insertReview" parameterType="review">
+		<selectKey keyProperty="reviewNo" resultType="_int" order="BEFORE">
+			select review_no_seq.nextval from dual
+		</selectKey>
 		insert into review (review_no, title, content, picture_name, hits, recommend, reg_date, member_id)
 		values (#{reviewNo}, #{title}, #{content}, #{pictureName, jdbcType=VARCHAR}, #{hits}, #{recommend}, to_char(sysdate, 'yyyymmdd'), #{memberId})
 	</insert>

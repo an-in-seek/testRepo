@@ -3,6 +3,7 @@ package com.ymz.review.controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.faq.vo.FAQ;
+import com.ymz.member.vo.Member;
 import com.ymz.review.service.ReviewService;
 import com.ymz.review.vo.Review;
 
@@ -27,20 +29,17 @@ public class ReviewController {
 	private ReviewService service;
 	
 	//리뷰 등록
-	@RequestMapping(value="register.do", method=RequestMethod.POST)
-	public String registerReview(@ModelAttribute Review review, Errors errors, HttpServletRequest request){
-//		if(errors.hasErrors()){
-//			return "review/review_write_form.tiles";
-//		}
-//		service.registerReview(review);
-		return "review/review_list.tiles"; // 임시
+	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
+	public String registerReview(@ModelAttribute Review review, Errors errors, HttpSession session, ModelMap map) throws Exception{
+		if(errors.hasErrors()){
+			return "review/review_write_form.tiles";
+		}
+		Member member = (Member)session.getAttribute("login_info");
+		review.setMemberId(member.getId());
+		service.registerReview(review);
+		return "redirect:/review/reviewList.do"; 
 	}
-	
-	//리뷰 등록 성공
-	
-	
-	//리뷰 내용
-	
+
 	
 	//리뷰 목록 - 페이징 처리
 	@RequestMapping("reviewList.do")

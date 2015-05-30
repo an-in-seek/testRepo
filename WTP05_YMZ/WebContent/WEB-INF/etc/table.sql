@@ -342,7 +342,7 @@ ALTER TABLE QNA
 -- 고객센터에서 사용하는 시퀀스
 drop sequence faq_no_seq;
 drop sequence faq_no_qna;
-drop sequence qna_no_seq
+drop sequence qna_no_seq;
 create sequence faq_no_seq;
 create sequence faq_no_qna;
 create sequence qna_no_seq;
@@ -351,4 +351,6 @@ drop sequence restaurant_no_seq;
 drop sequence food_no_seq;
 create sequence restaurant_no_seq;
 create sequence food_no_seq;
-
+-- 리뷰에서 사용하는 시퀀스
+drop sequence review_no_seq;
+create sequence review_no_seq;
