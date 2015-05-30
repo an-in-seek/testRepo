@@ -6,6 +6,12 @@
 <link type="text/css" href="${initParam.rootPath}/css/jquery-ui.css" rel="stylesheet"></link>	
 <script type="text/javascript">
 
+function removeFaq(number){
+	alert(number+"번 게시물이 삭제되었습니다.");
+	$("#number").val(number);
+	document.getElementById("removeForm").submit();
+} 
+
 $(document).ready(function(){
 	$("table#listTB tbody tr").on("click", function(){
 		$("table#listTB tbody tr").css("background-color", "white");
@@ -29,10 +35,6 @@ $(document).ready(function(){
 				//$("#product_info_layer").text("아이디 : "+obj.content);
 			}
 		});
-	});
-
-	$("#removeForm").on("submit", function(){
-		alert("게시물을 삭제했습니다.");
 	});
 		
 	$("#xButton").on("click", function(){
@@ -71,6 +73,7 @@ article{
 
 <%-- <c:if test="${fn:length(requestScope.faq_list) != 0 }"> --%>
 <form id="removeForm" method=post action="removeFaq.do">
+	<input type="hidden" id="number" name="number">
 	<table id="listTB" style="width:700px" border="1" align="center">
 		<thead>
 			<tr align="center">
@@ -84,7 +87,9 @@ article{
 				<tr align="center">
 					<td id="td1">${qna.number}</td>
 					<td id="td2">${qna.title}</td>
-					<td align='center'><input type="submit" id="number" name="number" value="${qna.number}" ></td>
+					<td align='center'>
+					<input type="button"  value="삭제" onclick="removeFaq(${qna.number});">
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>

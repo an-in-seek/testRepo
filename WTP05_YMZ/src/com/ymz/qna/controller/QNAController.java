@@ -3,6 +3,7 @@ package com.ymz.qna.controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ymz.member.vo.Member;
 import com.ymz.qna.service.QNAService;
 import com.ymz.qna.vo.QNA;
 
@@ -26,13 +28,15 @@ public class QNAController {
 	private QNAService service;
 	
 	//QNA게시물 등록
-	@RequestMapping(value="qnaWrite.do", method=RequestMethod.POST)
-	public String registerQNA(@ModelAttribute QNA qna, Errors errors) throws Exception{
+	@RequestMapping(value="write.do", method=RequestMethod.POST)
+	public String registerQNA(@ModelAttribute QNA qna, Errors errors, HttpSession session, ModelMap map) throws Exception{
 		if(errors.hasErrors()){
 			return "qna/qna_write_form.tiles";
-		}
+		}//등록 성공
+		Member member = (Member)session.getAttribute("login_info");
+		qna.setMemberId(member.getId());
 		service.registerQNA(qna);
-		return "qna/qnaList.do";
+		return "/qna/qnaList.do";
 	}
 	
 	//QNA게시물 전체목록 조회(페이징)

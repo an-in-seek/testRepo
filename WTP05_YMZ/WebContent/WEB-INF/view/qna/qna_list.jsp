@@ -70,8 +70,7 @@ article{
 		<tr>
 			<td>
 			<select id="searchSort">
-					<option>정렬방식</option>
-					<option value="날짜순서">날짜순서</option>
+					<option>분류방식</option>
 					<option value="회원관련">회원관련</option>
 					<option value="맛집관련">맛집관련</option>
 					<option value="리뷰관련">리뷰관련</option>

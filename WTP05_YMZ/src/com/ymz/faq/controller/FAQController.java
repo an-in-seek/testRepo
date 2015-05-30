@@ -54,6 +54,7 @@ public class FAQController {
 	@RequestMapping(value="removeFaq.do", method=RequestMethod.POST) //login/removeFaq.do
 	public String removeFAQByNo(@ModelAttribute FAQ faq, HttpServletRequest request){
 		//로그인 처리는 interceptor가 처리
+		System.out.println(faq.getNumber());
 		service.removeFAQByNo(faq.getNumber());
 		return "/faq/faqList.do";//삭제후 원래 페이지로 이동
 	}

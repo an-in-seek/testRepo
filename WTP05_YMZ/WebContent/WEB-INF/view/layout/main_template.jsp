@@ -55,7 +55,7 @@ header.template3{
 section.template3{
 	padding: 15px;
 	margin:10px;
-	height: 500px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	height: 600px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	float:left;
 }
 #right{
@@ -82,10 +82,8 @@ footer.template3{
 	<div class="template3">
 		<header class="template3">
 			<tiles:insertAttribute name="header" />
-		</header>
-		<nav id="menu" class="template3">
 			<tiles:insertAttribute name="menu" />
-		</nav>
+		</header>
 		<aside id="right" class="template3">
 			<tiles:insertAttribute name="login_menu" /><!-- 서브메뉴로 -->
 		</aside>
