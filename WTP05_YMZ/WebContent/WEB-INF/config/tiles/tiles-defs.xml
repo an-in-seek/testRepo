@@ -69,8 +69,8 @@
  	<definition name="main_template" template="/WEB-INF/view/layout/main_template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
+		<put-attribute name="aside_menu" value="/WEB-INF/view/layout/aside_menu.jsp" />
 		<put-attribute name="login_menu" value="/WEB-INF/view/layout/login_menu.jsp" />
-		<put-attribute name="sub_menu" value="/WEB-INF/view/layout/sub_menu.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 	</definition>
 	<definition name="*.tiles" extends="main_template">

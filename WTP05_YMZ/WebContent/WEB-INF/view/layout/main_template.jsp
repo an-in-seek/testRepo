@@ -34,13 +34,13 @@ table, td, th{
 td, th{
 	padding: 5px;
 }
-div.template3{
+div.main_template{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	width:1024px;
 }
-header.template3{
+header.main_template{
 	background-color:skyblue;
 	color:white;
 	text-align:center;
@@ -52,12 +52,6 @@ header.template3{
 	text-align:center;
 	padding: 5px;
 }
-section.template3{
-	padding: 15px;
-	margin:10px;
-	height: 500px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-	float:left;
-}
 #right{
 	margin:10px;
 	background-color:#faebd7;
@@ -66,9 +60,25 @@ section.template3{
 	width:150px;
 	font-weight:bold;
 	text-align:center;
-	float:right;   /*왼쪽으로 띄움 */
+	float:right;   /*오른쪽으로 띄움 */
 }
-footer.template3{
+#body{
+	padding: 15px;
+	margin:10px;
+	height: 500px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	float:left;
+}
+#left{
+	margin:10px;
+	background-color:#faebd7;
+	padding: 15px;
+	height:110px;
+	width:150px;
+	font-weight:bold;
+	text-align:center;
+	float:left;   /*왼쪽으로 띄움 */
+}
+footer.main_template{
 	background-color:skyblue;
 	color:white;
 	padding-top:20px;
@@ -79,20 +89,23 @@ footer.template3{
 </style>
 </head>
 <body>
-	<div class="template3">
-		<header class="template3">
+	<div class="main_template">
+		<header class="main_template">
 			<tiles:insertAttribute name="header" />
 		</header>
-		<nav id="menu" class="template3">
+		<nav id="menu" class="main_template">
 			<tiles:insertAttribute name="menu" />
 		</nav>
-		<aside id="right" class="template3">
-			<tiles:insertAttribute name="login_menu" /><!-- 서브메뉴로 -->
+		<aside id="left">
+			<tiles:insertAttribute name="aside_menu" /><!-- 서브메뉴로 -->
 		</aside>
-		<section class="template3">
+		<section id="body">
 			<tiles:insertAttribute name="body" />
 		</section>
-		<footer class="template3">
+		<aside id="right">
+			<tiles:insertAttribute name="login_menu" /><!-- 서브메뉴로 -->
+		</aside>
+		<footer class="main_template">
 			<tiles:insertAttribute name="footer" />
 		</footer>
 	</div>
