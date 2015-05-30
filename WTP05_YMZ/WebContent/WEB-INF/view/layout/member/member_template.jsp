@@ -50,15 +50,7 @@ header.member_template{
 	text-align:center;
 	padding: 5px;
 }
-#right{
-	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
-	padding:10px;
-	height:600px;
-	width:150px;
-	font-weight:bold;
-	text-align:center;
-	float:left;  /*오른쪽으로 띄움 */
-}
+
 #body{
 	padding: 20px;
 	height:580px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/

@@ -51,6 +51,17 @@ nav.main_template{
 	font-weight:bold;
 	float:right;  /*오른쪽으로 띄움 */
 }
+#right{
+	margin-top:10px;
+	background-color: orange;
+	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
+	padding:10px;
+	height:120px;
+	width:150px;
+	font-weight:bold;
+	text-align:center;
+	float:right;  /*오른쪽으로 띄움 */
+}
 #body{
 	padding: 20px;
 	height:580px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
