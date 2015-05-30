@@ -103,6 +103,10 @@ public class RestaurantController {
 		String location = service.getLocationByNo(restaurant.getLocationNo());
 		model.addAttribute("restaurant_location", location);
 		
+		String[] pictures = restaurant.getPictureName().split(",");
+		for(int i=0; i<pictures.length; i++) {
+			model.addAttribute("pic"+(i+1), pictures[i]);
+		}
 		return "restaurant/restaurant_view.tiles";
 	}
 }
