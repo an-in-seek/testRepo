@@ -59,11 +59,10 @@ button{
 <body>
 <%
 	String title = request.getParameter("title");
-	String content = request.getParameter("content");
-	
+		
 %>
 <div align="center">
-<h2>스마트에디터 연습 페이지</h2>
+<h2>리뷰</h2>
 
 <!-- ************************************** 리뷰 정보 ************************************* -->
 <table id="contentTB" style="width:700px">

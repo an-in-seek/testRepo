@@ -44,8 +44,8 @@ public class ReviewController {
 	
 	//리뷰 목록 - 페이징 처리
 	@RequestMapping("reviewList.do")
-	public ModelAndView reviewList(@RequestParam (defaultValue="1") int currentPage){
-		Map<String, Object> map = service.getReviewListPaging(currentPage);
+	public ModelAndView reviewList(@RequestParam (defaultValue="1") int pageNo){
+		Map<String, Object> map = service.getReviewListPaging(pageNo);
 		return new ModelAndView("review/review_list.tiles", map);
 	}
 	

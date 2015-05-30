@@ -24,11 +24,12 @@ $(document).ready(function(){
 	});
 	
 	// 리뷰 제목 클릭 이벤트
-	$("table#listTB tbody tr").on("click", function(){
-		var text = $(this).find(":first-child").next().text();
-		alert(text);
-		
+	$("table#listTB tbody tr").hover(function(){
+		 $(this).css("background-color", "lightpink");
+	}, function(){
+		 $(this).css("background-color", "white");
 	});
+	
 });
 </script>
 <style type="text/css">
@@ -101,7 +102,7 @@ h2{
 				<font color="red"><b>${pageNum}</b></font>
 			</c:when>
 			<c:otherwise>
-				<a href="${initParam.rootPath }/review/reviewList.do?page=${pageNum}">${pageNum} </a>
+				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}">${pageNum} </a>
 			</c:otherwise>
 		</c:choose>
 	&nbsp;&nbsp;
