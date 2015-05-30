@@ -8,7 +8,8 @@
 <script type="text/javascript">
 var pic_count = 1;
 var menu_count = 1;
-var nameMessage = "업체명을 입력하세요";
+
+var nameMessage = "상호명을 입력하세요";
 var nameCheck = false;
 var categoryCheck = false;
 var phoneCheck1 = false;
@@ -29,7 +30,7 @@ $(document).ready(function(){
 			dataType:"text",
 			beforeSend:function(){
 				if($("#restaurantName").val().trim()==""){
-					nameMessage = "업체명을 입력하세요";
+					nameMessage = "상호명을 입력하세요";
 					nameCheck = false;
 					return false;
 				}
@@ -39,7 +40,7 @@ $(document).ready(function(){
 					$("#nameMessage").text("");
 					nameCheck = true;
 				}else{
-					nameMessage = "이미 존재하는 업체명입니다";
+					nameMessage = "이미 존재하는 상호명입니다";
 					$("#nameMessage").text(nameMessage);
 					nameCheck = false;
 				}
@@ -271,7 +272,7 @@ $(document).ready(function(){
 <p><font size="5"><b>기본정보</b></font></p>
 <table>
 <tr>
-	<td>업체명</td>
+	<td>상호명</td>
 	<td>
 		<input type="text" id="restaurantName" name="restaurantName" maxlength="10">
 		<font color="red"><span id="nameMessage"></span></font>

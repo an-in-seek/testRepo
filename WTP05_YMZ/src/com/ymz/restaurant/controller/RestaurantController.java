@@ -47,7 +47,7 @@ public class RestaurantController {
 		Map<String, Object> map = service.getRestaurantListPaging(currentPage);
 		model.addAllAttributes(map);
 		
-		return "restaurant/restaurant_type.restiles";
+		return "restaurant/restaurant_type.tiles";
 	}
 	
 	@RequestMapping("/addNewRestaurantForm.do")
@@ -55,7 +55,7 @@ public class RestaurantController {
 		List<String> buildingNames = service.getBuildingNames();
 		model.addAttribute("buildingNames", buildingNames);
 		
-		return "restaurant/restaurant_write_form.restiles";
+		return "restaurant/restaurant_write_form.tiles";
 	}
 	
 	@RequestMapping("/addNewRestaurant.do")
@@ -93,5 +93,12 @@ public class RestaurantController {
 		service.addRestaurant(restaurant, foodName, foodPrice, foodDescription);
 		
 		return "redirect:/restaurant/showListByType.do";
-	}	
+	}
+	
+	@RequestMapping("/restaurantView.do")
+	public String restaurantView(int restaurantNo, Model model) {
+		Restaurant restaurant = service.getRestaurantByNo(restaurantNo);
+		model.addAttribute("restaurant", restaurant);
+		return "restaurant/restaurant_view.tiles";
+	}
 }

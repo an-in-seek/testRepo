@@ -71,4 +71,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 			dao.insertFood(restaurant.getRestaurantNo(), foodNamesList.get(i), foodPricesList.get(i), foodDescriptionsList.get(i));
 		}
 	}
+
+	@Override
+	public Restaurant getRestaurantByNo(int restaurantNo) {
+		return dao.selectRestaurantByNo(restaurantNo);
+	}
 }

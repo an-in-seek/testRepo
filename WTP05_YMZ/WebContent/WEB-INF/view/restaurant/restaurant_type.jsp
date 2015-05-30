@@ -32,7 +32,7 @@
 				<td>${restaurant.restaurantNo }</td>
 				<td>${restaurant.category}</td>
 				<td align="left">
-					<a href="">${restaurant.restaurantName}</a>
+					<a href="${initParam.rootPath }/restaurant/restaurantView.do?restaurantNo=${restaurant.restaurantNo }">${restaurant.restaurantName}</a>
 					<c:if test="${restaurant.replyCount>0 }"><font color="gray">[${restaurant.replyCount }]</font></c:if>
 				</td>
 				<td>${restaurant.phoneNo}</td>

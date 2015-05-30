@@ -74,4 +74,9 @@
 		insert into food values(#{foodNo}, #{foodName}, #{foodPrice}, #{foodDescription}, #{restaurantNo})
 	</insert>
 	
+	<select id="selectRestaurantByNo" parameterType="_int" resultMap="restaurant-resultmap">
+		<include refid="restaurant-select"/>
+		where restaurant_no=#{restaurantNo}
+	</select>
+	
 </mapper>
