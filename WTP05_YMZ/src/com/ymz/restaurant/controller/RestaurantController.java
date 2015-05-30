@@ -82,7 +82,7 @@ public class RestaurantController {
 		String pictureNameTemp = "";
 		String path = request.getServletContext().getRealPath("/uploadPhoto");
 		for(int i=0; i<pictureName.length; i++) {
-			String fileName = System.currentTimeMillis()+"";
+			String fileName = System.nanoTime()+"";
 			File file = new File(path, fileName);
 			pictureName[i].transferTo(file);
 			pictureNameTemp += fileName+",";

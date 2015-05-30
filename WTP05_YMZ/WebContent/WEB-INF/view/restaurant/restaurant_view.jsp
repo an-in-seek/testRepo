@@ -74,7 +74,9 @@ $(document).ready(function(){
 	<td align="center">소개</td>
 	<td>${requestScope.restaurant.description }</td>
 </tr>
-</table>
+</table><p>
+<hr>
+<p align="right"><button>수정</button> <button>삭제</button></p>
 </td>
 
 </tr>
