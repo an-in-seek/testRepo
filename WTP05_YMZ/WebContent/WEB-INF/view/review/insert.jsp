@@ -111,7 +111,7 @@ button{
 
 
 <!-- 테이블 시작 -->
-<table id="replyTB" style="width:700px">
+<table id="replyTB" style="width:800px">
 		<thead>
 			<tr>
 				<td>번호</td>
@@ -135,14 +135,22 @@ button{
 	</table>
 	<p>
 
-<!-- 댓글 작성 영역 -->
-<textarea name="reply_content" id="reply_content" rows="5" cols="50" style="width:800px; height:100px;"></textarea><br>
+	<table>
+		<tr>
+			<td>
+				<!-- 댓글 작성 영역 -->
+				<textarea name="reply_content" id="reply_content" style="width:600px; height:100px;"></textarea><br>
+			</td>
+			<td>
+				<!-- 댓글 버튼 -->
+				<button id="reply_registerBtn" style="width:80px;height:20px;">등록</button>
+				<button id="reply_modifyBtn" style="width:80px;height:20px;">수정</button>
+				<button id="reply_deleteBtn" style="width:80px;height:20px;">삭제</button>
+				<button id="reply_reportBtn" style="width:80px;height:20px;">신고</button>
+			</td>
+		</tr>
+	</table>
 
-<!-- 댓글 버튼 -->
-<button id="reply_registerBtn" style="width:100px;height:50px;">등록</button>
-<button id="reply_modifyBtn" style="width:100px;height:50px;">수정</button>
-<button id="reply_deleteBtn" style="width:100px;height:50px;">삭제</button>
-<button id="reply_reportBtn" style="width:100px;height:50px;">신고</button>
 
 </div>
 </body>
