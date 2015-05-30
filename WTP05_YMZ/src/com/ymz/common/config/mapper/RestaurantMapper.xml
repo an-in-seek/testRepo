@@ -32,7 +32,7 @@
 							description, picture_name, score, hits, theme, reg_date, reply_count, location_no
 					from	(
 								<include refid="restaurant-select"/>
-								order by reg_date
+								order by restaurant_no desc
 							)
 				)
 		where	page = #{currentPage}
