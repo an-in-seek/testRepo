@@ -8,6 +8,9 @@ delete from qna CASCADE CONSTRAINTS;
 
 insert into member values('user01', 1111, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, '관리자', '20140514');
 
+insert into restaurant values(1, '새마을식당', '한식', '031-111-2222', '경기도 성남시 분당구 삼평동', '백주부의 새마을식당이쥬', '111111111111111,222222222222222,', 0, 0, '회식,', '20150530', 0, 10);
+insert into food values(food_no_seq.nextval, '7분김치찌개', 5000, null, 1);
+insert into food values(food_no_seq.nextval, '된장찌개', 6000, null, 1);
 
 insert into location values(1, '유스페이스 1A동', '1');
 insert into location values(2, '유스페이스 1B동', '1');
