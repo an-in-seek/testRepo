@@ -29,7 +29,7 @@ $(document).ready(function(){
 		},
 		fOnAppLoad : function(){
 			// 기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할 때 사용
-			oEditors.getById["content"].exec("PASTE_HTML", ["첫번째 에디터! 기존 DB에 저장된 내용을 에디터에 적용할 문구"]);
+			oEditors.getById["content"].exec("PASTE_HTML", ["기존 DB에 저장된 내용을 에디터에 적용할 문구"]);
 		},
 		fCreator: "createSEditor2"
 	});
@@ -48,7 +48,10 @@ $(document).ready(function(){
 h2{
 	text-align: center;
 }
-
+button{
+	width:100px;
+	height:50px;
+}
 table#t1{
 	width: 100%;
 }
@@ -64,13 +67,13 @@ table#t1{
 <!-- 테이블 -->
 <table id="t1">
 	<tr>
-		<td>제목</td>
+		<td align="center">제목</td>
 		<td><input type="text" id="title" name="title" style="width:800px"></td>
 	</tr>
 	<tr>
-		<td>내용</td>
+		<td align="center">내용</td>
 		<td>
-			<textarea name="content" id="content" rows="10" cols="100" style="width:800px; height:420px;">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea><br>
+			<textarea name="content" id="content" rows="10" cols="100" style="width:800px; height:420px;"></textarea><br>
 		</td>
 	</tr>
 	<tr>
