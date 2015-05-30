@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +25,7 @@ public class FAQController {
 	private FAQService service;
 
 	// FAQ게시물 등록
-	@RequestMapping(value="write.do", method=RequestMethod.POST)
+	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
 	public String registerFAQ(@ModelAttribute FAQ faq, Errors errors, HttpServletRequest request) throws Exception{
 		if(errors.hasErrors()){
 			return "faq/faq_write_form.tiles";
@@ -51,7 +50,7 @@ public class FAQController {
 	}
 	
 	// 게시물 삭제
-	@RequestMapping(value="removeFaq.do", method=RequestMethod.POST) //login/removeFaq.do
+	@RequestMapping(value="login/removeFaq.do", method=RequestMethod.POST) //login/removeFaq.do
 	public String removeFAQByNo(@ModelAttribute FAQ faq, HttpServletRequest request){
 		//로그인 처리는 interceptor가 처리
 		System.out.println(faq.getNumber());

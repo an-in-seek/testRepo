@@ -24,7 +24,18 @@ insert into location values(9, '아브뉴프랑', '1');
 insert into location values(10, '유스페이스 2B동', '2');
 
 
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1','1','1','1','1','20150528','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1','제목1','1','1','1','20150528','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('2','제목2','1','221','0','20140420','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('3','제목3','1','15','11','20130311','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('4','제목4','1','542','22','20120715','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('5','제목5','1','412','6','20110622','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('6','제목6','1','333','31','20101127','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('7','제목7','1','12','2','20061208','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('8','제목8','1','53','0','20040203','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('9','제목9','1','111','4','20070101','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('10','제목10','1','245','44','20090928','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('11','제목11','1','311','38','20001114','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('12','제목12','1','444','14','19981212','user01');
 
 
 insert into FAQ (faq_no, faq_title, faq_content) values(faq_no_seq.nextval, '개명으로 인한 이름을 변경하고 싶습니다.', 

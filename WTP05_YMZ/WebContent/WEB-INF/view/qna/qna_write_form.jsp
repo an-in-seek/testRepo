@@ -44,7 +44,7 @@ table#t1 {
 <div align="center">
 	<h2>QNA게시물 등록</h2>
 	<!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
-	<form id="write" method="post" action="${initParam.rootPath}/qna/write.do">
+	<form id="write" method="post" action="${initParam.rootPath}/qna/login/write.do">
 		<!-- 테이블 -->
 		<table id="t1">
 			<tr>

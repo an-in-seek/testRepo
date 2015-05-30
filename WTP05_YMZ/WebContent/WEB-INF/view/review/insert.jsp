@@ -7,7 +7,29 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
-<link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
+<link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript">
+$(document).ready(function(){
+
+	// 리뷰 내용
+	
+	
+	// 댓글 버튼
+	$("#reply_registerBtn").on("click", function(){
+		alert("로그인부터 하세욥!!!");
+	});
+	$("#reply_modifyBtn").on("click", function(){
+		alert("로그인부터 하세욥!!!");
+	});
+	$("#reply_deleteBtn").on("click", function(){
+		alert("로그인부터 하세욥!!!");
+	});
+	$("#reply_reportBtn").on("click", function(){
+		alert("로그인부터 하세욥!!!");
+	});
+	
+});
+</script>	
 <!-- css -->
 <style type="text/css">
 table#contentTB thead tr{
@@ -80,16 +102,16 @@ button{
 
 <!-- 버튼 -->
 <a href="${initParam.rootPath }/review/reviewList.do"><button>목록</button></a>
-<button id="	">수정</button>
-<button id="	">삭제</button>
-<button id="	">추천</button>
-<button id="	">신고</button>
+<button id="modifyBtn">수정</button>
+<button id="deleteBtn">삭제</button>
+<button id="recommendBtn">추천</button>
+<button id="reportBtn">신고</button>
 <hr>
 <!-- ****************************************  댓 글 영 역  ****************************************** -->
 
 
 <!-- 테이블 시작 -->
-<table id="replyTB" style="width:700px">
+<table id="replyTB" style="width:800px">
 		<thead>
 			<tr>
 				<td>번호</td>
@@ -113,15 +135,22 @@ button{
 	</table>
 	<p>
 
-<!-- 댓글 작성 영역 -->
-<textarea name="reply_content" id="reply_content" rows="5" cols="50" style="width:800px; height:100px;"></textarea><br>
+	<table>
+		<tr>
+			<td>
+				<!-- 댓글 작성 영역 -->
+				<textarea name="reply_content" id="reply_content" style="width:600px; height:100px;"></textarea><br>
+			</td>
+			<td>
+				<!-- 댓글 버튼 -->
+				<button id="reply_registerBtn" style="width:80px;height:20px;">등록</button>
+				<button id="reply_modifyBtn" style="width:80px;height:20px;">수정</button>
+				<button id="reply_deleteBtn" style="width:80px;height:20px;">삭제</button>
+				<button id="reply_reportBtn" style="width:80px;height:20px;">신고</button>
+			</td>
+		</tr>
+	</table>
 
-<!-- 댓글 버튼 -->
-<button id="	" style="width:100px;height:50px;">등록</button>
-<button id="	" style="width:100px;height:50px;">수정</button>
-<button id="	" style="width:100px;height:50px;">삭제</button>
-<button id="	" style="width:100px;height:50px;">신고</button>
-<button id="	" style="width:100px;height:50px;">목록</button>
 
 </div>
 </body>
