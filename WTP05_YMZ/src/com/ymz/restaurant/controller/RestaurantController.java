@@ -99,6 +99,10 @@ public class RestaurantController {
 	public String restaurantView(int restaurantNo, Model model) {
 		Restaurant restaurant = service.getRestaurantByNo(restaurantNo);
 		model.addAttribute("restaurant", restaurant);
+		
+		String location = service.getLocationByNo(restaurant.getLocationNo());
+		model.addAttribute("restaurant_location", location);
+		
 		return "restaurant/restaurant_view.tiles";
 	}
 }
