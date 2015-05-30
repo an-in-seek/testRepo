@@ -32,7 +32,7 @@ article{
 
 <h2 align="center">고객센터(FAQ)</h2>
 
-<form id="writeForm" method="post" action="${initParam.rootPath}/faq/write.do" >
+<form id="writeForm" method="post" action="${initParam.rootPath}/faq/login/write.do" >
 
 	<table id="tb" align="center" width="700px" style="border:solid 2px #050099">
 		<thead>

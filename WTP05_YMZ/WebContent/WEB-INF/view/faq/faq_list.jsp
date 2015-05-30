@@ -7,7 +7,6 @@
 <script type="text/javascript">
 
 function removeFaq(number){
-	alert(number+"번 게시물이 삭제되었습니다.");
 	$("#number").val(number);
 	document.getElementById("removeForm").submit();
 } 
@@ -72,7 +71,7 @@ article{
 <h2 align="center">고객센터(FAQ)</h2> 	
 
 <%-- <c:if test="${fn:length(requestScope.faq_list) != 0 }"> --%>
-<form id="removeForm" method=post action="removeFaq.do">
+<form id="removeForm" method=post action="login/removeFaq.do">
 	<input type="hidden" id="number" name="number">
 	<table id="listTB" style="width:700px" border="1" align="center">
 		<thead>
@@ -86,7 +85,7 @@ article{
 			<c:forEach items="${requestScope.faq_list }" var="qna">
 				<tr align="center">
 					<td id="td1">${qna.number}</td>
-					<td id="td2">${qna.title}</td>
+					<td id="td2" align="left">${qna.title}</td>
 					<td align='center'>
 					<input type="button"  value="삭제" onclick="removeFaq(${qna.number});">
 					</td>
@@ -113,7 +112,7 @@ article{
 		<tr height="10" align="center"></tr>
 	</table>
 
-	<form action="${initParam.rootPath }/faq/writeForm.do" method="post">
+	<form action="${initParam.rootPath }/faq/login/writeForm.do" method="post">
 		<table style="width:700px" align="center">
 			<tr>
 				<td align="center"><input type="submit" value="글쓰기"></td>

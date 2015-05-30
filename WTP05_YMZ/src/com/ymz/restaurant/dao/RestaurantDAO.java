@@ -1,8 +1,8 @@
 package com.ymz.restaurant.dao;
 
 import java.util.List;
-import java.util.Map;
 
+import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
 
 public interface RestaurantDAO {
@@ -16,4 +16,5 @@ public interface RestaurantDAO {
 	public int insertFood(int restaurantNo, String foodName, int foodPrice, String foodDescription);
 	public Restaurant selectRestaurantByNo(int restaurantNo);
 	public String selectLocationByNo(int locationNo);
+	public List<Food> selectFoodsByRestaurantNo(int restaurantNo);
 }

@@ -74,11 +74,50 @@ $(document).ready(function(){
 	<td align="center">소개</td>
 	<td>${requestScope.restaurant.description }</td>
 </tr>
-</table>
+</table><p>
+<hr>
+<p align="right"><button>수정</button> <button>삭제</button></p>
 </td>
-
 </tr>
 </table>
 
+<!-- 여기부터 메뉴판 코드 -->
+<p><font size="5"><b>메뉴판</b></font></p>
+<table border="1" style="width:100%">
+<thead>
+<tr align="center">
+<td rowspan="2">메뉴</td>
+<td rowspan="2">가격</td>
+<td colspan="2">예산짜기</td>
+</tr>
+<tr align="center">
+<td>선택</td>
+<td>수량</td>
+</tr>
+</thead>
+<tbody id="menus">
+<c:choose>
+<c:when test="${empty requestScope.foods }">
+<tr>
+<td colspan="4" align="center">등록된 메뉴가 없습니다</td>
+</tr>
+</c:when>
+<c:otherwise>
+<c:forEach items="${requestScope.foods }" var="food">
+	<tr align="center">
+		<td>${food.foodName }</td>
+		<td>${food.foodPrice }원</td>
+		<td><input type="checkbox"></td>
+		<td>
+			<input type="number" min="0" max="10" value="0" readonly="readonly">
+			<button id="btn_up">↑</button>
+			<button id="btn_down">↓</button>
+		</td>
+	</tr>
+</c:forEach>
+</c:otherwise>
+</c:choose>
+</tbody>
+</table>
 </body>
 </html>

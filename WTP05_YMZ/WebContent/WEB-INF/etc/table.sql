@@ -65,8 +65,6 @@ CREATE TABLE MEMBER (
 	JOIN_DATE VARCHAR2(8) NOT NULL /* 가입일 */
 );
 
-insert into member values('user03', 1111, '피카츄', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, '정회원', '20140514');
-
 ALTER TABLE MEMBER
 	ADD
 		PRIMARY KEY (
@@ -81,7 +79,7 @@ CREATE TABLE RESTAURANT (
 	PHONE_NO VARCHAR2(20) NOT NULL, /* 전화번호 */
 	ADDRESS VARCHAR2(100) NOT NULL, /* 주소 */
 	DESCRIPTION CLOB NOT NULL, /* 설명 */
-	PICTURE_NAME VARCHAR2(70), /* 사진 이름 */
+	PICTURE_NAME VARCHAR2(80), /* 사진 이름 */
 	SCORE NUMBER(2) NOT NULL, /* 평점 */
 	HITS NUMBER(10) NOT NULL, /* 조회수 */
 	THEME VARCHAR2(30) NOT NULL, /* 테마 */
@@ -344,8 +342,10 @@ ALTER TABLE QNA
 -- 고객센터에서 사용하는 시퀀스
 drop sequence faq_no_seq;
 drop sequence faq_no_qna;
+drop sequence qna_no_seq
 create sequence faq_no_seq;
 create sequence faq_no_qna;
+create sequence qna_no_seq;
 -- 맛집정보에서 사용하는 시퀀스
 drop sequence restaurant_no_seq;
 drop sequence food_no_seq;

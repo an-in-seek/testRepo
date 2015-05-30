@@ -35,8 +35,8 @@
 	<mvc:view-controller path="/index.do" view-name="main.tiles"/>
 	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>
 	<mvc:view-controller path="/member/loginForm.do" view-name="member/login_form.tiles"/>
-	<mvc:view-controller path="/faq/writeForm.do" view-name="faq/faq_write_form.tiles"/>
-	<mvc:view-controller path="/qna/writeForm.do" view-name="qna/qna_write_form.tiles"/>
+	<mvc:view-controller path="/faq/login/writeForm.do" view-name="faq/faq_write_form.tiles"/>
+	<mvc:view-controller path="/qna/login/writeForm.do" view-name="qna/qna_write_form.tiles"/>
 	<mvc:view-controller path="/review/review_write_form.do" view-name="review/review_write_form.tiles"/>
 	<mvc:view-controller path="/review/insert.do" view-name="review/insert.tiles"/>
 	

@@ -28,7 +28,7 @@ public class QNAController {
 	private QNAService service;
 	
 	//QNA게시물 등록
-	@RequestMapping(value="write.do", method=RequestMethod.POST)
+	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
 	public String registerQNA(@ModelAttribute QNA qna, Errors errors, HttpSession session, ModelMap map) throws Exception{
 		if(errors.hasErrors()){
 			return "qna/qna_write_form.tiles";

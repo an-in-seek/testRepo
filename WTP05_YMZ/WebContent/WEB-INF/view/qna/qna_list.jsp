@@ -50,7 +50,7 @@ article{
 			<c:forEach items="${requestScope.qna_list }" var="qna">
 				<tr align="center">
 					<td>${qna.number }</td>
-					<td><a href="${initParam.rootPath}/qna/qnaView.do?qnaNo=${qna.number}">${qna.title}</a></td>
+					<td align="left"><a href="${initParam.rootPath}/qna/qnaView.do?qnaNo=${qna.number}">${qna.title}</a></td>
 					<td>${qna.category}</td>
 					<td>${qna.memberId}</td>
 					<td>${qna.registrationDate}</td>
@@ -63,8 +63,6 @@ article{
 	<table style="width: 700px">
 		<tr height="10" align="center"></tr>
 	</table>
-
-	
 
 	<table align="center">
 		<tr>
@@ -79,7 +77,7 @@ article{
 			<td><input type="text" id="searchText"></td>
 			<td><input type="button" id="searchBtn" value="검색"></td>
 			<td>
-				<form action="${initParam.rootPath }/qna/writeForm.do" method="post">
+				<form action="${initParam.rootPath }/qna/login/writeForm.do" method="post">
 					<input type="submit" value="글쓰기">
 				</form>
 			</td>
