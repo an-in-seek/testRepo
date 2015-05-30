@@ -1,3 +1,11 @@
+delete from member;
+delete from restaurant;
+delete from location;
+delete from review;
+delete from faq;
+delete from qna;
+
+
 
 insert into member values('user01', 1111, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, '관리자', '20140514');
 
