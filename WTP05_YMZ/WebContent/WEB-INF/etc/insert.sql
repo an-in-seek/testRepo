@@ -1,10 +1,9 @@
-delete from member;
-delete from restaurant;
-delete from location;
-delete from review;
-delete from faq;
-delete from qna;
-
+delete from member CASCADE CONSTRAINTS;
+delete from restaurant CASCADE CONSTRAINTS;
+delete from location CASCADE CONSTRAINTS;
+delete from review CASCADE CONSTRAINTS;
+delete from faq CASCADE CONSTRAINTS;
+delete from qna CASCADE CONSTRAINTS;
 
 
 insert into member values('user01', 1111, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, '관리자', '20140514');
@@ -22,7 +21,7 @@ insert into location values(9, '아브뉴프랑', '1');
 insert into location values(10, '유스페이스 2B동', '2');
 
 
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1','1','1','1','1','20150528','aaa');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1','1','1','1','1','20150528','user01');
 
 
 insert into FAQ (faq_no, faq_title, faq_content) values(faq_no_seq.nextval, '개명으로 인한 이름을 변경하고 싶습니다.', 

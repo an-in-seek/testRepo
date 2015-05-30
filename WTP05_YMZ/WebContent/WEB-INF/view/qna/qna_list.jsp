@@ -50,7 +50,7 @@ article{
 			<c:forEach items="${requestScope.qna_list }" var="qna">
 				<tr align="center">
 					<td>${qna.number }</td>
-					<td><a href="${initParam.rootPath}/qna/qnaView.do?qnaNo=${qna.number}">${qna.title}</a></td>
+					<td align="left"><a href="${initParam.rootPath}/qna/qnaView.do?qnaNo=${qna.number}">${qna.title}</a></td>
 					<td>${qna.category}</td>
 					<td>${qna.memberId}</td>
 					<td>${qna.registrationDate}</td>

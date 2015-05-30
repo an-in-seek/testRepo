@@ -86,7 +86,7 @@ article{
 			<c:forEach items="${requestScope.faq_list }" var="qna">
 				<tr align="center">
 					<td id="td1">${qna.number}</td>
-					<td id="td2">${qna.title}</td>
+					<td id="td2" align="left">${qna.title}</td>
 					<td align='center'>
 					<input type="button"  value="삭제" onclick="removeFaq(${qna.number});">
 					</td>
