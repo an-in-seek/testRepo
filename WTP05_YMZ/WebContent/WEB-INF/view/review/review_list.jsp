@@ -36,10 +36,10 @@ $(document).ready(function(){
 table#listTB thead tr{
 	color:azure;
 	font-weight: bold;
-	background: indigo;
+	background: darkcyan;
 	text-align: center;
 }
-table#listTB tbody tr{
+table#listTB tbody tr td#title{
 	cursor: pointer;
 }
 button{
@@ -73,7 +73,7 @@ h2{
 			<c:forEach items="${requestScope.reviewList }" var="review">
 				<tr>
 					<td align="center">${review.reviewNo }</td>
-					<td align="left"><a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}">${review.title}</a></td>
+					<td align="left" id="title"><a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}">${review.title}</a></td>
 					<td align="center">${review.memberId}</td>
 					<td align="center">${review.regDate}</td>
 					<td align="right" style="width:50px">${review.recommend}</td>
