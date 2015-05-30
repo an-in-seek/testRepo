@@ -69,4 +69,9 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		food.setFoodDescription(foodDescription);
 		return session.insert(namespace+"insertFood", food);
 	}
+
+	@Override
+	public Restaurant selectRestaurantByNo(int restaurantNo) {
+		return session.selectOne(namespace+"selectRestaurantByNo", restaurantNo);
+	}
 }

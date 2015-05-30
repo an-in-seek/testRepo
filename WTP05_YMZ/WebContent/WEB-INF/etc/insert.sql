@@ -8,6 +8,3 @@ insert into location values(7, '삼환하이펙스 A동', '1');
 insert into location values(8, '삼환하이펙스 B동', '1');
 insert into location values(9, '아브뉴프랑', '1');
 insert into location values(10, '유스페이스 2B동', '2');
-
-create sequence restaurant_no_seq;
-create sequence food_no_seq;

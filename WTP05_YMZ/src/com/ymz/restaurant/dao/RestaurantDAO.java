@@ -13,4 +13,5 @@ public interface RestaurantDAO {
 	public int selectLocationNo(String buildingName, String floor);
 	public int insertRestaurant(Restaurant restaurant);
 	public int insertFood(int restaurantNo, String foodName, int foodPrice, String foodDescription);
+	public Restaurant selectRestaurantByNo(int restaurantNo);
 }
