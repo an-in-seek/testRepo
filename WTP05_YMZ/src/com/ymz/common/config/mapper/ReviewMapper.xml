@@ -57,7 +57,7 @@
 					   recommend, reg_date, member_id
 				from (
 						<include refid="review-select"/>
-						order by reg_date
+						order by reg_date desc
 			)
 		) 
 		where	page = #{currentPage}
