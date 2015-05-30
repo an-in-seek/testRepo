@@ -23,6 +23,12 @@ $(document).ready(function(){
 		alert("정렬방식 : "+txt);
 	});
 	
+	// 리뷰 제목 클릭 이벤트
+	$("table#listTB tbody tr").on("click", function(){
+		var text = $(this).find(":first-child").next().text();
+		alert(text);
+		
+	});
 });
 </script>
 <style type="text/css">
