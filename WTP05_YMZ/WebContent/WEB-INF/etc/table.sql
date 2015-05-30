@@ -45,7 +45,7 @@ DROP TABLE QNA
 /* 새 테이블 */
 DROP TABLE LOCATION 
 	CASCADE CONSTRAINTS;
-
+select * from member;
 /* 회원 */
 CREATE TABLE MEMBER (
 	MEMBER_ID VARCHAR2(10) NOT NULL, /* 회원_ID */
@@ -342,8 +342,10 @@ ALTER TABLE QNA
 -- 고객센터에서 사용하는 시퀀스
 drop sequence faq_no_seq;
 drop sequence faq_no_qna;
+drop sequence qna_no_seq
 create sequence faq_no_seq;
 create sequence faq_no_qna;
+create sequence qna_no_seq;
 -- 맛집정보에서 사용하는 시퀀스
 drop sequence restaurant_no_seq;
 drop sequence food_no_seq;

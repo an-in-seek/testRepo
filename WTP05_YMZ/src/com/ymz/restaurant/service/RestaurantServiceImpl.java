@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ymz.common.util.PagingBean;
 import com.ymz.restaurant.dao.RestaurantDAO;
+import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
 
 @Service
@@ -80,5 +81,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public String getLocationByNo(int locationNo) {
 		return dao.selectLocationByNo(locationNo);
+	}
+
+	@Override
+	public List<Food> getFoodsByRestaurantNo(int restaurantNo) {
+		return dao.selectFoodsByRestaurantNo(restaurantNo);
 	}
 }

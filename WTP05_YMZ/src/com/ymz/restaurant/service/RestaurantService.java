@@ -3,6 +3,7 @@ package com.ymz.restaurant.service;
 import java.util.List;
 import java.util.Map;
 
+import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
 
 public interface RestaurantService {
@@ -14,4 +15,5 @@ public interface RestaurantService {
 	public void addRestaurant(Restaurant restaurant, String[] foodNames, String[] foodPrices, String[] foodDescriptions);
 	public Restaurant getRestaurantByNo(int restaurantNo);
 	public String getLocationByNo(int locationNo);
+	public List<Food> getFoodsByRestaurantNo(int restaurantNo);
 }

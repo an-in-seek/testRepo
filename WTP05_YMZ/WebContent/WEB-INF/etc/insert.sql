@@ -8,6 +8,9 @@ delete from qna CASCADE CONSTRAINTS;
 
 insert into member values('user01', 1111, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, '관리자', '20140514');
 
+insert into restaurant values(1, '새마을식당', '한식', '031-111-2222', '경기도 성남시 분당구 삼평동', '백주부의 새마을식당이쥬', '111111111111111,222222222222222,', 0, 0, '회식,', '20150530', 0, 10);
+insert into food values(food_no_seq.nextval, '7분김치찌개', 5000, null, 1);
+insert into food values(food_no_seq.nextval, '된장찌개', 6000, null, 1);
 
 
 insert into location values(1, '유스페이스 1A동', '1');
@@ -22,7 +25,18 @@ insert into location values(9, '아브뉴프랑', '1');
 insert into location values(10, '유스페이스 2B동', '2');
 
 
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1','1','1','1','1','20150528','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1','새마을식당','1','1','1','20150528','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('2','버거킹','1','221','0','20140420','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('3','맥도날드','1','15','11','20130311','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('4','롯데리아','1','542','22','20120715','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('5','차지족발','1','412','6','20110622','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('6','재스기네치킨','1','333','31','20101127','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('7','한솥도시락','1','12','2','20061208','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('8','코스타국밥','1','53','0','20040203','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('9','파리바게트','1','111','4','20070101','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('10','대게나라','1','245','44','20090928','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('11','면사무소','1','311','38','20001114','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('12','중국성','1','444','14','19981212','user01');
 
 
 insert into FAQ (faq_no, faq_title, faq_content) values(faq_no_seq.nextval, '개명으로 인한 이름을 변경하고 싶습니다.', 

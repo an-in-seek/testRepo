@@ -104,6 +104,8 @@ public class MemberController {
 		}
 		return url;
 	}
+	//회원정보수정
+
 	
 	// 전체 정보 조회1
 	@RequestMapping("memberList.do")

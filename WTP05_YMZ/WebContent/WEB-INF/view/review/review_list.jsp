@@ -23,12 +23,19 @@ $(document).ready(function(){
 		alert("정렬방식 : "+txt);
 	});
 	
+	// 리뷰 제목 클릭 이벤트
+	$("table#listTB tbody tr").on("click", function(){
+		var text = $(this).find(":first-child").next().text();
+		alert(text);
+		
+	});
 });
 </script>
 <style type="text/css">
 table#listTB thead tr{
+	color:azure;
 	font-weight: bold;
-	background: lightgray;
+	background: indigo;
 	text-align: center;
 }
 table#listTB tbody tr{
@@ -49,27 +56,27 @@ h2{
 <h2>리뷰 목록</h2>
 <div align="center">
 <!-- 테이블 시작 -->
-<table id="listTB" style="width:700px">
+<table id="listTB" style="width:900px">
 		<thead>
 			<tr>
-				<td>번호</td>
-				<td>상호명</td>
-				<td>작성자</td>
-				<td>작성일</td>
-				<td>추천수</td>
-				<td>조회수</td>
+				<td style="width:50px">번호</td>
+				<td style="width:450px">상호명</td>
+				<td style="width:150px">작성자</td>
+				<td style="width:50px">작성일</td>
+				<td style="width:50px">추천</td>
+				<td style="width:50px">조회</td>
 			</tr>
 		</thead>
 		<tbody>
 			<!-- 여기 수정해야행 -->
 			<c:forEach items="${requestScope.reviewList }" var="review">
 				<tr>
-					<td>${review.reviewNo }</td>
-					<td>${review.title}</td>
-					<td>${review.memberId}</td>
-					<td>${review.regDate}</td>
-					<td>${review.recommend}</td>
-					<td>${review.hits}</td>
+					<td align="center">${review.reviewNo }</td>
+					<td align="left">${review.title}</td>
+					<td align="center">${review.memberId}</td>
+					<td align="center">${review.regDate}</td>
+					<td align="right" style="width:50px">${review.recommend}</td>
+					<td align="right">${review.hits}</td>
 				</tr> 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->

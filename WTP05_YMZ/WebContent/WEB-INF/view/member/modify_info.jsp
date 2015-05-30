@@ -3,27 +3,53 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script type="text/javascript">
 
+function openDaumPostcode(){
+	new daum.Postcode({
+		oncomplete:function(data){
+			document.getElementById('postcode1').value=data.postcode1;
+			document.getElementById('postcode2').value=data.postcode2;
+			document.getElementById('address').value=data.address;
+			document.getElementById('detailAddress').focus();
+		}
+	}).open();
+}
 $(document).ready(function(){
 	$("#modifyForm").on("submit", function(){
-		
+
 		if(!$("#password").val()){
 			alert("password를 입력하세요");
 			$("#password").focus();
 			return false;
 		}
-		
-		if(!$("#name").val()){
-			alert("이름을 입력하세요");
-			$("#name").focus();
+
+		if(!$("#nickname").val()){
+			alert("닉네임을 입력하세요");
+			$("#nickname").focus();
 			return false;
 		}
 		
+		if(!$("#birth").val()){
+			alert("생일을 입력하세요");
+			$("#birth").focus();
+			return false;
+		}
+		if(!$("#detailAddress").val()){
+			alert("상세주소를 입력하세요");
+			$("#detailAddress").focus();
+			return false;
+		}
+		
+		if(!$("#phoneNo").val()){
+			alert("전화번호를 입력하세요");
+			$("#phoneNo").focus();
+			return false;
+		}
 		if(!$("#email").val()){
 			alert("이메일을 입력하세요");
 			$("#email").focus();
 			return false;
 		}
-		
+	
 	});
 });
 
@@ -40,17 +66,41 @@ $(document).ready(function(){
 			<td>${sessionScope.login_info.id }</td>
 		</tr>
 		<tr>
-			<td>Password</td>
-			<td>
-				<input type="password" name="password" id="password">  <span class="errorMessage"><form:errors path="member.password"/></span>
-			</td>
-		</tr>
-		<tr>
 			<td>이름</td>
 			<td>
 				<input type="text" name="name" value="${sessionScope.login_info.name }" id="name">  <span class="errorMessage"><form:errors path="member.name"/></span>
 			</td>
 		</tr>
+		<tr>
+			<td>닉네임</td>
+			<td>
+				<input type="text" name="nickname" value="${sessionScope.login_info.nickname }" id="nickname"><span class="errorMessage"><form:errors path="member.nickname"/></span>
+			</td>
+		</tr>
+		<tr>
+			<td>생년월일</td>
+			<td>
+				<input type="text" name="nickname" value="${sessionScope.login_info.birth}" id="birth"><span class="errorMessage"><form:errors path="member.birth"/></span>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">우편번호</td>
+			<td>
+				<input type="text" id="postcode1" name="postcode1" value="${sessionScope.login_info.zipcode.substring(0,3) }" style="width:50px;" readonly>
+				<input type="text" id="postcode2" name="postcode2" value="${sessionScope.login_info.zipcode.substring(4,7) }" style="width:50px;" readonly>
+				<input type="button" onclick="openDaumPostcode()" value="우편번호 찾기">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">주소</td>
+			<td><input type="text" id="address" name="address" style="width:400px;" value="${sessionScope.login_info.address }" readonly><span class="errorMessage"><form:errors path="member.address"></form:errors></span>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">상세주소</td>
+			<td><input type="text" id="detailAddress" name="detailAddress" style="width:400px;" value="${sessionScope.login_info.detailAddress }"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
+			</td>
+		</tr>	
 		<tr>
 			<td>이메일</td>
 			<td>
@@ -58,22 +108,10 @@ $(document).ready(function(){
 			</td>
 		</tr>
 		<tr>
-			<td>사진변경</td>
+			<td>전화번호</td>
 			<td>
-				<input type="file" name="picture">
+				<input type="text" id="phoneNo" name="phoneNo" value="${sessionScope.login_info.phoneNo }"><span class="errorMessage"><form:errors path="member.phoneNo"/></span> 
 			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<c:choose>
-					<c:when test="${empty sessionScope.login_info.pictureName }">
-						<img src="${initParam.rootPath }/uploadPhoto/no-photo.png">
-					</c:when>
-					<c:otherwise>
-						<img src="${initParam.rootPath }/uploadPhoto/${sessionScope.login_info.pictureName}">
-					</c:otherwise>
-				</c:choose>
-			</td> 
 		</tr>
 		<tr> 
 			<td colspan="2" >

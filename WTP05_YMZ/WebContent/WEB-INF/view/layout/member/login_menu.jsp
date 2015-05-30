@@ -2,13 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:if test="${sessionScope.login_info!=null }">
-	<table >
+	<table align="center">
 		<tr>
-			${sessionScope.login_info.name }님 환영합니다.
+			<td colspan="2">
+			<font size="5" color="blue">${sessionScope.login_info.name }</font><font size="2">님 환영합니다.</font>
+			</td>
 		</tr>
-		<tr>
+		<tr height="50">
 			<td>
-				<a href=""><font size="1">마이페이지</font></a>
+				<a href="${initParam.rootPath }/member/myPage.do"><font size="1">마이페이지</font></a>
 			</td>
 			<td>
 				<a href="${initParam.rootPath }/member/login/logout.do"><font size="1">로그아웃</font></a>
