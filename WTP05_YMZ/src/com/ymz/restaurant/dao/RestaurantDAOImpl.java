@@ -74,4 +74,9 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	public Restaurant selectRestaurantByNo(int restaurantNo) {
 		return session.selectOne(namespace+"selectRestaurantByNo", restaurantNo);
 	}
+
+	@Override
+	public String selectLocationByNo(int locationNo) {
+		return session.selectOne(namespace+"selectLocationByNo", locationNo);
+	}
 }

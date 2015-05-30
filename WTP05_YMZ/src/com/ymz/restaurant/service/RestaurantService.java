@@ -13,4 +13,5 @@ public interface RestaurantService {
 	public int getLocationNo(String buildingName, String floor);
 	public void addRestaurant(Restaurant restaurant, String[] foodNames, String[] foodPrices, String[] foodDescriptions);
 	public Restaurant getRestaurantByNo(int restaurantNo);
+	public String getLocationByNo(int locationNo);
 }

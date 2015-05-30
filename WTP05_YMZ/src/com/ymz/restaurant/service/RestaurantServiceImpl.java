@@ -76,4 +76,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public Restaurant getRestaurantByNo(int restaurantNo) {
 		return dao.selectRestaurantByNo(restaurantNo);
 	}
+
+	@Override
+	public String getLocationByNo(int locationNo) {
+		return dao.selectLocationByNo(locationNo);
+	}
 }
