@@ -92,6 +92,6 @@ public class RestaurantController {
 		
 		service.addRestaurant(restaurant, foodName, foodPrice, foodDescription);
 		
-		return "/restaurant/showListByType.do";
-	}
+		return "redirect:/restaurant/showListByType.do";
+	}	
 }
