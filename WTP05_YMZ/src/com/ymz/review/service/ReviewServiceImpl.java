@@ -58,4 +58,15 @@ public class ReviewServiceImpl implements ReviewService {
 		return map;
 	}
 
+	/**
+	 * 리뷰 번호로 조회
+	 */
+	@Override
+	public Review getReviewByNo(int reviewNo) {
+		Review review = dao.selectReviewByNo(reviewNo);
+		return review;
+	}
+	
+	
+
 }

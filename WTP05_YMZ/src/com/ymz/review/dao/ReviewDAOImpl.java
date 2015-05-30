@@ -64,5 +64,11 @@ public class ReviewDAOImpl implements ReviewDAO{
 		return session.selectOne(namespace+"selectTotalReviewCount");
 	}
 
+	@Override
+	public Review selectReviewByNo(int reviewNo) {
+		return session.selectOne(namespace + "selectReviewByNo", reviewNo);
+	}
+
+	
 	
 }

@@ -51,6 +51,12 @@
 		delete from review where member_id=#{memberId}
 	</delete>
 	
+	<!-- 조회 -->
+	<select id="selectReviewByNo" resultMap="review-resultmap" parameterType="int">
+	<include refid="review-select"/>
+		where review_no=#{reviewNo}
+	</select>
+	
 	<!-- 리뷰 목록 페이징 -->
 		<select id="selectAllReviewPaging" parameterType="map" resultMap="review-resultmap">
 		select review_no, title, content, picture_name, hits, recommend, reg_date, member_id

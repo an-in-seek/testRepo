@@ -72,7 +72,7 @@ h2{
 			<c:forEach items="${requestScope.reviewList }" var="review">
 				<tr>
 					<td align="center">${review.reviewNo }</td>
-					<td align="left">${review.title}</td>
+					<td align="left"><a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}">${review.title}</a></td>
 					<td align="center">${review.memberId}</td>
 					<td align="center">${review.regDate}</td>
 					<td align="right" style="width:50px">${review.recommend}</td>
@@ -84,6 +84,36 @@ h2{
 	</table>
 	<p>
 <!-- 테이블 끝 -->
+
+<p align="center">
+	<!-- 페이징 처리 -->
+	<!-- 이전 페이지 그룹 -->
+	<c:choose>
+		<c:when test="${pagingBean.previousPageGroup }">
+			<a href="${initParam.rootPath }/review/reviewList.do?page=${pagingBean.startPageOfPageGroup-1}">◀</a>
+		</c:when>
+		<c:otherwise>◀</c:otherwise>
+	</c:choose>
+	<!-- 페이지 번호 -->
+	<c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
+		<c:choose>
+			<c:when test="${pageNum == pagingBean.currentPage }">
+				<font color="red"><b>${pageNum}</b></font>
+			</c:when>
+			<c:otherwise>
+				<a href="${initParam.rootPath }/review/reviewList.do?page=${pageNum}">${pageNum} </a>
+			</c:otherwise>
+		</c:choose>
+	&nbsp;&nbsp;
+</c:forEach>
+	<!-- 다음 페이지 그룹 -->
+	<c:choose>
+		<c:when test="${pagingBean.nextPageGroup }">
+			<a href="${initParam.rootPath }/review/reviewList.do?page=${pagingBean.endPageOfPageGroup+1}">▶</a>
+		</c:when>
+		<c:otherwise>▶</c:otherwise>
+	</c:choose>
+</p>
 
 <!-- 기능 -->
 <table>
@@ -105,7 +135,9 @@ h2{
 			</td>
 		</tr>
 </table>
-	
+
+
+
 </div>
 </body>
 </html>

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.faq.vo.FAQ;
 import com.ymz.member.vo.Member;
+import com.ymz.qna.vo.QNA;
 import com.ymz.review.service.ReviewService;
 import com.ymz.review.vo.Review;
 
@@ -46,6 +47,13 @@ public class ReviewController {
 	public ModelAndView reviewList(@RequestParam (defaultValue="1") int currentPage){
 		Map<String, Object> map = service.getReviewListPaging(currentPage);
 		return new ModelAndView("review/review_list.tiles", map);
+	}
+	
+	//게시물 번호로 정보조회
+	@RequestMapping("reviewView.do")
+	public ModelAndView ReviewView(@RequestParam int reviewNo){
+		Review review = service.getReviewByNo(reviewNo);
+		return new ModelAndView("review/review_view.tiles", "review", review);
 	}
 	
 	//리뷰 수정(로그인시 가능)

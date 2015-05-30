@@ -17,6 +17,9 @@ public interface ReviewService {
 	
 	// 리뷰 목록
 	public abstract Map<String, Object> getReviewListPaging(int currentPage);
+
+	// 리뷰 조회
+	public abstract Review getReviewByNo(int reviewNo);
 	
 	
 }
