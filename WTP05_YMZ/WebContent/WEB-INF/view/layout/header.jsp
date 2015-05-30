@@ -2,14 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 인클루드 되므로 보여질 부분만 작성한다. -->
 <c:if test="${sessionScope.login_info!=null }">
-	<table  width="1024" cellspacing="0" cellpadding="0">
+	<table width="1024" cellspacing="0" cellpadding="0">
 	<tr>
-		<td rowspan="3"><h2 align="center"><a href='${initParam.rootPath }/index.do'>YA MEOK ZA!</a></h2></td>
+		<td colspan="3"><h2 align="center"><a href='${initParam.rootPath }/index.do'>YA MEOK ZA!</a></h2></td>
 	</tr>
 	<tr>
 		<td align="center">
 		<a href=""><font size="2">마이페이지 | </font></a>
-		<a href="${initParam.rootPath }/member/logout.do"><font size="2">로그아웃</font></a>
+		<a href="${initParam.rootPath }/member/login/logout.do"><font size="2">로그아웃</font></a>
 		</td>
 	</tr>
 </table>

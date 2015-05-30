@@ -9,7 +9,7 @@
 var pic_count = 1;
 var menu_count = 1;
 
-var nameMessage = "업체명을 입력하세요";
+var nameMessage = "상호명을 입력하세요";
 var nameCheck = false;
 var categoryCheck = false;
 var phoneCheck1 = false;
@@ -30,7 +30,7 @@ $(document).ready(function(){
 			dataType:"text",
 			beforeSend:function(){
 				if($("#restaurantName").val().trim()==""){
-					nameMessage = "업체명을 입력하세요";
+					nameMessage = "상호명을 입력하세요";
 					nameCheck = false;
 					return false;
 				}
@@ -40,7 +40,7 @@ $(document).ready(function(){
 					$("#nameMessage").text("");
 					nameCheck = true;
 				}else{
-					nameMessage = "이미 존재하는 업체명입니다";
+					nameMessage = "이미 존재하는 상호명입니다";
 					$("#nameMessage").text(nameMessage);
 					nameCheck = false;
 				}
@@ -167,6 +167,22 @@ $(document).ready(function(){
 		if(!nameCheck||!categoryCheck||!phoneCheck1||!phoneCheck2||!phoneCheck3||!addressCheck||!themeCheck||!locationCheck||!infoCheck||!pictureCheck){
 			return false;
 		}
+		
+		// 메뉴가 있으면 반드시 가격이 있고, 가격이 있으면 반드시 메뉴가 있게하라
+		for(var i=1;i<$("#menu_table tr").length+1;i++){
+			if($("#menu_table tr:nth-child("+i+") input[name=foodName]").val()!=""){
+				if($("#menu_table tr:nth-child("+i+") input[name=foodPrice]").val()==""){
+					$("#menu_table tr:nth-child("+i+") input[name=foodPrice]").focus();
+					return false;
+				}
+			}
+			if($("#menu_table tr:nth-child("+i+") input[name=foodPrice]").val()!=""){
+				if($("#menu_table tr:nth-child("+i+") input[name=foodName]").val()==""){
+					$("#menu_table tr:nth-child("+i+") input[name=foodName]").focus();
+					return false;
+				}
+			}
+		}
 	});
 	////////////////////////////////////////
 	
@@ -256,7 +272,7 @@ $(document).ready(function(){
 <p><font size="5"><b>기본정보</b></font></p>
 <table>
 <tr>
-	<td>업체명</td>
+	<td>상호명</td>
 	<td>
 		<input type="text" id="restaurantName" name="restaurantName" maxlength="10">
 		<font color="red"><span id="nameMessage"></span></font>
@@ -352,15 +368,13 @@ $(document).ready(function(){
 </tr>
 </thead>
 <tbody id="menu_table">
+<c:forEach begin="1" end="10">
 <tr>
 	<td><input type="text" name="foodName" maxlength="10"></td>
-	<td><input type="text" name="foodPrice" maxlength="10">원</td>
-	<td><input type="text" name="foodDescription" style="width:300px"></td>
-	<td>
-		<button id="menu_add">＋</button>
-		<button id="menu_del">－</button>
-	</td>
+	<td><input type="number" name="foodPrice" min="0" max="99999999">원</td>
+	<td><input type="text" name="foodDescription" maxlength="30" style="width:300px"></td>
 </tr>
+</c:forEach>
 </tbody>
 </table>
 <hr>

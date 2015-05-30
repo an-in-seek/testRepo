@@ -35,10 +35,6 @@
 	</definition>
 	
 	<definition name="restaurant/*.tiles" extends="restaurant_template">
-		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp"/>
-	</definition>
-	
-	<definition name="restaurant/*.restiles" extends="restaurant_template">
 		<put-attribute name="body" value="/WEB-INF/view/restaurant/{1}.jsp"/>
 	</definition>
 	<!-- 여기까지 지훈이코드 -->
@@ -69,14 +65,21 @@
  	<definition name="main_template" template="/WEB-INF/view/layout/main_template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
-		<put-attribute name="login_menu" value="/WEB-INF/view/layout/login_menu.jsp" />
-		<put-attribute name="sub_menu" value="/WEB-INF/view/layout/sub_menu.jsp" />
+		<put-attribute name="aside_menu" value="/WEB-INF/view/layout/aside_menu.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 	</definition>
 	<definition name="*.tiles" extends="main_template">
 		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp"/>
+		<put-attribute name="right_menu" value="/WEB-INF/view/layout/login_menu.jsp"/>
 	</definition>
-	<definition name="member/*.tiles" extends="main_template">
+	
+	 <definition name="member_template" template="/WEB-INF/view/layout/member_template.jsp">
+		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
+		<put-attribute name="aside_menu" value="/WEB-INF/view/layout/aside_menu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
+	</definition>
+	<definition name="member/*.tiles" extends="member_template">
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
 	</definition>
 	<!-- 메인페이지:달이 -->

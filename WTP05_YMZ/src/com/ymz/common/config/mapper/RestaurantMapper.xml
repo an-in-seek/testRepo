@@ -20,8 +20,7 @@
 		<result column="theme" property="theme"/>
 		<result column="reg_date" property="regDate"/>
 		<result column="reply_count" property="replyCount"/>
-		<result column="building_name" property="buildingName"/>
-		<result column="floor" property="floor"/>
+		<result column="location_no" property="locationNo"/>
 	</resultMap>
 	
 	<select id="selectAllRestaurantPaging" resultMap="restaurant-resultmap">
@@ -32,7 +31,7 @@
 							description, picture_name, score, hits, theme, reg_date, reply_count, location_no
 					from	(
 								<include refid="restaurant-select"/>
-								order by reg_date
+								order by restaurant_no desc
 							)
 				)
 		where	page = #{currentPage}
@@ -73,5 +72,14 @@
 		</selectKey>
 		insert into food values(#{foodNo}, #{foodName}, #{foodPrice}, #{foodDescription}, #{restaurantNo})
 	</insert>
+	
+	<select id="selectRestaurantByNo" parameterType="_int" resultMap="restaurant-resultmap">
+		<include refid="restaurant-select"/>
+		where restaurant_no=#{restaurantNo}
+	</select>
+	
+	<select id="selectLocationByNo" parameterType="_int" resultType="String">
+		select building_name||' '||floor||'층' from location where location_no=#{locationNo}
+	</select>
 	
 </mapper>

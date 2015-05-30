@@ -56,27 +56,29 @@ public class RestaurantServiceImpl implements RestaurantService {
 			String[] foodPrices, String[] foodDescriptions) {
 		dao.insertRestaurant(restaurant);
 		
-		if(foodNames.length==0||foodPrices.length==0){}
-		else {
-			ArrayList<String> foodNamesList = new ArrayList<String>();
-			ArrayList<Integer> foodPricesList = new ArrayList<Integer>();
-			ArrayList<String> foodDescriptionsList = new ArrayList<String>();
-			for(int i=0; i<foodNames.length; i++) {
+		ArrayList<String> foodNamesList = new ArrayList<String>();
+		ArrayList<Integer> foodPricesList = new ArrayList<Integer>();
+		ArrayList<String> foodDescriptionsList = new ArrayList<String>();
+		for(int i=0; i<foodNames.length; i++) {
+			if(!foodNames[i].equals("")) {
 				foodNamesList.add(foodNames[i]);
 				foodPricesList.add(Integer.parseInt(foodPrices[i]));
 				foodDescriptionsList.add(foodDescriptions[i]);
 			}
-			for(int i=0; i<foodNamesList.size(); i++) {
-				if(foodNamesList.get(i).trim().equals("")) {
-					foodNamesList.remove(i);
-					foodPricesList.remove(i);
-					foodDescriptionsList.remove(i);
-				}
-			}
-			
-			for(int i=0; i<foodNamesList.size(); i++) {
-				dao.insertFood(restaurant.getRestaurantNo(), foodNamesList.get(i), foodPricesList.get(i), foodDescriptionsList.get(i));
-			}
 		}
+		
+		for(int i=0; i<foodNamesList.size(); i++) {
+			dao.insertFood(restaurant.getRestaurantNo(), foodNamesList.get(i), foodPricesList.get(i), foodDescriptionsList.get(i));
+		}
+	}
+
+	@Override
+	public Restaurant getRestaurantByNo(int restaurantNo) {
+		return dao.selectRestaurantByNo(restaurantNo);
+	}
+
+	@Override
+	public String getLocationByNo(int locationNo) {
+		return dao.selectLocationByNo(locationNo);
 	}
 }

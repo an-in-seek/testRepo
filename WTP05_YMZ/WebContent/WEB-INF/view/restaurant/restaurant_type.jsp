@@ -28,10 +28,13 @@
 	</thead>
 	<tbody>
 		<c:forEach items="${requestScope.restaurantList }" var="restaurant">
-			<tr>
+			<tr align="center">
 				<td>${restaurant.restaurantNo }</td>
 				<td>${restaurant.category}</td>
-				<td>${restaurant.restaurantName}</td>
+				<td align="left">
+					<a href="${initParam.rootPath }/restaurant/restaurantView.do?restaurantNo=${restaurant.restaurantNo }">${restaurant.restaurantName}</a>
+					<c:if test="${restaurant.replyCount>0 }"><font color="gray">[${restaurant.replyCount }]</font></c:if>
+				</td>
 				<td>${restaurant.phoneNo}</td>
 				<td>${restaurant.score}</td>
 				<td>${restaurant.hits}</td>

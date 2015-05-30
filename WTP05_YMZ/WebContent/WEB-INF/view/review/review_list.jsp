@@ -34,6 +34,10 @@ table#listTB thead tr{
 table#listTB tbody tr{
 	cursor: pointer;
 }
+button{
+	width:100px;
+	height:50px;
+}
 h2{
 	text-align: center;
 }
