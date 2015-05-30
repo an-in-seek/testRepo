@@ -160,7 +160,7 @@ ALTER TABLE REVIEW_REPLY
 
 /* 신고당한 맛집 */
 CREATE TABLE REPORTED_RESTAURANT (
-	NO NUMBER(10) NOT NULL, /* 게시물 번호 */
+	REPORTED_RESTAURANT_NO NUMBER(10) NOT NULL, /* 게시물 번호 */
 	CATEGORY VARCHAR2(12) NOT NULL, /* 분류 */
 	BBS_NO NUMBER(10) NOT NULL, /* 게시판 번호 */
 	STATE VARCHAR2(12) NOT NULL, /* 상태 */
@@ -171,12 +171,12 @@ CREATE TABLE REPORTED_RESTAURANT (
 ALTER TABLE REPORTED_RESTAURANT
 	ADD
 		PRIMARY KEY (
-			NO
+			REPORTED_RESTAURANT_NO
 		);
 
 /* 신고당한 리뷰 */
 CREATE TABLE REPORTED_REVIEW (
-	NO NUMBER(10) NOT NULL, /* 게시물 번호 */
+	REPORTED_REVIEW_NO NUMBER(10) NOT NULL, /* 게시물 번호 */
 	CATEGORY VARCHAR2(12) NOT NULL, /* 분류 */
 	BBS_NO NUMBER(10) NOT NULL, /* 게시판 번호 */
 	STATE VARCHAR2(12) NOT NULL, /* 상태 */
@@ -187,12 +187,12 @@ CREATE TABLE REPORTED_REVIEW (
 ALTER TABLE REPORTED_REVIEW
 	ADD
 		PRIMARY KEY (
-			NO
+			REPORTED_REVIEW_NO
 		);
 
 /* 신고당한 댓글 */
 CREATE TABLE REPORTED_REPLY (
-	NO NUMBER(10) NOT NULL, /* 댓글 번호 */
+	REPORTED_REPLY_NO NUMBER(10) NOT NULL, /* 댓글 번호 */
 	CATEGORY VARCHAR2(12) NOT NULL, /* 분류 */
 	CONTENT CLOB NOT NULL, /* 내용 */
 	STATE VARCHAR2(12) NOT NULL, /* 상태 */
@@ -203,37 +203,37 @@ CREATE TABLE REPORTED_REPLY (
 ALTER TABLE REPORTED_REPLY
 	ADD
 		PRIMARY KEY (
-			NO
+			REPORTED_REPLY_NO
 		);
 
 /* 자주 묻는 질문과 답변 */
 CREATE TABLE FAQ (
-	NO NUMBER(10) NOT NULL, /* 게시물 번호 */
-	TITLE VARCHAR2(60) NOT NULL, /* 제목 */
-	CONTENT CLOB NOT NULL /* 내용 */
+	FAQ_NO NUMBER(10) NOT NULL, /* 게시물 번호 */
+	FAQ_TITLE VARCHAR2(60) NOT NULL, /* 제목 */
+	FAQ_CONTENT CLOB NOT NULL /* 내용 */
 );
 
 ALTER TABLE FAQ
 	ADD
 		PRIMARY KEY (
-			NO
+			FAQ_NO
 		);
 
 /* 질문과답변 */
 CREATE TABLE QNA (
-	NO NUMBER(10) NOT NULL, /* 게시물 번호 */
-	TITLE VARCHAR2(60) NOT NULL, /* 제목 */
-	CATEGORY VARCHAR2(12) NOT NULL, /* 카테고리 */
-	REGISTRATION_DATE VARCHAR2(8) NOT NULL, /* 등록일 */
-	HITS NUMBER(10) NOT NULL, /* 조회수 */
-	CONTENT CLOB NOT NULL, /* 내용 */
+	QNA_NO NUMBER(10) NOT NULL, /* 게시물 번호 */
+	QNA_TITLE VARCHAR2(60) NOT NULL, /* 제목 */
+	QNA_CATEGORY VARCHAR2(12) NOT NULL, /* 카테고리 */
+	QNA_REGISTRATION_DATE VARCHAR2(8) NOT NULL, /* 등록일 */
+	QNA_HITS NUMBER(10) NOT NULL, /* 조회수 */
+	QNA_CONTENT CLOB NOT NULL, /* 내용 */
 	MEMBER_ID VARCHAR2(10) NOT NULL /* 회원_ID */
 );
 
 ALTER TABLE QNA
 	ADD
 		PRIMARY KEY (
-			NO
+			QNA_NO
 		);
 
 /* 새 테이블 */
@@ -338,3 +338,14 @@ ALTER TABLE QNA
 		REFERENCES MEMBER (
 			MEMBER_ID
 		);
+		
+-- 고객센터에서 사용하는 시퀀스
+drop sequence faq_no_seq;
+drop sequence faq_no_qna;
+create sequence faq_no_seq;
+create sequence faq_no_qna;
+-- 맛집정보에서 사용하는 시퀀스
+drop sequence restaurant_no_seq;
+drop sequence food_no_seq;
+create sequence restaurant_no_seq;
+create sequence food_no_seq;
