@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ymz.restaurant.service.RestaurantService;
+import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
 
 @Controller
@@ -100,13 +101,20 @@ public class RestaurantController {
 		Restaurant restaurant = service.getRestaurantByNo(restaurantNo);
 		model.addAttribute("restaurant", restaurant);
 		
+		// 건물명과 층을 문자열로 합쳐 request scope에 올린다
 		String location = service.getLocationByNo(restaurant.getLocationNo());
 		model.addAttribute("restaurant_location", location);
 		
+		// 그림들을 request scope에 올린다
 		String[] pictures = restaurant.getPictureName().split(",");
 		for(int i=0; i<pictures.length; i++) {
 			model.addAttribute("pic"+(i+1), pictures[i]);
 		}
+		
+		// 선택된 가게의 음식들을 request scope에 올린다
+		List<Food> foods = service.getFoodsByRestaurantNo(restaurant.getRestaurantNo());
+		model.addAttribute("foods", foods);
+		
 		return "restaurant/restaurant_view.tiles";
 	}
 }

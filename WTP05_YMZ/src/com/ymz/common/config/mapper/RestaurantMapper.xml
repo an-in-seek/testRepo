@@ -23,6 +23,14 @@
 		<result column="location_no" property="locationNo"/>
 	</resultMap>
 	
+	<resultMap type="food" id="food-resultmap">
+		<id column="food_no" property="foodNo"/>
+		<result column="food_name" property="foodName"/>
+		<result column="food_price" property="foodPrice"/>
+		<result column="food_description" property="foodDescription"/>
+		<result column="restaurant_no" property="restaurantNo"/>
+	</resultMap>
+	
 	<select id="selectAllRestaurantPaging" resultMap="restaurant-resultmap">
 		select	restaurant_no, restaurant_name, category, phone_no, address, description,
 				picture_name, score, hits, theme, reg_date, reply_count, location_no
@@ -80,6 +88,11 @@
 	
 	<select id="selectLocationByNo" parameterType="_int" resultType="String">
 		select building_name||' '||floor||'층' from location where location_no=#{locationNo}
+	</select>
+	
+	<select id="selectFoodsByRestaurantNo" parameterType="_int" resultMap="food-resultmap">
+		select food_no, food_name, food_price, food_description, restaurant_no from food
+		where restaurant_no=#{restaurantNo}
 	</select>
 	
 </mapper>
