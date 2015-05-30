@@ -65,8 +65,6 @@ CREATE TABLE MEMBER (
 	JOIN_DATE VARCHAR2(8) NOT NULL /* 가입일 */
 );
 
-insert into member values('user03', 1111, '피카츄', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, '정회원', '20140514');
-
 ALTER TABLE MEMBER
 	ADD
 		PRIMARY KEY (
