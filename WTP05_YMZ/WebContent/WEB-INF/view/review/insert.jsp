@@ -26,22 +26,24 @@ table#replyTB thead tr{
 table#replyTB tbody tr{
 	cursor: pointer;
 }
-h2{
-	text-align: center;
+button{
+	width:100px;
+	height:50px;
 }
+
 </style>
 <!-- css 끝 -->
 </head>
 <body>
-
-<h2>스마트에디터 연습 페이지</h2>
 <%
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");
 	
 %>
+<div align="center">
+<h2>스마트에디터 연습 페이지</h2>
 
-
+<!-- ************************************** 리뷰 정보 ************************************* -->
 <table id="contentTB" style="width:700px">
 		<thead>
 			<tr>
@@ -52,7 +54,7 @@ h2{
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
+			<tr align="center">
 				<td>111</td>
 				<td>222</td> 
 				<td>333</td>
@@ -62,16 +64,30 @@ h2{
 	</table>
 	<p>
 <hr>
-내용 <br>
+</div>
+
+
+<!-- ********************************* 리뷰 내용이 들어가는 공간 *************************************** -->
+내용 시작<br>
 <%=content %><br>
-내용 끝<br>
-<!-- 글 내용이 들어가는 공간 -->
+내용 끝<p>
+
+<!-- ******************************* 리뷰 내용이 들어가는 공간 끝 ************************************** -->
 
 
-<!-- 글 내용이 들어가는 공간 끝 -->
 
 <div id="reply" align="center">
+
+<!-- 버튼 -->
+<a href="${initParam.rootPath }/review/reviewList.do"><button>목록</button></a>
+<button id="	">수정</button>
+<button id="	">삭제</button>
+<button id="	">추천</button>
+<button id="	">신고</button>
 <hr>
+<!-- ****************************************  댓 글 영 역  ****************************************** -->
+
+
 <!-- 테이블 시작 -->
 <table id="replyTB" style="width:700px">
 		<thead>
@@ -96,8 +112,17 @@ h2{
 		</tbody>
 	</table>
 	<p>
-ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ<br>
-ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ<br>
+
+<!-- 댓글 작성 영역 -->
+<textarea name="reply_content" id="reply_content" rows="5" cols="50" style="width:800px; height:100px;"></textarea><br>
+
+<!-- 댓글 버튼 -->
+<button id="	" style="width:100px;height:50px;">등록</button>
+<button id="	" style="width:100px;height:50px;">수정</button>
+<button id="	" style="width:100px;height:50px;">삭제</button>
+<button id="	" style="width:100px;height:50px;">신고</button>
+<button id="	" style="width:100px;height:50px;">목록</button>
+
 </div>
 </body>
 
