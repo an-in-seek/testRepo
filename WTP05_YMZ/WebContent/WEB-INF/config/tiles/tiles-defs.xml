@@ -62,26 +62,39 @@
 	
 	
 	<!-- 메인페이지:달이 -->
- 	<definition name="main_template" template="/WEB-INF/view/layout/main_template.jsp">
+ 	<definition name="main_template" template="/WEB-INF/view/layout/member/main_template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
-		<put-attribute name="aside_menu" value="/WEB-INF/view/layout/aside_menu.jsp" />
+		<put-attribute name="aside_menu" value="/WEB-INF/view/layout/member/aside_menu.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 	</definition>
 	<definition name="*.tiles" extends="main_template">
 		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp"/>
-		<put-attribute name="right_menu" value="/WEB-INF/view/layout/login_menu.jsp"/>
+		<put-attribute name="right_menu" value="/WEB-INF/view/layout/member/login_menu.jsp"/>
 	</definition>
-	
-	 <definition name="member_template" template="/WEB-INF/view/layout/member_template.jsp">
+	<!-- 회원가입 로그인 메뉴바를 누르면 네비게이션이 안보이게 한다. -->
+	 <definition name="member_template" template="/WEB-INF/view/layout/member/member_template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
-		<put-attribute name="aside_menu" value="/WEB-INF/view/layout/aside_menu.jsp" />
+		<put-attribute name="aside_menu" value="/WEB-INF/view/layout/member/aside_menu.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 	</definition>
 	<definition name="member/*.tiles" extends="member_template">
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
 	</definition>
-	<!-- 메인페이지:달이 -->
+	<!-- 메인페이지:끝 -->
+	<!-- 마이페이지:달이 -->
+	<definition name="mypage_template" template="/WEB-INF/view/layout/member/mypage_template.jsp">
+		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
+	</definition>
+	<definition name="member/info/*.tiles" extends="mypage_template">
+		<put-attribute name="aside_menu" value="/WEB-INF/view/member/mypage.jsp" />
+	</definition>
+	<definition name="member/info/*.tiles" extends="mypage_template">
+		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
+	</definition>
+	<!-- 마이페이지:끝 -->
 	
 </tiles-definitions>
