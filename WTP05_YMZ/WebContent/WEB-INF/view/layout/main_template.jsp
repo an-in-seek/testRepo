@@ -34,41 +34,39 @@ table, td, th{
 td, th{
 	padding: 5px;
 }
-div.template3{
+div.main_template{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	width:1024px;
 }
-header.template3{
+header.main_template{
 	background-color:skyblue;
 	color:white;
 	text-align:center;
 	padding: 5px;
 }
-#menu{
-	background-color:skyblue;
-	color:white;
-	text-align:center;
-	padding: 5px;
+
+nav.main_template{
+	font-weight:bold;
+	float:right;  /*오른쪽으로 띄움 */
 }
-section.template3{
-	padding: 15px;
-	margin:10px;
-	height: 600px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-	float:left;
+#body{
+	padding: 20px;
+	height:580px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	width:500px;
+	float:left;   /*왼쪽으로 띄움 */
 }
-#right{
-	margin:10px;
-	background-color:#faebd7;
-	padding: 15px;
-	height:110px;
-	width:150px;
+#left{
+	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
+	padding:10px;
+	height:600px;
+	width:100px;
 	font-weight:bold;
 	text-align:center;
-	float:right;   /*왼쪽으로 띄움 */
+	float:left;  /*왼쪽으로 띄움 */
 }
-footer.template3{
+footer.main_template{
 	background-color:skyblue;
 	color:white;
 	padding-top:20px;
@@ -79,18 +77,21 @@ footer.template3{
 </style>
 </head>
 <body>
-	<div class="template3">
-		<header class="template3">
+	<div class="main_template">
+		<header class="main_template">
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="menu" />
 		</header>
-		<aside id="right" class="template3">
-			<tiles:insertAttribute name="login_menu" /><!-- 서브메뉴로 -->
+		<aside id="left" class="main_template">
+			<tiles:insertAttribute name="aside_menu" /><!-- 서브메뉴로 -->
 		</aside>
-		<section class="template3">
+		<section id="body" class="main_template">
 			<tiles:insertAttribute name="body" />
 		</section>
-		<footer class="template3">
+		<nav id="right" class="main_template">
+			<tiles:insertAttribute name="right_menu" /><!-- 서브메뉴로 -->
+		</nav>
+		<footer class="main_template">
 			<tiles:insertAttribute name="footer" />
 		</footer>
 	</div>
