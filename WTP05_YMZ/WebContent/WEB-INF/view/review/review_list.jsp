@@ -34,6 +34,7 @@ $(document).ready(function(){
 });
 </script>
 <style type="text/css">
+
 table#listTB thead tr{
 	color: azure;
 	font-weight: bold;
@@ -51,21 +52,22 @@ button{
 	height:50px;
 }
 
-a.menu:link {text-decoration:none; color: black;}/*방문하지 않은 페이지*/
-a.menu:hover {text-decoration:underline; color: crimson;}/*링크에 마우스 올라갔을 때*/
-a.menu:active {text-decoration:none; color: black;}/*링크 클릭시*/
-a.menu:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/
+a.list:link {text-decoration:none; color: black;}/*방문하지 않은 페이지*/
+a.list:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/ 
+a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 올라갔을 때*/
+
 
 </style>
- 
-
 </head>
+
 <body>
 
-<div align="center">
-<h2>리뷰 목록</h2>
-<!-- 테이블 시작 -->
-<table id="listTB" style="width:900px">
+<section>
+	<div align="center">
+	<h2>맛집 리뷰</h2>
+	
+	<!-- 테이블 시작 -->
+	<table id="listTB" style="width:900px">
 		<thead>
 			<tr>
 				<td style="width:50px">번호</td>
@@ -81,7 +83,7 @@ a.menu:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/
 			<c:forEach items="${requestScope.reviewList }" var="review">
 				<tr>
 					<td align="center">${review.reviewNo }</td>
-					<td align="left" id="title"><a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}" class="menu">${review.title}</a></td>
+					<td align="left" id="title"><a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}" class="list">${review.title}</a></td>
 					<td align="center">${review.memberId}</td>
 					<td align="center">${review.regDate}</td>
 					<td align="right" style="width:50px">${review.recommend}</td>
@@ -92,10 +94,11 @@ a.menu:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/
 		</tbody>
 	</table>
 	<br>
-<!-- 테이블 끝 -->
+	<!-- 테이블 끝 -->
 
-<p align="center">
+
 	<!-- 페이징 처리 -->
+	
 	<!-- 이전 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.previousPageGroup }">
@@ -114,7 +117,7 @@ a.menu:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/
 			</c:otherwise>
 		</c:choose>
 	&nbsp;&nbsp;
-</c:forEach>
+	</c:forEach>
 	<!-- 다음 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.nextPageGroup }">
@@ -122,10 +125,10 @@ a.menu:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/
 		</c:when>
 		<c:otherwise>▶</c:otherwise>
 	</c:choose>
-<br>
+	<br>
 
-<!-- 기능 -->
-<table>
+	<!-- 기능 -->
+	<table>
 		<tr>
 			<td>
 			<select id="searchSort">
@@ -142,10 +145,11 @@ a.menu:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/
 				</form>
 			</td>
 		</tr>
-</table>
-<br>
+	</table>
+	<br>
 
+	</div>
+</section>
 
-</div>
 </body>
 </html>

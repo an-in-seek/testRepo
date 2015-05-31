@@ -12,10 +12,19 @@
 $(document).ready(function(){
 
 	// 리뷰 내용
+	$("#recommendBtn").on("click", function(){
+		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+	});
+	$("#modifyBtn").on("click", function(){
+		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+	});
+	$("#reportBtn").on("click", function(){
+		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+	});
 	
 	
 	// 댓글 버튼
-	$("#reply_registerBtn").on("click", function(){
+	$("#reply_registerBtn").on("click", function(){ 
 		alert("로그인부터 하세욥!!!");
 	});
 	$("#reply_modifyBtn").on("click", function(){
@@ -93,17 +102,20 @@ button{
 
 ${requestScope.review.content }<br>
 
+	<div align="center" id="recommend"> <!-- 추천 버튼 -->
+		<button id="recommendBtn"><font color="red">${requestScope.review.recommend}</font><br>추천</button>
+	</div><br><br>
+	
 <!-- ******************************* 리뷰 내용이 들어가는 공간 끝 ************************************** -->
 
 
 
 <div id="reply" align="center">
-
 <!-- 버튼 -->
 <a href="${initParam.rootPath }/review/reviewList.do"><button>목록</button></a>
 <a href="${initParam.rootPath }/review/login/removeReview.do?reviewNo=${requestScope.review.reviewNo}"><button>삭제</button></a>
 <button id="modifyBtn">수정</button>
-<button id="recommendBtn">추천</button>
+
 <button id="reportBtn">신고</button>
 <hr>
 <!-- ****************************************  댓 글 영 역  ****************************************** -->
