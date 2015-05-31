@@ -100,8 +100,8 @@ ${requestScope.review.content }<br>
 
 <!-- 버튼 -->
 <a href="${initParam.rootPath }/review/reviewList.do"><button>목록</button></a>
+<a href="${initParam.rootPath }/review/login/removeReview.do"><button>삭제</button></a>
 <button id="modifyBtn">수정</button>
-<button id="deleteBtn">삭제</button>
 <button id="recommendBtn">추천</button>
 <button id="reportBtn">신고</button>
 <hr>

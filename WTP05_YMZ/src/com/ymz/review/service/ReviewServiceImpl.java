@@ -40,8 +40,8 @@ public class ReviewServiceImpl implements ReviewService {
 	 * 리뷰 삭제
 	 */
 	@Override
-	public void removeReview(int num) {
-		dao.deleteReview(num);
+	public void removeReviewById(String id) {
+		dao.deleteReview(id);
 	}
 
 	/**

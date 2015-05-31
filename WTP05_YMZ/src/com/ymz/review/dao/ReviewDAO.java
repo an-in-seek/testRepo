@@ -15,7 +15,7 @@ public interface ReviewDAO {
 	public abstract void updateReview(Review review);
 	
 	// 리뷰 삭제
-	public abstract void deleteReview(int num);
+	public abstract void deleteReview(String id);
 	
 	// 리뷰 목록
 	public abstract List<Review> selectAllReviewPaging(int pageNo);

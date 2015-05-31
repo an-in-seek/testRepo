@@ -40,8 +40,8 @@ public class ReviewDAOImpl implements ReviewDAO{
 	 * 리뷰 삭제
 	 */
 	@Override
-	public void deleteReview(int num) {
-		session.delete(namespace+"insertReview", num);
+	public void deleteReview(String id) {
+		session.delete(namespace+"deleteReview", id);
 	}
 
 	

@@ -47,7 +47,7 @@
 	
 	<!-- 삭제 -->
 
-	<delete id="deleteReview" parameterType="int">
+	<delete id="deleteReview" parameterType="string">
 		delete from review where member_id=#{memberId}
 	</delete>
 	

@@ -24,6 +24,9 @@ insert into location values(9, '아브뉴프랑', '1');
 insert into location values(10, '유스페이스 2B동', '2');
 
 
+
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('90','수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg
+" title="suzy.jpg"><br style="clear:both;">','1234','150','20150530','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('91','새마을식당','1','1','1','20150528','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('92','버거킹','1','221','0','20140420','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('93','맥도날드','1','15','11','20130311','user01');
