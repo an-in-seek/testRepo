@@ -52,7 +52,7 @@ button{
 }
 
 a.menu:link {text-decoration:none; color: black;}/*방문하지 않은 페이지*/
-a.menu:hover {text-decoration:underline; color: c71585;}/*링크에 마우스 올라갔을 때*/
+a.menu:hover {text-decoration:underline; color: crimson;}/*링크에 마우스 올라갔을 때*/
 a.menu:active {text-decoration:none; color: black;}/*링크 클릭시*/
 a.menu:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/
 
