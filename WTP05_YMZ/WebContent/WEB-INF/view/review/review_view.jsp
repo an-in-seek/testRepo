@@ -57,29 +57,30 @@ button{
 <!-- css 끝 -->
 </head>
 <body>
-<%
-	String title = request.getParameter("title");
-		
-%>
+
 <div align="center">
 <h2>리뷰</h2>
 
 <!-- ************************************** 리뷰 정보 ************************************* -->
-<table id="contentTB" style="width:700px">
+<table id="contentTB" style="width:900px">
 		<thead>
 			<tr>
-				<td>번호</td>
-				<td>제목</td>
-				<td>등록일</td>
-				<td>추천수</td>
+				<td style="width:100px">글번호</td>
+				<td style="width:450px">제목</td>
+				<td style="width:50px">ID</td>
+				<td style="width:100px">조회수</td>
+				<td style="width:100px">등록일</td>
+				<td style="width:100px">추천수</td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr align="center">
-				<td>111</td>
-				<td>222</td> 
-				<td>333</td>
-				<td>444</td>
+				<td>${requestScope.review.reviewNo}</td>
+				<td>${requestScope.review.title}</td>
+				<td>${requestScope.review.memberId}</td> 
+				<td>${requestScope.review.hits}</td> 
+				<td>${requestScope.review.regDate}</td>
+				<td>${requestScope.review.recommend}</td>
 			</tr> 
 		</tbody>
 	</table>
