@@ -44,6 +44,15 @@ public class ReviewDAOImpl implements ReviewDAO{
 		session.delete(namespace+"deleteReview", review);
 	}
 
+
+	/**
+	 * 리뷰 조회
+	 */
+	@Override
+	public Review selectReviewByNo(int reviewNo) {
+		session.selectOne(namespace + "updateHits", reviewNo);
+		return session.selectOne(namespace + "selectReviewByNo", reviewNo);
+	}
 	
 	/**
 	 * Review 테이블의 페이징 처리 전체 리뷰 조회 처리
@@ -66,10 +75,6 @@ public class ReviewDAOImpl implements ReviewDAO{
 		return session.selectOne(namespace+"selectTotalReviewCount");
 	}
 
-	@Override
-	public Review selectReviewByNo(int reviewNo) {
-		return session.selectOne(namespace + "selectReviewByNo", reviewNo);
-	}
 
 	
 	
