@@ -40,22 +40,39 @@ public class ReviewServiceImpl implements ReviewService {
 	 * 리뷰 삭제
 	 */
 	@Override
-	public void removeReview(int num) {
-		dao.deleteReview(num);
+	public void removeReviewById(String id) {
+		dao.deleteReview(id);
 	}
 
 	/**
-	 * 리뷰 목록 - 페이징
+	 * 전체 회원 목록 조회 처리 - Paging 처리
+	 *  - 목록에 뿌려줄 리뷰리스트(List<Review>)와 페이징 처리를 PagingBean 객체를 생성해 Map에 넣어 리턴
+	 * @param page : 조회할 page 번호
+	 * @return Map
 	 */
 	@Override
-	public Map<String, Object> getReviewListPaging(int currentPage) {
-		List<Review> list = dao.selectAllReviewPaging(currentPage);
+	public Map<String, Object> getReviewListPaging(int pageNo) {
+		// 목록에 뿌려질 List<Review> 조회
+		List<Review> list = dao.selectAllReviewPaging(pageNo);
+		// PagingBean 생성
 		int totalContent = dao.selectTotalReviewCount();
-		PagingBean pagingBean = new PagingBean(totalContent, currentPage);
+		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
+		// 두개의 값(List, PagingBean)을 Map에 넣어 return
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reviewList", list);
 		map.put("pagingBean", pagingBean);
 		return map;
 	}
+
+	/**
+	 * 리뷰 번호로 조회
+	 */
+	@Override
+	public Review getReviewByNo(int reviewNo) {
+		Review review = dao.selectReviewByNo(reviewNo);
+		return review;
+	}
+	
+	
 
 }

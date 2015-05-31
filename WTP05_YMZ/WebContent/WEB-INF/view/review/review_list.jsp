@@ -24,21 +24,22 @@ $(document).ready(function(){
 	});
 	
 	// 리뷰 제목 클릭 이벤트
-	$("table#listTB tbody tr").on("click", function(){
-		var text = $(this).find(":first-child").next().text();
-		alert(text);
-		
+	$("table#listTB tbody tr").hover(function(){
+		 $(this).css("background-color", "lightpink");
+	}, function(){
+		 $(this).css("background-color", "white");
 	});
+	
 });
 </script>
 <style type="text/css">
 table#listTB thead tr{
 	color:azure;
 	font-weight: bold;
-	background: indigo;
+	background: darkcyan;
 	text-align: center;
 }
-table#listTB tbody tr{
+table#listTB tbody tr td#title{
 	cursor: pointer;
 }
 button{
@@ -72,7 +73,7 @@ h2{
 			<c:forEach items="${requestScope.reviewList }" var="review">
 				<tr>
 					<td align="center">${review.reviewNo }</td>
-					<td align="left">${review.title}</td>
+					<td align="left" id="title"><a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}">${review.title}</a></td>
 					<td align="center">${review.memberId}</td>
 					<td align="center">${review.regDate}</td>
 					<td align="right" style="width:50px">${review.recommend}</td>
@@ -84,6 +85,36 @@ h2{
 	</table>
 	<p>
 <!-- 테이블 끝 -->
+
+<p align="center">
+	<!-- 페이징 처리 -->
+	<!-- 이전 페이지 그룹 -->
+	<c:choose>
+		<c:when test="${pagingBean.previousPageGroup }">
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.startPageOfPageGroup-1}">◀</a>
+		</c:when>
+		<c:otherwise>◀</c:otherwise>
+	</c:choose>
+	<!-- 페이지 번호 -->
+	<c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
+		<c:choose>
+			<c:when test="${pageNum == pagingBean.currentPage }">
+				<font color="red"><b>${pageNum}</b></font>
+			</c:when>
+			<c:otherwise>
+				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}">${pageNum} </a>
+			</c:otherwise>
+		</c:choose>
+	&nbsp;&nbsp;
+</c:forEach>
+	<!-- 다음 페이지 그룹 -->
+	<c:choose>
+		<c:when test="${pagingBean.nextPageGroup }">
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.endPageOfPageGroup+1}">▶</a>
+		</c:when>
+		<c:otherwise>▶</c:otherwise>
+	</c:choose>
+</p>
 
 <!-- 기능 -->
 <table>
@@ -105,7 +136,9 @@ h2{
 			</td>
 		</tr>
 </table>
-	
+
+
+
 </div>
 </body>
 </html>
