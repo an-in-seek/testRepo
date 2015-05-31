@@ -19,12 +19,12 @@ $(document).ready(function(){
 <table style="width:100%;">
 <tr>
 
-<td style="width:60%">
+<td style="width:50%">
 <table border="1" style="width:100%">
 <tr align="center">
-<td colspan="5" height="370px"><img id="selectedPicture"></td>
+<td colspan="5"><img id="selectedPicture"></td>
 </tr>
-<tr id="selectPicture" align="center" height="105px">
+<tr id="selectPicture" align="center">
 <td style="width:20%">
 	<c:if test="${!empty requestScope.pic1 }"><img class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic1}"></c:if>
 </td>
@@ -44,7 +44,7 @@ $(document).ready(function(){
 </table>
 </td>
 
-<td style="width:40%">
+<td valign="top" style="width:50%">
 <table>
 <tr>
 	<td style="width:100px" align="center">상호명</td>
