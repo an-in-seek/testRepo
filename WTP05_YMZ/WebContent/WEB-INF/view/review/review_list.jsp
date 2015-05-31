@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>먹자먹자 야 먹자</title>
@@ -9,6 +9,7 @@
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <script type="text/javascript">
 $(document).ready(function(){
+	
 	
 	var txt = "";
 	// 정렬 버튼 이벤트
@@ -25,16 +26,16 @@ $(document).ready(function(){
 	
 	// 리뷰 제목 클릭 이벤트
 	$("table#listTB tbody tr").hover(function(){
-		 $(this).css("background-color", "lightpink");
+		 $(this).css("background-color", "lavender");
 	}, function(){
-		 $(this).css("background-color", "white");
+		 $(this).css("background-color", "linen");
 	});
 	
 });
 </script>
 <style type="text/css">
 table#listTB thead tr{
-	color:azure;
+	color: azure;
 	font-weight: bold;
 	background: darkcyan;
 	text-align: center;
@@ -42,20 +43,27 @@ table#listTB thead tr{
 table#listTB tbody tr td#title{
 	cursor: pointer;
 }
+table#listTB tbody tr{
+	background: linen;
+}
 button{
 	width:100px;
 	height:50px;
 }
-h2{
-	text-align: center;
-}
-</style>
 
+a.menu:link {text-decoration:none; color: black;}/*방문하지 않은 페이지*/
+a.menu:hover {text-decoration:underline; color: c71585;}/*링크에 마우스 올라갔을 때*/
+a.menu:active {text-decoration:none; color: black;}/*링크 클릭시*/
+a.menu:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/
+
+</style>
+ 
 
 </head>
 <body>
-<h2>리뷰 목록</h2>
+
 <div align="center">
+<h2>리뷰 목록</h2>
 <!-- 테이블 시작 -->
 <table id="listTB" style="width:900px">
 		<thead>
@@ -73,7 +81,7 @@ h2{
 			<c:forEach items="${requestScope.reviewList }" var="review">
 				<tr>
 					<td align="center">${review.reviewNo }</td>
-					<td align="left" id="title"><a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}">${review.title}</a></td>
+					<td align="left" id="title"><a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}" class="menu">${review.title}</a></td>
 					<td align="center">${review.memberId}</td>
 					<td align="center">${review.regDate}</td>
 					<td align="right" style="width:50px">${review.recommend}</td>
@@ -83,7 +91,7 @@ h2{
 			<!-- 수정해야행 끝 -->
 		</tbody>
 	</table>
-	<p>
+	<br>
 <!-- 테이블 끝 -->
 
 <p align="center">
@@ -114,14 +122,13 @@ h2{
 		</c:when>
 		<c:otherwise>▶</c:otherwise>
 	</c:choose>
-</p>
+<br>
 
 <!-- 기능 -->
 <table>
 		<tr>
 			<td>
 			<select id="searchSort">
-					<option>정렬방식</option>
 					<option value="추천수">추천수</option>
 					<option value="조회수">조회수</option>
 					<option value="최신글">최신글</option>
@@ -136,7 +143,7 @@ h2{
 			</td>
 		</tr>
 </table>
-<p>
+<br>
 
 
 </div>

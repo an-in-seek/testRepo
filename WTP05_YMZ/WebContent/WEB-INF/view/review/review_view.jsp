@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -84,7 +84,7 @@ button{
 			</tr> 
 		</tbody>
 	</table>
-	<p>
+	<br>
 <hr>
 </div>
 
@@ -132,8 +132,8 @@ ${requestScope.review.content }<br>
 			<!-- 수정해야행 끝 -->
 		</tbody>
 	</table>
-	<p>
-
+	<br>
+	
 	<table>
 		<tr>
 			<td>
