@@ -66,9 +66,15 @@ public class ReviewController {
 	
 	//리뷰 삭제(로그인시 가능)
 	@RequestMapping("login/removeReview.do")
-	public String removeReviewById(@ModelAttribute Review review, HttpServletRequest request, ModelMap map){
-		String id = review.getMemberId();
-		service.removeReviewById(id);
-		return "review/review_list.tiles";
+	public String removeReview(@ModelAttribute Review review, @RequestParam int reviewNo, ModelMap map, HttpSession session){
+		Member member = (Member)session.getAttribute("login_info");
+		String userid = member.getId();
+		System.out.println("삭제할 글번호 : "+ reviewNo);
+		System.out.println("글쓴이 아이디: " + userid);
+		review.setMemberId(userid);
+		review.setReviewNo(reviewNo);
+		service.removeReview(review);
+		System.out.println("글번호 "+reviewNo+" 삭제 완료!!");
+		return "redirect:/review/reviewList.do";
 	}
 }
