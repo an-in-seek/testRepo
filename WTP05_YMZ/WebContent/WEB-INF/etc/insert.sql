@@ -5,12 +5,7 @@ delete from review CASCADE CONSTRAINTS;
 delete from faq CASCADE CONSTRAINTS;
 delete from qna CASCADE CONSTRAINTS;
 
-
 insert into member values('user01', 1111, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, '관리자', '20140514');
-
-insert into restaurant values(1, '새마을식당', '한식', '031-111-2222', '경기도 성남시 분당구 삼평동', '백주부의 새마을식당이쥬', '111111111111111,222222222222222,', 0, 0, '회식,', '20150530', 0, 10);
-insert into food values(food_no_seq.nextval, '7분김치찌개', 5000, null, 1);
-insert into food values(food_no_seq.nextval, '된장찌개', 6000, null, 1);
 
 insert into location values(1, '유스페이스 1A동', '1');
 insert into location values(2, '유스페이스 1B동', '1');
@@ -23,10 +18,12 @@ insert into location values(8, '삼환하이펙스 B동', '1');
 insert into location values(9, '아브뉴프랑', '1');
 insert into location values(10, '유스페이스 2B동', '2');
 
+insert into restaurant values(1, '새마을식당', '한식', '031-111-2222', '경기도 성남시 분당구 삼평동', '백주부의 새마을식당이쥬', '111111111111111,111111111111112,111111111111113,111111111111114,', 0, 0, '회식,', '20150530', 0, 10);
+insert into food values(food_no_seq.nextval, '7분김치찌개', 5000, '7분만 끓이면 된다해', 1);
+insert into food values(food_no_seq.nextval, '된장찌개', 6000, '미소된장 쓰면 맛없쥬', 1);
+insert into food values(food_no_seq.nextval, '열탄불고기', 8000, '6월 1일 50% 세일', 1);
 
-
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('90','수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg
-" title="suzy.jpg"><br style="clear:both;">','1234','150','20150530','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('90','수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','20150530','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('91','새마을식당','1','1','1','20150528','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('92','버거킹','1','221','0','20140420','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('93','맥도날드','1','15','11','20130311','user01');
