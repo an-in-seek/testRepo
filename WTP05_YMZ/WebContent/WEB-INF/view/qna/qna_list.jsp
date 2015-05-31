@@ -18,9 +18,6 @@ table#listTB thead tr{
 	font-weight: bold;
 	background: silver;
 }
-table#listTB tbody tr{
-	cursor: pointer;
-}
 div#dialog{
 	width:400px;
 	display: none;

@@ -48,7 +48,7 @@ table#listTB thead tr{
 	font-weight: bold;
 	background: silver;
 }
-table#listTB tbody tr{
+table#listTB tbody tr td#td2{
 	cursor: pointer;
 }
 div#dialog{
@@ -86,7 +86,7 @@ article{
 				<tr align="center">
 					<td id="td1">${qna.number}</td>
 					<td id="td2" align="left">${qna.title}</td>
-					<td align='center'>
+					<td id="td3" align='center'>
 					<input type="button"  value="삭제" onclick="removeFaq(${qna.number});">
 					</td>
 				</tr>

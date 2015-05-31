@@ -1,6 +1,35 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"%>
 <%@ page import="java.sql.*"%>
 
+<script type="text/javascript" src="${initParam.rootPath}/script/jquery-ui.js"></script>
+<link type="text/css" href="${initParam.rootPath}/css/jquery-ui.css" rel="stylesheet"></link>	
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#commentBtn").on("click", function() {
+			document.location.href="login/commentForm.do?number="+${requestScope.qna.number};
+		});
+		$("#listBtn").on("click", function() {
+			document.location.href="qnaList.do";
+		});
+		$("#modifyBtn").on("click", function() {
+			var isDel = confirm("정말로 수정하시겠습니까?");
+			if (isDel) {
+				document.location.href="login/modifyForm.do?number="+${requestScope.qna.number};
+			} else {
+				return;
+			}
+		});
+		$("#deleteBtn").on("click", function() {
+			var isDel = confirm("정말로 삭제하시겠습니까?");
+			if (isDel) {
+				document.location.href="login/removeQna.do?number="+${requestScope.qna.number};
+			} else {
+				return;
+			}
+		});
+	});
+</script>
+
 <style type="text/css">
 table#tb thead tr {
 	font-weight: bold;
@@ -77,9 +106,11 @@ article {
 	</tr>
 	<tr align="center">
 		<td width="0">&nbsp;</td>
-		<td colspan="2" ><input type=button value="답글">
-			<input type=button value="목록" OnClick="window.location='qnaList.do'">
-			<input type=button value="수정"> <input type=button value="삭제">
+		<td colspan="2" >
+			<input id="commentBtn" type=button value="답글">
+			<input id="listBtn" type=button value="목록" > <!--OnClick="window.location='qnaList.do'"-->
+			<input id="modifyBtn" type=button value="수정"> 
+			<input id="deleteBtn" type=button value="삭제" >
 		<td width="0">&nbsp;</td>
 	</tr>
 </table>

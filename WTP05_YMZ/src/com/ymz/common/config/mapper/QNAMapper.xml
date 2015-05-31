@@ -30,20 +30,8 @@
 	</resultMap>
 	
 	<insert id="insertQNA" parameterType="QNA">
-		insert into qna (	qna_no, 
-								qna_title, 
-								qna_category, 
-								qna_registration_date, 
-								qna_hits, 
-								qna_content, 
-								member_id)
-		values (	faq_no_qna.nextval, 
-					#{title}, 
-					#{category}, 
-					to_char(sysdate, 'yyyymmdd'), 
-					0, 
-					#{content}, 
-					#{memberId})
+		insert into qna (qna_no, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id)
+		values (qna_no_seq.nextval, #{title}, #{category}, to_char(sysdate, 'yyyymmdd'), 0, #{content}, #{memberId})
 	</insert>
 	
 	<update id="updateQNA" parameterType="QNA">
