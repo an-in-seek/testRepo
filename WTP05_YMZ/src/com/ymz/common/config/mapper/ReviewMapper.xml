@@ -6,7 +6,6 @@
 		select  review_no, 
 				title, 
 				content, 
-				picture_name, 
 				hits, 
 				recommend, 
 				reg_date, 
@@ -18,7 +17,6 @@
 		<id column="review_no" property="reviewNo"/>
 		<result column="title" property="title"/>
 		<result column="content" property="content"/>
-		<result column="picture_name" property="pictureName"/>
 		<result column="hits" property="hits"/>
 		<result column="recommend" property="recommend"/>
 		<result column="reg_date" property="regDate"/>
@@ -30,39 +28,44 @@
 		<selectKey keyProperty="reviewNo" resultType="_int" order="BEFORE">
 			select review_no_seq.nextval from dual
 		</selectKey>
-		insert into review (review_no, title, content, picture_name, hits, recommend, reg_date, member_id)
-		values (#{reviewNo}, #{title}, #{content}, #{pictureName, jdbcType=VARCHAR}, #{hits}, #{recommend}, to_char(sysdate, 'yyyymmdd'), #{memberId})
+		insert into review (review_no, title, content, hits, recommend, reg_date, member_id)
+		values (#{reviewNo}, #{title}, #{content}, #{hits}, #{recommend}, to_char(sysdate, 'yyyymmdd'), #{memberId})
 	</insert>
 
 	<!-- 수정 -->
 	<update id="updateReview" parameterType="review">
 		update  review
 		set		title=#{title},
-				content=#{content},
-				<if test="pictureName!=null">
-				,picture_name=#{pictureName}
-				</if>
+				content=#{content}
 		where	member_id=#{memberId}
 	</update>
 	
 	<!-- 삭제 -->
 
-	<delete id="deleteReview" parameterType="string">
-		delete from review where member_id=#{memberId}
+	<delete id="deleteReview" parameterType="review">
+		delete from review 
+		where review_no=#{reviewNo} and member_id=#{memberId}
 	</delete>
 	
 	<!-- 조회 -->
 	<select id="selectReviewByNo" resultMap="review-resultmap" parameterType="int">
-	<include refid="review-select"/>
+		<include refid="review-select"/>
+		where review_no=#{reviewNo}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<select id="updateHits" parameterType="int">
+		update review
+		set hits = hits + 1
 		where review_no=#{reviewNo}
 	</select>
 	
 	<!-- 리뷰 목록 페이징 -->
 		<select id="selectAllReviewPaging" parameterType="map" resultMap="review-resultmap">
-		select review_no, title, content, picture_name, hits, recommend, reg_date, member_id
+		select review_no, title, content, hits, recommend, reg_date, member_id
 		from (
 				select ceil(rownum/#{contentsPerPage}) page, 
-					   review_no, title, content, picture_name, hits, 
+					   review_no, title, content, hits, 
 					   recommend, reg_date, member_id
 				from (
 						<include refid="review-select"/>
