@@ -45,7 +45,7 @@ DROP TABLE QNA
 /* 새 테이블 */
 DROP TABLE LOCATION 
 	CASCADE CONSTRAINTS;
-select * from member;
+
 /* 회원 */
 CREATE TABLE MEMBER (
 	MEMBER_ID VARCHAR2(10) NOT NULL, /* 회원_ID */

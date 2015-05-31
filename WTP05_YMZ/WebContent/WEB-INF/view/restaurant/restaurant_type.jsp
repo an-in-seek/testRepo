@@ -5,6 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("a").hover(function(){
+		$(this).css("text-decoration","underline");
+	},function(){
+		$(this).css("text-decoration","none");
+	});
+});
+</script>
 </head>
 <body><div align="center">
 <a href="">한식</a> <a href="">양식</a> <a href="">중식</a> <a href="">일식</a>
@@ -48,33 +57,34 @@
 <!-- 이전 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.previousPageGroup }">
-		<a href="${initParam.rootPath }/restaurant/showListByType.do?currentPage=${pagingBean.startPageOfPageGroup-1}">◀</a>
+		<a href="${initParam.rootPath }/restaurant/showListByType.do?currentPage=${pagingBean.startPageOfPageGroup-1}">&lt;</a>
 	</c:when>
 	<c:otherwise>
-		◀
+		&lt;
 	</c:otherwise>
 </c:choose>	
 <!-- 페이지 번호 -->
 <c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
+	&nbsp;
 	<c:choose>
 		<c:when test="${pageNum == pagingBean.currentPage }">
-			<b>[${pageNum}]</b>
+			<u><b>${pageNum}</b></u>
 		</c:when>
 		<c:otherwise>
-			<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pageNum}">
+			<a href="${initParam.rootPath }/restaurant/showListByType.do?currentPage=${pageNum}">
 				${pageNum}
 			</a>
 		</c:otherwise>
 	</c:choose>
-	&nbsp;&nbsp;
+	&nbsp;
 </c:forEach>
 <!-- 다음 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.nextPageGroup }">
-		<a href="${initParam.rootPath }/restaurant/showListByType.do?currentPage=${pagingBean.endPageOfPageGroup+1}">▶</a>
+		<a href="${initParam.rootPath }/restaurant/showListByType.do?currentPage=${pagingBean.endPageOfPageGroup+1}">&gt;</a>
 	</c:when>
 	<c:otherwise>
-		▶
+		&gt;
 	</c:otherwise>
 </c:choose>
 </div></body>
