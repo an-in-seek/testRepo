@@ -110,23 +110,51 @@ $(document).ready(function(){
 <td style="width:50%">
 <table border="1" style="width:100%">
 <tr align="center">
-<td colspan="5"><img id="selectedPicture"></td>
+<td colspan="5"><img id="selectedPicture" style="width:390px;height:260px;"></td>
 </tr>
 <tr id="selectPicture" align="center">
-<td style="width:20%">
-	<c:if test="${!empty requestScope.pic1 }"><img class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic1}"></c:if>
+<td>
+	<c:if test="${!empty requestScope.pic1 }"><img style="width:70px;height:50px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic1}"></c:if>
 </td>
-<td style="width:20%">
-	<c:if test="${!empty requestScope.pic2 }"><img class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic2}"></c:if>
+<td>
+	<c:choose>
+		<c:when test="${!empty requestScope.pic2 }">
+			<img style="width:70px;height:50px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic2}">
+		</c:when>
+		<c:otherwise>
+			<img style="width:70px;height:50px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+		</c:otherwise>
+	</c:choose>
 </td>
-<td style="width:20%">
-	<c:if test="${!empty requestScope.pic3 }"><img class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic3}"></c:if>
+<td>
+	<c:choose>
+		<c:when test="${!empty requestScope.pic3 }">
+			<img style="width:70px;height:50px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic3}">
+		</c:when>
+		<c:otherwise>
+			<img style="width:70px;height:50px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+		</c:otherwise>
+	</c:choose>
 </td>
-<td style="width:20%">
-	<c:if test="${!empty requestScope.pic4 }"><img class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic4}"></c:if>
+<td>
+	<c:choose>
+		<c:when test="${!empty requestScope.pic4 }">
+			<img style="width:70px;height:50px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic4}">
+		</c:when>
+		<c:otherwise>
+			<img style="width:70px;height:50px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+		</c:otherwise>
+	</c:choose>
 </td>
-<td style="width:20%">
-	<c:if test="${!empty requestScope.pic5 }"><img class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic5}"></c:if>
+<td>
+	<c:choose>
+		<c:when test="${!empty requestScope.pic5 }">
+			<img style="width:70px;height:50px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic5}">
+		</c:when>
+		<c:otherwise>
+			<img style="width:70px;height:50px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+		</c:otherwise>
+	</c:choose>
 </td>
 </tr>
 </table>

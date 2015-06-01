@@ -183,6 +183,8 @@ $(document).ready(function(){
 				}
 			}
 		}
+		
+		$("#description").val($("#description").val().replace(/\n/g, '<br>'));
 	});
 	////////////////////////////////////////
 	

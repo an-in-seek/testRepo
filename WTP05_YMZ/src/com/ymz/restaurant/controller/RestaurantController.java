@@ -66,6 +66,11 @@ public class RestaurantController {
 		return "restaurant/restaurant_theme.tiles";
 	}
 	
+	@RequestMapping("/showListByLocation.do")
+	public String showListByLocation() {
+		return "restaurant/restaurant_location.tiles";
+	}
+	
 	@RequestMapping("/addNewRestaurantForm.do")
 	public String addNewRestaurantForm(Model model) {
 		List<String> buildingNames = service.getBuildingNames();

@@ -75,7 +75,7 @@ $(document).ready(function(){
 						<td style="border-left-style:hidden;border-right-style:hidden;">${restaurant.restaurantNo }</td>
 						<td style="border-right-style:hidden;">${restaurant.category}</td>
 						<td width="10%" style="border-right-style:hidden;">
-							<img width="80" height="80" src="${initParam.rootPath }/uploadPhoto/${fn:substring(restaurant.pictureName, 0, 14)}">
+							<img style="width:80px;height:60px;" src="${initParam.rootPath }/uploadPhoto/${fn:split(restaurant.pictureName,',')[0]}">
 						</td>
 						<td align="left" style="border-right-style:hidden;">
 							<a href="${initParam.rootPath }/restaurant/restaurantView.do?restaurantNo=${restaurant.restaurantNo }">${restaurant.restaurantName}</a>
