@@ -73,6 +73,18 @@ public class ReviewServiceImpl implements ReviewService {
 		return review;
 	}
 	
+	/**
+	 * 리뷰 추천
+	 */
+	public void recommendReview(Review review){
+		dao.recommendReview(review);
+	}
 	
+	/**
+	 * 리뷰 조회수 증가
+	 */
+	public void updateHitsReview(int reviewNo){
+		dao.updateHitsReview(reviewNo);
+	}
 
 }

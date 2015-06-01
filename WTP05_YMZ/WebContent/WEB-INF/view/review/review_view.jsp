@@ -7,16 +7,44 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/script/jquery.cookie.js"></script>
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <script type="text/javascript">
 $(document).ready(function(){
-
+	var reviewNumber = ${requestScope.review.reviewNo};
+	// 새로고침 조회수 증가 막기
+	var c = $.cookie('reviewNo');
+	var cook = $.cookie('reviewNo', '${requestScope.review.reviewNo}'); // 쿠키 reviewNo를 셋팅
+	if(c!='${requestScope.review.reviewNo}'){
+		$.ajax({
+			url:"${initParam.rootPath}/review/ajax/updateHits.do", // 요청 url
+			type:"post",
+			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
+			success:function(txt){
+				$("#count").html(txt);
+			}
+		});
+		
+	}
+	
+	
 	// 리뷰 내용
 	$("#recommendBtn").on("click", function(){
-		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+		var id = "${empty sessionScope.login_info}";
+		if(id=="true"){
+			alert("로그인 안했엉");
+			return;
+		}
+		document.location.href="${initParam.rootPath }/review/login/recommendReview.do?reviewNo="+${requestScope.review.reviewNo};
 	});
-	$("#modifyBtn").on("click", function(){
-		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+
+	$("#deleteBtn").on("click", function(){
+		var isDel = confirm("정말로 삭제하시겠습니까?");
+		if (isDel) {
+			document.location.href="${initParam.rootPath }/review/login/removeReview.do?reviewNo="+${requestScope.review.reviewNo};
+		} else {
+			return;
+		}
 	});
 	$("#reportBtn").on("click", function(){
 		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
@@ -61,6 +89,11 @@ button{
 	width:100px;
 	height:50px;
 }
+button#recommendBtn{
+	width:200px;
+	height:100px;
+	background: palegreen;
+}
 
 </style>
 <!-- css 끝 -->
@@ -87,7 +120,7 @@ button{
 				<td>${requestScope.review.reviewNo}</td>
 				<td>${requestScope.review.title}</td>
 				<td>${requestScope.review.memberId}</td> 
-				<td>${requestScope.review.hits}</td> 
+				<td id="count">${requestScope.review.hits}</td> 
 				<td>${requestScope.review.regDate}</td>
 				<td>${requestScope.review.recommend}</td>
 			</tr> 
@@ -103,7 +136,10 @@ button{
 ${requestScope.review.content }<br>
 
 	<div align="center" id="recommend"> <!-- 추천 버튼 -->
-		<button id="recommendBtn"><font color="red">${requestScope.review.recommend}</font><br>추천</button>
+		<button id="recommendBtn">
+			<font color="red" size="6">${requestScope.review.recommend}</font><br><br>
+			<font color="blue" size='2'>추천</font>
+		</button>
 	</div><br><br>
 	
 <!-- ******************************* 리뷰 내용이 들어가는 공간 끝 ************************************** -->
@@ -111,12 +147,13 @@ ${requestScope.review.content }<br>
 
 
 <div id="reply" align="center">
-<!-- 버튼 -->
-<a href="${initParam.rootPath }/review/reviewList.do"><button>목록</button></a>
-<a href="${initParam.rootPath }/review/login/removeReview.do?reviewNo=${requestScope.review.reviewNo}"><button>삭제</button></a>
-<button id="modifyBtn">수정</button>
+	<!-- 버튼 -->
+	<a href="${initParam.rootPath }/review/reviewList.do"><button>목록</button></a>
+	<a href="${initParam.rootPath }/review/login/modifyForm.do?reviewNo=${requestScope.review.reviewNo}">
+	<button id="modifyBtn">수정</button></a>
+	<button id="deleteBtn">삭제</button>
+	<button id="reportBtn">신고</button>
 
-<button id="reportBtn">신고</button>
 <hr>
 <!-- ****************************************  댓 글 영 역  ****************************************** -->
 

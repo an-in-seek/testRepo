@@ -7,7 +7,8 @@ import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
 
 public interface RestaurantService {
-	public Map<String, Object> getRestaurantListPaging(int currentPage);
+	public Map<String, Object> getListByTypePaging(String category, String align, int currentPage, String searchWord);
+	public Map<String, Object> getListByThemePaging(String theme, String align, int currentPage, String searchWord);
 	public Restaurant getRestaurantByName(String name);
 	public List<String> getBuildingNames();
 	public List<String> getFloorsByBuildingName(String buildingName);
@@ -16,4 +17,5 @@ public interface RestaurantService {
 	public Restaurant getRestaurantByNo(int restaurantNo);
 	public String getLocationByNo(int locationNo);
 	public List<Food> getFoodsByRestaurantNo(int restaurantNo);
+	public int increaseHits(int restaurantNo);
 }

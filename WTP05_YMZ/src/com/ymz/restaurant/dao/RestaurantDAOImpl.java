@@ -20,11 +20,25 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	private String namespace = "restaurant.dao.RestaurantMapper.";
 	
 	@Override
-	public List<Restaurant> selectAllRestaurantPaging(int currentPage) {
+	public List<Restaurant> selectListByTypePaging(String category, String align, int currentPage, String searchWord) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		map.put("category", category);
+		map.put("align", align);
 		map.put("currentPage", currentPage);
-		return session.selectList(namespace+"selectAllRestaurantPaging", map);
+		map.put("searchWord", searchWord);
+		return session.selectList(namespace+"selectListByTypePaging", map);
+	}
+	
+	@Override
+	public List<Restaurant> selectListByThemePaging(String theme, String align, int currentPage, String searchWord) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		map.put("theme", theme);
+		map.put("align", align);
+		map.put("currentPage", currentPage);
+		map.put("searchWord", searchWord);
+		return session.selectList(namespace+"selectListByThemePaging", map);
 	}
 
 	@Override
@@ -83,5 +97,10 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	@Override
 	public List<Food> selectFoodsByRestaurantNo(int restaurantNo) {
 		return session.selectList(namespace+"selectFoodsByRestaurantNo", restaurantNo);
+	}
+
+	@Override
+	public int updateHits(int restaurantNo) {
+		return session.update(namespace+"updateHits", restaurantNo);
 	}
 }
