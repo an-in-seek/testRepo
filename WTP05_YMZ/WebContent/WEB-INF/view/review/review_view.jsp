@@ -13,8 +13,11 @@ $(document).ready(function(){
 
 	// 리뷰 내용
 	$("#recommendBtn").on("click", function(){
-		var name = ${sessionScope.login_info.name};
-		alert(name);
+		var id = "${empty sessionScope.login_info}";
+		if(id=="true"){
+			alert("로그인 안했엉");
+			return;
+		}
 		document.location.href="${initParam.rootPath }/review/login/recommendReview.do?reviewNo="+${requestScope.review.reviewNo};
 	});
 
