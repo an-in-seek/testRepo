@@ -4,20 +4,23 @@
 <script type="text/javascript">
 var pwCheck = false;
 $(document).ready(function(){
-	
 	$("#current_password").on("keyup",function(){
 		var current_password = $(this).val();
 		alert(current_password);
 				$.ajax({
-					url:"${initParam.rootPath}/member/passwordCheck.do",
+					url:"${initParam.rootPath}/member/confirmPassword.do",
 					data:{"current_password":current_password},
 					dataType:"text",
+					beforeSend:function(){
+					if(!current_password){//password에 입력된 값이 없으면 전송하지 않는다.
+							return false;
+						}
+					},
 					success:function(ret){
 						if(ret=="false"){
-							alert("비밀번호가 틀렸습니다.")
-							pwCheck = false;
+							pwCheck=false;
 						}else{
-							pwCheck = true;
+							pwCheck=true;
 						}
 					}
 			});
@@ -41,7 +44,7 @@ $(document).ready(function(){
 					return false;
 				}
 				if(!pwCheck){
-					alert("비밀번호가 틀렸다고요.....")
+					alert("비밀번호가 틀렸다고요")
 					$("#current_password").focus();
 					return false;
 				}
@@ -49,10 +52,11 @@ $(document).ready(function(){
 })
 
 </script>
+<hr noshade="noshade" width="30%" align="left">
 
 <h2>비밀번호 수정 폼</h2>
 
-<form method="post" action="${initParam.rootPath }/member/mypage/modifyPassword.do" id="modifyPassword" enctype="multipart/form-data">
+<form method="post" action="${initParam.rootPath }/member/modifyPassword.do" id="modifyPassword" enctype="multipart/form-data">
 		<table style="width:500px" align="center">
 			<tr>
 				<td>기존비밀번호</td>
@@ -62,7 +66,7 @@ $(document).ready(function(){
 				<td>변경할비밀번호</td>
 				<td><input type="text" name="password" id="password"></td>
 			</tr>
-			<tr>	
+			<tr>
 				<td>비밀번호확인</td>
 				<td><input type="text" name="password_check" id="password_check"></td>
 			</tr>

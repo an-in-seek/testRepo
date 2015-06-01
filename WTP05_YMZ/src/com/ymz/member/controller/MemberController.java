@@ -193,43 +193,38 @@ public class MemberController {
 		}
 		return result;
 	}
-	/**********************기존비밀번호 확인********************///비밀번호수정
-	@RequestMapping("passwordCheck.do")
+	/**********************기존 비밀번호 체크********************///
+	@RequestMapping("confirmPassword.do")
 	@ResponseBody
-	public String passwordCheck(@RequestParam String current_password,HttpSession session){
+	public String confirmPassword(@RequestParam String current_password, HttpSession session){
 		Member m = (Member)session.getAttribute("login_info");
-		String password = m.getPassword();
-		System.out.println(m.getPassword());
-		System.out.println(current_password);
 		String result = null;
-		if(current_password==password){
-			result = "true";
-			System.out.println(result);
-		}else{
-			result = "false";
-			System.out.println(result);	
-		}
+			if(current_password.equals(m.getPassword())){
+				result = "true";
+			}else{
+				result = "false";
+			}
 		return result;
 	}
 	
-	/**********************비밀번호 수정********************///비밀번호수정
-	@RequestMapping(value="mypage/modifyPassword.do",method=RequestMethod.POST)
+	/********************** 비밀번호 수정 ********************///비밀번호수정
+	@RequestMapping(value="modifyPassword.do",method=RequestMethod.POST)
 	@ResponseBody
 	public String modifyPassword(@RequestParam String password,HttpSession session){
 		Member loginInfo = (Member)session.getAttribute("login_info");
+		System.out.println(password);
 		String id = loginInfo.getId();
 		System.out.println(id);
 		Member m = service.getMemberById(id);
-		System.out.println(m.getId());
 		m.setPassword(password);
 		service.modifyPassword(m);
-		return "redirect:/member/modifySuccess.do";
+		return "member/myPage.do";
 	}
 	
-	@RequestMapping("modifySuccess.do")
-	public String modifySuccess(){
-		return "member/modify_password_success.tiles";
-	}
-	
+//	@RequestMapping("modifySuccess.do")
+//	public String modifySuccess(){
+//		return "member/modify_password_success.tiles";
+//	}
+//	
 
 }
