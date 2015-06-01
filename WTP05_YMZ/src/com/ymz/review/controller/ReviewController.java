@@ -1,5 +1,6 @@
 package com.ymz.review.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -48,9 +49,13 @@ public class ReviewController {
 	
 	//게시물 번호로 정보조회
 	@RequestMapping("reviewView.do")
-	public ModelAndView ReviewView(@RequestParam int reviewNo){
+	public ModelAndView ReviewView(@RequestParam int reviewNo, @RequestParam int pageNo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		int pageNum = pageNo;
 		Review review = service.getReviewByNo(reviewNo);
-		return new ModelAndView("review/review_view.tiles", "review", review);
+		map.put("pageNo", pageNum);
+		map.put("review", review);
+		return new ModelAndView("review/review_view.tiles", map);
 	}
 	
 	
@@ -99,7 +104,7 @@ public class ReviewController {
 		return "/review/reviewView.do";
 	}
 	
-	// 리뷰 검색
+	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
 	
 	public String searchReview(    ){
 		

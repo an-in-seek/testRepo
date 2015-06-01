@@ -7,14 +7,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
-<script type="text/javascript" src="${initParam.rootPath }/script/jquery.cookie.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/script/jquery.cookie.js"></script> <!-- 쿠키 사용 -->
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <script type="text/javascript">
 $(document).ready(function(){
+	
 	var reviewNumber = ${requestScope.review.reviewNo};
 	// 새로고침 조회수 증가 막기
-	var c = $.cookie('reviewNo');
-	var cook = $.cookie('reviewNo', '${requestScope.review.reviewNo}'); // 쿠키 reviewNo를 셋팅
+	var c = $.cookie('reviewNo'); // 쿠키 조회
+	$.cookie('reviewNo', '${requestScope.review.reviewNo}'); // 쿠키 reviewNo를 셋팅
 	if(c!='${requestScope.review.reviewNo}'){
 		$.ajax({
 			url:"${initParam.rootPath}/review/ajax/updateHits.do", // 요청 url
@@ -148,7 +149,7 @@ ${requestScope.review.content }<br>
 
 <div id="reply" align="center">
 	<!-- 버튼 -->
-	<a href="${initParam.rootPath }/review/reviewList.do"><button>목록</button></a>
+	<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${requestScope.pageNo}"><button>목록</button></a>
 	<a href="${initParam.rootPath }/review/login/modifyForm.do?reviewNo=${requestScope.review.reviewNo}">
 	<button id="modifyBtn">수정</button></a>
 	<button id="deleteBtn">삭제</button>

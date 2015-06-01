@@ -83,7 +83,9 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 			<c:forEach items="${requestScope.reviewList }" var="review">
 				<tr>
 					<td align="center">${review.reviewNo }</td>
-					<td align="left" id="title"><a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}" class="list">${review.title}</a></td>
+					<td align="left" id="title">
+					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+					${review.title}</a></td>
 					<td align="center">${review.memberId}</td>
 					<td align="center">${review.regDate}</td>
 					<td align="right" style="width:50px">${review.recommend}</td>

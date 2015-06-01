@@ -41,11 +41,7 @@ $(document).ready(function(){
 			$("#title").focus();
 			return false;
 		}
-		if (!$("#content").val()) {
-			alert("내용을 입력하세요");
-			$("#content").focus();
-			return false;
-		}
+
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 	});
 
