@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,12 +44,26 @@ public class RestaurantController {
 	
 	@RequestMapping("/showListByType.do")
 	public String showListByType(
+			@RequestParam(defaultValue="전체") String category,
+			@RequestParam(defaultValue="date") String align,
 			@RequestParam(defaultValue="1") int currentPage,
-			Model model) {
-		Map<String, Object> map = service.getRestaurantListPaging(currentPage);
+			String searchWord, Model model) {
+		Map<String, Object> map = service.getListByTypePaging(category, align, currentPage, searchWord);
 		model.addAllAttributes(map);
 		
 		return "restaurant/restaurant_type.tiles";
+	}
+	
+	@RequestMapping("/showListByTheme.do")
+	public String showListByTheme(
+			@RequestParam(defaultValue="전체") String theme,
+			@RequestParam(defaultValue="date") String align,
+			@RequestParam(defaultValue="1") int currentPage,
+			String searchWord, Model model) {
+		Map<String, Object> map = service.getListByThemePaging(theme, align, currentPage, searchWord);
+		model.addAllAttributes(map);
+		
+		return "restaurant/restaurant_theme.tiles";
 	}
 	
 	@RequestMapping("/addNewRestaurantForm.do")
@@ -99,6 +114,7 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping("/restaurantView.do")
+	@Transactional
 	public String restaurantView(int restaurantNo, Model model) {
 		Restaurant restaurant = service.getRestaurantByNo(restaurantNo);
 		model.addAttribute("restaurant", restaurant);
@@ -116,6 +132,9 @@ public class RestaurantController {
 		// 선택된 가게의 음식들을 request scope에 올린다
 		List<Food> foods = service.getFoodsByRestaurantNo(restaurant.getRestaurantNo());
 		model.addAttribute("foods", foods);
+		
+		// 조회수 1증가
+		service.increaseHits(restaurantNo);
 		
 		return "restaurant/restaurant_view.tiles";
 	}

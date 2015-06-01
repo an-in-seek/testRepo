@@ -31,7 +31,7 @@
 		<result column="restaurant_no" property="restaurantNo"/>
 	</resultMap>
 	
-	<select id="selectAllRestaurantPaging" resultMap="restaurant-resultmap">
+	<select id="selectListByTypePaging" parameterType="Map" resultMap="restaurant-resultmap">
 		select	restaurant_no, restaurant_name, category, phone_no, address, description,
 				picture_name, score, hits, theme, reg_date, reply_count, location_no
 		from	(
@@ -39,7 +39,71 @@
 							description, picture_name, score, hits, theme, reg_date, reply_count, location_no
 					from	(
 								<include refid="restaurant-select"/>
-								order by restaurant_no desc
+								<if test="category=='전체' and searchWord!=null">
+									where restaurant_name like '%'||#{searchWord}||'%'
+								</if>
+								<choose>
+									<when test="category=='전체'"/>
+									<otherwise>
+										where category=#{category}
+										<if test="searchWord!=null">
+											and restaurant_name like '%'||#{searchWord}||'%'
+										</if>
+									</otherwise>
+								</choose>
+								<choose>
+									<when test="align=='hits'">
+										order by hits desc
+									</when>
+									<when test="align=='manyScore'">
+										order by reply_count desc
+									</when>
+									<when test="align=='highScore'">
+										order by score desc
+									</when>
+									<otherwise>
+										order by restaurant_no desc
+									</otherwise>
+								</choose>
+							)
+				)
+		where	page = #{currentPage}
+	</select>
+	
+	<select id="selectListByThemePaging" parameterType="Map" resultMap="restaurant-resultmap">
+		select	restaurant_no, restaurant_name, category, phone_no, address, description,
+				picture_name, score, hits, theme, reg_date, reply_count, location_no
+		from	(
+					select	ceil(rownum/#{contentsPerPage}) page, restaurant_no, restaurant_name, category, phone_no, address,
+							description, picture_name, score, hits, theme, reg_date, reply_count, location_no
+					from	(
+								<include refid="restaurant-select"/>
+								<if test="theme=='전체' and searchWord!=null">
+									where restaurant_name like '%'||#{searchWord}||'%'
+								</if>
+								<choose>
+									<when test="theme=='전체'"/>
+									<otherwise>
+										where theme like '%'||#{theme}||'%'
+										<if test="searchWord!=null">
+											and restaurant_name like '%'||#{searchWord}||'%'
+										</if>
+									</otherwise>
+								</choose>
+								<choose>
+									<when test="align=='hits'">
+										order by hits desc
+									</when>
+									<when test="align=='manyScore'">
+										order by reply_count desc
+									</when>
+									<when test="align=='highScore'">
+										order by score desc
+									</when>
+									<otherwise>
+										order by restaurant_no desc
+									</otherwise>
+								</choose>
 							)
 				)
 		where	page = #{currentPage}
@@ -94,5 +158,9 @@
 		select food_no, food_name, food_price, food_description, restaurant_no from food
 		where restaurant_no=#{restaurantNo}
 	</select>
+	
+	<update id="updateHits" parameterType="_int">
+		update restaurant set hits=hits+1 where restaurant_no=#{restaurantNo}
+	</update>
 	
 </mapper>
