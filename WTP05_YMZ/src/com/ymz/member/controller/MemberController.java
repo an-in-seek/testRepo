@@ -194,7 +194,7 @@ public class MemberController {
 		return result;
 	}
 	/**********************기존비밀번호 확인********************///비밀번호수정
-	@RequestMapping("passwordCheck.do")
+	@RequestMapping("passwordCheck")
 	@ResponseBody
 	public String passwordCheck(@RequestParam String current_password,HttpSession session){
 		Member m = (Member)session.getAttribute("login_info");
@@ -211,10 +211,13 @@ public class MemberController {
 	}
 	
 	/**********************비밀번호 수정********************///비밀번호수정
-	@RequestMapping(value="login/modifyPassword", method=RequestMethod.POST)
+	@RequestMapping(value="login/modifyPassword.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String modifyPassword(){
-		return "member/info/modify_password_success.tiles";
+	public String modifyPassword(@RequestParam String password,Member member,HttpSession session){
+		Member loginInfo = (Member)session.getAttribute("login_info");
+		service.modifyMember(member);
+		loginInfo.setPassword(password);
+		return "member/mypage/modify_password_success.tiles";
 	}
 	
 	

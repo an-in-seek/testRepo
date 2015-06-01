@@ -3,13 +3,16 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-		$("#current_password").ajax({
+	$("submit").on("click",function(){
+		$.ajax({
 			url:"${initParam.rootPath}/member/passwordCheck.do",
 			data:{"current_password":current_password},
+			type:"post",
 			dataType:"JSON",
 			beforeSend:function(){
 				if(!current_password){
 					return false;
+					alert("asdfasdfasdf");
 				}
 			},
 			success:function(ret){
@@ -18,6 +21,7 @@ $(document).ready(function(){
 				}
 			}
 		});
+	})s
 	$("#modifyPassword").on("submit",function(){
 		if(!("#current_password").val()){
 			alert("기존비밀번호를 입력하세요");
@@ -47,7 +51,7 @@ $(document).ready(function(){
 		<table style="width:500px" align="center">
 			<tr>
 				<td>기존비밀번호</td>
-				<td><input type="password" name="current_password" id="current_password"></td>
+				<td><input type="password" id="current_password"></td>
 			</tr>
 			<tr>
 				<td>변경할비밀번호</td>
@@ -59,7 +63,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="변경">
+					<input type="submit" value="변경" id="submit">
 					<input type="reset" value="초기화">
 				</td>	
 			</tr>
