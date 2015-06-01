@@ -6,20 +6,29 @@
 	a.menu:active	{text-decoration:none; color: white;}/*링크 클릭시*/
 	a.menu:visited {text-decoration:none; color: white;}/*방문한 링크 표시*/
 </style>
+<script type="text/javascript">
+function removeConfirm(){
+	var flag = confirm("정말 탈퇴하겠습니까?");
+	if(flag){
+		location.href = "${initParam.rootPath }/member/login/removeMember.do";
+	}
+}
+
+</script>
 <table align="center" width="200" height="500" cellspacing="0" cellpadding="0">
 	<tr>
-		<td><a href='${initParam.rootPath }/member/myPage.do' class="menu"><font color="black" size="3">메인(활동내역)</font></a></td>
+		<td><a href='${initParam.rootPath }/member/mypage.do' class="menu"><font color="black" size="3">메인(활동내역)</font></a></td>
 	</tr>
 	<tr>
 		<td><a href="${initParam.rootPath }/member/login/modifyForm.do"  class="menu"><font color="black" size="3">회원기본수정</font></a></td>
 	</tr>
 	<tr>
-		<td><a href="${initParam.rootPath }/member/login/modifyPassword.do"  class="menu"><font color="black" size="3">비밀번호수정</font></a></td>
+		<td><a href="${initParam.rootPath }/member/mypage/modify_password.do"  class="menu"><font color="black" size="3">비밀번호수정</font></a></td>
 	</tr>
 	<tr>
-		<td><a href="${initParam.rootPath }/member/login/tradeCoupon.do"  class="menu"><font color="black" size="3">쿠폰교환</font></a></td>
+		<td><a href="${initParam.rootPath }/member/mypage/tradeCoupon.do"  class="menu"><font color="black" size="3">쿠폰교환</font></a></td>
 	</tr>
 	<tr>
-		<td><font color="red" size="3">회원탈퇴</font></td>
+		<td><a href="javascript:removeConfirm();">회원탈퇴</a></td>
 	</tr>
 </table>    

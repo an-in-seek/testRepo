@@ -45,6 +45,17 @@ public class MemberDAOImpl implements MemberDAO {
 	public int updateMember(Member member){
 		return  session.update(namespace+"updateMember", member);
 	}
+	
+	/**
+	 * 비밀번호 수정 메소드
+	 * 
+	 */
+	
+	@Override
+	public int updatePassword(Member member) {
+		// TODO Auto-generated method stub
+		return session.update(namespace+"updatePassword",member);
+	}
 	/**
 	 * 매개 변수로 받은 ID의 회원을 삭제하는 메소드
 	 * @param id

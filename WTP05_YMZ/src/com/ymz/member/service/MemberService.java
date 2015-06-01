@@ -44,7 +44,13 @@ public interface MemberService {
 	 * @param member 수정할 회원 전보
 	 */
 	public abstract void modifyMember(Member member);
-
+	
+	/**
+	 * 비밀번호 수정 메소드
+	 */
+	public abstract void modifyPassword(Member member);
+	
+	
 	/**
 	 * 회원 탈퇴 메소드
 	 * @param id 탈퇴할 회원 ID

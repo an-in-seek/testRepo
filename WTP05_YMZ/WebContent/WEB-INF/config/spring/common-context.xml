@@ -36,6 +36,7 @@
 	<mvc:view-controller path="/index.do" view-name="main.tiles"/>
 	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>
 	<mvc:view-controller path="/member/loginForm.do" view-name="member/login_form.tiles"/>
+	<mvc:view-controller path="/member/mypage/modify_password_success.do" view-name="member/info/modify_password_success.tiles"/>
 	<mvc:view-controller path="/faq/login/writeForm.do" view-name="faq/faq_write_form.tiles"/>
 	<!-- <mvc:view-controller path="/faq/login/modifyForm.do" view-name="faq/faq_modify_form.tiles"/> -->
 	<mvc:view-controller path="/qna/login/writeForm.do" view-name="qna/qna_write_form.tiles"/>
@@ -49,15 +50,14 @@
 	
 	<!-- 회원정보 수정 폼 -->
 	<mvc:view-controller path="/member/login/modifyForm.do" view-name="member/info/modify_info.tiles"/>
-	
 	<!-- 비밀번호수정 폼 -->
-	<mvc:view-controller path="/member/login/modifyPassword.do" view-name="member/info/modify_password.tiles"/>
-	
+	<mvc:view-controller path="/member/mypage/modify_password.do" view-name="member/info/modify_password.tiles"/>
 	<!-- 쿠폰교환 폼 -->
-	<mvc:view-controller path="/member/login/tradeCoupon.do" view-name="member/info/trade_coupon.tiles"/>
-	
+	<mvc:view-controller path="/member/mypage/tradeCoupon.do" view-name="member/info/trade_coupon.tiles"/>
+	<!-- 회원탈퇴 폼 -->
+
 	<!-- 마이페이지 폼-->
-	<mvc:view-controller path="/member/myPage.do" view-name="member/info/mypage.tiles"/>
+	<mvc:view-controller path="/member/mypage.do" view-name="member/info/mypage.tiles"/>
 	
 	<!-- file upload 처리 multipartResolver 등록 -->
 	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>

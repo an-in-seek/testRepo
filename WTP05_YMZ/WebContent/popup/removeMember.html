@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원탈퇴 팝업창</title>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+
+<form method="post" action="${initParam.rootPath }/member/login/removeMember.do">
+	<table>
+		<tr>
+			<td colspan="2">
+				<font size="2">정말로 회원탈퇴 하시겠습니까?</font>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="submit" value="탈퇴">
+			</td>
+			<td>
+				<input type="button" onclick="window.close();" value="취소">
+			</td>	
+		</tr>
+	
+	</table>
+
+</form>
+</body>
+</html>
