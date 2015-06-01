@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,10 +36,10 @@ $(document).ready(function(){
 <a href="${initParam.rootPath }/restaurant/showListByType.do?category=중식">중식</a>
 <a href="${initParam.rootPath }/restaurant/showListByType.do?category=일식">일식</a>
 <p/>
-<table border="1">
+<table border="1" style="width:100%">
 	<thead>
 		<tr>
-			<td style="border-left-style:hidden;border-top-style:hidden;border-right-style:hidden;" colspan="3">
+			<td style="border-left-style:hidden;border-top-style:hidden;border-right-style:hidden;" colspan="4">
 				<form id="alignForm" action="${initParam.rootPath }/restaurant/showListByType.do" method="post">
 				정렬방식:
 				<select id="align" name="align">
@@ -52,34 +53,37 @@ $(document).ready(function(){
 			</td>
 			<td style="border-top-style:hidden;border-right-style:hidden;" colspan="3" align="right"><a href="${initParam.rootPath }/restaurant/addNewRestaurantForm.do"><button>맛집등록</button></a></td>
 		</tr>
-		<tr align="center">
-			<td width="70px">번호</td>
-			<td width="70px">분류</td>
-			<td width="250px">상호명</td>
-			<td width="150px">전화번호</td>
-			<td width="80px">평점</td>
-			<td width="70px">조회수</td>
+		<tr height="50px" align="center">
+			<td width="10%" style="border-left-style:hidden;border-right-style:hidden;"><b>번호</b></td>
+			<td width="10%" style="border-right-style:hidden;"><b>분류</b></td>
+			<td colspan="2" width="40%" style="border-right-style:hidden;"><b>상호명</b></td>
+			<td width="20%" style="border-right-style:hidden;"><b>전화번호</b></td>
+			<td width="10%" style="border-right-style:hidden;"><b>평점</b></td>
+			<td width="10%" style="border-right-style:hidden;"><b>조회수</b></td>
 		</tr>
 	</thead>
 	<tbody>
 		<c:choose>
 			<c:when test="${empty requestScope.restaurantList }">
 				<tr>
-					<td align="center" height="50px" colspan="6">등록된 맛집이 없습니다</td>
+					<td align="center" height="50px" colspan="7" style="border-left-style:hidden;border-right-style:hidden;">등록된 맛집이 없습니다</td>
 				</tr>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${requestScope.restaurantList }" var="restaurant">
 					<tr align="center">
-						<td>${restaurant.restaurantNo }</td>
-						<td>${restaurant.category}</td>
-						<td align="left">
+						<td style="border-left-style:hidden;border-right-style:hidden;">${restaurant.restaurantNo }</td>
+						<td style="border-right-style:hidden;">${restaurant.category}</td>
+						<td width="10%" style="border-right-style:hidden;">
+							<img width="80" height="80" src="${initParam.rootPath }/uploadPhoto/${fn:substring(restaurant.pictureName, 0, 14)}">
+						</td>
+						<td align="left" style="border-right-style:hidden;">
 							<a href="${initParam.rootPath }/restaurant/restaurantView.do?restaurantNo=${restaurant.restaurantNo }">${restaurant.restaurantName}</a>
 							<c:if test="${restaurant.replyCount>0 }"><font color="gray">[${restaurant.replyCount }]</font></c:if>
 						</td>
-						<td>${restaurant.phoneNo}</td>
-						<td>${restaurant.score}</td>
-						<td>${restaurant.hits}</td>
+						<td style="border-right-style:hidden;">${restaurant.phoneNo}</td>
+						<td style="border-right-style:hidden;">${restaurant.score}</td>
+						<td style="border-right-style:hidden;">${restaurant.hits}</td>
 					</tr> 
 				</c:forEach>
 			</c:otherwise>
