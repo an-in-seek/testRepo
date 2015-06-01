@@ -13,10 +13,13 @@ public interface ReviewService {
 	public abstract void modifyReview(Review review);
 	
 	// 리뷰 삭제
-	public abstract void removeReview(int num);
+	public abstract void removeReview(Review review);
 	
 	// 리뷰 목록
 	public abstract Map<String, Object> getReviewListPaging(int currentPage);
+
+	// 리뷰 조회
+	public abstract Review getReviewByNo(int reviewNo);
 	
 	
 }

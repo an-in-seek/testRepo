@@ -12,16 +12,13 @@ public class Review implements Serializable{
 	private String content;
 	private int recommend;
 	private String memberId;
-	/* 사진 관련*/
-	private String pictureName;
-	private List upfile; // 파일정보를 담을 변수 (같은 이름으로 여러개가 넘어올때 List 사용)
 	
 	public Review(){
 		
 	}
 
 	public Review(int reviewNo, String title, String regDate, int hits,
-			String content, int recommend, String memberId, String pictureName) {
+			String content, int recommend, String memberId) {
 		super();
 		this.reviewNo = reviewNo;
 		this.title = title;
@@ -30,7 +27,6 @@ public class Review implements Serializable{
 		this.content = content;
 		this.recommend = recommend;
 		this.memberId = memberId;
-		this.pictureName = pictureName;
 	}
 
 	public int getReviewNo() {
@@ -89,22 +85,6 @@ public class Review implements Serializable{
 		this.memberId = memberId;
 	}
 
-	public String getPictureName() {
-		return pictureName;
-	}
-
-	public void setPictureName(String pictureName) {
-		this.pictureName = pictureName;
-	}
-
-	public List getUpfile() {
-		return upfile;
-	}
-
-	public void setUpfile(List upfile) {
-		this.upfile = upfile;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -113,13 +93,10 @@ public class Review implements Serializable{
 		result = prime * result + hits;
 		result = prime * result
 				+ ((memberId == null) ? 0 : memberId.hashCode());
-		result = prime * result
-				+ ((pictureName == null) ? 0 : pictureName.hashCode());
 		result = prime * result + recommend;
 		result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
 		result = prime * result + reviewNo;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((upfile == null) ? 0 : upfile.hashCode());
 		return result;
 	}
 
@@ -144,11 +121,6 @@ public class Review implements Serializable{
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
-		if (pictureName == null) {
-			if (other.pictureName != null)
-				return false;
-		} else if (!pictureName.equals(other.pictureName))
-			return false;
 		if (recommend != other.recommend)
 			return false;
 		if (regDate == null) {
@@ -163,11 +135,6 @@ public class Review implements Serializable{
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
-		if (upfile == null) {
-			if (other.upfile != null)
-				return false;
-		} else if (!upfile.equals(other.upfile))
-			return false;
 		return true;
 	}
 
@@ -176,9 +143,11 @@ public class Review implements Serializable{
 		return "Review [reviewNo=" + reviewNo + ", title=" + title
 				+ ", regDate=" + regDate + ", hits=" + hits + ", content="
 				+ content + ", recommend=" + recommend + ", memberId="
-				+ memberId + ", pictureName=" + pictureName + ", upfile="
-				+ upfile + "]";
+				+ memberId + "]";
 	}
+	
+	
+
 
 	
 	

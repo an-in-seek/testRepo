@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>먹자먹자 야 먹자</title>
@@ -9,6 +9,7 @@
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <script type="text/javascript">
 $(document).ready(function(){
+	
 	
 	var txt = "";
 	// 정렬 버튼 이벤트
@@ -24,39 +25,49 @@ $(document).ready(function(){
 	});
 	
 	// 리뷰 제목 클릭 이벤트
-	$("table#listTB tbody tr").on("click", function(){
-		var text = $(this).find(":first-child").next().text();
-		alert(text);
-		
+	$("table#listTB tbody tr").hover(function(){
+		 $(this).css("background-color", "lavender");
+	}, function(){
+		 $(this).css("background-color", "linen");
 	});
+	
 });
 </script>
 <style type="text/css">
+
 table#listTB thead tr{
-	color:azure;
+	color: azure;
 	font-weight: bold;
-	background: indigo;
+	background: darkcyan;
 	text-align: center;
 }
-table#listTB tbody tr{
+table#listTB tbody tr td#title{
 	cursor: pointer;
+}
+table#listTB tbody tr{
+	background: linen;
 }
 button{
 	width:100px;
 	height:50px;
 }
-h2{
-	text-align: center;
-}
+
+a.list:link {text-decoration:none; color: black;}/*방문하지 않은 페이지*/
+a.list:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/ 
+a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 올라갔을 때*/
+
+
 </style>
-
-
 </head>
+
 <body>
-<h2>리뷰 목록</h2>
-<div align="center">
-<!-- 테이블 시작 -->
-<table id="listTB" style="width:900px">
+
+<section>
+	<div align="center">
+	<h2>맛집 리뷰</h2>
+	
+	<!-- 테이블 시작 -->
+	<table id="listTB" style="width:900px">
 		<thead>
 			<tr>
 				<td style="width:50px">번호</td>
@@ -72,7 +83,7 @@ h2{
 			<c:forEach items="${requestScope.reviewList }" var="review">
 				<tr>
 					<td align="center">${review.reviewNo }</td>
-					<td align="left">${review.title}</td>
+					<td align="left" id="title"><a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}" class="list">${review.title}</a></td>
 					<td align="center">${review.memberId}</td>
 					<td align="center">${review.regDate}</td>
 					<td align="right" style="width:50px">${review.recommend}</td>
@@ -82,15 +93,45 @@ h2{
 			<!-- 수정해야행 끝 -->
 		</tbody>
 	</table>
-	<p>
-<!-- 테이블 끝 -->
+	<br>
+	<!-- 테이블 끝 -->
 
-<!-- 기능 -->
-<table>
+
+	<!-- 페이징 처리 -->
+	
+	<!-- 이전 페이지 그룹 -->
+	<c:choose>
+		<c:when test="${pagingBean.previousPageGroup }">
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.startPageOfPageGroup-1}">◀</a>
+		</c:when>
+		<c:otherwise>◀</c:otherwise>
+	</c:choose>
+	<!-- 페이지 번호 -->
+	<c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
+		<c:choose>
+			<c:when test="${pageNum == pagingBean.currentPage }">
+				<font color="red"><b>${pageNum}</b></font>
+			</c:when>
+			<c:otherwise>
+				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}">${pageNum} </a>
+			</c:otherwise>
+		</c:choose>
+	&nbsp;&nbsp;
+	</c:forEach>
+	<!-- 다음 페이지 그룹 -->
+	<c:choose>
+		<c:when test="${pagingBean.nextPageGroup }">
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.endPageOfPageGroup+1}">▶</a>
+		</c:when>
+		<c:otherwise>▶</c:otherwise>
+	</c:choose>
+	<br>
+
+	<!-- 기능 -->
+	<table>
 		<tr>
 			<td>
 			<select id="searchSort">
-					<option>정렬방식</option>
 					<option value="추천수">추천수</option>
 					<option value="조회수">조회수</option>
 					<option value="최신글">최신글</option>
@@ -104,8 +145,11 @@ h2{
 				</form>
 			</td>
 		</tr>
-</table>
-	
-</div>
+	</table>
+	<br>
+
+	</div>
+</section>
+
 </body>
 </html>

@@ -5,12 +5,7 @@ delete from review CASCADE CONSTRAINTS;
 delete from faq CASCADE CONSTRAINTS;
 delete from qna CASCADE CONSTRAINTS;
 
-
 insert into member values('user01', 1111, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, '관리자', '20140514');
-
-insert into restaurant values(1, '새마을식당', '한식', '031-111-2222', '경기도 성남시 분당구 삼평동', '백주부의 새마을식당이쥬', '111111111111111,222222222222222,', 0, 0, '회식,', '20150530', 0, 10);
-insert into food values(food_no_seq.nextval, '7분김치찌개', 5000, null, 1);
-insert into food values(food_no_seq.nextval, '된장찌개', 6000, null, 1);
 
 
 insert into location values(1, '유스페이스 1A동', '1');
@@ -24,20 +19,66 @@ insert into location values(8, '삼환하이펙스 B동', '1');
 insert into location values(9, '아브뉴프랑', '1');
 insert into location values(10, '유스페이스 2B동', '2');
 
+insert into restaurant values(1, '새마을식당', '한식', '031-111-2222', '경기도 성남시 분당구 삼평동', '백주부의 새마을식당이쥬', '111111111111111,111111111111112,111111111111113,111111111111114,', 0, 0, '회식,', '20150530', 0, 10);
+insert into food values(food_no_seq.nextval, '7분김치찌개', 5000, '7분만 끓이면 된다해', 1);
+insert into food values(food_no_seq.nextval, '된장찌개', 6000, '미소된장 쓰면 맛없쥬', 1);
+insert into food values(food_no_seq.nextval, '열탄불고기', 8000, '6월 1일 50% 세일', 1);
 
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1','새마을식당','1','1','1','20150528','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('2','버거킹','1','221','0','20140420','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('3','맥도날드','1','15','11','20130311','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('4','롯데리아','1','542','22','20120715','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('5','차지족발','1','412','6','20110622','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('6','재스기네치킨','1','333','31','20101127','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('7','한솥도시락','1','12','2','20061208','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('8','코스타국밥','1','53','0','20040203','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('9','파리바게트','1','111','4','20070101','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('10','대게나라','1','245','44','20090928','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('11','면사무소','1','311','38','20001114','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('12','중국성','1','444','14','19981212','user01');
-
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('90','수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','20150530','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('91','새마을식당','1','1','1','20150528','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('92','버거킹','1','221','0','20140420','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('93','맥도날드','1','15','11','20130311','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('94','롯데리아','1','542','22','20120715','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('95','차지족발','1','412','6','20110622','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('96','재스기네치킨','1','333','31','20101127','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('97','한솥도시락','1','12','2','20061208','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('98','코스타국밥','1','53','0','20040203','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('99','파리바게트','1','111','4','20070101','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('100','대게나라','1','245','44','20090928','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('101','면사무소','1','311','38','20001114','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('102','중국성','1','454','14','19981212','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('103','차지치킨','1','444','6','19941111','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('104','도미노피자','1','774','66','19921231','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('105','파파존스','1','97','34','20020211','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('106','미스터피자','1','831','84','20041225','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1000','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1001','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1002','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1003','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1004','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1005','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1006','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1007','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1008','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1009','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1010','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1011','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1012','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1013','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1014','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1015','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1016','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1017','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1018','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1019','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1020','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1021','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1022','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1023','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1024','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1025','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1026','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1027','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1028','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1029','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1030','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1031','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1032','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1033','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1034','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1035','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1036','프로듀사롤하느라못봄','1','444','44','19940404','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1037','프로듀사롤하느라못봄','1','444','44','19940404','user01');
 
 insert into FAQ (faq_no, faq_title, faq_content) values(faq_no_seq.nextval, '개명으로 인한 이름을 변경하고 싶습니다.', 
 '개명으로 인한 회원 이름을 변경하고자 할 경우에는 로그인 후, 회원정보 수정란에서 성명 표기 우측에 표시되어 있는 "개명에 의한 이름 변경"을 클릭하시어 변경하시면 됩니다. 

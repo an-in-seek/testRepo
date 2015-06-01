@@ -62,22 +62,23 @@ table#t1{
 <h2>리뷰 글쓰기 폼</h2>
 
 <!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
-<form id="write" method="post" action="${initParam.rootPath }/review/insert.do">
+<form id="write" method="post" action="${initParam.rootPath }/review/login/write.do">
 
 <!-- 테이블 -->
 <table id="t1">
 	<tr>
 		<td align="center">제목</td>
-		<td><input type="text" id="title" name="title" style="width:800px"></td>
+		<td><input type="text" id="title" name="title" style="width:900px"></td>
 	</tr>
 	<tr>
 		<td align="center">내용</td>
 		<td>
-			<textarea name="content" id="content" rows="10" cols="100" style="width:800px; height:420px;"></textarea><br>
+			<textarea name="content" id="content" rows="10" cols="100" style="width:900px; height:420px;"></textarea><br>
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td></td>
+		<td align="center">
 			<input type="submit" id="save" value="등록">
 			<input type="button" value="취소" onclick="javascript:history.back(-1);">
 		</td>

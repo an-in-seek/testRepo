@@ -83,10 +83,12 @@ public class RestaurantController {
 		String pictureNameTemp = "";
 		String path = request.getServletContext().getRealPath("/uploadPhoto");
 		for(int i=0; i<pictureName.length; i++) {
-			String fileName = System.nanoTime()+"";
-			File file = new File(path, fileName);
-			pictureName[i].transferTo(file);
-			pictureNameTemp += fileName+",";
+			if(pictureName[i].getSize()!=0) {
+				String fileName = System.nanoTime()+"";
+				File file = new File(path, fileName);
+				pictureName[i].transferTo(file);
+				pictureNameTemp += fileName+",";
+			}
 		}
 		restaurant.setPictureName(pictureNameTemp);
 		// 여기까지 세팅 끝

@@ -45,7 +45,7 @@ DROP TABLE QNA
 /* 새 테이블 */
 DROP TABLE LOCATION 
 	CASCADE CONSTRAINTS;
-select * from member;
+
 /* 회원 */
 CREATE TABLE MEMBER (
 	MEMBER_ID VARCHAR2(10) NOT NULL, /* 회원_ID */
@@ -130,7 +130,6 @@ CREATE TABLE REVIEW (
 	REVIEW_NO NUMBER(10) NOT NULL, /* 리뷰 번호 */
 	TITLE VARCHAR2(60) NOT NULL, /* 제목 */
 	CONTENT CLOB NOT NULL, /* 내용 */
-	PICTURE_NAME VARCHAR2(70), /* 사진_이름 */
 	HITS NUMBER(10) NOT NULL, /* 조회수 */
 	RECOMMEND NUMBER(4) NOT NULL, /* 추천수 */
 	REG_DATE VARCHAR2(8) NOT NULL, /* 등록일 */
@@ -342,7 +341,7 @@ ALTER TABLE QNA
 -- 고객센터에서 사용하는 시퀀스
 drop sequence faq_no_seq;
 drop sequence faq_no_qna;
-drop sequence qna_no_seq
+drop sequence qna_no_seq;
 create sequence faq_no_seq;
 create sequence faq_no_qna;
 create sequence qna_no_seq;
@@ -351,4 +350,6 @@ drop sequence restaurant_no_seq;
 drop sequence food_no_seq;
 create sequence restaurant_no_seq;
 create sequence food_no_seq;
-
+-- 리뷰에서 사용하는 시퀀스
+drop sequence review_no_seq;
+create sequence review_no_seq;

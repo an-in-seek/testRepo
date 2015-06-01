@@ -33,10 +33,12 @@ public class QNAController {
 		if(errors.hasErrors()){
 			return "qna/qna_write_form.tiles";
 		}//등록 성공
+		//현재 로그인되어있는 사용자 아이디정보 삽입
 		Member member = (Member)session.getAttribute("login_info");
+		System.out.println(member.getId());
 		qna.setMemberId(member.getId());
 		service.registerQNA(qna);
-		return "/qna/qnaList.do";
+		return "redirect:/qna/qnaList.do";
 	}
 	
 	//QNA게시물 전체목록 조회(페이징)
@@ -54,7 +56,7 @@ public class QNAController {
 		}
 	
 	// 게시물 수정
-		@RequestMapping(value="login/modifyQnaInfo.do", method=RequestMethod.POST)
+		@RequestMapping(value="login/modifyQna.do", method=RequestMethod.POST)
 		public String modifyQNAInfo(@ModelAttribute QNA qna, Errors errors,  HttpServletRequest request)																													throws Exception{
 			//로그인 체크 - interceptor가 처리
 			service.modifyQNA(qna);//수정 처리
@@ -63,11 +65,10 @@ public class QNAController {
 		
 		// 게시물 삭제
 		@RequestMapping("login/removeQna.do")
-		public String removeQNAByNo(@ModelAttribute QNA qna, HttpServletRequest request, ModelMap map){
+		public String removeQNAByNo(@ModelAttribute QNA qna){
 			//로그인 처리는 interceptor가 처리
-			int number = Integer.parseInt(request.getParameter("number"));
-			service.removeQNAByNo(number);
-			return "main.tiles";//삭제후 메인페이지로 이동
+			service.removeQNAByNo(qna.getNumber());
+			return "redirect:/qna/qnaList.do";//삭제후 메인페이지로 이동
 		}
 		
 		// 리스트에서 id로 회원정보 요청한 것 처리 -Ajax 요청처리

@@ -40,19 +40,30 @@ public class ReviewDAOImpl implements ReviewDAO{
 	 * 리뷰 삭제
 	 */
 	@Override
-	public void deleteReview(int num) {
-		session.delete(namespace+"insertReview", num);
+	public void deleteReview(Review review) {
+		session.delete(namespace+"deleteReview", review);
 	}
 
-	
+
 	/**
-	 * 리뷰 목록
+	 * 리뷰 조회
 	 */
 	@Override
-	public List<Review> selectAllReviewPaging(int currentPage) {
+	public Review selectReviewByNo(int reviewNo) {
+		session.selectOne(namespace + "updateHits", reviewNo);
+		return session.selectOne(namespace + "selectReviewByNo", reviewNo);
+	}
+	
+	/**
+	 * Review 테이블의 페이징 처리 전체 리뷰 조회 처리
+	 * @param pageNo 조회할 페이지 번호
+	 * @return
+	 */
+	@Override
+	public List<Review> selectAllReviewPaging(int pageNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
-		map.put("currentPage", currentPage);
+		map.put("pageNo", pageNo);
 		return session.selectList(namespace+"selectAllReviewPaging", map);
 	}
 
@@ -64,5 +75,7 @@ public class ReviewDAOImpl implements ReviewDAO{
 		return session.selectOne(namespace+"selectTotalReviewCount");
 	}
 
+
+	
 	
 }
