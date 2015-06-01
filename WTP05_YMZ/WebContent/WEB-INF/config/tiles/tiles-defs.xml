@@ -27,7 +27,7 @@
 	
 	
 	<!-- 맛집정보 화면에서 템플릿:지훈이코드 -->
-	<definition name="restaurant_template" template="/WEB-INF/view/layout/template.jsp">
+	<definition name="restaurant_template" template="/WEB-INF/view/layout/restaurant_template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
 		<put-attribute name="sub_menu" value="/WEB-INF/view/restaurant/restaurant_sidemenu.jsp" />

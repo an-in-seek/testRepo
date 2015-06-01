@@ -41,7 +41,7 @@
 	<mvc:view-controller path="/qna/login/writeForm.do" view-name="qna/qna_write_form.tiles"/>
 	<mvc:view-controller path="/qna/login/modifyForm.do" view-name="qna/qna_modify_form.tiles"/>
 	<mvc:view-controller path="/qna/login/commentForm.do" view-name="qna/qna_comment_form.tiles"/>
-	<mvc:view-controller path="/review/review_write_form.do" view-name="review/review_write_form.tiles"/>
+	<mvc:view-controller path="/review/login/review_write_form.do" view-name="review/review_write_form.tiles"/>
 	
 	<!-- 로그인 후 요청하는 페이지중 로그인 체크 부분이 interceptor로 빠지면 단순 링크로 바뀌는 것들 view-controller로 처리 -->
 	<!-- 자기정보 조회 -->

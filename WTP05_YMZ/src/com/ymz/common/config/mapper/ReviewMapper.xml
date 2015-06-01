@@ -37,7 +37,7 @@
 		update  review
 		set		title=#{title},
 				content=#{content}
-		where	member_id=#{memberId}
+		where	review_no=#{reviewNo} and member_id=#{memberId}
 	</update>
 	
 	<!-- 삭제 -->
@@ -57,6 +57,13 @@
 	<select id="updateHits" parameterType="int">
 		update review
 		set hits = hits + 1
+		where review_no=#{reviewNo}
+	</select>
+	
+	<!-- 추천수 증가 -->
+	<select id="recommendReview" parameterType="review">
+		update review
+		set recommend = recommend + 1
 		where review_no=#{reviewNo}
 	</select>
 	

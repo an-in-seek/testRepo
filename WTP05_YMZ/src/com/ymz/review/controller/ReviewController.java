@@ -2,23 +2,20 @@ package com.ymz.review.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ymz.faq.vo.FAQ;
 import com.ymz.member.vo.Member;
-import com.ymz.qna.vo.QNA;
 import com.ymz.review.service.ReviewService;
 import com.ymz.review.vo.Review;
 
@@ -56,11 +53,26 @@ public class ReviewController {
 		return new ModelAndView("review/review_view.tiles", "review", review);
 	}
 	
+	
+	//리뷰 수정 폼으로 가기
+	@RequestMapping(value="login/modifyForm.do")
+	public ModelAndView modifyFormReview(@RequestParam int reviewNo){
+		Review review = service.getReviewByNo(reviewNo);
+		return new ModelAndView("review/review_modify_form.tiles", "review", review);
+	}
+	
 	//리뷰 수정(로그인시 가능)
-	@RequestMapping(value="login/modifyReview.do", method=RequestMethod.POST)
-	public String modifyReview(@ModelAttribute Review review, Errors errors,  HttpServletRequest request){
+	@RequestMapping(value="login/modifyReview.do")
+	public String modifyReview(@ModelAttribute Review review, @RequestParam int reviewNo, Errors errors, HttpSession session){
+		Member member = (Member)session.getAttribute("login_info");
+		String userid = member.getId();
+		System.out.println("수정할 글번호 : "+ reviewNo);
+		System.out.println("글쓴이 아이디: " + userid);
+		review.setMemberId(userid);
+		review.setReviewNo(reviewNo);
 		service.modifyReview(review);
-		return "review/review_list.tiles";
+		System.out.println("글번호 "+reviewNo+" 수정 완료!!");
+		return "redirect:/review/reviewList.do";
 	}
 	
 	
@@ -76,5 +88,31 @@ public class ReviewController {
 		service.removeReview(review);
 		System.out.println("글번호 "+reviewNo+" 삭제 완료!!");
 		return "redirect:/review/reviewList.do";
+	}
+	
+	// 리뷰 추천(로그인시 가능)
+	@RequestMapping("login/recommendReview.do")
+	public String recommendReview(@ModelAttribute Review review, @RequestParam int reviewNo){
+		System.out.println("추천할 글번호 : " + reviewNo);
+		review.setReviewNo(reviewNo);
+		service.recommendReview(review);
+		return "/review/reviewView.do";
+	}
+	
+	// 리뷰 검색
+	
+	public String searchReview(    ){
+		
+		return "/review/reviewList.do";
+	}
+	
+	// 조회수 증가
+	@RequestMapping("ajax/updateHits.do")
+	@ResponseBody
+	public int searchReview(@RequestParam int reviewNo, ModelMap map){
+		service.updateHitsReview(reviewNo);
+		Review review = service.getReviewByNo(reviewNo);
+		int hits = review.getHits();
+		return hits;
 	}
 }
