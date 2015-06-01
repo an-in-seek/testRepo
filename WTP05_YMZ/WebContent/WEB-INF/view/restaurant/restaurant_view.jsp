@@ -187,7 +187,7 @@ $(document).ready(function(){
 <c:choose>
 <c:when test="${empty requestScope.foods }">
 <tr>
-<td colspan="4" align="center">등록된 메뉴가 없습니다</td>
+<td colspan="4" align="center" height="50px">등록된 메뉴가 없습니다</td>
 </tr>
 </c:when>
 <c:otherwise>
