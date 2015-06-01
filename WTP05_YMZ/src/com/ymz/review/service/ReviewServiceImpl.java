@@ -73,6 +73,11 @@ public class ReviewServiceImpl implements ReviewService {
 		return review;
 	}
 	
-	
+	/**
+	 * 리뷰 추천
+	 */
+	public void recommendReview(Review review){
+		dao.recommendReview(review);
+	}
 
 }

@@ -92,4 +92,13 @@ public class ReviewController {
 		System.out.println("글번호 "+reviewNo+" 삭제 완료!!");
 		return "redirect:/review/reviewList.do";
 	}
+	
+	// 리뷰 추천(로그인시 가능)
+	@RequestMapping("login/recommendReview.do")
+	public String recommendReview(@ModelAttribute Review review, @RequestParam int reviewNo){
+		System.out.println("추천할 글번호 : " + reviewNo);
+		review.setReviewNo(reviewNo);
+		service.recommendReview(review);
+		return "/review/reviewView.do";
+	}
 }

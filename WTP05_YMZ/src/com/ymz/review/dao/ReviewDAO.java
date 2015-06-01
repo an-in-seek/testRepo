@@ -25,5 +25,8 @@ public interface ReviewDAO {
 	
 	// 리뷰 전체 페이지 수
 	public abstract int selectTotalReviewCount();
+
+	// 리뷰 추천
+	public abstract void recommendReview(Review review);
 	
 }

@@ -44,7 +44,13 @@ public class ReviewDAOImpl implements ReviewDAO{
 		session.delete(namespace+"deleteReview", review);
 	}
 
-
+	/**
+	 * 리뷰 추천
+	 */
+	public void recommendReview(Review review){
+		session.update(namespace+"recommendReview", review);
+	}
+	
 	/**
 	 * 리뷰 조회
 	 */

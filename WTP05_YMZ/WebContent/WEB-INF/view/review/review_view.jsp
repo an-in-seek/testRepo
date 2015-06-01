@@ -13,7 +13,9 @@ $(document).ready(function(){
 
 	// 리뷰 내용
 	$("#recommendBtn").on("click", function(){
-		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+		var name = ${sessionScope.login_info.name};
+		alert(name);
+		document.location.href="${initParam.rootPath }/review/login/recommendReview.do?reviewNo="+${requestScope.review.reviewNo};
 	});
 
 	$("#deleteBtn").on("click", function(){

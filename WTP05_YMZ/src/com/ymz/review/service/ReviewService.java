@@ -20,6 +20,9 @@ public interface ReviewService {
 
 	// 리뷰 조회
 	public abstract Review getReviewByNo(int reviewNo);
+
+	// 리뷰 추천
+	public abstract void recommendReview(Review review);
 	
 	
 }
