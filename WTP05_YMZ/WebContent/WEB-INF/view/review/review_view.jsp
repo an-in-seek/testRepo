@@ -15,8 +15,14 @@ $(document).ready(function(){
 	$("#recommendBtn").on("click", function(){
 		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
 	});
-	$("#modifyBtn").on("click", function(){
-		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+
+	$("#deleteBtn").on("click", function(){
+		var isDel = confirm("정말로 삭제하시겠습니까?");
+		if (isDel) {
+			document.location.href="${initParam.rootPath }/review/login/removeReview.do?reviewNo="+${requestScope.review.reviewNo};
+		} else {
+			return;
+		}
 	});
 	$("#reportBtn").on("click", function(){
 		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
@@ -61,6 +67,11 @@ button{
 	width:100px;
 	height:50px;
 }
+button#recommendBtn{
+	width:200px;
+	height:100px;
+	background: palegreen;
+}
 
 </style>
 <!-- css 끝 -->
@@ -103,7 +114,10 @@ button{
 ${requestScope.review.content }<br>
 
 	<div align="center" id="recommend"> <!-- 추천 버튼 -->
-		<button id="recommendBtn"><font color="red">${requestScope.review.recommend}</font><br>추천</button>
+		<button id="recommendBtn">
+			<font color="red" size="6">${requestScope.review.recommend}</font><br><br>
+			<font color="blue" size='2'>추천</font>
+		</button>
 	</div><br><br>
 	
 <!-- ******************************* 리뷰 내용이 들어가는 공간 끝 ************************************** -->
@@ -111,12 +125,13 @@ ${requestScope.review.content }<br>
 
 
 <div id="reply" align="center">
-<!-- 버튼 -->
-<a href="${initParam.rootPath }/review/reviewList.do"><button>목록</button></a>
-<a href="${initParam.rootPath }/review/login/removeReview.do?reviewNo=${requestScope.review.reviewNo}"><button>삭제</button></a>
-<button id="modifyBtn">수정</button>
+	<!-- 버튼 -->
+	<a href="${initParam.rootPath }/review/reviewList.do"><button>목록</button></a>
+	<a href="${initParam.rootPath }/review/login/modifyForm.do?reviewNo=${requestScope.review.reviewNo}">
+	<button id="modifyBtn">수정</button></a>
+	<button id="deleteBtn">삭제</button>
+	<button id="reportBtn">신고</button>
 
-<button id="reportBtn">신고</button>
 <hr>
 <!-- ****************************************  댓 글 영 역  ****************************************** -->
 

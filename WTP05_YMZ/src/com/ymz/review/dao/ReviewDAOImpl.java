@@ -33,7 +33,7 @@ public class ReviewDAOImpl implements ReviewDAO{
 	 */
 	@Override
 	public void updateReview(Review review) {
-		session.update(namespace+"insertReview", review);
+		session.update(namespace+"updateReview", review);
 	}
 
 	/**
