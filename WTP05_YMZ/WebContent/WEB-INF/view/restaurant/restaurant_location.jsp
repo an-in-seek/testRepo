@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+restaurant_location.jsp
 </body>
 </html>
