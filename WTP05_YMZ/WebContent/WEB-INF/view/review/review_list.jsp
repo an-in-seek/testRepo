@@ -140,7 +140,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 			<td><input type="text" id="searchText"></td>
 			<td><input type="button" id="searchBtn" value="검색"></td>
 			<td>
-				<form action="${initParam.rootPath }/review/review_write_form.do" method="post">
+				<form action="${initParam.rootPath }/review/login/review_write_form.do" method="post">
 					<input type="submit" value="글쓰기">
 				</form>
 			</td>

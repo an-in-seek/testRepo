@@ -37,7 +37,7 @@
 		update  review
 		set		title=#{title},
 				content=#{content}
-		where	member_id=#{memberId}
+		where	review_no=#{reviewNo} and member_id=#{memberId}
 	</update>
 	
 	<!-- 삭제 -->

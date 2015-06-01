@@ -56,11 +56,26 @@ public class ReviewController {
 		return new ModelAndView("review/review_view.tiles", "review", review);
 	}
 	
+	
+	//리뷰 수정 폼으로 가기
+	@RequestMapping(value="login/modifyForm.do")
+	public ModelAndView modifyFormReview(@RequestParam int reviewNo){
+		Review review = service.getReviewByNo(reviewNo);
+		return new ModelAndView("review/review_modify_form.tiles", "review", review);
+	}
+	
 	//리뷰 수정(로그인시 가능)
-	@RequestMapping(value="login/modifyReview.do", method=RequestMethod.POST)
-	public String modifyReview(@ModelAttribute Review review, Errors errors,  HttpServletRequest request){
+	@RequestMapping(value="login/modifyReview.do")
+	public String modifyReview(@ModelAttribute Review review, @RequestParam int reviewNo, Errors errors, HttpSession session){
+		Member member = (Member)session.getAttribute("login_info");
+		String userid = member.getId();
+		System.out.println("수정할 글번호 : "+ reviewNo);
+		System.out.println("글쓴이 아이디: " + userid);
+		review.setMemberId(userid);
+		review.setReviewNo(reviewNo);
 		service.modifyReview(review);
-		return "review/review_list.tiles";
+		System.out.println("글번호 "+reviewNo+" 수정 완료!!");
+		return "redirect:/review/reviewList.do";
 	}
 	
 	
