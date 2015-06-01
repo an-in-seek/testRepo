@@ -48,8 +48,7 @@
 	
 	<update id="updateMember" parameterType="member">
 		update member
-		set		member_password=#{password},
-					nickname=#{nickname},
+		set			nickname=#{nickname},
 					birth=#{birth},
 					zipcode=#{zipcode},
 					address=#{address},
@@ -59,7 +58,11 @@
 					mileage=#{mileage}
 		where	member_id=#{id}
 	</update>
-	
+	<update id="updatePassword" parameterType="member">
+		update member
+		set member_password=#{password}
+		where member_id=#{id}
+	</update>
 	<delete id="deleteMemberById" parameterType="string">
 		delete from member where member_id=#{id}
 	</delete>

@@ -134,13 +134,13 @@ public class MemberController {
 			return "member/modify_form.tiles";
 		}
 
+		//session의 login_info 속성의 property들을  수정된 정보로 변경(id, joinDate는 변경 안한다.)
 		//로그인 체크 - interceptor가 처리
 		service.modifyMember(member);//수정 처리
-		
-		//session의 login_info 속성의 property들을  수정된 정보로 변경(id, joinDate는 변경 안한다.)
 		loginInfo.setName(member.getName());
 		loginInfo.setEmail(member.getEmail());
 		loginInfo.setPassword(member.getPassword());
+		
 
 		return "member/member_info.tiles";
 	}
@@ -194,11 +194,13 @@ public class MemberController {
 		return result;
 	}
 	/**********************기존비밀번호 확인********************///비밀번호수정
-	@RequestMapping("passwordCheck")
+	@RequestMapping("passwordCheck.do")
 	@ResponseBody
 	public String passwordCheck(@RequestParam String current_password,HttpSession session){
 		Member m = (Member)session.getAttribute("login_info");
 		String password = m.getPassword();
+		System.out.println(m.getPassword());
+		System.out.println(current_password);
 		String result = null;
 		if(current_password==password){
 			result = "true";
@@ -211,15 +213,23 @@ public class MemberController {
 	}
 	
 	/**********************비밀번호 수정********************///비밀번호수정
-	@RequestMapping(value="login/modifyPassword.do", method=RequestMethod.POST)
+	@RequestMapping(value="mypage/modifyPassword.do",method=RequestMethod.POST)
 	@ResponseBody
-	public String modifyPassword(@RequestParam String password,Member member,HttpSession session){
+	public String modifyPassword(@RequestParam String password,HttpSession session){
 		Member loginInfo = (Member)session.getAttribute("login_info");
-		service.modifyMember(member);
-		loginInfo.setPassword(password);
-		return "member/mypage/modify_password_success.tiles";
+		String id = loginInfo.getId();
+		System.out.println(id);
+		Member m = service.getMemberById(id);
+		System.out.println(m.getId());
+		m.setPassword(password);
+		service.modifyPassword(m);
+		return "redirect:/member/modifySuccess.do";
 	}
 	
+	@RequestMapping("modifySuccess.do")
+	public String modifySuccess(){
+		return "member/modify_password_success.tiles";
+	}
 	
 
 }

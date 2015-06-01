@@ -26,6 +26,13 @@ public interface MemberDAO {
 	 * @param member
 	 */
 	public abstract int updateMember(Member member);
+	
+	/**
+	 * 비밀번호 수정 메소드
+	 * 매개변수로 받은 값을 id 회원의 비밀번호로 변경한다.
+	 * @param string
+	 */
+	public abstract int updatePassword(Member member);
 
 	/**
 	 * 매개 변수로 받은 ID의 회원을 삭제하는 메소드
