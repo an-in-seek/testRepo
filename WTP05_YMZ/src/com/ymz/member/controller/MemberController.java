@@ -105,6 +105,7 @@ public class MemberController {
 		return url;
 	}
 	//회원정보수정
+	
 
 	
 	// 전체 정보 조회1
@@ -192,5 +193,30 @@ public class MemberController {
 		}
 		return result;
 	}
+	/**********************기존비밀번호 확인********************///비밀번호수정
+	@RequestMapping("passwordCheck.do")
+	@ResponseBody
+	public String passwordCheck(@RequestParam String current_password,HttpSession session){
+		Member m = (Member)session.getAttribute("login_info");
+		String password = m.getPassword();
+		String result = null;
+		if(current_password==password){
+			result = "true";
+			System.out.println(result);
+		}else{
+			result = "false";
+			System.out.println(result);	
+		}
+		return result;
+	}
+	
+	/**********************비밀번호 수정********************///비밀번호수정
+	@RequestMapping(value="login/modifyPassword", method=RequestMethod.POST)
+	@ResponseBody
+	public String modifyPassword(){
+		return "member/info/modify_password_success.tiles";
+	}
+	
+	
 
 }

@@ -14,10 +14,10 @@
 		<td><a href="${initParam.rootPath }/member/login/modifyForm.do"  class="menu"><font color="black" size="3">회원기본수정</font></a></td>
 	</tr>
 	<tr>
-		<td><a href="${initParam.rootPath }/member/login/modifyPassword.do"  class="menu"><font color="black" size="3">비밀번호수정</font></a></td>
+		<td><a href="${initParam.rootPath }/member/mypage/modify_Password.do"  class="menu"><font color="black" size="3">비밀번호수정</font></a></td>
 	</tr>
 	<tr>
-		<td><a href="${initParam.rootPath }/member/login/tradeCoupon.do"  class="menu"><font color="black" size="3">쿠폰교환</font></a></td>
+		<td><a href="${initParam.rootPath }/member/mypage/tradeCoupon.do"  class="menu"><font color="black" size="3">쿠폰교환</font></a></td>
 	</tr>
 	<tr>
 		<td><font color="red" size="3">회원탈퇴</font></td>
