@@ -18,6 +18,7 @@ insert into location values(8, '삼환하이펙스 B동', '1');
 insert into location values(9, '아브뉴프랑', '1');
 insert into location values(10, '유스페이스 2B동', '2');
 
+--유스페이스2B동2층
 insert into restaurant values(restaurant_no_seq.nextval, '새마을식당', '한식', '031-628-6694', '경기도 성남시 분당구 삼평동', '백주부의 새마을식당이쥬', '11111111111111,11111111111112,11111111111113,11111111111114,', 0, 0, '가족,연인,친구,회식,', '20150530', 0, 10);
 insert into food values(food_no_seq.nextval, '열탄불고기', 8000, '5330원/100g', 1);
 insert into food values(food_no_seq.nextval, '소금구이', 9000, '6000원/100g', 1);
@@ -39,6 +40,21 @@ insert into restaurant values(restaurant_no_seq.nextval, '봉추찜닭', '한식
 insert into food values(food_no_seq.nextval, '찜닭-小', 20000, '2인분 (닭:국산)', 4);
 insert into food values(food_no_seq.nextval, '찜닭-中', 30000, '3~4인분 (닭:국산)', 4);
 insert into food values(food_no_seq.nextval, '찜닭-大', 40000, '4~5인분 (닭:국산)', 4);
+--유스페이스2B동1층
+insert into restaurant values(restaurant_no_seq.nextval, '본스치킨', '양식', '031-628-2362', '경기도 성남시 분당구 삼평동', '본스본스', '11111111111151,', 0, 0, '연인,', '20150530', 0, 4);
+insert into food values(food_no_seq.nextval, '스파이시감자튀김', 13000, 'SPICY POTATO', 5);
+insert into food values(food_no_seq.nextval, '본스소세지', 17000, 'SAUSAGE COMBO', 5);
+insert into food values(food_no_seq.nextval, '무뼈닭발', 16000, 'BONELESS CHICKEN FEET', 5);
+insert into restaurant values(restaurant_no_seq.nextval, '종로김밥', '한식', '031-628-6969', '경기도 성남시 분당구 삼평동', '김밥집', '11111111111161,', 0, 0, '연인,친구,', '20150530', 0, 4);
+insert into food values(food_no_seq.nextval, '종로김밥', 2500, null, 6);
+insert into food values(food_no_seq.nextval, '치즈김밥', 3000, null, 6);
+insert into food values(food_no_seq.nextval, '참치김밥', 3500, null, 6);
+insert into food values(food_no_seq.nextval, '신라면', 3000, null, 6);
+insert into food values(food_no_seq.nextval, '떡라면', 3500, null, 6);
+insert into food values(food_no_seq.nextval, '제육덮밥', 5500, null, 6);
+insert into restaurant values(restaurant_no_seq.nextval, 'SUBWAY', '양식', '031-739-8300', '경기도 성남시 분당구 삼평동', '샌드위치집', '11111111111171,', 0, 0, '가족,연인,친구,', '20150530', 0, 4);
+insert into food values(food_no_seq.nextval, '베지샐러드', 5000, null, 7);
+insert into food values(food_no_seq.nextval, '에그마요샐러드', 5400, null, 7);
 
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('90','수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','20150530','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('91','새마을식당','1','1','1','20150528','user01');
