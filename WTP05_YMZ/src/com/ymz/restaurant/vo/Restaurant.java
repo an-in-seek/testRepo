@@ -237,5 +237,5 @@ public class Restaurant implements Serializable {
 				+ score + ", hits=" + hits + ", theme=" + theme + ", regDate="
 				+ regDate + ", replyCount=" + replyCount + ", locationNo="
 				+ locationNo + "]";
-	}
+	}	
 }

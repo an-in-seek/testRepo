@@ -21,13 +21,28 @@ public class RestaurantServiceImpl implements RestaurantService {
 	private RestaurantDAO dao;
 	
 	@Override
-	public Map<String, Object> getRestaurantListPaging(int currentPage) {
-		List<Restaurant> list = dao.selectAllRestaurantPaging(currentPage);
+	public Map<String, Object> getListByTypePaging(String category, String align, int currentPage, String searchWord) {
+		List<Restaurant> list = dao.selectListByTypePaging(category, align, currentPage, searchWord);
 		int totalContent = dao.selectTotalRestaurantCount();
 		PagingBean pagingBean = new PagingBean(totalContent, currentPage);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("restaurantList", list);
 		map.put("pagingBean", pagingBean);
+		map.put("category", category);
+		map.put("align", align);
+		return map;
+	}
+	
+	@Override
+	public Map<String, Object> getListByThemePaging(String theme, String align, int currentPage, String searchWord) {
+		List<Restaurant> list = dao.selectListByThemePaging(theme, align, currentPage, searchWord);
+		int totalContent = dao.selectTotalRestaurantCount();
+		PagingBean pagingBean = new PagingBean(totalContent, currentPage);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("restaurantList", list);
+		map.put("pagingBean", pagingBean);
+		map.put("theme", theme);
+		map.put("align", align);
 		return map;
 	}
 
@@ -86,5 +101,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public List<Food> getFoodsByRestaurantNo(int restaurantNo) {
 		return dao.selectFoodsByRestaurantNo(restaurantNo);
+	}
+
+	@Override
+	public int increaseHits(int restaurantNo) {
+		return dao.updateHits(restaurantNo);
 	}
 }

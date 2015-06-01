@@ -12,20 +12,46 @@ $(document).ready(function(){
 	},function(){
 		$(this).css("text-decoration","none");
 	});
+	
+	$("#align").on("change",function(){
+		alignForm.submit();
+	});
+	
+	$("#alignForm select option[value=${requestScope.align}]").prop("selected","selected");
+	
+	$("#searchForm").on("submit",function(){
+		if($("#search").val().trim()==""){
+			return false;
+		}
+		searchForm.submit();
+	});
 });
 </script>
 </head>
 <body><div align="center">
-<a href="">한식</a> <a href="">양식</a> <a href="">중식</a> <a href="">일식</a>
+<a href="${initParam.rootPath }/restaurant/showListByType.do?category=전체">전체보기</a>
+<a href="${initParam.rootPath }/restaurant/showListByType.do?category=한식">한식</a>
+<a href="${initParam.rootPath }/restaurant/showListByType.do?category=양식">양식</a>
+<a href="${initParam.rootPath }/restaurant/showListByType.do?category=중식">중식</a>
+<a href="${initParam.rootPath }/restaurant/showListByType.do?category=일식">일식</a>
 <p/>
-<table style="width:100%;">
-<tr>
-<td width="50%" align="left"></td>
-<td width="50%" align="right"><a href="${initParam.rootPath }/restaurant/addNewRestaurantForm.do"><button>맛집등록</button></a></td>
-</tr>
-</table>
 <table border="1">
 	<thead>
+		<tr>
+			<td style="border-left-style:hidden;border-top-style:hidden;border-right-style:hidden;" colspan="3">
+				<form id="alignForm" action="${initParam.rootPath }/restaurant/showListByType.do" method="post">
+				정렬방식:
+				<select id="align" name="align">
+					<option value="date">최근 등록일순</option>
+					<option value="hits">조회수 많은순</option>
+					<option value="manyScore">평가 많은순</option>
+					<option value="highScore">평점 높은순</option>
+				</select>
+				<input type="hidden" name="category" value="${requestScope.category }">
+				</form>
+			</td>
+			<td style="border-top-style:hidden;border-right-style:hidden;" colspan="3" align="right"><a href="${initParam.rootPath }/restaurant/addNewRestaurantForm.do"><button>맛집등록</button></a></td>
+		</tr>
 		<tr align="center">
 			<td width="70px">번호</td>
 			<td width="70px">분류</td>
@@ -36,19 +62,28 @@ $(document).ready(function(){
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${requestScope.restaurantList }" var="restaurant">
-			<tr align="center">
-				<td>${restaurant.restaurantNo }</td>
-				<td>${restaurant.category}</td>
-				<td align="left">
-					<a href="${initParam.rootPath }/restaurant/restaurantView.do?restaurantNo=${restaurant.restaurantNo }">${restaurant.restaurantName}</a>
-					<c:if test="${restaurant.replyCount>0 }"><font color="gray">[${restaurant.replyCount }]</font></c:if>
-				</td>
-				<td>${restaurant.phoneNo}</td>
-				<td>${restaurant.score}</td>
-				<td>${restaurant.hits}</td>
-			</tr> 
-		</c:forEach>
+		<c:choose>
+			<c:when test="${empty requestScope.restaurantList }">
+				<tr>
+					<td align="center" height="50px" colspan="6">등록된 맛집이 없습니다</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${requestScope.restaurantList }" var="restaurant">
+					<tr align="center">
+						<td>${restaurant.restaurantNo }</td>
+						<td>${restaurant.category}</td>
+						<td align="left">
+							<a href="${initParam.rootPath }/restaurant/restaurantView.do?restaurantNo=${restaurant.restaurantNo }">${restaurant.restaurantName}</a>
+							<c:if test="${restaurant.replyCount>0 }"><font color="gray">[${restaurant.replyCount }]</font></c:if>
+						</td>
+						<td>${restaurant.phoneNo}</td>
+						<td>${restaurant.score}</td>
+						<td>${restaurant.hits}</td>
+					</tr> 
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	</tbody>
 </table>
 <p>
@@ -87,5 +122,13 @@ $(document).ready(function(){
 		&gt;
 	</c:otherwise>
 </c:choose>
+
+<form id="searchForm" action="${initParam.rootPath }/restaurant/showListByType.do">
+<input type="text" id="search" name="searchWord">
+<input type="submit" value="검색">
+<input type="hidden" name="category" value="${requestScope.category }">
+<input type="hidden" name="align" value="${requestScope.align }">
+</form>
+
 </div></body>
 </html>

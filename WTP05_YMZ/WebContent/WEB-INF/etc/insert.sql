@@ -18,7 +18,7 @@ insert into location values(8, '삼환하이펙스 B동', '1');
 insert into location values(9, '아브뉴프랑', '1');
 insert into location values(10, '유스페이스 2B동', '2');
 
-insert into restaurant values(1, '새마을식당', '한식', '031-111-2222', '경기도 성남시 분당구 삼평동', '백주부의 새마을식당이쥬', '111111111111111,111111111111112,111111111111113,111111111111114,', 0, 0, '회식,', '20150530', 0, 10);
+insert into restaurant values(restaurant_no_seq.nextval, '새마을식당', '한식', '031-111-2222', '경기도 성남시 분당구 삼평동', '백주부의 새마을식당이쥬', '111111111111111,111111111111112,111111111111113,111111111111114,', 0, 0, '회식,', '20150530', 0, 10);
 insert into food values(food_no_seq.nextval, '7분김치찌개', 5000, '7분만 끓이면 된다해', 1);
 insert into food values(food_no_seq.nextval, '된장찌개', 6000, '미소된장 쓰면 맛없쥬', 1);
 insert into food values(food_no_seq.nextval, '열탄불고기', 8000, '6월 1일 50% 세일', 1);
