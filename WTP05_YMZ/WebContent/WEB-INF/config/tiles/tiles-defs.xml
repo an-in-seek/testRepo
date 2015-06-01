@@ -93,6 +93,10 @@
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
 		<put-attribute name="aside_menu" value="/WEB-INF/view/layout/member/mypage.jsp" />
 	</definition>
+		<definition name="member/mypage/*.tiles" extends="mypage_template">
+		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
+		<put-attribute name="aside_menu" value="/WEB-INF/view/layout/member/mypage.jsp" />
+	</definition>
 	<!-- 마이페이지:끝 -->
 	
 </tiles-definitions>

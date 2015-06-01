@@ -6,7 +6,6 @@ var pwCheck = false;
 $(document).ready(function(){
 	$("#current_password").on("keyup",function(){
 		var current_password = $(this).val();
-		alert(current_password);
 				$.ajax({
 					url:"${initParam.rootPath}/member/confirmPassword.do",
 					data:{"current_password":current_password},
@@ -18,8 +17,10 @@ $(document).ready(function(){
 					},
 					success:function(ret){
 						if(ret=="false"){
+							alert("false");
 							pwCheck=false;
 						}else{
+							alert("true");
 							pwCheck=true;
 						}
 					}
@@ -56,7 +57,7 @@ $(document).ready(function(){
 
 <h2>비밀번호 수정 폼</h2>
 
-<form method="post" action="${initParam.rootPath }/member/modifyPassword.do" id="modifyPassword" enctype="multipart/form-data">
+<form method="post" action="${initParam.rootPath }/member/modify_password.do" id="modifyPassword" enctype="multipart/form-data">
 		<table style="width:500px" align="center">
 			<tr>
 				<td>기존비밀번호</td>

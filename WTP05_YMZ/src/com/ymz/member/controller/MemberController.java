@@ -208,9 +208,9 @@ public class MemberController {
 	}
 	
 	/********************** 비밀번호 수정 ********************///비밀번호수정
-	@RequestMapping(value="modifyPassword.do",method=RequestMethod.POST)
+	@RequestMapping(value="modify_password.do",method=RequestMethod.POST)
 	@ResponseBody
-	public String modifyPassword(@RequestParam String password,HttpSession session){
+	public ModelAndView modifyPassword(@RequestParam String password,HttpSession session){
 		Member loginInfo = (Member)session.getAttribute("login_info");
 		System.out.println(password);
 		String id = loginInfo.getId();
@@ -218,13 +218,17 @@ public class MemberController {
 		Member m = service.getMemberById(id);
 		m.setPassword(password);
 		service.modifyPassword(m);
-		return "member/myPage.do";
-	}
+		return new ModelAndView("member/info/modify_password_success.tiles");
+		}
 	
-//	@RequestMapping("modifySuccess.do")
-//	public String modifySuccess(){
-//		return "member/modify_password_success.tiles";
+//	@RequestMapping("moneyCheck.do")
+//	public String moneyCheck(String num){
+//		System.out.println(num);
+//		int num1 = Integer.parseInt(num);
+//		int num2 = 1000;
+//		String num3 = (String)(num1 + num2);
+//		System.out.println(num3);
 //	}
-//	
+
 
 }
