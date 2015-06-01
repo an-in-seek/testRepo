@@ -10,11 +10,11 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	
 	var txt = "";
-	// 정렬 버튼 이벤트
+	// 검색 버튼 이벤트
 	$("#searchBtn").on("click", function(){
-		alert("검색");
+		var search = $("#searchText").val();
+		alert(search+" 검색!!!은 아직 안돼");
 	});
 	
 	
@@ -132,9 +132,9 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 		<tr>
 			<td>
 			<select id="searchSort">
-					<option value="추천수">추천수</option>
-					<option value="조회수">조회수</option>
-					<option value="최신글">최신글</option>
+					<option value="latest">최신글</option>
+					<option value="recommend">추천수</option>
+					<option value="hits">조회수</option>
 			</select>
 			</td>
 			<td><input type="text" id="searchText"></td>

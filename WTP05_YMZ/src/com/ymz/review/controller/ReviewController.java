@@ -51,8 +51,10 @@ public class ReviewController {
 	
 	//게시물 번호로 정보조회
 	@RequestMapping("reviewView.do")
-	public ModelAndView ReviewView(@RequestParam int reviewNo){
+	public ModelAndView ReviewView(@RequestParam int reviewNo, HttpSession session){
+		boolean hitFlag = false;
 		Review review = service.getReviewByNo(reviewNo);
+		hitFlag = true;
 		return new ModelAndView("review/review_view.tiles", "review", review);
 	}
 	
@@ -100,5 +102,12 @@ public class ReviewController {
 		review.setReviewNo(reviewNo);
 		service.recommendReview(review);
 		return "/review/reviewView.do";
+	}
+	
+	// 리뷰 검색
+	
+	public String searchReview(    ){
+		
+		return "/review/reviewList.do";
 	}
 }
