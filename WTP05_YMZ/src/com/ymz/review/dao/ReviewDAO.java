@@ -28,5 +28,8 @@ public interface ReviewDAO {
 
 	// 리뷰 추천
 	public abstract void recommendReview(Review review);
+
+	// 리뷰 조회수 증가
+	public abstract void updateHitsReview(int reviewNo);
 	
 }

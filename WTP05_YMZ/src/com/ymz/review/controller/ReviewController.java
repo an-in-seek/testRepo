@@ -2,23 +2,20 @@ package com.ymz.review.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ymz.faq.vo.FAQ;
 import com.ymz.member.vo.Member;
-import com.ymz.qna.vo.QNA;
 import com.ymz.review.service.ReviewService;
 import com.ymz.review.vo.Review;
 
@@ -51,10 +48,8 @@ public class ReviewController {
 	
 	//게시물 번호로 정보조회
 	@RequestMapping("reviewView.do")
-	public ModelAndView ReviewView(@RequestParam int reviewNo, HttpSession session){
-		boolean hitFlag = false;
+	public ModelAndView ReviewView(@RequestParam int reviewNo){
 		Review review = service.getReviewByNo(reviewNo);
-		hitFlag = true;
 		return new ModelAndView("review/review_view.tiles", "review", review);
 	}
 	
@@ -109,5 +104,15 @@ public class ReviewController {
 	public String searchReview(    ){
 		
 		return "/review/reviewList.do";
+	}
+	
+	// 조회수 증가
+	@RequestMapping("ajax/updateHits.do")
+	@ResponseBody
+	public int searchReview(@RequestParam int reviewNo, ModelMap map){
+		service.updateHitsReview(reviewNo);
+		Review review = service.getReviewByNo(reviewNo);
+		int hits = review.getHits();
+		return hits;
 	}
 }

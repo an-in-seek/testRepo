@@ -7,10 +7,27 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/script/jquery.cookie.js"></script>
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <script type="text/javascript">
 $(document).ready(function(){
-
+	var reviewNumber = ${requestScope.review.reviewNo};
+	// 새로고침 조회수 증가 막기
+	var c = $.cookie('reviewNo');
+	var cook = $.cookie('reviewNo', '${requestScope.review.reviewNo}'); // 쿠키 reviewNo를 셋팅
+	if(c!='${requestScope.review.reviewNo}'){
+		$.ajax({
+			url:"${initParam.rootPath}/review/ajax/updateHits.do", // 요청 url
+			type:"post",
+			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
+			success:function(txt){
+				$("#count").html(txt);
+			}
+		});
+		
+	}
+	
+	
 	// 리뷰 내용
 	$("#recommendBtn").on("click", function(){
 		var id = "${empty sessionScope.login_info}";
@@ -103,7 +120,7 @@ button#recommendBtn{
 				<td>${requestScope.review.reviewNo}</td>
 				<td>${requestScope.review.title}</td>
 				<td>${requestScope.review.memberId}</td> 
-				<td>${requestScope.review.hits}</td> 
+				<td id="count">${requestScope.review.hits}</td> 
 				<td>${requestScope.review.regDate}</td>
 				<td>${requestScope.review.recommend}</td>
 			</tr> 
