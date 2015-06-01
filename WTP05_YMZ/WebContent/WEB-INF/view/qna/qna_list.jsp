@@ -44,10 +44,16 @@ article{
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.qna_list }" var="qna">
+			<c:forEach items="${requestScope.qna_list}" var="qna">
 				<tr align="center">
 					<td>${qna.number }</td>
-					<td align="left"><a href="${initParam.rootPath}/qna/qnaView.do?qnaNo=${qna.number}">${qna.title}</a></td>
+					<td align="left">
+						<c:forEach begin="1" end="${qna.relevel}">
+							&nbsp;&nbsp;
+						</c:forEach> 
+						<c:if test="${qna.relevel != 0}"><img src="${initParam.rootPath}/se2/img/reply_icon.gif" /></c:if>
+						<a href="${initParam.rootPath}/qna/qnaView.do?qnaNo=${qna.number}">${qna.title}</a>
+					</td>
 					<td>${qna.category}</td>
 					<td>${qna.memberId}</td>
 					<td>${qna.registrationDate}</td>
@@ -55,7 +61,7 @@ article{
 				</tr>
 			</c:forEach>
 		</tbody>
-	</table>
+</table>
 
 	<table style="width: 700px">
 		<tr height="10" align="center"></tr>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="category.dao.CategoryMapper">
+
+	<sql id="category-select">
+		select 	category_id, category_name
+		from		category
+	</sql>
+	
+	<resultMap type="Category" id="category-resultmap">
+		<id column="category_id" property="categoryId"/>
+		<result column="category_name" property="categoryName"/>
+	</resultMap>
+	
+	<select id="selectAllCategory" resultMap="category-resultmap">
+		<include refid="category-select"/>
+		order by category_id
+	</select>
+
+	<select id="selectCategoryByNo" resultMap="category-resultmap" parameterType="String">
+		<include refid="category-select"/>
+		where category_id=#{categoryId}
+	</select>
+	
+</mapper>

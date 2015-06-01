@@ -22,7 +22,7 @@ $(document).ready(function(){
 				},
 				fOnAppLoad : function() {
 					// 기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할 때 사용
-					oEditors.getById["content"].exec("PASTE_HTML", []);
+					oEditors.getById["content"].exec("PASTE_HTML", ["${requestScope.qna.content}"]);
 				},
 				fCreator : "createSEditor2"
 			});
@@ -42,28 +42,32 @@ table#t1 {
 </style>
 
 <div align="center">
-	<h2>QNA게시물 답글</h2>
+	<h2>QNA게시물 답글${requestScope.qna.refamily}</h2>
 	<!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
-	<form id="write" method="post" action="${initParam.rootPath}/qna/login/write.do">
-		<!-- 테이블 -->
+	<form id="write" method="post" action="${initParam.rootPath}/qna/login/writeComment.do">
+		<input type="hidden" id="number" name="number" value="${requestScope.qna.number}" >
+		<input type="hidden" id="refamily" name="refamily" value="${requestScope.qna.refamily}" >
+		<input type="hidden" id="restep" name="restep" value="${requestScope.qna.restep}" >
+		<input type="hidden" id="relevel" name="relevel" value="${requestScope.qna.relevel}" >
 		<table id="t1">
 			<tr>
 				<td>분류</td>
 				<td><select id="category" name="category">
-					<option>분류</option>
-					<option value="회원관련">회원관련</option>
-					<option value="맛집관련">맛집관련</option>
-					<option value="리뷰관련">리뷰관련</option>
+					<c:forEach items="${requestScope.categoryList}" var="c">
+						<c:if test="${c.categoryId == requestScope.qna.category}">
+							<option value="${c.categoryId}" selected="selected">${c.categoryName}</option>
+						</c:if>
+						</c:forEach>
 				</select></td>
 			</tr>
 			<tr>
 				<td width="60px">제목</td>
-				<td><input type="text" id="title" name="title" style="width: 700px">${requestScope.qna.title }</td>
+				<td><input type="text" id="title" name="title" style="width: 700px" value="${requestScope.qna.title}" required="required"></td>
 			</tr>
 			<tr>
 				<td>내용</td>
 				<td>
-				<textarea name="content" id="content" rows="10" cols="100" style="width: 700px; height: 350px;">${requestScope.qna.content}</textarea><br>
+				<textarea name="content" id="content" rows="10" cols="100" style="width: 700px; height: 350px;" required="required"></textarea><br>
 				</td>
 			</tr>
 			<tr align="center">
@@ -74,6 +78,5 @@ table#t1 {
 				</td>
 			</tr>
 		</table>
-		<!-- 테이블 끝 -->
 	</form>
 </div>
