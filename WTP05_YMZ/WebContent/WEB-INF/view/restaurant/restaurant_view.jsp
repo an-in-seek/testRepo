@@ -225,7 +225,7 @@ $(document).ready(function(){
 		<td align="center"><span class="foodPrice">${food.foodPrice }</span>원</td>
 		<td align="center"><input type="checkbox" id="${food.foodName }"></td>
 		<td align="center">
-			<input type="number" min="1" max="10" value="1" readonly="readonly">
+			<input type="number" min="1" max="10" value="1" readonly="readonly" style="width:80px">
 			<button class="${food.foodName }">↑</button>
 			<button class="${food.foodName }">↓</button>
 		</td>
