@@ -221,14 +221,17 @@ public class MemberController {
 		return new ModelAndView("member/info/modify_password_success.tiles");
 		}
 	
-//	@RequestMapping("moneyCheck.do")
-//	public String moneyCheck(String num){
-//		System.out.println(num);
-//		int num1 = Integer.parseInt(num);
-//		int num2 = 1000;
-//		String num3 = (String)(num1 + num2);
-//		System.out.println(num3);
-//	}
+	@RequestMapping("moneyCheck.do")
+	@ResponseBody
+	public String moneyCheck(String num){
+		System.out.println(num);
+		int num1 = Integer.parseInt(num);
+		int num2 = 1000;
+		int num3 = num1 + num2;
+		String result = Integer.toString(num3);
+		System.out.println(result);
+		return result;
+	}
 
 
 }
