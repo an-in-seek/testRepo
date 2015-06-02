@@ -96,6 +96,7 @@ table#replyTB tbody tr{
 	cursor: pointer;
 }
 button{
+	background: hotpink;
 	width:100px;
 	height:50px;
 }

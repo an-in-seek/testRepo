@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestScope;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.common.validator.MemberValidator;
@@ -224,14 +225,25 @@ public class MemberController {
 	@RequestMapping("moneyCheck.do")
 	@ResponseBody
 	public String moneyCheck(String num){
-		System.out.println(num);
 		int num1 = Integer.parseInt(num);
 		int num2 = 1000;
 		int num3 = num1 + num2;
 		String result = Integer.toString(num3);
-		System.out.println(result);
 		return result;
 	}
 
-
+	@RequestMapping("updateMileage.do")
+	@ResponseBody
+	public ModelAndView updateMileage(@RequestParam String result,HttpSession session){
+		int exmileage = Integer.parseInt(result);
+		Member loginInfo = (Member)session.getAttribute("login_info");
+		String id = loginInfo.getId();
+		Member m = service.getMemberById(id);
+		m.setMileage(exmileage);
+		System.out.println(result);
+		service.modifyMileage(m);
+//		Integer.parseInt(exmileage);
+//		session.setAttribute(exmileage);
+		return new ModelAndView("member/info/trade_coupon.tiles");
+	}
 }

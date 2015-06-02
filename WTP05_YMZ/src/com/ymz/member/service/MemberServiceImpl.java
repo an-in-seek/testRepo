@@ -107,6 +107,16 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		dao.updatePassword(member);
 	}
+	
+	/**
+	 * 마일리지 수정 메소드
+	 */
+	@Override
+	public void modifyMileage(Member member) {
+		// TODO Auto-generated method stub
+		dao.updateMember(member);
+		
+	}
 	/**
 	 * 회원 탈퇴 메소드
 	 * @param id 탈퇴할 회원 ID
