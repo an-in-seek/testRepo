@@ -98,8 +98,30 @@ public class ReviewController {
 	// 리뷰 추천(로그인시 가능)
 	@RequestMapping("login/ajax/recommendReview.do")
 	@ResponseBody
-	public int recommendReview(@RequestParam int reviewNo, ModelMap map){
-		service.recommendReview(reviewNo);
+	public int recommendReview(@RequestParam int reviewNo, HttpSession session, ModelMap map){
+		Member member = (Member)session.getAttribute("login_info"); // 회원 정보 갖고오기
+		int result = 0;
+		Map rmap = new HashMap();
+		System.out.println("글 번호 : " + reviewNo);
+		System.out.println("회원 아이디 : " + member.getId());
+		rmap.put("number", reviewNo);
+		rmap.put("id", member.getId());
+		try{
+			result = service.getRecommendCount(rmap);       // 추천 테이블에서 기존 값이 있는지 확인
+			System.out.println("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ : " + result);
+		}catch(Exception e){
+			result = 0;
+			System.out.println("Null값일 경우 출력");
+		}
+		
+		System.out.println("######## 중복 추천이면 1, 아니면 0 : "+result);
+		
+		if(result == 0){									// 없으면 추천수 증가
+			service.inputRecommend(rmap);						// 추천 테이블에 값 입력
+			service.recommendReview(reviewNo); 				
+		}else if(result ==1){
+			
+		}
 		Review review = service.getReviewByNo(reviewNo);
 		int recommendCount = review.getRecommend();
 		return recommendCount;

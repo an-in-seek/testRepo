@@ -73,13 +73,30 @@ public class ReviewServiceImpl implements ReviewService {
 		return review;
 	}
 	
+	
+	/**
+	 * 리뷰 추천 테이블에서 값 조회
+	 */
+	@Override
+	public int getRecommendCount(Map rmap) {
+		return dao.getRecommendCount(rmap);
+	}
+	
+	/**
+	 * 리뷰 추천 등록
+	 */
+	@Override
+	public void inputRecommend(Map rmap) {
+		dao.inputRecommend(rmap);
+	}
+	
 	/**
 	 * 리뷰 추천
 	 */
 	public void recommendReview(int reviewNo){
 		dao.recommendReview(reviewNo);
 	}
-	
+
 	/**
 	 * 리뷰 조회수 증가
 	 */
