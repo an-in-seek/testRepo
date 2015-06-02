@@ -67,13 +67,13 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<h2>맛집 리뷰</h2>
 	
 	<!-- 테이블 시작 -->
-	<table id="listTB" style="width:900px">
+	<table id="listTB" style="width:1000px">
 		<thead>
 			<tr>
 				<td style="width:50px">번호</td>
-				<td style="width:450px">상호명</td>
+				<td style="width:350px">상호명</td>
 				<td style="width:150px">작성자</td>
-				<td style="width:50px">작성일</td>
+				<td style="width:100px">작성일</td>
 				<td style="width:50px">추천</td>
 				<td style="width:50px">조회</td>
 			</tr>
@@ -149,7 +149,12 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 		</tr>
 	</table>
 	<br>
-
+	</div>
+	
+	<!-- 인기글 테이블 -->
+	<div id="famousText" align="center">
+		<span style="font-size: 10" >인기순 테이블, 제목에 댓글개수 달기</span>
+		<br><br>
 	</div>
 </section>
 

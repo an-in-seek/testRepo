@@ -29,7 +29,7 @@
 			select review_no_seq.nextval from dual
 		</selectKey>
 		insert into review (review_no, title, content, hits, recommend, reg_date, member_id)
-		values (#{reviewNo}, #{title}, #{content}, #{hits}, #{recommend}, to_char(sysdate, 'yyyymmdd'), #{memberId})
+		values (#{reviewNo}, #{title}, #{content}, #{hits}, #{recommend}, to_char(sysdate, 'yyyy-mm-dd hh:MM:ss'), #{memberId})
 	</insert>
 
 	<!-- 수정 -->
