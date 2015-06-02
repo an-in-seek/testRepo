@@ -50,6 +50,10 @@ public interface MemberService {
 	 */
 	public abstract void modifyPassword(Member member);
 	
+	/**
+	 * 마일리지 수정 메소드 
+	 */
+	public abstract void modifyMileage(Member member);
 	
 	/**
 	 * 회원 탈퇴 메소드
