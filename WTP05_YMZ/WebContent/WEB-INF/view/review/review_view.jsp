@@ -22,22 +22,32 @@ $(document).ready(function(){
 			type:"post",
 			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
 			success:function(txt){
-				$("#count").html(txt);
+				$("#hitsCount").html(txt);
 			}
 		});
 	}
 	
 	
-	// 리뷰 내용
-	$("#recommendBtn").on("click", function(){
+	////////////////////////////////////////////////////// 리뷰 본문
+	// 추천
+	$("#recommendBtn").on("click", function(){		
 		var id = "${empty sessionScope.login_info}";
 		if(id=="true"){
 			alert("로그인 안했엉");
 			return;
 		}
-		document.location.href="${initParam.rootPath }/review/login/recommendReview.do?reviewNo="+${requestScope.review.reviewNo};
+		$.ajax({
+			url:"${initParam.rootPath }/review/login/ajax/recommendReview.do", // 요청 url
+			type:"post",
+			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
+			success:function(txt){
+				$("#recommendCount").html(txt);
+				$("#recommendCountBtn").html(txt);
+			}
+		});
+		
 	});
-
+	// 삭제
 	$("#deleteBtn").on("click", function(){
 		var isDel = confirm("정말로 삭제하시겠습니까?");
 		if (isDel) {
@@ -120,9 +130,9 @@ button#recommendBtn{
 				<td>${requestScope.review.reviewNo}</td>
 				<td>${requestScope.review.title}</td>
 				<td>${requestScope.review.memberId}</td> 
-				<td id="count">${requestScope.review.hits}</td> 
+				<td id="hitsCount">${requestScope.review.hits}</td> 
 				<td>${requestScope.review.regDate}</td>
-				<td>${requestScope.review.recommend}</td>
+				<td id="recommendCount">${requestScope.review.recommend}</td>
 			</tr> 
 		</tbody>
 	</table>
@@ -137,7 +147,7 @@ ${requestScope.review.content }<br>
 
 	<div align="center" id="recommend"> <!-- 추천 버튼 -->
 		<button id="recommendBtn">
-			<font color="red" size="6">${requestScope.review.recommend}</font><br><br>
+			<span id="recommendCountBtn">${requestScope.review.recommend}</span><br> 
 			<font color="blue" size='2'>추천</font>
 		</button>
 	</div><br><br>

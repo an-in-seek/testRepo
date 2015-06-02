@@ -61,7 +61,7 @@
 	</select>
 	
 	<!-- 추천수 증가 -->
-	<select id="recommendReview" parameterType="review">
+	<select id="recommendReview" parameterType="int">
 		update review
 		set recommend = recommend + 1
 		where review_no=#{reviewNo}
