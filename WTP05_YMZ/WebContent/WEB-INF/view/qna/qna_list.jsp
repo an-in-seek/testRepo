@@ -10,6 +10,20 @@
 			$("table#listTB tbody tr").css("background-color", "white");
 			$(this).css("background-color", "lightgray");
 		});
+		
+		$.ajax({
+			url:"${initParam.rootPath}/qna/findLoginMember.do", //요청 url 설정
+			type:"post", //HTTP 요청 방식(method)
+			dataType:"json", //javascript객체로 변환해서 응답데이터를 전달.
+			beforeSend:function(){
+				$("#writeBtn").hide();
+			},
+			success:function(member){
+				if(member){
+					$("#writeBtn").show();
+				}
+			}
+		});
 	});
 </script>
 
@@ -81,7 +95,7 @@ article{
 			<td><input type="button" id="searchBtn" value="검색"></td>
 			<td>
 				<form action="${initParam.rootPath }/qna/login/writeForm.do" method="post">
-					<input type="submit" value="글쓰기">
+					<input id="writeBtn" type="submit" value="글쓰기">
 				</form>
 			</td>
 		</tr>

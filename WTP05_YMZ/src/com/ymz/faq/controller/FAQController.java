@@ -3,6 +3,7 @@ package com.ymz.faq.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.faq.service.FAQService;
 import com.ymz.faq.vo.FAQ;
+import com.ymz.member.vo.Member;
 
 @Controller
 @RequestMapping("/faq/")
@@ -63,5 +65,13 @@ public class FAQController {
 	@ResponseBody
 	public FAQ findFAQByNo(@RequestParam int number){
 		return service.getFAQByNo(number);
+	}
+	
+	// 현재 로그인정보를 체크해서 리턴
+	@RequestMapping("findLoginMember")
+	@ResponseBody
+	public Member findLoginMember(HttpSession session){
+		Member member = (Member) session.getAttribute("login_info");
+		return member;
 	}
 }

@@ -25,7 +25,6 @@ $(document).ready(function(){
 				$("#count").html(txt);
 			}
 		});
-		
 	}
 	
 	

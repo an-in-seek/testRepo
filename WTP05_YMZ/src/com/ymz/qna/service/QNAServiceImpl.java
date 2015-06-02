@@ -63,6 +63,12 @@ public class QNAServiceImpl implements QNAService {
 		QNA qna = dao.selectQNAByNo(number);
 		return qna;
 	}
+	
+	//리뷰 조회수 증가
+	@Override
+	public void updateHitsQNA(int number){
+		dao.updateHitsQNA(number);
+	}
 
 	//트랜젝션 테스트
 	@Override

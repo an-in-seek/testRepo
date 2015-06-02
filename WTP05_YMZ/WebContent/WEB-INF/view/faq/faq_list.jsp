@@ -12,6 +12,25 @@ function removeFaq(number){
 } 
 
 $(document).ready(function(){
+	
+	$.ajax({
+		url:"${initParam.rootPath}/faq/findLoginMember.do", //요청 url 설정
+		type:"post", //HTTP 요청 방식(method)
+		dataType:"json", //javascript객체로 변환해서 응답데이터를 전달.
+		beforeSend:function(){
+			$("#writeBtn").hide();
+			$("#modifyBtn").hide();
+			$("#td3").hide();
+		},
+		success:function(member){
+			if(member){
+				$("#writeBtn").show();
+				$("#modifyBtn").show();
+				$("#td3").show();
+			}
+		}
+	});
+	
 	$("table#listTB tbody tr").on("click", function(){
 		$("table#listTB tbody tr").css("background-color", "white");
 		$(this).css("background-color", "lightgray");
@@ -21,11 +40,7 @@ $(document).ready(function(){
 			data:{"number":number},
 			type:"post", //HTTP 요청 방식(method)
 			dataType:"json", //javascript객체로 변환해서 응답데이터를 전달.
-			beforeSend:function(){
-				//$("#product_info_layer").hide();
-				//alert("확인");
-				//return false;
-			},
+			beforeSend:function(){ },
 			success:function(obj){
 				var content = obj.content;
 				var txt = content;
@@ -73,12 +88,12 @@ article{
 <%-- <c:if test="${fn:length(requestScope.faq_list) != 0 }"> --%>
 <form id="removeForm" method=post action="login/removeFaq.do">
 	<input type="hidden" id="number" name="number">
+	
 	<table id="listTB" style="width:700px" border="1" align="center">
 		<thead>
 			<tr align="center">
 				<td>NO</td>
 				<td>제목</td>
-				<td width="100px">삭제(관리자)</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -86,12 +101,17 @@ article{
 				<tr align="center">
 					<td id="td1">${qna.number}</td>
 					<td id="td2" align="left">${qna.title}</td>
-					<td id="td3" align='center'>
-					<input type="button"  value="삭제" onclick="removeFaq(${qna.number});">
-					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
+	</table>
+	<table>
+	<tr>
+	<td width="100px">삭제(관리자)</td>
+	</tr>
+	<tr>
+	<td><input id="deleteBtn${qna.number}" type="button"  value="삭제" onclick="removeFaq(${qna.number});"></td>
+	</tr>
 	</table>
 </form>
 
@@ -115,7 +135,8 @@ article{
 	<form action="${initParam.rootPath }/faq/login/writeForm.do" method="post">
 		<table style="width:700px" align="center">
 			<tr>
-				<td align="center"><input type="submit" value="글쓰기"></td>
+				<td align="center"><input id="writeBtn" type="submit" value="글쓰기"></td>
+				<td align="center"><input id="modifyBtn" type="button" value="수정하기"></td>
 			</tr>
 		</table>
 	</form>

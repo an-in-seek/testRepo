@@ -46,12 +46,6 @@ public class QNADAOImpl implements QNADAO {
 		return session.delete(namespace+"deleteQNAByNo", number);
 	}
 
-	// QNA게시판 글 번호로 조회
-	@Override
-	public QNA selectQNAByNo(int number) {
-		return session.selectOne(namespace + "selectQNAByNo", number);
-	}
-		
 	//QNA게시판 글 전체목록 조회
 	@Override
 	public List<QNA> selectAllQNA(int pageNo) {
@@ -61,6 +55,19 @@ public class QNADAOImpl implements QNADAO {
 		return session.selectList(namespace+"selectAllQNA", map);
 	}
 	
+	// QNA게시판 글 번호로 조회
+	@Override
+	public QNA selectQNAByNo(int number) {
+		return session.selectOne(namespace + "selectQNAByNo", number);
+	}
+	
+	//QNA게시물 조회수 증가
+	@Override
+	public void updateHitsQNA(int number){
+		session.update(namespace + "updateHits", number);
+	}
+	
+	//DB에 있는 데이터 총 개수
 	@Override
 	public int selectTotalQNACount(){
 		return session.selectOne(namespace+"selectTotalQNACount");
