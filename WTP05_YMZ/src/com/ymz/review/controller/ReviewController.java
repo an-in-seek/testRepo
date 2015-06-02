@@ -96,19 +96,13 @@ public class ReviewController {
 	}
 	
 	// 리뷰 추천(로그인시 가능)
-	@RequestMapping("login/recommendReview.do")
-	public String recommendReview(@ModelAttribute Review review, @RequestParam int reviewNo){
-		System.out.println("추천할 글번호 : " + reviewNo);
-		review.setReviewNo(reviewNo);
-		service.recommendReview(review);
-		return "/review/reviewView.do";
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
-	
-	public String searchReview(    ){
-		
-		return "/review/reviewList.do";
+	@RequestMapping("login/ajax/recommendReview.do")
+	@ResponseBody
+	public int recommendReview(@RequestParam int reviewNo, ModelMap map){
+		service.recommendReview(reviewNo);
+		Review review = service.getReviewByNo(reviewNo);
+		int recommendCount = review.getRecommend();
+		return recommendCount;
 	}
 	
 	// 조회수 증가
@@ -120,4 +114,11 @@ public class ReviewController {
 		int hits = review.getHits();
 		return hits;
 	}
+	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
+	
+	public String searchReview(    ){
+		
+		return "/review/reviewList.do";
+	}
+	
 }

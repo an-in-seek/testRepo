@@ -22,7 +22,7 @@ public interface ReviewService {
 	public abstract Review getReviewByNo(int reviewNo);
 
 	// 리뷰 추천
-	public abstract void recommendReview(Review review);
+	public abstract void recommendReview(int reviewNo);
 
 	// 리뷰 조회수 증가
 	public abstract void updateHitsReview(int reviewNo);

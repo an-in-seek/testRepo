@@ -47,8 +47,8 @@ public class ReviewDAOImpl implements ReviewDAO{
 	/**
 	 * 리뷰 추천
 	 */
-	public void recommendReview(Review review){
-		session.update(namespace+"recommendReview", review);
+	public void recommendReview(int reviewNo){
+		session.update(namespace+"recommendReview", reviewNo);
 	}
 	
 	/**
@@ -56,7 +56,6 @@ public class ReviewDAOImpl implements ReviewDAO{
 	 */
 	@Override
 	public Review selectReviewByNo(int reviewNo) {
-		//session.selectOne(namespace + "updateHits", reviewNo);
 		return session.selectOne(namespace + "selectReviewByNo", reviewNo);
 	}
 	

@@ -76,8 +76,8 @@ public class ReviewServiceImpl implements ReviewService {
 	/**
 	 * 리뷰 추천
 	 */
-	public void recommendReview(Review review){
-		dao.recommendReview(review);
+	public void recommendReview(int reviewNo){
+		dao.recommendReview(reviewNo);
 	}
 	
 	/**
