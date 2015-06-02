@@ -9,6 +9,9 @@ public interface QNADAO {
 	//게시물 삽입
 	public abstract int insertQNA(QNA qna);
 	
+	//게시물 답글 삽입
+	public abstract void insertQNAComment(QNA qna);
+	
 	//게시물 수정
 	public abstract int updateQNA(QNA qna);
 	
@@ -23,5 +26,7 @@ public interface QNADAO {
 
 	//게시판 DB에 있는 모든 정보들의 개수를 카운트
 	public abstract int selectTotalQNACount();
+
+	
 
 }

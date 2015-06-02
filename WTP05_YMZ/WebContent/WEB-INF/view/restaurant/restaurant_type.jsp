@@ -80,6 +80,7 @@ $(document).ready(function(){
 						<td align="left" style="border-right-style:hidden;">
 							<a href="${initParam.rootPath }/restaurant/restaurantView.do?restaurantNo=${restaurant.restaurantNo }">${restaurant.restaurantName}</a>
 							<c:if test="${restaurant.replyCount>0 }"><font color="gray">[${restaurant.replyCount }]</font></c:if>
+							<c:if test="${requestScope.today==restaurant.regDate }"><img style="width:12px;height:10px;" src="${initParam.rootPath }/uploadPhoto/new.png"></c:if>
 						</td>
 						<td style="border-right-style:hidden;">${restaurant.phoneNo}</td>
 						<td style="border-right-style:hidden;">${restaurant.score}</td>

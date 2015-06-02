@@ -25,6 +25,12 @@ public class QNAServiceImpl implements QNAService {
 	public void registerQNA(QNA qna) {
 		dao.insertQNA(qna);
 	}
+	
+	//QNA게시판 답글 등록
+	@Override
+	public void registerQNAComment(QNA qna) {
+		dao.insertQNAComment(qna);
+	}
 
 	//QNA게시판 글 수정
 	@Override

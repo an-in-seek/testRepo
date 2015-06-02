@@ -105,6 +105,7 @@ public class MemberController {
 		return url;
 	}
 	//회원정보수정
+	
 
 	
 	// 전체 정보 조회1
@@ -133,13 +134,13 @@ public class MemberController {
 			return "member/modify_form.tiles";
 		}
 
+		//session의 login_info 속성의 property들을  수정된 정보로 변경(id, joinDate는 변경 안한다.)
 		//로그인 체크 - interceptor가 처리
 		service.modifyMember(member);//수정 처리
-		
-		//session의 login_info 속성의 property들을  수정된 정보로 변경(id, joinDate는 변경 안한다.)
 		loginInfo.setName(member.getName());
 		loginInfo.setEmail(member.getEmail());
 		loginInfo.setPassword(member.getPassword());
+		
 
 		return "member/member_info.tiles";
 	}
@@ -192,5 +193,42 @@ public class MemberController {
 		}
 		return result;
 	}
+	/**********************기존 비밀번호 체크********************///
+	@RequestMapping("confirmPassword.do")
+	@ResponseBody
+	public String confirmPassword(@RequestParam String current_password, HttpSession session){
+		Member m = (Member)session.getAttribute("login_info");
+		String result = null;
+			if(current_password.equals(m.getPassword())){
+				result = "true";
+			}else{
+				result = "false";
+			}
+		return result;
+	}
+	
+	/********************** 비밀번호 수정 ********************///비밀번호수정
+	@RequestMapping(value="modify_password.do",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView modifyPassword(@RequestParam String password,HttpSession session){
+		Member loginInfo = (Member)session.getAttribute("login_info");
+		System.out.println(password);
+		String id = loginInfo.getId();
+		System.out.println(id);
+		Member m = service.getMemberById(id);
+		m.setPassword(password);
+		service.modifyPassword(m);
+		return new ModelAndView("member/info/modify_password_success.tiles");
+		}
+	
+//	@RequestMapping("moneyCheck.do")
+//	public String moneyCheck(String num){
+//		System.out.println(num);
+//		int num1 = Integer.parseInt(num);
+//		int num2 = 1000;
+//		String num3 = (String)(num1 + num2);
+//		System.out.println(num3);
+//	}
+
 
 }

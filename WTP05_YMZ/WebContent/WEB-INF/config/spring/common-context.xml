@@ -11,6 +11,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 
+	<context:component-scan base-package="com.ymz.common.category.dao, com.ymz.common.category.service, com.ymz.common.category.controller"/>
 	<context:component-scan base-package="com.ymz.faq.dao, com.ymz.faq.service, com.ymz.faq.controller"/>
 	<context:component-scan base-package="com.ymz.member.dao, com.ymz.member.service, com.ymz.member.controller"/>
 	<context:component-scan base-package="com.ymz.restaurant.dao, com.ymz.restaurant.service, com.ymz.restaurant.controller"/>
@@ -35,10 +36,11 @@
 	<mvc:view-controller path="/index.do" view-name="main.tiles"/>
 	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>
 	<mvc:view-controller path="/member/loginForm.do" view-name="member/login_form.tiles"/>
+	<mvc:view-controller path="/member/mypage/modify_password_success.do" view-name="member/info/modify_password_success.tiles"/>
 	<mvc:view-controller path="/faq/login/writeForm.do" view-name="faq/faq_write_form.tiles"/>
-	<mvc:view-controller path="/faq/login/modifyForm.do" view-name="faq/faq_modify_form.tiles"/>
+	<!-- <mvc:view-controller path="/faq/login/modifyForm.do" view-name="faq/faq_modify_form.tiles"/> -->
 	<mvc:view-controller path="/qna/login/writeForm.do" view-name="qna/qna_write_form.tiles"/>
-	<mvc:view-controller path="/qna/login/modifyForm.do" view-name="qna/qna_modify_form.tiles"/>
+	<!-- <mvc:view-controller path="/qna/login/modifyForm.do" view-name="qna/qna_modify_form.tiles"/> -->
 	<mvc:view-controller path="/qna/login/commentForm.do" view-name="qna/qna_comment_form.tiles"/>
 	<mvc:view-controller path="/review/login/review_write_form.do" view-name="review/review_write_form.tiles"/>
 	
@@ -48,15 +50,14 @@
 	
 	<!-- 회원정보 수정 폼 -->
 	<mvc:view-controller path="/member/login/modifyForm.do" view-name="member/info/modify_info.tiles"/>
-	
 	<!-- 비밀번호수정 폼 -->
-	<mvc:view-controller path="/member/login/modifyPassword.do" view-name="member/info/modify_password.tiles"/>
-	
+	<mvc:view-controller path="/member/mypage/modify_password.do" view-name="member/info/modify_password.tiles"/>
 	<!-- 쿠폰교환 폼 -->
-	<mvc:view-controller path="/member/login/tradeCoupon.do" view-name="member/info/trade_coupon.tiles"/>
-	
+	<mvc:view-controller path="/member/mypage/tradeCoupon.do" view-name="member/info/trade_coupon.tiles"/>
+	<!-- 회원탈퇴 폼 -->
+
 	<!-- 마이페이지 폼-->
-	<mvc:view-controller path="/member/myPage.do" view-name="member/info/mypage.tiles"/>
+	<mvc:view-controller path="/member/mypage.do" view-name="member/info/mypage.tiles"/>
 	
 	<!-- file upload 처리 multipartResolver 등록 -->
 	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>

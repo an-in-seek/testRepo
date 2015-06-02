@@ -44,13 +44,19 @@ public class ReviewDAOImpl implements ReviewDAO{
 		session.delete(namespace+"deleteReview", review);
 	}
 
-
+	/**
+	 * 리뷰 추천
+	 */
+	public void recommendReview(Review review){
+		session.update(namespace+"recommendReview", review);
+	}
+	
 	/**
 	 * 리뷰 조회
 	 */
 	@Override
 	public Review selectReviewByNo(int reviewNo) {
-		session.selectOne(namespace + "updateHits", reviewNo);
+		//session.selectOne(namespace + "updateHits", reviewNo);
 		return session.selectOne(namespace + "selectReviewByNo", reviewNo);
 	}
 	
@@ -75,7 +81,13 @@ public class ReviewDAOImpl implements ReviewDAO{
 		return session.selectOne(namespace+"selectTotalReviewCount");
 	}
 
-
+	/**
+	 * 리뷰 조회수 증가
+	 * @return 
+	 */
+	public void updateHitsReview(int reviewNo){
+		session.update(namespace + "updateHits", reviewNo);
+	}
 	
 	
 }

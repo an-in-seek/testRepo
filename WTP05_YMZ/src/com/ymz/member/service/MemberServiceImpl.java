@@ -99,6 +99,15 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 	/**
+	 * 비밀번호 수정 메소드
+	 */
+	
+	@Override
+	public void modifyPassword(Member member) {
+		// TODO Auto-generated method stub
+		dao.updatePassword(member);
+	}
+	/**
 	 * 회원 탈퇴 메소드
 	 * @param id 탈퇴할 회원 ID
 	 */

@@ -88,6 +88,15 @@ article {
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
+		<td align="center">분류</td>
+		<td>${requestScope.qna.category}</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr height="1" bgcolor="#dddddd">
+		<td colspan="4"></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
 		<td align="center">제목</td>
 		<td>${requestScope.qna.title}</td>
 		<td>&nbsp;</td>
@@ -96,9 +105,10 @@ article {
 		<td colspan="4"></td>
 	</tr>
 	<tr>
-		<td></td>
+		<td>&nbsp;</td>
 		<td align="center" height="200">내용</td>
-		<td colspan="2">${requestScope.qna.content}</td>
+		<td colspan="1">${requestScope.qna.content}</td>
+		<td>&nbsp;</td>
 	</tr>
 
 	<tr height="2" bgcolor="#dddddd">

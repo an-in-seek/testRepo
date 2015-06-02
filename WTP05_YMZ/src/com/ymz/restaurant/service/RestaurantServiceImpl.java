@@ -1,6 +1,8 @@
 package com.ymz.restaurant.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +32,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		map.put("pagingBean", pagingBean);
 		map.put("category", category);
 		map.put("align", align);
+		map.put("today", new SimpleDateFormat("yyyyMMdd").format(new Date()));
 		return map;
 	}
 	
@@ -43,6 +46,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		map.put("pagingBean", pagingBean);
 		map.put("theme", theme);
 		map.put("align", align);
+		map.put("today", new SimpleDateFormat("yyyyMMdd").format(new Date()));
 		return map;
 	}
 

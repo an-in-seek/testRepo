@@ -90,7 +90,6 @@ footer.member_template{
 		<section id="body" class="member_template">
 			<tiles:insertAttribute name="body" />
 		</section>
-	
 		
 		<footer class="member_template">
 			<tiles:insertAttribute name="footer" />

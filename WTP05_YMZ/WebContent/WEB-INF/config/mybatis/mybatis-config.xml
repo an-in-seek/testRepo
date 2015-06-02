@@ -2,6 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 	<typeAliases>
+		<package name="com.ymz.common.category.vo"/>
 		<package name="com.ymz.faq.vo"/>
 		<package name="com.ymz.member.vo"/>
 		<package name="com.ymz.restaurant.vo"/>
@@ -22,6 +23,7 @@
 	
 	
 	<mappers>
+		<mapper resource="com/ymz/common/config/mapper/CategoryMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/FAQMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/MemberMapper.xml"/>		
 		<mapper resource="com/ymz/common/config/mapper/RestaurantMapper.xml"/>

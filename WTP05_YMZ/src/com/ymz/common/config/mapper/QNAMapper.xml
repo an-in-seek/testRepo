@@ -5,6 +5,9 @@
 
 	<sql id="qna-select">
 		select	qna_no, 
+				qna_refamily,
+				qna_restep,
+				qna_relevel,
 				qna_title, 
 				qna_category, 
 				to_char(to_date(qna_registration_date, 'yyyymmdd'), 'yyyy-mm-dd') qna_registration_date, 
@@ -16,6 +19,9 @@
 	
 	<resultMap type="QNA" id="qna-resultmap">
 		<id column="qna_no" property="number"/>
+		<result column="qna_refamily" property="refamily"/>
+		<result column="qna_restep" property="restep"/>
+		<result column="qna_relevel" property="relevel"/>
 		<result column="qna_title" property="title"/>
 		<result column="qna_category" property="category"/>
 		<result column="qna_registration_date" property="registrationDate"/>
@@ -30,8 +36,55 @@
 	</resultMap>
 	
 	<insert id="insertQNA" parameterType="QNA">
-		insert into qna (qna_no, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id)
-		values (qna_no_seq.nextval, #{title}, #{category}, to_char(sysdate, 'yyyymmdd'), 0, #{content}, #{memberId})
+		insert into qna (	qna_no, 
+								qna_refamily,
+								qna_restep,
+								qna_relevel,
+								qna_title, 
+								qna_category, 
+								qna_registration_date, 
+								qna_hits, 
+								qna_content, 
+								member_id)
+		values (	qna_no_seq.nextval, 
+					qna_no_seq.currval, 
+					0,
+					0,
+					#{title}, 
+					#{category}, 
+					to_char(sysdate, 'yyyymmdd'), 
+					0, 
+					#{content}, 
+					#{memberId})
+	</insert>
+	
+	<update id="addStep" parameterType="QNA">
+		update 	qna 
+		set 		qna_restep = qna_restep+1 
+		where 	qna_refamily = #{refamily} and qna_restep > #{restep}
+	</update>
+	
+	<insert id="insertQNAComment" parameterType="QNA">
+		insert into qna (	qna_no,	
+								qna_refamily,
+								qna_restep,
+								qna_relevel,
+								qna_title, 
+								qna_category, 
+								qna_registration_date, 
+								qna_hits, 
+								qna_content, 
+								member_id)
+		values (	qna_no_seq.nextval, 
+					#{refamily}, 
+					#{restep}+1,
+					#{relevel}+1,
+					#{title}, 
+					#{category}, 
+					to_char(sysdate, 'yyyymmdd'), 
+					0, 
+					#{content}, 
+					#{memberId})
 	</insert>
 	
 	<update id="updateQNA" parameterType="QNA">
@@ -45,12 +98,12 @@
 	</delete>
 	
 	<select id="selectAllQNA" parameterType="map" resultMap="qna-resultmap">
-		select qna_no, qna_title, qna_category, member_id, qna_registration_date,  qna_hits
+		select qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, member_id, qna_registration_date,  qna_hits
 		from (
-			select ceil(rownum/#{contentsPerPage}) page, qna_no, qna_title, qna_category, member_id, qna_registration_date,  qna_hits
+			select ceil(rownum/#{contentsPerPage}) page, qna_no,  qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, member_id, qna_registration_date,  qna_hits
 			from (
 					<include refid="qna-select"/>
-					order by qna_no
+					order by qna_refamily desc, qna_restep asc
 			)
 		) 
 		where page = #{pageNo}

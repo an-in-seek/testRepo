@@ -24,6 +24,15 @@ public class QNADAOImpl implements QNADAO {
 	public int insertQNA(QNA qna) {
 		return session.insert(namespace+"insertQNA", qna);
 	}
+	
+	@Override
+	public void insertQNAComment(QNA qna) {
+		//transaction 처리 필요
+		//update step+1(원본 글보다 큰건 다 +1)
+		session.update(namespace+"addStep", qna);
+		//insert 삽입
+		session.insert(namespace+"insertQNAComment", qna);
+	}
 
 	//QNA게시판 글 수정
 	@Override

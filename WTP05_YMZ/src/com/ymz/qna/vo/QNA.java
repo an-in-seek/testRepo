@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 public class QNA implements Serializable{
 
-	private int number;
+	private int number; 
+	private int refamily;
+	private int restep;
+	private int relevel;
 	private String title;
 	private String category;
 	private String registrationDate;
@@ -12,12 +15,18 @@ public class QNA implements Serializable{
 	private String content;
 	private String memberId;
 	
-	public QNA(){}
+	public QNA() {
+		super();
+	}
 
-	public QNA(int number, String title, String category,
-			String registrationDate, int hits, String content, String memberId) {
+	public QNA(int number, int refamily, int restep, int relevel, String title,
+			String category, String registrationDate, int hits, String content,
+			String memberId) {
 		super();
 		this.number = number;
+		this.refamily = refamily;
+		this.restep = restep;
+		this.relevel = relevel;
 		this.title = title;
 		this.category = category;
 		this.registrationDate = registrationDate;
@@ -32,6 +41,30 @@ public class QNA implements Serializable{
 
 	public void setNumber(int number) {
 		this.number = number;
+	}
+
+	public int getRefamily() {
+		return refamily;
+	}
+
+	public void setRefamily(int refamily) {
+		this.refamily = refamily;
+	}
+
+	public int getRestep() {
+		return restep;
+	}
+
+	public void setRestep(int restep) {
+		this.restep = restep;
+	}
+
+	public int getRelevel() {
+		return relevel;
+	}
+
+	public void setRelevel(int relevel) {
+		this.relevel = relevel;
 	}
 
 	public String getTitle() {
@@ -84,10 +117,11 @@ public class QNA implements Serializable{
 
 	@Override
 	public String toString() {
-		return "QNA [number=" + number + ", title=" + title + ", category="
-				+ category + ", registrationDate=" + registrationDate
-				+ ", hits=" + hits + ", content=" + content + ", memberId="
-				+ memberId + "]";
+		return "QNA [number=" + number + ", refamily=" + refamily + ", restep="
+				+ restep + ", relevel=" + relevel + ", title=" + title
+				+ ", category=" + category + ", registrationDate="
+				+ registrationDate + ", hits=" + hits + ", content=" + content
+				+ ", memberId=" + memberId + "]";
 	}
 
 	@Override
@@ -101,9 +135,12 @@ public class QNA implements Serializable{
 		result = prime * result
 				+ ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + number;
+		result = prime * result + refamily;
 		result = prime
 				* result
 				+ ((registrationDate == null) ? 0 : registrationDate.hashCode());
+		result = prime * result + relevel;
+		result = prime * result + restep;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -136,10 +173,16 @@ public class QNA implements Serializable{
 			return false;
 		if (number != other.number)
 			return false;
+		if (refamily != other.refamily)
+			return false;
 		if (registrationDate == null) {
 			if (other.registrationDate != null)
 				return false;
 		} else if (!registrationDate.equals(other.registrationDate))
+			return false;
+		if (relevel != other.relevel)
+			return false;
+		if (restep != other.restep)
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -148,6 +191,5 @@ public class QNA implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 }
