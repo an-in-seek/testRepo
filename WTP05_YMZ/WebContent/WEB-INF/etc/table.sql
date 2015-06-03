@@ -382,6 +382,5 @@ create sequence location_no_seq;
 drop sequence review_no_seq;
 create sequence review_no_seq;
 --리뷰댓글에서 사용하는 씨컨즈
-
 drop sequence review_reply_no_seq;
 create sequence review_reply_no_seq;
