@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,12 +44,20 @@ public class FAQController {
 		return new ModelAndView("faq/faq_list.tiles", "faq_list", list);
 	}
 	
+	//FAQ게시물 수정폼으로 이동
+	@RequestMapping("login/modifyForm.do")
+	public String moveModifyForm(@RequestParam int number, ModelMap map)throws Exception{
+		//로그인 체크 - interceptor가 처리
+		map.put("faq", service.getFAQByNo(number));
+		return "faq/faq_modify_form.tiles";
+	}
+	
 	// 게시물 수정
-	@RequestMapping(value="login/modifyFaqInfo.do", method=RequestMethod.POST)
-	public String modifyFAQInfo(@ModelAttribute FAQ faq, Errors errors,  HttpServletRequest request)																													throws Exception{
+	@RequestMapping(value="login/modify.do", method=RequestMethod.POST)
+	public String modifyFAQ(@ModelAttribute FAQ faq, Errors errors) throws Exception{
 		//로그인 체크 - interceptor가 처리
 		service.modifyFAQ(faq);//수정 처리
-		return "faq/faq_info.tiles";
+		return "/faq/faqList.do";
 	}
 	
 	// 게시물 삭제

@@ -5,9 +5,10 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <script type="text/javascript">
+
 	$(document).ready(function() {
-		$("table#listTB tbody tr").on("mouseover", function() {
-			$("table#listTB tbody tr").css("background-color", "white");
+		$("#listTB tbody tr").on("mouseover", function() {
+			$("#listTB tbody tr").css("background-color", "white");
 			$(this).css("background-color", "lightgray");
 		});
 		
@@ -41,12 +42,20 @@ article{
 	padding: 5px;
 	padding-left: 10px;
 }
+#listTB{
+	margin-left: 10px;
+}
 </style>
 
-<h2 align="center">고객센터(Q&A)</h2>
+
 
 <%-- <c:if test="${fn:length(requestScope.qna_list) != 0 }"> --%>
-	<table align="center" id="listTB" style="width: 700px" border="1">
+<table align="left" style="width: 700px">
+	<tr>
+		<td><h2 align="center">고객센터(Q&A)</h2></td>
+	</tr>
+</table>
+<table align="left" id="listTB" style="width: 700px" border="1">
 		<thead>
 			<tr align="center">
 				<td>NO</td>
