@@ -96,29 +96,32 @@ public class ReviewController {
 	}
 	
 	// 리뷰 추천(로그인시 가능)
+//	1. 추천 버튼을 누르면 추천 테이블에 값을 넣는다.
+//	2. 리뷰 테이블의 추천수를 +1 해준다.
+//	3. DB에서 있는지 조회한다. return type = _int , 리턴값이  0이면 업뎃하지말고 1이면 업뎃하고
+//	4. 다시 추천 버튼을 누르면 추천 테이블의 값을 가져와서 비교한 뒤 같으면 다시 뷰로 돌악나다.
+
 	@RequestMapping("login/ajax/recommendReview.do")
 	@ResponseBody
 	public int recommendReview(@RequestParam int reviewNo, HttpSession session, ModelMap map){
 		Member member = (Member)session.getAttribute("login_info"); // 회원 정보 갖고오기
 		int result = 0;
-		Map rmap = new HashMap();
+		Map<String, Object> rmap = new HashMap<String, Object>();
 		System.out.println("글 번호 : " + reviewNo);
 		System.out.println("회원 아이디 : " + member.getId());
+		
 		rmap.put("number", reviewNo);
 		rmap.put("id", member.getId());
+		
 		try{
 			result = service.getRecommendCount(rmap);       // 추천 테이블에서 기존 값이 있는지 확인
-			System.out.println("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ : " + result);
-		}catch(Exception e){
-			result = 0;
-			System.out.println("Null값일 경우 출력");
+		}catch(Exception e){								// Null값이 Return되어 Exception이 발생했을 경우
+			result = 0;										// 0을 결과값으로 입력한다.
 		}
 		
-		System.out.println("######## 중복 추천이면 1, 아니면 0 : "+result);
-		
-		if(result == 0){									// 없으면 추천수 증가
-			service.inputRecommend(rmap);						// 추천 테이블에 값 입력
-			service.recommendReview(reviewNo); 				
+		if(result == 0){									// 추천 테이블에 값이 없으면
+			service.inputRecommend(rmap);					// 추천 테이블에 값 입력
+			service.recommendReview(reviewNo); 				// 리뷰 테이블에 추천 수 증가
 		}else if(result ==1){
 			
 		}
@@ -136,6 +139,7 @@ public class ReviewController {
 		int hits = review.getHits();
 		return hits;
 	}
+	
 	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
 	
 	public String searchReview(    ){
