@@ -1,6 +1,7 @@
 package com.ymz.restaurant.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -72,9 +73,15 @@ public class RestaurantController {
 		return "restaurant/restaurant_theme.tiles";
 	}
 	
-	@RequestMapping("/showListByLocation.do")
-	public String showListByLocation() {
+	@RequestMapping("/selectLocation.do")
+	public String selectLocation() {
 		return "restaurant/restaurant_location.tiles";
+	}
+	
+	@RequestMapping("/boardByLocation.do")
+	public String boardByLocation(String buildingName, String floor,
+			@RequestParam(defaultValue="1") int currentPage) {
+		return "restaurant/restaurant_location_board.tiles";
 	}
 	
 	@RequestMapping("/addNewRestaurantForm.do")

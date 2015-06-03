@@ -168,6 +168,5 @@
 				picture_name, score, hits, theme, reg_date, reply_count, r.location_no
 		from	restaurant r, location l
 		where	l.building_name=#{buildingName} and l.floor=#{floor} and r.location_no=l.location_no 
-	</select>
-	
+	</select>	
 </mapper>

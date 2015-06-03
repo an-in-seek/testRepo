@@ -111,9 +111,7 @@ $(document).ready(function(){
 			<u><b>${pageNum}</b></u>
 		</c:when>
 		<c:otherwise>
-			<a href="${initParam.rootPath }/restaurant/showListByType.do?currentPage=${pageNum}">
-				${pageNum}
-			</a>
+			<a href="${initParam.rootPath }/restaurant/showListByType.do?currentPage=${pageNum}">${pageNum}</a>
 		</c:otherwise>
 	</c:choose>
 	&nbsp;
