@@ -1,7 +1,6 @@
 package com.ymz.restaurant.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -80,7 +79,9 @@ public class RestaurantController {
 	
 	@RequestMapping("/boardByLocation.do")
 	public String boardByLocation(String buildingName, String floor,
-			@RequestParam(defaultValue="1") int currentPage) {
+			@RequestParam(defaultValue="1") int currentPage, Model model) {
+		Map<String, Object> map = service.getRestaurantsPaging(buildingName, floor, currentPage);
+		model.addAllAttributes(map);
 		return "restaurant/restaurant_location_board.tiles";
 	}
 	

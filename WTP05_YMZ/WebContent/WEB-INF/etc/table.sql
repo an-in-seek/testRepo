@@ -50,6 +50,9 @@ DROP TABLE QNA
 DROP TABLE LOCATION 
 	CASCADE CONSTRAINTS;
 	
+DROP TABLE CATEGORY
+	CASCADE CONSTRAINTS;
+	
 
 /* 카테고리 테이블 */
 CREATE TABLE CATEGORY (
@@ -382,9 +385,13 @@ drop sequence location_no_seq;
 create sequence restaurant_no_seq;
 create sequence food_no_seq;
 create sequence location_no_seq;
+-- 맛집정보댓글에서 사용하는 시퀀스
+drop sequence resreply_no_seq;
+create sequence resreply_no_seq;
 -- 리뷰에서 사용하는 시퀀스
 drop sequence review_no_seq;
 create sequence review_no_seq;
 -- 리뷰댓글에서 사용하는 시퀀스
 drop sequence review_reply_no_seq;
 create sequence review_reply_no_seq;
+
