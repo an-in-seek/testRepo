@@ -31,6 +31,8 @@ $(document).ready(function(){
 		 $(this).css("background-color", "linen");
 	});
 	
+	// 등록일 글자수 자르기
+	
 });
 </script>
 <style type="text/css">
@@ -79,17 +81,21 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 			</tr>
 		</thead>
 		<tbody>
-			<!-- 여기 수정해야행 -->
 			<c:forEach items="${requestScope.reviewList }" var="review">
 				<tr>
 					<td align="center">${review.reviewNo }</td>
 					<td align="left" id="title">
 					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-					${review.title}</a></td>
+					${review.title} 
+					<c:if test="${review.replyCount != 0}">
+					<font color="red">[${review.replyCount}]</font>
+					</c:if>
+					</a>
+					</td>
 					<td align="center">${review.memberId}</td>
-					<td align="center">${review.regDate}</td>
-					<td align="right" style="width:50px">${review.recommend}</td>
-					<td align="right">${review.hits}</td>
+					<td id="regDate" align="center">${review.regDate}</td>
+					<td align="center" style="width:50px">${review.recommend}</td>
+					<td align="center">${review.hits}</td>
 				</tr> 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->
@@ -153,7 +159,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	
 	<!-- 인기글 테이블 -->
 	<div id="famousText" align="center">
-		<span style="font-size: 10" >인기순 테이블, 제목에 댓글개수 달기</span>
+		<span style="font-size: 10" >인기순 테이블 위치</span>
 		<br><br>
 	</div>
 </section>

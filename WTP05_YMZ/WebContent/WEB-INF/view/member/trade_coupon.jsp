@@ -11,30 +11,38 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript">
 
-var cnt = 0;
-var num1 = 0;
-var num2 = 0;
+
 /**
  * 버튼 클릭시 쿠폰장수1개를 더하고 금액도 1000씩 더한다.
  * 현재마일리지와 쿠폰금액을 차감한 나머지 마일리지를 보여준다.
  */
 
 $(document).ready(function(){
+	var cnt = 0;
+	var num1 = 0;
+	var num2 = 0;
+	//document.getElementById("result").value = 1;
+	$("#exBtn").on("click",function(){
+		alert("마일리지가 부족합니다");
+	})
+	
 	$("#btn").on("click",function(){
+		alert(($("#currentMileage").val()))
 		var num = null;
-		if($("#price").val()==""){
-			num = "0"
-		}else{
 			num = document.getElementById("price").value;
-		}
-		
+			alert(num);
 		$.ajax({
 			url:"${initParam.rootPath}/member/moneyCheck.do",
 			data:{"num":num},
 			dataType:"text",
+			beforeSend:function(){
+				if($("#result").val()=="0"){
+					alert("마일리지가 부족합니다");
+				return false;
+				}
+			},
 			success:function(ret){
 				document.getElementById("price").value = ret;
-				document.getElementById("price").innerHTML = ret;
 				var dif = document.getElementById("difference");
 				dif.innerText=$("#currentMileage").val()+" - "+$("#price").val();
 				cnt++;
@@ -42,11 +50,14 @@ $(document).ready(function(){
 				
 				var num1 = Number($("#price").val());
 				var num2 = Number($("#currentMileage").val());
-				var num3 = num2-num1;
+				num3 = num2-num1;
 				
+				//if(num3<0){
+					//alert("마일리지가 부족합니다");
+					//return false;
+				//}
 				var result = document.getElementById("result");
-				result.innerText=num3;
-				
+				result.value = num3;
 			}
 		})
 	});
@@ -67,6 +78,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+
 <h2>쿠폰교환</h2>
 <form method="post" action="${initParam.rootPath }/member/updateMileage.do" id="modifyMileage"> 
 	<table width="800" align="center">
@@ -75,7 +87,7 @@ $(document).ready(function(){
 				현재마일리지 
 			</td>
 			<td>
-				<input type="text" value="${sessionScope.login_info.mileage}" id="currentMileage" readonly>
+				<input type="text" value="${requestScope.mileage }" id="currentMileage" readonly>
 			</td>
 		</tr>
 		<tr>
@@ -83,11 +95,14 @@ $(document).ready(function(){
 				쿠폰금액 :
 			</td>
 			<td>
-				<input type="text" name="price" id="price" readonly>
+				<input type="text" name="price" id="price" value="0" readonly>
 			</td>
-			<td>
-   				<input type="button" value="+" id="btn">
-			</td>
+			<c:if test="${requestScope.mileage>=1000 }">
+					<td><input type="button" value="+" id="btn"></td>
+			</c:if>
+			<c:if test="${requestScope.mileage<1000 }">
+					<td><input type="button" value="+" id="exBtn"></td>
+			</c:if>
 			<td width="100">
 				<input type="text" name="count" id="count" readonly>
 			</td>
@@ -107,7 +122,7 @@ $(document).ready(function(){
 			<td>
 				남은 마일리지
 			</td>
-			<td>
+			<td id="ex">
 				<input type="text" id="result" name="result" readonly>
 			</td>
 		</tr>

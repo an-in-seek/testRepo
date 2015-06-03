@@ -148,8 +148,8 @@ ${requestScope.review.content }<br>
 
 	<div align="center" id="recommend"> <!-- 추천 버튼 -->
 		<button id="recommendBtn">
-			<span id="recommendCountBtn">${requestScope.review.recommend}</span><br> 
-			<font color="blue" size='2'>추천</font>
+			<span id="recommendCountBtn">${requestScope.review.recommend}</span>
+			<font color="" size='4'>♥</font>
 		</button>
 	</div><br><br>
 	

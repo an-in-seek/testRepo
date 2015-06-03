@@ -3,6 +3,7 @@ package com.ymz.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestScope;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.common.validator.MemberValidator;
@@ -87,8 +87,8 @@ public class MemberController {
 	}
 	
 	// 로그인
-	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public String login(String id, String password, HttpSession session, HttpServletResponse response, ModelMap map){
+	@RequestMapping(value="login.do",method=RequestMethod.POST)
+	public String login(String id, String password, HttpSession session, HttpServletRequest request, HttpServletResponse response, ModelMap map){
 		Member m = service.getMemberById(id);
 		String url = null;
 		if(m!=null){
@@ -208,7 +208,7 @@ public class MemberController {
 		return result;
 	}
 	
-	/********************** 비밀번호 수정 ********************///비밀번호수정
+	/********************** 비밀번호 수정 ********************/
 	@RequestMapping(value="modify_password.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView modifyPassword(@RequestParam String password,HttpSession session){
@@ -222,28 +222,43 @@ public class MemberController {
 		return new ModelAndView("member/info/modify_password_success.tiles");
 		}
 	
+	/********************** 회원 마일리지 값 요청 ********************/
+	@RequestMapping("couponTrade.do")
+	@ResponseBody
+	public ModelAndView couponTrade(HttpSession session,HttpServletRequest request){
+		Member m = (Member)session.getAttribute("login_info");
+		int mileage = m.getMileage();
+		request.setAttribute("mileage", mileage);
+		return new ModelAndView("member/info/trade_coupon.tiles");
+	}
+	
+	/********************** 쿠폰 값 요청 ********************/
 	@RequestMapping("moneyCheck.do")
 	@ResponseBody
 	public String moneyCheck(String num){
+		System.out.println(num);
+		String result = null;
 		int num1 = Integer.parseInt(num);
-		int num2 = 1000;
-		int num3 = num1 + num2;
-		String result = Integer.toString(num3);
+			int num3 = num1 + 1000;
+			result = Integer.toString(num3);
+		System.out.println(result);
 		return result;
 	}
-
+	
+	/********************** 쿠폰 값 요청 ********************/
 	@RequestMapping("updateMileage.do")
 	@ResponseBody
-	public ModelAndView updateMileage(@RequestParam String result,HttpSession session){
-		int exmileage = Integer.parseInt(result);
+	public ModelAndView updateMileage(@RequestParam String result,HttpSession session,HttpServletRequest request){
+		int exMileage = Integer.parseInt(result);
 		Member loginInfo = (Member)session.getAttribute("login_info");
 		String id = loginInfo.getId();
 		Member m = service.getMemberById(id);
-		m.setMileage(exmileage);
-		System.out.println(result);
+		m.setMileage(exMileage);
 		service.modifyMileage(m);
 //		Integer.parseInt(exmileage);
 //		session.setAttribute(exmileage);
+		int mileage = m.getMileage();
+		request.setAttribute("mileage", mileage);
 		return new ModelAndView("member/info/trade_coupon.tiles");
 	}
 }

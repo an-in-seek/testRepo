@@ -96,6 +96,11 @@ public class ReviewController {
 	}
 	
 	// 리뷰 추천(로그인시 가능)
+//	1. 추천 버튼을 누르면 추천 테이블에 값을 넣는다.
+//	2. 리뷰 테이블의 추천수를 +1 해준다.
+//	3. DB에서 있는지 조회한다. return type = _int , 리턴값이  0이면 업뎃하지말고 1이면 업뎃하고
+//	4. 다시 추천 버튼을 누르면 추천 테이블의 값을 가져와서 비교한 뒤 같으면 다시 뷰로 돌악나다.
+
 	@RequestMapping("login/ajax/recommendReview.do")
 	@ResponseBody
 	public int recommendReview(@RequestParam int reviewNo, HttpSession session, ModelMap map){

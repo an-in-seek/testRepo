@@ -80,6 +80,7 @@ CREATE TABLE MEMBER (
 	GRADE VARCHAR2(10) NOT NULL, /* 등급 */
 	JOIN_DATE VARCHAR2(8) NOT NULL /* 가입일 */
 );
+
 select * from member;
 ALTER TABLE MEMBER
 	ADD
@@ -380,3 +381,6 @@ create sequence location_no_seq;
 -- 리뷰에서 사용하는 시퀀스
 drop sequence review_no_seq;
 create sequence review_no_seq;
+-- 리뷰댓글에서 사용하는 시퀀스
+drop sequence review_reply_no_seq;
+create sequence review_reply_no_seq;
