@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import com.ymz.common.util.PagingBean;
 import com.ymz.restaurant.dao.RestaurantDAO;
@@ -110,5 +111,21 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public int increaseHits(int restaurantNo) {
 		return dao.updateHits(restaurantNo);
+	}
+
+	@Override
+	public List<String> getRestaurantsByBuildingName(String buildingName) {
+		List<String> floors = dao.selectFloorsByBuildingName(buildingName);
+		List<String> data = new ArrayList<String>();
+		for(int i=0; i<floors.size(); i++) {
+			List<Restaurant> restaurants = dao.selectRestaurantsByBuildingNameAndFloor(buildingName, floors.get(i));
+			String temp = "";
+			for(int j=0; j<restaurants.size(); j++) {
+				temp += restaurants.get(j).getRestaurantName()+",";
+			}
+			data.add(floors.get(i)+"층");
+			data.add(temp);
+		}
+		return data;
 	}
 }
