@@ -3,9 +3,11 @@ package com.ymz.review.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
@@ -19,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ymz.member.vo.Member;
 import com.ymz.review.service.ReviewService;
 import com.ymz.review.vo.Review;
+import com.ymz.reviewreply.service.ReviewReplyService;
+import com.ymz.reviewreply.vo.ReviewReply;
 
 @Controller
 @RequestMapping("/review/")
@@ -26,6 +30,9 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewService service;
+	
+	@Autowired
+	private ReviewReplyService replyService;
 	
 	//리뷰 등록
 	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
@@ -96,19 +103,33 @@ public class ReviewController {
 	}
 	
 	// 리뷰 추천(로그인시 가능)
-	@RequestMapping("login/recommendReview.do")
-	public String recommendReview(@ModelAttribute Review review, @RequestParam int reviewNo){
-		System.out.println("추천할 글번호 : " + reviewNo);
-		review.setReviewNo(reviewNo);
-		service.recommendReview(review);
-		return "/review/reviewView.do";
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
-	
-	public String searchReview(    ){
+	@RequestMapping("login/ajax/recommendReview.do")
+	@ResponseBody
+	public int recommendReview(@RequestParam int reviewNo, HttpSession session, ModelMap map){
+		Member member = (Member)session.getAttribute("login_info"); // 회원 정보 갖고오기
+		int result = 0;
+		Map<String, Object> rmap = new HashMap<String, Object>();
+		System.out.println("글 번호 : " + reviewNo);
+		System.out.println("회원 아이디 : " + member.getId());
 		
-		return "/review/reviewList.do";
+		rmap.put("number", reviewNo);
+		rmap.put("id", member.getId());
+		
+		try{
+			result = service.getRecommendCount(rmap);       // 추천 테이블에서 기존 값이 있는지 확인
+		}catch(Exception e){								// Null값이 Return되어 Exception이 발생했을 경우
+			result = 0;										// 0을 결과값으로 입력한다.
+		}
+		
+		if(result == 0){									// 추천 테이블에 값이 없으면
+			service.inputRecommend(rmap);					// 추천 테이블에 값 입력
+			service.recommendReview(reviewNo); 				// 리뷰 테이블에 추천 수 증가
+		}else if(result ==1){
+			
+		}
+		Review review = service.getReviewByNo(reviewNo);
+		int recommendCount = review.getRecommend();
+		return recommendCount;
 	}
 	
 	// 조회수 증가
@@ -120,4 +141,48 @@ public class ReviewController {
 		int hits = review.getHits();
 		return hits;
 	}
+	
+	/////////////////////////////////////////////////////////////////쭈욘////////////////////////////////////////////////////////////////
+	
+	
+	//댓글 등록
+		@RequestMapping(value="login/register.do", method=RequestMethod.POST)
+		public String registerReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session, HttpServletRequest request) throws Exception{
+			if(errors.hasErrors()){
+				System.out.println("에러 있엉");
+				return "review/review_view.tiles";
+			}
+			Member member = (Member)session.getAttribute("login_info");
+			System.out.println("댓글 글쓴이 : " + member.getId());
+			System.out.println("댓글 달 글번호 : " + reply.getReviewNo());
+			System.out.println("zzz : " + reply.getContent());
+			System.out.println("댓글 내용 : " + request.getAttribute("reply_content"));
+			System.out.println("내용 : " + request.getAttribute("zz"));
+			reply.setMemberId(member.getId());
+			//reply.setReviewNo(reviewNo);
+			replyService.registerReviewReply(reply);
+			return "redirect:/review/review_view.tiles";
+		}
+		
+		//댓글 수정
+		@RequestMapping(value="login/modifyReviewReply.do", method=RequestMethod.POST)
+		public String modifyReviewReply(@ModelAttribute ReviewReply reply, @RequestParam int replyNo, Errors errors, HttpSession session){
+			Member member = (Member)session.getAttribute("login_info");
+			String userId = member.getId();
+			System.out.println("수정할 글번호 : " + replyNo);
+			System.out.println("글쓴이 아이디 : " + userId);
+			reply.setMemberId(userId);
+			reply.setReplyNo(replyNo);
+			replyService.modifyReviewReply(reply);
+			System.out.println("글번호 : " + replyNo + "수정완료 ! ");
+			return "redirect:/review/review_view.tiles";
+		}
+		
+		//댓글 삭제
+		@RequestMapping(value="login/removeReviewReply.do")
+		public String removeReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpServletRequest request){
+			String memberId = request.getParameter("memberId");
+			replyService.removeReviewReply(reply);
+			return "review/review_view.tiles";
+		}
 }

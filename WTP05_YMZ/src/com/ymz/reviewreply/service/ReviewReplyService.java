@@ -1,5 +1,7 @@
 package com.ymz.reviewreply.service;
 
+import java.util.List;
+
 import com.ymz.reviewreply.vo.ReviewReply;
 
 public interface ReviewReplyService {
@@ -11,6 +13,9 @@ public interface ReviewReplyService {
 	public abstract void modifyReviewReply(ReviewReply reply);
 	
 	//댓글 삭제
-	public abstract void removeReviewReply(String memberId);
+	public abstract void removeReviewReply(ReviewReply reply);
+	
+	//댓글 목록
+	public abstract List<ReviewReply> getReplyList();
 	
 }

@@ -1,5 +1,7 @@
 package com.ymz.reviewreply.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +28,15 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 
 	//댓글 삭제
 	@Override
-	public void removeReviewReply(String memberId) {
-		dao.deleteReviewReply(memberId);
+	public void removeReviewReply(ReviewReply reply) {
+		dao.deleteReviewReply(reply);
+	}
+
+	//댓글 목록
+	@Override
+	public List<ReviewReply> getReplyList() {
+		List<ReviewReply> list = dao.selectAllReply();
+		return list;
 	}
 
 }

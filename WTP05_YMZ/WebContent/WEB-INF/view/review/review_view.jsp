@@ -22,23 +22,32 @@ $(document).ready(function(){
 			type:"post",
 			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
 			success:function(txt){
-				$("#count").html(txt);
+				$("#hitsCount").html(txt);
 			}
 		});
-		
 	}
 	
 	
-	// 리뷰 내용
-	$("#recommendBtn").on("click", function(){
+	////////////////////////////////////////////////////// 리뷰 본문
+	// 추천
+	$("#recommendBtn").on("click", function(){		
 		var id = "${empty sessionScope.login_info}";
 		if(id=="true"){
 			alert("로그인 안했엉");
 			return;
 		}
-		document.location.href="${initParam.rootPath }/review/login/recommendReview.do?reviewNo="+${requestScope.review.reviewNo};
+		$.ajax({
+			url:"${initParam.rootPath }/review/login/ajax/recommendReview.do", // 요청 url
+			type:"post",
+			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
+			success:function(txt){
+				$("#recommendCount").html(txt);
+				$("#recommendCountBtn").html(txt);
+			}
+		});
+		
 	});
-
+	// 삭제
 	$("#deleteBtn").on("click", function(){
 		var isDel = confirm("정말로 삭제하시겠습니까?");
 		if (isDel) {
@@ -53,9 +62,6 @@ $(document).ready(function(){
 	
 	
 	// 댓글 버튼
-	$("#reply_registerBtn").on("click", function(){ 
-		alert("로그인부터 하세욥!!!");
-	});
 	$("#reply_modifyBtn").on("click", function(){
 		alert("로그인부터 하세욥!!!");
 	});
@@ -87,6 +93,7 @@ table#replyTB tbody tr{
 	cursor: pointer;
 }
 button{
+	background: hotpink;
 	width:100px;
 	height:50px;
 }
@@ -121,9 +128,9 @@ button#recommendBtn{
 				<td>${requestScope.review.reviewNo}</td>
 				<td>${requestScope.review.title}</td>
 				<td>${requestScope.review.memberId}</td> 
-				<td id="count">${requestScope.review.hits}</td> 
+				<td id="hitsCount">${requestScope.review.hits}</td> 
 				<td>${requestScope.review.regDate}</td>
-				<td>${requestScope.review.recommend}</td>
+				<td id="recommendCount">${requestScope.review.recommend}</td>
 			</tr> 
 		</tbody>
 	</table>
@@ -158,7 +165,7 @@ ${requestScope.review.content }<br>
 <hr>
 <!-- ****************************************  댓 글 영 역  ****************************************** -->
 
-
+<form action="${initParam.rootPath }/review/login/register.do"  method="post">
 <!-- 테이블 시작 -->
 <table id="replyTB" style="width:800px">
 		<thead>
@@ -173,10 +180,10 @@ ${requestScope.review.content }<br>
 			<!-- 여기 수정해야행 -->
 			<c:forEach items="${requestScope.reviewReplyList }" var="reviewReply">
 				<tr>
-					<td>${reviewReply.댓글번호 }</td>
-					<td>${reviewReply.내용}</td>
-					<td>${reviewReply.회원ID}</td>
-					<td>${reviewReply.등록일}</td>
+					<td>${requestScope.reviewReply.replyNo }</td>
+					<td>${requestScope.reviewReply.content}</td>
+					<td>${requestScope.reviewReply.memberId}</td>
+					<td>${requestScope.reviewReply.regDate}</td>
 				</tr> 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->
@@ -188,18 +195,19 @@ ${requestScope.review.content }<br>
 		<tr>
 			<td>
 				<!-- 댓글 작성 영역 -->
-				<textarea name="reply_content" id="reply_content" style="width:600px; height:100px;"></textarea><br>
+				<textarea name="content" id="reply_content" style="width:600px; height:100px;"></textarea><br>
+				<input type="text"  name="zz" id="zz">
 			</td>
 			<td>
 				<!-- 댓글 버튼 -->
-				<button id="reply_registerBtn" style="width:80px;height:20px;">등록</button>
+				<input type="submit"  value="등록">
 				<button id="reply_modifyBtn" style="width:80px;height:20px;">수정</button>
 				<button id="reply_deleteBtn" style="width:80px;height:20px;">삭제</button>
 				<button id="reply_reportBtn" style="width:80px;height:20px;">신고</button>
 			</td>
 		</tr>
 	</table>
-
+</form>
 
 </div>
 </body>
