@@ -39,5 +39,8 @@ public interface ReviewDAO {
 	// 리뷰 추천수 등록
 	public abstract void inputRecommend(Map rmap);
 
+	// 오늘 최고 조회수글 가져오기
+	public abstract List<Review> selectTodayBestHits();
+
 	
 }
