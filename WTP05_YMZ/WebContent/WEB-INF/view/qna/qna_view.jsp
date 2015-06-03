@@ -2,15 +2,52 @@
 <%@ page import="java.sql.*"%>
 
 <script type="text/javascript" src="${initParam.rootPath}/script/jquery-ui.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/script/jquery.cookie.js"></script> <!-- 쿠키 사용 -->
 <link type="text/css" href="${initParam.rootPath}/css/jquery-ui.css" rel="stylesheet"></link>	
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		var qnaNumber = ${requestScope.qna.number}; // 새로고침 조회수 증가 막기
+		var c = $.cookie('number'); // 쿠키 조회
+		
+		$.ajax({
+			url:"${initParam.rootPath}/qna/findLoginMember.do", //요청 url 설정
+			type:"post", //HTTP 요청 방식(method)
+			dataType:"json", //javascript객체로 변환해서 응답데이터를 전달.
+			beforeSend:function(){
+				$("#commentBtn").hide();
+				$("#modifyBtn").hide();
+				$("#deleteBtn").hide();
+			},
+			success:function(member){
+				if(member){
+					$("#commentBtn").show();
+					$("#modifyBtn").show();
+					$("#deleteBtn").show();
+				}
+			}
+		});
+		
+		$.cookie('number', '${requestScope.qna.number}'); // 쿠키 reviewNo를 셋팅
+		if(c!='${requestScope.qna.number}'){
+			$.ajax({
+				url:"${initParam.rootPath}/qna/ajax/updateHits.do", // 요청 url
+				type:"post",
+				data:{number:qnaNumber}, // 요청 파라미터 id = xxxxxxxx
+				success:function(txt){
+					$("#count").html(txt);
+				}
+			});
+		}
+		
 		$("#commentBtn").on("click", function() {
 			document.location.href="login/commentForm.do?number="+${requestScope.qna.number};
 		});
+		
 		$("#listBtn").on("click", function() {
 			document.location.href="qnaList.do";
 		});
+		
 		$("#modifyBtn").on("click", function() {
 			var isDel = confirm("정말로 수정하시겠습니까?");
 			if (isDel) {
@@ -19,6 +56,7 @@
 				return;
 			}
 		});
+		
 		$("#deleteBtn").on("click", function() {
 			var isDel = confirm("정말로 삭제하시겠습니까?");
 			if (isDel) {
@@ -62,7 +100,7 @@ article {
 	<tr>
 		<td>&nbsp;</td>
 		<td align="center">조회수</td>
-		<td>${requestScope.qna.hits}명</td>
+		<td id="count">${requestScope.qna.hits}</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr height="1" bgcolor="#dddddd">

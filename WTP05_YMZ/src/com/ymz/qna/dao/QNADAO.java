@@ -27,6 +27,9 @@ public interface QNADAO {
 	//게시판 DB에 있는 모든 정보들의 개수를 카운트
 	public abstract int selectTotalQNACount();
 
+	//게시물 조회수 증가
+	public abstract void updateHitsQNA(int number);
+
 	
 
 }

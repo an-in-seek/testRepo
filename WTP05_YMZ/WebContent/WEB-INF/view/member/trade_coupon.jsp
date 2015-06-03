@@ -1,3 +1,5 @@
+<%@page import="com.ymz.member.vo.Member"%>
+<%@page import="org.springframework.web.context.request.SessionScope"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -8,6 +10,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript">
+
 var cnt = 0;
 var num1 = 0;
 var num2 = 0;
@@ -46,13 +49,26 @@ $(document).ready(function(){
 				
 			}
 		})
-	})
+	});
+	
+	
 });
+
+	/*
+	 * 발급클릭시 메세지창 띄우기.
+	 */
+	function issueConfirm(){
+		confirm("고객님의 메일로 쿠폰이 전송되었습니다");
+		if(!flag){
+			
+		}
+	}
+
 </script>
 </head>
 <body>
 <h2>쿠폰교환</h2>
-<form> 
+<form method="post" action="${initParam.rootPath }/member/updateMileage.do" id="modifyMileage"> 
 	<table width="800" align="center">
 		<tr>
 			<td  width="center">
@@ -92,12 +108,12 @@ $(document).ready(function(){
 				남은 마일리지
 			</td>
 			<td>
-				<input type="text" id="result" readonly>
+				<input type="text" id="result" name="result" readonly>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<input type="submit" value="발급">
+				<input type="submit" onclick="javascript:issueConfirm();" id ="submit" value="발급">
 			</td>
 			<td>
 				<input type="reset" value="초기화">			
