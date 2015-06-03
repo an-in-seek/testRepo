@@ -12,13 +12,17 @@ public class Review implements Serializable{
 	private String content;
 	private int recommend;
 	private String memberId;
+	////////////////////////////////////////////// 참조용 변수들
+	private String nickname;		// 회원 닉네임
+	private int replyCount;			// 댓글 개수
 	
 	public Review(){
 		
 	}
 
 	public Review(int reviewNo, String title, String regDate, int hits,
-			String content, int recommend, String memberId) {
+			String content, int recommend, String memberId, String nickname,
+			int replyCount) {
 		super();
 		this.reviewNo = reviewNo;
 		this.title = title;
@@ -27,6 +31,8 @@ public class Review implements Serializable{
 		this.content = content;
 		this.recommend = recommend;
 		this.memberId = memberId;
+		this.nickname = nickname;
+		this.replyCount = replyCount;
 	}
 
 	public int getReviewNo() {
@@ -85,6 +91,22 @@ public class Review implements Serializable{
 		this.memberId = memberId;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -93,8 +115,11 @@ public class Review implements Serializable{
 		result = prime * result + hits;
 		result = prime * result
 				+ ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result
+				+ ((nickname == null) ? 0 : nickname.hashCode());
 		result = prime * result + recommend;
 		result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
+		result = prime * result + replyCount;
 		result = prime * result + reviewNo;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
@@ -121,12 +146,19 @@ public class Review implements Serializable{
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
+		if (nickname == null) {
+			if (other.nickname != null)
+				return false;
+		} else if (!nickname.equals(other.nickname))
+			return false;
 		if (recommend != other.recommend)
 			return false;
 		if (regDate == null) {
 			if (other.regDate != null)
 				return false;
 		} else if (!regDate.equals(other.regDate))
+			return false;
+		if (replyCount != other.replyCount)
 			return false;
 		if (reviewNo != other.reviewNo)
 			return false;
@@ -143,12 +175,11 @@ public class Review implements Serializable{
 		return "Review [reviewNo=" + reviewNo + ", title=" + title
 				+ ", regDate=" + regDate + ", hits=" + hits + ", content="
 				+ content + ", recommend=" + recommend + ", memberId="
-				+ memberId + "]";
+				+ memberId + ", nickname=" + nickname + ", replyCount="
+				+ replyCount + "]";
 	}
-	
-	
 
-
+	
 	
 	
 }
