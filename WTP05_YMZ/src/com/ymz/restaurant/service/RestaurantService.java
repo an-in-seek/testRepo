@@ -18,4 +18,5 @@ public interface RestaurantService {
 	public String getLocationByNo(int locationNo);
 	public List<Food> getFoodsByRestaurantNo(int restaurantNo);
 	public int increaseHits(int restaurantNo);
+	public List<String> getRestaurantsByBuildingName(String buildingName);
 }

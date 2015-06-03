@@ -42,6 +42,12 @@ public class RestaurantController {
 		return service.getFloorsByBuildingName(buildingName);
 	}
 	
+	@RequestMapping("/ajax/getRestaurantsByBuildingName.do")
+	@ResponseBody
+	public List<String> getRestaurantsByBuildingName(String buildingName) {
+		return service.getRestaurantsByBuildingName(buildingName);
+	}
+	
 	@RequestMapping("/showListByType.do")
 	public String showListByType(
 			@RequestParam(defaultValue="전체") String category,

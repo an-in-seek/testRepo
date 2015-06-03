@@ -163,4 +163,11 @@
 		update restaurant set hits=hits+1 where restaurant_no=#{restaurantNo}
 	</update>
 	
+	<select id="selectRestaurantsByBuildingNameAndFloor" parameterType="Map" resultMap="restaurant-resultmap">
+		select	restaurant_no, restaurant_name, category, phone_no, address, description,
+				picture_name, score, hits, theme, reg_date, reply_count, r.location_no
+		from	restaurant r, location l
+		where	l.building_name=#{buildingName} and l.floor=#{floor} and r.location_no=l.location_no 
+	</select>
+	
 </mapper>
