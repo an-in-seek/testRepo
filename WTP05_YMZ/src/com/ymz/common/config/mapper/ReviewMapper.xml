@@ -29,7 +29,7 @@
 			select review_no_seq.nextval from dual
 		</selectKey>
 		insert into review (review_no, title, content, hits, recommend, reg_date, member_id)
-		values (#{reviewNo}, #{title}, #{content}, #{hits}, #{recommend}, to_char(sysdate, 'yyyymmdd'), #{memberId})
+		values (#{reviewNo}, #{title}, #{content}, #{hits}, #{recommend}, to_char(sysdate, 'yyyy-mm-dd hh:MM:ss'), #{memberId})
 	</insert>
 
 	<!-- 수정 -->
@@ -60,8 +60,21 @@
 		where review_no=#{reviewNo}
 	</select>
 	
+	<!-- 추천수 조회 -->
+	<select id="selectRecommendReview" parameterType="map" resultType="_int">
+		select count(*)
+		from review_recommend
+		where review_no=#{number} and member_id=#{id}
+	</select>
+	
+	<!-- 추천 테이블 입력 -->
+	<select id="insertRecommendReview" parameterType="map">
+		insert into review_recommend(review_no, member_id) 
+		values (#{number}, #{id})
+	</select>
+	
 	<!-- 추천수 증가 -->
-	<select id="recommendReview" parameterType="review">
+	<select id="recommendReview" parameterType="int">
 		update review
 		set recommend = recommend + 1
 		where review_no=#{reviewNo}

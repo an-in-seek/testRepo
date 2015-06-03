@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
@@ -142,6 +141,7 @@ public class ReviewController {
 		return hits;
 	}
 	
+
 	/////////////////////////////////////////////////////////////////쭈욘////////////////////////////////////////////////////////////////
 	
 	
@@ -185,4 +185,11 @@ public class ReviewController {
 			replyService.removeReviewReply(reply);
 			return "review/review_view.tiles";
 		}
+	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
+	
+	public String searchReview(    ){
+		
+		return "/review/reviewList.do";
+	}
+	
 }

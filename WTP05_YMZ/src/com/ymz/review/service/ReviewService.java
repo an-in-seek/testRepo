@@ -21,11 +21,18 @@ public interface ReviewService {
 	// 리뷰 조회
 	public abstract Review getReviewByNo(int reviewNo);
 
+	// 리뷰 추천 테이블 값 가져오기
+	public abstract int getRecommendCount(Map rmap);
+
 	// 리뷰 추천
-	public abstract void recommendReview(Review review);
+	public abstract void recommendReview(int reviewNo);
 
 	// 리뷰 조회수 증가
 	public abstract void updateHitsReview(int reviewNo);
+
+	// 리뷰 추천 등록 (추천테이블)
+	public abstract void inputRecommend(Map rmap);
+
 
 	
 	

@@ -35,6 +35,7 @@
 		<association property="member" javaType="member" resultMap="member.dao.memberMapper.member-resultmap"/>
 	</resultMap>
 	
+	<!-- 게시물 등록 -->
 	<insert id="insertQNA" parameterType="QNA">
 		insert into qna (	qna_no, 
 								qna_refamily,
@@ -58,12 +59,14 @@
 					#{memberId})
 	</insert>
 	
+	<!-- 수정 -->
 	<update id="addStep" parameterType="QNA">
 		update 	qna 
 		set 		qna_restep = qna_restep+1 
 		where 	qna_refamily = #{refamily} and qna_restep > #{restep}
 	</update>
 	
+	<!-- 답글 등록 -->
 	<insert id="insertQNAComment" parameterType="QNA">
 		insert into qna (	qna_no,	
 								qna_refamily,
@@ -87,16 +90,19 @@
 					#{memberId})
 	</insert>
 	
+	<!-- 게시물 수정 -->
 	<update id="updateQNA" parameterType="QNA">
 		update 	qna
 		set			qna_title=#{title}, qna_category=#{category}, qna_content=#{content}
 		where		qna_no=#{number}
 	</update>
 	
+	<!-- 게시물 삭제 -->
 	<delete id="deleteQNAByNo" parameterType="int">
 		delete from qna where qna_no=#{number}
 	</delete>
 	
+	<!-- 전체 정보 조회 -->
 	<select id="selectAllQNA" parameterType="map" resultMap="qna-resultmap">
 		select qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, member_id, qna_registration_date,  qna_hits
 		from (
@@ -109,14 +115,22 @@
 		where page = #{pageNo}
 	</select>
 
+	<!-- DB 데이터 총 개수 -->
 	<select id="selectTotalQNACount" resultType="_int">
 		select count(qna_no) from qna
 	</select>
 	
+	<!-- 번호로 게시물 조회 -->
 	<select id="selectQNAByNo" resultMap="qna-resultmap" parameterType="int">
 		<include refid="qna-select"/>
 		where qna_no=#{number}
 	</select>
 	
+	<!-- 조회수 증가 -->
+	<select id="updateHits" parameterType="int">
+		update qna
+		set qna_hits = qna_hits + 1
+		where qna_no=#{number}
+	</select>
 </mapper>
 

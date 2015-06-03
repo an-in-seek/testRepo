@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestScope;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.common.validator.MemberValidator;
@@ -221,14 +222,28 @@ public class MemberController {
 		return new ModelAndView("member/info/modify_password_success.tiles");
 		}
 	
-//	@RequestMapping("moneyCheck.do")
-//	public String moneyCheck(String num){
-//		System.out.println(num);
-//		int num1 = Integer.parseInt(num);
-//		int num2 = 1000;
-//		String num3 = (String)(num1 + num2);
-//		System.out.println(num3);
-//	}
+	@RequestMapping("moneyCheck.do")
+	@ResponseBody
+	public String moneyCheck(String num){
+		int num1 = Integer.parseInt(num);
+		int num2 = 1000;
+		int num3 = num1 + num2;
+		String result = Integer.toString(num3);
+		return result;
+	}
 
-
+	@RequestMapping("updateMileage.do")
+	@ResponseBody
+	public ModelAndView updateMileage(@RequestParam String result,HttpSession session){
+		int exmileage = Integer.parseInt(result);
+		Member loginInfo = (Member)session.getAttribute("login_info");
+		String id = loginInfo.getId();
+		Member m = service.getMemberById(id);
+		m.setMileage(exmileage);
+		System.out.println(result);
+		service.modifyMileage(m);
+//		Integer.parseInt(exmileage);
+//		session.setAttribute(exmileage);
+		return new ModelAndView("member/info/trade_coupon.tiles");
+	}
 }

@@ -21,6 +21,10 @@ DROP TABLE REVIEW
 /* 리뷰_댓글 */
 DROP TABLE REVIEW_REPLY 
 	CASCADE CONSTRAINTS;
+	
+/* 리뷰_추천 */
+DROP TABLE REVIEW_RECOMMEND
+	CASCADE CONSTRAINTS;
 
 /* 신고당한 맛집 */
 DROP TABLE REPORTED_RESTAURANT 
@@ -45,6 +49,7 @@ DROP TABLE QNA
 /* 새 테이블 */
 DROP TABLE LOCATION 
 	CASCADE CONSTRAINTS;
+	
 
 /* 카테고리 테이블 */
 CREATE TABLE CATEGORY (
@@ -143,7 +148,7 @@ CREATE TABLE REVIEW (
 	CONTENT CLOB NOT NULL, /* 내용 */
 	HITS NUMBER(10) NOT NULL, /* 조회수 */
 	RECOMMEND NUMBER(4) NOT NULL, /* 추천수 */
-	REG_DATE VARCHAR2(8) NOT NULL, /* 등록일 */
+	REG_DATE VARCHAR2(20) NOT NULL, /* 등록일 */
 	MEMBER_ID VARCHAR2(10) NOT NULL /* 회원_ID */
 );
 
@@ -156,7 +161,7 @@ ALTER TABLE REVIEW
 /* 리뷰_댓글 */
 CREATE TABLE REVIEW_REPLY (
 	REVIEW_REPLY_NO NUMBER(10) NOT NULL, /* 리뷰댓글번호 */
-	REG_DATE VARCHAR2(8) NOT NULL, /* 등록일 */
+	REG_DATE VARCHAR2(20) NOT NULL, /* 등록일 */
 	CONTENT CLOB NOT NULL, /* 내용 */
 	MEMBER_ID VARCHAR2(10) NOT NULL, /* 회원_ID */
 	REVIEW_NO NUMBER(10) NOT NULL /* 리뷰 번호 */
@@ -167,6 +172,12 @@ ALTER TABLE REVIEW_REPLY
 		PRIMARY KEY (
 			REVIEW_REPLY_NO
 		);
+		
+/* 리뷰 추천수 테이블 */
+CREATE TABLE REVIEW_RECOMMEND (
+	REVIEW_NO NUMBER(10) NOT NULL,
+	MEMBER_ID VARCHAR2(10) NOT NULL
+);
 
 /* 신고당한 맛집 */
 CREATE TABLE REPORTED_RESTAURANT (
@@ -362,8 +373,10 @@ create sequence qna_no_seq;
 -- 맛집정보에서 사용하는 시퀀스
 drop sequence restaurant_no_seq;
 drop sequence food_no_seq;
+drop sequence location_no_seq;
 create sequence restaurant_no_seq;
 create sequence food_no_seq;
+create sequence location_no_seq;
 -- 리뷰에서 사용하는 시퀀스
 drop sequence review_no_seq;
 create sequence review_no_seq;

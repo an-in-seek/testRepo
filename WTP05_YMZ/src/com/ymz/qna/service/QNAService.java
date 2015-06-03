@@ -24,7 +24,11 @@ public interface QNAService {
 	//게시물 ID번호로 조회
 	public abstract QNA getQNAByNo(int number);
 	
+	//트랜젝션
 	public abstract void transactionTest(QNA q1, QNA q2) throws Exception;
+
+	//조회수 증가
+	public abstract void updateHitsQNA(int number);
 	
 
 }

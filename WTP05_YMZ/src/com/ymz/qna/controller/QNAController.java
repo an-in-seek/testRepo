@@ -3,7 +3,6 @@ package com.ymz.qna.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +74,16 @@ public class QNAController {
 		return new ModelAndView("qna/qna_view.tiles", "qna", qna);
 	}
 	
+	// 조회수 증가
+	@RequestMapping("ajax/updateHits.do")
+	@ResponseBody
+	public int searchReview(@RequestParam int number, ModelMap map){
+		service.updateHitsQNA(number);
+		QNA qna = service.getQNAByNo(number);
+		int hits = qna.getHits();
+		return hits;
+	}
+	
 	// 게시물 답글폼으로 이동
 	@RequestMapping("login/commentForm.do")//로그인 체크 - interceptor가 처리
 	public String moveQNACommentForm(@RequestParam int number, ModelMap map)throws Exception{
@@ -116,5 +125,13 @@ public class QNAController {
 	@ResponseBody
 	public QNA findQNAByNo(@RequestParam int number){
 		return service.getQNAByNo(number);
+	}
+	
+	// 현재 로그인정보를 체크해서 리턴
+	@RequestMapping("findLoginMember")
+	@ResponseBody
+	public Member findLoginMember(HttpSession session){
+		Member member = (Member) session.getAttribute("login_info");
+		return member;
 	}
 }

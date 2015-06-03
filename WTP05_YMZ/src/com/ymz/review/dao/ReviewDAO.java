@@ -1,6 +1,7 @@
 package com.ymz.review.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ymz.qna.vo.QNA;
 import com.ymz.restaurant.vo.Restaurant;
@@ -26,10 +27,17 @@ public interface ReviewDAO {
 	// 리뷰 전체 페이지 수
 	public abstract int selectTotalReviewCount();
 
+	// 리뷰 추천테이블에서 값 조회
+	public abstract int getRecommendCount(Map rmap);
+
 	// 리뷰 추천
-	public abstract void recommendReview(Review review);
+	public abstract void recommendReview(int reviewNo);
 
 	// 리뷰 조회수 증가
 	public abstract void updateHitsReview(int reviewNo);
+
+	// 리뷰 추천수 등록
+	public abstract void inputRecommend(Map rmap);
+
 	
 }
