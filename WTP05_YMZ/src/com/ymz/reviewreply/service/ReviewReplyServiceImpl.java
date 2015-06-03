@@ -36,8 +36,8 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 
 	//댓글 목록
 	@Override
-	public Map<String, Object> getReplyList() {
-		List<ReviewReply> list = dao.selectAllReply();
+	public Map<String, Object> getReplyList(int reviewNo) {
+		List<ReviewReply> list = dao.selectAllReply(reviewNo);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reviewReplyList", list);
 		return map;

@@ -57,13 +57,13 @@ public class ReviewController {
 	//게시물 번호로 정보조회
 	@RequestMapping("reviewView.do")
 	public ModelAndView ReviewView(@RequestParam int reviewNo, @RequestParam int pageNo){
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map =replyService.getReplyList(reviewNo); //DB로 reviewNo을 보내서 해당댓글들 가꼬오기
 		int pageNum = pageNo;
 		Review review = service.getReviewByNo(reviewNo);
-		map = replyService.getReplyList();
 		map.put("pageNo", pageNum);
 		map.put("review", review);
 		
+//		replyService.getReplyList(reviewNo); //DB로 reviewNo을 보내서 해당댓글들 가꼬오기
 		return new ModelAndView("review/review_view.tiles", map);
 	}
 	

@@ -16,6 +16,6 @@ public interface ReviewReplyService {
 	public abstract void removeReviewReply(ReviewReply reply);
 	
 	//댓글 목록
-	public abstract Map<String, Object> getReplyList();
+	public abstract Map<String, Object> getReplyList(int reviewNo);
 	
 }

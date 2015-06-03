@@ -45,9 +45,10 @@
 		where  review_reply_no=#{replyNo} and member_id=#{memberId}
 	</delete>
 	
-	<!-- 목록 -->
-	<select id="selectAllReply"  resultMap="reviewreply-resultmap">
+	<!-- 목록 tip : where쓰기; --> 
+	<select id="selectAllReply"  resultMap="reviewreply-resultmap" parameterType="_int">
 		<include refid="reply-select"/>
+		where review_no=#{reviewNo}
 	</select>
 	
 </mapper>

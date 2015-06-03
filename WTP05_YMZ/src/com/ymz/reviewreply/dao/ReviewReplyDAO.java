@@ -16,5 +16,5 @@ public interface ReviewReplyDAO {
 	public abstract void deleteReviewReply(ReviewReply reply);
 	    
 	//댓글 목록
-	public abstract List<ReviewReply> selectAllReply();
+	public abstract List<ReviewReply> selectAllReply(int reviewNo);
 }

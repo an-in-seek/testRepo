@@ -36,8 +36,7 @@ public class ReviewReplyDAOImpl implements ReviewReplyDAO {
 
 	//댓글목록
 	@Override
-	public List<ReviewReply> selectAllReply() {
-		// TODO Auto-generated method stub
-		return session.selectList(namespace + "selectAllReply");
+	public List<ReviewReply> selectAllReply(int reviewNo) {
+		return session.selectList(namespace + "selectAllReply", reviewNo);
 	}
 }
