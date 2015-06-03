@@ -1,8 +1,10 @@
 package com.ymz.review.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ymz.member.vo.Member;
 import com.ymz.review.service.ReviewService;
 import com.ymz.review.vo.Review;
+import com.ymz.reviewreply.service.ReviewReplyService;
+import com.ymz.reviewreply.vo.ReviewReply;
 
 @Controller
 @RequestMapping("/review/")
@@ -26,6 +30,9 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewService service;
+	
+	@Autowired
+	private ReviewReplyService replyService;
 	
 	//리뷰 등록
 	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
@@ -50,11 +57,13 @@ public class ReviewController {
 	//게시물 번호로 정보조회
 	@RequestMapping("reviewView.do")
 	public ModelAndView ReviewView(@RequestParam int reviewNo, @RequestParam int pageNo){
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map =replyService.getReplyList(reviewNo); //DB로 reviewNo을 보내서 해당댓글들 가꼬오기
 		int pageNum = pageNo;
 		Review review = service.getReviewByNo(reviewNo);
 		map.put("pageNo", pageNum);
 		map.put("review", review);
+		
+//		replyService.getReplyList(reviewNo); //DB로 reviewNo을 보내서 해당댓글들 가꼬오기
 		return new ModelAndView("review/review_view.tiles", map);
 	}
 	
@@ -96,6 +105,11 @@ public class ReviewController {
 	}
 	
 	// 리뷰 추천(로그인시 가능)
+//	1. 추천 버튼을 누르면 추천 테이블에 값을 넣는다.
+//	2. 리뷰 테이블의 추천수를 +1 해준다.
+//	3. DB에서 있는지 조회한다. return type = _int , 리턴값이  0이면 업뎃하지말고 1이면 업뎃하고
+//	4. 다시 추천 버튼을 누르면 추천 테이블의 값을 가져와서 비교한 뒤 같으면 다시 뷰로 돌악나다.
+
 	@RequestMapping("login/ajax/recommendReview.do")
 	@ResponseBody
 	public int recommendReview(@RequestParam int reviewNo, HttpSession session, ModelMap map){
@@ -135,6 +149,50 @@ public class ReviewController {
 		return hits;
 	}
 	
+
+	/////////////////////////////////////////////////////////////////쭈욘////////////////////////////////////////////////////////////////
+	
+	
+	//댓글 등록
+		@RequestMapping(value="login/register.do", method=RequestMethod.POST)
+		public String registerReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session, HttpServletRequest request) throws Exception{
+			if(errors.hasErrors()){
+				System.out.println("에러 있엉");
+				return "review/review_view.tiles";
+			}
+			Member member = (Member)session.getAttribute("login_info");
+			System.out.println("댓글 글쓴이 : " + member.getId());
+			System.out.println("댓글내용: " + reply.getContent());
+			System.out.println("글번호 : " + reply.getReviewNo());
+			reply.setMemberId(member.getId());
+			//reply.setReviewNo(reviewNo);
+			replyService.registerReviewReply(reply);
+			int reviewNo = reply.getReviewNo();
+			int pageNo = 2;
+			return "redirect:/review/reviewView.do?reviewNo="+reviewNo+"&pageNo="+pageNo;
+		}
+		
+		//댓글 수정
+		@RequestMapping(value="login/modifyReviewReply.do", method=RequestMethod.POST)
+		public String modifyReviewReply(@ModelAttribute ReviewReply reply, @RequestParam int replyNo, Errors errors, HttpSession session){
+			Member member = (Member)session.getAttribute("login_info");
+			String userId = member.getId();
+			System.out.println("수정할 글번호 : " + replyNo);
+			System.out.println("글쓴이 아이디 : " + userId);
+			reply.setMemberId(userId);
+			reply.setReplyNo(replyNo);
+			replyService.modifyReviewReply(reply);
+			System.out.println("글번호 : " + replyNo + "수정완료 ! ");
+			return "redirect:/review/review_view.tiles";
+		}
+		
+		//댓글 삭제
+		@RequestMapping(value="login/removeReviewReply.do")
+		public String removeReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpServletRequest request){
+			String memberId = request.getParameter("memberId");
+			replyService.removeReviewReply(reply);
+			return "review/review_view.tiles";
+		}
 	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
 	
 	public String searchReview(    ){

@@ -103,4 +103,12 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	public int updateHits(int restaurantNo) {
 		return session.update(namespace+"updateHits", restaurantNo);
 	}
+
+	@Override
+	public List<Restaurant> selectRestaurantsByBuildingNameAndFloor(String buildingName, String floor) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("buildingName", buildingName);
+		map.put("floor", floor);
+		return session.selectList(namespace+"selectRestaurantsByBuildingNameAndFloor", map);
+	}
 }
