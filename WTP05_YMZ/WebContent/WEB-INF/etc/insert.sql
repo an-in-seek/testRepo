@@ -144,6 +144,17 @@ insert into review(review_no, title, content, hits, recommend, reg_date, member_
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1036','프로듀사롤하느라못봄','1','444','44','1994-04-04 11:00:10','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values('1037','프로듀사롤하느라못봄','1','444','44','1994-04-04 11:00:10','user01');
 
+
+insert into review_reply values('1', '2015-05-30 11:12:20', '노맛', 'user01', '90');
+insert into review_reply values('2', '2015-05-30 11:12:20', '짱짱', 'user01', '90');
+insert into review_reply values('3', '2015-05-30 11:12:20', '구려', 'user01', '90');
+insert into review_reply values('4', '2015-05-30 11:12:20', '차지가 쐈어요', 'user01', '90');
+insert into review_reply values('5', '2015-05-30 11:12:20', '비싸....', 'user01', '90');
+insert into review_reply values('6', '2015-05-30 11:12:20', '맛있엉!!', 'user01', '91');
+insert into review_reply values('7', '2015-05-30 11:12:20', '알바 쩌네요...', 'user01', '91');
+insert into review_reply values('8', '2015-05-30 11:12:20', 'ㅋㅋㅋㅋㅋㅋㅋㅋ', 'user01', '92');
+
+
 insert into FAQ (faq_no, faq_title, faq_content) values(faq_no_seq.nextval, '개명으로 인한 이름을 변경하고 싶습니다.', 
 '개명으로 인한 회원 이름을 변경하고자 할 경우에는 로그인 후, 회원정보 수정란에서 성명 표기 우측에 표시되어 있는 "개명에 의한 이름 변경"을 클릭하시어 변경하시면 됩니다. 
 개명으로 인해 회원명을 변경하고 하시는 회원님은 반드시 실명인증 사이트에서 본인 실명확인을 거치셔야 합니다.

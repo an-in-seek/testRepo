@@ -9,7 +9,8 @@
 				hits, 
 				recommend, 
 				reg_date, 
-				member_id
+				member_id,
+				(select count(*) from REVIEW_REPLY where review_reply.review_no = review.review_no) reply_count
 		from review
 	</sql>
 	
@@ -21,6 +22,7 @@
 		<result column="recommend" property="recommend"/>
 		<result column="reg_date" property="regDate"/>
 		<result column="member_id" property="memberId"/>
+		<result column="reply_count" property="replyCount"/>
 	</resultMap>
 	
 	<!-- 등록 -->
@@ -82,11 +84,11 @@
 	
 	<!-- 리뷰 목록 페이징 -->
 		<select id="selectAllReviewPaging" parameterType="map" resultMap="review-resultmap">
-		select review_no, title, content, hits, recommend, reg_date, member_id
+		select review_no, title, content, hits, recommend, reg_date, member_id, reply_count
 		from (
 				select ceil(rownum/#{contentsPerPage}) page, 
 					   review_no, title, content, hits, 
-					   recommend, reg_date, member_id
+					   recommend, reg_date, member_id, reply_count
 				from (
 						<include refid="review-select"/>
 						order by reg_date desc

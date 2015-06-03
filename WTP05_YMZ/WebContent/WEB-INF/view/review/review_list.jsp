@@ -85,7 +85,12 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 					<td align="center">${review.reviewNo }</td>
 					<td align="left" id="title">
 					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-					${review.title}</a></td>
+					${review.title} 
+					<c:if test="${review.replyCount != 0}">
+					<font color="red">[${review.replyCount}]</font>
+					</c:if>
+					</a>
+					</td>
 					<td align="center">${review.memberId}</td>
 					<td align="center">${review.regDate}</td>
 					<td align="right" style="width:50px">${review.recommend}</td>
@@ -153,7 +158,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	
 	<!-- 인기글 테이블 -->
 	<div id="famousText" align="center">
-		<span style="font-size: 10" >인기순 테이블, 제목에 댓글개수 달기</span>
+		<span style="font-size: 10" >인기순 테이블 위치</span>
 		<br><br>
 	</div>
 </section>
