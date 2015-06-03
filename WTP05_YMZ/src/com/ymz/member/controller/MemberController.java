@@ -32,21 +32,49 @@ public class MemberController {
 	
 	//회원 가입
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
-	public String joinMember(@ModelAttribute Member member, Errors errors, HttpServletRequest request) throws Exception{
+	public String joinMember(@ModelAttribute Member member, Errors errors, HttpServletRequest request,ModelMap map) throws Exception{
 		//요청파라미터 Validator를 이용해 검증
 		new MemberValidator().validate(member, errors);
 		if(errors.hasErrors()){
 			return "member/join_form.tiles";
 		}
+		String exId = (String) request.getParameter("id");
+		String exNickname = (String) request.getParameter("nickname");
+		String exName = (String) request.getParameter("name");
 		String post1 = (String) request.getParameter("postcode1");
-		System.out.println(post1);
 		String post2 = (String) request.getParameter("postcode2");
+		String exAddress = (String) request.getParameter("address");
+		String exDetailAddress = (String) request.getParameter("detailAddress");
+		String exPhoneNo = (String) request.getParameter("phoneNo");
+		String exSex = (String)request.getParameter("sex");
 		String zipcode = post1+"-"+post2;
 		member.setZipcode(zipcode);
-		System.out.println(member.getAddress());
 		member.setGrade("일반");
 		String recommend = (String)request.getParameter("recommend");
-		
+		String year = (String)request.getParameter("year");
+		String month = (String)request.getParameter("month");
+		String day = (String)request.getParameter("day");
+		String exbirth = year+"-"+month+"-"+day;
+		System.out.println(exbirth);
+		member.setBirth(exbirth);
+		String emailName = (String)request.getParameter("emailName");
+		String emailAddress = (String)request.getParameter("emailAddress");
+		String exEmail = emailName+"@"+emailAddress;
+		if(service.getMemberByEmail(exEmail)!=null){
+			map.addAttribute("error_message", "이미 가입된 이메일입니다.");
+			request.setAttribute("id", exId);
+			request.setAttribute("name", exName);
+			request.setAttribute("nickname",exNickname);
+			request.setAttribute("postcode1", post1);
+			request.setAttribute("postcode2", post2);
+			request.setAttribute("address", exAddress);
+			request.setAttribute("detailAddress", exDetailAddress);
+			request.setAttribute("exPhoneNo", exPhoneNo);
+			request.setAttribute("sex", exSex);
+			request.setAttribute("recommend", recommend);
+			return "member/join_form.tiles";
+		}else{
+		member.setEmail(exEmail);
 		if(service.getMemberById(recommend)!=null){
 			Member rm =service.getMemberById(recommend);
 			String id =rm.getId();
@@ -74,8 +102,8 @@ public class MemberController {
 			service.joinMember(member);
 		}
 		return "redirect:/member/joinSuccess.do?id="+member.getId();
+		}
 	}
-
 	
 	// 등록 성공
 	@RequestMapping("joinSuccess.do")
@@ -125,25 +153,35 @@ public class MemberController {
 	
 	
 	/*************로그인이 필요한 서비스 - interceptor에서 로그인 체크**********************/
-	@RequestMapping(value="login/modifyMemberInfo", method=RequestMethod.POST)
-	public String modifyMemberInfo(@ModelAttribute Member member, Errors errors, HttpSession session,  HttpServletRequest request, ModelMap map)
-																																					throws Exception{
+	@RequestMapping("modifyMemberInfo.do")
+	@ResponseBody
+	public ModelAndView modifyMemberInfo(@ModelAttribute Member member, Errors errors, HttpSession session,  HttpServletRequest request, ModelMap map){
 		Member loginInfo = (Member)session.getAttribute("login_info");
-		//Validation check
-		new MemberValidator().validate(member, errors);
-		if(errors.hasErrors()){
-			return "member/modify_form.tiles";
-		}
-
+//		//Validation check
+//		new MemberValidator().validate(member, errors);
+//		if(errors.hasErrors()){
+//			return "member/info/modify_info.tiles";
+//		}
 		//session의 login_info 속성의 property들을  수정된 정보로 변경(id, joinDate는 변경 안한다.)
 		//로그인 체크 - interceptor가 처리
-		service.modifyMember(member);//수정 처리
-		loginInfo.setName(member.getName());
-		loginInfo.setEmail(member.getEmail());
-		loginInfo.setPassword(member.getPassword());
-		
-
-		return "member/member_info.tiles";
+		String nickname = (String) request.getParameter("nickname");
+		String post1 = (String) request.getParameter("postcode1");
+		String post2 = (String) request.getParameter("postcode2");
+		String address = (String) request.getParameter("address");
+		String detailAddress = (String) request.getParameter("detailAddress");
+		String email = (String) request.getParameter("email");
+		String phoneNo = (String) request.getParameter("phoneNo");
+		String zipcode = post1+"-"+post2;
+		System.out.println(nickname);
+		loginInfo.setNickname(nickname);
+		loginInfo.setZipcode(zipcode);
+		loginInfo.setAddress(address);
+		loginInfo.setDetailAddress(detailAddress);
+		loginInfo.setEmail(email);
+		loginInfo.setPhoneNo(phoneNo);
+		service.modifyMember(loginInfo);
+		System.out.println(loginInfo.getNickname());
+		return new ModelAndView("member/info/modify_info.tiles");
 	}
 	
 	// 정보 제거하기
@@ -194,6 +232,8 @@ public class MemberController {
 		}
 		return result;
 	}
+	
+
 	/**********************기존 비밀번호 체크********************///
 	@RequestMapping("confirmPassword.do")
 	@ResponseBody
@@ -255,10 +295,30 @@ public class MemberController {
 		Member m = service.getMemberById(id);
 		m.setMileage(exMileage);
 		service.modifyMileage(m);
-//		Integer.parseInt(exmileage);
-//		session.setAttribute(exmileage);
 		int mileage = m.getMileage();
 		request.setAttribute("mileage", mileage);
 		return new ModelAndView("member/info/trade_coupon.tiles");
 	}
+	
+	/**********************이메일 중복 체크********************/
+//	@RequestMapping("emailExistCheck.do")
+//	@ResponseBody
+//	public String emailExistCheck(@RequestParam String recommend2){
+//		String result = null;
+//		if(recommend2=="" || service.getMemberById(recommend2)!=null){
+//			result = "true";
+//			System.out.println(result);
+//		}else{
+//			result = "false";
+//			System.out.println(result);
+//		}
+//		
+//	}
+	
+	
+	
+	
+	
+	
+	
 }

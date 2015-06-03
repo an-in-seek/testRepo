@@ -38,6 +38,11 @@ public interface MemberService {
 	 * @return
 	 */
 	public abstract Member getMemberById(String id);
+	
+	/**
+	 * Email로 회원 조회 메소드
+	 */
+	public abstract Member getMemberByEmail(String email);
 
 	/**
 	 * 회원 정보 수정 처리 메소드

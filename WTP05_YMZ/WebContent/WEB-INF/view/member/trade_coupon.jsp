@@ -27,10 +27,8 @@ $(document).ready(function(){
 	})
 	
 	$("#btn").on("click",function(){
-		alert(($("#currentMileage").val()))
 		var num = null;
 			num = document.getElementById("price").value;
-			alert(num);
 		$.ajax({
 			url:"${initParam.rootPath}/member/moneyCheck.do",
 			data:{"num":num},

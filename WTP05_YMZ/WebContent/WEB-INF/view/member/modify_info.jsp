@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script type="text/javascript">
-
 function openDaumPostcode(){
 	new daum.Postcode({
 		oncomplete:function(data){
@@ -15,22 +15,16 @@ function openDaumPostcode(){
 }
 $(document).ready(function(){
 	$("#modifyForm").on("submit", function(){
-
-		if(!$("#password").val()){
-			alert("password를 입력하세요");
-			$("#password").focus();
+		var flag = confirm("수정하시겠습니까?");
+		if(!flag){
 			return false;
+		}else{
+			confirm("수정이 완료 되었습니다.")
 		}
-
+		
 		if(!$("#nickname").val()){
 			alert("닉네임을 입력하세요");
 			$("#nickname").focus();
-			return false;
-		}
-		
-		if(!$("#birth").val()){
-			alert("생일을 입력하세요");
-			$("#birth").focus();
 			return false;
 		}
 		if(!$("#detailAddress").val()){
@@ -57,7 +51,7 @@ $(document).ready(function(){
 
 <h2>회원정보 수정 폼</h2>
 
-<form method="post" action="${initParam.rootPath }/member/login/modifyMemberInfo.do" id="modifyForm" 
+<form method="post" action="${initParam.rootPath }/member/modifyMemberInfo.do" id="modifyForm" 
 	      enctype="multipart/form-data">
 	<input type="hidden" name="id" value="${sessionScope.login_info.id }">
 	<table style="width:500px">
@@ -66,21 +60,9 @@ $(document).ready(function(){
 			<td>${sessionScope.login_info.id }</td>
 		</tr>
 		<tr>
-			<td>이름</td>
-			<td>
-				<input type="text" name="name" value="${sessionScope.login_info.name }" id="name">  <span class="errorMessage"><form:errors path="member.name"/></span>
-			</td>
-		</tr>
-		<tr>
 			<td>닉네임</td>
 			<td>
-				<input type="text" name="nickname" value="${sessionScope.login_info.nickname }" id="nickname"><span class="errorMessage"><form:errors path="member.nickname"/></span>
-			</td>
-		</tr>
-		<tr>
-			<td>생년월일</td>
-			<td>
-				<input type="text" name="nickname" value="${sessionScope.login_info.birth}" id="birth"><span class="errorMessage"><form:errors path="member.birth"/></span>
+				<input type="text" id="nickname" name="nickname" value="${sessionScope.login_info.nickname }" id="nickname"><span class="errorMessage"><form:errors path="member.nickname"/></span>
 			</td>
 		</tr>
 		<tr>
