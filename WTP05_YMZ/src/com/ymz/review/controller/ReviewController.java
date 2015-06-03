@@ -167,7 +167,9 @@ public class ReviewController {
 			reply.setMemberId(member.getId());
 			//reply.setReviewNo(reviewNo);
 			replyService.registerReviewReply(reply);
-			return "redirect:/review/reviewList.do";
+			int reviewNo = reply.getReviewNo();
+			int pageNo = 2;
+			return "redirect:/review/reviewView.do?reviewNo="+reviewNo+"&pageNo="+pageNo;
 		}
 		
 		//댓글 수정
