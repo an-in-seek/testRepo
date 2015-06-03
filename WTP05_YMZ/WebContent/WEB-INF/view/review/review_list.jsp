@@ -31,6 +31,8 @@ $(document).ready(function(){
 		 $(this).css("background-color", "linen");
 	});
 	
+	// 등록일 글자수 자르기
+	
 });
 </script>
 <style type="text/css">
@@ -79,7 +81,6 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 			</tr>
 		</thead>
 		<tbody>
-			<!-- 여기 수정해야행 -->
 			<c:forEach items="${requestScope.reviewList }" var="review">
 				<tr>
 					<td align="center">${review.reviewNo }</td>
@@ -92,9 +93,9 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 					</a>
 					</td>
 					<td align="center">${review.memberId}</td>
-					<td align="center">${review.regDate}</td>
-					<td align="right" style="width:50px">${review.recommend}</td>
-					<td align="right">${review.hits}</td>
+					<td id="regDate" align="center">${review.regDate}</td>
+					<td align="center" style="width:50px">${review.recommend}</td>
+					<td align="center">${review.hits}</td>
 				</tr> 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->

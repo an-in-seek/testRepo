@@ -84,7 +84,7 @@
 	
 	<!-- 리뷰 목록 페이징 -->
 		<select id="selectAllReviewPaging" parameterType="map" resultMap="review-resultmap">
-		select review_no, title, content, hits, recommend, reg_date, member_id, reply_count
+		select review_no, title, content, hits, recommend, substr(reg_date, 1,10) reg_date, member_id, reply_count
 		from (
 				select ceil(rownum/#{contentsPerPage}) page, 
 					   review_no, title, content, hits, 
