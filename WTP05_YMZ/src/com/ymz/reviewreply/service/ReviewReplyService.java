@@ -1,6 +1,6 @@
 package com.ymz.reviewreply.service;
 
-import java.util.List;
+import java.util.Map;
 
 import com.ymz.reviewreply.vo.ReviewReply;
 
@@ -16,6 +16,6 @@ public interface ReviewReplyService {
 	public abstract void removeReviewReply(ReviewReply reply);
 	
 	//댓글 목록
-	public abstract List<ReviewReply> getReplyList();
+	public abstract Map<String, Object> getReplyList();
 	
 }

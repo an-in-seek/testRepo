@@ -1,6 +1,7 @@
 package com.ymz.review.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,8 +60,10 @@ public class ReviewController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int pageNum = pageNo;
 		Review review = service.getReviewByNo(reviewNo);
+		map = replyService.getReplyList();
 		map.put("pageNo", pageNum);
 		map.put("review", review);
+		
 		return new ModelAndView("review/review_view.tiles", map);
 	}
 	
@@ -160,10 +163,11 @@ public class ReviewController {
 			Member member = (Member)session.getAttribute("login_info");
 			System.out.println("댓글 글쓴이 : " + member.getId());
 			System.out.println("댓글내용: " + reply.getContent());
+			System.out.println("글번호 : " + reply.getReviewNo());
 			reply.setMemberId(member.getId());
 			//reply.setReviewNo(reviewNo);
 			replyService.registerReviewReply(reply);
-			return "redirect:/review/review_view.tiles";
+			return "redirect:/review/reviewList.do";
 		}
 		
 		//댓글 수정

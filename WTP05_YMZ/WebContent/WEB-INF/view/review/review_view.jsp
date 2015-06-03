@@ -145,8 +145,8 @@ ${requestScope.review.content }<br>
 
 	<div align="center" id="recommend"> <!-- 추천 버튼 -->
 		<button id="recommendBtn">
-			<span id="recommendCountBtn">${requestScope.review.recommend}</span><br> 
-			<font color="blue" size='2'>추천</font>
+			<span id="recommendCountBtn">${requestScope.review.recommend}</span>
+			<font color="" size='4'>♥</font>
 		</button>
 	</div><br><br>
 	
@@ -166,6 +166,7 @@ ${requestScope.review.content }<br>
 <!-- ****************************************  댓 글 영 역  ****************************************** -->
 
 <form action="${initParam.rootPath }/review/login/register.do"  method="post">
+	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}">
 <!-- 테이블 시작 -->
 <table id="replyTB" style="width:800px">
 		<thead>
@@ -178,12 +179,12 @@ ${requestScope.review.content }<br>
 		</thead>
 		<tbody>
 			<!-- 여기 수정해야행 -->
-			<c:forEach items="${requestScope.reviewReplyList }" var="reviewReply">
+			<c:forEach items="${requestScope.reviewReplyList }" var="reply">
 				<tr>
-					<td>${requestScope.reviewReply.replyNo }</td>
-					<td>${requestScope.reviewReply.content}</td>
-					<td>${requestScope.reviewReply.memberId}</td>
-					<td>${requestScope.reviewReply.regDate}</td>
+					<td>${reply.replyNo }</td>
+					<td>${reply.content}</td>
+					<td>${reply.memberId}</td>
+					<td>${reply.regDate}</td>
 				</tr> 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->

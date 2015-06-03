@@ -1,6 +1,8 @@
 package com.ymz.reviewreply.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,9 +36,11 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 
 	//댓글 목록
 	@Override
-	public List<ReviewReply> getReplyList() {
+	public Map<String, Object> getReplyList() {
 		List<ReviewReply> list = dao.selectAllReply();
-		return list;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reviewReplyList", list);
+		return map;
 	}
 
 }
