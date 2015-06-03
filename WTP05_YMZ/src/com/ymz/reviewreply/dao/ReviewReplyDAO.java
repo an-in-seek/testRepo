@@ -1,5 +1,7 @@
 package com.ymz.reviewreply.dao;
 
+import java.util.List;
+
 import com.ymz.reviewreply.vo.ReviewReply;
 
 public interface ReviewReplyDAO {
@@ -11,6 +13,8 @@ public interface ReviewReplyDAO {
 	public abstract void updateReviewReply(ReviewReply reply);
 	
 	//댓글 삭제
-	public abstract void deleteReviewReply(String memberId);
-	
+	public abstract void deleteReviewReply(ReviewReply reply);
+	    
+	//댓글 목록
+	public abstract List<ReviewReply> selectAllReply(int reviewNo);
 }

@@ -1,5 +1,9 @@
 package com.ymz.reviewreply.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +30,17 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 
 	//댓글 삭제
 	@Override
-	public void removeReviewReply(String memberId) {
-		dao.deleteReviewReply(memberId);
+	public void removeReviewReply(ReviewReply reply) {
+		dao.deleteReviewReply(reply);
+	}
+
+	//댓글 목록
+	@Override
+	public Map<String, Object> getReplyList(int reviewNo) {
+		List<ReviewReply> list = dao.selectAllReply(reviewNo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reviewReplyList", list);
+		return map;
 	}
 
 }

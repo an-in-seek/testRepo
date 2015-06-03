@@ -1,5 +1,7 @@
 package com.ymz.reviewreply.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,13 @@ public class ReviewReplyDAOImpl implements ReviewReplyDAO {
 
 	//댓글 삭제
 	@Override
-	public void deleteReviewReply(String memberId) {
-		session.delete(namespace + "deleteReview", memberId);
+	public void deleteReviewReply(ReviewReply reply) {
+		session.delete(namespace + "deleteReply", reply);
+	}
+
+	//댓글목록
+	@Override
+	public List<ReviewReply> selectAllReply(int reviewNo) {
+		return session.selectList(namespace + "selectAllReply", reviewNo);
 	}
 }

@@ -62,9 +62,6 @@ $(document).ready(function(){
 	
 	
 	// 댓글 버튼
-	$("#reply_registerBtn").on("click", function(){ 
-		alert("로그인부터 하세욥!!!");
-	});
 	$("#reply_modifyBtn").on("click", function(){
 		alert("로그인부터 하세욥!!!");
 	});
@@ -168,7 +165,8 @@ ${requestScope.review.content }<br>
 <hr>
 <!-- ****************************************  댓 글 영 역  ****************************************** -->
 
-
+<form action="${initParam.rootPath }/review/login/register.do"  method="post">
+	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}">
 <!-- 테이블 시작 -->
 <table id="replyTB" style="width:800px">
 		<thead>
@@ -181,12 +179,12 @@ ${requestScope.review.content }<br>
 		</thead>
 		<tbody>
 			<!-- 여기 수정해야행 -->
-			<c:forEach items="${requestScope.reviewReplyList }" var="reviewReply">
+			<c:forEach items="${requestScope.reviewReplyList }" var="reply">
 				<tr>
-					<td>${reviewReply.댓글번호 }</td>
-					<td>${reviewReply.내용}</td>
-					<td>${reviewReply.회원ID}</td>
-					<td>${reviewReply.등록일}</td>
+					<td>${reply.replyNo }</td>
+					<td>${reply.content}</td>
+					<td>${reply.memberId}</td>
+					<td>${reply.regDate}</td>
 				</tr> 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->
@@ -198,18 +196,19 @@ ${requestScope.review.content }<br>
 		<tr>
 			<td>
 				<!-- 댓글 작성 영역 -->
-				<textarea name="reply_content" id="reply_content" style="width:600px; height:100px;"></textarea><br>
+				<textarea name="content" id="reply_content" style="width:600px; height:100px;"></textarea><br>
+				<input type="text"  name="zz" id="zz">
 			</td>
 			<td>
 				<!-- 댓글 버튼 -->
-				<button id="reply_registerBtn" style="width:80px;height:20px;">등록</button>
+				<input type="submit"  value="등록">
 				<button id="reply_modifyBtn" style="width:80px;height:20px;">수정</button>
 				<button id="reply_deleteBtn" style="width:80px;height:20px;">삭제</button>
 				<button id="reply_reportBtn" style="width:80px;height:20px;">신고</button>
 			</td>
 		</tr>
 	</table>
-
+</form>
 
 </div>
 </body>
