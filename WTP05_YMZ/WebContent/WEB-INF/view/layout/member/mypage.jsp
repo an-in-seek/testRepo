@@ -26,7 +26,7 @@ function removeConfirm(){
 		<td><a href="${initParam.rootPath }/member/mypage/modify_password.do"  class="menu"><font color="black" size="3">비밀번호수정</font></a></td>
 	</tr>
 	<tr>
-		<td><a href="${initParam.rootPath }/member/mypage/tradeCoupon.do"  class="menu"><font color="black" size="3">쿠폰교환</font></a></td>
+		<td><a href="${initParam.rootPath }/member/couponTrade.do"  class="menu"><font color="black" size="3">쿠폰교환</font></a></td>
 	</tr>
 	<tr>
 		<td><a href="javascript:removeConfirm();">회원탈퇴</a></td>
