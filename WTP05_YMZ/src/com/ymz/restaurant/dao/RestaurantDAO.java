@@ -20,4 +20,6 @@ public interface RestaurantDAO {
 	public List<Food> selectFoodsByRestaurantNo(int restaurantNo);
 	public int updateHits(int restaurantNo);
 	public List<Restaurant> selectRestaurantsByBuildingNameAndFloor(String buildingName, String floor);
+	public List<Restaurant> selectRestaurantsPaging(String buildingName, String floor, int currentPage);
+	public int selectRestaurantCount(String buildingName, String floor);
 }
