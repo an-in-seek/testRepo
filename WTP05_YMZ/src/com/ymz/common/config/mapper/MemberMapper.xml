@@ -69,17 +69,17 @@
 		
 	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
 		<include refid="member-select"/>
-		where	member_id=#{id}
+		where 	member_id=#{id}
 	</select>
 	
 	<select id="selectMemberByEmail" parameterType="string" resultMap="member-resultmap">
 		<include refid="member-select"/>
-		where	email=#{email}
+		where 	email=#{email}
 	</select>
 	
 	<select id="selectMemberByNickname" parameterType="string" resultMap="member-resultmap">
 		<include refid="member-select"/>
-		where	nickname=#{nickname}
+		where	 nickname=#{nickname}
 	</select>
 	
 	<select id="selectAllMember" resultMap="member-resultmap">
