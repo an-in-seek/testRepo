@@ -21,6 +21,7 @@ $(document).ready(function(){
 	var cnt = 0;
 	var num1 = 0;
 	var num2 = 0;
+	
 	//document.getElementById("result").value = 1;
 	$("#exBtn").on("click",function(){
 		alert("마일리지가 부족합니다");
@@ -59,20 +60,28 @@ $(document).ready(function(){
 			}
 		})
 	});
-	
-	
+	$("#modifyMileage").on("submit",function(){
+		var flag = confirm("확인을 누르시면 마일리지가 차감되고 쿠폰이 발급됩니다");
+		if(!flag){
+			alert("취소 되었습니다");
+			return false;
+		}else{
+			alert("고객님의 메일로 쿠폰이 전송되었습니다");
+			return true;
+		}
+	})
 });
 
 	/*
 	 * 발급클릭시 메세지창 띄우기.
-	 */
+
 	function issueConfirm(){
 		confirm("고객님의 메일로 쿠폰이 전송되었습니다");
 		if(!flag){
 			
 		}
 	}
-
+	*/
 </script>
 </head>
 <body>

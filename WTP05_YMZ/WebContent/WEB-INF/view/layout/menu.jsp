@@ -1,18 +1,40 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style type="text/css">
-	a.menu:link {text-decoration:none; color: white;}/*방문하지 않은 페이지*/
-	a.menu:hover	{text-decoration:underline; color: white;}/*링크에 마우스 올라갔을 때*/
-	a.menu:active	{text-decoration:none; color: white;}/*링크 클릭시*/
-	a.menu:visited {text-decoration:none; color: white;}/*방문한 링크 표시*/
+	.seek ul{ padding:0; list-style: none;}
+    .seek ul li{ width:140px; display: inline-block; position: relative; text-align: center; line-height: 20px; }
+    .seek ul li a{ width:100px; display: block; padding:5px 10px; color:#ffffff; border:1px solid #ffffff; background:skyblue; text-decoration:none; nowrap;}
+    .seek ul li a:hover{color: #fff; background: #939393;}
+    .seek ul li ul{display: none; position: absolute; z-index: 999; left: 0;}
+    .seek ul li:hover ul{display: block; /* display the dropdown */} 
 </style>    
-<table width="1024" cellspacing="0" cellpadding="0">
-	<tr>
-		<td align="center">
-		<a href='${initParam.rootPath }/index.do' class="menu">메인페이지</a>&nbsp;&nbsp;
-		<a href="${initParam.rootPath }/restaurant/showListByType.do" class="menu">맛집정보</a>&nbsp;&nbsp;
-		<a href="${initParam.rootPath }/review/reviewList.do" class="menu">맛집리뷰</a>&nbsp;&nbsp;
-		<a href="${initParam.rootPath }/faq/faqList.do" class="menu">고객센터</a>&nbsp;&nbsp;
-		</td>
-	</tr>
-</table>
+
+<body>
+
+	<div class="seek">
+		<ul >
+			<li><a href='${initParam.rootPath }/index.do' class="menu">메인페이지</a></li>
+			<li>
+				<a href="${initParam.rootPath }/restaurant/showListByType.do" class="menu">맛집정보</a>
+				<ul>
+					<li><a href="${initParam.rootPath }/restaurant/showListByType.do">유형별</a></li>
+					<li><a href="${initParam.rootPath }/restaurant/showListByTheme.do">테마별</a></li>
+					<li><a href="${initParam.rootPath }/restaurant/selectLocation.do">위치별</a></li>
+				</ul>
+			</li>
+			<li><a href="${initParam.rootPath }/review/reviewList.do" class="menu">맛집리뷰</a></li>
+			<li>
+				<a href="${initParam.rootPath }/faq/faqList.do" class="menu">고객센터&#9662;</a>
+				<ul>
+					<li><a href="${initParam.rootPath }/faq/faqList.do">FAQ</a></li>
+					<li><a href="${initParam.rootPath }/qna/qnaList.do">QNA</a></li>
+				</ul>
+			</li>
+			
+			<c:if test="${sessionScope.login_info.grade=='su'}">
+				<li><a href="${initParam.rootPath }/member/memberListPaging.do" class="menu">회원관리</a></li>
+			</c:if>
+		</ul>
+	</div>
+
+</body>

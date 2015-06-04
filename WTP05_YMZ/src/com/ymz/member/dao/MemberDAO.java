@@ -20,6 +20,10 @@ public interface MemberDAO {
 	public abstract Member selectMemberByEmail(String email);
 	
 	/**
+	 * Nickname로 회원 정보를 조회하여 return하는 메소드
+	 */
+	public abstract Member selectMemberByNickname(String nickname);
+	/**
 	 * 회원 정보를 DB에 insert하는 메소드
 	 * @param member 등록할 회원 정보
 	 */
