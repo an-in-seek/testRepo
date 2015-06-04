@@ -1,24 +1,29 @@
 package com.ymz.restaurant.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ymz.member.vo.Member;
 import com.ymz.restaurant.service.RestaurantService;
 import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
+import com.ymz.restaurantreply.service.RestaurantReplyService;
+import com.ymz.restaurantreply.vo.RestaurantReply;
 
 @Controller
 @RequestMapping("/restaurant")
@@ -26,6 +31,10 @@ public class RestaurantController {
 	
 	@Autowired
 	private RestaurantService service;
+	//송이꺼
+	@Autowired
+	private RestaurantReplyService replyService;
+	
 	
 	@RequestMapping("/ajax/checkName.do")
 	@ResponseBody
@@ -133,7 +142,7 @@ public class RestaurantController {
 	
 	@RequestMapping("/restaurantView.do")
 	@Transactional
-	public String restaurantView(int restaurantNo, Model model) {
+	public String restaurantView(int restaurantNo, Model model, HttpSession session, ModelMap map) {
 		Restaurant restaurant = service.getRestaurantByNo(restaurantNo);
 		model.addAttribute("restaurant", restaurant);
 		
@@ -153,7 +162,21 @@ public class RestaurantController {
 		
 		// 조회수 1증가
 		service.increaseHits(restaurantNo);
-		
+		//송이꺼-----------------------------------------------------------------------------
+		Member member = (Member)session.getAttribute("login_info");
+		List list = replyService.selectAllRestaurantReply(restaurant.getRestaurantNo());
+		map.put("replyList", list);
+
 		return "restaurant/restaurant_view.tiles";
+	}
+	
+	
+	@RequestMapping("/login/registerReply.do")
+	public String registerRestaurantReply(@ModelAttribute RestaurantReply restaurantReply, HttpSession session){	
+		//등록
+		Member member = (Member)session.getAttribute("login_info");
+		restaurantReply.setMemberId(member.getId());
+		 replyService.registerRestaurantReply(restaurantReply);
+		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getRestaurantNo();
 	}
 }

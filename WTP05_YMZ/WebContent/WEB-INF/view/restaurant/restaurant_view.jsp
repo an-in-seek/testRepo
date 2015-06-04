@@ -265,6 +265,55 @@ $(document).ready(function(){
 </tfoot>
 </table>
 <!-- ---------------------------------------------------------------------------------------------------- -->
+<hr>
+	<p>
+		<font size="5"><b>댓글</b></font>
+	</p>
 
+	<hr>
+	<table align="center" style="width: 700px;" border='1'>
+		<c:forEach items="${requestScope.replyList}" var="reply">
+				<tr>
+					<td>글번호 : ${reply.number }</td>
+					<td>작성일 : ${reply.regDate }
+					<td>작성자 : ${reply.memberId }</td>
+				</tr>
+				<tr>
+					<td colspan="3" height="30px">내용 : ${reply.content }</td>
+				</tr>
+				<tr>
+					<td colspan="3"></td>
+				</tr>
+			</c:forEach>
+	</table>
+	
+	<table align="center" style="width: 700px;" >
+		<tr>
+			<td colspan="2" height="10px"></td>
+			<td align="right">
+				<button id="reply_modifyButton" style="width: 80px; heigth: 20px;">수정</button>
+				<button id="reply_removeButton" style="width: 80px; heigth: 20px;">삭제</button>
+				<button id="reply_reportButton" style="width: 80px; heigth: 20px;">신고</button>
+			</td>
+		</tr>
+	</table>
+	
+	<hr>
+	<p>
+		<font size="5"><b>댓글쓰기</b></font>
+	</p>
+	<form method="post" action="${initParam.rootPath}/restaurant/login/registerReply.do" id="registerReplyForm">
+		<table>
+			<tr>
+				<td>
+				<font size='6'><b>내용</b></font>
+				<input type="text" id="content" name="content" style="width: 600px; height: 80px"> 
+				<input type="hidden" id="score" name="score" value="3"> 
+				<input type="hidden"	id="restaurantNo" name="restaurantNo"	value="${requestScope.restaurant.restaurantNo}"> 
+				<input type="submit" value="등록">
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>
