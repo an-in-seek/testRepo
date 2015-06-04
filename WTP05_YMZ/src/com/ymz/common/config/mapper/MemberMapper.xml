@@ -77,6 +77,11 @@
 		where	email=#{email}
 	</select>
 	
+	<select id="selectMemberByNickname" parameterType="string" resultMap="member-resultmap">
+		<include refid="member-select"/>
+		where	nickname=#{nickname}
+	</select>
+	
 	<select id="selectAllMember" resultMap="member-resultmap">
 		<include refid="member-select"/>
 	</select>
@@ -85,16 +90,10 @@
 
 		select member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
 							 favorite_food, mileage, grade, join_date
-
-		select id, password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date
->
 		from (
 
 			select ceil(rownum/#{contentsPerPage}) page, member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
-
-			select ceil(rownum/#{contentsPerPage}) page, id, password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
-
-							 favorite_food, mileage, grade, join_date
+													favorite_food, mileage, grade, join_date
 			from (
 					<include refid="member-select"/>
 					order by join_date

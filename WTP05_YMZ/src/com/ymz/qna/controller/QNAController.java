@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,6 +65,24 @@ public class QNAController {
 	@RequestMapping("qnaList.do")
 	public ModelAndView QNAList(@RequestParam(defaultValue="1")int page){
 		Map map = service.getQNAListPaging(page);
+		return new ModelAndView("qna/qna_list.tiles", map);
+	}
+	
+	//QNA게시물 전체목록 분류별 조회(페이징)
+	@RequestMapping("qnaListByCategory.do")
+	public ModelAndView QNAListByCategory(@ModelAttribute QNA qna){
+		int pageNo = 1;
+		String category = qna.getCategory();
+		Map map = service.getQNAListPagingByCategory(pageNo, category);
+		return new ModelAndView("qna/qna_list.tiles", map);
+	}
+	
+	//QNA게시물 전체목록 검색으로 조회(페이징)
+	@RequestMapping("searchQna.do")
+	public ModelAndView QNAListBySearch(@RequestParam String text){
+		int pageNo = 1;
+		System.out.println(text);
+		Map map = service.getQNAListPagingBySearch(pageNo, text);
 		return new ModelAndView("qna/qna_list.tiles", map);
 	}
 	

@@ -35,38 +35,12 @@ $(document).ready(function(){
 
 <link type="text/css" href="${initParam.rootPath}/css/jquery-ui.css" rel="stylesheet"></link>	
 <link type="text/css" href="${initParam.rootPath}/css/faq.css" rel="stylesheet"/>
-<style type="text/css">
-#listTB1 thead tr{
-	font-weight: bold;
-	background: silver;
-}
-#listTB2 thead tr{
-	font-weight: bold;
-	background: silver;
-}
-[id^=contentTr]{
-	cursor: pointer;
-	display: none;/*최초로딩시에는 안보이도록 처리*/
-}
-div#dialog{
-	width:400px;
-	display: none;
-}
-article{
-	border-bottom: 1px solid black;
-	padding: 5px;
-	padding-left: 10px;
-}
-#table1{
-	margin-left: 10px;
-}
-</style>
-
+<div align="center">
 <%-- <c:if test="${fn:length(requestScope.faq_list) != 0 }"> --%>
-<form id="removeForm" method=post action="login/removeFaq.do">
+<form id="removeForm" method=post action="${initParam.rootPath }/faq/login/removeFaq.do">
 	<input type="hidden" id="number" name="number">
 	<table id="table1">
-		<tr>
+		<tr align="center">
 			<td>
 				<div class="faq" id="listTB1" style="width: 680px" align="center">
 					<div class="faqHeader">
@@ -111,6 +85,6 @@ article{
 	</table>
 
 </form>
-	
+</div>
 <%-- </c:if> --%>
 

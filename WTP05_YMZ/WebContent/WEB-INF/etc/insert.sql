@@ -5,10 +5,12 @@ delete from review CASCADE CONSTRAINTS;
 delete from faq CASCADE CONSTRAINTS;
 delete from qna CASCADE CONSTRAINTS;
 
+
+
 insert into member values('user01', 1111, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, '관리자', '20140514');
 insert into member values('user02', 2222, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 99999999, '관리자', '20140514');
-insert into member values('5', 5555, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 100000, '관리자', '20140514');
-update member set mileage=50000 	where member_id='s';
+insert into member values('2', 5555, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 100000, '관리자', '20140514');
+update member set grade='su' 	where member_id='2';
 update member set mileage=100 	where member_id='2';
 insert into CATEGORY values('회원관련', '회원관련');
 insert into CATEGORY values('맛집관련', '맛집관련');
@@ -157,7 +159,6 @@ insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:2
 insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '맛있엉!!', 'user01', 3);
 insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '알바 쩌네요...', 'user01', 3);
 insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', 'ㅋㅋㅋㅋㅋㅋㅋㅋ', 'user01', 3);
-
 
 
 insert into FAQ (faq_no, faq_title, faq_content) values(faq_no_seq.nextval, '개명으로 인한 이름을 변경하고 싶습니다.', 

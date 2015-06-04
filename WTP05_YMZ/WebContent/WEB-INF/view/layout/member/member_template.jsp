@@ -52,22 +52,17 @@ header.member_template{
 }
 
 #body{
+	margin-top:10px;
+	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-left:auto;
 	padding: 20px;
-	height:580px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-	width:500px;
-	font-weight:bold;
-	text-align:left;
-	float:left;   /*왼쪽으로 띄움 */
-}
-#left{
-	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
-	padding:10px;
-	height:600px;
-	width:200px;
+	height:600px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	width:1000px;
 	font-weight:bold;
 	text-align:center;
-	float:left;  /*왼쪽으로 띄움 */
+	float:left;   /*왼쪽으로 띄움 */
 }
+
 footer.member_template{
 	background-color:skyblue;
 	color:white;
@@ -84,13 +79,10 @@ footer.member_template{
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="menu" />
 		</header>
-		<aside id="left" class="member_template">
-			<tiles:insertAttribute name="aside_menu" /><!-- 서브메뉴로 -->
-		</aside>
+		
 		<section id="body" class="member_template">
 			<tiles:insertAttribute name="body" />
 		</section>
-		
 		<footer class="member_template">
 			<tiles:insertAttribute name="footer" />
 		</footer>

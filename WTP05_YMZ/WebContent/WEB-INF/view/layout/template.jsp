@@ -57,9 +57,9 @@ nav.template{
 	float:left;   /*왼쪽으로 띄움 */
 }
 section.template{
-	padding: 15px;
-	height:600px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-	width:840px;
+	padding: 5px;
+	height:auto; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	width:1024px;
 	float:left;   /*왼쪽으로 띄움 */
 }
 footer.template{
@@ -80,9 +80,9 @@ footer.template{
 			<tiles:insertAttribute name="menu" />
 		</header>
 
-		<nav class="template">
+	<%-- 	<nav class="template">
 			<tiles:insertAttribute name="sub_menu" /><!-- 서브메뉴로 -->
-		</nav>
+		</nav> --%>
 
 		<section class="template">
 			<tiles:insertAttribute name="body" />

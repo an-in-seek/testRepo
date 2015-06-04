@@ -49,7 +49,7 @@ public class MemberController {
 		String exSex = (String)request.getParameter("sex");
 		String zipcode = post1+"-"+post2;
 		member.setZipcode(zipcode);
-		member.setGrade("일반");
+		member.setGrade("user");
 		String recommend = (String)request.getParameter("recommend");
 		String year = (String)request.getParameter("year");
 		String month = (String)request.getParameter("month");
@@ -157,31 +157,40 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView modifyMemberInfo(@ModelAttribute Member member, Errors errors, HttpSession session,  HttpServletRequest request, ModelMap map){
 		Member loginInfo = (Member)session.getAttribute("login_info");
-//		//Validation check
+		//Validation check
 //		new MemberValidator().validate(member, errors);
 //		if(errors.hasErrors()){
-//			return "member/info/modify_info.tiles";
+//			return new ModelAndView("member/info/modify_info.tiles");
 //		}
 		//session의 login_info 속성의 property들을  수정된 정보로 변경(id, joinDate는 변경 안한다.)
 		//로그인 체크 - interceptor가 처리
 		String nickname = (String) request.getParameter("nickname");
+		request.setAttribute("nickname", nickname);
+		String exNick = loginInfo.getNickname();
 		String post1 = (String) request.getParameter("postcode1");
 		String post2 = (String) request.getParameter("postcode2");
 		String address = (String) request.getParameter("address");
 		String detailAddress = (String) request.getParameter("detailAddress");
-		String email = (String) request.getParameter("email");
+		String emailName = (String) request.getParameter("emailName");
+		String emailAddress = (String) request.getParameter("emailAddress");
+		String email = emailName+"@"+emailAddress;
 		String phoneNo = (String) request.getParameter("phoneNo");
 		String zipcode = post1+"-"+post2;
-		System.out.println(nickname);
-		loginInfo.setNickname(nickname);
-		loginInfo.setZipcode(zipcode);
-		loginInfo.setAddress(address);
-		loginInfo.setDetailAddress(detailAddress);
-		loginInfo.setEmail(email);
-		loginInfo.setPhoneNo(phoneNo);
-		service.modifyMember(loginInfo);
-		System.out.println(loginInfo.getNickname());
-		return new ModelAndView("member/info/modify_info.tiles");
+		Member flag = service.getMemberByEmail(email);
+		String m = loginInfo.getEmail();
+		if(flag!=null&&!m.equals(email)){
+			map.addAttribute("error_message", "이미 가입된 이메일입니다.");
+			return new ModelAndView("member/info/modify_info.tiles",map);
+		}else{
+			loginInfo.setNickname(nickname);
+			loginInfo.setZipcode(zipcode);
+			loginInfo.setAddress(address);
+			loginInfo.setDetailAddress(detailAddress);
+			loginInfo.setEmail(email);
+			loginInfo.setPhoneNo(phoneNo);
+			service.modifyMember(loginInfo);
+			return new ModelAndView("member/mypage/mypage.tiles");
+		}
 	}
 	
 	// 정보 제거하기
@@ -245,6 +254,7 @@ public class MemberController {
 			}else{
 				result = "false";
 			}
+			System.out.println(result);
 		return result;
 	}
 	
@@ -253,13 +263,11 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView modifyPassword(@RequestParam String password,HttpSession session){
 		Member loginInfo = (Member)session.getAttribute("login_info");
-		System.out.println(password);
 		String id = loginInfo.getId();
-		System.out.println(id);
 		Member m = service.getMemberById(id);
 		m.setPassword(password);
 		service.modifyPassword(m);
-		return new ModelAndView("member/info/modify_password_success.tiles");
+		return new ModelAndView("member/mypage/mypage.tiles");
 		}
 	
 	/********************** 회원 마일리지 값 요청 ********************/
@@ -298,6 +306,25 @@ public class MemberController {
 		int mileage = m.getMileage();
 		request.setAttribute("mileage", mileage);
 		return new ModelAndView("member/info/trade_coupon.tiles");
+	}
+	
+	/**********************닉네임 중복 체크********************/
+	@RequestMapping("nickDuplicateCheck.do")
+	@ResponseBody
+	public String nickDuplicateCheck(@RequestParam String nickname,HttpSession session){
+		Member loginInfo = (Member)session.getAttribute("login_info");
+		String result = null;
+		String exNick = loginInfo.getNickname();
+		Member flag = service.getMemberByNickname(nickname);
+		if(flag!=null&&!nickname.equals(exNick)){
+			result="false";
+		}else if(flag==null){
+			result="true";
+		}else{
+			result="true";
+		}
+		System.out.println(result);
+		return result;
 	}
 	
 	/**********************이메일 중복 체크********************/
