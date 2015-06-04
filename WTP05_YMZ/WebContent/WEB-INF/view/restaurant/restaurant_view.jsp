@@ -192,7 +192,7 @@ $(document).ready(function(){
 </tr>
 </table><p>
 <hr>
-<p align="right"><button>수정</button> <button>삭제</button></p>
+<p align="right"><button>수정</button> <button id="btn_delete">삭제</button></p>
 </td>
 </tr>
 </table>

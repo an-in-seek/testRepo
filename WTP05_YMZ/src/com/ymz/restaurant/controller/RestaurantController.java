@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ymz.member.vo.Member;
 import com.ymz.restaurant.service.RestaurantService;
 import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
@@ -53,9 +55,16 @@ public class RestaurantController {
 			@RequestParam(defaultValue="전체") String category,
 			@RequestParam(defaultValue="date") String align,
 			@RequestParam(defaultValue="1") int currentPage,
-			String searchWord, Model model) {
+			String searchWord, Model model, HttpSession session) {
 		Map<String, Object> map = service.getListByTypePaging(category, align, currentPage, searchWord);
 		model.addAllAttributes(map);
+		
+		Member member = (Member)session.getAttribute("login_info");
+		if(member!=null) {
+			if(member.getGrade().equals("관리자")) {
+				model.addAttribute("hasRight",true);
+			}
+		}
 		
 		return "restaurant/restaurant_type.tiles";
 	}
@@ -87,7 +96,7 @@ public class RestaurantController {
 		return "restaurant/restaurant_location_board.tiles";
 	}
 	
-	@RequestMapping("/addNewRestaurantForm.do")
+	@RequestMapping("/login/admin/addNewRestaurantForm.do")
 	public String addNewRestaurantForm(Model model) {
 		List<String> buildingNames = service.getBuildingNames();
 		model.addAttribute("buildingNames", buildingNames);

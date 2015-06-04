@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(document).ready(function(){
+	if("${requestScope.hasRight}"){
+		$("#newRestaurantTd").append("<a href='${initParam.rootPath }/restaurant/login/admin/addNewRestaurantForm.do'><button>맛집등록</button>");
+	}
+	
 	$("a").hover(function(){
 		$(this).css("text-decoration","underline");
 	},function(){
@@ -53,7 +57,7 @@ $(document).ready(function(){
 				</select>
 				</form>
 			</td>
-			<td style="border-top-style:hidden;border-right-style:hidden;" colspan="3" align="right"><a href="${initParam.rootPath }/restaurant/addNewRestaurantForm.do"><button>맛집등록</button></a></td>
+			<td id="newRestaurantTd" style="border-top-style:hidden;border-right-style:hidden;" colspan="3" align="right"></td>
 		</tr>
 		<tr height="50px" align="center">
 			<td width="10%" style="border-left-style:hidden;border-right-style:hidden;"><b>번호</b></td>
