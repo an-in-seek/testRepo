@@ -25,13 +25,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public Map<String, Object> getListByTypePaging(String category, String align, int currentPage, String searchWord) {
 		List<Restaurant> list = dao.selectListByTypePaging(category, align, currentPage, searchWord);
-		int totalContent = dao.selectTotalRestaurantCount();
+		
+		int totalContent = dao.selectRestaurantCountByCategory(category, searchWord);
 		PagingBean pagingBean = new PagingBean(totalContent, currentPage);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("restaurantList", list);
 		map.put("pagingBean", pagingBean);
 		map.put("category", category);
 		map.put("align", align);
+		map.put("searchWord", searchWord);
 		map.put("today", new SimpleDateFormat("yyyyMMdd").format(new Date()));
 		return map;
 	}
@@ -39,13 +42,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public Map<String, Object> getListByThemePaging(String theme, String align, int currentPage, String searchWord) {
 		List<Restaurant> list = dao.selectListByThemePaging(theme, align, currentPage, searchWord);
-		int totalContent = dao.selectTotalRestaurantCount();
+		
+		int totalContent = dao.selectRestaurantCountByTheme(theme, searchWord);
 		PagingBean pagingBean = new PagingBean(totalContent, currentPage);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("restaurantList", list);
 		map.put("pagingBean", pagingBean);
 		map.put("theme", theme);
 		map.put("align", align);
+		map.put("searchWord", searchWord);
 		map.put("today", new SimpleDateFormat("yyyyMMdd").format(new Date()));
 		return map;
 	}
@@ -129,13 +135,13 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public Map<String, Object> getRestaurantsPaging(String buildingName, String floor, int currentPage) {
+	public Map<String, Object> getRestaurantsPaging(String buildingName, String floor, String align, int currentPage, String searchWord) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		List<Restaurant> restaurants = dao.selectRestaurantsPaging(buildingName, floor.split("층")[0], currentPage);
+		List<Restaurant> restaurants = dao.selectRestaurantsPaging(buildingName, floor.split("층")[0], align, currentPage, searchWord);
 		map.put("restaurants", restaurants);
 		
-		int totalContent = dao.selectRestaurantCount(buildingName, floor.split("층")[0]);
+		int totalContent = dao.selectRestaurantCount(buildingName, floor.split("층")[0], searchWord);
 		PagingBean pagingBean = new PagingBean(totalContent, currentPage);
 		map.put("pagingBean", pagingBean);
 		
@@ -143,6 +149,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 		map.put("buildingNames", buildingNames);
 		map.put("currentBuildingName", buildingName);
 		map.put("currentFloor", floor.split("층")[0]);
+		map.put("currentAlign", align);
+		map.put("searchWord", searchWord);
 		
 		List<String> floors = dao.selectFloorsByBuildingName(buildingName);
 		map.put("floors", floors);

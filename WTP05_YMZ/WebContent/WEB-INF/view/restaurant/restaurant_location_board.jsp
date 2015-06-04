@@ -6,6 +6,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#buildingSelect").on("change",function(){
+		$("#floorSelect").val("전체");
+		$("#alignSelect").val("${requestScope.currentAlign}");
+		$("#selectForm").submit();
+	});
+	
+	$("#floorSelect").on("change",function(){
+		$("#alignSelect").val("${requestScope.currentAlign}");
+		$("#selectForm").submit();
+	});
+	
+	$("#alignSelect").on("change",function(){
+		$("#selectForm").submit();
+	});
+	
+	$("#searchForm").on("submit",function(){
+		if($("#search").val().trim()==""){
+			return false;
+		}
+		$(this).append("<input type='hidden' name='buildingName' value='${currentBuildingName}'>");
+		$(this).append("<input type='hidden' name='floor' value='${currentFloor}'>");
+		$(this).append("<input type='hidden' name='align' value='${currentAlign}'>");
+	});
+	
+	$("#alignSelect option[value=${requestScope.currentAlign}]").prop("selected","selected");
+});
+</script>
 </head>
 <body><div align="center">
 
@@ -13,7 +42,9 @@
 	<thead>
 		<tr height="50px">
 			<td style="border-left-style:hidden;border-top-style:hidden;border-right-style:hidden;" colspan="4">
-				<select>
+			<form id="selectForm" action="${initParam.rootPath }/restaurant/boardByLocation.do" method="post">
+				위치:
+				<select id="buildingSelect" name="buildingName">
 					<c:forEach items="${requestScope.buildingNames }" var="buildingName">
 						<c:choose>
 							<c:when test="${requestScope.currentBuildingName==buildingName }">
@@ -25,7 +56,7 @@
 						</c:choose>
 					</c:forEach>
 				</select>
-				<select>
+				<select id="floorSelect" name="floor">
 					<option value="전체">전체보기</option>
 					<c:forEach items="${requestScope.floors }" var="floor">
 						<c:choose>
@@ -38,6 +69,15 @@
 						</c:choose>
 					</c:forEach>
 				</select>
+				정렬:
+				<select id="alignSelect" name="align">
+					<option value="date">최근 등록일순</option>
+					<option value="name">상호명순</option>
+					<option value="hits">조회수 많은순</option>
+					<option value="manyScore">평가 많은순</option>
+					<option value="highScore">평점 높은순</option>
+				</select>
+			</form>
 			</td>
 			<td style="border-top-style:hidden;border-right-style:hidden;" colspan="3" align="right"><a href="${initParam.rootPath }/restaurant/addNewRestaurantForm.do"><button>맛집등록</button></a></td>
 		</tr>
@@ -85,7 +125,7 @@
 <!-- 이전 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.previousPageGroup }">
-		<a href="${initParam.rootPath }/restaurant/boardByLocation.do?currentPage=${pagingBean.startPageOfPageGroup-1}&buildingName=${requestScope.currentBuildingName}&floor=${requestScope.currentFloor}">&lt;</a>
+		<a href="${initParam.rootPath }/restaurant/boardByLocation.do?currentPage=${pagingBean.startPageOfPageGroup-1}&buildingName=${requestScope.currentBuildingName}&floor=${requestScope.currentFloor}&align=${requestScope.currentAlign}&searchWord=${requestScope.searchWord}">&lt;</a>
 	</c:when>
 	<c:otherwise>
 		&lt;
@@ -99,7 +139,7 @@
 			<u><b>${pageNum}</b></u>
 		</c:when>
 		<c:otherwise>
-			<a href="${initParam.rootPath }/restaurant/boardByLocation.do?currentPage=${pageNum}&buildingName=${requestScope.currentBuildingName}&floor=${requestScope.currentFloor}">${pageNum}</a>
+			<a href="${initParam.rootPath }/restaurant/boardByLocation.do?currentPage=${pageNum}&buildingName=${requestScope.currentBuildingName}&floor=${requestScope.currentFloor}&align=${requestScope.currentAlign}&searchWord=${requestScope.searchWord}">${pageNum}</a>
 		</c:otherwise>
 	</c:choose>
 	&nbsp;
@@ -107,12 +147,17 @@
 <!-- 다음 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.nextPageGroup }">
-		<a href="${initParam.rootPath }/restaurant/boardByLocation.do?currentPage=${pagingBean.endPageOfPageGroup+1}&buildingName=${requestScope.currentBuildingName}&floor=${requestScope.currentFloor}">&gt;</a>
+		<a href="${initParam.rootPath }/restaurant/boardByLocation.do?currentPage=${pagingBean.endPageOfPageGroup+1}&buildingName=${requestScope.currentBuildingName}&floor=${requestScope.currentFloor}&align=${requestScope.currentAlign}&searchWord=${requestScope.searchWord}">&gt;</a>
 	</c:when>
 	<c:otherwise>
 		&gt;
 	</c:otherwise>
 </c:choose>
+
+<form id="searchForm" action="${initParam.rootPath }/restaurant/boardByLocation.do">
+<input type="text" id="search" name="searchWord" value="${requestScope.searchWord }">
+<input type="submit" value="검색">
+</form>
 
 </div></body>
 </html>

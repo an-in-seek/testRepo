@@ -39,19 +39,18 @@
 							description, picture_name, score, hits, theme, reg_date, reply_count, location_no
 					from	(
 								<include refid="restaurant-select"/>
-								<if test="category=='전체' and searchWord!=null">
-									where restaurant_name like '%'||#{searchWord}||'%'
-								</if>
+								<where>
+									<if test="category!='전체'">
+										category=#{category}
+									</if>
+									<if test="searchWord!=null">
+										and restaurant_name like '%'||#{searchWord}||'%'
+									</if>
+								</where>
 								<choose>
-									<when test="category=='전체'"/>
-									<otherwise>
-										where category=#{category}
-										<if test="searchWord!=null">
-											and restaurant_name like '%'||#{searchWord}||'%'
-										</if>
-									</otherwise>
-								</choose>
-								<choose>
+									<when test="align=='name'">
+										order by restaurant_name
+									</when>
 									<when test="align=='hits'">
 										order by hits desc
 									</when>
@@ -78,19 +77,18 @@
 							description, picture_name, score, hits, theme, reg_date, reply_count, location_no
 					from	(
 								<include refid="restaurant-select"/>
-								<if test="theme=='전체' and searchWord!=null">
-									where restaurant_name like '%'||#{searchWord}||'%'
-								</if>
+								<where>
+									<if test="theme!='전체'">
+										theme like '%'||#{theme}||'%'
+									</if>
+									<if test="searchWord!=null">
+										and restaurant_name like '%'||#{searchWord}||'%'
+									</if>
+								</where>
 								<choose>
-									<when test="theme=='전체'"/>
-									<otherwise>
-										where theme like '%'||#{theme}||'%'
-										<if test="searchWord!=null">
-											and restaurant_name like '%'||#{searchWord}||'%'
-										</if>
-									</otherwise>
-								</choose>
-								<choose>
+									<when test="align=='name'">
+										order by restaurant_name
+									</when>
 									<when test="align=='hits'">
 										order by hits desc
 									</when>
@@ -186,8 +184,27 @@
 									<if test="floor!='전체'">
 										and l.floor=#{floor}
 									</if>
+									<if test="searchWord!=null">
+										and r.restaurant_name like '%'||#{searchWord}||'%'
+									</if>
 								</where>
-								order by restaurant_no desc
+								<choose>
+									<when test="align=='name'">
+										order by restaurant_name
+									</when>
+									<when test="align=='hits'">
+										order by hits desc
+									</when>
+									<when test="align=='manyScore'">
+										order by reply_count desc
+									</when>
+									<when test="align=='highScore'">
+										order by score desc
+									</when>
+									<otherwise>
+										order by restaurant_no desc
+									</otherwise>
+								</choose>
 					)
 				)
 		where	page=#{currentPage}
@@ -196,10 +213,41 @@
 	<select id="selectRestaurantCount" parameterType="Map" resultType="_int">
 		select count(restaurant_no)
 		from restaurant r, location l
-		where r.location_no=l.location_no
-		and l.building_name=#{buildingName}
-		<if test="floor!='전체'">
-			and l.floor=#{floor}
-		</if>
+		<where>
+			r.location_no=l.location_no
+			and l.building_name=#{buildingName}
+			<if test="floor!='전체'">
+				and l.floor=#{floor}
+			</if>
+			<if test="searchWord!=null">
+				and r.restaurant_name like '%'||#{searchWord}||'%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectRestaurantCountByCategory" parameterType="Map" resultType="_int">
+		select count(restaurant_no)
+		from restaurant
+		<where>
+			<if test="category!='전체'">
+				category=#{category}
+			</if>
+			<if test="searchWord!=null">
+				and restaurant_name like '%'||#{searchWord}||'%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectRestaurantCountByTheme" parameterType="Map" resultType="_int">
+		select count(restaurant_no)
+		from restaurant
+		<where>
+			<if test="theme!='전체'">
+				theme like '%'||#{theme}||'%'
+			</if>
+			<if test="searchWord!=null">
+				and restaurant_name like '%'||#{searchWord}||'%'
+			</if>
+		</where>
 	</select>
 </mapper>
