@@ -101,6 +101,41 @@ $(document).ready(function(){
 		}
 	});
 });
+
+/* 
+$(document).ready(function() {
+
+	$("#registerFrom").on("submit", function() {
+
+		if (!$("#content").val()) {
+			alert("내용을 입력하세요");
+			$("#content").focus();
+			return true;
+		}
+	});
+
+	$("#reply_modifyButton").on("click", function() {
+		alert("로그인을 해야합니다.");
+	});
+
+	$("#reply_removeButton").on("click", function() {
+		var isDel=confirm("삭제할까요?");
+		if(isDel){
+			document.location.href="login/removeReply.do"
+		}else{
+			return;
+		}
+		alert("삭제되었습니다.");
+	});
+
+	$("#reply_reportButton").on("click", function() {
+		alert("로그인을 해야합니다.");
+	});
+});
+ */
+
+
+
 </script>
 </head>
 <body>
@@ -281,23 +316,17 @@ $(document).ready(function(){
 				<tr>
 					<td colspan="3" height="30px">내용 : ${reply.content }</td>
 				</tr>
+				<td align="right" colspan="3">
+				<button id="reply_modifyButton" style="width: 80px; heigth: 20px;">수정</button>
+				<button id="reply_removeButton" style="width: 80px; heigth: 20px;">삭제</button>
+				<button id="reply_reportButton" style="width: 80px; heigth: 20px;">신고</button>
+			</td>
 				<tr>
 					<td colspan="3"></td>
 				</tr>
 			</c:forEach>
 	</table>
-	
-	<table align="center" style="width: 700px;" >
-		<tr>
-			<td colspan="2" height="10px"></td>
-			<td align="right">
-				<button id="reply_modifyButton" style="width: 80px; heigth: 20px;">수정</button>
-				<button id="reply_removeButton" style="width: 80px; heigth: 20px;">삭제</button>
-				<button id="reply_reportButton" style="width: 80px; heigth: 20px;">신고</button>
-			</td>
-		</tr>
-	</table>
-	
+
 	<hr>
 	<p>
 		<font size="5"><b>댓글쓰기</b></font>

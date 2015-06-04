@@ -183,4 +183,13 @@ public class RestaurantController {
 		 replyService.registerRestaurantReply(restaurantReply);
 		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getRestaurantNo();
 	}
+	
+	@RequestMapping("/login/removeReply.do")
+	public String removeRestaurantReplyByReplyNo(@ModelAttribute RestaurantReply restaurantReply, HttpSession session){
+		Member member = (Member)session.getAttribute("login_info");
+		restaurantReply.setMemberId(member.getId());;
+		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getNumber();
+
+	}
+	
 }

@@ -45,7 +45,7 @@
 		where reply = #{number}
 
 	</update>
-
+<!-- 삭제 -->
 	<delete id="deleteRestaurantReplyByReplyNo" parameterType="int">
 		delete from restaurant_reply where reply = #{number}
 	</delete>
@@ -60,7 +60,7 @@
 		where reply = #{number}
 	</select>
 
-
+<!-- 조회 -->
 	<select id="selectAllRestaurantReply" parameterType="int" resultMap="restaurantReply-resultmap">
 		<include refid="restaurant_reply"/>
 			where restaurant_no =#{restNumber}
