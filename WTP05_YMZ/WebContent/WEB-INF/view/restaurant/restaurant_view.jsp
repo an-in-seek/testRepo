@@ -7,6 +7,18 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(document).ready(function(){
+	if("${requestScope.isAdmin}"){
+		$("#modifyAndDelete").append("<button id='btn_modify'>수정</button> <button id='btn_delete'>삭제</button>");
+		
+		$("#btn_delete").on("click",function(){
+			if(confirm("삭제하시겠습니까?")){
+				$("body").append("<form id='deleteForm' action='${initParam.rootPath}/restaurant/login/admin/removeRestaurant.do' method='post'></form>")
+				$("#deleteForm").append("<input type='hidden' name='restaurantNo' value='${requestScope.restaurant.restaurantNo}'>")
+				$("#deleteForm").submit();
+			}
+		});
+	}
+	
 	var calcListCount=0;
 	
 	$("#selectedPicture").prop("src",$("#selectPicture img:first").prop("src"));
@@ -101,6 +113,38 @@ $(document).ready(function(){
 		}
 	});
 });
+
+$(document).ready(function() {
+	$("#registerFrom").on("submit", function() {
+		if (!$("#content").val()) {
+			alert("내용을 입력하세요");
+			$("#content").focus();
+			return true;
+		}
+	});
+
+	$("#reply_modifyButton").on("click", function() {
+		alert("로그인을 해야합니다.");
+	});
+
+	$("#reply_removeButton").on("click", function() {
+		var isDel=confirm("삭제할까요?");
+		if(isDel){
+			
+		}else{
+			return;
+		}
+		
+	});
+
+	$("#reply_reportButton").on("click", function() {
+		alert("로그인을 해야합니다.");
+	});
+});
+ 
+
+
+
 </script>
 </head>
 <body>
@@ -192,7 +236,7 @@ $(document).ready(function(){
 </tr>
 </table><p>
 <hr>
-<p align="right"><button>수정</button> <button>삭제</button></p>
+<p id="modifyAndDelete" align="right"></p>
 </td>
 </tr>
 </table>
@@ -265,6 +309,49 @@ $(document).ready(function(){
 </tfoot>
 </table>
 <!-- ---------------------------------------------------------------------------------------------------- -->
+<hr>
+	<p>
+		<font size="5"><b>댓글</b></font>
+	</p>
 
+	<hr>
+	<table align="center" style="width: 700px;" border='1'>
+		<c:forEach items="${requestScope.replyList}" var="reply">
+				<tr>
+					<td>글번호 : ${reply.number }</td>
+					<td>작성일 : ${reply.regDate }
+					<td>작성자 : ${reply.memberId }</td>
+				</tr>
+				<tr>
+					<td colspan="3" height="30px">내용 : ${reply.content }</td>
+				</tr>
+				<td align="right" colspan="3">
+				<button id="reply_modifyButton" style="width: 80px; heigth: 20px;">수정</button>
+				<button id="reply_removeButton" style="width: 80px; heigth: 20px;">삭제</button>
+				<button id="reply_reportButton" style="width: 80px; heigth: 20px;">신고</button>
+			</td>
+				<tr>
+					<td colspan="3"></td>
+				</tr>
+			</c:forEach>
+	</table>
+
+	<hr>
+	<p>
+		<font size="5"><b>댓글쓰기</b></font>
+	</p>
+	<form method="post" action="${initParam.rootPath}/restaurant/login/registerReply.do" id="registerReplyForm">
+		<table>
+			<tr>
+				<td>
+				<font size='6'><b>내용</b></font>
+				<input type="text" id="content" name="content" style="width: 600px; height: 80px"> 
+				<input type="hidden" id="score" name="score" value="3"> 
+				<input type="hidden"	id="restaurantNo" name="restaurantNo"	value="${requestScope.restaurant.restaurantNo}"> 
+				<input type="submit" value="등록">
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

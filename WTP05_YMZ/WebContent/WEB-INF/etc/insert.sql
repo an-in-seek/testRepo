@@ -5,6 +5,8 @@ delete from review CASCADE CONSTRAINTS;
 delete from faq CASCADE CONSTRAINTS;
 delete from qna CASCADE CONSTRAINTS;
 
+
+
 insert into member values('user01', 1111, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, '관리자', '20140514');
 insert into member values('user02', 2222, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 99999999, '관리자', '20140514');
 insert into member values('2', 5555, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 100000, '관리자', '20140514');
@@ -91,12 +93,12 @@ insert into restaurant values(restaurant_no_seq.nextval, 'SUBWAY', '양식', '03
 insert into food values(food_no_seq.nextval, '베지샐러드', 5000, null, 20);
 insert into food values(food_no_seq.nextval, '에그마요샐러드', 5400, null, 20);
 
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','2015-05-30 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'새마을식당','1','1','1','2015-05-28 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'버거킹','1','221','0','2014-04-20 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'맥도날드','1','15','11','2013-03-11 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'롯데리아','1','542','22','2012-07-15 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'차지족발','1','412','6','2011-06-22 11:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','2015-06-03 11:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'새마을식당','1','1','1','2015-06-02 09:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'버거킹','1','221','0','2015-06-02 07:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'맥도날드','1','15','11','2015-06-01 05:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'롯데리아','1','542','22','2015-06-01 03:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'차지족발','1','412','6','2015-06-01 01:12:20','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'재스기네치킨','1','333','31','2010-11-27 11:12:20','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한솥도시락','1','12','2','2006-12-08 11:12:20','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타국밥','1','53','0','2004-02-03 11:12:20','user01');
@@ -157,7 +159,6 @@ insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:2
 insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '맛있엉!!', 'user01', 3);
 insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '알바 쩌네요...', 'user01', 3);
 insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', 'ㅋㅋㅋㅋㅋㅋㅋㅋ', 'user01', 3);
-
 
 
 insert into FAQ (faq_no, faq_title, faq_content) values(faq_no_seq.nextval, '개명으로 인한 이름을 변경하고 싶습니다.', 

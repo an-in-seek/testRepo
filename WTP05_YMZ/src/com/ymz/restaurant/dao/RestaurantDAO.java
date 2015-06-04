@@ -9,6 +9,8 @@ public interface RestaurantDAO {
 	public List<Restaurant> selectListByTypePaging(String category, String align, int pageNo, String searchWord);
 	public List<Restaurant> selectListByThemePaging(String theme, String align, int pageNo, String searchWord);
 	public int selectTotalRestaurantCount();
+	public int selectRestaurantCountByCategory(String category, String searchWord);
+	public int selectRestaurantCountByTheme(String theme, String searchWord);
 	public Restaurant selectRestaurantByName(String name);
 	public List<String> selectBuildingNames();
 	public List<String> selectFloorsByBuildingName(String buildingName);
@@ -20,6 +22,7 @@ public interface RestaurantDAO {
 	public List<Food> selectFoodsByRestaurantNo(int restaurantNo);
 	public int updateHits(int restaurantNo);
 	public List<Restaurant> selectRestaurantsByBuildingNameAndFloor(String buildingName, String floor);
-	public List<Restaurant> selectRestaurantsPaging(String buildingName, String floor, int currentPage);
-	public int selectRestaurantCount(String buildingName, String floor);
+	public List<Restaurant> selectRestaurantsPaging(String buildingName, String floor, String align, int currentPage, String searchWord);
+	public int selectRestaurantCount(String buildingName, String floor, String searchWord);
+	public int deleteRestaurant(int restaurantNo);
 }

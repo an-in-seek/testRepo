@@ -42,5 +42,8 @@ public interface ReviewDAO {
 	// 오늘 최고 조회수글 가져오기
 	public abstract List<Review> selectTodayBestHits();
 
+	// 이번달 최고 조회수글 가져오기
+	public abstract List<Review> selectMonthBestHits();
+
 	
 }

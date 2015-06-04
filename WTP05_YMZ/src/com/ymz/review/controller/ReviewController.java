@@ -155,7 +155,7 @@ public class ReviewController {
 	
 	//댓글 등록
 		@RequestMapping(value="login/register.do", method=RequestMethod.POST)
-		public String registerReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session, HttpServletRequest request) throws Exception{
+		public String registerReviewReply(@ModelAttribute ReviewReply reply, @RequestParam int pageNo, Errors errors, HttpSession session, HttpServletRequest request) throws Exception{
 			if(errors.hasErrors()){
 				System.out.println("에러 있엉");
 				return "review/review_view.tiles";
@@ -168,31 +168,43 @@ public class ReviewController {
 			//reply.setReviewNo(reviewNo);
 			replyService.registerReviewReply(reply);
 			int reviewNo = reply.getReviewNo();
-			int pageNo = 2;
-			return "redirect:/review/reviewView.do?reviewNo="+reviewNo+"&pageNo="+pageNo;
-		}
-		
-		//댓글 수정
-		@RequestMapping(value="login/modifyReviewReply.do", method=RequestMethod.POST)
-		public String modifyReviewReply(@ModelAttribute ReviewReply reply, @RequestParam int replyNo, Errors errors, HttpSession session){
-			Member member = (Member)session.getAttribute("login_info");
-			String userId = member.getId();
-			System.out.println("수정할 글번호 : " + replyNo);
-			System.out.println("글쓴이 아이디 : " + userId);
-			reply.setMemberId(userId);
-			reply.setReplyNo(replyNo);
-			replyService.modifyReviewReply(reply);
-			System.out.println("글번호 : " + replyNo + "수정완료 ! ");
-			return "redirect:/review/review_view.tiles";
+			int pNo = pageNo;
+			return "redirect:/review/reviewView.do?reviewNo="+reviewNo+"&pageNo="+pNo;
 		}
 		
 		//댓글 삭제
 		@RequestMapping(value="login/removeReviewReply.do")
-		public String removeReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpServletRequest request){
-			String memberId = request.getParameter("memberId");
+		public String removeReviewReply(@ModelAttribute ReviewReply reply, @RequestParam int replyNo, @RequestParam int pageNo, 
+																@RequestParam int reviewNo, HttpSession session){
+			Member member = (Member)session.getAttribute("login_info");
+			String userId = member.getId();
+			System.out.println("삭제할 댓글번호 : "+ replyNo);
+			System.out.println("글쓴이 아이디: " + userId);
+			reply.setMemberId(userId);
+			reply.setReplyNo(replyNo);
 			replyService.removeReviewReply(reply);
-			return "review/review_view.tiles";
+			int pNo = pageNo;
+			System.out.println("리뷰 번호 : "+ reviewNo);
+			return "redirect:/review/reviewView.do?reviewNo="+reviewNo+"&pageNo="+pNo;
 		}
+
+		//댓글 수정
+		@RequestMapping(value="login/modifyReviewReply.do", method=RequestMethod.POST)
+		public String modifyReviewReply(@ModelAttribute ReviewReply reply, @RequestParam int replyNo, int pageNo, Errors errors, HttpSession session) throws Exception{
+			Member member = (Member)session.getAttribute("login_info");
+			String userId = member.getId();
+			System.out.println("수정할 댓글번호 : " + replyNo);
+			System.out.println("글쓴이 아이디 : " + userId);
+			reply.setMemberId(userId);
+			reply.setReplyNo(replyNo);
+			replyService.modifyReviewReply(reply);
+			int reviewNo = reply.getReviewNo();
+			int pNo = pageNo;
+			System.out.println("글번호 : " + replyNo + "수정완료 ! ");
+			return "redirect:/review/reviewView.do?reviewNo="+reviewNo+"&pageNo="+pNo;
+		}
+		
+		
 	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
 	
 	public String searchReview(    ){

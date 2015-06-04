@@ -10,6 +10,18 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery.cookie.js"></script> <!-- 쿠키 사용 -->
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <script type="text/javascript">
+
+
+function removeReply(reviewNo, rnum, pNo){
+	var isDel = confirm("정말로 삭제하시겠습니까?");
+	if (isDel) {
+		document.location.href="${initParam.rootPath }/review/login/removeReviewReply.do?reviewNo="+reviewNo+"&replyNo="+rnum+"&pageNo="+pNo;
+	} else {
+		return;
+	}
+}
+
+
 $(document).ready(function(){
 	
 	var reviewNumber = ${requestScope.review.reviewNo};
@@ -56,18 +68,28 @@ $(document).ready(function(){
 			return;
 		}
 	});
+	
 	$("#reportBtn").on("click", function(){
 		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
 	});
 	
-	
-	// 댓글 버튼
+	// 댓글 등록 버튼
+	$("#reply_registerBtn").click(function() {
+	//	var text = $("#reply_content").val();
+	//	alert(text);
+		if(!$("#reply_content").val()){
+			alert("내용을 입력하세요");
+		$("#reply_content").focus();
+			return false;
+	   }
+	})
+
+
+	//댓글 수정 버튼
 	$("#reply_modifyBtn").on("click", function(){
-		alert("로그인부터 하세욥!!!");
-	});
-	$("#reply_deleteBtn").on("click", function(){
-		alert("로그인부터 하세욥!!!");
-	});
+		
+	}); 
+	
 	$("#reply_reportBtn").on("click", function(){
 		alert("로그인부터 하세욥!!!");
 	});
@@ -167,24 +189,32 @@ ${requestScope.review.content }<br>
 
 <form action="${initParam.rootPath }/review/login/register.do"  method="post">
 	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}">
+	<input type="hidden" name="pageNo" value="${requestScope.pageNo}">
 <!-- 테이블 시작 -->
 <table id="replyTB" style="width:800px">
 		<thead>
 			<tr>
-				<td>번호</td>
-				<td>내용</td>
+				<td>NO</td>
 				<td>작성자</td>
+				<td>내용</td>
 				<td>등록일</td>
+				<td></td>
 			</tr>
 		</thead>
 		<tbody>
 			<!-- 여기 수정해야행 -->
 			<c:forEach items="${requestScope.reviewReplyList }" var="reply">
 				<tr>
-					<td>${reply.replyNo }</td>
-					<td>${reply.content}</td>
+					<td>${reply.replyNo}</td>
 					<td>${reply.memberId}</td>
+					<td>${reply.content}</td>
 					<td>${reply.regDate}</td>
+					<td>
+						<button id="reply_modifyBtn" >수정</button>
+						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
+													onclick="removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});"  value="삭제" >
+						<button id="reply_reportBtn"">신고</button>
+					</td>
 				</tr> 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->
@@ -199,11 +229,10 @@ ${requestScope.review.content }<br>
 				<textarea name="content" id="reply_content" style="width:600px; height:100px;"></textarea><br>
 			</td>
 			<td>
-				<!-- 댓글 버튼 -->
-				<input type="submit"  value="등록">
-				<button id="reply_modifyBtn" style="width:80px;height:20px;">수정</button>
-				<button id="reply_deleteBtn" style="width:80px;height:20px;">삭제</button>
-				<button id="reply_reportBtn" style="width:80px;height:20px;">신고</button>
+				<!-- 등록 버튼 -->
+				<input type="submit" style="width:200px;height:100px;" id="reply_registerBtn" value="등록">
+				
+				
 			</td>
 		</tr>
 	</table>

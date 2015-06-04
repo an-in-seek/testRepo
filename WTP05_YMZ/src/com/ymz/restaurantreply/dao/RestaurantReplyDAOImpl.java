@@ -1,5 +1,7 @@
 package com.ymz.restaurantreply.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -9,41 +11,64 @@ import com.ymz.restaurantreply.vo.RestaurantReply;
 @Repository
 public class RestaurantReplyDAOImpl implements RestaurantReplyDAO{
 
-	private String namespace="restaurant_reply.dao.RestauranReplyMapper.";
+	private String namespace="restaurantReply.dao.RestaurantReplyMapper.";
 	@Autowired
 	private SqlSessionTemplate session;
 	
+	//등록하기
 	@Override
-	public int insertRestauran_reply(RestaurantReply restauran_reply) {
+	public int insertRestaurantReply(RestaurantReply restaurantReply) {
 		
-		return session.insert(namespace+"insertFAQ", restauran_reply);
+		return session.insert(namespace+"insertRestaurantReply", restaurantReply);
 	}
 
+	//조회하기
 	@Override
-	public int updateRestauran_reply(RestaurantReply restaurantReaply) {
+	public int updateRestaurantReply(RestaurantReply restaurantReply) {
 		
-		return session.update(namespace+"updateRestauran_reply", restaurantReaply);
+		return session.update(namespace+"updateRestaurantReply", restaurantReply);
 	}
 
+	//삭제하기
 	@Override
-	public int deleteRestaurant_replyByReplyNo(int ReplyNo) {
+	public int deleteRestaurantReplyByReplyNo(int number) {
 	
-		return session.delete(namespace+"deleteRestaurant_replyByReplyNo", ReplyNo);
+		return session.delete(namespace+"deleteRestaurantReplyByReplyNo", number);
 	}
 
+	//신고하기
 	@Override
-	public int reportRestaurant_replyByReplyNo(int ReplyNo) {
+	public int reportRestaurantReplyByReplyNo(int number) {
 		
-		return session.selectOne(namespace+"reportRestaurant_replyByReplyNo",ReplyNo);
-	}
-
-	@Override
-	public int gardeRestaurant_replyByReplyNo(int ReplyNo) {
-		
-		return session.selectOne(namespace+"gardeRestaurant_replyByReplyNo",ReplyNo);
+		return session.selectOne(namespace+"reportRestaurantReplyByReplyNo",number);
 	}
 
 	
-	
+	//평가하기
+	@Override
+	public int gardeRestaurantReplyByReplyNo(int number) {
+		
+		return session.selectOne(namespace+"gardeRestaurantReplyByReplyNo",number);
+	}
+
+	//댓글 번호로 댓글찾기
+	@Override
+	public RestaurantReply selectRestaurantReplyByReplyNo(int number) {
+		
+		return session.selectOne(namespace+"selectRestaurantReplyByReplyNo", number);
+	}
+
+	@Override
+	public List selectAllRestaurantReply(int restNumber) {
+			return session.selectList(namespace+"selectAllRestaurantReply", restNumber);
+	}
+
+	//댓글 카운트하기
+	@Override
+	public int updateReplyCount(int restaurantNo) {
+		
+		return session.update(namespace+"updateReplyCount",restaurantNo);
+		
+	}
 	
 }

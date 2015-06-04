@@ -113,20 +113,44 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	}
 
 	@Override
-	public List<Restaurant> selectRestaurantsPaging(String buildingName, String floor, int currentPage) {
+	public List<Restaurant> selectRestaurantsPaging(String buildingName, String floor, String align, int currentPage, String searchWord) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("buildingName", buildingName);
 		map.put("floor", floor);
+		map.put("align", align);
 		map.put("currentPage", currentPage);
+		map.put("searchWord", searchWord);
 		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
 		return session.selectList(namespace+"selectRestaurantsPaging", map);
 	}
 
 	@Override
-	public int selectRestaurantCount(String buildingName, String floor) {
+	public int selectRestaurantCount(String buildingName, String floor, String searchWord) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("buildingName", buildingName);
 		map.put("floor", floor);
+		map.put("searchWord", searchWord);
 		return session.selectOne(namespace+"selectRestaurantCount", map);
+	}
+
+	@Override
+	public int selectRestaurantCountByCategory(String category, String searchWord) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("category", category);
+		map.put("searchWord", searchWord);
+		return session.selectOne(namespace+"selectRestaurantCountByCategory", map);
+	}
+	
+	@Override
+	public int selectRestaurantCountByTheme(String theme, String searchWord) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("theme", theme);
+		map.put("searchWord", searchWord);
+		return session.selectOne(namespace+"selectRestaurantCountByTheme", map);
+	}
+
+	@Override
+	public int deleteRestaurant(int restaurantNo) {
+		return session.delete(namespace+"deleteRestaurant", restaurantNo);
 	}
 }
