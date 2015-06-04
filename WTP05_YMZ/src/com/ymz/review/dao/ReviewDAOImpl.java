@@ -118,6 +118,18 @@ public class ReviewDAOImpl implements ReviewDAO{
 		System.out.println("오늘 날짜 : " + today);
 		return session.selectList(namespace+"selectTodayBestHits", today);
 	}
+
+	/**
+	 * 이번달 최고 조회수글 가져오기
+	 */
+	@Override
+	public List<Review> selectMonthBestHits() {
+		SimpleDateFormat td = new SimpleDateFormat("yyyy-MM");
+		String month = td.format(new Date());
+		System.out.println("이번달 : " + month);
+		return session.selectList(namespace+"selectMonthBestHits", month);
+	}
+	
 	
 	
 	
