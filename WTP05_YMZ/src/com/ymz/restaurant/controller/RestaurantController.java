@@ -203,6 +203,12 @@ public class RestaurantController {
 		return "restaurant/restaurant_view.tiles";
 	}
 	
+	@RequestMapping("/restaurantViewByRestaurantName.do")
+	public String restaurantViewByRestaurantName(String restaurantName) {
+		int restaurantNo = service.getRestaurantByName(restaurantName).getRestaurantNo();
+		return "/restaurant/restaurantView.do?restaurantNo="+restaurantNo;
+	}
+	
 	
 	@RequestMapping("/login/registerReply.do")
 	public String registerRestaurantReply(@ModelAttribute RestaurantReply restaurantReply, HttpSession session){	
