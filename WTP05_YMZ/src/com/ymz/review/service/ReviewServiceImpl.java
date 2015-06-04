@@ -53,6 +53,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public Map<String, Object> getReviewListPaging(int pageNo) {
 		List<Review> bestHits = dao.selectTodayBestHits(); // 오늘 최고 조회수 글 목록 가져오기
+		List<Review> bestMonthHits = dao.selectMonthBestHits(); // 오늘 최고 조회수 글 목록 가져오기
 		// 목록에 뿌려질 List<Review> 조회
 		List<Review> list = dao.selectAllReviewPaging(pageNo);
 		// PagingBean 생성
@@ -63,6 +64,7 @@ public class ReviewServiceImpl implements ReviewService {
 		map.put("reviewList", list);
 		map.put("pagingBean", pagingBean);
 		map.put("todayBest", bestHits);
+		map.put("monthBest", bestMonthHits);
 		return map;
 	}
 
