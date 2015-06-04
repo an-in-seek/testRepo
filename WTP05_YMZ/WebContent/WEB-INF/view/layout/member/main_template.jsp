@@ -53,11 +53,11 @@ nav.main_template{
 }
 #right{
 	margin-top:10px;
-	background-color: orange;
+	background-color: lightsteelblue;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	padding:10px;
-	height:120px;
-	width:150px;
+	height:150px;
+	width:240px;
 	font-weight:bold;
 	text-align:center;
 	float:right;  /*오른쪽으로 띄움 */

@@ -3,14 +3,14 @@
 
 
  
-로그인 폼<br>   
-<hr noshade="noshade" width="30%" align="left"> 
+<h2>로그인 폼</h2>
+<hr noshade="noshade" width="30%" align="center"> 
 <c:if test="${requestScope.error_message != null}">
 	<font color="red" size="2">${requestScope.error_message}</font>
 </c:if>
 
 <form action="${initParam.rootPath }/member/login.do" method="post" >
-	<table>
+	<table align="center">
 		<tr>
 			<td>아이디</td>
 			<td><input type="text" name="id" size="20" autofocus="autofocus"></td>

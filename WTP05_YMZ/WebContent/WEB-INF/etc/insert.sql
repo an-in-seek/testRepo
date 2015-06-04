@@ -7,8 +7,8 @@ delete from qna CASCADE CONSTRAINTS;
 
 
 
-insert into member values('user01', 1111, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, '관리자', '20140514');
-insert into member values('user02', 2222, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 99999999, '관리자', '20140514');
+insert into member values('user01', 1111, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, 'user', '20140514');
+insert into member values('master', 1111, '안인식', '관리자', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140514');
 insert into member values('2', 5555, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 100000, '관리자', '20140514');
 update member set grade='su' 	where member_id='2';
 update member set mileage=100 	where member_id='2';
