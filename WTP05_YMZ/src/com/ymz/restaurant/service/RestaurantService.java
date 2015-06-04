@@ -20,4 +20,5 @@ public interface RestaurantService {
 	public int increaseHits(int restaurantNo);
 	public List<String> getRestaurantsByBuildingName(String buildingName);
 	public Map<String, Object> getRestaurantsPaging(String buildingName, String floor, String align, int currentPage, String searchWord);
+	public int removeRestaurant(int restaurantNo);
 }

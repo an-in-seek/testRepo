@@ -157,4 +157,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 		
 		return map;
 	}
+
+	@Override
+	public int removeRestaurant(int restaurantNo) {
+		return dao.deleteRestaurant(restaurantNo);
+	}
 }

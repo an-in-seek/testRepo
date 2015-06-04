@@ -30,6 +30,10 @@
 			<mvc:mapping path="/**/login/**/*"/>
 			<bean class="com.ymz.common.interceptor.LoginCheckInterceptor"/>
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/admin/**/*"/>
+			<bean class="com.ymz.common.interceptor.AdminCheckInterceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	<!-- Link controller들 설정 -->

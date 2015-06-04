@@ -148,4 +148,9 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		map.put("searchWord", searchWord);
 		return session.selectOne(namespace+"selectRestaurantCountByTheme", map);
 	}
+
+	@Override
+	public int deleteRestaurant(int restaurantNo) {
+		return session.delete(namespace+"deleteRestaurant", restaurantNo);
+	}
 }

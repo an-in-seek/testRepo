@@ -63,9 +63,16 @@ public class RestaurantController {
 			@RequestParam(defaultValue="전체") String category,
 			@RequestParam(defaultValue="date") String align,
 			@RequestParam(defaultValue="1") int currentPage,
-			String searchWord, Model model) {
+			String searchWord, Model model, HttpSession session) {
 		Map<String, Object> map = service.getListByTypePaging(category, align, currentPage, searchWord);
 		model.addAllAttributes(map);
+		
+		Member member = (Member)session.getAttribute("login_info");
+		if(member!=null) {
+			if(member.getGrade().equals("관리자")) {
+				model.addAttribute("isAdmin",true);
+			}
+		}
 		
 		return "restaurant/restaurant_type.tiles";
 	}
@@ -75,9 +82,16 @@ public class RestaurantController {
 			@RequestParam(defaultValue="전체") String theme,
 			@RequestParam(defaultValue="date") String align,
 			@RequestParam(defaultValue="1") int currentPage,
-			String searchWord, Model model) {
+			String searchWord, Model model, HttpSession session) {
 		Map<String, Object> map = service.getListByThemePaging(theme, align, currentPage, searchWord);
 		model.addAllAttributes(map);
+		
+		Member member = (Member)session.getAttribute("login_info");
+		if(member!=null) {
+			if(member.getGrade().equals("관리자")) {
+				model.addAttribute("isAdmin",true);
+			}
+		}
 		
 		return "restaurant/restaurant_theme.tiles";
 	}
@@ -91,13 +105,20 @@ public class RestaurantController {
 	public String boardByLocation(String buildingName, String floor,
 			@RequestParam(defaultValue="1") int currentPage,
 			@RequestParam(defaultValue="date") String align,
-			String searchWord, Model model) {
+			String searchWord, Model model, HttpSession session) {
+		Member member = (Member)session.getAttribute("login_info");
+		if(member!=null) {
+			if(member.getGrade().equals("관리자")) {
+				model.addAttribute("isAdmin",true);
+			}
+		}
+		
 		Map<String, Object> map = service.getRestaurantsPaging(buildingName, floor, align, currentPage, searchWord);
 		model.addAllAttributes(map);
 		return "restaurant/restaurant_location_board.tiles";
 	}
 	
-	@RequestMapping("/addNewRestaurantForm.do")
+	@RequestMapping("/login/admin/addNewRestaurantForm.do")
 	public String addNewRestaurantForm(Model model) {
 		List<String> buildingNames = service.getBuildingNames();
 		model.addAttribute("buildingNames", buildingNames);
@@ -105,7 +126,7 @@ public class RestaurantController {
 		return "restaurant/restaurant_write_form.tiles";
 	}
 	
-	@RequestMapping("/addNewRestaurant.do")
+	@RequestMapping("/login/admin/addNewRestaurant.do")
 	public String addNewRestaurant(String restaurantName, String category, String phoneNo1, String phoneNo2, String phoneNo3, String address, String[] theme, String building, String floor, String description,
 			@RequestParam("pictureName") MultipartFile[] pictureName, String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception {
 		// Restaurant 객체에 값 세팅
@@ -147,6 +168,14 @@ public class RestaurantController {
 	@RequestMapping("/restaurantView.do")
 	@Transactional
 	public String restaurantView(int restaurantNo, Model model, HttpSession session, ModelMap map) {
+		Member member = (Member)session.getAttribute("login_info");
+		if(member!=null) {
+			if(member.getGrade().equals("관리자")) {
+				model.addAttribute("isAdmin",true);
+			}
+		}
+		
+
 		Restaurant restaurant = service.getRestaurantByNo(restaurantNo);
 		model.addAttribute("restaurant", restaurant);
 		
@@ -167,7 +196,7 @@ public class RestaurantController {
 		// 조회수 1증가
 		service.increaseHits(restaurantNo);
 		//송이꺼-----------------------------------------------------------------------------
-		Member member = (Member)session.getAttribute("login_info");
+	
 		List list = replyService.selectAllRestaurantReply(restaurant.getRestaurantNo());
 		map.put("replyList", list);
 
@@ -191,5 +220,12 @@ public class RestaurantController {
 		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getNumber();
 
 	}
+
+	@RequestMapping("/login/admin/removeRestaurant.do")
+	public String removeRestaurant(int restaurantNo) {
+		service.removeRestaurant(restaurantNo);
+		return "redirect:/restaurant/showListByType.do";
+	}
 	
 }
+
