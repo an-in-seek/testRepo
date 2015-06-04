@@ -155,7 +155,7 @@ public class ReviewController {
 	
 	//댓글 등록
 		@RequestMapping(value="login/register.do", method=RequestMethod.POST)
-		public String registerReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session, HttpServletRequest request) throws Exception{
+		public String registerReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session, HttpServletRequest request, @RequestParam int pageNo) throws Exception{
 			if(errors.hasErrors()){
 				System.out.println("에러 있엉");
 				return "review/review_view.tiles";
@@ -168,8 +168,8 @@ public class ReviewController {
 			//reply.setReviewNo(reviewNo);
 			replyService.registerReviewReply(reply);
 			int reviewNo = reply.getReviewNo();
-			int pageNo = 2;
-			return "redirect:/review/reviewView.do?reviewNo="+reviewNo+"&pageNo="+pageNo;
+			int pNo = pageNo;
+			return "redirect:/review/reviewView.do?reviewNo="+reviewNo+"&pageNo="+pNo;
 		}
 		
 		//댓글 수정

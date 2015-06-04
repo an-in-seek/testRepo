@@ -61,7 +61,15 @@ $(document).ready(function(){
 	});
 	
 	
-	// 댓글 버튼
+	// 댓글 등록 버튼
+	$("#reply_registerBtn").click(function() {
+		if(!$("#content").val()){
+			alert("내용을 입력하세요");
+			$("#content").focus();
+			return false;
+		}
+	})
+	
 	$("#reply_modifyBtn").on("click", function(){
 		alert("로그인부터 하세욥!!!");
 	});
@@ -167,6 +175,7 @@ ${requestScope.review.content }<br>
 
 <form action="${initParam.rootPath }/review/login/register.do"  method="post">
 	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}">
+	<input type="hidden" name="pageNo" value="${requestScope.pageNo}">
 <!-- 테이블 시작 -->
 <table id="replyTB" style="width:800px">
 		<thead>
@@ -200,7 +209,7 @@ ${requestScope.review.content }<br>
 			</td>
 			<td>
 				<!-- 댓글 버튼 -->
-				<input type="submit"  value="등록">
+				<input type="submit"  id="reply_registerBtn" value="등록">
 				<button id="reply_modifyBtn" style="width:80px;height:20px;">수정</button>
 				<button id="reply_deleteBtn" style="width:80px;height:20px;">삭제</button>
 				<button id="reply_reportBtn" style="width:80px;height:20px;">신고</button>
