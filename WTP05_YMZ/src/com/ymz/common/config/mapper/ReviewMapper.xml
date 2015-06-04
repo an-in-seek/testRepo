@@ -111,6 +111,11 @@
 	</select>
 	
 	<!-- 이번달 인기글(조회순) -->
-	
+	<select id="selectMonthBestHits" resultMap="review-resultmap" parameterType="String">
+		select review_no, title
+		from review
+		where substr(reg_date, 1,7) = #{month} and rownum <![CDATA[<]]> 6
+		ORDER BY HITS desc   
+	</select>
 	<!-- 이번달 인기글(추천순) -->
 </mapper>

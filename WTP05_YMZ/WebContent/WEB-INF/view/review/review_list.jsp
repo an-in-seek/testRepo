@@ -49,6 +49,28 @@ table#listTB tbody tr td#title{
 table#listTB tbody tr{
 	background: linen;
 }
+table#bestTodayTB thead tr{
+	color: azure;
+	font-weight: bold;
+	background: limegreen;
+	text-align: center;
+}
+table#bestTodayTB tbody tr{
+	font-weight: bold;
+	background: lavender;
+	text-align: left;
+}
+table#bestMonthTB thead tr{
+	color: azure;
+	font-weight: bold;
+	background: limegreen;
+	text-align: left;
+}
+table#bestMonthTB tbody tr{
+	font-weight: bold;
+	background: lavender;
+	text-align: left;
+}
 button{
 	width:100px;
 	height:50px;
@@ -68,12 +90,69 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<div align="center">
 	<h2>맛집 리뷰</h2>
 	
+		<!-- 인기글 테이블 -->
+	<div id="famousText" align="center">
+	
+		<table id="total">
+			<tr>
+				<td>
+					<!-- 오늘 인기글 -->
+					<table id="bestTodayTB" style="width:400px">
+						<thead>
+							<tr>
+								<td colspan="2" align="center">
+								오늘 인기글
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.todayBest }" var="review" varStatus="status">
+							<tr>
+								<td align="center">${status.index+1}.</td>
+								<td align="left" id="title">
+									<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+									${review.title}
+									</a>
+								</td>
+							</tr> 
+							</c:forEach>
+						</tbody>
+					</table>
+				</td>
+				<td>
+				<!-- 이번달 인기글 -->
+				<table id="bestMonthTB" style="width:400px">
+					<thead>
+						<tr>
+							<td colspan="2" align="center">
+							이번달 인기글
+						</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${requestScope.monthBest }" var="review" varStatus="status">
+						<tr>
+							<td align="center">${status.index+1}.</td>
+							<td align="left" id="title">
+							<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+							${review.title}
+							</a>
+							</td>
+						</tr> 
+						</c:forEach>
+					</tbody>
+				</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br>
 	<!-- 테이블 시작 -->
 	<table id="listTB" style="width:1000px">
 		<thead>
 			<tr>
 				<td style="width:50px">번호</td>
-				<td style="width:350px">상호명</td>
+				<td style="width:350px">제목</td>
 				<td style="width:150px">작성자</td>
 				<td style="width:100px">작성일</td>
 				<td style="width:50px">추천</td>
@@ -135,54 +214,28 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	</c:choose>
 	<br>
 
-	<!-- 기능 -->
+	<!-- 검색 기능 (아직안함) -->
+	<form action="${initParam.rootPath }/review/login/review_write_form.do" method="post">
 	<table>
 		<tr>
 			<td>
 			<select id="searchSort">
-					<option value="latest">최신글</option>
-					<option value="recommend">추천수</option>
-					<option value="hits">조회수</option>
+					<option value="title">제목</option>
+					<option value="id">아이디</option>
+					<option value="nickname">닉네임</option>
 			</select>
 			</td>
 			<td><input type="text" id="searchText"></td>
 			<td><input type="button" id="searchBtn" value="검색"></td>
 			<td>
-				<form action="${initParam.rootPath }/review/login/review_write_form.do" method="post">
 					<input type="submit" value="글쓰기">
-				</form>
 			</td>
 		</tr>
 	</table>
+	</form>
 	<br>
 	</div>
 	
-	<!-- 인기글 테이블 -->
-	<div id="famousText" align="center">
-	
-		<table id="bestTB" style="width:400px">
-		<thead>
-			<tr>
-				<td colspan="2" align="center">
-					<font color="blue">오늘 인기글</font>
-				</td>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${requestScope.todayBest }" var="review" varStatus="status">
-				<tr>
-					<td align="center">${status.index+1}.</td>
-					<td align="left" id="title">
-					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-					${review.title}
-					</a>
-					</td>
-				</tr> 
-			</c:forEach>
-			<!-- 수정해야행 끝 -->
-		</tbody>
-	</table>
-	</div>
 </section>
 
 </body>
