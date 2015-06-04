@@ -6,50 +6,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-$(document).ready(function(){
-	$("a").hover(function(){
-		$(this).css("text-decoration","underline");
-	},function(){
-		$(this).css("text-decoration","none");
-	});
-	
-	$("#align").on("change",function(){
-		alignForm.submit();
-	});
-	
-	$("#alignForm select option[value=${requestScope.align}]").prop("selected","selected");
-	
-	$("#searchForm").on("submit",function(){
-		if($("#search").val().trim()==""){
-			return false;
-		}
-		searchForm.submit();
-	});
-});
-</script>
 </head>
 <body><div align="center">
-<a href="${initParam.rootPath }/restaurant/showListByType.do?category=전체">전체보기</a>
-<a href="${initParam.rootPath }/restaurant/showListByType.do?category=한식">한식</a>
-<a href="${initParam.rootPath }/restaurant/showListByType.do?category=양식">양식</a>
-<a href="${initParam.rootPath }/restaurant/showListByType.do?category=중식">중식</a>
-<a href="${initParam.rootPath }/restaurant/showListByType.do?category=일식">일식</a>
-<p/>
+
 <table border="1" style="width:100%">
 	<thead>
-		<tr>
+		<tr height="50px">
 			<td style="border-left-style:hidden;border-top-style:hidden;border-right-style:hidden;" colspan="4">
-				<form id="alignForm" action="${initParam.rootPath }/restaurant/showListByType.do" method="post">
-				정렬방식:
-				<select id="align" name="align">
-					<option value="date">최근 등록일순</option>
-					<option value="hits">조회수 많은순</option>
-					<option value="manyScore">평가 많은순</option>
-					<option value="highScore">평점 높은순</option>
+				<select>
+					<c:forEach items="${requestScope.buildingNames }" var="buildingName">
+						<c:choose>
+							<c:when test="${requestScope.currentBuildingName==buildingName }">
+								<option selected="selected">${buildingName }</option>
+							</c:when>
+							<c:otherwise>
+								<option>${buildingName }</option>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 				</select>
-				<input type="hidden" name="category" value="${requestScope.category }">
-				</form>
+				<select>
+					<option value="전체">전체보기</option>
+					<c:forEach items="${requestScope.floors }" var="floor">
+						<c:choose>
+							<c:when test="${requestScope.currentFloor==floor }">
+								<option selected="selected">${floor }층</option>
+							</c:when>
+							<c:otherwise>
+								<option>${floor }층</option>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</select>
 			</td>
 			<td style="border-top-style:hidden;border-right-style:hidden;" colspan="3" align="right"><a href="${initParam.rootPath }/restaurant/addNewRestaurantForm.do"><button>맛집등록</button></a></td>
 		</tr>
@@ -64,13 +52,13 @@ $(document).ready(function(){
 	</thead>
 	<tbody>
 		<c:choose>
-			<c:when test="${empty requestScope.restaurantList }">
+			<c:when test="${empty requestScope.restaurants }">
 				<tr>
 					<td align="center" height="50px" colspan="7" style="border-left-style:hidden;border-right-style:hidden;">등록된 맛집이 없습니다</td>
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${requestScope.restaurantList }" var="restaurant">
+				<c:forEach items="${requestScope.restaurants }" var="restaurant">
 					<tr align="center">
 						<td style="border-left-style:hidden;border-right-style:hidden;">${restaurant.restaurantNo }</td>
 						<td style="border-right-style:hidden;">${restaurant.category}</td>
@@ -85,19 +73,19 @@ $(document).ready(function(){
 						<td style="border-right-style:hidden;">${restaurant.phoneNo}</td>
 						<td style="border-right-style:hidden;">${restaurant.score}</td>
 						<td style="border-right-style:hidden;">${restaurant.hits}</td>
-					</tr> 
+					</tr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 	</tbody>
 </table>
-<p>
+<p/>
 
 <!-- 페이징 처리 -->
 <!-- 이전 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.previousPageGroup }">
-		<a href="${initParam.rootPath }/restaurant/showListByType.do?currentPage=${pagingBean.startPageOfPageGroup-1}">&lt;</a>
+		<a href="${initParam.rootPath }/restaurant/boardByLocation.do?currentPage=${pagingBean.startPageOfPageGroup-1}&buildingName=${requestScope.currentBuildingName}&floor=${requestScope.currentFloor}">&lt;</a>
 	</c:when>
 	<c:otherwise>
 		&lt;
@@ -111,7 +99,7 @@ $(document).ready(function(){
 			<u><b>${pageNum}</b></u>
 		</c:when>
 		<c:otherwise>
-			<a href="${initParam.rootPath }/restaurant/showListByType.do?currentPage=${pageNum}">${pageNum}</a>
+			<a href="${initParam.rootPath }/restaurant/boardByLocation.do?currentPage=${pageNum}&buildingName=${requestScope.currentBuildingName}&floor=${requestScope.currentFloor}">${pageNum}</a>
 		</c:otherwise>
 	</c:choose>
 	&nbsp;
@@ -119,19 +107,12 @@ $(document).ready(function(){
 <!-- 다음 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.nextPageGroup }">
-		<a href="${initParam.rootPath }/restaurant/showListByType.do?currentPage=${pagingBean.endPageOfPageGroup+1}">&gt;</a>
+		<a href="${initParam.rootPath }/restaurant/boardByLocation.do?currentPage=${pagingBean.endPageOfPageGroup+1}&buildingName=${requestScope.currentBuildingName}&floor=${requestScope.currentFloor}">&gt;</a>
 	</c:when>
 	<c:otherwise>
 		&gt;
 	</c:otherwise>
 </c:choose>
-
-<form id="searchForm" action="${initParam.rootPath }/restaurant/showListByType.do">
-<input type="text" id="search" name="searchWord">
-<input type="submit" value="검색">
-<input type="hidden" name="category" value="${requestScope.category }">
-<input type="hidden" name="align" value="${requestScope.align }">
-</form>
 
 </div></body>
 </html>

@@ -5,14 +5,28 @@ import java.io.Serializable;
 public class FAQ implements Serializable{
 
 	private int number;
+	private int refamily;
+	private int restep;
+	private int relevel;
 	private String title;
 	private String content;
 	
-	public FAQ(){}
-	
+	public FAQ() { }
+
 	public FAQ(int number, String title, String content) {
 		super();
 		this.number = number;
+		this.title = title;
+		this.content = content;
+	}
+
+	public FAQ(int number, int refamily, int restep, int relevel, String title,
+			String content) {
+		super();
+		this.number = number;
+		this.refamily = refamily;
+		this.restep = restep;
+		this.relevel = relevel;
 		this.title = title;
 		this.content = content;
 	}
@@ -23,6 +37,30 @@ public class FAQ implements Serializable{
 
 	public void setNumber(int number) {
 		this.number = number;
+	}
+
+	public int getRefamily() {
+		return refamily;
+	}
+
+	public void setRefamily(int refamily) {
+		this.refamily = refamily;
+	}
+
+	public int getRestep() {
+		return restep;
+	}
+
+	public void setRestep(int restep) {
+		this.restep = restep;
+	}
+
+	public int getRelevel() {
+		return relevel;
+	}
+
+	public void setRelevel(int relevel) {
+		this.relevel = relevel;
 	}
 
 	public String getTitle() {
@@ -43,8 +81,9 @@ public class FAQ implements Serializable{
 
 	@Override
 	public String toString() {
-		return "faq [number=" + number + ", title=" + title + ", content="
-				+ content + "]";
+		return "FAQ [number=" + number + ", refamily=" + refamily + ", restep="
+				+ restep + ", relevel=" + relevel + ", title=" + title
+				+ ", content=" + content + "]";
 	}
 
 	@Override
@@ -53,6 +92,9 @@ public class FAQ implements Serializable{
 		int result = 1;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + number;
+		result = prime * result + refamily;
+		result = prime * result + relevel;
+		result = prime * result + restep;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -72,6 +114,12 @@ public class FAQ implements Serializable{
 		} else if (!content.equals(other.content))
 			return false;
 		if (number != other.number)
+			return false;
+		if (refamily != other.refamily)
+			return false;
+		if (relevel != other.relevel)
+			return false;
+		if (restep != other.restep)
 			return false;
 		if (title == null) {
 			if (other.title != null)

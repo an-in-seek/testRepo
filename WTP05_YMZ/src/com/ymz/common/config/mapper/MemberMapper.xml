@@ -72,6 +72,11 @@
 		where	member_id=#{id}
 	</select>
 	
+	<select id="selectMemberByEmail" parameterType="string" resultMap="member-resultmap">
+		<include refid="member-select"/>
+		where	email=#{email}
+	</select>
+	
 	<select id="selectAllMember" resultMap="member-resultmap">
 		<include refid="member-select"/>
 	</select>

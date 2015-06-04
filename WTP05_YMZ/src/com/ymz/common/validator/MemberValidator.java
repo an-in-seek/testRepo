@@ -20,10 +20,10 @@ public class MemberValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nickname", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birth", "required");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birth", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sex", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "required");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNo", "required");
 		
 	}

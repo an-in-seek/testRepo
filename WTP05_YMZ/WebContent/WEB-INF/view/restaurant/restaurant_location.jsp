@@ -5,9 +5,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+var selectedBuildingName;
+
 function restaurantsTableSetting(txt){
 	var floor_gaesu=0;
-	var code="<tr><td id='all' style='background-color:lightgray;height:50px;border-style:hidden;' align='center' colspan='5'><b>전체보기</b></td></tr><tr><td colspan='5' style='border-left-style:hidden;border-right-style:hidden;'></td></tr>";
+	var code="<tr><td id='all' style='background-color:lightgray;height:50px;border-style:hidden;' align='center' colspan='5'><b>"+selectedBuildingName+" 맛집 전체보기</b></td></tr><tr><td colspan='5' style='border-left-style:hidden;border-right-style:hidden;'></td></tr>";
 	for(var i=0;i<txt.length;i++){
 		if(i%2==0){
 			code=code+"<tr style='height:40px;'><td id='row"+(++floor_gaesu)+"' style='border-left-style:hidden;border-right-style:hidden;width:100px;' align='center' rowspan='"+Math.ceil((txt[i+1].split(',').length-1)/4)+"'><b>"+txt[i]+"</b></td>";
@@ -40,6 +42,11 @@ function restaurantsTableSetting(txt){
 	},function(){
 		$(this).css("text-decoration","none");
 	});
+	$("#all").on("click",function(){
+		$("#tableForm").append("<input type='hidden' name='buildingName' value='"+selectedBuildingName+"'>");
+		$("#tableForm").append("<input type='hidden' name='floor' value='전체'>");
+		$("#tableForm").submit();
+	});
 	
 	for(var i=0;i<floor_gaesu;i++){
 		$("#row"+(i+1)).hover(function(){
@@ -52,7 +59,9 @@ function restaurantsTableSetting(txt){
 		});
 		
 		$("#row"+(i+1)).on("click",function(){
-			
+			$("#tableForm").append("<input type='hidden' name='buildingName' value='"+selectedBuildingName+"'>");
+			$("#tableForm").append("<input type='hidden' name='floor' value='"+$(this).text()+"'>");
+			$("#tableForm").submit();
 		});
 	}
 };
@@ -64,6 +73,7 @@ $(document).ready(function(){
 		$("#pangyo-map").css("background-image","url('${initParam.rootPath }/uploadPhoto/pangyo-map.png')");
 	});
 	$("#uspace2").on("click",function(){
+		selectedBuildingName = '유스페이스 2동';
 		$.ajax({
 			url:"${initParam.rootPath}/restaurant/ajax/getRestaurantsByBuildingName.do",
 			type:"post",
@@ -79,6 +89,7 @@ $(document).ready(function(){
 		$("#pangyo-map").css("background-image","url('${initParam.rootPath }/uploadPhoto/pangyo-map.png')");
 	});
 	$("#uspace1").on("click",function(){
+		selectedBuildingName = '유스페이스 1동';
 		$.ajax({
 			url:"${initParam.rootPath}/restaurant/ajax/getRestaurantsByBuildingName.do",
 			type:"post",
@@ -94,6 +105,7 @@ $(document).ready(function(){
 		$("#pangyo-map").css("background-image","url('${initParam.rootPath }/uploadPhoto/pangyo-map.png')");
 	});
 	$("#hsquare-n").on("click",function(){
+		selectedBuildingName = 'H스퀘어 N동';
 		$.ajax({
 			url:"${initParam.rootPath}/restaurant/ajax/getRestaurantsByBuildingName.do",
 			type:"post",
@@ -109,6 +121,7 @@ $(document).ready(function(){
 		$("#pangyo-map").css("background-image","url('${initParam.rootPath }/uploadPhoto/pangyo-map.png')");
 	});
 	$("#hsquare-s").on("click",function(){
+		selectedBuildingName = 'H스퀘어 S동';
 		$.ajax({
 			url:"${initParam.rootPath}/restaurant/ajax/getRestaurantsByBuildingName.do",
 			type:"post",
@@ -231,9 +244,16 @@ $(document).ready(function(){
 <td></td>
 </tr>
 </table>
-<p></p>
+<p>　</p>
+<form id="tableForm" action="${initParam.rootPath }/restaurant/boardByLocation.do">
 <table border="1" style="width:100%;" id="restaurantsTable">
+<tr>
+<td align="center" style="border-style:hidden;">
+<font size="5">지도에서 건물을 선택하세요</font>
+</td>
+</tr>
 </table>
+</form>
 </div>
 </body>
 </html>

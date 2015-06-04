@@ -149,14 +149,14 @@ insert into review(review_no, title, content, hits, recommend, reg_date, member_
 
 
 
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '노맛', 'user01', '1');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '짱짱', 'user01', '1');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '구려', 'user01', '1');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '차지가 쐈어요', 'user01', '2');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '비싸....', 'user01', '2');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '맛있엉!!', 'user01', '3');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '알바 쩌네요...', 'user01', '3');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', 'ㅋㅋㅋㅋㅋㅋㅋㅋ', 'user01', '3');
+insert into review_reply values(review_reply_no_seq.nextval, '20150530111220', '노맛', 'user01', 1);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '짱짱', 'user01', 1);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '구려', 'user01', 1);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '차지가 쐈어요', 'user01', 2);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '비싸....', 'user01', 2);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '맛있엉!!', 'user01', 3);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '알바 쩌네요...', 'user01', 3);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', 'ㅋㅋㅋㅋㅋㅋㅋㅋ', 'user01', 3);
 
 
 

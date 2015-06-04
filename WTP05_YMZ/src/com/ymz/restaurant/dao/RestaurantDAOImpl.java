@@ -111,4 +111,22 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		map.put("floor", floor);
 		return session.selectList(namespace+"selectRestaurantsByBuildingNameAndFloor", map);
 	}
+
+	@Override
+	public List<Restaurant> selectRestaurantsPaging(String buildingName, String floor, int currentPage) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("buildingName", buildingName);
+		map.put("floor", floor);
+		map.put("currentPage", currentPage);
+		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		return session.selectList(namespace+"selectRestaurantsPaging", map);
+	}
+
+	@Override
+	public int selectRestaurantCount(String buildingName, String floor) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("buildingName", buildingName);
+		map.put("floor", floor);
+		return session.selectOne(namespace+"selectRestaurantCount", map);
+	}
 }

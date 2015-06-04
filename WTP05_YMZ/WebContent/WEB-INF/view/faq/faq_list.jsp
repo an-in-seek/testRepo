@@ -3,7 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript" src="${initParam.rootPath}/script/jquery-ui.js"></script>
-<link type="text/css" href="${initParam.rootPath}/css/jquery-ui.css" rel="stylesheet"></link>	
+<script type="text/javascript" src="${initParam.rootPath}/script/jquery-latest.js"></script> 
+<script type="text/javascript" src="${initParam.rootPath}/script/faq.js"></script>
 <script type="text/javascript">
 
 function removeFaq(number){
@@ -12,7 +13,6 @@ function removeFaq(number){
 } 
 
 $(document).ready(function(){
-	
 	$.ajax({
 		url:"${initParam.rootPath}/faq/findLoginMember.do", //요청 url 설정
 		type:"post", //HTTP 요청 방식(method)
@@ -30,45 +30,23 @@ $(document).ready(function(){
 			}
 		}
 	});
-	
-	$("table#listTB1 tbody tr").on("click", function(){
-		$("table#listTB1 tbody tr").css("background-color", "white");
-		$(this).css("background-color", "lightgray");
-		var number = $(this).find(":first-child").text();
-		$.ajax({
-			url:"${initParam.rootPath}/faq/findFaqByNo.do", //요청 url 설정
-			data:{"number":number},
-			type:"post", //HTTP 요청 방식(method)
-			dataType:"json", //javascript객체로 변환해서 응답데이터를 전달.
-			beforeSend:function(){ },
-			success:function(obj){
-				var content = obj.content;
-				var txt = content;
-				$("#table_info_layer").show();
-				$("#product_info_layer").text(txt).show();
-				//$("#product_info_layer").text("아이디 : "+obj.content);
-			}
-		});
-	});
-		
-	$("#xButton").on("click", function(){
-		$("#table_info_layer").hide();
-		$("#product_info_layer").text(txt).hide();
-	});
 });
 </script>
 
+<link type="text/css" href="${initParam.rootPath}/css/jquery-ui.css" rel="stylesheet"></link>	
+<link type="text/css" href="${initParam.rootPath}/css/faq.css" rel="stylesheet"/>
 <style type="text/css">
-table#listTB1 thead tr{
+#listTB1 thead tr{
 	font-weight: bold;
 	background: silver;
 }
-table#listTB2 thead tr{
+#listTB2 thead tr{
 	font-weight: bold;
 	background: silver;
 }
-table#listTB1 tbody tr td#td2{
+[id^=contentTr]{
 	cursor: pointer;
+	display: none;/*최초로딩시에는 안보이도록 처리*/
 }
 div#dialog{
 	width:400px;
@@ -79,76 +57,59 @@ article{
 	padding: 5px;
 	padding-left: 10px;
 }
-#product_info_layer{
-	display: none;/*최초로딩시에는 안보이도록 처리*/
-}
-#table_info_layer{
-	display: none;/*최초로딩시에는 안보이도록 처리*/
+#table1{
+	margin-left: 10px;
 }
 </style>
-
-<h2 align="center">고객센터(FAQ)</h2> 	
 
 <%-- <c:if test="${fn:length(requestScope.faq_list) != 0 }"> --%>
 <form id="removeForm" method=post action="login/removeFaq.do">
 	<input type="hidden" id="number" name="number">
-	<table>
+	<table id="table1">
 		<tr>
 			<td>
-				<table id="listTB1" style="width: 680px" border="1" align="center">
-					<thead>
-						<tr align="center" height="40px">
-							<td>NO</td>
-							<td>제목</td>
+				<div class="faq" id="listTB1" style="width: 680px" align="center">
+					<div class="faqHeader">
+						<h1>고객센터(FAQ)</h1>
+						<button type="button" class="showAll"><font color="blue"><b>답변 모두 여닫기</b></font></button>
+					</div>
+					<c:forEach items="${requestScope.faq_list }" var="faq">
+						<ul class="faqBody">
+							<li class="article" id="a${faq.number}" align="center" height="40px">
+								<p class="q"><a href="#a${faq.number}">Q${faq.number} : ${faq.title}</a></p>
+								<p class="a">
+									A : ${faq.content}
+									<input id="modifyBtn" type="button" value="수정하기" onclick="window.location='${initParam.rootPath }/faq/login/modifyForm.do?number=${faq.number}'">
+								</p>
+							</li>
+						</ul>
+						</c:forEach>
+					<table align="center">
+						<tr>
+							<td align="center"><input id="writeBtn" type="button" value="글쓰기" onclick="window.location='${initParam.rootPath }/faq/login/writeForm.do'"></td>
 						</tr>
-					</thead>
+					</table>
+				</div>
+			</td>
+			
+			<td>
+				<table id="listTB2" style="width: 120px" border="1" align="center">
+						<tr  align="center" height="40px">
+						</tr>
 					<tbody>
 						<c:forEach items="${requestScope.faq_list }" var="qna">
 							<tr align="center" height="40px">
-								<td id="td1" >${qna.number}</td>
-								<td id="td2" align="left" >${qna.title}</td>
+								<td>Q${qna.number}</td>
+								<td><input id="deleteBtn${qna.number}" type="button" value="삭제" onclick="removeFaq(${qna.number});"></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-			</td>
-			<td>
-				<table id="listTB2" style="width: 120px" border="1" align="center">
-					<thead>
-						<tr  align="center" height="40px">
-							<td>삭제(관리자)</td>
-						</tr>
-					<thead>
-						<c:forEach items="${requestScope.faq_list }" var="qna">
-							<tr align="center" height="40px">
-								<td><input id="deleteBtn${qna.number}" type="button" value="삭제" onclick="removeFaq(${qna.number});"></td>
-							</tr>
-						</c:forEach>
-				</table>
+				
 			</td>
 		</tr>
 	</table>
-	
-	<table id="table_info_layer" border="1" align="center">
-		<tr>
-			<td align='center' bgcolor='silver'><b>내용</b>
-			<button id="xButton">X</button></td>
-		</tr>
-		<tr height='10' align='center'>
-			<td><div id="product_info_layer" align="center"></div></td>
-		</tr>
-	</table>
-	
-	<table align="center">
-		<tr>
-			<td align="center"><input id="writeBtn" type="button"
-				value="글쓰기"
-				onclick="window.location='${initParam.rootPath }/faq/login/writeForm.do'"></td>
-			<td align="center"><input id="modifyBtn" type="button"
-				value="수정하기" onclick=""></td>
-		</tr>
-	</table>
-	
+
 </form>
 	
 <%-- </c:if> --%>

@@ -10,7 +10,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import com.ymz.common.util.PagingBean;
 import com.ymz.restaurant.dao.RestaurantDAO;
@@ -127,5 +126,27 @@ public class RestaurantServiceImpl implements RestaurantService {
 			data.add(temp);
 		}
 		return data;
+	}
+
+	@Override
+	public Map<String, Object> getRestaurantsPaging(String buildingName, String floor, int currentPage) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<Restaurant> restaurants = dao.selectRestaurantsPaging(buildingName, floor.split("층")[0], currentPage);
+		map.put("restaurants", restaurants);
+		
+		int totalContent = dao.selectRestaurantCount(buildingName, floor.split("층")[0]);
+		PagingBean pagingBean = new PagingBean(totalContent, currentPage);
+		map.put("pagingBean", pagingBean);
+		
+		List<String> buildingNames = dao.selectBuildingNames();
+		map.put("buildingNames", buildingNames);
+		map.put("currentBuildingName", buildingName);
+		map.put("currentFloor", floor.split("층")[0]);
+		
+		List<String> floors = dao.selectFloorsByBuildingName(buildingName);
+		map.put("floors", floors);
+		
+		return map;
 	}
 }

@@ -170,4 +170,36 @@
 		where	l.building_name=#{buildingName} and l.floor=#{floor} and r.location_no=l.location_no 
 	</select>
 	
+	<select id="selectRestaurantsPaging" parameterType="Map" resultMap="restaurant-resultmap">
+		select	restaurant_no, restaurant_name, category, phone_no, address, description,
+				picture_name, score, hits, theme, reg_date, reply_count, location_no
+		from	(
+					select	ceil(rownum/#{contentsPerPage}) page, restaurant_no, restaurant_name, category, phone_no, address,
+							description, picture_name, score, hits, theme, reg_date, reply_count, location_no
+					from	(
+								select	restaurant_no, restaurant_name, category, phone_no, address, description,
+										picture_name, score, hits, theme, reg_date, reply_count, r.location_no
+								from	restaurant r, location l
+								<where>
+									r.location_no=l.location_no
+									and l.building_name=#{buildingName}
+									<if test="floor!='전체'">
+										and l.floor=#{floor}
+									</if>
+								</where>
+								order by restaurant_no desc
+					)
+				)
+		where	page=#{currentPage}
+	</select>
+	
+	<select id="selectRestaurantCount" parameterType="Map" resultType="_int">
+		select count(restaurant_no)
+		from restaurant r, location l
+		where r.location_no=l.location_no
+		and l.building_name=#{buildingName}
+		<if test="floor!='전체'">
+			and l.floor=#{floor}
+		</if>
+	</select>
 </mapper>

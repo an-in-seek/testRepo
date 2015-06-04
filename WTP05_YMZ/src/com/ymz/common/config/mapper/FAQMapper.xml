@@ -21,7 +21,7 @@
 	
 	<update id="updateFAQ" parameterType="FAQ">
 		update 	faq
-		set			faq_no=#{number}, faq_title=#{title}, faq_content=#{content}
+		set			faq_title=#{title}, faq_content=#{content}
 		where		faq_no=#{number}
 	</update>
 	

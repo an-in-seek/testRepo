@@ -13,7 +13,12 @@ public interface MemberDAO {
 	 * @return 
 	 */
 	public abstract Member selectMemberById(String id);
-
+	
+	/**
+	 * Email로 회원 정보를 조회하여 return하는 메소드
+	 */
+	public abstract Member selectMemberByEmail(String email);
+	
 	/**
 	 * 회원 정보를 DB에 insert하는 메소드
 	 * @param member 등록할 회원 정보

@@ -159,8 +159,29 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	
 	<!-- 인기글 테이블 -->
 	<div id="famousText" align="center">
-		<span style="font-size: 10" >인기순 테이블 위치</span>
-		<br><br>
+	
+		<table id="bestTB" style="width:400px">
+		<thead>
+			<tr>
+				<td colspan="2" align="center">
+					<font color="blue">오늘 인기글</font>
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${requestScope.todayBest }" var="review" varStatus="status">
+				<tr>
+					<td align="center">${status.index+1}.</td>
+					<td align="left" id="title">
+					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+					${review.title}
+					</a>
+					</td>
+				</tr> 
+			</c:forEach>
+			<!-- 수정해야행 끝 -->
+		</tbody>
+	</table>
 	</div>
 </section>
 

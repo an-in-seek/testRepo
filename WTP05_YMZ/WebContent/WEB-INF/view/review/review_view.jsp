@@ -197,7 +197,6 @@ ${requestScope.review.content }<br>
 			<td>
 				<!-- 댓글 작성 영역 -->
 				<textarea name="content" id="reply_content" style="width:600px; height:100px;"></textarea><br>
-				<input type="text"  name="zz" id="zz">
 			</td>
 			<td>
 				<!-- 댓글 버튼 -->

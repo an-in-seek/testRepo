@@ -50,6 +50,9 @@ DROP TABLE QNA
 DROP TABLE LOCATION 
 	CASCADE CONSTRAINTS;
 	
+DROP TABLE CATEGORY
+	CASCADE CONSTRAINTS;
+	
 
 /* 카테고리 테이블 */
 CREATE TABLE CATEGORY (
@@ -68,10 +71,10 @@ CREATE TABLE MEMBER (
 	MEMBER_PASSWORD VARCHAR2(10) NOT NULL, /* 회원 비밀번호 */
 	NAME VARCHAR2(30) NOT NULL, /* 회원 이름 */
 	NICKNAME VARCHAR2(30) NOT NULL, /* 닉네임 */
-	BIRTH VARCHAR2(12) NOT NULL, /* 생일 */
+	BIRTH VARCHAR2(30) NOT NULL, /* 생일 */
 	SEX VARCHAR2(4) NOT NULL, /* 성별 */
 	ZIPCODE VARCHAR2(10) NOT NULL, /* 우편번호 */
-	ADDRESS VARCHAR2(100) NOT NULL, /* 주소 */
+	ADDRESS VARCHAR2(120) NOT NULL, /* 주소 */
 	DETAIL_ADDRESS VARCHAR2(100) NOT NULL, /* 상세주소 */
 	EMAIL VARCHAR2(100) NOT NULL, /* 이메일 */
 	PHONE_NO VARCHAR2(20) NOT NULL, /* 전환번호 */
@@ -80,7 +83,6 @@ CREATE TABLE MEMBER (
 	GRADE VARCHAR2(10) NOT NULL, /* 등급 */
 	JOIN_DATE VARCHAR2(8) NOT NULL /* 가입일 */
 );
-
 select * from member;
 ALTER TABLE MEMBER
 	ADD
@@ -173,6 +175,11 @@ ALTER TABLE REVIEW_REPLY
 		PRIMARY KEY (
 			REVIEW_REPLY_NO
 		);
+		
+ALTER TABLE REVIEW_REPLY 
+	ADD CONSTRAINT delete_review
+	FOREIGN KEY (REVIEW_NO) REFERENCES REVIEW(REVIEW_NO) 
+	ON DELETE CASCADE;
 		
 /* 리뷰 추천수 테이블 */
 CREATE TABLE REVIEW_RECOMMEND (
@@ -378,9 +385,13 @@ drop sequence location_no_seq;
 create sequence restaurant_no_seq;
 create sequence food_no_seq;
 create sequence location_no_seq;
+-- 맛집정보댓글에서 사용하는 시퀀스
+drop sequence resreply_no_seq;
+create sequence resreply_no_seq;
 -- 리뷰에서 사용하는 시퀀스
 drop sequence review_no_seq;
 create sequence review_no_seq;
 -- 리뷰댓글에서 사용하는 시퀀스
 drop sequence review_reply_no_seq;
 create sequence review_reply_no_seq;
+

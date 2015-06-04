@@ -27,6 +27,16 @@ public class MemberDAOImpl implements MemberDAO {
 	public Member selectMemberById(String id){
 		return session.selectOne(namespace+"selectMemberById", id);
 	}
+	
+	/**
+	 * Email로 회원 정보를 조회하여 return하는 메소드
+	 */
+	@Override
+	public Member selectMemberByEmail(String email) {
+		return session.selectOne(namespace+"selectMemberByEmail",email);
+	}
+	
+	
 	/**
 	 * 회원 정보를 DB에 insert하는 메소드
 	 * @param member 등록할 회원 정보
@@ -36,6 +46,7 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return session.insert(namespace+"insertMember", member);
 	}
+
 	/**
 	 * 회원 정보 수정 메소드
 	 * 매개변수로 받은 Member객체의 id 회원의 나머지 정보를 변경한다. 단 ID와 가입일자는 변경 안한다.
