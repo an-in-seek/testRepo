@@ -5,7 +5,7 @@
 	<table align="center">
 		<tr>
 			<td colspan="2">
-			<font size="5" color="blue">${sessionScope.login_info.name }</font><font size="2">님 환영합니다.</font>
+			<font size="5" color="blue">${sessionScope.login_info.nickname }</font><font size="2">님 환영합니다.</font>
 			</td>
 		</tr>
 		<tr height="50">

@@ -98,6 +98,16 @@ public class MemberServiceImpl implements MemberService {
 		
 		return dao.selectMemberByEmail(email);
 	}
+	
+	
+	/**
+	 * Nickname로 회원정보 조회 메소드
+	 */
+	@Override
+	public Member getMemberByNickname(String nickname) {
+
+		return dao.selectMemberByNickname(nickname);
+	}
 	/**
 	 * 회원 정보 수정 처리 메소드
 	 * @param member 수정할 회원 전보
