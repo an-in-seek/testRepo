@@ -138,8 +138,8 @@ public class ReviewDAOImpl implements ReviewDAO{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
 		map.put("pageNo", pageNo);
-		map.put("sortType", type);  ////////////////////////// mapper적용 안함
-		return session.selectList(namespace+"selectAllReviewPaging", map);
+		map.put("sortType", type);  
+		return session.selectList(namespace+"ReviewSortPaging", map);
 	}
 	
 

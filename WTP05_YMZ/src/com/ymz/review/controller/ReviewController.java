@@ -47,13 +47,23 @@ public class ReviewController {
 		return "redirect:/review/reviewList.do"; 
 	}
 
-	
 	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
-	@RequestMapping("reviewList.do")
-	public ModelAndView reviewList(@RequestParam (defaultValue="1") int pageNo){
-		Map<String, Object> map = service.getReviewListPaging(pageNo);
-		return new ModelAndView("review/review_list.tiles", map);
-	}
+		@RequestMapping("reviewList.do")
+		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo){
+			System.out.println("정렬 타입 : " + sortType);
+			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType);
+			/////////////////////////////////
+			//Map<String, Object> map = service.getReviewListPaging(pageNo);
+			return new ModelAndView("review/review_list.tiles", map);
+		}
+	
+	
+//	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
+//	@RequestMapping("reviewList.do")
+//	public ModelAndView reviewList(@RequestParam (defaultValue="1") int pageNo){
+//		Map<String, Object> map = service.getReviewListPaging(pageNo);
+//		return new ModelAndView("review/review_list.tiles", map);
+//	}
 	
 	//게시물 번호로 정보조회
 	@RequestMapping("reviewView.do")
@@ -64,7 +74,6 @@ public class ReviewController {
 		map.put("pageNo", review.getPageNo());
 		map.put("review", rev);
 		
-//		replyService.getReplyList(reviewNo); //DB로 reviewNo을 보내서 해당댓글들 가꼬오기
 		return new ModelAndView("review/review_view.tiles", map);
 	}
 	
@@ -187,10 +196,9 @@ public class ReviewController {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 정렬
 	@RequestMapping("sortReview.do")
-	public ModelAndView sortReaview(@RequestParam String type, @RequestParam(defaultValue="1") int pageNo,
-																			Model model, HttpSession session){
-		System.out.println("정렬 타입 : " + type);
-		Map<String, Object> map = service.ReviewSortListPaging(pageNo, type);
+	public ModelAndView sortReaview(@RequestParam String sortType, @RequestParam(defaultValue="1") int pageNo, HttpSession session){
+		System.out.println("정렬 타입 : " + sortType);
+		Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType);
 		return new ModelAndView("review/review_list.tiles", map);
 	}
 	
