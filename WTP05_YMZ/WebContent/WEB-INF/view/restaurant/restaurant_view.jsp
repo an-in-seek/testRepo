@@ -7,6 +7,18 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(document).ready(function(){
+	if("${requestScope.isAdmin}"){
+		$("#modifyAndDelete").append("<button id='btn_modify'>수정</button> <button id='btn_delete'>삭제</button>");
+		
+		$("#btn_delete").on("click",function(){
+			if(confirm("삭제하시겠습니까?")){
+				$("body").append("<form id='deleteForm' action='${initParam.rootPath}/restaurant/login/admin/removeRestaurant.do' method='post'></form>")
+				$("#deleteForm").append("<input type='hidden' name='restaurantNo' value='${requestScope.restaurant.restaurantNo}'>")
+				$("#deleteForm").submit();
+			}
+		});
+	}
+	
 	var calcListCount=0;
 	
 	$("#selectedPicture").prop("src",$("#selectPicture img:first").prop("src"));
@@ -192,7 +204,7 @@ $(document).ready(function(){
 </tr>
 </table><p>
 <hr>
-<p align="right"><button>수정</button> <button id="btn_delete">삭제</button></p>
+<p id="modifyAndDelete" align="right"></p>
 </td>
 </tr>
 </table>

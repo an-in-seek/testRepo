@@ -270,7 +270,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<form id="regForm" action="${initParam.rootPath }/restaurant/addNewRestaurant.do" method="post" enctype="multipart/form-data">
+<form id="regForm" action="${initParam.rootPath }/restaurant/login/admin/addNewRestaurant.do" method="post" enctype="multipart/form-data">
 <p><font size="5"><b>기본정보</b></font></p>
 <table>
 <tr>
