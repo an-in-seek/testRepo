@@ -31,7 +31,7 @@
 			select review_no_seq.nextval from dual
 		</selectKey>
 		insert into review (review_no, title, content, hits, recommend, reg_date, member_id)
-		values (#{reviewNo}, #{title}, #{content}, #{hits}, #{recommend}, to_char(sysdate, 'yyyy-mm-dd hh:MM:ss'), #{memberId})
+		values (#{reviewNo}, #{title}, #{content}, #{hits}, #{recommend}, to_char(sysdate, 'yyyy-mm-dd HH24:MI:SS'), #{memberId})
 	</insert>
 
 	<!-- 수정 -->
@@ -84,7 +84,7 @@
 	
 	<!-- 리뷰 목록 페이징 -->
 		<select id="selectAllReviewPaging" parameterType="map" resultMap="review-resultmap">
-		select review_no, title, content, hits, recommend, substr(reg_date, 1,10) reg_date, member_id, reply_count
+		select review_no, title, content, hits, recommend, reg_date, member_id, reply_count
 		from (
 				select ceil(rownum/#{contentsPerPage}) page, 
 					   review_no, title, content, hits, 

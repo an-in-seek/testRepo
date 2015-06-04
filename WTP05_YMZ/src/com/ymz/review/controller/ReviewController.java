@@ -80,12 +80,9 @@ public class ReviewController {
 	public String modifyReview(@ModelAttribute Review review, @RequestParam int reviewNo, Errors errors, HttpSession session){
 		Member member = (Member)session.getAttribute("login_info");
 		String userid = member.getId();
-		System.out.println("수정할 글번호 : "+ reviewNo);
-		System.out.println("글쓴이 아이디: " + userid);
 		review.setMemberId(userid);
 		review.setReviewNo(reviewNo);
 		service.modifyReview(review);
-		System.out.println("글번호 "+reviewNo+" 수정 완료!!");
 		return "redirect:/review/reviewList.do";
 	}
 	
@@ -95,12 +92,9 @@ public class ReviewController {
 	public String removeReview(@ModelAttribute Review review, @RequestParam int reviewNo, ModelMap map, HttpSession session){
 		Member member = (Member)session.getAttribute("login_info");
 		String userid = member.getId();
-		System.out.println("삭제할 글번호 : "+ reviewNo);
-		System.out.println("글쓴이 아이디: " + userid);
 		review.setMemberId(userid);
 		review.setReviewNo(reviewNo);
 		service.removeReview(review);
-		System.out.println("글번호 "+reviewNo+" 삭제 완료!!");
 		return "redirect:/review/reviewList.do";
 	}
 	
@@ -116,8 +110,6 @@ public class ReviewController {
 		Member member = (Member)session.getAttribute("login_info"); // 회원 정보 갖고오기
 		int result = 0;
 		Map<String, Object> rmap = new HashMap<String, Object>();
-		System.out.println("글 번호 : " + reviewNo);
-		System.out.println("회원 아이디 : " + member.getId());
 		
 		rmap.put("number", reviewNo);
 		rmap.put("id", member.getId());
@@ -161,9 +153,6 @@ public class ReviewController {
 				return "review/review_view.tiles";
 			}
 			Member member = (Member)session.getAttribute("login_info");
-			System.out.println("댓글 글쓴이 : " + member.getId());
-			System.out.println("댓글내용: " + reply.getContent());
-			System.out.println("글번호 : " + reply.getReviewNo());
 			reply.setMemberId(member.getId());
 			//reply.setReviewNo(reviewNo);
 			replyService.registerReviewReply(reply);
@@ -177,12 +166,9 @@ public class ReviewController {
 		public String modifyReviewReply(@ModelAttribute ReviewReply reply, @RequestParam int replyNo, Errors errors, HttpSession session){
 			Member member = (Member)session.getAttribute("login_info");
 			String userId = member.getId();
-			System.out.println("수정할 글번호 : " + replyNo);
-			System.out.println("글쓴이 아이디 : " + userId);
 			reply.setMemberId(userId);
 			reply.setReplyNo(replyNo);
 			replyService.modifyReviewReply(reply);
-			System.out.println("글번호 : " + replyNo + "수정완료 ! ");
 			return "redirect:/review/review_view.tiles";
 		}
 		
@@ -199,5 +185,9 @@ public class ReviewController {
 		
 		return "/review/reviewList.do";
 	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 정렬
+	
+
 	
 }

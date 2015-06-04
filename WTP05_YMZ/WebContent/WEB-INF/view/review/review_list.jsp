@@ -142,9 +142,6 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 									</td>
 								</tr> 
 							</c:forEach>
-									
-								
-							
 						</tbody>
 					</table>
 				</td>
@@ -168,6 +165,14 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 							</a>
 							</td>
 						</tr> 
+						</c:forEach>
+						<c:forEach begin="${fn:length(requestScope.monthBest)}" end="4">
+								<tr>
+									<td align="center">&nbsp</td>
+									<td align="left" id="title">
+									&nbsp
+									</td>
+								</tr> 
 						</c:forEach>
 					</tbody>
 				</table>
@@ -202,7 +207,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 					</a>
 					</td>
 					<td align="center">${review.memberId}</td>
-					<td id="regDate" align="center">${review.regDate}</td>
+					<td id="regDate" align="center">${review.regDate.substring(0,10)}</td>
 					<td align="center" style="width:50px">${review.recommend}</td>
 					<td align="center">${review.hits}</td>
 				</tr> 
