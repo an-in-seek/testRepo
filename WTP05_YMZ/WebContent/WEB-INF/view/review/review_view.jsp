@@ -172,6 +172,7 @@ ${requestScope.review.content }<br>
 <table id="replyTB" style="width:800px">
 		<thead>
 			<tr>
+				<td>NO</td>
 				<td>작성자</td>
 				<td>내용</td>
 				<td>등록일</td>
@@ -179,9 +180,9 @@ ${requestScope.review.content }<br>
 			</tr>
 		</thead>
 		<tbody>
-			<!-- 여기 수정해야행 -->
 			<c:forEach items="${requestScope.reviewReplyList }" var="reply">
 				<tr>
+					<td>${reply.replyNo}</td>
 					<td>${reply.memberId}</td>
 					<td>${reply.content}</td>
 					<td>${reply.regDate}</td>

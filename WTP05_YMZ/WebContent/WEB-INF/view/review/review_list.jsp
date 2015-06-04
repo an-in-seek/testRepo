@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,10 +19,21 @@ $(document).ready(function(){
 	});
 	
 	
-	// 정렬방식 셀렉터 이벤트
+	// 검색 방식 셀렉터 이벤트
 	$("#searchSort").on("change", function(){
 		txt = $(this).val(); // $(select객체).val() - 선택된 option의 value가 리턴
-		alert("정렬방식 : "+txt);
+		alert("검색방식 : "+txt);
+	});
+	
+	// 조회수 정렬
+	$("#hitsSort").on("click", function(){
+		alert("조회수 정렬입니다. 아직 안했어");
+	});
+	
+	// 추천수 정렬
+	$("#recommendSort").on("click", function(){
+		
+		alert("추천수 정렬입니다. 아직 안했어");
 	});
 	
 	// 리뷰 제목 클릭 이벤트
@@ -44,6 +56,12 @@ table#listTB thead tr{
 	text-align: center;
 }
 table#listTB tbody tr td#title{
+	cursor: pointer;
+}
+table#listTB thead tr td#hitsSort{
+	cursor: pointer;
+}
+table#listTB thead tr td#recommendSort{
 	cursor: pointer;
 }
 table#listTB tbody tr{
@@ -90,14 +108,14 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<div align="center">
 	<h2>맛집 리뷰</h2>
 	
-		<!-- 인기글 테이블 -->
+	<!-- 인기글 테이블 -->
 	<div id="famousText" align="center">
 	
 		<table id="total">
 			<tr>
 				<td>
 					<!-- 오늘 인기글 -->
-					<table id="bestTodayTB" style="width:400px">
+					<table id="bestTodayTB" style="width:500px">
 						<thead>
 							<tr>
 								<td colspan="2" align="center">
@@ -107,21 +125,32 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 						</thead>
 						<tbody>
 							<c:forEach items="${requestScope.todayBest }" var="review" varStatus="status">
-							<tr>
-								<td align="center">${status.index+1}.</td>
-								<td align="left" id="title">
-									<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-									${review.title}
-									</a>
-								</td>
-							</tr> 
+								<tr>
+									<td align="center">${status.index+1}위</td>
+									<td align="left" id="title">
+										<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+										${review.title}
+										</a>
+									</td>
+								</tr> 
 							</c:forEach>
+							<c:forEach begin="${fn:length(requestScope.todayBest)}" end="4">
+								<tr>
+									<td align="center">&nbsp</td>
+									<td align="left" id="title">
+									&nbsp
+									</td>
+								</tr> 
+							</c:forEach>
+									
+								
+							
 						</tbody>
 					</table>
 				</td>
 				<td>
 				<!-- 이번달 인기글 -->
-				<table id="bestMonthTB" style="width:400px">
+				<table id="bestMonthTB" style="width:500px">
 					<thead>
 						<tr>
 							<td colspan="2" align="center">
@@ -132,7 +161,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 					<tbody>
 						<c:forEach items="${requestScope.monthBest }" var="review" varStatus="status">
 						<tr>
-							<td align="center">${status.index+1}.</td>
+							<td align="center">${status.index+1}위</td>
 							<td align="left" id="title">
 							<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
 							${review.title}
@@ -147,6 +176,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 		</table>
 	</div>
 	<br>
+	
 	<!-- 테이블 시작 -->
 	<table id="listTB" style="width:1000px">
 		<thead>
@@ -155,8 +185,8 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 				<td style="width:350px">제목</td>
 				<td style="width:150px">작성자</td>
 				<td style="width:100px">작성일</td>
-				<td style="width:50px">추천</td>
-				<td style="width:50px">조회</td>
+				<td id="hitsSort" style="width:50px">추천<font size="1" color="red">▼</font></td>
+				<td id="recommendSort" style="width:50px">조회<font size="1" color="red">▼</font></td>
 			</tr>
 		</thead>
 		<tbody>

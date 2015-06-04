@@ -101,7 +101,14 @@
 	<select id="selectTotalReviewCount" resultType="_int">
 		select count(review_no) from review
 	</select>
+	
+	<!-- 추천수 정렬 -->
+	
 
+	<!-- 조회수 정렬 -->
+	
+	
+	
 	<!-- 오늘 인기글(조회순) -->
 	<select id="selectTodayBestHits" resultMap="review-resultmap" parameterType="String">
 		select review_no, title
