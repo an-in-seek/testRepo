@@ -180,20 +180,24 @@ ${requestScope.review.content }<br>
 <table id="replyTB" style="width:800px">
 		<thead>
 			<tr>
-				<td>번호</td>
-				<td>내용</td>
 				<td>작성자</td>
+				<td>내용</td>
 				<td>등록일</td>
+				<td></td>
 			</tr>
 		</thead>
 		<tbody>
 			<!-- 여기 수정해야행 -->
 			<c:forEach items="${requestScope.reviewReplyList }" var="reply">
 				<tr>
-					<td>${reply.replyNo }</td>
-					<td>${reply.content}</td>
 					<td>${reply.memberId}</td>
+					<td>${reply.content}</td>
 					<td>${reply.regDate}</td>
+					<td>
+						<button id="reply_modifyBtn" style="width:80px;height:20px;">수정</button>
+						<button id="reply_deleteBtn" style="width:80px;height:20px;">삭제</button>
+						<button id="reply_reportBtn" style="width:80px;height:20px;">신고</button>
+					</td>
 				</tr> 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->
@@ -208,11 +212,10 @@ ${requestScope.review.content }<br>
 				<textarea name="content" id="reply_content" style="width:600px; height:100px;"></textarea><br>
 			</td>
 			<td>
-				<!-- 댓글 버튼 -->
-				<input type="submit"  id="reply_registerBtn" value="등록">
-				<button id="reply_modifyBtn" style="width:80px;height:20px;">수정</button>
-				<button id="reply_deleteBtn" style="width:80px;height:20px;">삭제</button>
-				<button id="reply_reportBtn" style="width:80px;height:20px;">신고</button>
+				<!-- 등록 버튼 -->
+				<input type="submit" style="width:200px;height:100px;" value="등록">
+				
+				
 			</td>
 		</tr>
 	</table>

@@ -155,7 +155,7 @@ public class ReviewController {
 	
 	//댓글 등록
 		@RequestMapping(value="login/register.do", method=RequestMethod.POST)
-		public String registerReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session, HttpServletRequest request, @RequestParam int pageNo) throws Exception{
+		public String registerReviewReply(@ModelAttribute ReviewReply reply, @RequestParam int pageNo, Errors errors, HttpSession session, HttpServletRequest request) throws Exception{
 			if(errors.hasErrors()){
 				System.out.println("에러 있엉");
 				return "review/review_view.tiles";
