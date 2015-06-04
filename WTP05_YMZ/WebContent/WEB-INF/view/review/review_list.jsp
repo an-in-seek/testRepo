@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,6 +11,16 @@
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	
+	// 오늘 날짜 뽑아오기
+	var nowdate = new Date();
+	var year = nowdate.getFullYear();
+	var month = nowdate.getMonth() + 1;
+	var day = nowdate.getDate()
+	date_str = year + "-" + (month<=9? '0'+month:month) + "-" + (day<=9? '0'+day:day);
+	alert(date_str);
+ 
 	
 	var txt = "";
 	// 검색 버튼 이벤트
@@ -116,6 +127,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 <section>
 	<div align="center">
 	<h2>맛집 리뷰</h2>
+
 	
 	<!-- 인기글 테이블 -->
 	<div id="famousText" align="center">
@@ -216,7 +228,8 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 					</a>
 					</td>
 					<td align="center">${review.memberId}</td>
-					<td id="regDate" align="center">${review.regDate.substring(0,10)}</td>
+					<td id="regDate" align="center">
+					${review.regDate.substring(0,10)}</td>
 					<td align="center" style="width:50px">${review.recommend}</td>
 					<td align="center">${review.hits}</td>
 				</tr> 
