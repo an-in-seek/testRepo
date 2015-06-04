@@ -114,11 +114,8 @@ $(document).ready(function(){
 	});
 });
 
-/* 
 $(document).ready(function() {
-
 	$("#registerFrom").on("submit", function() {
-
 		if (!$("#content").val()) {
 			alert("내용을 입력하세요");
 			$("#content").focus();
@@ -133,18 +130,18 @@ $(document).ready(function() {
 	$("#reply_removeButton").on("click", function() {
 		var isDel=confirm("삭제할까요?");
 		if(isDel){
-			document.location.href="login/removeReply.do"
+			
 		}else{
 			return;
 		}
-		alert("삭제되었습니다.");
+		
 	});
 
 	$("#reply_reportButton").on("click", function() {
 		alert("로그인을 해야합니다.");
 	});
 });
- */
+ 
 
 
 

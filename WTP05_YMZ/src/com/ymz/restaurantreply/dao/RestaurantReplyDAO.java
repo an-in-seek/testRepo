@@ -9,7 +9,8 @@ public interface RestaurantReplyDAO {
 	// 게시물 등록
 	public abstract int insertRestaurantReply(
 			RestaurantReply restaurantReply);
-
+	//리플개수 보여주기
+ public abstract int updateReplyCount(int restaurantNo);
 	// 게시물 수정
 	public abstract int updateRestaurantReply(RestaurantReply restaurantReply);
 	// 게시물 삭제

@@ -10,6 +10,8 @@ public interface RestaurantReplyService {
 	
 	  // 등록
 	public abstract void registerRestaurantReply(RestaurantReply restaurantReply);
+
+	
 		//수정
 	public abstract void modifyRestaurantReply(RestaurantReply restaurantReply);
 		//삭제

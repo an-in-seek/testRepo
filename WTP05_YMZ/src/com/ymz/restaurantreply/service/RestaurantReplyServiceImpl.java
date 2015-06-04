@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ymz.restaurantreply.dao.RestaurantReplyDAO;
 import com.ymz.restaurantreply.vo.RestaurantReply;
@@ -16,9 +17,10 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 
 	// 등록하기
 	@Override
+	@Transactional
 	public void registerRestaurantReply(RestaurantReply restaurantReply) {
 		dao.insertRestaurantReply(restaurantReply);
-
+		dao.updateReplyCount(restaurantReply.getRestaurantNo());
 	}
 
 	// 수정하기
@@ -34,13 +36,15 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 		dao.deleteRestaurantReplyByReplyNo(number);
 
 	}
-	//조회하기
+
+	// 조회하기
 	@Override
-	public RestaurantReply  selectRestaurantReplyByReplyNo(int number){
-		
+	public RestaurantReply selectRestaurantReplyByReplyNo(int number) {
+
 		return dao.selectRestaurantReplyByReplyNo(number);
 	}
-//댓글 리스트 조회하기
+
+	// 댓글 리스트 조회하기
 
 	@Override
 	public List selectAllRestaurantReply(int restNumber) {
@@ -48,9 +52,6 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 		return dao.selectAllRestaurantReply(restNumber);
 	}
 
-
-
-	
 	// 송이꺼
 
 }

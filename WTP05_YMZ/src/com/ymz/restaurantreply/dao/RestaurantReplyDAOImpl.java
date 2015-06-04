@@ -62,5 +62,13 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO{
 	public List selectAllRestaurantReply(int restNumber) {
 			return session.selectList(namespace+"selectAllRestaurantReply", restNumber);
 	}
+
+	//댓글 카운트하기
+	@Override
+	public int updateReplyCount(int restaurantNo) {
+		
+		return session.update(namespace+"updateReplyCount",restaurantNo);
+		
+	}
 	
 }

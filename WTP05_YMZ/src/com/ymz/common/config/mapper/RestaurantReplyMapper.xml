@@ -36,6 +36,12 @@
 					#{memberId},
 					#{restaurantNo})
 	</insert>
+	
+	<update id="updateReplyCount" parameterType="_int">
+		update restaurant
+		set reply_count = reply_count + 1
+		where restaurant_no=#{restaurantNo}
+	</update>
 
 	<update id="updateRestaurantReply" parameterType="RestaurantReply">
 		update restaurant_reply
