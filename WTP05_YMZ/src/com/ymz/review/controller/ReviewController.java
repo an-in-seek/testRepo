@@ -47,7 +47,7 @@ public class ReviewController {
 	}
 
 	
-	//리뷰 목록 - 페이징 처리
+	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
 	@RequestMapping("reviewList.do")
 	public ModelAndView reviewList(@RequestParam (defaultValue="1") int pageNo){
 		Map<String, Object> map = service.getReviewListPaging(pageNo);
