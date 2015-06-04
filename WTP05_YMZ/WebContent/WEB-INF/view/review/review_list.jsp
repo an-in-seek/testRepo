@@ -28,12 +28,15 @@ $(document).ready(function(){
 	// 조회수 정렬
 	$("#hitsSort").on("click", function(){
 		alert("조회수 정렬입니다. 아직 안했어");
+		var txt = "hits";
+		document.location.href="${initParam.rootPath }/review/sortReview.do?type="+txt;
 	});
 	
 	// 추천수 정렬
 	$("#recommendSort").on("click", function(){
-		
 		alert("추천수 정렬입니다. 아직 안했어");
+		var txt = "recommend";
+		document.location.href="${initParam.rootPath }/review/sortReview.do?type="+txt;
 	});
 	
 	// 리뷰 제목 클릭 이벤트
@@ -190,8 +193,8 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 				<td style="width:350px">제목</td>
 				<td style="width:150px">작성자</td>
 				<td style="width:100px">작성일</td>
-				<td id="hitsSort" style="width:50px">추천<font size="1" color="red">▼</font></td>
-				<td id="recommendSort" style="width:50px">조회<font size="1" color="red">▼</font></td>
+				<td id="recommendSort" style="width:50px">추천<font size="1" color="red">▼</font></td>
+				<td id="hitsSort" style="width:50px">조회<font size="1" color="red">▼</font></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -212,7 +215,6 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 					<td align="center">${review.hits}</td>
 				</tr> 
 			</c:forEach>
-			<!-- 수정해야행 끝 -->
 		</tbody>
 	</table>
 	<br>

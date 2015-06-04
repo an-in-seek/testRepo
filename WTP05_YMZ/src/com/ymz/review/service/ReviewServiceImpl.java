@@ -108,4 +108,23 @@ public class ReviewServiceImpl implements ReviewService {
 		dao.updateHitsReview(reviewNo);
 	}
 
+	/**
+	 * 리뷰 정렬 - 아직 수정중
+	 */
+	@Override
+	public Map<String, Object> ReviewSortListPaging(int pageNo, String type) {
+		// 목록에 뿌려질 List<Review> 조회
+		List<Review> sortlist = dao.selectSortReviewPaging(pageNo, type);
+		// PagingBean 생성
+		int totalContent = dao.selectTotalReviewCount();
+		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
+		// 두개의 값(List, PagingBean)을 Map에 넣어 return
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reviewList", sortlist);
+		map.put("pagingBean", pagingBean);
+		return map;
+	}
+	
+	
+
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -202,7 +203,12 @@ public class ReviewController {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 정렬
-	
-
+	@RequestMapping("sortReview.do")
+	public ModelAndView sortReaview(@RequestParam String type, @RequestParam(defaultValue="1") int pageNo,
+																			Model model, HttpSession session){
+		System.out.println("정렬 타입 : " + type);
+		Map<String, Object> map = service.ReviewSortListPaging(pageNo, type);
+		return new ModelAndView("review/review_list.tiles", map);
+	}
 	
 }
