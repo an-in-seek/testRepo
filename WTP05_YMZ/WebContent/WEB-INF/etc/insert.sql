@@ -93,12 +93,12 @@ insert into restaurant values(restaurant_no_seq.nextval, 'SUBWAY', '양식', '03
 insert into food values(food_no_seq.nextval, '베지샐러드', 5000, null, 20);
 insert into food values(food_no_seq.nextval, '에그마요샐러드', 5400, null, 20);
 
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','2015-05-30 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'새마을식당','1','1','1','2015-05-28 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'버거킹','1','221','0','2014-04-20 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'맥도날드','1','15','11','2013-03-11 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'롯데리아','1','542','22','2012-07-15 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'차지족발','1','412','6','2011-06-22 11:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','2015-06-03 11:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'새마을식당','1','1','1','2015-06-02 09:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'버거킹','1','221','0','2015-06-02 07:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'맥도날드','1','15','11','2015-06-01 05:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'롯데리아','1','542','22','2015-06-01 03:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'차지족발','1','412','6','2015-06-01 01:12:20','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'재스기네치킨','1','333','31','2010-11-27 11:12:20','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한솥도시락','1','12','2','2006-12-08 11:12:20','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타국밥','1','53','0','2004-02-03 11:12:20','user01');
@@ -151,14 +151,14 @@ insert into review(review_no, title, content, hits, recommend, reg_date, member_
 
 
 
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '노맛', 'user01', '1');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '짱짱', 'user01', '1');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '구려', 'user01', '1');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '차지가 쐈어요', 'user01', '2');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '비싸....', 'user01', '2');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '맛있엉!!', 'user01', '3');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '알바 쩌네요...', 'user01', '3');
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', 'ㅋㅋㅋㅋㅋㅋㅋㅋ', 'user01', '3');
+insert into review_reply values(review_reply_no_seq.nextval, '20150530111220', '노맛', 'user01', 1);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '짱짱', 'user01', 1);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '구려', 'user01', 1);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '차지가 쐈어요', 'user01', 2);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '비싸....', 'user01', 2);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '맛있엉!!', 'user01', 3);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', '알바 쩌네요...', 'user01', 3);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 11:12:20', 'ㅋㅋㅋㅋㅋㅋㅋㅋ', 'user01', 3);
 
 insert into restaurant_reply values(restaurant_reply_no_seq.nextval, '20150505','맛맛','1','user01','2');
 

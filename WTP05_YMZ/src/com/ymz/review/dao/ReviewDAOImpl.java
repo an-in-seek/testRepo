@@ -1,5 +1,8 @@
 package com.ymz.review.dao;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ymz.common.util.PagingBean;
-import com.ymz.restaurant.vo.Restaurant;
 import com.ymz.review.vo.Review;
 
 @Repository
@@ -105,6 +107,30 @@ public class ReviewDAOImpl implements ReviewDAO{
 	public void updateHitsReview(int reviewNo){
 		session.update(namespace + "updateHits", reviewNo);
 	}
+
+	/**
+	 * 오늘 최고 조회수글 가져오기
+	 */
+	@Override
+	public List<Review> selectTodayBestHits() {
+		SimpleDateFormat td = new SimpleDateFormat("yyyy-MM-dd");
+		String today = td.format(new Date());
+		System.out.println("오늘 날짜 : " + today);
+		return session.selectList(namespace+"selectTodayBestHits", today);
+	}
+
+	/**
+	 * 이번달 최고 조회수글 가져오기
+	 */
+	@Override
+	public List<Review> selectMonthBestHits() {
+		SimpleDateFormat td = new SimpleDateFormat("yyyy-MM");
+		String month = td.format(new Date());
+		System.out.println("이번달 : " + month);
+		return session.selectList(namespace+"selectMonthBestHits", month);
+	}
+	
+	
 	
 	
 }

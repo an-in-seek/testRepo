@@ -15,6 +15,7 @@ $(document).ready(function(){
 	});
 	
 	$("#align").on("change",function(){
+		$("#alignForm").append("<input type='hidden' name='theme' value='${requestScope.theme}'>");
 		alignForm.submit();
 	});
 	
@@ -24,31 +25,32 @@ $(document).ready(function(){
 		if($("#search").val().trim()==""){
 			return false;
 		}
-		searchForm.submit();
+		$(this).append("<input type='hidden' name='theme' value='${requestScope.theme}'>");
+		$(this).append("<input type='hidden' name='align' value='${requestScope.align}'>");
 	});
 });
 </script>
 </head>
 <body><div align="center">
-<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=전체">전체보기</a>
-<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=가족">가족</a>
-<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=연인">연인</a>
-<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=친구">친구</a>
-<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=회식">회식</a>
+<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=전체&align=${requestScope.align}">전체보기</a>
+<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=가족&align=${requestScope.align}">가족</a>
+<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=연인&align=${requestScope.align}">연인</a>
+<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=친구&align=${requestScope.align}">친구</a>
+<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=회식&align=${requestScope.align}">회식</a>
 <p/>
 <table border="1" style="width:100%;">
 	<thead>
-		<tr>
+		<tr height="50px">
 			<td style="border-left-style:hidden;border-top-style:hidden;border-right-style:hidden;" colspan="4">
-				<form id="alignForm" action="${initParam.rootPath }/restaurant/showListByType.do" method="post">
-				정렬방식:
+				<form id="alignForm" action="${initParam.rootPath }/restaurant/showListByTheme.do" method="post">
+				정렬:
 				<select id="align" name="align">
 					<option value="date">최근 등록일순</option>
+					<option value="name">상호명순</option>
 					<option value="hits">조회수 많은순</option>
 					<option value="manyScore">평가 많은순</option>
 					<option value="highScore">평점 높은순</option>
 				</select>
-				<input type="hidden" name="category" value="${requestScope.category }">
 				</form>
 			</td>
 			<td style="border-top-style:hidden;border-right-style:hidden;" colspan="3" align="right"><a href="${initParam.rootPath }/restaurant/addNewRestaurantForm.do"><button>맛집등록</button></a></td>
@@ -97,7 +99,7 @@ $(document).ready(function(){
 <!-- 이전 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.previousPageGroup }">
-		<a href="${initParam.rootPath }/restaurant/showListByTheme.do?currentPage=${pagingBean.startPageOfPageGroup-1}">&lt;</a>
+		<a href="${initParam.rootPath }/restaurant/showListByTheme.do?currentPage=${pagingBean.startPageOfPageGroup-1}&theme=${requestScope.theme}&align=${requestScope.align}&searchWord=${requestScope.searchWord}">&lt;</a>
 	</c:when>
 	<c:otherwise>
 		&lt;
@@ -111,7 +113,7 @@ $(document).ready(function(){
 			<u><b>${pageNum}</b></u>
 		</c:when>
 		<c:otherwise>
-			<a href="${initParam.rootPath }/restaurant/showListByTheme.do?currentPage=${pageNum}">
+			<a href="${initParam.rootPath }/restaurant/showListByTheme.do?currentPage=${pageNum}&theme=${requestScope.theme}&align=${requestScope.align}&searchWord=${requestScope.searchWord}">
 				${pageNum}
 			</a>
 		</c:otherwise>
@@ -121,7 +123,7 @@ $(document).ready(function(){
 <!-- 다음 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.nextPageGroup }">
-		<a href="${initParam.rootPath }/restaurant/showListByTheme.do?currentPage=${pagingBean.endPageOfPageGroup+1}">&gt;</a>
+		<a href="${initParam.rootPath }/restaurant/showListByTheme.do?currentPage=${pagingBean.endPageOfPageGroup+1}&theme=${requestScope.theme}&align=${requestScope.align}&searchWord=${requestScope.searchWord}">&gt;</a>
 	</c:when>
 	<c:otherwise>
 		&gt;
@@ -129,10 +131,8 @@ $(document).ready(function(){
 </c:choose>
 
 <form id="searchForm" action="${initParam.rootPath }/restaurant/showListByTheme.do">
-<input type="text" id="search" name="searchWord">
+<input type="text" id="search" name="searchWord" value="${requestScope.searchWord }">
 <input type="submit" value="검색">
-<input type="hidden" name="theme" value="${requestScope.category }">
-<input type="hidden" name="align" value="${requestScope.align }">
 </form>
 
 </div></body>

@@ -89,7 +89,11 @@ public class RestaurantController {
 	
 	@RequestMapping("/boardByLocation.do")
 	public String boardByLocation(String buildingName, String floor,
-			@RequestParam(defaultValue="1") int currentPage) {
+			@RequestParam(defaultValue="1") int currentPage,
+			@RequestParam(defaultValue="date") String align,
+			String searchWord, Model model) {
+		Map<String, Object> map = service.getRestaurantsPaging(buildingName, floor, align, currentPage, searchWord);
+		model.addAllAttributes(map);
 		return "restaurant/restaurant_location_board.tiles";
 	}
 	
