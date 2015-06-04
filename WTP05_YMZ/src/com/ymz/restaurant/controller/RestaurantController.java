@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +22,8 @@ import com.ymz.member.vo.Member;
 import com.ymz.restaurant.service.RestaurantService;
 import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
+import com.ymz.restaurantreply.service.RestaurantReplyService;
+import com.ymz.restaurantreply.vo.RestaurantReply;
 
 @Controller
 @RequestMapping("/restaurant")
@@ -27,6 +31,10 @@ public class RestaurantController {
 	
 	@Autowired
 	private RestaurantService service;
+	//송이꺼
+	@Autowired
+	private RestaurantReplyService replyService;
+	
 	
 	@RequestMapping("/ajax/checkName.do")
 	@ResponseBody
@@ -62,7 +70,7 @@ public class RestaurantController {
 		Member member = (Member)session.getAttribute("login_info");
 		if(member!=null) {
 			if(member.getGrade().equals("관리자")) {
-				model.addAttribute("hasRight",true);
+				model.addAttribute("isAdmin",true);
 			}
 		}
 		
@@ -74,9 +82,16 @@ public class RestaurantController {
 			@RequestParam(defaultValue="전체") String theme,
 			@RequestParam(defaultValue="date") String align,
 			@RequestParam(defaultValue="1") int currentPage,
-			String searchWord, Model model) {
+			String searchWord, Model model, HttpSession session) {
 		Map<String, Object> map = service.getListByThemePaging(theme, align, currentPage, searchWord);
 		model.addAllAttributes(map);
+		
+		Member member = (Member)session.getAttribute("login_info");
+		if(member!=null) {
+			if(member.getGrade().equals("관리자")) {
+				model.addAttribute("isAdmin",true);
+			}
+		}
 		
 		return "restaurant/restaurant_theme.tiles";
 	}
@@ -90,7 +105,14 @@ public class RestaurantController {
 	public String boardByLocation(String buildingName, String floor,
 			@RequestParam(defaultValue="1") int currentPage,
 			@RequestParam(defaultValue="date") String align,
-			String searchWord, Model model) {
+			String searchWord, Model model, HttpSession session) {
+		Member member = (Member)session.getAttribute("login_info");
+		if(member!=null) {
+			if(member.getGrade().equals("관리자")) {
+				model.addAttribute("isAdmin",true);
+			}
+		}
+		
 		Map<String, Object> map = service.getRestaurantsPaging(buildingName, floor, align, currentPage, searchWord);
 		model.addAllAttributes(map);
 		return "restaurant/restaurant_location_board.tiles";
@@ -104,7 +126,7 @@ public class RestaurantController {
 		return "restaurant/restaurant_write_form.tiles";
 	}
 	
-	@RequestMapping("/addNewRestaurant.do")
+	@RequestMapping("/login/admin/addNewRestaurant.do")
 	public String addNewRestaurant(String restaurantName, String category, String phoneNo1, String phoneNo2, String phoneNo3, String address, String[] theme, String building, String floor, String description,
 			@RequestParam("pictureName") MultipartFile[] pictureName, String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception {
 		// Restaurant 객체에 값 세팅
@@ -145,7 +167,15 @@ public class RestaurantController {
 	
 	@RequestMapping("/restaurantView.do")
 	@Transactional
-	public String restaurantView(int restaurantNo, Model model) {
+	public String restaurantView(int restaurantNo, Model model, HttpSession session, ModelMap map) {
+		Member member = (Member)session.getAttribute("login_info");
+		if(member!=null) {
+			if(member.getGrade().equals("관리자")) {
+				model.addAttribute("isAdmin",true);
+			}
+		}
+		
+
 		Restaurant restaurant = service.getRestaurantByNo(restaurantNo);
 		model.addAttribute("restaurant", restaurant);
 		
@@ -165,7 +195,37 @@ public class RestaurantController {
 		
 		// 조회수 1증가
 		service.increaseHits(restaurantNo);
-		
+		//송이꺼-----------------------------------------------------------------------------
+	
+		List list = replyService.selectAllRestaurantReply(restaurant.getRestaurantNo());
+		map.put("replyList", list);
+
 		return "restaurant/restaurant_view.tiles";
 	}
+	
+	
+	@RequestMapping("/login/registerReply.do")
+	public String registerRestaurantReply(@ModelAttribute RestaurantReply restaurantReply, HttpSession session){	
+		//등록
+		Member member = (Member)session.getAttribute("login_info");
+		restaurantReply.setMemberId(member.getId());
+		 replyService.registerRestaurantReply(restaurantReply);
+		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getRestaurantNo();
+	}
+	
+	@RequestMapping("/login/removeReply.do")
+	public String removeRestaurantReplyByReplyNo(@ModelAttribute RestaurantReply restaurantReply, HttpSession session){
+		Member member = (Member)session.getAttribute("login_info");
+		restaurantReply.setMemberId(member.getId());;
+		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getNumber();
+
+	}
+
+	@RequestMapping("/login/admin/removeRestaurant.do")
+	public String removeRestaurant(int restaurantNo) {
+		service.removeRestaurant(restaurantNo);
+		return "redirect:/restaurant/showListByType.do";
+	}
+	
 }
+

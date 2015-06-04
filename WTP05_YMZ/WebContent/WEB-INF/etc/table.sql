@@ -84,6 +84,7 @@ CREATE TABLE MEMBER (
 	JOIN_DATE VARCHAR2(8) NOT NULL /* 가입일 */
 );
 select * from member;
+
 ALTER TABLE MEMBER
 	ADD
 		PRIMARY KEY (
@@ -106,7 +107,6 @@ CREATE TABLE RESTAURANT (
 	REPLY_COUNT NUMBER(4) NOT NULL, /* 댓글수 */
 	LOCATION_NO NUMBER(10) NOT NULL /* 위치번호 */
 );
-
 ALTER TABLE RESTAURANT
 	ADD
 		PRIMARY KEY (
@@ -385,9 +385,9 @@ drop sequence location_no_seq;
 create sequence restaurant_no_seq;
 create sequence food_no_seq;
 create sequence location_no_seq;
--- 맛집정보댓글에서 사용하는 시퀀스
-drop sequence resreply_no_seq;
-create sequence resreply_no_seq;
+--맛집정보댓글에서 사용하는 시퀀스
+drop sequence restaurant_reply_no_seq;
+create sequence restaurant_reply_no_seq;
 -- 리뷰에서 사용하는 시퀀스
 drop sequence review_no_seq;
 create sequence review_no_seq;

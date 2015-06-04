@@ -250,4 +250,8 @@
 			</if>
 		</where>
 	</select>
+	
+	<delete id="deleteRestaurant" parameterType="_int">
+		delete from restaurant where restaurant_no=#{restaurantNo}
+	</delete>
 </mapper>
