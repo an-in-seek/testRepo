@@ -15,14 +15,17 @@ public class Review implements Serializable{
 	////////////////////////////////////////////// 참조용 변수들
 	private String nickname;		// 회원 닉네임
 	private int replyCount;			// 댓글 개수
+	private int pageNo;
+	
 	
 	public Review(){
 		
 	}
 
+
 	public Review(int reviewNo, String title, String regDate, int hits,
 			String content, int recommend, String memberId, String nickname,
-			int replyCount) {
+			int replyCount, int pageNo) {
 		super();
 		this.reviewNo = reviewNo;
 		this.title = title;
@@ -33,79 +36,109 @@ public class Review implements Serializable{
 		this.memberId = memberId;
 		this.nickname = nickname;
 		this.replyCount = replyCount;
+		this.pageNo = pageNo;
 	}
+
 
 	public int getReviewNo() {
 		return reviewNo;
 	}
 
+
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
 	}
+
 
 	public String getTitle() {
 		return title;
 	}
 
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 
 	public String getRegDate() {
 		return regDate;
 	}
 
+
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+
 
 	public int getHits() {
 		return hits;
 	}
 
+
 	public void setHits(int hits) {
 		this.hits = hits;
 	}
+
 
 	public String getContent() {
 		return content;
 	}
 
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 
 	public int getRecommend() {
 		return recommend;
 	}
 
+
 	public void setRecommend(int recommend) {
 		this.recommend = recommend;
 	}
+
 
 	public String getMemberId() {
 		return memberId;
 	}
 
+
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+
 
 	public String getNickname() {
 		return nickname;
 	}
 
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
 
 	public int getReplyCount() {
 		return replyCount;
 	}
 
+
 	public void setReplyCount(int replyCount) {
 		this.replyCount = replyCount;
 	}
+
+
+	public int getPageNo() {
+		return pageNo;
+	}
+
+
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -117,6 +150,7 @@ public class Review implements Serializable{
 				+ ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result
 				+ ((nickname == null) ? 0 : nickname.hashCode());
+		result = prime * result + pageNo;
 		result = prime * result + recommend;
 		result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
 		result = prime * result + replyCount;
@@ -124,6 +158,7 @@ public class Review implements Serializable{
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -151,6 +186,8 @@ public class Review implements Serializable{
 				return false;
 		} else if (!nickname.equals(other.nickname))
 			return false;
+		if (pageNo != other.pageNo)
+			return false;
 		if (recommend != other.recommend)
 			return false;
 		if (regDate == null) {
@@ -170,13 +207,14 @@ public class Review implements Serializable{
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", title=" + title
 				+ ", regDate=" + regDate + ", hits=" + hits + ", content="
 				+ content + ", recommend=" + recommend + ", memberId="
 				+ memberId + ", nickname=" + nickname + ", replyCount="
-				+ replyCount + "]";
+				+ replyCount + ", pageNo=" + pageNo + "]";
 	}
 
 	
