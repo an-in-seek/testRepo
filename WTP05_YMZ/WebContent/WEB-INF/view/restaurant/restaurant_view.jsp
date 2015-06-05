@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-$(document).ready(function(){
+$(document).ready(function(){	
 	if("${requestScope.isAdmin}"){
-		$("#modifyAndDelete").append("<button id='btn_modify'>수정</button> <button id='btn_delete'>삭제</button>");
+		$("#modifyAndDelete").append("<a href='${initParam.rootPath}/restaurant/login/admin/modifyRestaurantForm.do?restaurantNo=${requestScope.restaurant.restaurantNo}'><button id='btn_modify'>수정</button></a> <button id='btn_delete'>삭제</button>");
 		
 		$("#btn_delete").on("click",function(){
 			if(confirm("삭제하시겠습니까?")){
@@ -112,9 +112,8 @@ $(document).ready(function(){
 			$("#totalDiv").text(Math.ceil($("#total").text()/$("#calcTotal input").val()));
 		}
 	});
-});
+//송이꺼-----------------------------------------------------------
 
-$(document).ready(function() {
 	$("#registerFrom").on("submit", function() {
 		if (!$("#content").val()) {
 			alert("내용을 입력하세요");
@@ -127,23 +126,21 @@ $(document).ready(function() {
 		alert("로그인을 해야합니다.");
 	});
 
-	$("#reply_removeButton").on("click", function() {
-		var isDel=confirm("삭제할까요?");
-		if(isDel){
-			
-		}else{
-			return;
-		}
-		
-	});
-
 	$("#reply_reportButton").on("click", function() {
 		alert("로그인을 해야합니다.");
 	});
 });
- 
 
 
+//송이꺼
+function removeReply(restaurantNo, number){
+	var isDel=confirm("삭제할까요?");
+	if(isDel){
+		document.location.href="${initParam.rootPath}/restaurant/login/removeReply.do?restaurantNo="+restaurantNo+"&number"+number;
+	}else{
+		return;
+	}
+}
 
 </script>
 </head>
@@ -321,17 +318,18 @@ $(document).ready(function() {
 					<td>글번호 : ${reply.number }</td>
 					<td>작성일 : ${reply.regDate }
 					<td>작성자 : ${reply.memberId }</td>
+					<td>평점 : ${reply.score }</td>
 				</tr>
 				<tr>
-					<td colspan="3" height="30px">내용 : ${reply.content }</td>
+					<td colspan="4" height="30px">내용 : ${reply.content }</td>
 				</tr>
-				<td align="right" colspan="3">
+				<td align="right" colspan="4">
 				<button id="reply_modifyButton" style="width: 80px; heigth: 20px;">수정</button>
-				<button id="reply_removeButton" style="width: 80px; heigth: 20px;">삭제</button>
+				<input type="button" id="reply_removeButton${reply.number }" onclick="removeReply(${requestScope.restaurant.restaurantNo},${reply.number})" value="삭제">
 				<button id="reply_reportButton" style="width: 80px; heigth: 20px;">신고</button>
-			</td>
+				</td>
 				<tr>
-					<td colspan="3"></td>
+					<td colspan="4"></td>
 				</tr>
 			</c:forEach>
 	</table>
@@ -341,14 +339,22 @@ $(document).ready(function() {
 		<font size="5"><b>댓글쓰기</b></font>
 	</p>
 	<form method="post" action="${initParam.rootPath}/restaurant/login/registerReply.do" id="registerReplyForm">
-		<table>
+		<table align="center" style="width: 700px;" border='1'>
 			<tr>
 				<td>
 				<font size='6'><b>내용</b></font>
-				<input type="text" id="content" name="content" style="width: 600px; height: 80px"> 
-				<input type="hidden" id="score" name="score" value="3"> 
-				<input type="hidden"	id="restaurantNo" name="restaurantNo"	value="${requestScope.restaurant.restaurantNo}"> 
-				<input type="submit" value="등록">
+					<input type="text" id="content" name="content" style="width: 600px; height: 80px"> 
+					
+					<input type="hidden"	id="restaurantNo" name="restaurantNo"	value="${requestScope.restaurant.restaurantNo}"> 
+				<p>
+				평점주기
+					<label for="1">1</label><input type="radio" name="score" value="1" id="1"><span class="errorMessage"></span>
+					<label for="2">2</label><input type="radio" name="score" value="2" id="2"><span class="errorMessage"></span>
+					<label for="3">3</label><input type="radio" name="score" value="3" id="3"><span class="errorMessage"></span>
+					<label for="4">4</label><input type="radio" name="score" value="4" id="4"><span class="errorMessage"></span>
+					<label for="5">5</label><input type="radio" name="score" value="5" id="5"><span class="errorMessage"></span>
+				</p>
+					<input type="submit" value="등록">
 				</td>
 			</tr>
 		</table>

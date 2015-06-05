@@ -45,7 +45,11 @@ public class MemberController {
 		String post2 = (String) request.getParameter("postcode2");
 		String exAddress = (String) request.getParameter("address");
 		String exDetailAddress = (String) request.getParameter("detailAddress");
-		String exPhoneNo = (String) request.getParameter("phoneNo");
+		String phoneCP = (String) request.getParameter("phoneCP");
+		String num1 = (String)request.getParameter("num1");
+		String num2 = (String)request.getParameter("num2");
+		String phoneNo = phoneCP+"-"+num1+"-"+num2;
+		member.setPhoneNo(phoneNo);
 		String exSex = (String)request.getParameter("sex");
 		String zipcode = post1+"-"+post2;
 		member.setZipcode(zipcode);
@@ -55,7 +59,6 @@ public class MemberController {
 		String month = (String)request.getParameter("month");
 		String day = (String)request.getParameter("day");
 		String exbirth = year+"-"+month+"-"+day;
-		System.out.println(exbirth);
 		member.setBirth(exbirth);
 		String emailName = (String)request.getParameter("emailName");
 		String emailAddress = (String)request.getParameter("emailAddress");
@@ -69,7 +72,9 @@ public class MemberController {
 			request.setAttribute("postcode2", post2);
 			request.setAttribute("address", exAddress);
 			request.setAttribute("detailAddress", exDetailAddress);
-			request.setAttribute("exPhoneNo", exPhoneNo);
+			request.setAttribute("phoneCP", phoneCP);
+			request.setAttribute("num1", num1);
+			request.setAttribute("num2", num2);
 			request.setAttribute("sex", exSex);
 			request.setAttribute("recommend", recommend);
 			return "member/join_form.tiles";
@@ -87,12 +92,12 @@ public class MemberController {
 			String address = rm.getAddress();
 			String detailAddress = rm.getDetailAddress();
 			String email = rm.getEmail();
-			String phoneNo = rm.getPhoneNo();
+			String phone = rm.getPhoneNo();
 			String favoriteFood = rm.getFavoriteFood();
 			int mileage = rm.getMileage()+100;
 			String grade = rm.getGrade();
 			String joinDate = rm.getJoinDate();
-			Member newRm = new Member(id,password,name,nickname,birth,sex,zipcode2,address,detailAddress,email,phoneNo,favoriteFood,mileage,grade,joinDate);
+			Member newRm = new Member(id,password,name,nickname,birth,sex,zipcode2,address,detailAddress,email,phone,favoriteFood,mileage,grade,joinDate);
 			
 			service.modifyMember(newRm);
 			member.setMileage(10);
@@ -109,7 +114,6 @@ public class MemberController {
 	@RequestMapping("joinSuccess.do")
 	public String joinSuccess(@RequestParam String id, ModelMap map) throws Exception{
 		Member member = service.getMemberById(id);
-		System.out.println(member);
 		map.addAttribute("member", member);
 		return "member/join_success.tiles";
 	}
@@ -155,7 +159,7 @@ public class MemberController {
 	/*************로그인이 필요한 서비스 - interceptor에서 로그인 체크**********************/
 	@RequestMapping("modifyMemberInfo.do")
 	@ResponseBody
-	public ModelAndView modifyMemberInfo(@ModelAttribute Member member, Errors errors, HttpSession session,  HttpServletRequest request, ModelMap map){
+	public ModelAndView modifyMemberInfo(@ModelAttribute Member member, Errors errors, HttpSession session,  HttpServletRequest request, ModelMap map ){
 		Member loginInfo = (Member)session.getAttribute("login_info");
 		//Validation check
 //		new MemberValidator().validate(member, errors);
@@ -234,10 +238,8 @@ public class MemberController {
 		String result = null;
 		if(recommend2=="" || service.getMemberById(recommend2)!=null){
 			result = "true";
-			System.out.println(result);
 		}else{
 			result = "false";
-			System.out.println(result);
 		}
 		return result;
 	}
@@ -254,7 +256,6 @@ public class MemberController {
 			}else{
 				result = "false";
 			}
-			System.out.println(result);
 		return result;
 	}
 	
@@ -283,13 +284,21 @@ public class MemberController {
 	/********************** 쿠폰 값 요청 ********************/
 	@RequestMapping("moneyCheck.do")
 	@ResponseBody
-	public String moneyCheck(String num){
-		System.out.println(num);
+	public String moneyCheck(String num,HttpServletRequest request){
 		String result = null;
 		int num1 = Integer.parseInt(num);
-			int num3 = num1 + 1000;
-			result = Integer.toString(num3);
-		System.out.println(result);
+		int num3 = num1 + 1000;
+		result = Integer.toString(num3);
+		return result;
+	}
+	
+	@RequestMapping("moneyRequest.do")
+	@ResponseBody
+	public String moneyRequest(String num, HttpServletRequest request){
+		String result = null;
+		int num1 = Integer.parseInt(num);
+		int num3 = num1 - 1000;
+		result = Integer.toString(num3); 
 		return result;
 	}
 	
@@ -323,8 +332,75 @@ public class MemberController {
 		}else{
 			result="true";
 		}
-		System.out.println(result);
 		return result;
+	}
+	
+	/**********************핸드폰으로 아이디 찾기********************/
+	@RequestMapping("loginIdFind.do")
+	@ResponseBody
+	public ModelAndView loginIdFind(String name, HttpServletRequest request,ModelMap map){
+		System.out.println("asdfasdfasdfasdfasedfasdfasdfasdf");
+		String id = null;
+		Member m = service.getMemberByName(name);
+		if(m!=null){
+		String phone = m.getPhoneNo();
+		System.out.println(phone);
+		String phoneCP =request.getParameter("phoneCP");
+		String num1 = request.getParameter("num1");
+		String num2 = request.getParameter("num2");
+		String exPhone = phoneCP+"-"+num1+"-"+num2;
+		System.out.println(exPhone);
+			if(phone.equals(exPhone)){
+				id = m.getId();
+				System.out.println(id);
+				map.addAttribute("id",id);
+				return new ModelAndView("/WEB-INF/view/member/idFind_success.jsp",map);
+			}else{
+				map.addAttribute("error_message","존재하지 않는 정보입니다");
+				return new ModelAndView("/popup/idFind.jsp",map);	
+				}
+		}else{
+			map.addAttribute("error_message", "존재하지 않는 정보입니다.");
+			return new ModelAndView("/popup/idFind.jsp",map);
+		}
+	}
+	
+	/**********************핸드폰으로 비밀번호 찾기********************/
+	@RequestMapping("loginPwFind.do")
+	@ResponseBody
+	public ModelAndView loginPwFind(String name, HttpServletRequest request,ModelMap map){
+		String id = null;
+		Member m = service.getMemberByName(name);
+		if(m!=null){
+		String phone = m.getPhoneNo();
+		String phoneCP =request.getParameter("phoneCP");
+		String num1 = request.getParameter("num1");
+		String num2 = request.getParameter("num2");
+		String exPhone = phoneCP+"-"+num1+"-"+num2;
+		System.out.println(exPhone);
+			if(phone.equals(exPhone)){
+				id = m.getId();
+				request.setAttribute("id", id);
+				return new ModelAndView("/WEB-INF/view/member/pwFind_success.jsp");
+			}else{
+				map.addAttribute("error_message","존재하지 않는 정보입니다");
+				return new ModelAndView("/popup/pwFind.jsp",map);	
+				}
+		}else{
+			map.addAttribute("error_message", "존재하지 않는 정보입니다.");
+			return new ModelAndView("/popup/pwFind.jsp",map);
+		}
+	}
+	
+	/**********************비밀번호 분실시 변경 요청********************/
+	@RequestMapping("passwordChange.do")
+	@ResponseBody
+	public String passwordChange(String password, HttpServletRequest request){
+		String id = request.getParameter("id");
+		Member m = service.getMemberById(id);
+		m.setPassword(password);
+		service.modifyPassword(m);
+		return "redirect:/index.do";
 	}
 	
 	/**********************이메일 중복 체크********************/

@@ -26,8 +26,10 @@ insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100
 
 
 
-update member set grade='su' 	where member_id='2';
-update member set mileage=100 	where member_id='2';
+update member set grade='master' 	where member_id='2';
+update member set mileage=11111 	where member_id='2';
+select * from member;
+delete member where member_id='1';
 insert into CATEGORY values('회원관련', '회원관련');
 insert into CATEGORY values('맛집관련', '맛집관련');
 insert into CATEGORY values('리뷰관련', '리뷰관련');

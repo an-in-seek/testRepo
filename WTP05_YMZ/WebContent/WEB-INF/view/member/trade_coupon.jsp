@@ -21,13 +21,20 @@ $(document).ready(function(){
 	var cnt = 0;
 	var num1 = 0;
 	var num2 = 0;
-	
-	//document.getElementById("result").value = 1;
+	var check = false;
+	$("#reset").on("click",function(){
+		if(cnt!=0){
+			return cnt=0;
+		}
+		
+	})
 	$("#exBtn").on("click",function(){
 		alert("마일리지가 부족합니다");
 	})
-	
-	$("#btn").on("click",function(){
+
+	$("#plus").on("click",function(){
+		var result = Number($("#result").val());
+			check = true;
 		var num = null;
 			num = document.getElementById("price").value;
 		$.ajax({
@@ -35,26 +42,24 @@ $(document).ready(function(){
 			data:{"num":num},
 			dataType:"text",
 			beforeSend:function(){
-				if($("#result").val()=="0"){
-					alert("마일리지가 부족합니다");
+			if(result<1000){
 				return false;
-				}
+			}	
 			},
 			success:function(ret){
+			
 				document.getElementById("price").value = ret;
 				var dif = document.getElementById("difference");
 				dif.innerText=$("#currentMileage").val()+" - "+$("#price").val();
 				cnt++;
-				document.getElementById("count").innerText=cnt;
-				
+				document.getElementById("count").value = cnt;
 				var num1 = Number($("#price").val());
 				var num2 = Number($("#currentMileage").val());
 				num3 = num2-num1;
-				
-				//if(num3<0){
-					//alert("마일리지가 부족합니다");
-					//return false;
-				//}
+				if(num3<0){
+					alert("마일리지가 부족합니다");
+					return false;
+				}
 				var result = document.getElementById("result");
 				result.value = num3;
 			}
@@ -66,27 +71,25 @@ $(document).ready(function(){
 			alert("취소 되었습니다");
 			return false;
 		}else{
-			alert("고객님의 메일로 쿠폰이 전송되었습니다");
-			return true;
+			if(!check){
+				alert("금액을 입력해주십시오");
+				return false;
+			}
 		}
+		if($("#count").val()==0){
+			alert("금액을 입력해주십시오")
+			return false
+		}
+			alert("고객님의 메일로 쿠폰이 전송되었습니다");
 	})
+
 });
 
-	/*
-	 * 발급클릭시 메세지창 띄우기.
-
-	function issueConfirm(){
-		confirm("고객님의 메일로 쿠폰이 전송되었습니다");
-		if(!flag){
-			
-		}
-	}
-	*/
 </script>
 </head>
 <body>
 
-<h2>쿠폰교환</h2>
+<h2 align="center">쿠폰교환</h2>
 <form method="post" action="${initParam.rootPath }/member/updateMileage.do" id="modifyMileage"> 
 	<table width="800" align="center">
 		<tr>
@@ -105,13 +108,14 @@ $(document).ready(function(){
 				<input type="text" name="price" id="price" value="0" readonly>
 			</td>
 			<c:if test="${requestScope.mileage>=1000 }">
-					<td><input type="button" value="+" id="btn"></td>
+					<td><input type="button" value="+" id="plus"></td>
+					
 			</c:if>
 			<c:if test="${requestScope.mileage<1000 }">
 					<td><input type="button" value="+" id="exBtn"></td>
 			</c:if>
 			<td width="100">
-				<input type="text" name="count" id="count" readonly>
+				<input type="text" name="count" id="count" value="0" readonly>
 			</td>
 			<td width="100">
 			장
@@ -129,8 +133,8 @@ $(document).ready(function(){
 			<td>
 				남은 마일리지
 			</td>
-			<td id="ex">
-				<input type="text" id="result" name="result" readonly>
+			<td>
+				<input type="text" id="result" name="result" value="${requestScope.mileage }" readonly>
 			</td>
 		</tr>
 		<tr>
@@ -138,7 +142,7 @@ $(document).ready(function(){
 				<input type="submit" onclick="javascript:issueConfirm();" id ="submit" value="발급">
 			</td>
 			<td>
-				<input type="reset" value="초기화">			
+				<input type="reset" id="reset" value="초기화">			
 			</td>
 		</tr>
 	</table>

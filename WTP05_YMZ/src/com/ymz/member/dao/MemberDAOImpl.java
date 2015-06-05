@@ -46,6 +46,15 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	/**
+	 * name으로 회원 정보를 조회하여 return하는 메소드
+	 */
+	
+	@Override
+	public Member selectMemberByName(String name) {
+		return session.selectOne(namespace+"selectMemberByName",name);
+	}
+
+	/**
 	 * 회원 정보를 DB에 insert하는 메소드
 	 * @param member 등록할 회원 정보
 	 */

@@ -69,7 +69,7 @@ public class RestaurantController {
 		
 		Member member = (Member)session.getAttribute("login_info");
 		if(member!=null) {
-			if(member.getGrade().equals("관리자")) {
+			if(member.getGrade().equals("master")) {
 				model.addAttribute("isAdmin",true);
 			}
 		}
@@ -88,7 +88,7 @@ public class RestaurantController {
 		
 		Member member = (Member)session.getAttribute("login_info");
 		if(member!=null) {
-			if(member.getGrade().equals("관리자")) {
+			if(member.getGrade().equals("master")) {
 				model.addAttribute("isAdmin",true);
 			}
 		}
@@ -108,7 +108,7 @@ public class RestaurantController {
 			String searchWord, Model model, HttpSession session) {
 		Member member = (Member)session.getAttribute("login_info");
 		if(member!=null) {
-			if(member.getGrade().equals("관리자")) {
+			if(member.getGrade().equals("master")) {
 				model.addAttribute("isAdmin",true);
 			}
 		}
@@ -126,9 +126,17 @@ public class RestaurantController {
 		return "restaurant/restaurant_write_form.tiles";
 	}
 	
+	@RequestMapping("/login/admin/modifyRestaurantForm.do")
+	public String modifyRestaurantForm(int restaurantNo, Model model) {
+		Map map = service.setRestaurantModifyForm(restaurantNo);
+		model.addAllAttributes(map);
+		return "restaurant/restaurant_modify_form.tiles";
+	}
+	
 	@RequestMapping("/login/admin/addNewRestaurant.do")
 	public String addNewRestaurant(String restaurantName, String category, String phoneNo1, String phoneNo2, String phoneNo3, String address, String[] theme, String building, String floor, String description,
 			@RequestParam("pictureName") MultipartFile[] pictureName, String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception {
+		
 		// Restaurant 객체에 값 세팅
 		Restaurant restaurant = new Restaurant();
 		restaurant.setRestaurantName(restaurantName);
@@ -170,11 +178,10 @@ public class RestaurantController {
 	public String restaurantView(int restaurantNo, Model model, HttpSession session, ModelMap map) {
 		Member member = (Member)session.getAttribute("login_info");
 		if(member!=null) {
-			if(member.getGrade().equals("관리자")) {
+			if(member.getGrade().equals("master")) {
 				model.addAttribute("isAdmin",true);
 			}
 		}
-		
 
 		Restaurant restaurant = service.getRestaurantByNo(restaurantNo);
 		model.addAttribute("restaurant", restaurant);
@@ -218,20 +225,38 @@ public class RestaurantController {
 		 replyService.registerRestaurantReply(restaurantReply);
 		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getRestaurantNo();
 	}
-	
+	//댓글 삭제
 	@RequestMapping("/login/removeReply.do")
-	public String removeRestaurantReplyByReplyNo(@ModelAttribute RestaurantReply restaurantReply, HttpSession session){
+	public String removeRestaurantReplyByReplyNo(@ModelAttribute RestaurantReply restaurantReply,int number, HttpSession session){
 		Member member = (Member)session.getAttribute("login_info");
-		restaurantReply.setMemberId(member.getId());;
+		restaurantReply.setMemberId(member.getId());
+		replyService.removeRestaurantReplyByReplyNo(number);
 		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getNumber();
 
 	}
+	
+	@RequestMapping("/login/updateReply.do")
+	public String modifyRestaurantReply(@ModelAttribute RestaurantReply restaurantReply, HttpSession session){
+		Member member = (Member)session.getAttribute("login_info");
+		restaurantReply.setMemberId(member.getId());
+		
+		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getContent();
+		
+		
+	}
+	
+	
+	
+	
 
 	@RequestMapping("/login/admin/removeRestaurant.do")
 	public String removeRestaurant(int restaurantNo) {
 		service.removeRestaurant(restaurantNo);
 		return "redirect:/restaurant/showListByType.do";
 	}
+	
+	
+	
 	
 }
 

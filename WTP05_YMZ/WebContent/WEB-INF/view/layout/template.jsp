@@ -42,7 +42,7 @@ div.template{
 }
 header.template{
 	width:1024px;
-	padding: 10px;
+	padding: 5px;
 	background-color:skyblue;
 	color:white;
 	text-align:center;
@@ -50,7 +50,7 @@ header.template{
 nav.template{
 	height:620px;
 	width:100px;
-	padding:10px;
+	padding:5px;
 	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	background-color:#F5F5DC;
 	font-weight:bold;
@@ -59,14 +59,14 @@ nav.template{
 }
 section.template{
 	width:1024px;
-	padding: 10px;
+	padding: 5px;
 	height:auto; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	float:left;   /*왼쪽으로 띄움 */
 }
 footer.template{
 	height:50px;
 	width:1024px;
-	padding: 10px;
+	padding: 5px;
 	background-color:skyblue;
 	color:white;
 	text-align:center;
@@ -82,9 +82,11 @@ footer.template{
 			<tiles:insertAttribute name="menu" />
 		</header>
 
-	<%-- 	<nav class="template">
-			<tiles:insertAttribute name="sub_menu" /><!-- 서브메뉴로 -->
-		</nav> --%>
+		<%-- 	
+		<nav class="template">
+			<tiles:insertAttribute name="sub_menu" />서브메뉴로
+		</nav> 
+		--%>
 
 		<section class="template">
 			<tiles:insertAttribute name="body" />

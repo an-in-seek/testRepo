@@ -19,9 +19,16 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 	@Override
 	@Transactional
 	public void registerRestaurantReply(RestaurantReply restaurantReply) {
+		System.out.println(restaurantReply);
 		dao.insertRestaurantReply(restaurantReply);
 		dao.updateReplyCount(restaurantReply.getRestaurantNo());
-	}
+	
+		int sum =dao.selectScore(restaurantReply.getRestaurantNo());
+		int replyCount=dao.selectReplyCount(restaurantReply.getRestaurantNo());
+		
+		double score =(double) sum/replyCount;
+		dao.updateScore(score, restaurantReply.getRestaurantNo());
+		}
 
 	// 수정하기
 	@Override

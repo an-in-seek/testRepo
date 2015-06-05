@@ -254,4 +254,12 @@
 	<delete id="deleteRestaurant" parameterType="_int">
 		delete from restaurant where restaurant_no=#{restaurantNo}
 	</delete>
+	
+	<select id="selectBuildingNameByLocationNo" parameterType="_int" resultType="String">
+		select building_name from location where location_no=#{locationNo}
+	</select>
+	
+	<select id="selectFloorByLocationNo" parameterType="_int" resultType="String">
+		select floor from location where location_no=#{locationNo}
+	</select>
 </mapper>
