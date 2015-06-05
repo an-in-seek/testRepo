@@ -29,17 +29,12 @@ function chagee(time, num){
 
 $(document).ready(function(){
 	
-	//alert(date_str);
-	
 	var txt = "";
-
-	
 	
 	// 검색 방식 셀렉터 이벤트
 	$("#searchSort").on("change", function(){
 		txt = $(this).val(); // $(select객체).val() - 선택된 option의 value가 리턴
-		alert("검색방식 : "+txt);
-		
+		// alert("검색방식 : "+txt);
 	});
 	
 	// 조회수 정렬
@@ -276,7 +271,8 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 				<font color="red"><b>${pageNum}</b></font>
 			</c:when>
 			<c:otherwise>
-				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}&sortType=${requestScope.sortType}">${pageNum} </a>
+				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}&sortType=${requestScope.sortType}
+							&searchType=${requestScope.searchType}&query=${requestScope.query}">${pageNum} </a>
 			</c:otherwise>
 		</c:choose>
 	&nbsp;&nbsp;
