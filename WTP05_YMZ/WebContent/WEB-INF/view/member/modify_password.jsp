@@ -28,6 +28,10 @@ var pwCheck = false;
 	$("#modifyPassword").on("submit",function(){
 				var password = $("#password").val();
 				var password_check = $("#password_check").val();
+				var flag = confirm("비밀번호를 수정하시겠습니까");
+				if(!flag){
+					return false;
+				}else{
 				if(!$("#current_password").val()){
 					alert("기존비밀번호를 입력하세요");
 					$("#current_password").focus();
@@ -55,6 +59,8 @@ var pwCheck = false;
 					$("#password_check").focus();
 					return false;
 				}
+			}	
+				alert("비밀번호가 수정되었습니다.");
 				
 			})
 })

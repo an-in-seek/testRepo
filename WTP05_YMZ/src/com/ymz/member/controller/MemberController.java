@@ -55,7 +55,6 @@ public class MemberController {
 		String month = (String)request.getParameter("month");
 		String day = (String)request.getParameter("day");
 		String exbirth = year+"-"+month+"-"+day;
-		System.out.println(exbirth);
 		member.setBirth(exbirth);
 		String emailName = (String)request.getParameter("emailName");
 		String emailAddress = (String)request.getParameter("emailAddress");
@@ -109,7 +108,6 @@ public class MemberController {
 	@RequestMapping("joinSuccess.do")
 	public String joinSuccess(@RequestParam String id, ModelMap map) throws Exception{
 		Member member = service.getMemberById(id);
-		System.out.println(member);
 		map.addAttribute("member", member);
 		return "member/join_success.tiles";
 	}
@@ -234,10 +232,8 @@ public class MemberController {
 		String result = null;
 		if(recommend2=="" || service.getMemberById(recommend2)!=null){
 			result = "true";
-			System.out.println(result);
 		}else{
 			result = "false";
-			System.out.println(result);
 		}
 		return result;
 	}
@@ -254,7 +250,6 @@ public class MemberController {
 			}else{
 				result = "false";
 			}
-			System.out.println(result);
 		return result;
 	}
 	
@@ -283,13 +278,21 @@ public class MemberController {
 	/********************** 쿠폰 값 요청 ********************/
 	@RequestMapping("moneyCheck.do")
 	@ResponseBody
-	public String moneyCheck(String num){
-		System.out.println(num);
+	public String moneyCheck(String num,HttpServletRequest request){
 		String result = null;
 		int num1 = Integer.parseInt(num);
-			int num3 = num1 + 1000;
-			result = Integer.toString(num3);
-		System.out.println(result);
+		int num3 = num1 + 1000;
+		result = Integer.toString(num3);
+		return result;
+	}
+	
+	@RequestMapping("moneyRequest.do")
+	@ResponseBody
+	public String moneyRequest(String num, HttpServletRequest request){
+		String result = null;
+		int num1 = Integer.parseInt(num);
+		int num3 = num1 - 1000;
+		result = Integer.toString(num3); 
 		return result;
 	}
 	
@@ -323,7 +326,6 @@ public class MemberController {
 		}else{
 			result="true";
 		}
-		System.out.println(result);
 		return result;
 	}
 	
