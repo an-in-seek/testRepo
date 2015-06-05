@@ -5,6 +5,12 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	$("input[name=find]:radio").on("click",function(){
+		var findCD = $("input[name=find]:radio").val();
+		alert(findCD);
+	})
+
 	$("#findId").on("submit",function(){
 		if(!$("#name").val()){
 			alert("이름을 입력하세요");
