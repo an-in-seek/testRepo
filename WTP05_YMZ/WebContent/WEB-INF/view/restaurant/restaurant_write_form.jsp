@@ -184,6 +184,9 @@ $(document).ready(function(){
 			}
 		}
 		
+		var phone = $("#phoneNo1").val()+"-"+$("#phoneNo2")+"-"+$("#phoneNo3");
+		$("#regForm").append("<input type='hidden' name='phone' value='"+phone+"'>");
+		
 		$("#description").val($("#description").val().replace(/\n/g, '<br>'));
 	});
 	////////////////////////////////////////

@@ -129,6 +129,7 @@ public class RestaurantController {
 	@RequestMapping("/login/admin/addNewRestaurant.do")
 	public String addNewRestaurant(String restaurantName, String category, String phoneNo1, String phoneNo2, String phoneNo3, String address, String[] theme, String building, String floor, String description,
 			@RequestParam("pictureName") MultipartFile[] pictureName, String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception {
+		
 		// Restaurant 객체에 값 세팅
 		Restaurant restaurant = new Restaurant();
 		restaurant.setRestaurantName(restaurantName);
