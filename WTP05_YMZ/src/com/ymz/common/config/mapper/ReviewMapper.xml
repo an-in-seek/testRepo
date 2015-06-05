@@ -102,27 +102,36 @@
 		select count(review_no) from review
 	</select>
 	
-	<!-- 추천수 정렬 -->
 	
 
-	<!-- 조회수 정렬 -->
+	<!-- 정렬 -->
 		<select id="ReviewSortPaging" parameterType="map" resultMap="review-resultmap">
-		select review_no, title, content, hits, recommend, reg_date, member_id, reply_count
+		select review_no, title, content, hits, recommend, 
+			   reg_date, 
+		 	   member_id, reply_count
 		from (
 				select ceil(rownum/#{contentsPerPage}) page, 
 					   review_no, title, content, hits, 
 					   recommend, reg_date, member_id, reply_count
 				from (
-						<include refid="review-select"/>
+						select  review_no, 
+								title, 
+								content, 
+								hits, 
+								recommend, 
+								reg_date,
+								member_id,
+								(select count(*) from REVIEW_REPLY where review_reply.review_no = review.review_no) reply_count
+						from 	review
 						<choose>
+							<when test="sortType=='latest'">
+									order by reg_date desc
+							</when>
 							<when test="sortType=='recommend'">
 								order by recommend desc
 							</when>
 							<when test="sortType=='hits'">
 								order by hits desc
-							</when>
-							<when test="sortType=='latest'">
-								order by reg_date desc
 							</when>
 						</choose>
 			)
