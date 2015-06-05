@@ -1,7 +1,10 @@
 package com.ymz.restaurant.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
@@ -21,5 +24,5 @@ public interface RestaurantService {
 	public List<String> getRestaurantsByBuildingName(String buildingName);
 	public Map<String, Object> getRestaurantsPaging(String buildingName, String floor, String align, int currentPage, String searchWord);
 	public int removeRestaurant(int restaurantNo);
-	public Map setRestaurantModifyForm(int restaurantNo);
+	public Map setRestaurantModifyForm(int restaurantNo, HttpServletRequest request) throws Exception;
 }

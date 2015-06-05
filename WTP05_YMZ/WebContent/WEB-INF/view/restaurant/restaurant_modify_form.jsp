@@ -7,7 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+var pictureCount = 0;
+
 $(document).ready(function(){
+	// 처음 화면을 띄우면서 테마를 세팅한다
 	if(${fn:contains(requestScope.restaurant.theme,'가족') }){
 		$("input:checkbox[value=가족]").prop("checked","checked");
 	}
@@ -21,6 +24,7 @@ $(document).ready(function(){
 		$("input:checkbox[value=회식]").prop("checked","checked");
 	}
 	
+	// 건물 바뀌면 해당건물의 층수만큼 층 select를 바꾼다
 	$("#building").on("change",function(){
 		$.ajax({
 			url:"${initParam.rootPath}/restaurant/ajax/getFloorsByBuildingName.do",
@@ -42,7 +46,55 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	// 줄바꿈 변환
+	$("#description").html("${requestScope.restaurant.description }".replace('<br>', '\n'));
+	
+	// 사진첨부버튼 클릭 이벤트
+	$("#pictureName").on("click",function(){
+		if(pictureCount==5){
+			alert("사진은 최대 5장까지 첨부 가능합니다");
+			return false;
+		}
+	});
+	
+	// 사진이 추가될때 이벤트
+	$("#pictureName").on("change",function(){
+		var formData = new FormData();
+		formData.append("picture",$(this)[0].files[0]);
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/addPictureTemp.do",
+			processData:false,
+			contentType:false,
+			data:formData,
+			type:"post",
+			success:function(fileName){
+				if(fileName){
+					pictureCount++;
+					$("#pictureTemp td:nth-child("+pictureCount+")").html("<img style='width:160px;height:140px' src='${initParam.rootPath}/tempPhoto/"+fileName+"'>");
+				}
+			}
+		});
+	});
+	
+	// 기존에 들어있는 사진갯수를 pictureCount에 저장한다
+	pictureCount = ${fn:length(fn:split(requestScope.restaurant.pictureName,',')) };
+	
+	// 그림 클릭시 이벤트(클릭시 삭제)
+	$("#pictureTemp").on("click","img",function(){
+		var src = $(this).prop("src");
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/removePictureTemp.do",
+			type:"post",
+			data:"fileName="+src
+		});
+		
+		$(this).parent().remove();
+		$("#pictureTemp").append("<td></td>");
+		pictureCount--;
+	});
 });
+
 </script>
 </head>
 <body>
@@ -142,7 +194,14 @@ $(document).ready(function(){
 		<select id="floor" name="floor">
 			<option value="default">층을 선택하세요</option>
 			<c:forEach items="${requestScope.floors }" var="floor">
-				<option>${floor }</option>
+				<c:choose>
+					<c:when test="${requestScope.currentFloor==floor }">
+						<option selected="selected">${floor }</option>
+					</c:when>
+					<c:otherwise>
+						<option>${floor }</option>
+					</c:otherwise>
+				</c:choose>
 			</c:forEach>
 		</select>
 		<font color="red"><span id="locationMessage"></span></font>
@@ -160,21 +219,23 @@ $(document).ready(function(){
 <hr>
 
 <p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="pictureName" name="pictureName">
 <font color="red"><span id="pictureMessage"></span></font></p>
 <table id="picture_table">
-<tr>
-	<td><input type="file" name="pictureName"></td>
-	<td>
-		<button id="picture_add">＋</button>
-		<button id="picture_del">－</button>
-	</td>
+<tr id="pictureTemp">
+<c:forEach items="${fn:split(requestScope.restaurant.pictureName,',') }" var="picture">
+	<td><img style="width:160px;height:140px;" src="${initParam.rootPath }/uploadPhoto/${picture}"></td>
+</c:forEach>
+<c:forEach begin="${fn:length(fn:split(requestScope.restaurant.pictureName,','))+1 }" end="5">
+<td></td>
+</c:forEach>
 </tr>
 </table>
 
 <hr>
 
 <p><font size="5"><b>메뉴</b></font>&nbsp;&nbsp;(최대 10개 등록 가능)</p>
-<table>
+<table style="width:100%;">
 <thead>
 <tr align="center">
 <td>메뉴명</td>
@@ -184,7 +245,14 @@ $(document).ready(function(){
 </tr>
 </thead>
 <tbody id="menu_table">
-<c:forEach begin="1" end="10">
+<c:forEach items="${requestScope.menus }" var="menu">
+<tr>
+	<td><input type="text" name="foodName" maxlength="10" value="${menu.foodName }"></td>
+	<td><input type="number" name="foodPrice" min="0" max="99999999" value="${menu.foodPrice }">원</td>
+	<td><input type="text" name="foodDescription" maxlength="30" style="width:300px" value="${menu.foodDescription }"></td>
+</tr>
+</c:forEach>
+<c:forEach begin="${fn:length(requestScope.menus)+1 }" end="10">
 <tr>
 	<td><input type="text" name="foodName" maxlength="10"></td>
 	<td><input type="number" name="foodPrice" min="0" max="99999999">원</td>
@@ -199,5 +267,6 @@ $(document).ready(function(){
 <button id="btn_cancel" style="width:100px;height:50px;">취소</button>
 </p>
 </form>
+
 </body>
 </html>
