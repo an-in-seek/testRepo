@@ -82,9 +82,11 @@ footer.template{
 			<tiles:insertAttribute name="menu" />
 		</header>
 
-	<%-- 	<nav class="template">
-			<tiles:insertAttribute name="sub_menu" /><!-- 서브메뉴로 -->
-		</nav> --%>
+		<%-- 	
+		<nav class="template">
+			<tiles:insertAttribute name="sub_menu" />서브메뉴로
+		</nav> 
+		--%>
 
 		<section class="template">
 			<tiles:insertAttribute name="body" />

@@ -2,12 +2,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
-<link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#listTB tbody tr").on("mouseover", function(){
 		$("table#listTB tbody tr").css("background-color", "white");
-		$(this).css("background-color", "silver");
+		$(this).css("background-color", "lightgray");
 	});
 	$("#listTB tbody tr").on("click", function(){
 		var id = $(this).find(":nth-child(2)").text();
@@ -32,17 +31,25 @@ $(document).ready(function(){
 	});
 });
 </script>
+
+<link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <style type="text/css">
 div#table{
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	padding: 20px;
 	width:800px;
-	font-weight:bold;
 	text-align:center;
 	float:center;   /*왼쪽으로 띄움 */
 }
-table#listTB tbody tr{
+#listTB {
+	margin-left: 20px;
+}
+#listTB thead tr {
+	font-weight: bold;
+	background: silver;
+}
+#listTB tbody tr{
 	cursor: pointer;
 }
 div#dialog{
@@ -90,30 +97,27 @@ article{
 <!-- 이전 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.previousPageGroup }">
-		<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pagingBean.startPageOfPageGroup-1}">◀</a>
+		<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
 	</c:when>
-	<c:otherwise>◀</c:otherwise>
+	<c:otherwise>◀&nbsp;</c:otherwise>
 </c:choose>	
 <!-- 페이지 번호 -->
 <c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
 	<c:choose>
 		<c:when test="${pageNum == pagingBean.currentPage }">
-			<b>[${pageNum}]</b>
+			<b><font color="red">&nbsp;${pageNum}&nbsp;</font></b>
 		</c:when>
 		<c:otherwise>
-			<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pageNum}">
-				${pageNum}
-			</a>
+			<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
 		</c:otherwise>
 	</c:choose>
-	&nbsp;&nbsp;
 </c:forEach>
 <!-- 다음 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.nextPageGroup }">
-		<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pagingBean.endPageOfPageGroup+1}">▶</a>
+		<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
 	</c:when>
-	<c:otherwise>▶</c:otherwise>
+	<c:otherwise>&nbsp;▶</c:otherwise>
 </c:choose>	
 </p>
 </div>

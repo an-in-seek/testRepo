@@ -72,6 +72,7 @@
 		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp"/>
 		<put-attribute name="right_menu" value="/WEB-INF/view/layout/member/login_menu.jsp"/>
 	</definition>
+	
 	<!-- 회원가입 로그인 메뉴바를 누르면 네비게이션이 안보이게 한다. -->
 	 <definition name="member_template" template="/WEB-INF/view/layout/member/member_template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
@@ -82,6 +83,7 @@
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
 	</definition>
 	<!-- 메인페이지:끝 -->
+	
 	<!-- 마이페이지:달이 -->
 	<definition name="mypage_template" template="/WEB-INF/view/layout/member/mypage_template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
@@ -96,8 +98,6 @@
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
 		<put-attribute name="aside_menu" value="/WEB-INF/view/layout/member/mypage.jsp" />
 	</definition>
-	<!-- 마이페이지:끝 -->
-	<!-- 관리페이지 -->
-	
+	<!-- 마이페이지:끝 -->	
 	
 </tiles-definitions>
