@@ -13,55 +13,84 @@ public class ReviewReply implements Serializable{
 	private String content;
 	private String memberId;
 	private int reviewNo;
+	private int pageNo;
 	
+	
+	public ReviewReply(){ 	}
+
+
 	public ReviewReply(int replyNo, String regDate, String content,
-			String memberId, int reviewNo) {
+			String memberId, int reviewNo, int pageNo) {
 		super();
 		this.replyNo = replyNo;
 		this.regDate = regDate;
 		this.content = content;
 		this.memberId = memberId;
 		this.reviewNo = reviewNo;
+		this.pageNo = pageNo;
 	}
-	
-	public ReviewReply(){ 	}
-	
+
+
 	public int getReplyNo() {
 		return replyNo;
 	}
+
+
 	public void setReplyNo(int replyNo) {
 		this.replyNo = replyNo;
 	}
+
+
 	public String getRegDate() {
 		return regDate;
 	}
+
+
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+
+
 	public String getContent() {
 		return content;
 	}
+
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+
 	public String getMemberId() {
 		return memberId;
 	}
+
+
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+
+
 	public int getReviewNo() {
 		return reviewNo;
 	}
+
+
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
 	}
-	@Override
-	public String toString() {
-		return "ReviewReply [replyNo=" + replyNo + ", regDate=" + regDate
-				+ ", content=" + content + ", memberId=" + memberId
-				+ ", reviewNo=" + reviewNo + "]";
+
+
+	public int getPageNo() {
+		return pageNo;
 	}
+
+
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -69,11 +98,14 @@ public class ReviewReply implements Serializable{
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result
 				+ ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result + pageNo;
 		result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
 		result = prime * result + replyNo;
 		result = prime * result + reviewNo;
 		return result;
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -93,6 +125,8 @@ public class ReviewReply implements Serializable{
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
+		if (pageNo != other.pageNo)
+			return false;
 		if (regDate == null) {
 			if (other.regDate != null)
 				return false;
@@ -104,4 +138,15 @@ public class ReviewReply implements Serializable{
 			return false;
 		return true;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ReviewReply [replyNo=" + replyNo + ", regDate=" + regDate
+				+ ", content=" + content + ", memberId=" + memberId
+				+ ", reviewNo=" + reviewNo + ", pageNo=" + pageNo + "]";
+	}
+	
+	
+
 }

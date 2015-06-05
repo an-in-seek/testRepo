@@ -80,7 +80,7 @@ $(document).ready(function(){
 	});
 	
 	//비밀번호 일치 확인
-		$("#passwordCheck").on("change", function(){
+	$("#passwordCheck").on("change", function(){
 		var passwordCh = $("#passwordCheck").val();
 		var password = $("#password").val();
 				if(passwordCh!=password){
@@ -91,7 +91,7 @@ $(document).ready(function(){
 					$("#pwMessageLayer").text("비밀번호가 일치합니다.");
 					$("#pwMessageLayer").addClass("normalMessage");
 					pwChe=true;
-				}
+			}
 	});
 	//Validator 검사위해 주석처리
 	$("#registerForm").on("submit", function(){
@@ -188,7 +188,17 @@ $(document).ready(function(){
 
 
 </script>
-
+<style type="text/css">
+div#table{
+	margin-right:100px;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-left:150px;
+	padding: 20px;
+	width:800px;
+	font-weight:bold;
+	text-align:left;
+	float:center;   /*왼쪽으로 띄움 */
+</style>
+<div id="table">
 <h2>회원가입</h2>
 <c:if test="${requestScope.error_message != null}">
 	<font color="red" size="2">${requestScope.error_message}</font>
@@ -304,3 +314,4 @@ $(document).ready(function(){
 		</tr>
 	</table>
 </form>
+</div>

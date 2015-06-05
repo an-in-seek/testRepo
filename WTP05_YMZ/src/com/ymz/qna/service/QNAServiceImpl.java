@@ -57,6 +57,32 @@ public class QNAServiceImpl implements QNAService {
 		return map;
 	}
 	
+	//QNA게시판 글 전체목록 분류별 조회
+	@Override
+	public Map<String, Object> getQNAListPagingByCategory(int pageNo, String category) {
+		List<QNA> list = dao.selectAllQNAByCategory(pageNo, category);
+		int totalContent = dao.selectTotalQNACountByCategory(category);
+		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
+		
+		HashMap map = new HashMap();
+		map.put("qna_list", list);
+		map.put("pagingBean1", pagingBean); //5개
+		return map;
+	}
+	
+	//QNA게시판 글 전체목록 검색으로 조회
+	@Override
+	public Map<String, Object> getQNAListPagingBySearch(int pageNo, String text) {
+		List<QNA> list = dao.selectAllQNABySearch(pageNo, text);
+		int totalContent = dao.selectTotalQNACountBySearch(text);
+		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
+		
+		HashMap map = new HashMap();
+		map.put("qna_list", list);
+		map.put("pagingBean1", pagingBean); //5개
+		return map;
+	}
+	
 	//QNA게시판 글 번호로 조회
 	@Override
 	public QNA getQNAByNo(int number) {
@@ -80,4 +106,5 @@ public class QNAServiceImpl implements QNAService {
 		}
 		dao.insertQNA(q2);
 	}
+
 }

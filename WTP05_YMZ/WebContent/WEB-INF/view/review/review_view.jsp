@@ -23,7 +23,6 @@ function removeReply(reviewNo, rnum, pNo){
 
 
 $(document).ready(function(){
-	
 	var reviewNumber = ${requestScope.review.reviewNo};
 	// 새로고침 조회수 증가 막기
 	var c = $.cookie('reviewNo'); // 쿠키 조회
@@ -202,7 +201,6 @@ ${requestScope.review.content }<br>
 			</tr>
 		</thead>
 		<tbody>
-			<!-- 여기 수정해야행 -->
 			<c:forEach items="${requestScope.reviewReplyList }" var="reply">
 				<tr>
 					<td>${reply.replyNo}</td>
@@ -213,7 +211,7 @@ ${requestScope.review.content }<br>
 						<button id="reply_modifyBtn" >수정</button>
 						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
 													onclick="removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});"  value="삭제" >
-						<button id="reply_reportBtn"">신고</button>
+						<button id="reply_reportBtn">신고</button>
 					</td>
 				</tr> 
 			</c:forEach>

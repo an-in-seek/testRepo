@@ -43,7 +43,12 @@ public interface MemberService {
 	 * Email로 회원 조회 메소드
 	 */
 	public abstract Member getMemberByEmail(String email);
-
+	
+	/**
+	 * Nickname로 회원 조회 메소드
+	 */
+	public abstract Member getMemberByNickname(String nickname);
+	
 	/**
 	 * 회원 정보 수정 처리 메소드
 	 * @param member 수정할 회원 전보

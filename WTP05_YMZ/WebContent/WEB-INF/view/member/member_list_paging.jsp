@@ -5,23 +5,18 @@
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <script type="text/javascript">
 $(document).ready(function(){
-	$("table#listTB tbody tr").on("mouseover", function(){
+	$("#listTB tbody tr").on("mouseover", function(){
 		$("table#listTB tbody tr").css("background-color", "white");
 		$(this).css("background-color", "silver");
 	});
-	$("table#listTB tbody tr").on("click", function(){
-		var id = $(this).find(":first-child").text();
+	$("#listTB tbody tr").on("click", function(){
+		var id = $(this).find(":nth-child(2)").text();
 		$.ajax({
 			url:"${initParam.rootPath}/member/findMemberById.do",
 			data:{"id":id},
 			type:"post",
 			dataType:"json",
 			success:function(ret){
-				if(ret.pictureName){
-					$("#pic").html("<img style='max' src='${initParam.rootPath }/uploadPhoto/"+ret.pictureName+"'>");
-				}else{
-					$("#pic").html("<img src='${initParam.rootPath }/uploadPhoto/no-photo.png'>");
-				}
 				$("#id").text("아이디 : "+ret.id);
 				$("#password").text("패스워드 : "+ret.password);
 				$("#name").text("이름 : "+ret.name);
@@ -29,15 +24,23 @@ $(document).ready(function(){
 				$("#joinDate").text("가입일 : "+ret.joinDate);
 				//Dialog 띄우기 
 				$("#dialog").dialog({modal:true,width:400});
+			},
+			error:function(xhr, dd, ddd){
+				alert(xhr.status + dd + ddd);
 			}
 		});
 	});
 });
 </script>
 <style type="text/css">
-table#listTB thead tr{
-	font-weight: bold;
-	background: lightgray;
+div#table{
+	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-left:auto;
+	padding: 20px;
+	width:800px;
+	font-weight:bold;
+	text-align:center;
+	float:center;   /*왼쪽으로 띄움 */
 }
 table#listTB tbody tr{
 	cursor: pointer;
@@ -53,24 +56,29 @@ article{
 }
 </style>
 
-<h2 align="center">맛집 리뷰</h2> 	
+<h2 align="center">회원 목록</h2> 
+<div align="center" id="table">	
 <c:if test="${fn:length(requestScope.member_list) != 0 }">
-	<table align="center" id="listTB" style="width:700px">
+	<table align="center" id="listTB" style="width:800px">
 		<thead>
 			<tr align="center">
+				<td>번호</td>
 				<td>ID</td>
 				<td>이름</td>
+				<td>닉네임</td>
 				<td>Email</td>
-				<td>가입일</td>
+				<td>전화번호</td>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.member_list }" var="member">
+			<c:forEach items="${requestScope.member_list }" var="member" varStatus="cnt">
 				<tr align="center">
+					<td>${cnt.count }</td>
 					<td>${member.id }</td>
 					<td>${member.name}</td>
-					<td align="left">${member.email}</td>
-					<td>${member.joinDate}</td>
+					<td>${member.nickname }</td>
+					<td>${member.email}</td>
+					<td>${member.phoneNo}</td>
 				</tr> 
 			</c:forEach>
 		</tbody>
@@ -108,6 +116,35 @@ article{
 	<c:otherwise>▶</c:otherwise>
 </c:choose>	
 </p>
+</div>
+
+<div>
+<table align="center">
+				<tr>
+					<td>
+						<form id="categoryForm" name="categoryForm" action="${initParam.rootPath }/qna/qnaListByCategory.do" method="post">
+							<select id="category" name="category">
+								<option>검색방식</option>
+								<option value="아이디">아이디</option>
+								<option value="이름">이름</option>
+								<option value="닉네임">닉네임</option>
+							</select>
+						</form>
+					</td>
+					<td colspan="2">
+						<form id="searchQna" name="searchQna" action="${initParam.rootPath }/qna/searchQna.do" method="post">
+							<input type="text" id="text" name="text" placeholder="제목으로 검색">						
+							<input type="submit" id="searchBtn" value="검색">
+						</form>
+					</td>
+					<td>
+						<form action="${initParam.rootPath }/qna/login/writeForm.do" method="post">
+							<input id="writeBtn" type="submit" value="글쓰기">
+						</form>
+					</td>
+				</tr>
+			</table>
+</div>
 
 <div id="dialog" title="선택 회원 정보">
 	<figure id="pic"></figure>

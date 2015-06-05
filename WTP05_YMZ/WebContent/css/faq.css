@@ -9,3 +9,9 @@
 .faq .q a{display:block;padding:.5em 1em;text-align:left;font-weight:bold;background:#fafafa;color:#000;text-decoration:none !important}
 .faq .q a:hover, .faq .q a:active, .faq .q a:focus{background:#f8f8f8}
 .faq .a{margin:0;padding:1em;line-height:1.5}
+#listTB1 thead tr{font-weight: bold;background: silver;}
+#listTB2 thead tr{font-weight: bold;background: silver;}
+[id^=contentTr]{cursor: pointer;display: none;/*최초로딩시에는 안보이도록 처리*/}
+div#dialog{width:400px;display: none;}
+article{border-bottom: 1px solid black;padding: 5px;padding-left: 10px;}
+#table1{margin-left: 20px;}
