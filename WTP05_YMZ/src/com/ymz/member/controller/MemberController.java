@@ -1,6 +1,5 @@
 package com.ymz.member.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -159,11 +157,9 @@ public class MemberController {
 	
 	//리스트에서 (ID,이름,닉네임,등급)으로 회원정보 조회
 	@RequestMapping("login/findMemberByInfo.do")
-	public  ModelAndView findMemberByInfo(@RequestParam String info, @RequestParam String command){
-		int pageNo=1;
-		System.out.println(info+" --- "+command);
-		Map map = service.getMemberByInfo(info, command, pageNo);
-		return new ModelAndView("member/member_list_paging.tiles", map);
+	public  ModelAndView findMemberByInfo(@RequestParam String info, @RequestParam String command, @RequestParam(defaultValue="1")int page){
+		List list = service.getMemberList(info, command);
+		return new ModelAndView("member/member_list.tiles", "member_list", list);
 	}
 	
 	

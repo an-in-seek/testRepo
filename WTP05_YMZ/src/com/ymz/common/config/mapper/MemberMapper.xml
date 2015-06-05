@@ -89,8 +89,22 @@
 		where	 name=#{name}
 	</select>
 	
-	<select id="selectAllMember" resultMap="member-resultmap">
+	<select id="selectAllMember" parameterType="map" resultMap="member-resultmap">
 		<include refid="member-select"/>
+		<choose>
+				<when test="command == 'member_id'">
+					where member_id = #{info}
+				</when>
+				<when test="command == 'member_name'">
+					where name = #{info}
+				</when>
+				<when test="command == 'member_nickname'">
+					where nickname = #{info}
+				</when>
+				<when test="command == 'grade'">
+					where grade = #{info}
+				</when>
+			</choose>
 	</select>
 	
 	<!-- Paging 추가 -->
@@ -116,8 +130,36 @@
 			select ceil(rownum/#{contentsPerPage}) page, member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date
 			from (
 					<include refid="member-select"/>
+					<choose>
+						<when test="command == 'member_id'">
+							where member_id = #{info}
+						</when>
+						<when test="command == 'member_name'">
+							where name = #{info}
+						</when>
+						<when test="command == 'member_nickname'">
+							where nickname = #{info}
+						</when>
+						<when test="command == 'grade'">
+							where grade = #{info}
+						</when>
+					</choose>
 					order by join_date
 			)
+			<choose>
+				<when test="command == 'member_id'">
+					where member_id = #{info}
+				</when>
+				<when test="command == 'member_name'">
+					where name = #{info}
+				</when>
+				<when test="command == 'member_nickname'">
+					where nickname = #{info}
+				</when>
+				<when test="command == 'grade'">
+					where grade = #{info}
+				</when>
+			</choose>
 		) 
 		where page = #{pageNo} 
 		<choose>

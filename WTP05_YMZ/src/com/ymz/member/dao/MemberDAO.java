@@ -58,9 +58,11 @@ public interface MemberDAO {
 
 	/**
 	 * Member 테이블의 전체 회원정보 조회 처리
+	 * @param command 
+	 * @param info 
 	 * @return
 	 */
-	public abstract List<Member> selectAllMember();
+	public abstract List<Member> selectAllMember(String info, String command);
 
 	/**
 	 * Member 테이블의 페이징 처리 전체 회원 조회 처리
