@@ -7,11 +7,29 @@ delete from qna CASCADE CONSTRAINTS;
 
 
 
-insert into member values('user01', 1111, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 10, 'user', '20140514');
-insert into member values('master', 1111, '안인식', '관리자', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140514');
-insert into member values('2', 5555, '관리자', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '한식', 100000, '관리자', '20140514');
+insert into member values('master', 1111, '관리자', '관리자', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140514');
+insert into member values('user01', 1111, '피카츄', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '양식', 10, 'user', '20140513');
+insert into member values('user02', 5555, '라이츄', '라이츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user02@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140512');
+insert into member values('user03', 5555, '파이리', '파이리', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user03@naver.com', '010-1111-1111', '일식', 100000, 'user', '20140511');
+insert into member values('user04', 5555, '꼬부기', '꼬부기', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user04@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140510');
+insert into member values('user05', 5555, '버터플', '버터플', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user05@naver.com', '010-1111-1111', '양식', 100000, 'user', '20140519');
+insert into member values('user06', 5555, '야도란', '야도란', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user06@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140518');
+insert into member values('user07', 5555, '피존투', '피존투', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user07@naver.com', '010-1111-1111', '중식', 100000, 'user', '20140517');
+insert into member values('user08', 5555, '또가스', '또가스', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user08@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140516');
+insert into member values('user09', 5555, '리자드', '리자드', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user09@naver.com', '010-1111-1111', '중식', 100000, 'user', '20140515');
+insert into member values('user10', 5555, '리자몽', '리자몽', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user10@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140514');
+insert into member values('user11', 5555, '어니부기', '어니부기', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user11@naver.com', '010-1111-1111', '일식', 100000, 'user', '20140513');
+insert into member values('user12', 5555, '거북왕', '거북왕', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user12@naver.com', '010-1111-1111', '양식', 100000, 'user', '20140512');
+insert into member values('user13', 5555, '아상해씨', '이상해씨', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user13@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140511');
+insert into member values('user14', 5555, '이상해풀', '이상해풀', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user14@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140510');
+insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user15@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140501');
+
+
+
 update member set grade='su' 	where member_id='2';
-update member set mileage=100 	where member_id='2';
+update member set mileage=11111 	where member_id='2';
+select * from member;
+delete member where member_id='1';
 insert into CATEGORY values('회원관련', '회원관련');
 insert into CATEGORY values('맛집관련', '맛집관련');
 insert into CATEGORY values('리뷰관련', '리뷰관련');

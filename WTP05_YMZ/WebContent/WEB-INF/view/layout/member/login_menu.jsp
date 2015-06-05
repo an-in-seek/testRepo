@@ -22,7 +22,7 @@
   -webkit-appearance: none;
   zoom: 1;}
   .btn input {
-  width: 80px;
+  width: 90px;
   height: 30px;
   border: 0;
   border-radius: 0;
@@ -68,11 +68,11 @@
 			<table align="center"  style="border:solid 1px #050099; margin-top:4%">
 				<tr align="center" >
 					<td><font size="3">아이디</font></td>
-					<td><input type="text" name="id"  placeholder="ID" class="int"></td>
+					<td><input type="text" name="id"  placeholder="ID" class="int" required="required"></td>
 				</tr>
 				<tr align="center" >
 					<td><font size="3">비밀번호</font></td>
-					<td><input type="password" name="password"  placeholder="Password" class="int"></td>
+					<td><input type="password" name="password"  placeholder="Password" class="int" required="required" maxlength="16"></td>
 				</tr>
 			</table>
 			

@@ -14,12 +14,16 @@ table#memberInfoTB{
 		<td>${sessionScope.login_info.id }</td>
 	</tr>
 	<tr>
-		<th  align="left">패스워드</th>
-		<td>${sessionScope.login_info.password}</td>
-	</tr>
-	<tr>
 		<th align="left">이름</th>
 		<td>${sessionScope.login_info.name}</td>
+	</tr>
+	<tr>
+		<th align="left">닉네임</th>
+		<td>${sessionScope.login_info.nickname}</td>
+	</tr>
+	<tr>
+		<th align="left">생년월일</th>
+		<td>${sessionScope.login_info.birth}</td>
 	</tr>
 	<tr>
 		<th align="left">Email</th>
