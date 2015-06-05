@@ -17,9 +17,11 @@ public interface MemberService {
 
 	/**
 	 * 전체 회원 목록 조회 처리
+	 * @param command 
+	 * @param info 
 	 * @return List<Member>
 	 */
-	public abstract List<Member> getMemberList();
+	public abstract List<Member> getMemberList(String info, String command);
 
 	/* **********************************************
 	 * 페이징 처리 service 메소드

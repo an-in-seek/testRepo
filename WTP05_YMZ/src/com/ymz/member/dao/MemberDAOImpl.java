@@ -98,8 +98,11 @@ public class MemberDAOImpl implements MemberDAO {
 	 * @return
 	 */
 	@Override
-	public List<Member> selectAllMember(){
-		return session.selectList(namespace+"selectAllMember");
+	public List<Member> selectAllMember(String info,  String command){
+		Map param = new HashMap();
+		param.put("info", info);
+		param.put("command", command);
+		return session.selectList(namespace+"selectAllMember", param);
 	}
 
 	/**
@@ -117,6 +120,7 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public List<Member> selectAllMemberByInfo(String info,  String command, int pageNo) {
+		System.out.println("info : "+info+" --- command : "+command);
 		Map param = new HashMap();
 		param.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
 		param.put("pageNo", pageNo);

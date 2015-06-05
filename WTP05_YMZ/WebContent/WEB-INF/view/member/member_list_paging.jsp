@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -119,7 +120,7 @@ article{
 <!-- 이전 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.previousPageGroup }">
-		<a href="${initParam.rootPath }/member/login/memberListPaging.do?page=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
+		<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
 	</c:when>
 	<c:otherwise>◀&nbsp;</c:otherwise>
 </c:choose>	
@@ -130,14 +131,14 @@ article{
 			&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
 		</c:when>
 		<c:otherwise>
-			<a href="${initParam.rootPath }/member/login/memberListPaging.do?page=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
+			<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 <!-- 다음 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.nextPageGroup }">
-		<a href="${initParam.rootPath }/member/login/memberListPaging.do?page=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
+		<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
 	</c:when>
 	<c:otherwise>&nbsp;▶</c:otherwise>
 </c:choose>	

@@ -49,9 +49,9 @@ public class MemberServiceImpl implements MemberService {
 	 * @return List<Member>
 	 */
 	@Override
-	public List<Member> getMemberList(){
+	public List<Member> getMemberList(String info, String command){
 		
-		List <Member> list = dao.selectAllMember();
+		List <Member> list = dao.selectAllMember(info, command);
 		
 		return list;
 	}

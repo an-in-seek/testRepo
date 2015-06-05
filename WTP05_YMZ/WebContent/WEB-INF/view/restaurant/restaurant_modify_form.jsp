@@ -9,6 +9,18 @@
 <script type="text/javascript">
 var pictureCount = 0;
 
+var nameMessage = "상호명을 입력하세요";
+var nameCheck = true;
+var categoryCheck = true;
+var phoneCheck1 = true;
+var phoneCheck2 = true;
+var phoneCheck3 = true;
+var addressCheck = true;
+var themeCheck = true;
+var locationCheck = true;
+var infoCheck = true;
+var pictureCheck = true;
+
 $(document).ready(function(){
 	// 처음 화면을 띄우면서 테마를 세팅한다
 	if(${fn:contains(requestScope.restaurant.theme,'가족') }){
@@ -47,11 +59,11 @@ $(document).ready(function(){
 		});
 	});
 	
-	// 줄바꿈 변환
+	// 소개 textarea 줄바꿈 변환
 	$("#description").html("${requestScope.restaurant.description }".replace('<br>', '\n'));
 	
 	// 사진첨부버튼 클릭 이벤트
-	$("#pictureName").on("click",function(){
+	$("#addPicture").on("click",function(){
 		if(pictureCount==5){
 			alert("사진은 최대 5장까지 첨부 가능합니다");
 			return false;
@@ -59,7 +71,7 @@ $(document).ready(function(){
 	});
 	
 	// 사진이 추가될때 이벤트
-	$("#pictureName").on("change",function(){
+	$("#addPicture").on("change",function(){
 		var formData = new FormData();
 		formData.append("picture",$(this)[0].files[0]);
 		$.ajax({
@@ -71,7 +83,11 @@ $(document).ready(function(){
 			success:function(fileName){
 				if(fileName){
 					pictureCount++;
-					$("#pictureTemp td:nth-child("+pictureCount+")").html("<img style='width:160px;height:140px' src='${initParam.rootPath}/tempPhoto/"+fileName+"'>");
+					if(pictureCount==1){
+						pictureCheck=true;
+						$("#pictureMessage").text("");
+					}
+					$("#pictureTemp td:nth-child("+pictureCount+")").html("<img style='width:160px;height:140px' src='${initParam.rootPath}/tempPhoto/"+fileName+"'><input type='hidden' name='addedPicture' value='"+fileName+"'");
 				}
 			}
 		});
@@ -92,6 +108,170 @@ $(document).ready(function(){
 		$(this).parent().remove();
 		$("#pictureTemp").append("<td></td>");
 		pictureCount--;
+		if(pictureCount==0){
+			pictureCheck=false;
+		}
+	});
+	
+	///////////////////////////////////////////////////////////////////////
+	
+	$("#restaurantName").on("blur",function(){
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/checkName.do",
+			type:"post",
+			data:"name="+$("#restaurantName").val(),
+			dataType:"text",
+			beforeSend:function(){
+				if($("#restaurantName").val().trim()==""){
+					nameMessage = "상호명을 입력하세요";
+					nameCheck = false;
+					return false;
+				}
+			},
+			success:function(check){
+				if(eval(check)){
+					$("#nameMessage").text("");
+					nameCheck = true;
+				}else{
+					nameMessage = "이미 존재하는 상호명입니다";
+					$("#nameMessage").text(nameMessage);
+					nameCheck = false;
+				}
+			}
+		});
+	});
+	
+	$("#category").on("change",function(){
+		if($(this).val()!="default"){
+			categoryCheck = true;
+			$("#categoryMessage").text("");
+		}else{
+			categoryCheck = false;
+		}
+	});
+	
+	$("#phoneNo1").on("blur",function(){
+		if($(this).val().trim()!=""){
+			phoneCheck1 = true;
+			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
+				$("#phoneMessage").text("");
+			}
+		}else{
+			phoneCheck1 = false;
+		}
+	});
+	$("#phoneNo2").on("blur",function(){
+		if($(this).val().trim()!=""){
+			phoneCheck2 = true;
+			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
+				$("#phoneMessage").text("");
+			}
+		}else{
+			phoneCheck2 = false;
+		}
+	});
+	$("#phoneNo3").on("blur",function(){
+		if($(this).val().trim()!=""){
+			phoneCheck3 = true;
+			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
+				$("#phoneMessage").text("");
+			}
+		}else{
+			phoneCheck3 = false;
+		}
+	});
+	
+	$("#address").on("blur",function(){
+		if($(this).val().trim()!=""){
+			addressCheck = true;
+			$("#addressMessage").text("");
+		}else{
+			addressCheck = false;
+		}
+	});
+	
+	$("input[type=checkbox]").on("click",function(){
+		if($("input[type=checkbox]:checked").length>0){
+			themeCheck = true;
+			$("#themeMessage").text("");
+		}else{
+			themeCheck = false;
+		}
+	});
+	
+	$("#building").on("change",function(){
+		locationCheck = false;
+	});
+	$("#floor").on("change",function(){
+		if($(this).val()!="default"){
+			locationCheck = true;
+			$("#locationMessage").text("");
+		}else{
+			locationCheck = false;
+		}
+	});
+	
+	$("#description").on("blur",function(){
+		if($(this).val().trim()!=""){
+			infoCheck = true;
+			$("#infoMessage").text("");
+		}else{
+			infoCheck = false;
+		}
+	});
+	
+	///////////////////////////////////////////////////////////////////////
+	
+	$("#modifyForm").on("submit",function(){
+		if(!nameCheck){
+			$("#nameMessage").text(nameMessage);
+		}
+		if(!categoryCheck){
+			$("#categoryMessage").text("업종을 선택하세요");
+		}
+		if(!(phoneCheck1&&phoneCheck2&&phoneCheck3)){
+			$("#phoneMessage").text("전화번호를 입력하세요");
+		}
+		if(!addressCheck){
+			$("#addressMessage").text("주소를 입력하세요");
+		}
+		if(!themeCheck){
+			$("#themeMessage").text("테마를 1개 이상 선택하세요");
+		}
+		if(!locationCheck){
+			$("#locationMessage").text("위치를 선택하세요");
+		}
+		if(!infoCheck){
+			$("#infoMessage").text("소개를 입력하세요");
+		}
+		if(!pictureCheck){
+			$("#pictureMessage").text("사진을 한장 이상 등록하세요");
+		}
+		
+		if(!nameCheck||!categoryCheck||!phoneCheck1||!phoneCheck2||!phoneCheck3||!addressCheck||!themeCheck||!locationCheck||!infoCheck||!pictureCheck){
+			return false;
+		}
+		
+		// 메뉴가 있으면 반드시 가격이 있고, 가격이 있으면 반드시 메뉴가 있게하라
+		for(var i=1;i<$("#menu_table tr").length+1;i++){
+			if($("#menu_table tr:nth-child("+i+") input[name=foodName]").val()!=""){
+				if($("#menu_table tr:nth-child("+i+") input[name=foodPrice]").val()==""){
+					$("#menu_table tr:nth-child("+i+") input[name=foodPrice]").focus();
+					return false;
+				}
+			}
+			if($("#menu_table tr:nth-child("+i+") input[name=foodPrice]").val()!=""){
+				if($("#menu_table tr:nth-child("+i+") input[name=foodName]").val()==""){
+					$("#menu_table tr:nth-child("+i+") input[name=foodName]").focus();
+					return false;
+				}
+			}
+		}
+		
+		var phone = $("#phoneNo1").val()+"-"+$("#phoneNo2").val()+"-"+$("#phoneNo3").val();
+		$("#modifyForm").append("<input type='hidden' name='phoneNo' value='"+phone+"'>");
+		
+		$("#description").val($("#description").val().replace(/\n/g, '<br>'));
 	});
 });
 
@@ -219,12 +399,12 @@ $(document).ready(function(){
 <hr>
 
 <p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="pictureName" name="pictureName">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="addPicture" name="addPicture">
 <font color="red"><span id="pictureMessage"></span></font></p>
 <table id="picture_table">
 <tr id="pictureTemp">
 <c:forEach items="${fn:split(requestScope.restaurant.pictureName,',') }" var="picture">
-	<td><img style="width:160px;height:140px;" src="${initParam.rootPath }/uploadPhoto/${picture}"></td>
+	<td><img style="width:160px;height:140px;" src="${initParam.rootPath }/uploadPhoto/${picture}"><input type="hidden" name="addedPicture" value="${picture }"></td>
 </c:forEach>
 <c:forEach begin="${fn:length(fn:split(requestScope.restaurant.pictureName,','))+1 }" end="5">
 <td></td>
