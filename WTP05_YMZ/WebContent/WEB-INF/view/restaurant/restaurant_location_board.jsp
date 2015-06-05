@@ -6,11 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+a{
+	color: black;
+}
+</style>
 <script type="text/javascript">
 $(document).ready(function(){
 	if("${requestScope.isAdmin}"){
 		$("#newRestaurantTd").append("<a href='${initParam.rootPath }/restaurant/login/admin/addNewRestaurantForm.do'><button>맛집등록</button>");
 	}
+	
+	$("a").hover(function(){
+		$(this).css("text-decoration","underline");
+	},function(){
+		$(this).css("text-decoration","none");
+	});
 	
 	$("#buildingSelect").on("change",function(){
 		$("#floorSelect").val("전체");
