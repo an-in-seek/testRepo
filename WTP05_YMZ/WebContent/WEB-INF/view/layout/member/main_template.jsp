@@ -56,8 +56,8 @@ nav.main_template{
 	background-color: lightsteelblue;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	padding:10px;
-	height:150px;
-	width:240px;
+	height:160px;
+	width:260px;
 	font-weight:bold;
 	text-align:center;
 	float:right;  /*오른쪽으로 띄움 */

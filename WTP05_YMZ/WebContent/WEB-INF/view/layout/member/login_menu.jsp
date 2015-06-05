@@ -8,49 +8,81 @@
 .cu {font-family: cursive;}
 .fa {font-family: fantasy;}
 .mo {font-family: monospace;}
+.int {position: relative;
+  z-index: 10;
+  width: 120px;
+  height: 21px;
+  padding: 3px 0 2px 5px;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  line-height: 16px;
+  font-size: 12px;
+  color: #4a4a4a;
+  -webkit-appearance: none;
+  zoom: 1;}
+  .btn input {
+  width: 80px;
+  height: 30px;
+  border: 0;
+  border-radius: 0;
+  background: darkslateblue;
+  font-size: 12px;
+  line-height: 55px\9;
+  color:white; 
+  -webkit-appearance: none;
+  cursor: pointer;
+}
 </style>
   
 <c:if test="${sessionScope.login_info!=null }">
 	<table align="center">
-		<tr>
-			<td colspan="2">
-			<font size="5" color="blue">${sessionScope.login_info.nickname }</font><font size="2">님 환영합니다.</font>
+		<tr align="center" height="30px" >
+			<td></td>
+		</tr>
+		<tr align="center" >
+			<td>
+			<font size="6" color="blue">${sessionScope.login_info.nickname }</font><font size="2">님 환영합니다.</font>
 			</td>
 		</tr>
-		<tr height="50">
-			<td>
-				<a href="${initParam.rootPath }/member/mypage.do"><font size="1">마이페이지</font></a>
+	</table>
+	
+	<table align="center"  style="border:solid 1px #050099; margin-top:4%" width="220px">
+		<tr align="center" height="50px" >
+			<td class="btn">
+			<input type="button"  value="마이페이지" style="border:solid 1px #050099; " 
+					OnClick="window.location='${initParam.rootPath }/member/mypage.do'">
 			</td>
-			<td>
-				<a href="${initParam.rootPath }/member/login/logout.do"><font size="1">로그아웃</font></a>
+			<td class="btn">
+				<input type="button"  value="로그아웃" style="border:solid 1px #050099; " 
+					OnClick="window.location='${initParam.rootPath }/member/login/logout.do'">
 			</td>
 		</tr>
-		</table>
+	</table>
+	
 </c:if>
 <c:choose>
 	<c:when test="${sessionScope.login_info==null }">
-		<form action="${initParam.rootPath }/member/login.do" method="post">
+		<form action="${initParam.rootPath }/member/login.do" method="post" >
 		
 			<table align="center"  style="border:solid 1px #050099; margin-top:4%">
 				<tr align="center" >
 					<td><font size="3">아이디</font></td>
-					<td><input type="text" name="id" size="16px" placeholder="ID"></td>
+					<td><input type="text" name="id"  placeholder="ID" class="int"></td>
 				</tr>
 				<tr align="center" >
 					<td><font size="3">비밀번호</font></td>
-					<td><input type="password" name="password" size="16px" placeholder="Password"></td>
+					<td><input type="password" name="password"  placeholder="Password" class="int"></td>
 				</tr>
 			</table>
 			
 			<table align="center" style="margin-top:1%">
 				<tr align="center" >
-					<td><input type="submit"  value="로그인" style="background-color:darkslateblue; color:white; font-size:16px; border:solid 1px #050099; "></td>
-					<td><input type="button"  value="회원가입" style="background-color:darkslateblue; color:white; font-size:16px; border:solid 1px #050099; " 
+					<td class="btn"><input type="submit"  value="로그인" style="font-size:16px; border:solid 1px #050099; "></td>
+					<td class="btn"><input type="button"  value="회원가입" style="font-size:16px; border:solid 1px #050099; " 
 					OnClick="window.location='${initParam.rootPath }/member/joinForm.do'"></td>
 				</tr>
 			</table>
-			
-			<table align="center"  border="1" style="border:solid 1px #050099; margin-top:2%"></table>
 			
 			<table align="center" height="50" style="margin-top:1%" class="mo">
 				<tr>
