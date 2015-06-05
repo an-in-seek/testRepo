@@ -22,7 +22,7 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO{
 		return session.insert(namespace+"insertRestaurantReply", restaurantReply);
 	}
 
-	//조회하기
+	//수정하기
 	@Override
 	public int updateRestaurantReply(RestaurantReply restaurantReply) {
 		
@@ -46,9 +46,9 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO{
 	
 	//평가하기
 	@Override
-	public int gardeRestaurantReplyByReplyNo(int number) {
+	public int gradeRestaurantReplyByReplyNo(int number) {
 		
-		return session.selectOne(namespace+"gardeRestaurantReplyByReplyNo",number);
+		return session.selectOne(namespace+"gradeRestaurantReplyByReplyNo",number);
 	}
 
 	//댓글 번호로 댓글찾기
@@ -70,5 +70,25 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO{
 		return session.update(namespace+"updateReplyCount",restaurantNo);
 		
 	}
+
 	
+
+	@Override
+	public int selectScore(int restaurantNo) {
+		return session.selectOne(namespace+"selectScore", restaurantNo);
+	}
+
+	@Override
+	public int selectReplyCount(int restaurantNo) {
+		
+		return session.selectOne(namespace+"selectReplyCount", restaurantNo);
+	}
+
+	@Override
+	public double updateScore(double score, int restaurantNo) {
+	
+		return session.selectOne(namespace+"updateScore", score);
+	}
+	
+
 }
