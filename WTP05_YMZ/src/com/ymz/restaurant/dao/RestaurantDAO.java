@@ -25,4 +25,6 @@ public interface RestaurantDAO {
 	public List<Restaurant> selectRestaurantsPaging(String buildingName, String floor, String align, int currentPage, String searchWord);
 	public int selectRestaurantCount(String buildingName, String floor, String searchWord);
 	public int deleteRestaurant(int restaurantNo);
+	public String selectBuildingNameByLocationNo(int locationNo);
+	public String selectFloorByLocationNo(int locationNo);
 }

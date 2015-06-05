@@ -8,7 +8,7 @@
 <script type="text/javascript">
 $(document).ready(function(){	
 	if("${requestScope.isAdmin}"){
-		$("#modifyAndDelete").append("<button id='btn_modify'>수정</button> <button id='btn_delete'>삭제</button>");
+		$("#modifyAndDelete").append("<a href='${initParam.rootPath}/restaurant/login/admin/modifyRestaurantForm.do?restaurantNo=${requestScope.restaurant.restaurantNo}'><button id='btn_modify'>수정</button></a> <button id='btn_delete'>삭제</button>");
 		
 		$("#btn_delete").on("click",function(){
 			if(confirm("삭제하시겠습니까?")){
