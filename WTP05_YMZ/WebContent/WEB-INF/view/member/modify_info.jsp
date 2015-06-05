@@ -25,7 +25,8 @@ function openDaumPostcode(){
 	}).open();
 }
 $(document).ready(function(){
-var nickChe = null;
+var check = false;
+var nickChe = false;
 	var emailNameEx = $("#email").val();
 	var i =emailNameEx.indexOf("@");
 	var e = emailNameEx.length;
@@ -38,6 +39,7 @@ var nickChe = null;
 	 * 닉네임 중복확인
 	 */
 	$("#exNick").on("click",function(){
+		check = true;
 		var nickname = $("#nickname").val();
 		$.ajax({
 			url:"${initParam.rootPath}/member/nickDuplicateCheck.do",
@@ -72,11 +74,16 @@ var nickChe = null;
 			return false;
 		}else{
 			
-		if(!nickChe){
-			alert("중복된 닉네임입니다.");
+		if(!check){
+			alert("중복체크를 해주십시오");
+			return false
+		}
+		if($("#nickname").val()==""){
+			alert("닉네임을 입력하세요");
 			$("#nickname").focus();
 			return false;
-		}	
+		}
+		
 		if(!$("#nickname").val()){
 			alert("닉네임을 입력하세요");
 			$("#nickname").focus();
@@ -94,11 +101,18 @@ var nickChe = null;
 			return false;
 		}
 		if(!$("#emailAddress").val()){
-			alert("이메일을 입력하세요");
+			alert("전화번호를 입력하세요");
 			$("#emailAddress").focus();
 			return false;
 		}
+		
+		if(!$("#phoneNo").val()){
+			alert("이메일을 입력하세요");
+			$("#phoneNo").focus();
+			return false;
 		}
+		}
+		alert("회원정보가 수정되었습니다.");
 	});
 })
 
@@ -119,7 +133,7 @@ var nickChe = null;
 		<tr>
 			<td>닉네임</td>
 			<td>
-				<input type="text" id="nickname" name="nickname" value="${sessionScope.login_info.nickname }" id="nickname">
+				<input type="text" id="nickname" name="nickname" value="${sessionScope.login_info.nickname }">
 				<input type="button" id="exNick" name="exNick" value="중복체크">
 				<span id="dupMessageLayer"> </span><span class="errorMessage"></span>
 			</td>
