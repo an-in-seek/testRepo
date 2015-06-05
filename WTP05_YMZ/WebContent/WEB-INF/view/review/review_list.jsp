@@ -260,7 +260,8 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<!-- 이전 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.previousPageGroup }">
-			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.startPageOfPageGroup-1}&sortType=${requestScope.sortType}">◀</a>
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.startPageOfPageGroup-1}&sortType=${requestScope.sortType}
+										&searchType=${requestScope.searchType}&query=${requestScope.query}">◀</a>
 		</c:when>
 		<c:otherwise>◀</c:otherwise>
 	</c:choose>
@@ -272,7 +273,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 			</c:when>
 			<c:otherwise>
 				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}&sortType=${requestScope.sortType}
-							&searchType=${requestScope.searchType}&query=${requestScope.query}">${pageNum} </a>
+										&searchType=${requestScope.searchType}&query=${requestScope.query}">${pageNum} </a>
 			</c:otherwise>
 		</c:choose>
 	&nbsp;&nbsp;
@@ -280,13 +281,14 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<!-- 다음 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.nextPageGroup }">
-			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.endPageOfPageGroup+1}&sortType=${requestScope.sortType}">▶</a>
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.endPageOfPageGroup+1}&sortType=${requestScope.sortType}
+										&searchType=${requestScope.searchType}&query=${requestScope.query}">▶</a>
 		</c:when>
 		<c:otherwise>▶</c:otherwise>
 	</c:choose>
 	<br>
 
-	<!-- 검색 기능 (아직안함) -->
+	<!-- 검색 기능 & 글쓰기 -->
 	<table>
 		<tr>
 			<td>

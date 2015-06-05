@@ -129,7 +129,11 @@ public class ReviewDAOImpl implements ReviewDAO{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchType", searchType);  
 		map.put("query", query);  
-		return session.selectOne(namespace+"selectTotalReviewCount");
+		if(searchType.equals("")&&query.equals("")){
+			return session.selectOne(namespace+"selectTotalReviewCount");
+		}
+		return session.selectOne(namespace+"selectSearchReviewCount", map);
+		
 	}
 
 	

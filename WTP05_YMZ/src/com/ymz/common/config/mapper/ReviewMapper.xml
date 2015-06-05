@@ -146,12 +146,24 @@
 	<!-- 전체 게시물 수  -->
 	<select id="selectTotalReviewCount" resultType="_int">
 		select count(review_no) from review
+
+	
 	</select>
 	
 	<!-- 검색된 전체 게시물 수  -->
-	<select id="selectSearchReviewCount" resultType="_int">
+	<select id="selectSearchReviewCount" parameterType="map" resultType="_int">
 		select count(review_no) from review
-		
+		<choose>
+						<when test="searchType=='title'">
+							where title like '%'||#{query}||'%'
+						</when>
+						<when test="searchType=='id'">
+							where member_id like '%'||#{query}||'%'
+						</when>
+						<when test="searchType=='nickname'">
+							where nickname like '%'||#{query}||'%'
+						</when>
+		</choose>
 	</select>
 	
 	<!-- 오늘 인기글(조회순) -->

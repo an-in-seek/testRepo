@@ -169,7 +169,31 @@ insert into review(review_no, title, content, hits, recommend, reg_date, member_
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','39','644','1972-04-04 11:00:10','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','29','744','1972-03-04 11:00:10','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','19','643','1972-02-04 11:00:10','user01');
-
+--
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','69','344','1972-07-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','59','444','1972-06-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','49','544','1972-05-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','39','644','1972-04-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','29','744','1972-03-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','19','643','1972-02-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','69','344','1972-07-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','59','444','1972-06-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','49','544','1972-05-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','39','644','1972-04-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','29','744','1972-03-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','19','643','1972-02-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','69','344','1972-07-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','59','444','1972-06-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','49','544','1972-05-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','39','644','1972-04-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','29','744','1972-03-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','19','643','1972-02-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','69','344','1972-07-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','59','444','1972-06-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','49','544','1972-05-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','39','644','1972-04-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','29','744','1972-03-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','19','643','1972-02-04 11:00:10','user01');
 
 
 insert into review_reply values(review_reply_no_seq.nextval, '20150530111220', '노맛', 'user01', 1);

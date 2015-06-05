@@ -47,7 +47,7 @@ public class ReviewController {
 	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
 		@RequestMapping("reviewList.do")
 		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo, 
-															@RequestParam (defaultValue="") String searchType, String query){
+													@RequestParam (defaultValue="") String searchType,@RequestParam (defaultValue="") String query){
 			System.out.println("정렬 타입 : " + sortType);
 			System.out.println("검색 타입 : " + searchType);
 			System.out.println("검색어 : " + query);
@@ -61,9 +61,6 @@ public class ReviewController {
 	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
 		@RequestMapping("searchReview.do")
 		public String searchReview(@RequestParam (defaultValue="1") int pageNo, @RequestParam String searchType, @RequestParam String query){
-			System.out.println("검색 타입 : " + searchType);
-			System.out.println("검색어 : " + query);
-			
 			return "/review/reviewList.do";
 		}
 		
