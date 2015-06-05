@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,6 +12,16 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	
+	// 오늘 날짜 뽑아오기
+	var nowdate = new Date();
+	var year = nowdate.getFullYear();
+	var month = nowdate.getMonth() + 1;
+	var day = nowdate.getDate()
+	date_str = year + "-" + (month<=9? '0'+month:month) + "-" + (day<=9? '0'+day:day);
+	alert(date_str);
+ 
+	
 	var txt = "";
 	// 검색 버튼 이벤트
 	$("#searchBtn").on("click", function(){
@@ -18,10 +30,28 @@ $(document).ready(function(){
 	});
 	
 	
-	// 정렬방식 셀렉터 이벤트
+	// 검색 방식 셀렉터 이벤트
 	$("#searchSort").on("change", function(){
 		txt = $(this).val(); // $(select객체).val() - 선택된 option의 value가 리턴
-		alert("정렬방식 : "+txt);
+		alert("검색방식 : "+txt);
+	});
+	
+	// 조회수 정렬
+	$("#latestSort").on("click", function(){
+		var txt = "latest";
+		document.location.href="${initParam.rootPath }/review/reviewList.do?sortType="+txt;
+	});
+	
+	// 조회수 정렬
+	$("#hitsSort").on("click", function(){
+		var txt = "hits";
+		document.location.href="${initParam.rootPath }/review/reviewList.do?sortType="+txt;
+	});
+	
+	// 추천수 정렬
+	$("#recommendSort").on("click", function(){
+		var txt = "recommend";
+		document.location.href="${initParam.rootPath }/review/reviewList.do?sortType="+txt;
 	});
 	
 	// 리뷰 제목 클릭 이벤트
@@ -31,7 +61,6 @@ $(document).ready(function(){
 		 $(this).css("background-color", "linen");
 	});
 	
-	// 등록일 글자수 자르기
 	
 });
 </script>
@@ -44,6 +73,15 @@ table#listTB thead tr{
 	text-align: center;
 }
 table#listTB tbody tr td#title{
+	cursor: pointer;
+}
+table#listTB thead tr td#hitsSort{
+	cursor: pointer;
+}
+table#listTB thead tr td#recommendSort{
+	cursor: pointer;
+}
+table#listTB thead tr td#latestSort{
 	cursor: pointer;
 }
 table#listTB tbody tr{
@@ -89,15 +127,16 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 <section>
 	<div align="center">
 	<h2>맛집 리뷰</h2>
+
 	
-		<!-- 인기글 테이블 -->
+	<!-- 인기글 테이블 -->
 	<div id="famousText" align="center">
 	
 		<table id="total">
 			<tr>
 				<td>
 					<!-- 오늘 인기글 -->
-					<table id="bestTodayTB" style="width:400px">
+					<table id="bestTodayTB" style="width:500px">
 						<thead>
 							<tr>
 								<td colspan="2" align="center">
@@ -107,21 +146,29 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 						</thead>
 						<tbody>
 							<c:forEach items="${requestScope.todayBest }" var="review" varStatus="status">
-							<tr>
-								<td align="center">${status.index+1}.</td>
-								<td align="left" id="title">
-									<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-									${review.title}
-									</a>
-								</td>
-							</tr> 
+								<tr>
+									<td align="center">${status.index+1}위</td>
+									<td align="left" id="title">
+										<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+										${review.title}
+										</a>
+									</td>
+								</tr> 
+							</c:forEach>
+							<c:forEach begin="${fn:length(requestScope.todayBest)}" end="4"> <!-- 5개 이하일 경우 빈공간을 만들어준다. -->
+								<tr>
+									<td align="center">&nbsp</td>
+									<td align="left" id="title">
+									&nbsp
+									</td>
+								</tr> 
 							</c:forEach>
 						</tbody>
 					</table>
 				</td>
 				<td>
 				<!-- 이번달 인기글 -->
-				<table id="bestMonthTB" style="width:400px">
+				<table id="bestMonthTB" style="width:500px">
 					<thead>
 						<tr>
 							<td colspan="2" align="center">
@@ -132,13 +179,21 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 					<tbody>
 						<c:forEach items="${requestScope.monthBest }" var="review" varStatus="status">
 						<tr>
-							<td align="center">${status.index+1}.</td>
+							<td align="center">${status.index+1}위</td>
 							<td align="left" id="title">
 							<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
 							${review.title}
 							</a>
 							</td>
 						</tr> 
+						</c:forEach>
+						<c:forEach begin="${fn:length(requestScope.monthBest)}" end="4">
+								<tr>
+									<td align="center">&nbsp</td>
+									<td align="left" id="title">
+									&nbsp
+									</td>
+								</tr> 
 						</c:forEach>
 					</tbody>
 				</table>
@@ -147,6 +202,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 		</table>
 	</div>
 	<br>
+	
 	<!-- 테이블 시작 -->
 	<table id="listTB" style="width:1000px">
 		<thead>
@@ -154,9 +210,9 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 				<td style="width:50px">번호</td>
 				<td style="width:350px">제목</td>
 				<td style="width:150px">작성자</td>
-				<td style="width:100px">작성일</td>
-				<td style="width:50px">추천</td>
-				<td style="width:50px">조회</td>
+				<td id="latestSort" style="width:100px">작성일<font size="1" color="red">▼</font></td>
+				<td id="recommendSort" style="width:50px">추천<font size="1" color="red">▼</font></td>
+				<td id="hitsSort" style="width:50px">조회<font size="1" color="red">▼</font></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -172,12 +228,12 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 					</a>
 					</td>
 					<td align="center">${review.memberId}</td>
-					<td id="regDate" align="center">${review.regDate}</td>
+					<td id="regDate" align="center">
+					${review.regDate.substring(0,10)}</td>
 					<td align="center" style="width:50px">${review.recommend}</td>
 					<td align="center">${review.hits}</td>
 				</tr> 
 			</c:forEach>
-			<!-- 수정해야행 끝 -->
 		</tbody>
 	</table>
 	<br>
@@ -189,7 +245,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<!-- 이전 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.previousPageGroup }">
-			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.startPageOfPageGroup-1}">◀</a>
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.startPageOfPageGroup-1}&sortType=${requestScope.sortType}">◀</a>
 		</c:when>
 		<c:otherwise>◀</c:otherwise>
 	</c:choose>
@@ -200,7 +256,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 				<font color="red"><b>${pageNum}</b></font>
 			</c:when>
 			<c:otherwise>
-				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}">${pageNum} </a>
+				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}&sortType=${requestScope.sortType}">${pageNum} </a>
 			</c:otherwise>
 		</c:choose>
 	&nbsp;&nbsp;
@@ -208,7 +264,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<!-- 다음 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.nextPageGroup }">
-			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.endPageOfPageGroup+1}">▶</a>
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.endPageOfPageGroup+1}&sortType=${requestScope.sortType}">▶</a>
 		</c:when>
 		<c:otherwise>▶</c:otherwise>
 	</c:choose>

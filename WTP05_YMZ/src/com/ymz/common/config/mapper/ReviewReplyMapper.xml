@@ -29,7 +29,7 @@
 										  content,
 										  member_id,
 										  review_no)
-		values (#{replyNo}, to_char(sysdate, 'yyyy-mm-dd hh:MM:ss'), #{content}, #{memberId}, #{reviewNo})
+		values (#{replyNo}, to_char(sysdate, 'yyyy-mm-dd HH24:MI:SS'), #{content, jdbcType=VARCHAR}, #{memberId}, #{reviewNo})
 	</insert>
 	
 	<!-- 수정 -->

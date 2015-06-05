@@ -33,6 +33,9 @@ public interface ReviewService {
 	// 리뷰 추천 등록 (추천테이블)
 	public abstract void inputRecommend(Map rmap);
 
+	// 리뷰 정렬 관련
+	public abstract Map<String, Object> ReviewSortListPaging(int pageNo, String type);
+
 
 	
 	

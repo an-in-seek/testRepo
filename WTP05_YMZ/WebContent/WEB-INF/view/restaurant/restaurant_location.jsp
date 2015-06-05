@@ -4,11 +4,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+a{
+	color: black;
+}
+</style>
+
 <script type="text/javascript">
 var selectedBuildingName;
 
 function restaurantsTableSetting(txt){
 	var floor_gaesu=0;
+	var a_count=0;
 	var code="<tr><td id='all' style='background-color:lightgray;height:50px;border-style:hidden;' align='center' colspan='5'><b>"+selectedBuildingName+" 맛집 전체보기</b></td></tr><tr><td colspan='5' style='border-left-style:hidden;border-right-style:hidden;'></td></tr>";
 	for(var i=0;i<txt.length;i++){
 		if(i%2==0){
@@ -24,7 +32,7 @@ function restaurantsTableSetting(txt){
 					code=code+"</tr><tr style='height:40px;'>"
 					k=0;
 				}
-				code=code+"<td style='border-right-style:hidden;'>"+temp[j]+"</td>";
+				code=code+"<td style='border-right-style:hidden;'><a id='count"+(++a_count)+"' href='${initParam.rootPath}/restaurant/restaurantViewByRestaurantName.do?restaurantName="+temp[j]+"'>"+temp[j]+"</a></td>";
 				if(j==temp.length-2 && k<4){
 					for(var l=k;l<3;l++){
 						code=code+"<td style='border-right-style:hidden;'></td>";
@@ -62,6 +70,14 @@ function restaurantsTableSetting(txt){
 			$("#tableForm").append("<input type='hidden' name='buildingName' value='"+selectedBuildingName+"'>");
 			$("#tableForm").append("<input type='hidden' name='floor' value='"+$(this).text()+"'>");
 			$("#tableForm").submit();
+		});
+	}
+	
+	for(var i=1;i<a_count+1;i++){
+		$("#count"+i).hover(function(){
+			$(this).css("text-decoration","underline");
+		},function(){
+			$(this).css("text-decoration","none");
 		});
 	}
 };

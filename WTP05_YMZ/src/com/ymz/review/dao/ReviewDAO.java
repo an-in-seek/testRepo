@@ -45,5 +45,8 @@ public interface ReviewDAO {
 	// 이번달 최고 조회수글 가져오기
 	public abstract List<Review> selectMonthBestHits();
 
+	// 정렬
+	public abstract List<Review> selectSortReviewPaging(int pageNo, String type);
+
 	
 }

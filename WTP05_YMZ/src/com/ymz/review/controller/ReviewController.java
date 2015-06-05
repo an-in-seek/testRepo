@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,7 +37,7 @@ public class ReviewController {
 	
 	//리뷰 등록
 	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
-	public String registerReview(@ModelAttribute Review review, Errors errors, HttpSession session, ModelMap map) throws Exception{
+	public String registerReview(@ModelAttribute Review review, Errors errors, HttpSession session) throws Exception{
 		if(errors.hasErrors()){
 			return "review/review_write_form.tiles";
 		}
@@ -46,24 +47,33 @@ public class ReviewController {
 		return "redirect:/review/reviewList.do"; 
 	}
 
-	
 	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
-	@RequestMapping("reviewList.do")
-	public ModelAndView reviewList(@RequestParam (defaultValue="1") int pageNo){
-		Map<String, Object> map = service.getReviewListPaging(pageNo);
-		return new ModelAndView("review/review_list.tiles", map);
-	}
+		@RequestMapping("reviewList.do")
+		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo){
+			System.out.println("정렬 타입 : " + sortType);
+			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType);
+			/////////////////////////////////
+			//Map<String, Object> map = service.getReviewListPaging(pageNo);
+			return new ModelAndView("review/review_list.tiles", map);
+		}
+	
+	
+//	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
+//	@RequestMapping("reviewList.do")
+//	public ModelAndView reviewList(@RequestParam (defaultValue="1") int pageNo){
+//		Map<String, Object> map = service.getReviewListPaging(pageNo);
+//		return new ModelAndView("review/review_list.tiles", map);
+//	}
 	
 	//게시물 번호로 정보조회
 	@RequestMapping("reviewView.do")
-	public ModelAndView ReviewView(@RequestParam int reviewNo, @RequestParam int pageNo){
-		Map<String, Object> map =replyService.getReplyList(reviewNo); //DB로 reviewNo을 보내서 해당댓글들 가꼬오기
-		int pageNum = pageNo;
-		Review review = service.getReviewByNo(reviewNo);
-		map.put("pageNo", pageNum);
-		map.put("review", review);
+	public ModelAndView ReviewView(@ModelAttribute Review review){ //@RequestParam int reviewNo, @RequestParam int pageNo
+		Map<String, Object> map =replyService.getReplyList(review.getReviewNo()); //DB로 reviewNo을 보내서 해당댓글들 가꼬오기
 		
-//		replyService.getReplyList(reviewNo); //DB로 reviewNo을 보내서 해당댓글들 가꼬오기
+		Review rev = service.getReviewByNo(review.getReviewNo());
+		map.put("pageNo", review.getPageNo());
+		map.put("review", rev);
+		
 		return new ModelAndView("review/review_view.tiles", map);
 	}
 	
@@ -77,30 +87,22 @@ public class ReviewController {
 	
 	//리뷰 수정(로그인시 가능)
 	@RequestMapping(value="login/modifyReview.do")
-	public String modifyReview(@ModelAttribute Review review, @RequestParam int reviewNo, Errors errors, HttpSession session){
+	public String modifyReview(@ModelAttribute Review review, Errors errors, HttpSession session){
 		Member member = (Member)session.getAttribute("login_info");
 		String userid = member.getId();
-		System.out.println("수정할 글번호 : "+ reviewNo);
-		System.out.println("글쓴이 아이디: " + userid);
 		review.setMemberId(userid);
-		review.setReviewNo(reviewNo);
-		service.modifyReview(review);
-		System.out.println("글번호 "+reviewNo+" 수정 완료!!");
+		service.modifyReview(review); // 리뷰 수정
 		return "redirect:/review/reviewList.do";
 	}
 	
 	
 	//리뷰 삭제(로그인시 가능)
 	@RequestMapping("login/removeReview.do")
-	public String removeReview(@ModelAttribute Review review, @RequestParam int reviewNo, ModelMap map, HttpSession session){
+	public String removeReview(@ModelAttribute Review review, Errors errors, HttpSession session){
 		Member member = (Member)session.getAttribute("login_info");
 		String userid = member.getId();
-		System.out.println("삭제할 글번호 : "+ reviewNo);
-		System.out.println("글쓴이 아이디: " + userid);
 		review.setMemberId(userid);
-		review.setReviewNo(reviewNo);
 		service.removeReview(review);
-		System.out.println("글번호 "+reviewNo+" 삭제 완료!!");
 		return "redirect:/review/reviewList.do";
 	}
 	
@@ -116,8 +118,6 @@ public class ReviewController {
 		Member member = (Member)session.getAttribute("login_info"); // 회원 정보 갖고오기
 		int result = 0;
 		Map<String, Object> rmap = new HashMap<String, Object>();
-		System.out.println("글 번호 : " + reviewNo);
-		System.out.println("회원 아이디 : " + member.getId());
 		
 		rmap.put("number", reviewNo);
 		rmap.put("id", member.getId());
@@ -155,53 +155,35 @@ public class ReviewController {
 	
 	//댓글 등록
 		@RequestMapping(value="login/register.do", method=RequestMethod.POST)
-		public String registerReviewReply(@ModelAttribute ReviewReply reply, @RequestParam int pageNo, Errors errors, HttpSession session, HttpServletRequest request) throws Exception{
+		public String registerReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session) throws Exception{
 			if(errors.hasErrors()){
 				System.out.println("에러 있엉");
 				return "review/review_view.tiles";
 			}
 			Member member = (Member)session.getAttribute("login_info");
-			System.out.println("댓글 글쓴이 : " + member.getId());
-			System.out.println("댓글내용: " + reply.getContent());
-			System.out.println("글번호 : " + reply.getReviewNo());
 			reply.setMemberId(member.getId());
-			//reply.setReviewNo(reviewNo);
 			replyService.registerReviewReply(reply);
-			int reviewNo = reply.getReviewNo();
-			int pNo = pageNo;
-			return "redirect:/review/reviewView.do?reviewNo="+reviewNo+"&pageNo="+pNo;
+			return "redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo();
 		}
 		
 		//댓글 삭제
 		@RequestMapping(value="login/removeReviewReply.do")
-		public String removeReviewReply(@ModelAttribute ReviewReply reply, @RequestParam int replyNo, @RequestParam int pageNo, 
-																@RequestParam int reviewNo, HttpSession session){
+		public String removeReviewReply(@ModelAttribute ReviewReply reply, HttpSession session){
 			Member member = (Member)session.getAttribute("login_info");
 			String userId = member.getId();
-			System.out.println("삭제할 댓글번호 : "+ replyNo);
-			System.out.println("글쓴이 아이디: " + userId);
 			reply.setMemberId(userId);
-			reply.setReplyNo(replyNo);
 			replyService.removeReviewReply(reply);
-			int pNo = pageNo;
-			System.out.println("리뷰 번호 : "+ reviewNo);
-			return "redirect:/review/reviewView.do?reviewNo="+reviewNo+"&pageNo="+pNo;
+			return "redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo();
 		}
 
 		//댓글 수정
 		@RequestMapping(value="login/modifyReviewReply.do", method=RequestMethod.POST)
-		public String modifyReviewReply(@ModelAttribute ReviewReply reply, @RequestParam int replyNo, int pageNo, Errors errors, HttpSession session) throws Exception{
+		public String modifyReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session) throws Exception{
 			Member member = (Member)session.getAttribute("login_info");
 			String userId = member.getId();
-			System.out.println("수정할 댓글번호 : " + replyNo);
-			System.out.println("글쓴이 아이디 : " + userId);
 			reply.setMemberId(userId);
-			reply.setReplyNo(replyNo);
 			replyService.modifyReviewReply(reply);
-			int reviewNo = reply.getReviewNo();
-			int pNo = pageNo;
-			System.out.println("글번호 : " + replyNo + "수정완료 ! ");
-			return "redirect:/review/reviewView.do?reviewNo="+reviewNo+"&pageNo="+pNo;
+			return "redirect:/review/reviewView.do?reviewNo=";
 		}
 		
 		
@@ -210,6 +192,14 @@ public class ReviewController {
 	public String searchReview(    ){
 		
 		return "/review/reviewList.do";
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 정렬
+	@RequestMapping("sortReview.do")
+	public ModelAndView sortReaview(@RequestParam String sortType, @RequestParam(defaultValue="1") int pageNo, HttpSession session){
+		System.out.println("정렬 타입 : " + sortType);
+		Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType);
+		return new ModelAndView("review/review_list.tiles", map);
 	}
 	
 }
