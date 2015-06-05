@@ -21,6 +21,15 @@ function removeReply(reviewNo, rnum, pNo){
 	}
 }
 
+function modifyReply(){
+	var isDel = confirm("정말로 수정하시겠습니까?");
+	if (isDel) {
+	} else {
+		return;
+	}
+}
+
+
 
 $(document).ready(function(){
 	var reviewNumber = ${requestScope.review.reviewNo};
@@ -84,10 +93,6 @@ $(document).ready(function(){
 	})
 
 
-	//댓글 수정 버튼
-	$("#reply_modifyBtn").on("click", function(){
-		
-	}); 
 	
 	$("#reply_reportBtn").on("click", function(){
 		alert("로그인부터 하세욥!!!");
@@ -208,7 +213,8 @@ ${requestScope.review.content }<br>
 					<td>${reply.content}</td>
 					<td>${reply.regDate}</td>
 					<td>
-						<button id="reply_modifyBtn" >수정</button>
+						<input type="button" id="reply_modifyBtn${reply.replyNo}"
+												onclick="modifyReply();" value="수정">
 						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
 													onclick="removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});"  value="삭제" >
 						<button id="reply_reportBtn">신고</button>

@@ -32,7 +32,7 @@
 			</li>
 			
 			<c:if test="${sessionScope.login_info.grade=='master'}">
-				<li><a href="${initParam.rootPath }/member/memberListPaging.do" class="menu">회원관리</a></li>
+				<li><a href="${initParam.rootPath }/member/login/memberListPaging.do" class="menu">회원관리</a></li>
 			</c:if>
 		</ul>
 	</div>
