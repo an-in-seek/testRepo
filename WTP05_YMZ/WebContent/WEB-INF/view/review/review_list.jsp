@@ -14,12 +14,12 @@ $(document).ready(function(){
 	
 	
 	// 오늘 날짜 뽑아오기
-	var nowdate = new Date();
-	var year = nowdate.getFullYear();
-	var month = nowdate.getMonth() + 1;
-	var day = nowdate.getDate()
-	date_str = year + "-" + (month<=9? '0'+month:month) + "-" + (day<=9? '0'+day:day);
-	alert(date_str);
+//	var nowdate = new Date();
+//	var year = nowdate.getFullYear();
+//	var month = nowdate.getMonth() + 1;
+//	var day = nowdate.getDate()
+//	date_str = year + "-" + (month<=9? '0'+month:month) + "-" + (day<=9? '0'+day:day);
+//	alert(date_str);
  
 	
 	var txt = "";

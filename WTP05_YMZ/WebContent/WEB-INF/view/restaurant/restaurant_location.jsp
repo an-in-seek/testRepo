@@ -10,7 +10,6 @@ a{
 	color: black;
 }
 </style>
-
 <script type="text/javascript">
 var selectedBuildingName;
 
@@ -146,7 +145,7 @@ $(document).ready(function(){
 			success:restaurantsTableSetting
 		});
 	});
-	
+   
 	$("#hipex-a").hover(function(){
 		$("#pangyo-map").css("background-image","url('${initParam.rootPath }/uploadPhoto/hipex-a.png')");
 	},function(){
