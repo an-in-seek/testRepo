@@ -46,15 +46,27 @@ public class ReviewController {
 
 	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
 		@RequestMapping("reviewList.do")
-		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo){
+		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo, 
+															@RequestParam (defaultValue="") String searchType, String query){
 			System.out.println("정렬 타입 : " + sortType);
-			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType);
+			System.out.println("검색 타입 : " + searchType);
+			System.out.println("검색어 : " + query);
+			
+			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType, searchType, query);
 			/////////////////////////////////
 			//Map<String, Object> map = service.getReviewListPaging(pageNo);
 			return new ModelAndView("review/review_list.tiles", map);
 		}
 	
-	
+	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
+		@RequestMapping("searchReview.do")
+		public String searchReview(@RequestParam (defaultValue="1") int pageNo, @RequestParam String searchType, @RequestParam String query){
+			System.out.println("검색 타입 : " + searchType);
+			System.out.println("검색어 : " + query);
+			
+			return "/review/reviewList.do";
+		}
+		
 //	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
 //	@RequestMapping("reviewList.do")
 //	public ModelAndView reviewList(@RequestParam (defaultValue="1") int pageNo){
@@ -173,7 +185,7 @@ public class ReviewController {
 			return "redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo();
 		}
 
-		//댓글 수정(글옮기기) 필요없음
+		/////////////////////////////////////////////////////////////////////////////////////////댓글 수정(글옮기기) 필요없음
 		@RequestMapping(value="login/modifyReviewReplyform.do")
 		public ModelAndView modifyReviewReplyform(@ModelAttribute ReviewReply reply, ModelMap map){
 			reply = replyService.getReviewReplyContent(reply.getReplyNo());
@@ -197,21 +209,5 @@ public class ReviewController {
 			map.addAttribute("reply", reply);
 			return new ModelAndView("redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo() + "&pageNo="+reply.getPageNo(), map);
 		}
-		
-		
-	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
-	
-	public String searchReview(    ){
-		
-		return "/review/reviewList.do";
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 정렬
-	@RequestMapping("sortReview.do")
-	public ModelAndView sortReaview(@RequestParam String sortType, @RequestParam(defaultValue="1") int pageNo, HttpSession session){
-		System.out.println("정렬 타입 : " + sortType);
-		Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType);
-		return new ModelAndView("review/review_list.tiles", map);
-	}
-	
+
 }

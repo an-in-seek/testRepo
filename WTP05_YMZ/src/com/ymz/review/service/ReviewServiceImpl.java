@@ -43,31 +43,7 @@ public class ReviewServiceImpl implements ReviewService {
 	public void removeReview(Review review) {
 		dao.deleteReview(review);
 	}
-
-	/**
-	 * 전체 회원 목록 조회 처리 - Paging 처리
-	 *  - 목록에 뿌려줄 리뷰리스트(List<Review>)와 페이징 처리를 PagingBean 객체를 생성해 Map에 넣어 리턴
-	 * @param page : 조회할 page 번호
-	 * @return Map
-	 */
-	@Override
-	public Map<String, Object> getReviewListPaging(int pageNo) {
-		List<Review> bestHits = dao.selectTodayBestHits(); // 오늘 최고 조회수 글 목록 가져오기
-		List<Review> bestMonthHits = dao.selectMonthBestHits(); // 오늘 최고 조회수 글 목록 가져오기
-		// 목록에 뿌려질 List<Review> 조회
-		List<Review> list = dao.selectAllReviewPaging(pageNo);
-		// PagingBean 생성
-		int totalContent = dao.selectTotalReviewCount();
-		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
-		// 두개의 값(List, PagingBean)을 Map에 넣어 return
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("reviewList", list);
-		map.put("pagingBean", pagingBean);
-		map.put("todayBest", bestHits);
-		map.put("monthBest", bestMonthHits);
-		return map;
-	}
-
+	
 	/**
 	 * 리뷰 번호로 조회
 	 */
@@ -112,13 +88,13 @@ public class ReviewServiceImpl implements ReviewService {
 	 * 리뷰 정렬 - 아직 수정중
 	 */
 	@Override
-	public Map<String, Object> ReviewSortListPaging(int pageNo, String type) {
+	public Map<String, Object> ReviewSortListPaging(int pageNo, String type, String searchType, String query) {
 		List<Review> bestHits = dao.selectTodayBestHits(); // 오늘 최고 조회수 글 목록 가져오기
 		List<Review> bestMonthHits = dao.selectMonthBestHits(); // 오늘 최고 조회수 글 목록 가져오기
 		// 목록에 뿌려질 List<Review> 조회
-		List<Review> sortlist = dao.selectSortReviewPaging(pageNo, type);
+		List<Review> sortlist = dao.selectSortReviewPaging(pageNo, type, searchType, query); // 수정 매개변수 추가
 		// PagingBean 생성
-		int totalContent = dao.selectTotalReviewCount();
+		int totalContent = dao.selectTotalReviewCount(searchType, query); // 수정 : 매개변수 추가
 		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
 		// 두개의 값(List, PagingBean)을 Map에 넣어 return
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -127,6 +103,8 @@ public class ReviewServiceImpl implements ReviewService {
 		map.put("todayBest", bestHits);
 		map.put("monthBest", bestMonthHits);
 		map.put("sortType", type);
+		map.put("searchType", searchType);
+		map.put("query", query);
 		return map;
 	}
 	

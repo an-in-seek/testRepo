@@ -78,27 +78,6 @@ public class ReviewDAOImpl implements ReviewDAO{
 	public Review selectReviewByNo(int reviewNo) {
 		return session.selectOne(namespace + "selectReviewByNo", reviewNo);
 	}
-	
-	/**
-	 * Review 테이블의 페이징 처리 전체 리뷰 조회 처리
-	 * @param pageNo 조회할 페이지 번호
-	 * @return
-	 */
-	@Override
-	public List<Review> selectAllReviewPaging(int pageNo) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
-		map.put("pageNo", pageNo);
-		return session.selectList(namespace+"selectAllReviewPaging", map);
-	}
-
-	/**
-	 * 리뷰 전체 페이지 수
-	 */
-	@Override
-	public int selectTotalReviewCount() {
-		return session.selectOne(namespace+"selectTotalReviewCount");
-	}
 
 	/**
 	 * 리뷰 조회수 증가
@@ -115,7 +94,6 @@ public class ReviewDAOImpl implements ReviewDAO{
 	public List<Review> selectTodayBestHits() {
 		SimpleDateFormat td = new SimpleDateFormat("yyyy-MM-dd");
 		String today = td.format(new Date());
-		System.out.println("오늘 날짜 : " + today);
 		return session.selectList(namespace+"selectTodayBestHits", today);
 	}
 
@@ -126,22 +104,33 @@ public class ReviewDAOImpl implements ReviewDAO{
 	public List<Review> selectMonthBestHits() {
 		SimpleDateFormat td = new SimpleDateFormat("yyyy-MM");
 		String month = td.format(new Date());
-		System.out.println("이번달 : " + month);
 		return session.selectList(namespace+"selectMonthBestHits", month);
 	}
 
 	/**
-	 * 정렬 관련
+	 * 리뷰 정렬 페이징 관련
 	 */
 	@Override
-	public List<Review> selectSortReviewPaging(int pageNo, String type) {
+	public List<Review> selectSortReviewPaging(int pageNo, String type, String searchType, String query) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
 		map.put("pageNo", pageNo);
 		map.put("sortType", type);  
+		map.put("searchType", searchType);  
+		map.put("query", query);  
 		return session.selectList(namespace+"ReviewSortPaging", map);
 	}
 	
+	/**
+	 * 리뷰 전체 페이지 수
+	 */
+	@Override
+	public int selectTotalReviewCount(String searchType, String query) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);  
+		map.put("query", query);  
+		return session.selectOne(namespace+"selectTotalReviewCount");
+	}
 
 	
 	

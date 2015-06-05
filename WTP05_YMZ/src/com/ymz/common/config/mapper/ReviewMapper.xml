@@ -97,14 +97,7 @@
 		where	page = #{pageNo}
 	</select>
 	
-	<!-- 게시물 수  -->
-	<select id="selectTotalReviewCount" resultType="_int">
-		select count(review_no) from review
-	</select>
-	
-	
-
-	<!-- 정렬 -->
+	<!-- 리뷰 정렬 페이징 -->
 		<select id="ReviewSortPaging" parameterType="map" resultMap="review-resultmap">
 		select review_no, title, content, hits, recommend, 
 			   reg_date, 
@@ -124,6 +117,17 @@
 								(select count(*) from REVIEW_REPLY where review_reply.review_no = review.review_no) reply_count
 						from 	review
 						<choose>
+							<when test="searchType=='title'">
+								where title like '%'||#{query}||'%'
+							</when>
+							<when test="searchType=='id'">
+								where member_id like '%'||#{query}||'%'
+							</when>
+							<when test="searchType=='nickname'">
+								where nickname like '%'||#{query}||'%'
+							</when>
+						</choose>
+						<choose>
 							<when test="sortType=='latest'">
 									order by reg_date desc
 							</when>
@@ -139,6 +143,16 @@
 		where	page = #{pageNo}
 	</select>
 	
+	<!-- 전체 게시물 수  -->
+	<select id="selectTotalReviewCount" resultType="_int">
+		select count(review_no) from review
+	</select>
+	
+	<!-- 검색된 전체 게시물 수  -->
+	<select id="selectSearchReviewCount" resultType="_int">
+		select count(review_no) from review
+		
+	</select>
 	
 	<!-- 오늘 인기글(조회순) -->
 	<select id="selectTodayBestHits" resultMap="review-resultmap" parameterType="String">
@@ -155,5 +169,4 @@
 		where substr(reg_date, 1,7) = #{month} and rownum <![CDATA[<]]> 6
 		ORDER BY HITS desc   
 	</select>
-	<!-- 이번달 인기글(추천순) -->
 </mapper>

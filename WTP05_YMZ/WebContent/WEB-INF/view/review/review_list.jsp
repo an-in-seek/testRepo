@@ -32,17 +32,14 @@ $(document).ready(function(){
 	//alert(date_str);
 	
 	var txt = "";
-	// 검색 버튼 이벤트
-	$("#searchBtn").on("click", function(){
-		var search = $("#searchText").val();
-		alert(search+" 검색!!!은 아직 안돼");
-	});
+
 	
 	
 	// 검색 방식 셀렉터 이벤트
 	$("#searchSort").on("change", function(){
 		txt = $(this).val(); // $(select객체).val() - 선택된 option의 value가 리턴
 		alert("검색방식 : "+txt);
+		
 	});
 	
 	// 조회수 정렬
@@ -70,7 +67,16 @@ $(document).ready(function(){
 		 $(this).css("background-color", "linen");
 	});
 	
-	
+	// 검색 전송 이벤트
+	$("#searchForm").on("submit",function(){
+		if($("#searchText").val().trim()==""){
+			return false;
+		}
+		var type = $("#searchSort").val();
+		var search = $("#searchText").val();
+		$(this).append("<input type='hidden' name='searchType' value='"+type+"'>");
+		$(this).append("<input type='hidden' name='query' value='"+search+"'>");
+	});
 });
 </script>
 <style type="text/css">
@@ -285,24 +291,27 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<br>
 
 	<!-- 검색 기능 (아직안함) -->
-	<form action="${initParam.rootPath }/review/login/review_write_form.do" method="post">
 	<table>
 		<tr>
 			<td>
+			<form id="searchForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
 			<select id="searchSort">
 					<option value="title">제목</option>
 					<option value="id">아이디</option>
 					<option value="nickname">닉네임</option>
 			</select>
+			
+			<input type="text" id="searchText">
+			<input type="submit" id="searchBtn" value="검색">
+			</form>
 			</td>
-			<td><input type="text" id="searchText"></td>
-			<td><input type="button" id="searchBtn" value="검색"></td>
 			<td>
-					<input type="submit" value="글쓰기">
+			<form id="writeForm" action="${initParam.rootPath }/review/login/review_write_form.do">
+				<input type="submit" value="글쓰기">
+			</form>
 			</td>
 		</tr>
 	</table>
-	</form>
 	<br>
 	</div>
 	

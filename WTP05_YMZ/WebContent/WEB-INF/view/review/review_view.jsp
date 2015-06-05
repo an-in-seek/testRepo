@@ -27,8 +27,7 @@ function modifyReply(reviewNo, rnum, pNo, idx){
 	if(isUp){
 		//document.location.href="${initParam.rootPath}/review/login/modifyReviewReplyform.do?reviewNo="+reviewNo+"&replyNo="+rnum+"&pageNo="+pNo;
 		//$("#replyBody").find(":first-child").next().html("<tr><td><input type='text' value='영역'></td></tr>");
-		alert(rnum);
-		$("#dialog2").append("<input type='hidden' name='replyNo' value='"+rnum+"'>");
+		$("#dialog2").append("<input type='hidden' name='replyNo' value='"+rnum+"'>"); // 댓글 번호값을 다이얼로그 폼으로 보낸다.
 		$("#dialog").dialog({modal:true, width:400});
 		
 
@@ -247,10 +246,10 @@ ${requestScope.review.content }<br>
 		</tr>
 	</table>
 </form>
-<div id="dialog" title="ㅎ2">
+<div id="dialog" title="댓글 수정">
 	<figure id="pic"></figure>
 	<section>
-	<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 정보 </header>
+	<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 댓글을 입력하세요. </header>
 	<form id="dialog2" action="${initParam.rootPath }/review/login/modifyReviewReply.do" method="post">
 	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}">
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}">
