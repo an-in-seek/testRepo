@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+function id_pop(){
+	  window.open('${initParam.rootPath }/popup/idFind.jsp','네이버팝업','width=450, height=350, scrollbars=no');
+	 }
+function pw_pop(){
+	  window.open('${initParam.rootPath }/popup/pwFind.jsp','네이버팝업','width=450, height=350, scrollbars=no');
+	 }
+	
 
+</script>
 <style>
 #main-title {color:#050099;font-size:70pt;margin-top:20%;}
 .se {font-family: serif;}
@@ -86,8 +95,8 @@
 			
 			<table align="center" height="50" style="margin-top:1%" class="mo">
 				<tr>
-					<td><a style="text-decoration:none;" href=""><font size="2">아이디 찾기 |</font></td>
-					<td><a style="text-decoration:none;" href=""><font size="2">비밀번호 찾기</font></td>
+					<td><a style="text-decoration:none;" href="javascript:id_pop();"><font size="2">아이디 찾기 |</font></a></td>
+					<td><a style="text-decoration:none;" href="javascript:pw_pop();"><font size="2">비밀번호 찾기</font></a></td>
 				</tr>
 			</table>
 		</form>

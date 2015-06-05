@@ -7,7 +7,7 @@ delete from qna CASCADE CONSTRAINTS;
 
 
 
-insert into member values('master', 1111, '관리자', '관리자', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140514');
+insert into member values('master01', 1111, '관리자', '관리자', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140514');
 insert into member values('user01', 1111, '피카츄', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '양식', 10, 'user', '20140513');
 insert into member values('user02', 5555, '라이츄', '라이츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user02@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140512');
 insert into member values('user03', 5555, '파이리', '파이리', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user03@naver.com', '010-1111-1111', '일식', 100000, 'user', '20140511');
@@ -24,9 +24,9 @@ insert into member values('user13', 5555, '아상해씨', '이상해씨', '20100
 insert into member values('user14', 5555, '이상해풀', '이상해풀', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user14@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140510');
 insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user15@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140501');
 
+update member set grade='master' where member_id='master'
 
-
-update member set grade='su' 	where member_id='2';
+update member set grade='master' 	where member_id='2';
 update member set mileage=11111 	where member_id='2';
 select * from member;
 delete member where member_id='1';

@@ -21,6 +21,7 @@ function removeReply(reviewNo, rnum, pNo){
 	}
 }
 
+<<<<<<< HEAD
 //댓글 수정
 function modifyReply(reviewNo, rnum, pNo, idx){
 	var isUp=confirm("수정하시겠습니까?")
@@ -33,6 +34,17 @@ function modifyReply(reviewNo, rnum, pNo, idx){
 		return;
 	}
 }
+=======
+function modifyReply(){
+	var isDel = confirm("정말로 수정하시겠습니까?");
+	if (isDel) {
+	} else {
+		return;
+	}
+}
+
+
+>>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 
 $(document).ready(function(){
 	var reviewNumber = ${requestScope.review.reviewNo};
@@ -94,6 +106,11 @@ $(document).ready(function(){
 			return false;
 	   }
 	})
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 	
 	//------
 	$("#reply_reportBtn").on("click", function(){
@@ -215,9 +232,14 @@ ${requestScope.review.content }<br>
 					<td>${reply.content}</td>
 					<td>${reply.regDate}</td>
 					<td>
+<<<<<<< HEAD
 						<input type="button" id="reply_modifyBtn${reply.replyNo}"  
 													onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
 													
+=======
+						<input type="button" id="reply_modifyBtn${reply.replyNo}"
+												onclick="modifyReply();" value="수정">
+>>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
 													onclick="removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});"  value="삭제" >
 													

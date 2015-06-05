@@ -149,11 +149,18 @@ $(document).ready(function(){
 			return false;
 		}
 		
-		if(!$("#phoneNo").val()){
+		if(!$("#num1").val()){
 			alert("전화번호를 입력하세요");
-			$("#phoneNo").focus();
+			$("#num1").focus();
 			return false;
 		}
+		
+		if(!$("#num2").val()){
+			alert("전화번호를 입력하세요");
+			$("#num2").focus();
+			return false;
+		}
+		
 		if(!$("#emailName").val()){
 			alert("이메일을 입력하세요");
 			$("#emailName").focus();
@@ -288,7 +295,9 @@ div#table{
 		<tr>
 			<td>전화번호</td>
 			<td>
-				<input type="text" id="phoneNo" name="phoneNo" value="${requestScope.exPhoneNo }"> 
+				<select name="phoneCP" id="phoneCP" class="input_text w60" style="vertical-align:middle">
+			<option value="010" >010</option><option value="011" >011</option><option value="017" >017</option><option value="018" >018</option><option value="019" >019</option></select>
+			&nbsp;-&nbsp;<input type="text" id="num1" name="num1" size="2" style="vertical-align:middle">&nbsp;&nbsp;<input type="text" id="num2" name="num2" size="2" class="input_text w60" style="vertical-align:middle"> 
 			</td>
 		</tr>
 		<tr>

@@ -46,6 +46,15 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	/**
+	 * name으로 회원 정보를 조회하여 return하는 메소드
+	 */
+	
+	@Override
+	public Member selectMemberByName(String name) {
+		return session.selectOne(namespace+"selectMemberByName",name);
+	}
+
+	/**
 	 * 회원 정보를 DB에 insert하는 메소드
 	 * @param member 등록할 회원 정보
 	 */
@@ -92,9 +101,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<Member> selectAllMember(){
 		return session.selectList(namespace+"selectAllMember");
 	}
-	/* ********************************************************
-	 * 페이징
-	 * ********************************************************/
+
 	/**
 	 * Member 테이블의 페이징 처리 전체 회원 조회 처리
 	 * @param pageNo 조회할 페이지 번호
@@ -109,7 +116,25 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
+	public List<Member> selectAllMemberByInfo(String info,  String command, int pageNo) {
+		Map param = new HashMap();
+		param.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		param.put("pageNo", pageNo);
+		param.put("info", info); //여기서 info는 아이디, 이름, 닉네임 이다.
+		param.put("command", command);
+		return session.selectList(namespace+"selectAllMemberByInfo", param);
+	}
+	
+	@Override
 	public int selectTotalMemberCount(){
 		return session.selectOne(namespace+"selectTotalMemberCount");
+	}
+
+	@Override
+	public int selectTotalMemberCountByInfo(String info, String command) {
+		Map param = new HashMap();
+		param.put("info", info);
+		param.put("command", command);
+		return session.selectOne(namespace+"selectTotalMemberCountByInfo", param);
 	}
 }

@@ -23,6 +23,12 @@ public interface MemberDAO {
 	 * Nickname로 회원 정보를 조회하여 return하는 메소드
 	 */
 	public abstract Member selectMemberByNickname(String nickname);
+	
+	/**
+	 * name으로 회원 정보를 조회하여 return하는 메소드
+	 */
+	
+	public abstract Member selectMemberByName(String name);
 	/**
 	 * 회원 정보를 DB에 insert하는 메소드
 	 * @param member 등록할 회원 정보
@@ -56,9 +62,6 @@ public interface MemberDAO {
 	 */
 	public abstract List<Member> selectAllMember();
 
-	/* ********************************************************
-	 * 페이징
-	 * ********************************************************/
 	/**
 	 * Member 테이블의 페이징 처리 전체 회원 조회 처리
 	 * @param pageNo 조회할 페이지 번호
@@ -67,5 +70,9 @@ public interface MemberDAO {
 	public abstract List<Member> selectAllMemberPaging(int pageNo);
 
 	public abstract int selectTotalMemberCount();
+
+	public abstract List<Member> selectAllMemberByInfo(String info, String command, int pageNo);
+
+	public abstract int selectTotalMemberCountByInfo(String info, String command);
 
 }
