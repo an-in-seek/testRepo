@@ -112,9 +112,8 @@ $(document).ready(function(){
 			$("#totalDiv").text(Math.ceil($("#total").text()/$("#calcTotal input").val()));
 		}
 	});
-});
+//송이꺼-----------------------------------------------------------
 
-$(document).ready(function() {
 	$("#registerFrom").on("submit", function() {
 		if (!$("#content").val()) {
 			alert("내용을 입력하세요");
@@ -126,14 +125,6 @@ $(document).ready(function() {
 	$("#reply_modifyButton").on("click", function() {
 		alert("로그인을 해야합니다.");
 	});
-	$("#reply_removeButton").on("click", function() {
-		var isDel=confirm("삭제할까요?");
-		if (isDel) {
-		document.location.href="${initParam.rootPath}/restaurant/login/removeReply.do?number="+${requestScope.restaurantReply.number};
-		}else{
-			return;
-		}
-	});
 
 	$("#reply_reportButton").on("click", function() {
 		alert("로그인을 해야합니다.");
@@ -141,6 +132,15 @@ $(document).ready(function() {
 });
 
 
+//송이꺼
+function removeReply(restaurantNo, number){
+	var isDel=confirm("삭제할까요?");
+	if(isDel){
+		document.location.href="${initParam.rootPath}/restaurant/login/removeReply.do?restaurantNo="+restaurantNo+"&number"+number;
+	}else{
+		return;
+	}
+}
 
 </script>
 </head>
@@ -325,7 +325,7 @@ $(document).ready(function() {
 				</tr>
 				<td align="right" colspan="4">
 				<button id="reply_modifyButton" style="width: 80px; heigth: 20px;">수정</button>
-				<button id="reply_removeButton" style="width: 80px; heigth: 20px;">삭제</button>
+				<input type="button" id="reply_removeButton${reply.number }" onclick="removeReply(${requestScope.restaurant.restaurantNo},${reply.number})" value="삭제">
 				<button id="reply_reportButton" style="width: 80px; heigth: 20px;">신고</button>
 				</td>
 				<tr>
