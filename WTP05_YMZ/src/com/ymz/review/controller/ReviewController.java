@@ -40,29 +40,23 @@ public class ReviewController {
 		}
 		Member member = (Member)session.getAttribute("login_info");
 		review.setMemberId(member.getId());
+		review.setNickname(member.getName());
+		System.out.println(" 글 작성자 : " + member.getName());
 		service.registerReview(review);
 		return "redirect:/review/reviewList.do"; 
 	}
 
-	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
+	//리뷰 목록 - 페이징 처리 + 인기글 가져오기 + 검색
 		@RequestMapping("reviewList.do")
 		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo, 
 													@RequestParam (defaultValue="") String searchType,@RequestParam (defaultValue="") String query){
-			System.out.println("정렬 타입 : " + sortType);
-			System.out.println("검색 타입 : " + searchType);
-			System.out.println("검색어 : " + query);
 			
 			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType, searchType, query);
 			/////////////////////////////////
 			//Map<String, Object> map = service.getReviewListPaging(pageNo);
 			return new ModelAndView("review/review_list.tiles", map);
 		}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
-		@RequestMapping("searchReview.do")
-		public String searchReview(@RequestParam (defaultValue="1") int pageNo, @RequestParam String searchType, @RequestParam String query){
-			return "/review/reviewList.do";
-		}
+
 		
 //	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
 //	@RequestMapping("reviewList.do")
