@@ -339,20 +339,16 @@ public class MemberController {
 	@RequestMapping("loginIdFind.do")
 	@ResponseBody
 	public ModelAndView loginIdFind(String name, HttpServletRequest request,ModelMap map){
-		System.out.println("asdfasdfasdfasdfasedfasdfasdfasdf");
 		String id = null;
 		Member m = service.getMemberByName(name);
 		if(m!=null){
 		String phone = m.getPhoneNo();
-		System.out.println(phone);
 		String phoneCP =request.getParameter("phoneCP");
 		String num1 = request.getParameter("num1");
 		String num2 = request.getParameter("num2");
 		String exPhone = phoneCP+"-"+num1+"-"+num2;
-		System.out.println(exPhone);
 			if(phone.equals(exPhone)){
 				id = m.getId();
-				System.out.println(id);
 				map.addAttribute("id",id);
 				return new ModelAndView("/WEB-INF/view/member/idFind_success.jsp",map);
 			}else{
@@ -377,7 +373,6 @@ public class MemberController {
 		String num1 = request.getParameter("num1");
 		String num2 = request.getParameter("num2");
 		String exPhone = phoneCP+"-"+num1+"-"+num2;
-		System.out.println(exPhone);
 			if(phone.equals(exPhone)){
 				id = m.getId();
 				request.setAttribute("id", id);
@@ -395,14 +390,17 @@ public class MemberController {
 	/**********************비밀번호 분실시 변경 요청********************/
 	@RequestMapping("passwordChange.do")
 	@ResponseBody
-	public String passwordChange(String password, HttpServletRequest request){
+	public void passwordChange(String password, String passwordCheck, HttpServletRequest request){
+		if(password!=passwordCheck){
+			
+		}else{
 		String id = request.getParameter("id");
 		Member m = service.getMemberById(id);
 		m.setPassword(password);
 		service.modifyPassword(m);
-		return "redirect:/index.do";
+		}
+		
 	}
-	
 	/**********************이메일 중복 체크********************/
 //	@RequestMapping("emailExistCheck.do")
 //	@ResponseBody
