@@ -113,7 +113,7 @@ article {
 					<c:forEach begin="${pagingBean1.startPageOfPageGroup }" end="${pagingBean1.endPageOfPageGroup}" var="pageNum">
 						<c:choose>
 							<c:when test="${pageNum == pagingBean1.currentPage }">
-								<font color="red"><b>&nbsp;${pageNum}&nbsp;</b></font>
+								&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
 							</c:when>
 							<c:otherwise>
 								<a href="${initParam.rootPath }/qna/qnaList.do?page=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
