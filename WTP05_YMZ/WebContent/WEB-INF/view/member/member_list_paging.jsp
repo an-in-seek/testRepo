@@ -66,7 +66,7 @@ article{
 <h2 align="center">회원 목록</h2> 
 <div align="center" id="table">	
 <c:if test="${fn:length(requestScope.member_list) != 0 }">
-	<table align="center" id="listTB" style="width:800px">
+	<table align="center" id="listTB" style="width:800px" border="1">
 		<thead>
 			<tr align="center">
 				<td>번호</td>
@@ -105,7 +105,7 @@ article{
 <c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
 	<c:choose>
 		<c:when test="${pageNum == pagingBean.currentPage }">
-			<b><font color="red">&nbsp;${pageNum}&nbsp;</font></b>
+			&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
 		</c:when>
 		<c:otherwise>
 			<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
@@ -120,16 +120,14 @@ article{
 	<c:otherwise>&nbsp;▶</c:otherwise>
 </c:choose>	
 </p>
-</div>
 
-<div>
 <table align="center">
 				<tr>
 					<td>
 						<form id="categoryForm" name="categoryForm" action="${initParam.rootPath }/qna/qnaListByCategory.do" method="post">
 							<select id="category" name="category">
 								<option>검색방식</option>
-								<option value="아이디">아이디</option>
+								<option value="아이디">아이디(ID)</option>
 								<option value="이름">이름</option>
 								<option value="닉네임">닉네임</option>
 							</select>
@@ -137,13 +135,13 @@ article{
 					</td>
 					<td colspan="2">
 						<form id="searchQna" name="searchQna" action="${initParam.rootPath }/qna/searchQna.do" method="post">
-							<input type="text" id="text" name="text" placeholder="제목으로 검색">						
+							<input type="text" id="text" name="text" placeholder="검색하기">						
 							<input type="submit" id="searchBtn" value="검색">
 						</form>
 					</td>
 					<td>
-						<form action="${initParam.rootPath }/qna/login/writeForm.do" method="post">
-							<input id="writeBtn" type="submit" value="글쓰기">
+						<form action="${initParam.rootPath }/member/joinForm.do" method="post">
+							<input id="writeBtn" type="submit" value="회원등록">
 						</form>
 					</td>
 				</tr>

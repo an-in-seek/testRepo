@@ -21,7 +21,7 @@
   color: #4a4a4a;
   -webkit-appearance: none;
   zoom: 1;}
-  .btn input {
+.btn input {
   width: 90px;
   height: 30px;
   border: 0;
