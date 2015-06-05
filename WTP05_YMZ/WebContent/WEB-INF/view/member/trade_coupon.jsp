@@ -26,6 +26,7 @@ $(document).ready(function(){
 		if(cnt!=0){
 			return cnt=0;
 		}
+		
 	})
 	$("#exBtn").on("click",function(){
 		alert("마일리지가 부족합니다");
@@ -74,6 +75,10 @@ $(document).ready(function(){
 				alert("금액을 입력해주십시오");
 				return false;
 			}
+		}
+		if($("#count").val()==0){
+			alert("금액을 입력해주십시오")
+			return false
 		}
 			alert("고객님의 메일로 쿠폰이 전송되었습니다");
 	})
@@ -128,7 +133,7 @@ $(document).ready(function(){
 			<td>
 				남은 마일리지
 			</td>
-			<td id="ex">
+			<td>
 				<input type="text" id="result" name="result" value="${requestScope.mileage }" readonly>
 			</td>
 		</tr>

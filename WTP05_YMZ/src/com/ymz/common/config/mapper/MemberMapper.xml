@@ -58,11 +58,13 @@
 					mileage=#{mileage}
 		where	member_id=#{id}
 	</update>
+	
 	<update id="updatePassword" parameterType="member">
 		update member
 		set member_password=#{password}
 		where member_id=#{id}
 	</update>
+	
 	<delete id="deleteMemberById" parameterType="string">
 		delete from member where member_id=#{id}
 	</delete>
@@ -85,6 +87,7 @@
 	<select id="selectAllMember" resultMap="member-resultmap">
 		<include refid="member-select"/>
 	</select>
+	
 	<!-- Paging 추가 -->
 	<select id="selectAllMemberPaging" parameterType="map" resultMap="member-resultmap">
 
@@ -101,6 +104,7 @@
 		) 
 		where page = #{pageNo}
 	</select>
+	
 	<select id="selectTotalMemberCount" resultType="_int">
 		select count(member_id) from member
 	</select>
