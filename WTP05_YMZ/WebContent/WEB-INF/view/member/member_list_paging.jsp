@@ -5,12 +5,12 @@
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <script type="text/javascript">
 $(document).ready(function(){
-	$("table#listTB tbody tr").on("mouseover", function(){
+	$("#listTB tbody tr").on("mouseover", function(){
 		$("table#listTB tbody tr").css("background-color", "white");
 		$(this).css("background-color", "silver");
 	});
-	$("table#listTB tbody tr").on("click", function(){
-		var id = $(this).find(":first-child").text();
+	$("#listTB tbody tr").on("click", function(){
+		var id = $(this).find(":nth-child(2)").text();
 		$.ajax({
 			url:"${initParam.rootPath}/member/findMemberById.do",
 			data:{"id":id},
@@ -24,6 +24,9 @@ $(document).ready(function(){
 				$("#joinDate").text("가입일 : "+ret.joinDate);
 				//Dialog 띄우기 
 				$("#dialog").dialog({modal:true,width:400});
+			},
+			error:function(xhr, dd, ddd){
+				alert(xhr.status + dd + ddd);
 			}
 		});
 	});
@@ -114,6 +117,35 @@ article{
 </c:choose>	
 </p>
 </div>
+
+<div>
+<table align="center">
+				<tr>
+					<td>
+						<form id="categoryForm" name="categoryForm" action="${initParam.rootPath }/qna/qnaListByCategory.do" method="post">
+							<select id="category" name="category">
+								<option>검색방식</option>
+								<option value="아이디">아이디</option>
+								<option value="이름">이름</option>
+								<option value="닉네임">닉네임</option>
+							</select>
+						</form>
+					</td>
+					<td colspan="2">
+						<form id="searchQna" name="searchQna" action="${initParam.rootPath }/qna/searchQna.do" method="post">
+							<input type="text" id="text" name="text" placeholder="제목으로 검색">						
+							<input type="submit" id="searchBtn" value="검색">
+						</form>
+					</td>
+					<td>
+						<form action="${initParam.rootPath }/qna/login/writeForm.do" method="post">
+							<input id="writeBtn" type="submit" value="글쓰기">
+						</form>
+					</td>
+				</tr>
+			</table>
+</div>
+
 <div id="dialog" title="선택 회원 정보">
 	<figure id="pic"></figure>
 	<section>

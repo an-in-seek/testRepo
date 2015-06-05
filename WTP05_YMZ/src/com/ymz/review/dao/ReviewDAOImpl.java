@@ -129,8 +129,20 @@ public class ReviewDAOImpl implements ReviewDAO{
 		System.out.println("이번달 : " + month);
 		return session.selectList(namespace+"selectMonthBestHits", month);
 	}
+
+	/**
+	 * 정렬 관련
+	 */
+	@Override
+	public List<Review> selectSortReviewPaging(int pageNo, String type) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		map.put("pageNo", pageNo);
+		map.put("sortType", type);  
+		return session.selectList(namespace+"ReviewSortPaging", map);
+	}
 	
-	
+
 	
 	
 }

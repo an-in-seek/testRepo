@@ -31,7 +31,7 @@
 			select review_no_seq.nextval from dual
 		</selectKey>
 		insert into review (review_no, title, content, hits, recommend, reg_date, member_id)
-		values (#{reviewNo}, #{title}, #{content}, #{hits}, #{recommend}, to_char(sysdate, 'yyyy-mm-dd hh:MM:ss'), #{memberId})
+		values (#{reviewNo}, #{title}, #{content}, #{hits}, #{recommend}, to_char(sysdate, 'yyyy-mm-dd HH24:MI:SS'), #{memberId})
 	</insert>
 
 	<!-- 수정 -->
@@ -83,8 +83,8 @@
 	</select>
 	
 	<!-- 리뷰 목록 페이징 -->
-		<select id="selectAllReviewPaging" parameterType="map" resultMap="review-resultmap">
-		select review_no, title, content, hits, recommend, substr(reg_date, 1,10) reg_date, member_id, reply_count
+	<select id="selectAllReviewPaging" parameterType="map" resultMap="review-resultmap">
+		select review_no, title, content, hits, recommend, reg_date, member_id, reply_count
 		from (
 				select ceil(rownum/#{contentsPerPage}) page, 
 					   review_no, title, content, hits, 
@@ -101,7 +101,36 @@
 	<select id="selectTotalReviewCount" resultType="_int">
 		select count(review_no) from review
 	</select>
+	
+	<!-- 추천수 정렬 -->
+	
 
+	<!-- 조회수 정렬 -->
+		<select id="ReviewSortPaging" parameterType="map" resultMap="review-resultmap">
+		select review_no, title, content, hits, recommend, reg_date, member_id, reply_count
+		from (
+				select ceil(rownum/#{contentsPerPage}) page, 
+					   review_no, title, content, hits, 
+					   recommend, reg_date, member_id, reply_count
+				from (
+						<include refid="review-select"/>
+						<choose>
+							<when test="sortType=='recommend'">
+								order by recommend desc
+							</when>
+							<when test="sortType=='hits'">
+								order by hits desc
+							</when>
+							<when test="sortType=='latest'">
+								order by reg_date desc
+							</when>
+						</choose>
+			)
+		) 
+		where	page = #{pageNo}
+	</select>
+	
+	
 	<!-- 오늘 인기글(조회순) -->
 	<select id="selectTodayBestHits" resultMap="review-resultmap" parameterType="String">
 		select review_no, title

@@ -15,7 +15,7 @@
 		<ul >
 			<li><a href='${initParam.rootPath }/index.do' class="menu">메인페이지</a></li>
 			<li>
-				<a href="${initParam.rootPath }/restaurant/showListByType.do" class="menu">맛집정보</a>
+				<a href="${initParam.rootPath }/restaurant/showListByType.do" class="menu">맛집정보&#9662;</a>
 				<ul>
 					<li><a href="${initParam.rootPath }/restaurant/showListByType.do">유형별</a></li>
 					<li><a href="${initParam.rootPath }/restaurant/showListByTheme.do">테마별</a></li>
@@ -31,7 +31,7 @@
 				</ul>
 			</li>
 			
-			<c:if test="${sessionScope.login_info.grade=='su'}">
+			<c:if test="${sessionScope.login_info.grade=='master'}">
 				<li><a href="${initParam.rootPath }/member/memberListPaging.do" class="menu">회원관리</a></li>
 			</c:if>
 		</ul>
