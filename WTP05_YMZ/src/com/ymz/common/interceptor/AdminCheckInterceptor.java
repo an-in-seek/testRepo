@@ -15,7 +15,7 @@ public class AdminCheckInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		Member member = (Member)request.getSession().getAttribute("login_info");
-		if(!member.getGrade().equals("관리자")) {
+		if(!member.getGrade().equals("master")) {
 			throw new ModelAndViewDefiningException(new ModelAndView("/WEB-INF/view/not_admin.jsp"));
 		}
 		return super.preHandle(request, response, handler);

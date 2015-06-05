@@ -162,4 +162,18 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public int removeRestaurant(int restaurantNo) {
 		return dao.deleteRestaurant(restaurantNo);
 	}
+
+	@Override
+	public Map setRestaurantModifyForm(int restaurantNo) {
+		Map map = new HashMap();
+		
+		Restaurant restaurant = dao.selectRestaurantByNo(restaurantNo);
+		map.put("restaurant", restaurant);
+		map.put("buildingNames", dao.selectBuildingNames());
+		String currentBuildingName = dao.selectBuildingNameByLocationNo(restaurant.getLocationNo());
+		map.put("currentBuildingName", currentBuildingName);
+		map.put("floors", dao.selectFloorsByBuildingName(currentBuildingName));
+		map.put("currentFloor", dao.selectFloorByLocationNo(restaurant.getLocationNo()));
+		return map;
+	}
 }
