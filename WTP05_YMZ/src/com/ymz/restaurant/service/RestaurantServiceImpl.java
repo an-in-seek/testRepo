@@ -1,11 +1,17 @@
 package com.ymz.restaurant.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -164,7 +170,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public Map setRestaurantModifyForm(int restaurantNo) {
+	public Map setRestaurantModifyForm(int restaurantNo, HttpServletRequest request) throws IOException {
 		Map map = new HashMap();
 		
 		Restaurant restaurant = dao.selectRestaurantByNo(restaurantNo);
@@ -174,6 +180,41 @@ public class RestaurantServiceImpl implements RestaurantService {
 		map.put("currentBuildingName", currentBuildingName);
 		map.put("floors", dao.selectFloorsByBuildingName(currentBuildingName));
 		map.put("currentFloor", dao.selectFloorByLocationNo(restaurant.getLocationNo()));
+		map.put("menus", dao.selectFoodsByRestaurantNo(restaurantNo));
+		
+		String path = request.getServletContext().getRealPath("/uploadPhoto");
+		String tempPath = request.getServletContext().getRealPath("/tempPhoto");
+		String[] pictureNames = restaurant.getPictureName().split(",");
+		for(int i=0; i<pictureNames.length; i++) {
+			File file = new File(path, pictureNames[i]);
+			File newFile = new File(tempPath, pictureNames[i]);
+			fileCopy(file, newFile);
+		} // 수정화면 띄우면서 원본파일->임시폴더로 저장
+		
 		return map;
+	}
+	
+	public void fileCopy(File srcFile, File targetFile) throws IOException {
+		// byte[]을 이용한 입출력
+		FileInputStream fis = null;
+		FileOutputStream fos = null;
+		byte[] buffer = new byte[100000];
+		try {
+			// 1. 연결
+			fis = new FileInputStream(srcFile);
+			fos = new FileOutputStream(targetFile);
+			
+			// 2. 입출력작업
+			int i = fis.read(buffer); // buffer에 읽은 byte를 넣어 준다. 읽은 byte수를 return. EOF 읽은 경우 -1
+			while(i!=-1) {
+				fos.write(buffer, 0, i); // buffer(배열) 내에 있는 byte들을 한번에 출력, 0번 index에서 i개만큼
+				i = fis.read(buffer);
+			}
+			// io종료
+		} finally {
+			// 3. 연결 닫기
+			if(fis!=null) fis.close();
+			if(fos!=null) fos.close();
+		}
 	}
 }

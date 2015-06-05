@@ -58,6 +58,27 @@ public class RestaurantController {
 		return service.getRestaurantsByBuildingName(buildingName);
 	}
 	
+	@RequestMapping("/ajax/addPictureTemp.do")
+	@ResponseBody
+	public String addPictureTemp(MultipartFile picture, HttpServletRequest request) throws Exception {
+		String path = request.getServletContext().getRealPath("/tempPhoto");
+		String fileName = null;
+		if(picture!=null) {
+			fileName = System.nanoTime()+"";
+			File file = new File(path, fileName);
+			picture.transferTo(file);
+		}
+		
+		return fileName;
+	}
+	
+	@RequestMapping("/ajax/removePictureTemp.do")
+	public void removePictureTemp(String fileName, HttpServletRequest request) {
+		String path = request.getServletContext().getRealPath("/tempPhoto");
+		String name = fileName.split("Photo/")[1];
+		new File(path, name).delete();
+	}
+	
 	@RequestMapping("/showListByType.do")
 	public String showListByType(
 			@RequestParam(defaultValue="전체") String category,
@@ -127,10 +148,15 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping("/login/admin/modifyRestaurantForm.do")
-	public String modifyRestaurantForm(int restaurantNo, Model model) {
-		Map map = service.setRestaurantModifyForm(restaurantNo);
+	public String modifyRestaurantForm(int restaurantNo, Model model, HttpServletRequest request) throws Exception {
+		Map map = service.setRestaurantModifyForm(restaurantNo, request);
 		model.addAllAttributes(map);
 		return "restaurant/restaurant_modify_form.tiles";
+	}
+	
+	@RequestMapping("/login/admin/modifyRestaurant.do")
+	public String modifyRestaurant() {
+		return "";
 	}
 	
 	@RequestMapping("/login/admin/addNewRestaurant.do")
