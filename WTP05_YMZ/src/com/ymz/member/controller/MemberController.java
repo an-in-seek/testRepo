@@ -3,7 +3,6 @@ package com.ymz.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -143,10 +143,18 @@ public class MemberController {
 	}
 	
 	// 전체 정보 조회2
-	@RequestMapping("memberListPaging.do")
+	@RequestMapping("login/memberListPaging.do")
 	public ModelAndView memberListPaging(@RequestParam(defaultValue="1")int page){
 		Map map = service.getMemberListPaging(page);
 		return new ModelAndView("member/member_list_paging.tiles", map);
+	}
+	
+	//리스트에서 id로 회원정보 조회
+	@RequestMapping("login/findMemberByInfo.do")
+	public  ModelAndView findMemberByInfo(@RequestParam String id ){
+		System.out.println("출력되냐?????????");
+		Member member = service.getMemberById(id);
+		return new ModelAndView("member/member_list_paging.tiles", "member", member);
 	}
 	
 	

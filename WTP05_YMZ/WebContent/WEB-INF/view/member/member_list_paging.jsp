@@ -16,19 +16,38 @@ $(document).ready(function(){
 			type:"post",
 			dataType:"json",
 			success:function(ret){
-				$("#id").text("아이디 : "+ret.id);
+				$("#pic").html("<img src='${initParam.rootPath }/uploadPhoto/no-photo.png'>");
+				$("#memberId").text("아이디 : "+ret.id);
 				$("#password").text("패스워드 : "+ret.password);
 				$("#name").text("이름 : "+ret.name);
+				$("#nickname").text("닉네임 : "+ret.nickname);
+				$("#birth").text("생일 : "+ret.birth);
+				$("#sex").text("성별 : "+ret.sex);
+				$("#address").text("주소 : "+ret.address);
 				$("#email").text("이메일 : "+ret.email);
 				$("#joinDate").text("가입일 : "+ret.joinDate);
+				$("#mileage").text("마일리지 : "+ret.mileage);
+				$("#grade").text("등급 : "+ret.grade);
 				//Dialog 띄우기 
-				$("#dialog").dialog({modal:true,width:400});
+				$("#dialog").dialog({modal:true,width:500});
 			},
 			error:function(xhr, dd, ddd){
 				alert(xhr.status + dd + ddd);
 			}
 		});
 	});
+	/* $("#categorySelect").on("change", function(){
+		var txt = $(this).val();
+		alert("셀렉트 : "+txt);
+		
+		if(txt == "아이디"){
+			
+		}else if(txt == "이름"){
+			
+		}else if(txt == "닉네임"){
+			document.
+		}
+	}); */
 });
 </script>
 
@@ -75,6 +94,7 @@ article{
 				<td>닉네임</td>
 				<td>Email</td>
 				<td>전화번호</td>
+				<td>등급</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -86,6 +106,7 @@ article{
 					<td>${member.nickname }</td>
 					<td>${member.email}</td>
 					<td>${member.phoneNo}</td>
+					<td>${member.grade}</td>
 				</tr> 
 			</c:forEach>
 		</tbody>
@@ -124,18 +145,15 @@ article{
 <table align="center">
 				<tr>
 					<td>
-						<form id="categoryForm" name="categoryForm" action="${initParam.rootPath }/qna/qnaListByCategory.do" method="post">
-							<select id="category" name="category">
-								<option>검색방식</option>
-								<option value="아이디">아이디(ID)</option>
-								<option value="이름">이름</option>
-								<option value="닉네임">닉네임</option>
-							</select>
-						</form>
+						<select id="categorySelect" name="category">
+							<option value="아이디">아이디(ID)</option>
+							<option value="이름">이름</option>
+							<option value="닉네임">닉네임</option>
+						</select>
 					</td>
 					<td colspan="2">
-						<form id="searchQna" name="searchQna" action="${initParam.rootPath }/qna/searchQna.do" method="post">
-							<input type="text" id="text" name="text" placeholder="검색하기">						
+						<form id="searchForm" name="searchForm" action="${initParam.rootPath }/member/login/findMemberByInfo" method="post">
+							<input type="text" id="memberId" name="id" placeholder="검색하기">			
 							<input type="submit" id="searchBtn" value="검색">
 						</form>
 					</td>
@@ -149,13 +167,19 @@ article{
 </div>
 
 <div id="dialog" title="선택 회원 정보">
-	<figure id="pic"></figure>
+	<figure id="pic" align="center"></figure>
 	<section>
 		<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 정보 </header>
-		<article id="id"></article>
+		<article id="memberId"></article>
 		<article id="password"></article>
 		<article id="name"></article>
+		<article id="nickname"></article>
+		<article id="birth"></article>
+		<article id="sex"></article>
+		<article id="address"></article>
 		<article id="email"></article>
 		<article id="joinDate"></article>
+		<article id="mileage"></article>
+		<article id="grade"></article>
 	</section>
 </div>

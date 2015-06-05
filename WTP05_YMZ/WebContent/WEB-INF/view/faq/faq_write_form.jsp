@@ -45,8 +45,8 @@ article{
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td align="center">제목</td>
-			<td><input type="text" id="title" name="title" size="80" maxlength="100" style="height:20px;"></td>
+			<td align="center" width="40px">제목</td>
+			<td><input type="text" id="title" name="title" style="width: 600px" maxlength="100" style="height:20px;"></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">
@@ -55,7 +55,7 @@ article{
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center">내용</td>
-			<td><textarea id="content" name="content" cols="80" rows="20"></textarea></td>
+			<td><textarea id="content" name="content" rows="20" style="width: 600px"></textarea></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">
