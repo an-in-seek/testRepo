@@ -1,6 +1,8 @@
 package com.ymz.restaurantreply.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +89,10 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO{
 	@Override
 	public double updateScore(double score, int restaurantNo) {
 	
-		return session.selectOne(namespace+"updateScore", score);
+		Map map = new HashMap();
+		map.put("score", score);
+		map.put("restaurantNo", restaurantNo);
+		return session.update(namespace+"updateScore", map);
 	}
 	
 

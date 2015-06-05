@@ -94,18 +94,14 @@
 		where restaurant_no =#{restNumber}
 	</select>
 
-	<update id="updateScore" parameterType="double">
+	<update id="updateScore" parameterType="Map">
 		update restaurant
 
 		set score = #{score}
 		
-		where resturant_no =#{restNumber}
-
-
-
-
-
-
+		where restaurant_no =#{restaurantNo}
+			
+		
 	</update>
 
 </mapper>
