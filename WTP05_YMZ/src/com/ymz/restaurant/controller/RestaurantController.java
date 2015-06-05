@@ -155,8 +155,19 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping("/login/admin/modifyRestaurant.do")
-	public String modifyRestaurant() {
-		return "";
+	public String modifyRestaurant(Restaurant restaurant, String addedPicture, String building, String floor,
+			String[] foodName, String[] foodPrice, String[] foodDescription) {
+		restaurant.setPictureName(addedPicture+",");
+		restaurant.setTheme(restaurant.getTheme()+",");
+		
+		System.out.println(restaurant);
+		System.out.println(building);
+		System.out.println(floor);
+		System.out.println(foodName);
+		System.out.println(foodPrice);
+		System.out.println(foodDescription);
+		
+		return "restaurant/restaurant_view.tiles";
 	}
 	
 	@RequestMapping("/login/admin/addNewRestaurant.do")
