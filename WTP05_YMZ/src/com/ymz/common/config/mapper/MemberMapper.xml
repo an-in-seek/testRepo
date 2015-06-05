@@ -84,6 +84,11 @@
 		where	 nickname=#{nickname}
 	</select>
 	
+	<select id="selectMemberByName" parameterType="string" resultMap="member-resultmap">
+		<include refid="member-select"/>
+		where	 name=#{name}
+	</select>
+	
 	<select id="selectAllMember" resultMap="member-resultmap">
 		<include refid="member-select"/>
 	</select>

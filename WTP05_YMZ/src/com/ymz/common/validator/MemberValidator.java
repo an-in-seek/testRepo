@@ -24,7 +24,7 @@ public class MemberValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sex", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "required");
 		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNo", "required");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNo", "required");
 		
 	}
 
