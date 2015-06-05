@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script type="text/javascript">
 function id_pop(){
 	  window.open('${initParam.rootPath }/popup/idFind.jsp','네이버팝업','width=450, height=350, scrollbars=no');

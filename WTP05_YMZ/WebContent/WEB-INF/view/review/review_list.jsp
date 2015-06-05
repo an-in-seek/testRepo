@@ -10,17 +10,26 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <script type="text/javascript">
-$(document).ready(function(){
-	
-	
-	// 오늘 날짜 뽑아오기
+
+
+function chagee(time, num){
 	var nowdate = new Date();
 	var year = nowdate.getFullYear();
 	var month = nowdate.getMonth() + 1;
-	var day = nowdate.getDate()
-	date_str = year + "-" + (month<=9? '0'+month:month) + "-" + (day<=9? '0'+day:day);
-	alert(date_str);
- 
+	var day = nowdate.getDate();
+	var date_str = year + "-" + (month<=9? '0'+month:month) + "-" + (day<=9? '0'+day:day);
+	var regDate = time.substring(0,10);
+	//alert(regDate);
+	if(date_str == regDate){
+		$("#regDate"+num).html(time.substring(11,19));
+	}else{
+		$("#regDate"+num).html(regDate);
+	}
+}
+
+$(document).ready(function(){
+	
+	//alert(date_str);
 	
 	var txt = "";
 	// 검색 버튼 이벤트
@@ -216,7 +225,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.reviewList }" var="review">
+			<c:forEach items="${requestScope.reviewList }" var="review" varStatus="status">
 				<tr>
 					<td align="center">${review.reviewNo }</td>
 					<td align="left" id="title">
@@ -228,8 +237,13 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 					</a>
 					</td>
 					<td align="center">${review.memberId}</td>
-					<td id="regDate" align="center">
-					${review.regDate.substring(0,10)}</td>
+					<td id="regDate${status.index+1}" align="center">
+						<script type="text/javascript">
+							var tt = "${review.regDate}";
+							var num = "${status.index+1}";
+							chagee(tt, num);
+						</script>
+					</td>
 					<td align="center" style="width:50px">${review.recommend}</td>
 					<td align="center">${review.hits}</td>
 				</tr> 
