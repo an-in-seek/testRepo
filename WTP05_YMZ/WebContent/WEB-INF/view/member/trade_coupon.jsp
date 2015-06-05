@@ -52,7 +52,6 @@ $(document).ready(function(){
 				dif.innerText=$("#currentMileage").val()+" - "+$("#price").val();
 				cnt++;
 				document.getElementById("count").value = cnt;
-				alert(cnt);
 				var num1 = Number($("#price").val());
 				var num2 = Number($("#currentMileage").val());
 				num3 = num2-num1;
