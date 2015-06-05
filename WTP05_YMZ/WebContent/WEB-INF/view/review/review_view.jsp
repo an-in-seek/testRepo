@@ -11,7 +11,7 @@
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <script type="text/javascript">
 
-
+//댓글 삭제
 function removeReply(reviewNo, rnum, pNo){
 	var isDel = confirm("정말로 삭제하시겠습니까?");
 	if (isDel) {
@@ -21,6 +21,18 @@ function removeReply(reviewNo, rnum, pNo){
 	}
 }
 
+//댓글 수정
+function modifyReply(reviewNo, rnum, pNo, idx){
+	var isUp=confirm("수정하시겠습니까?")
+	if(isUp){
+		//document.location.href="${initParam.rootPath}/review/login/modifyReviewReplyform.do?reviewNo="+reviewNo+"&replyNo="+rnum+"&pageNo="+pNo;
+		//$("#replyBody").find(":first-child").next().html("<tr><td><input type='text' value='영역'></td></tr>");
+		$("#dialog").dialog({modal:true, width:400});
+
+	}else{
+		return;
+	}
+}
 
 $(document).ready(function(){
 	var reviewNumber = ${requestScope.review.reviewNo};
@@ -82,13 +94,8 @@ $(document).ready(function(){
 			return false;
 	   }
 	})
-
-
-	//댓글 수정 버튼
-	$("#reply_modifyBtn").on("click", function(){
-		
-	}); 
 	
+	//------
 	$("#reply_reportBtn").on("click", function(){
 		alert("로그인부터 하세욥!!!");
 	});
@@ -200,19 +207,24 @@ ${requestScope.review.content }<br>
 				<td></td>
 			</tr>
 		</thead>
-		<tbody>
-			<c:forEach items="${requestScope.reviewReplyList }" var="reply">
-				<tr>
+		<tbody id="replyBody">
+			<c:forEach items="${requestScope.reviewReplyList }" var="reply"  varStatus="status">
+				<tr id="reply${status.index+1}">
 					<td>${reply.replyNo}</td>
 					<td>${reply.memberId}</td>
 					<td>${reply.content}</td>
 					<td>${reply.regDate}</td>
 					<td>
-						<button id="reply_modifyBtn" >수정</button>
+						<input type="button" id="reply_modifyBtn${reply.replyNo}"  
+													onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
+													
 						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
 													onclick="removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});"  value="삭제" >
-						<button id="reply_reportBtn">신고</button>
+													
+						<input type="button"  id="reply_reportBtn"  value ="신고">
+					
 					</td>
+					
 				</tr> 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->
@@ -224,7 +236,7 @@ ${requestScope.review.content }<br>
 		<tr>
 			<td>
 				<!-- 댓글 작성 영역 -->
-				<textarea name="content" id="reply_content" style="width:600px; height:100px;"></textarea><br>
+				<textarea name="content" id="reply_content" style="width:600px; height:100px;">${requestScope.reply.content }</textarea><br>
 			</td>
 			<td>
 				<!-- 등록 버튼 -->
@@ -235,7 +247,16 @@ ${requestScope.review.content }<br>
 		</tr>
 	</table>
 </form>
-
+<div id="dialog" title="ㅎ2">
+	<figure id="pic"></figure>
+	<section>
+	<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 정보 </header>
+	<form action="${initParam.rootPath }/review/login/modifyReviewReply.do" method="post">
+	<input type="text" id="content" name="content">
+	<input type="submit" value="수정">
+	</form>
+	</section>
+</div>
 </div>
 </body>
 

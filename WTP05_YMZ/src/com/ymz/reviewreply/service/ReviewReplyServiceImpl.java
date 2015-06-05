@@ -43,4 +43,13 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 		return map;
 	}
 
+	//댓글 내용 갖고오기
+	@Override
+	public ReviewReply getReviewReplyContent(int replyNo) {
+
+		return dao.getReviewReplyContent(replyNo);
+	}
+	
+	
+
 }

@@ -1,15 +1,12 @@
 package com.ymz.review.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -176,9 +173,19 @@ public class ReviewController {
 			return "redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo();
 		}
 
+		//댓글 수정(글옮기기)
+		@RequestMapping(value="login/modifyReviewReplyform.do")
+		public ModelAndView modifyReviewReplyform(@ModelAttribute ReviewReply reply, ModelMap map){
+			reply = replyService.getReviewReplyContent(reply.getReplyNo());
+			System.out.println(reply.getContent());
+			map.addAttribute("reply", reply);
+			return new ModelAndView("/review/reviewView.do?reviewNo="+reply.getReviewNo() + "&pageNo="+reply.getPageNo(), map);
+		}
+		
 		//댓글 수정
 		@RequestMapping(value="login/modifyReviewReply.do", method=RequestMethod.POST)
 		public String modifyReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session) throws Exception{
+			System.out.println("수정할 댓글 : "+ reply.getContent());
 			Member member = (Member)session.getAttribute("login_info");
 			String userId = member.getId();
 			reply.setMemberId(userId);
