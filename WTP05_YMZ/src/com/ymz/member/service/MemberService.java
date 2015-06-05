@@ -77,4 +77,6 @@ public interface MemberService {
 	public abstract void removeMemberById(String id);
 
 	public abstract void transactionTest(Member m1, Member m2) throws Exception;
+
+	public abstract Map getMemberByInfo(String info, String command, int pageNo);
 }

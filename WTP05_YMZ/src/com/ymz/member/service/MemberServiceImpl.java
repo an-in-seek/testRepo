@@ -77,25 +77,28 @@ public class MemberServiceImpl implements MemberService {
 		map.put("pagingBean", pagingBean);
 		return map;
 	}
-	/**
-	 * ID로 회원 조회 메소드
-	 * @param id : 조회할 회원 ID
-	 * @return
-	 */
+	
+	//ID, 이름, 닉네임으로 회원 조회 메소드
 	@Override
-	public Member getMemberById(String id){
-		
-		return dao.selectMemberById(id);
-		
+	public Map getMemberByInfo(String info, String command, int pageNo) {
+		List<Member> list = dao.selectAllMemberByInfo(info, command, pageNo);
+		int totalContent = dao.selectTotalMemberCountByInfo(info, command);
+		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
+		HashMap map = new HashMap();
+		map.put("member_list", list);
+		map.put("pagingBean", pagingBean);
+		return map;
 	}
 	
-	/**
-	 * Email로 회원정보 조회 메소드
-	 */
+	 //ID로 회원 조회 메소드
+	@Override
+	public Member getMemberById(String id){
+		return dao.selectMemberById(id);
+	}
 	
+	// Email로 회원정보 조회 메소드
 	@Override
 	public Member getMemberByEmail(String email) {
-		
 		return dao.selectMemberByEmail(email);
 	}
 	
@@ -167,7 +170,6 @@ public class MemberServiceImpl implements MemberService {
 		dao.insertMember(m2);
 
 	}
-	
 	
 	
 }

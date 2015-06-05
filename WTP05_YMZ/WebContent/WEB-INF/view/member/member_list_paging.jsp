@@ -36,18 +36,19 @@ $(document).ready(function(){
 			}
 		});
 	});
-	/* $("#categorySelect").on("change", function(){
+	
+	$("#categorySelect").on("change", function(){
 		var txt = $(this).val();
-		alert("셀렉트 : "+txt);
-		
-		if(txt == "아이디"){
-			
-		}else if(txt == "이름"){
-			
-		}else if(txt == "닉네임"){
-			document.
+		$("#command").val(txt)
+	}); 
+	
+	$("#searchBtn").on("click", function(){
+		var state = $("#categorySelect").val()
+		if(state == '검색방식'){
+			alert("검색방식을 선택하세요.");
+			return false;
 		}
-	}); */
+	}); 
 });
 </script>
 
@@ -118,7 +119,7 @@ article{
 <!-- 이전 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.previousPageGroup }">
-		<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
+		<a href="${initParam.rootPath }/member/login/memberListPaging.do?page=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
 	</c:when>
 	<c:otherwise>◀&nbsp;</c:otherwise>
 </c:choose>	
@@ -129,14 +130,14 @@ article{
 			&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
 		</c:when>
 		<c:otherwise>
-			<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
+			<a href="${initParam.rootPath }/member/login/memberListPaging.do?page=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 <!-- 다음 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.nextPageGroup }">
-		<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
+		<a href="${initParam.rootPath }/member/login/memberListPaging.do?page=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
 	</c:when>
 	<c:otherwise>&nbsp;▶</c:otherwise>
 </c:choose>	
@@ -146,14 +147,17 @@ article{
 				<tr>
 					<td>
 						<select id="categorySelect" name="category">
-							<option value="아이디">아이디(ID)</option>
-							<option value="이름">이름</option>
-							<option value="닉네임">닉네임</option>
+							<option value="검색방식">검색방식</option> 
+							<option value="member_id">아이디</option>
+							<option value="member_name">이름</option>
+							<option value="member_nickname">닉네임</option>
+							<option value="grade">등급</option>
 						</select>
 					</td>
 					<td colspan="2">
-						<form id="searchForm" name="searchForm" action="${initParam.rootPath }/member/login/findMemberByInfo" method="post">
-							<input type="text" id="memberId" name="id" placeholder="검색하기">			
+						<form id="searchForm" name="searchForm" action="${initParam.rootPath }/member/login/findMemberByInfo.do" method="post">
+							<input type="text" id="info" name="info" placeholder="검색하기">			
+							<input type="hidden" id="command" name="command">
 							<input type="submit" id="searchBtn" value="검색">
 						</form>
 					</td>

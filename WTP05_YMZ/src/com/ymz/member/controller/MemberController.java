@@ -1,6 +1,8 @@
 package com.ymz.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -155,12 +157,13 @@ public class MemberController {
 		return new ModelAndView("member/member_list_paging.tiles", map);
 	}
 	
-	//리스트에서 id로 회원정보 조회
+	//리스트에서 (ID,이름,닉네임,등급)으로 회원정보 조회
 	@RequestMapping("login/findMemberByInfo.do")
-	public  ModelAndView findMemberByInfo(@RequestParam String id ){
-		System.out.println("출력되냐?????????");
-		Member member = service.getMemberById(id);
-		return new ModelAndView("member/member_list_paging.tiles", "member", member);
+	public  ModelAndView findMemberByInfo(@RequestParam String info, @RequestParam String command){
+		int pageNo=1;
+		System.out.println(info+" --- "+command);
+		Map map = service.getMemberByInfo(info, command, pageNo);
+		return new ModelAndView("member/member_list_paging.tiles", map);
 	}
 	
 	
