@@ -79,6 +79,11 @@ public class RestaurantController {
 		new File(path, name).delete();
 	}
 	
+	@RequestMapping("/restaurantTypeSelect.do")
+	public String restaurantTypeSelect() {
+		return "restaurant/restaurant_type_select.tiles";
+	}
+	
 	@RequestMapping("/showListByType.do")
 	public String showListByType(
 			@RequestParam(defaultValue="전체") String category,
@@ -236,21 +241,28 @@ public class RestaurantController {
 	}
 	//댓글 삭제
 	@RequestMapping("/login/removeReply.do")
-	public String removeRestaurantReplyByReplyNo(@ModelAttribute RestaurantReply restaurantReply,int number, HttpSession session){
+	public String removeRestaurantReply(@ModelAttribute RestaurantReply restaurantReply,@RequestParam int number, @RequestParam int restaurantNo ,HttpSession session){
 		Member member = (Member)session.getAttribute("login_info");
-		restaurantReply.setMemberId(member.getId());
-		replyService.removeRestaurantReplyByReplyNo(number);
-		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getNumber();
+		String userId = member.getId();
+		System.out.println(number);
+		replyService.removeRestaurantReply(restaurantReply,number, userId);
+		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantNo;
 
 	}
-	
+	//수정하기
 	@RequestMapping("/login/updateReply.do")
-	public String modifyRestaurantReply(@ModelAttribute RestaurantReply restaurantReply, HttpSession session){
+	public String modifyRestaurantReply(@ModelAttribute RestaurantReply restaurantReply,HttpSession session){
 		Member member = (Member)session.getAttribute("login_info");
-		restaurantReply.setMemberId(member.getId());
-		
-		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getContent();
-		
+		String userId = member.getId();
+		restaurantReply.setMemberId(userId);
+		System.out.println("수정할 댓글 : "+restaurantReply.getContent());
+		System.out.println("로그인한 아이디 : "+userId);
+		System.out.println("맛집정보 번호 : "+restaurantReply.getRestaurantNo());
+		System.out.println("댓글번호 : "+restaurantReply.getNumber());
+//		System.out.println("페이지번호 : "+restaurantReply.get);
+		replyService.modifyRestaurantReply(restaurantReply);
+		int restaurantNo = restaurantReply.getRestaurantNo();
+		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantNo;
 		
 	}
 	

@@ -32,13 +32,13 @@ article{
 
 <h2 align="center">FAQ게시물 수정</h2>
 
-
+<div style="padding:20px">
 <form id="modifyForm" method="post" action="${initParam.rootPath}/faq/login/modify.do" >
 	<input type="hidden" name="number" value="${requestScope.faq.number}">
 	<table id="tb" align="center" width="700px" style="border:solid 2px #050099">
 		<thead>
 			<tr style="text-align: center;">
-				<td colspan="4"><font size="bold">글쓰기</font></td>
+				<td colspan="4"><font size="4">수정하기</font></td>
 			</tr>
 		</thead>
 		<tr height="1" >
@@ -46,8 +46,8 @@ article{
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td align="center">제목</td>
-			<td><input type="text" id="title" name="title" size="80" maxlength="100" style="height:20px;" value="${requestScope.faq.title}"></td>
+			<td align="center" width="40px">제목</td>
+			<td><input type="text" id="title" name="title" maxlength="50" style="width:580px; height:20px;" value="${requestScope.faq.title}"></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">
@@ -56,7 +56,7 @@ article{
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center">내용</td>
-			<td><textarea id="content" name="content" cols="80" rows="20">${requestScope.faq.content}</textarea></td>
+			<td><textarea id="content" name="content" cols="80" rows="20" style="width: 580px">${requestScope.faq.content}</textarea></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">
@@ -72,3 +72,4 @@ article{
 		</tr>
 	</table>
 </form>
+</div>

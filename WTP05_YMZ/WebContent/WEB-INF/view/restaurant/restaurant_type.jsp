@@ -23,11 +23,6 @@ $(document).ready(function(){
 		$(this).css("text-decoration","none");
 	});
 	
-	$("#align").on("change",function(){
-		$("#alignForm").append("<input type='hidden' name='category' value='${requestScope.category}'>");
-		alignForm.submit();
-	});
-	
 	$("#alignForm select option[value=${requestScope.align}]").prop("selected","selected");
 	
 	$("#searchForm").on("submit",function(){
@@ -49,21 +44,31 @@ $(document).ready(function(){
 	},function(){
 		$(this).css("background","none");
 	});
+	
+	$("#category option[value=${requestScope.category}]").prop("selected","selected");
+	$("#category").on("change",function(){
+		$("#alignForm").submit();
+	});
+	$("#align").on("change",function(){
+		alignForm.submit();
+	});
 });
 </script>
 </head>
 <body><div align="center">
-<a href="${initParam.rootPath }/restaurant/showListByType.do?category=전체&align=${requestScope.align}">전체보기</a>
-<a href="${initParam.rootPath }/restaurant/showListByType.do?category=한식&align=${requestScope.align}">한식</a>
-<a href="${initParam.rootPath }/restaurant/showListByType.do?category=양식&align=${requestScope.align}">양식</a>
-<a href="${initParam.rootPath }/restaurant/showListByType.do?category=중식&align=${requestScope.align}">중식</a>
-<a href="${initParam.rootPath }/restaurant/showListByType.do?category=일식&align=${requestScope.align}">일식</a>
-<p/>
 <table border="1" style="width:100%">
 	<thead>
 		<tr height="50px">
 			<td style="border-left-style:hidden;border-top-style:hidden;border-right-style:hidden;" colspan="4">
 				<form id="alignForm" action="${initParam.rootPath }/restaurant/showListByType.do" method="post">
+				분류:
+				<select id="category" name="category">
+					<option value="전체">전체보기</option>
+					<option value="한식">한식</option>
+					<option value="양식">양식</option>
+					<option value="중식">중식</option>
+					<option value="일식">일식</option>
+				</select>
 				정렬:
 				<select id="align" name="align">
 					<option value="date">최근 등록일순</option>

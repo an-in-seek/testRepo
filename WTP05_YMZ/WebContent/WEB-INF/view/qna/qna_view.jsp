@@ -85,6 +85,7 @@ article {
 
 <h2 align="center">게시물 내용</h2>
 
+<div align="center" style="padding:20px">
 <table id="tb" align="center" width="700px" style="border:solid 2px #050099">
 	<thead>
 		<tr style="text-align:center">
@@ -165,3 +166,4 @@ article {
 		<td width="0">&nbsp;</td>
 	</tr>
 </table>
+</div>

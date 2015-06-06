@@ -32,48 +32,46 @@
 		restaurant_no)
 		values( restaurant_reply_no_seq.nextval,
 					to_char(sysdate, 'yyyymmdd'),
-					#{content},
+					#{content, jdbcType=VARCHAR},
 					#{score},
 					#{memberId},
 					#{restaurantNo})
 	</insert>
-
+<!-- 게시물 댓글 개수 +1 -->
 	<update id="updateReplyCount" parameterType="_int">
 		update restaurant
 		set reply_count = reply_count + 1
 		where restaurant_no=#{restaurantNo}
 	</update>
-
+	
+	<!-- 게시물 댓글 개수 -1 -->
+<update id="updateReplyCount2" parameterType="_int">
+		update restaurant
+		set reply_count = reply_count - 1
+		where restaurant_no=#{restaurantNo}
+	</update>
+	
+<!-- 수정 -->
 	<update id="updateRestaurantReply" parameterType="RestaurantReply">
-		update
-		restaurant_reply
-
-		set content=#{content}
-
-		where reply = #{number}
+		update 	restaurant_reply
+		set content=#{content}, score=#{score}
+		where restaurant_reply_no=#{number} and member_id=#{memberId}
 
 	</update>
 	<!-- 삭제 -->
-	<delete id="deleteRestaurantReplyByReplyNo" parameterType="int">
-		delete from restaurant_reply where reply = #{number}
+	<delete id="deleteRestaurantReply" parameterType="map">
+		delete from restaurant_reply 
+
+		where restaurant_reply_no=#{number} and member_id=#{memberId}
 	</delete>
 
 
-	<select id="selectRestaurantReplyByReplyNo" parameterType="string"
-		resultMap="restaurantReply-resultmap">
-		select restaurant_reply
-
-		set content=#{content}
-
-		where reply =
-		#{number}
-	</select>
 
 	<!-- 조회 -->
 	<select id="selectAllRestaurantReply" parameterType="int"
 		resultMap="restaurantReply-resultmap">
 		<include refid="restaurant_reply" />
-		where restaurant_no =#{restNumber}
+		where restaurant_no =#{restaurantNo}
 	</select>
 
 	<!-- 평점 -->

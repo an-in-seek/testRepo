@@ -39,6 +39,18 @@
 		<result column="join_date" property="joinDate"/>	
 	</resultMap>
 	
+<!-- 	<resultMap type="member" id="member-qna-resultmap" extends="member-resultmap">
+		<collection property="QNA" ofType="QNA">
+			<id column="qna_no" property="number"/>
+			<result column="qna_title" property="title"/>
+			<result column="qna_category" property="category"/>
+			<result column="qna_registration_date" property="registrationDate"/>
+			<result column="qna_hits" property="hits"/>
+			<result column="qna_content" property="content"/>
+			<result column="member_id" property="memberId"/>
+		</collection>
+	</resultMap> -->
+	
 	<insert id="insertMember" parameterType="member">
 		insert into member (member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
 							 favorite_food, mileage, grade, join_date)

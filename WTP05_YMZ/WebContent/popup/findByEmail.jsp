@@ -4,30 +4,11 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery.js"></script>
 <script type="text/javascript">
-	/*
-	 * 이메일주소 select 값 선택
-	 */
-	function mailCheck(selectObj){ 
-		document.getElementById('emailAddress').value=selectObj.value;
-		if(selectObj.value==""){
-			$("#emailAddress").focus();	
-		}
-	}
 $(document).ready(function(){
 
-	$("#findPw").on("submit",function(){
-		var flag = confirm("비밀번호를 수정하시겠습니까");
-		if(!flag){
-			alert("취소하셨습니다");
-			return false;
-			window.close();
-		}else{
+	$("#findId").on("submit",function(){
 		if(!$("#id").val()){
 			alert("아이디를 입력하세요");
-			return false;
-		}
-		if(!$("#name").val()){
-			alert("이름을 입력하세요");
 			return false;
 		}
 		if(!$("#emailName").val()){
@@ -38,14 +19,11 @@ $(document).ready(function(){
 			alert("이메일을 입력하세요");
 			return false;
 		}
-		
-		}
-		//window.close();
+		alert("고객님의 메일로 임시비밀번호가 전송되었습니다");
 	})
 })
 </script>
-<h2>비밀번호찾기</h2>
-<form method="post" action="${initParam.rootPath }/member/sendpw.do"  id="findPw" enctype="multipart/form-data">
+<form method="post" action="${initParam.rootPath }/member/sendpw.do"  id="registerForm" enctype="multipart/form-data">
 <c:if test="${requestScope.error_message != null}">
 	<font color="red" size="2">${requestScope.error_message}</font>
 </c:if>
@@ -54,16 +32,8 @@ $(document).ready(function(){
 			<td>
 				ID
 			</td>
-			<td>
+			<td colspan="2">
 				<input type="text" id="id" name="id">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				이름
-			</td>
-			<td>
-				<input type="text" id="name" name="name">
 			</td>
 		</tr>
 		<tr>
