@@ -79,6 +79,11 @@ public class RestaurantController {
 		new File(path, name).delete();
 	}
 	
+	@RequestMapping("/restaurantTypeSelect.do")
+	public String restaurantTypeSelect() {
+		return "restaurant/restaurant_type_select.tiles";
+	}
+	
 	@RequestMapping("/showListByType.do")
 	public String showListByType(
 			@RequestParam(defaultValue="전체") String category,
