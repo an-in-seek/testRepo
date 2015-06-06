@@ -163,4 +163,14 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	public String selectFloorByLocationNo(int locationNo) {
 		return session.selectOne(namespace+"selectFloorByLocationNo", locationNo);
 	}
+
+	@Override
+	public int updateRestaurant(Restaurant restaurant) {
+		return session.update(namespace+"updateRestaurant", restaurant);
+	}
+
+	@Override
+	public int deleteFoods(int restaurantNo) {
+		return session.delete(namespace+"deleteFoods", restaurantNo);
+	}
 }

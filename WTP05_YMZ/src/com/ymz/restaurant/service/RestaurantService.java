@@ -1,6 +1,5 @@
 package com.ymz.restaurant.service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,7 @@ public interface RestaurantService {
 	public List<String> getBuildingNames();
 	public List<String> getFloorsByBuildingName(String buildingName);
 	public int getLocationNo(String buildingName, String floor);
-	public void addRestaurant(Restaurant restaurant, String[] foodNames, String[] foodPrices, String[] foodDescriptions);
+	public void addRestaurant(Restaurant restaurant, String[] foodNames, String[] foodPrices, String[] foodDescriptions, HttpServletRequest request) throws Exception;
 	public Restaurant getRestaurantByNo(int restaurantNo);
 	public String getLocationByNo(int locationNo);
 	public List<Food> getFoodsByRestaurantNo(int restaurantNo);
@@ -25,4 +24,5 @@ public interface RestaurantService {
 	public Map<String, Object> getRestaurantsPaging(String buildingName, String floor, String align, int currentPage, String searchWord);
 	public int removeRestaurant(int restaurantNo);
 	public Map setRestaurantModifyForm(int restaurantNo, HttpServletRequest request) throws Exception;
+	public void modifyRestaurant(Restaurant restaurant, String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception;
 }

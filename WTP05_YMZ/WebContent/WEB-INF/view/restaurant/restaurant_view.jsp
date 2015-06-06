@@ -23,22 +23,25 @@ $(document).ready(function(){
 	
 	$("#selectedPicture").prop("src",$("#selectPicture img:first").prop("src"));
 	
-	$(".isUpload").on("click",function(){
+	$(".isUpload").hover(function(){
 		$("#selectedPicture").prop("src",$(this).prop("src"));
+		$(this).parent().css("background-color","red");
+	},function(){
+		$(this).parent().css("background","none");
 	});
 	
 	//메뉴판 체크박스 클릭이벤트
 	$("input[type=checkbox]").on("click",function(){
 		if($(this).is(":checked")){
 			if(calcListCount==0){
-				$("#calcList").html("<tr class='"+$(this).prop("id")+"'><td align='left' style='padding-left:20px;'></td><td></td><td></td><td></td></tr>");
+				$("#calcList").html("<tr class='"+$(this).prop("id")+"'><td align='left' style='padding-left:20px;border-left-style:hidden;border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td></tr>");
 				$("#calcList tr td:first-child").html($("#menus ."+$(this).prop("id")+" td:first-child").html());
 				$("#calcList tr td:nth-child(2)").html("<span class='foodPrice'>"+$("#menus ."+$(this).prop("id")+" td:nth-child(2) .foodPrice").html()+"</span>원");
 				$("#calcList tr td:nth-child(3)").html($("#menus ."+$(this).prop("id")+" td:nth-child(4) input").val());
 				$("#calcList tr td:nth-child(4)").html("<span class='subTotal'>"+$("#calcList tr td:nth-child(2) .foodPrice").text()*$("#calcList tr td:nth-child(3)").text()+"</span>원");
 				calcListCount++;
 			}else{
-				$("#calcList").append("<tr class='"+$(this).prop("id")+"'><td align='left' style='padding-left:20px;'></td><td></td><td></td><td></td></tr>");
+				$("#calcList").append("<tr class='"+$(this).prop("id")+"'><td align='left' style='padding-left:20px;border-left-style:hidden;border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td></tr>");
 				$("#calcList tr:last-child td:first-child").html($("#menus ."+$(this).prop("id")+" td:first-child").html());
 				$("#calcList tr:last-child td:nth-child(2)").html("<span class='foodPrice'>"+$("#menus ."+$(this).prop("id")+" td:nth-child(2) .foodPrice").html()+"</span>원");
 				$("#calcList tr:last-child td:nth-child(3)").html($("#menus ."+$(this).prop("id")+" td:nth-child(4) input").val());
@@ -47,7 +50,7 @@ $(document).ready(function(){
 			}
 		}else{
 			if(calcListCount==1){
-				$("#calcList").html("<tr><td colspan='4' height='50px'>위 메뉴판에서 메뉴와 수량을 선택하면 편리하게 예산을 짜실 수 있습니다</td></tr>");
+				$("#calcList").html("<tr><td colspan='4' height='50px' style='border-left-style:hidden;border-right-style:hidden;'>위 메뉴판에서 메뉴와 수량을 선택하면 편리하게 예산을 짜실 수 있습니다</td></tr>");
 				calcListCount--;
 			}else{
 				$("#calcList tr."+$(this).prop("id")).remove();
@@ -59,12 +62,16 @@ $(document).ready(function(){
 		for(var i=1;i<calcListCount+1;i++){
 			total=total+eval($("#calcList tr:nth-child("+i+") td:last-child .subTotal").text());
 		}
-		$("#calcTotal td:last-child").html("총합계 : <span id='total'>"+total+"</span>원");
-		$("#totalDiv").text(total/$("#calcTotal input").val());
+		$("#totalPrint").html("총합계 : <span id='total'>"+total+"</span>원");
+		$("#totalDiv").text(Math.ceil(total/$("#calcTotal input").val()));
+	});
+
+	$("#menus img").on("mouseover",function(){
+		$(this).css("cursor","pointer");
 	});
 	
 	//수량증가버튼클릭이벤트
-	$("#menus button:even").on("click",function(){
+	$("#menus img:even").on("click",function(){
 		if($("#menus tr."+$(this).prop("class")+" td:last-child input").val()<10){
 			$("#menus tr."+$(this).prop("class")+" td:last-child input").val(eval($("#menus tr."+$(this).prop("class")+" td:last-child input").val())+1);
 			if($("#menus tr."+$(this).prop("class")+" input:checked").val()=="on"){
@@ -75,14 +82,14 @@ $(document).ready(function(){
 				for(var i=1;i<calcListCount+1;i++){
 					total=total+eval($("#calcList tr:nth-child("+i+") td:last-child .subTotal").text());
 				}
-				$("#calcTotal td:last-child").html("총합계 : <span id='total'>"+total+"</span>원");
+				$("#totalPrint").html("총합계 : <span id='total'>"+total+"</span>원");
 				$("#totalDiv").text(Math.ceil(total/$("#calcTotal input").val()));
 			}
 		}
 	});
 	
 	//수량감소버튼클릭이벤트
-	$("#menus button:odd").on("click",function(){
+	$("#menus img:odd").on("click",function(){
 		if($("#menus tr."+$(this).prop("class")+" td:last-child input").val()>1){
 			$("#menus tr."+$(this).prop("class")+" td:last-child input").val(eval($("#menus tr."+$(this).prop("class")+" td:last-child input").val())-1);
 			if($("#menus tr."+$(this).prop("class")+" input:checked").val()=="on"){
@@ -93,7 +100,7 @@ $(document).ready(function(){
 				for(var i=1;i<calcListCount+1;i++){
 					total=total+eval($("#calcList tr:nth-child("+i+") td:last-child .subTotal").text());
 				}
-				$("#calcTotal td:last-child").html("총합계 : <span id='total'>"+total+"</span>원");
+				$("#totalPrint").html("총합계 : <span id='total'>"+total+"</span>원");
 				$("#totalDiv").text(Math.ceil(total/$("#calcTotal input").val()));
 			}
 		}
@@ -149,51 +156,51 @@ function removeReply(restaurantNo, number){
 <tr>
 
 <td style="width:50%">
-<table border="1" style="width:100%">
+<table style="width:100%">
 <tr align="center">
-<td colspan="5"><img id="selectedPicture" style="width:390px;height:260px;"></td>
+<td colspan="5" style="padding:1px;padding-top:5px;"><img id="selectedPicture" style="width:450px;height:300px;"></td>
 </tr>
 <tr id="selectPicture" align="center">
-<td>
-	<c:if test="${!empty requestScope.pic1 }"><img style="width:70px;height:50px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic1}"></c:if>
+<td style="width:20%;padding:5px;padding-bottom:1px;">
+	<c:if test="${!empty requestScope.pic1 }"><img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic1}"></c:if>
 </td>
-<td>
+<td style="width:20%;padding:5px;padding-bottom:1px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic2 }">
-			<img style="width:70px;height:50px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic2}">
+			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic2}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:70px;height:50px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
 		</c:otherwise>
 	</c:choose>
 </td>
-<td>
+<td style="width:20%;padding:5px;padding-bottom:1px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic3 }">
-			<img style="width:70px;height:50px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic3}">
+			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic3}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:70px;height:50px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
 		</c:otherwise>
 	</c:choose>
 </td>
-<td>
+<td style="width:20%;padding:5px;padding-bottom:1px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic4 }">
-			<img style="width:70px;height:50px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic4}">
+			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic4}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:70px;height:50px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
 		</c:otherwise>
 	</c:choose>
 </td>
-<td>
+<td style="width:20%;padding:5px;padding-bottom:1px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic5 }">
-			<img style="width:70px;height:50px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic5}">
+			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic5}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:70px;height:50px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
 		</c:otherwise>
 	</c:choose>
 </td>
@@ -242,14 +249,14 @@ function removeReply(restaurantNo, number){
 <p><font size="5"><b>메뉴판</b></font></p>
 <table border="1" style="width:100%">
 <thead>
-<tr align="center">
-<td rowspan="2">메뉴</td>
-<td rowspan="2"  style="width:15%;">가격</td>
-<td colspan="2">예산짜기</td>
+<tr align="center" style="background-color:lightgray;">
+<td rowspan="2"><b>메뉴</b></td>
+<td rowspan="2" style="width:15%;"><b>가격</b></td>
+<td colspan="2"><b>예산짜기</b></td>
 </tr>
-<tr align="center">
-<td style="width:6%;">선택</td>
-<td style="width:20%;">수량</td>
+<tr align="center" style="background-color:lightgray;">
+<td style="width:6%;"><font color="gray">선택</font></td>
+<td style="width:15%;"><font color="gray">수량</font></td>
 </tr>
 </thead>
 <tbody id="menus">
@@ -262,13 +269,18 @@ function removeReply(restaurantNo, number){
 <c:otherwise>
 <c:forEach items="${requestScope.foods }" var="food">
 	<tr class="${food.foodName }">
-		<td style="padding-left:20px;">${food.foodName }&nbsp;&nbsp;<font color="gray" size="2">${food.foodDescription }</font></td>
-		<td align="center"><span class="foodPrice">${food.foodPrice }</span>원</td>
-		<td align="center"><input type="checkbox" id="${food.foodName }"></td>
-		<td align="center">
-			<input type="number" min="1" max="10" value="1" readonly="readonly" style="width:80px">
-			<button class="${food.foodName }">↑</button>
-			<button class="${food.foodName }">↓</button>
+		<td style="padding-left:20px;border-left-style:hidden;border-right-style:hidden;">${food.foodName }&nbsp;&nbsp;<font color="gray" size="2">${food.foodDescription }</font></td>
+		<td style="border-right-style:hidden;" align="center"><span class="foodPrice">${food.foodPrice }</span>원</td>
+		<td style="border-right-style:hidden;" align="center"><input type="checkbox" id="${food.foodName }"></td>
+		<td style="border-right-style:hidden;" align="center">
+			<table>
+			<tr>
+			<td style="padding:0px;padding-right:3px;"><input type="number" min="1" max="10" value="1" readonly="readonly" style="width:80px;height:20px;"></td>
+			<td style="padding:0px;line-height:13px;">
+			<img class="${food.foodName }" src="${initParam.rootPath }/uploadPhoto/up.png"><br>
+			<img class="${food.foodName }" src="${initParam.rootPath }/uploadPhoto/down.png"></td>
+			</tr>
+			</table>
 		</td>
 	</tr>
 </c:forEach>
@@ -282,26 +294,33 @@ function removeReply(restaurantNo, number){
 <p><font size="5"><b>예산짜기</b></font></p>
 <table border="1" style="width:100%">
 <thead>
-<tr align="center">
-<td>메뉴</td>
-<td style="width:15%;">가격</td>
-<td style="width:6%;">수량</td>
-<td style="width:20%;">계</td>
+<tr align="center" height="50px" style="background-color:lightgray;">
+<td><b>메뉴</b></td>
+<td style="width:15%;"><b>가격</b></td>
+<td style="width:6%;"><b>수량</b></td>
+<td style="width:15%;"><b>계</b></td>
 </tr>
 </thead>
 <tbody id="calcList" align="center">
 <tr>
-<td colspan="4" height="50px">위 메뉴판에서 메뉴와 수량을 선택하면 편리하게 예산을 짜실 수 있습니다</td>
+<td style="border-left-style:hidden;border-right-style:hidden;" colspan="4" height="50px">위 메뉴판에서 메뉴와 수량을 선택하면 편리하게 예산을 짜실 수 있습니다</td>
 </tr>
 </tbody>
 <tfoot id="calcTotal">
-<tr>
-<td colspan="2" style="padding-left:20px;border:0px;">인원수 별 금액 :
-	<input type="number" min="1" max="10" value="1" readonly="readonly">
-	<button id="numofpeopleUp">↑</button>
-	<button id="numofpeopleDown">↓</button> 명 일 때 약 <span id="totalDiv">0</span>원 씩 지불
+<tr style="background-color:lightgray;">
+<td colspan="2" style="padding-left:20px;border:0px;">
+	<table>
+	<tr>
+	<td style="padding:0px;">인원수 별 금액 : <input style="height:20px;" type="number" min="1" max="10" value="1" readonly="readonly"></td>
+	<td style="padding:0px;padding-left:3px;padding-right:5px;line-height:13px;">
+		<img id="numofpeopleUp" src="${initParam.rootPath }/uploadPhoto/up.png"><br>
+		<img id="numofpeopleDown" src="${initParam.rootPath }/uploadPhoto/down.png">
+	</td>
+	<td style="padding:0px;">명 일 때 약 <span id="totalDiv">0</span>원 씩 지불</td>
+	</tr>
+	</table>
 </td>
-<td colspan="2" align="right" style="padding-right:20px;border:0px;">총합계 : <span id="total">0</span>원</td>
+<td id="totalPrint" colspan="2" align="right" style="padding-right:20px;border:0px;">총합계 : <span id="total">0</span>원</td>
 </tr>
 </tfoot>
 </table>

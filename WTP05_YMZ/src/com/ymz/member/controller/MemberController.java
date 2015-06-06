@@ -169,8 +169,8 @@ public class MemberController {
 	//리스트에서 (ID,이름,닉네임,등급)으로 회원정보 조회
 	@RequestMapping("login/findMemberByInfo.do")
 	public  ModelAndView findMemberByInfo(@RequestParam String info, @RequestParam String command, @RequestParam(defaultValue="1")int page){
-		List list = service.getMemberList(info, command);
-		return new ModelAndView("member/member_list.tiles", "member_list", list);
+		Map map = service.getMemberByInfo(info, command, page);
+		return new ModelAndView("member/member_list_paging.tiles", map);
 	}
 	
 	

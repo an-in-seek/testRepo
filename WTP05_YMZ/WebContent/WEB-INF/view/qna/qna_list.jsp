@@ -63,7 +63,8 @@ article {
 
 <h2 align="center">고객센터(Q&A)</h2>
 <div align="center" id="table">
-<%-- <c:if test="${fn:length(requestScope.qna_list) != 0 }"> --%>
+<c:choose>
+	<c:when test="${fn:length(requestScope.qna_list) != 0 }">
 	<table align="left" id="listTB" style="width: 800px" border="1">
 		<thead>
 			<tr align="center">
@@ -94,7 +95,6 @@ article {
 			</c:forEach>
 		</tbody>
 	</table>
-	<%-- </c:if> --%>
 
 	<table align="center">
 		<tr>
@@ -131,6 +131,27 @@ article {
 			</td>
 		</tr>
 	</table>
+	</c:when>
+	<c:otherwise>
+	<table align="left" id="listTB" style="width: 800px" border="1">
+		<thead>
+			<tr align="center">
+				<td width="40px">NO</td>
+				<td width="320px">제목</td>
+				<td width="90px">분류</td>
+				<td width="70px">작성자</td>
+				<td width="110px">작성일</td>
+				<td width="70px">조회수</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr align="center">
+				<td colspan="6"><font color="red">등록된 게시물이 없습니다.</font></td>
+			</tr>
+		</tbody>
+	</table>
+	</c:otherwise>
+</c:choose>
 
 	<table align="center">
 		<tr>
@@ -147,7 +168,7 @@ article {
 			</td>
 			<td colspan="2">
 				<form id="searchQna" name="searchQna" action="${initParam.rootPath }/qna/searchQna.do" method="post">
-					<input type="text" id="text" name="text" placeholder="제목으로 검색">						
+					<input type="text" id="text" name="text" placeholder="제목으로만 검색">						
 					<input type="submit" id="searchBtn" value="검색">
 				</form>
 			</td>

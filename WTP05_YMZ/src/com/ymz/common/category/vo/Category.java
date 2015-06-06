@@ -6,39 +6,40 @@ public class Category implements Serializable{
 
 	private String categoryId;
 	private String categoryName;
+	private String categoryInfo;
 	
-	public Category(String categoryId, String categoryName) {
+	public Category() {}
+	public Category(String categoryId, String categoryName, String categoryInfo) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
+		this.categoryInfo = categoryInfo;
 	}
-
-	public Category() {
-		super();
-	}
-
+	
 	public String getCategoryId() {
 		return categoryId;
 	}
-
 	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
 	}
-
 	public String getCategoryName() {
 		return categoryName;
 	}
-
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-
+	public String getCategoryInfo() {
+		return categoryInfo;
+	}
+	public void setCategoryInfo(String categoryInfo) {
+		this.categoryInfo = categoryInfo;
+	}
+	
 	@Override
 	public String toString() {
 		return "Category [categoryId=" + categoryId + ", categoryName="
-				+ categoryName + "]";
+				+ categoryName + ", categoryInfo=" + categoryInfo + "]";
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -46,10 +47,11 @@ public class Category implements Serializable{
 		result = prime * result
 				+ ((categoryId == null) ? 0 : categoryId.hashCode());
 		result = prime * result
+				+ ((categoryInfo == null) ? 0 : categoryInfo.hashCode());
+		result = prime * result
 				+ ((categoryName == null) ? 0 : categoryName.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -64,6 +66,11 @@ public class Category implements Serializable{
 				return false;
 		} else if (!categoryId.equals(other.categoryId))
 			return false;
+		if (categoryInfo == null) {
+			if (other.categoryInfo != null)
+				return false;
+		} else if (!categoryInfo.equals(other.categoryInfo))
+			return false;
 		if (categoryName == null) {
 			if (other.categoryName != null)
 				return false;
@@ -71,6 +78,5 @@ public class Category implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 }

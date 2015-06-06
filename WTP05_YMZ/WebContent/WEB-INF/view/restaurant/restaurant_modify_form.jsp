@@ -87,7 +87,7 @@ $(document).ready(function(){
 						pictureCheck=true;
 						$("#pictureMessage").text("");
 					}
-					$("#pictureTemp td:nth-child("+pictureCount+")").html("<img style='width:160px;height:140px' src='${initParam.rootPath}/tempPhoto/"+fileName+"'><input type='hidden' name='addedPicture' value='"+fileName+"'");
+					$("#pictureTemp td:nth-child("+pictureCount+")").html("<img style='width:160px;height:140px' src='${initParam.rootPath}/tempPhoto/"+fileName+"'><input type='hidden' name='addedPicture' value='"+fileName+"'>");
 				}
 			}
 		});
@@ -270,8 +270,12 @@ $(document).ready(function(){
 		
 		var phone = $("#phoneNo1").val()+"-"+$("#phoneNo2").val()+"-"+$("#phoneNo3").val();
 		$("#modifyForm").append("<input type='hidden' name='phoneNo' value='"+phone+"'>");
-		
+		$("#modifyForm").append("<input type='hidden' name='restaurantNo' value='${requestScope.restaurant.restaurantNo}'>");
 		$("#description").val($("#description").val().replace(/\n/g, '<br>'));
+	});
+	
+	$("#btn_cancel").on("click",function(){
+		history.back();
 	});
 });
 
