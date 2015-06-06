@@ -23,6 +23,7 @@
 		<result column="reg_date" property="regDate"/>
 		<result column="member_id" property="memberId"/>
 		<result column="reply_count" property="replyCount"/>
+		<result column="nickname" property="nickname"/>
 	</resultMap>
 	
 	<!-- 등록 -->
@@ -100,11 +101,11 @@
 	<!-- 리뷰 정렬 페이징 -->
 		<select id="ReviewSortPaging" parameterType="map" resultMap="review-resultmap">
 		select review_no, title, content, hits, recommend, 
-			   reg_date, 
+			   reg_date, nickname,
 		 	   member_id, reply_count
 		from (
 				select ceil(rownum/#{contentsPerPage}) page, 
-					   review_no, title, content, hits, 
+					   review_no, title, content, hits, nickname,
 					   recommend, reg_date, member_id, reply_count
 				from (
 						select  review_no, 
@@ -113,18 +114,21 @@
 								hits, 
 								recommend, 
 								reg_date,
-								member_id,
+								m.member_id member_id,
+								m.nickname nickname,
 								(select count(*) from REVIEW_REPLY where review_reply.review_no = review.review_no) reply_count
-						from 	review
+						from 	review, member m
+						where 1=1
+						and review.member_id = m.member_id
 						<choose>
 							<when test="searchType=='title'">
-								where title like '%'||#{query}||'%'
+								and title like '%'||#{query}||'%'
 							</when>
 							<when test="searchType=='id'">
-								where member_id like '%'||#{query}||'%'
+								and m.member_id like '%'||#{query}||'%'
 							</when>
 							<when test="searchType=='nickname'">
-								where nickname like '%'||#{query}||'%'
+								and m.nickname like '%'||#{query}||'%'
 							</when>
 						</choose>
 						<choose>

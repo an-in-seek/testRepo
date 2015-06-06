@@ -237,7 +237,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 					</c:if>
 					</a>
 					</td>
-					<td align="center">${review.memberId}</td>
+					<td align="center">${review.nickname}</td>
 					<td id="regDate${status.index+1}" align="center">
 						<script type="text/javascript">
 							var tt = "${review.regDate}";
