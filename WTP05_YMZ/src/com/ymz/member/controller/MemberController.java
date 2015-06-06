@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
@@ -20,12 +22,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.common.validator.MemberValidator;
+import com.ymz.member.mail.Email;
+import com.ymz.member.mail.EmailSender;
 import com.ymz.member.service.MemberService;
 import com.ymz.member.vo.Member;
 
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
+	
+   @Autowired
+   private EmailSender emailSender;
+   
+   @Autowired
+   private Email email;
+
 	
 	@Autowired
 	private MemberService service;
@@ -251,6 +262,18 @@ public class MemberController {
 		return result;
 	}
 	
+	/**********************리스트에서 nickname으로 회원정보 존재 유무 요청 처리 -Ajax 요청처리********************/
+	@RequestMapping("nickExistCheck.do")
+	@ResponseBody
+	public String nickExistCheck(@RequestParam String nickname){
+		String result = null;
+		if(nickname=="" || service.getMemberByNickname(nickname)!=null){
+			result = "true";
+		}else{
+			result = "false";
+		}
+		return result;
+	}
 
 	/**********************기존 비밀번호 체크********************///
 	@RequestMapping("confirmPassword.do")
@@ -345,19 +368,20 @@ public class MemberController {
 	/**********************핸드폰으로 아이디 찾기********************/
 	@RequestMapping("loginIdFind.do")
 	@ResponseBody
-	public ModelAndView loginIdFind(String name, HttpServletRequest request,ModelMap map){
-		String id = null;
+	public ModelAndView loginIdFind(String name, HttpServletRequest request, ModelMap map){
 		Member m = service.getMemberByName(name);
 		if(m!=null){
 		String phone = m.getPhoneNo();
+		System.out.println(phone);
 		String phoneCP =request.getParameter("phoneCP");
 		String num1 = request.getParameter("num1");
 		String num2 = request.getParameter("num2");
 		String exPhone = phoneCP+"-"+num1+"-"+num2;
 			if(phone.equals(exPhone)){
-				id = m.getId();
-				map.addAttribute("id",id);
-				return new ModelAndView("/WEB-INF/view/member/idFind_success.jsp",map);
+				String id = m.getId();
+				System.out.println(id);
+				request.setAttribute("id", id);
+				return new ModelAndView("/WEB-INF/view/member/idFind_success.jsp");
 			}else{
 				map.addAttribute("error_message","존재하지 않는 정보입니다");
 				return new ModelAndView("/popup/idFind.jsp",map);	
@@ -369,45 +393,95 @@ public class MemberController {
 	}
 	
 	/**********************핸드폰으로 비밀번호 찾기********************/
-	@RequestMapping("loginPwFind.do")
-	@ResponseBody
-	public ModelAndView loginPwFind(String name, HttpServletRequest request,ModelMap map){
-		String id = null;
-		Member m = service.getMemberByName(name);
-		if(m!=null){
-		String phone = m.getPhoneNo();
-		String phoneCP =request.getParameter("phoneCP");
-		String num1 = request.getParameter("num1");
-		String num2 = request.getParameter("num2");
-		String exPhone = phoneCP+"-"+num1+"-"+num2;
-			if(phone.equals(exPhone)){
-				id = m.getId();
-				request.setAttribute("id", id);
-				return new ModelAndView("/WEB-INF/view/member/pwFind_success.jsp");
-			}else{
-				map.addAttribute("error_message","존재하지 않는 정보입니다");
-				return new ModelAndView("/popup/pwFind.jsp",map);	
-				}
-		}else{
-			map.addAttribute("error_message", "존재하지 않는 정보입니다.");
-			return new ModelAndView("/popup/pwFind.jsp",map);
-		}
-	}
+//	@RequestMapping("loginPwFind.do")
+//	@ResponseBody
+//	public ModelAndView loginPwFind(String name, HttpServletRequest request,ModelMap map){
+//		String id = null;
+//		Member m = service.getMemberByName(name);
+//		if(m!=null){
+//		String phone = m.getPhoneNo();
+//		String phoneCP =request.getParameter("phoneCP");
+//		String num1 = request.getParameter("num1");
+//		String num2 = request.getParameter("num2");
+//		String exPhone = phoneCP+"-"+num1+"-"+num2;
+//			if(phone.equals(exPhone)){
+//				id = m.getId();
+//				request.setAttribute("id", id);
+//				return new ModelAndView("/WEB-INF/view/member/pwFind_success.jsp");
+//			}else{
+//				map.addAttribute("error_message","존재하지 않는 정보입니다");
+//				return new ModelAndView("/popup/pwFind.jsp",map);	
+//				}
+//		}else{
+//			map.addAttribute("error_message", "존재하지 않는 정보입니다.");
+//			return new ModelAndView("/popup/pwFind.jsp",map);
+//		}
+//	}
 	
 	/**********************비밀번호 분실시 변경 요청********************/
-	@RequestMapping("passwordChange.do")
+//	@RequestMapping("passwordChange.do")
+//	@ResponseBody
+//	public void passwordChange(String password, String passwordCheck, HttpServletRequest request){
+//		if(password!=passwordCheck){
+//			
+//		}else{
+//		String id = request.getParameter("id");
+//		Member m = service.getMemberById(id);
+//		m.setPassword(password);
+//		service.modifyPassword(m);
+//		}
+//		
+//	}
+	
+	/**********************이메일 인증 체크********************/
+	@RequestMapping("sendpw.do")
 	@ResponseBody
-	public void passwordChange(String password, String passwordCheck, HttpServletRequest request){
-		if(password!=passwordCheck){
-			
-		}else{
-		String id = request.getParameter("id");
-		Member m = service.getMemberById(id);
-		m.setPassword(password);
-		service.modifyPassword(m);
-		}
-		
+	public ModelAndView sendpw(String id, String name, String emailName,String emailAddress, ModelMap map){
+		ApplicationContext context = new ClassPathXmlApplicationContext("/com/ymz/member/mail/Spring_Mail.xml");
+	    	Member checkId =service.getMemberById(id);
+	    	if(checkId!=null){
+	    		String exName1 = checkId.getName();
+	    		String exEmail = checkId.getEmail();
+    			Member checkName = service.getMemberByName(name);
+	    		String exName2 = checkName.getName();
+	    		String exEmail2 = checkName.getEmail();
+	    		if(exName1.equals(exName2)){
+	    			String checkEmail = emailName+"@"+emailAddress;
+	    			Member m = service.getMemberByEmail(checkEmail);
+	    			String email = m.getEmail();
+	    			if(exEmail.equals(email)&&exEmail2.equals(email)){
+	    				EmailSender mm = (EmailSender) context.getBean("EmailSender");
+	    				int password = (int)(Math.random()*(99999-1000+1))+1000;
+	    				String exPassword = Integer.toString(password);
+	    				mm.sendMail("yameokzamanager@gmail.com",
+	    						email,
+	    						"야먹자의 임시비밀번호가 발급되었습니다", 
+	    						"당신의 임시비밀번호는 "+exPassword+" 입니다.<br>다시 로그인 해주십시오");
+	    				m.setPassword(exPassword);
+	    				service.modifyPassword(m);
+	    				return new ModelAndView("/popup/findPw_success.jsp");
+	    			}
+	    				map.addAttribute("error_message", "존재하지 않는 정보입니다(이메일).");
+		    			return new ModelAndView("/popup/pwFind.jsp",map);
+	    			
+	    		}
+	    			map.addAttribute("error_message", "존재하지 않는 정보입니다(이름).");
+	    			return new ModelAndView("/popup/pwFind.jsp",map);
+	    	}else{
+	    		map.addAttribute("error_message", "존재하지 않는 정보입니다.(아이디)");
+    			return new ModelAndView("/popup/pwFind.jsp",map);
+		}	
+	    	
 	}
+	    	
+}
+
+    
+
+	
+	
+	
+	
 	/**********************이메일 중복 체크********************/
 //	@RequestMapping("emailExistCheck.do")
 //	@ResponseBody
@@ -428,5 +502,4 @@ public class MemberController {
 	
 	
 	
-	
-}
+
