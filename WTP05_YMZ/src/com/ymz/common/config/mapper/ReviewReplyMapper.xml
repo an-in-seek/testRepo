@@ -16,6 +16,7 @@
 		<result column="reg_date" property="regDate"/>
 		<result column="content" property="content"/>
 		<result column="member_id" property="memberId"/>
+		<result column="nickname" property="nickname"/>
 		<result column="review_no" property="reviewNo"/>
 	</resultMap>
 	
@@ -47,8 +48,14 @@
 	
 	<!-- 목록 --> 
 	<select id="selectAllReply"  resultMap="reviewreply-resultmap" parameterType="_int">
-		<include refid="reply-select"/>
-		where review_no=#{reviewNo}
+		select review_reply_no,
+				  reg_date,
+				  content,
+				  r.member_id,
+				  nickname,
+				  review_no
+		from review_reply r, member m
+		where review_no=#{reviewNo} and r.member_id = m.member_id
 	</select>
 	
 	<!-- 댓글 내용 갖고오기 -->

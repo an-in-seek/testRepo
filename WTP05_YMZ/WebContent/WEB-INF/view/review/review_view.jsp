@@ -217,7 +217,7 @@ ${requestScope.review.content }<br>
 			<c:forEach items="${requestScope.reviewReplyList }" var="reply"  varStatus="status">
 				<tr id="reply${status.index+1}">
 					<td>${reply.replyNo}</td>
-					<td>${reply.memberId}</td>
+					<td>${reply.nickname}</td>
 					<td id="rContent${status.index+1}">${reply.content}</td>
 					<td>${reply.regDate}</td>
 					<td>

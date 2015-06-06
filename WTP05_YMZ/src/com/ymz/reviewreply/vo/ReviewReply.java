@@ -14,15 +14,14 @@ public class ReviewReply implements Serializable{
 	private String memberId;
 	private int reviewNo;
 	private int pageNo;
+	private String nickname;
 	
 	
 	public ReviewReply(){ 	}
-	
-	
 
 
 	public ReviewReply(int replyNo, String regDate, String content,
-			String memberId, int reviewNo, int pageNo) {
+			String memberId, int reviewNo, int pageNo, String nickname) {
 		super();
 		this.replyNo = replyNo;
 		this.regDate = regDate;
@@ -30,6 +29,7 @@ public class ReviewReply implements Serializable{
 		this.memberId = memberId;
 		this.reviewNo = reviewNo;
 		this.pageNo = pageNo;
+		this.nickname = nickname;
 	}
 
 
@@ -93,6 +93,16 @@ public class ReviewReply implements Serializable{
 	}
 
 
+	public String getNickname() {
+		return nickname;
+	}
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -100,6 +110,8 @@ public class ReviewReply implements Serializable{
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result
 				+ ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result
+				+ ((nickname == null) ? 0 : nickname.hashCode());
 		result = prime * result + pageNo;
 		result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
 		result = prime * result + replyNo;
@@ -127,6 +139,11 @@ public class ReviewReply implements Serializable{
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
+		if (nickname == null) {
+			if (other.nickname != null)
+				return false;
+		} else if (!nickname.equals(other.nickname))
+			return false;
 		if (pageNo != other.pageNo)
 			return false;
 		if (regDate == null) {
@@ -146,8 +163,10 @@ public class ReviewReply implements Serializable{
 	public String toString() {
 		return "ReviewReply [replyNo=" + replyNo + ", regDate=" + regDate
 				+ ", content=" + content + ", memberId=" + memberId
-				+ ", reviewNo=" + reviewNo + ", pageNo=" + pageNo + "]";
+				+ ", reviewNo=" + reviewNo + ", pageNo=" + pageNo
+				+ ", nickname=" + nickname + "]";
 	}
+	
 	
 	
 
