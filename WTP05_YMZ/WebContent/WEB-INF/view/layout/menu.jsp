@@ -15,7 +15,7 @@
 		<ul >
 			<li><a href='${initParam.rootPath }/index.do' class="menu">메인페이지</a></li>
 			<li>
-				<a class="menu">맛집정보&#9662;</a>
+				<a href="${initParam.rootPath }/restaurant/restaurantTypeSelect.do" class="menu">맛집정보&#9662;</a>
 				<ul>
 					<li><a href="${initParam.rootPath }/restaurant/restaurantTypeSelect.do">유형별</a></li>
 					<li><a href="${initParam.rootPath }/restaurant/showListByTheme.do">테마별</a></li>
