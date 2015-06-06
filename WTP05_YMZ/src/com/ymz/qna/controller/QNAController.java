@@ -41,7 +41,6 @@ public class QNAController {
 		}//등록 성공
 		//현재 로그인되어있는 사용자 아이디정보 삽입
 		Member member = (Member)session.getAttribute("login_info");
-		System.out.println(member.getId());
 		qna.setMemberId(member.getId());
 		service.registerQNA(qna);
 		return "redirect:/qna/qnaList.do";
@@ -55,7 +54,6 @@ public class QNAController {
 		}//등록 성공
 		//현재 로그인되어있는 사용자 아이디정보 삽입
 		Member member = (Member)session.getAttribute("login_info");
-		System.out.println(member.getId());
 		qna.setMemberId(member.getId());
 		service.registerQNAComment(qna);
 		return "redirect:/qna/qnaList.do";
@@ -81,7 +79,6 @@ public class QNAController {
 	@RequestMapping("searchQna.do")
 	public ModelAndView QNAListBySearch(@RequestParam String text){
 		int pageNo = 1;
-		System.out.println(text);
 		Map map = service.getQNAListPagingBySearch(pageNo, text);
 		return new ModelAndView("qna/qna_list.tiles", map);
 	}

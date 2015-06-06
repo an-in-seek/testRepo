@@ -22,12 +22,12 @@ function removeReply(reviewNo, rnum, pNo){
 }
 
 //댓글 수정
-function modifyReply(reviewNo, rnum, pNo, idx){
+function modifyReply(reviewNo, replyNum, pNo, idx){
 	var isUp=confirm("수정하시겠습니까?")
 	if(isUp){
-		//document.location.href="${initParam.rootPath}/review/login/modifyReviewReplyform.do?reviewNo="+reviewNo+"&replyNo="+rnum+"&pageNo="+pNo;
-		//$("#replyBody").find(":first-child").next().html("<tr><td><input type='text' value='영역'></td></tr>");
-		$("#dialog2").append("<input type='hidden' name='replyNo' value='"+rnum+"'>"); // 댓글 번호값을 다이얼로그 폼으로 보낸다.
+		var rrr = $("#rContent"+idx).text(); 		// 수정하고픈 리플의 내용을 갖고온다.
+		$("#dialog2").append("<input type='hidden' name='replyNo' value='"+replyNum+"'>"); // 댓글 번호값을 다이얼로그 폼으로 보낸다.
+		$("#reviewModifyContent").html(rrr);		// 원본 리플을 화면에 출력해준다.
 		$("#dialog").dialog({modal:true, width:400});
 		
 
@@ -213,13 +213,13 @@ ${requestScope.review.content }<br>
 				<tr id="reply${status.index+1}">
 					<td>${reply.replyNo}</td>
 					<td>${reply.memberId}</td>
-					<td>${reply.content}</td>
+					<td id="rContent${status.index+1}">${reply.content}</td>
 					<td>${reply.regDate}</td>
 					<td>
 						<input type="button" id="reply_modifyBtn${reply.replyNo}"  
-													onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
+							onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
 						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
-													onclick="removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});"  value="삭제" >
+							onclick="removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});"  value="삭제" >
 						<input type="button"  id="reply_reportBtn"  value ="신고">
 					
 					</td>
@@ -253,7 +253,7 @@ ${requestScope.review.content }<br>
 	<form id="dialog2" action="${initParam.rootPath }/review/login/modifyReviewReply.do" method="post">
 	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}">
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}">
-	<input type="text" id="content" name="content">
+	<textarea id="reviewModifyContent" name="content">${reply.content}</textarea><br>
 	<input type="submit" value="수정">
 	</form>
 	</section>

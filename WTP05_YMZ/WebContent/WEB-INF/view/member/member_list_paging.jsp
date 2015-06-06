@@ -17,7 +17,7 @@ $(document).ready(function(){
 			type:"post",
 			dataType:"json",
 			success:function(ret){
-				$("#pic").html("<img src='${initParam.rootPath }/uploadPhoto/no-photo.png'>");
+				/* $("#pic").html("<img src='${initParam.rootPath }/uploadPhoto/no-photo.png'>"); */
 				$("#memberId").text("아이디 : "+ret.id);
 				$("#password").text("패스워드 : "+ret.password);
 				$("#name").text("이름 : "+ret.name);
@@ -38,18 +38,14 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#categorySelect").on("change", function(){
-		var txt = $(this).val();
-		$("#command").val(txt)
-	}); 
-	
-	$("#searchBtn").on("click", function(){
-		var state = $("#categorySelect").val()
-		if(state == '검색방식'){
-			alert("검색방식을 선택하세요.");
+	$("#searchBtn").on("click",function(){
+		 if($("#searchText").val().trim()==""){
+			 alert("검색할 내용를 입력하세요.");
 			return false;
-		}
-	}); 
+		} 
+		var command = $("#categorySelect").val()
+		$("#command").val(command);
+	});
 });
 </script>
 
@@ -86,7 +82,8 @@ article{
 
 <h2 align="center">회원 목록</h2> 
 <div align="center" id="table">	
-<c:if test="${fn:length(requestScope.member_list) != 0 }">
+<c:choose>
+	<c:when test="${fn:length(requestScope.member_list) != 0 }">
 	<table align="center" id="listTB" style="width:800px" border="1">
 		<thead>
 			<tr align="center">
@@ -113,42 +110,62 @@ article{
 			</c:forEach>
 		</tbody>
 	</table>
-</c:if>
 
-<p align="center">
-<!-- 페이징 처리 -->
-<!-- 이전 페이지 그룹 -->
-<c:choose>
-	<c:when test="${pagingBean.previousPageGroup }">
-		<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
-	</c:when>
-	<c:otherwise>◀&nbsp;</c:otherwise>
-</c:choose>	
-<!-- 페이지 번호 -->
-<c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
+	<p align="center">
+	<!-- 페이징 처리 -->
+	<!-- 이전 페이지 그룹 -->
 	<c:choose>
-		<c:when test="${pageNum == pagingBean.currentPage }">
-			&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
+		<c:when test="${pagingBean.previousPageGroup }">
+			<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pagingBean.startPageOfPageGroup-1}&command=${requestScope.command}&info=${requestScope.info}">◀&nbsp;</a>
 		</c:when>
-		<c:otherwise>
-			<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
-		</c:otherwise>
-	</c:choose>
-</c:forEach>
-<!-- 다음 페이지 그룹 -->
-<c:choose>
-	<c:when test="${pagingBean.nextPageGroup }">
-		<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
+		<c:otherwise>◀&nbsp;</c:otherwise>
+	</c:choose>	
+	<!-- 페이지 번호 -->
+	<c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
+		<c:choose>
+			<c:when test="${pageNum == pagingBean.currentPage }">
+				&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
+			</c:when>
+			<c:otherwise>
+				<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pageNum}&command=${requestScope.command}&info=${requestScope.info}">&nbsp;${pageNum}&nbsp;</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	<!-- 다음 페이지 그룹 -->
+	<c:choose>
+		<c:when test="${pagingBean.nextPageGroup }">
+			<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pagingBean.endPageOfPageGroup+1}&command=${requestScope.command}&info=${requestScope.info}">&nbsp;▶</a>
+		</c:when>
+		<c:otherwise>&nbsp;▶</c:otherwise>
+	</c:choose>	
+	</p>
 	</c:when>
-	<c:otherwise>&nbsp;▶</c:otherwise>
-</c:choose>	
-</p>
+	<c:otherwise>
+	<table align="center" id="listTB" style="width:800px" border="1">
+		<thead>
+			<tr align="center">
+				<td>번호</td>
+				<td>ID</td>
+				<td>이름</td>
+				<td>닉네임</td>
+				<td>Email</td>
+				<td>전화번호</td>
+				<td>등급</td>
+			</tr>
+		</thead>
+		<tbody>
+				<tr align="center">
+					<td colspan="7"><font color="red">등록된 회원이 없습니다.</font></td>
+				</tr> 
+		</tbody>
+	</table>
+	</c:otherwise>
+</c:choose>
 
 <table align="center">
 				<tr>
 					<td>
 						<select id="categorySelect" name="category">
-							<option value="검색방식">검색방식</option> 
 							<option value="member_id">아이디</option>
 							<option value="member_name">이름</option>
 							<option value="member_nickname">닉네임</option>
@@ -157,7 +174,7 @@ article{
 					</td>
 					<td colspan="2">
 						<form id="searchForm" name="searchForm" action="${initParam.rootPath }/member/login/findMemberByInfo.do" method="post">
-							<input type="text" id="info" name="info" placeholder="검색하기">			
+							<input type="text" id="searchText" name="info" placeholder="검색하기">			
 							<input type="hidden" id="command" name="command">
 							<input type="submit" id="searchBtn" value="검색">
 						</form>
@@ -172,7 +189,7 @@ article{
 </div>
 
 <div id="dialog" title="선택 회원 정보">
-	<figure id="pic" align="center"></figure>
+	<!-- <figure id="pic" align="center"></figure> -->
 	<section>
 		<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 정보 </header>
 		<article id="memberId"></article>

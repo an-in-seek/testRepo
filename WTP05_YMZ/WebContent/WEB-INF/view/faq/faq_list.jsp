@@ -26,7 +26,7 @@ $(document).ready(function(){
 			$("#listTB2").hide();
 		},
 		success:function(member){
-			if(member){
+			if(member.grade == 'master'){
 				$("#writeBtn").show();
 				for(idx=1 ; idx<=10 ; idx++){
 					$("#modifyBtn"+idx).show();

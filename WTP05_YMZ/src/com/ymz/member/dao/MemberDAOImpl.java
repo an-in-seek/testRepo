@@ -120,7 +120,6 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public List<Member> selectAllMemberByInfo(String info,  String command, int pageNo) {
-		System.out.println("info : "+info+" --- command : "+command);
 		Map param = new HashMap();
 		param.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
 		param.put("pageNo", pageNo);

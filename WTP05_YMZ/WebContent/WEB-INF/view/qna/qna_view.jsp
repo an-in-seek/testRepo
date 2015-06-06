@@ -20,8 +20,11 @@
 				$("#deleteBtn").hide();
 			},
 			success:function(member){
-				if(member){
-					$("#commentBtn").show();
+				$("#commentBtn").show();
+				if(member.grade == 'master'){
+					$("#modifyBtn").show();
+					$("#deleteBtn").show();
+				}else if(member.id == '${requestScope.qna.memberId}'){
 					$("#modifyBtn").show();
 					$("#deleteBtn").show();
 				}
@@ -108,7 +111,7 @@ article {
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td align="center">아이디</td>
+		<td align="center">작성자</td>
 		<td>${requestScope.qna.memberId}</td>
 		<td>&nbsp;</td>
 	</tr>
