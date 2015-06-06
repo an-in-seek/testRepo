@@ -85,7 +85,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	@Transactional
 	public void addRestaurant(Restaurant restaurant, String[] foodNames,
-			String[] foodPrices, String[] foodDescriptions) {
+			String[] foodPrices, String[] foodDescriptions, HttpServletRequest request) throws Exception {
 		dao.insertRestaurant(restaurant);
 		
 		ArrayList<String> foodNamesList = new ArrayList<String>();
@@ -101,6 +101,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 		
 		for(int i=0; i<foodNamesList.size(); i++) {
 			dao.insertFood(restaurant.getRestaurantNo(), foodNamesList.get(i), foodPricesList.get(i), foodDescriptionsList.get(i));
+		}
+		
+		String path = request.getServletContext().getRealPath("/uploadPhoto");
+		String tempPath = request.getServletContext().getRealPath("/tempPhoto");
+		String[] fileNames = restaurant.getPictureName().split(",");
+		for(int i=0; i<fileNames.length; i++) {
+			File tempFile = new File(tempPath, fileNames[i]);
+			File file = new File(path, fileNames[i]);
+			fileCopy(tempFile, file);
+			tempFile.delete();
 		}
 	}
 
@@ -192,6 +202,38 @@ public class RestaurantServiceImpl implements RestaurantService {
 		} // 수정화면 띄우면서 원본파일->임시폴더로 저장
 		
 		return map;
+	}
+	
+	@Override
+	@Transactional
+	public void modifyRestaurant(Restaurant restaurant, String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception {
+		dao.updateRestaurant(restaurant);
+		dao.deleteFoods(restaurant.getRestaurantNo());
+		
+		ArrayList<String> foodNamesList = new ArrayList<String>();
+		ArrayList<Integer> foodPricesList = new ArrayList<Integer>();
+		ArrayList<String> foodDescriptionsList = new ArrayList<String>();
+		for(int i=0; i<foodName.length; i++) {
+			if(!foodName[i].equals("")) {
+				foodNamesList.add(foodName[i]);
+				foodPricesList.add(Integer.parseInt(foodPrice[i]));
+				foodDescriptionsList.add(foodDescription[i]);
+			}
+		}
+		
+		for(int i=0; i<foodNamesList.size(); i++) {
+			dao.insertFood(restaurant.getRestaurantNo(), foodNamesList.get(i), foodPricesList.get(i), foodDescriptionsList.get(i));
+		}
+		
+		String path = request.getServletContext().getRealPath("/uploadPhoto");
+		String tempPath = request.getServletContext().getRealPath("/tempPhoto");
+		String[] fileNames = restaurant.getPictureName().split(",");
+		for(int i=0; i<fileNames.length; i++) {
+			File tempFile = new File(tempPath, fileNames[i]);
+			File file = new File(path, fileNames[i]);
+			fileCopy(tempFile, file);
+			tempFile.delete();
+		}
 	}
 	
 	public void fileCopy(File srcFile, File targetFile) throws IOException {

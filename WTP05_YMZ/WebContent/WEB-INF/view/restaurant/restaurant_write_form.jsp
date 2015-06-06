@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-var pic_count = 1;
-var menu_count = 1;
+var pictureCount = 0;
 
 var nameMessage = "상호명을 입력하세요";
 var nameCheck = false;
@@ -184,65 +183,12 @@ $(document).ready(function(){
 			}
 		}
 		
-		var phone = $("#phoneNo1").val()+"-"+$("#phoneNo2")+"-"+$("#phoneNo3");
-		$("#regForm").append("<input type='hidden' name='phone' value='"+phone+"'>");
+		var phone = $("#phoneNo1").val()+"-"+$("#phoneNo2").val()+"-"+$("#phoneNo3").val();
+		$("#regForm").append("<input type='hidden' name='phoneNo' value='"+phone+"'>");
 		
 		$("#description").val($("#description").val().replace(/\n/g, '<br>'));
 	});
 	////////////////////////////////////////
-	
-	$("#picture_table").on("click","#picture_add",function(){
-		if(pic_count<5){
-			$("#picture_table").append("<tr><td><input type='file' name='pictureName'></td><td><button id='picture_add'>＋</button> <button id='picture_del'>－</button></td></tr>");
-			$("#picture_table tr:nth-child("+pic_count+") td:last-child").html("");
-			pic_count++;
-		}else{
-			alert("사진은 최대 5장까지 첨부할 수 있습니다");
-			return false;
-		}
-	});
-	
-	$("#picture_table").on("click","#picture_del",function(){
-		if(pic_count>1){
-			$("#picture_table tr:last-child").remove();
-			$("#picture_table tr:nth-child("+(pic_count-1)+") td:last-child").html("<button id='picture_add'>＋</button> <button id='picture_del'>－</button>");
-			pic_count--;
-		}else{
-			return false;
-		}
-		
-		var count = 0;
-		for(var i=1; i<$("#picture_table input[name=pictureName]").length+1; i++){
-			if($("#picture_table tr:nth-child("+i+") input[name=pictureName]").val()!=""){
-				count++;
-				break;
-			}
-		}
-		if(count==0){
-			pictureCheck = false;
-		}
-	});
-	
-	$("#menu_table").on("click","#menu_add",function(){
-		if(menu_count<10){
-			$("#menu_table").append("<tr><td><input type='text' name='foodName' maxlength='10'></td><td><input type='text' name='foodPrice' maxlength='10'>원</td><td><input type='text' name='foodDescription' style='width:300px'></td><td><button id='menu_add'>＋</button> <button id='menu_del'>－</button></td></tr>");
-			$("#menu_table tr:nth-child("+menu_count+") td:last-child").html("");
-			menu_count++;
-		}else{
-			alert("메뉴는 최대 10개까지 추가할 수 있습니다");
-			return false;
-		}
-	});
-	
-	$("#menu_table").on("click","#menu_del",function(){
-		if(menu_count>1){
-			$("#menu_table tr:last-child").remove();
-			$("#menu_table tr:nth-child("+(menu_count-1)+") td:last-child").html("<button id='menu_add'>＋</button> <button id='menu_del'>－</button>");
-			menu_count--;
-		}else{
-			return false;
-		}
-	});
 	
 	$("#btn_cancel").on("click",function(){
 		history.back();
@@ -268,6 +214,54 @@ $(document).ready(function(){
 				$("#floor").html(temp);
 			}
 		});
+	});
+	
+	// 사진첨부버튼 클릭 이벤트
+	$("#addPicture").on("click",function(){
+		if(pictureCount==5){
+			alert("사진은 최대 5장까지 첨부 가능합니다");
+			return false;
+		}
+	});
+	
+	// 사진이 추가될때 이벤트
+	$("#addPicture").on("change",function(){
+		var formData = new FormData();
+		formData.append("picture",$(this)[0].files[0]);
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/addPictureTemp.do",
+			processData:false,
+			contentType:false,
+			data:formData,
+			type:"post",
+			success:function(fileName){
+				if(fileName){
+					pictureCount++;
+					if(pictureCount==1){
+						pictureCheck=true;
+						$("#pictureMessage").text("");
+					}
+					$("#pictureTemp td:nth-child("+pictureCount+")").html("<img style='width:160px;height:140px' src='${initParam.rootPath}/tempPhoto/"+fileName+"'><input type='hidden' name='addedPicture' value='"+fileName+"'>");
+				}
+			}
+		});
+	});
+	
+	// 그림 클릭시 이벤트(클릭시 삭제)
+	$("#pictureTemp").on("click","img",function(){
+		var src = $(this).prop("src");
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/removePictureTemp.do",
+			type:"post",
+			data:"fileName="+src
+		});
+		
+		$(this).parent().remove();
+		$("#pictureTemp").append("<td></td>");
+		pictureCount--;
+		if(pictureCount==0){
+			pictureCheck=false;
+		}
 	});
 });
 </script>
@@ -349,14 +343,15 @@ $(document).ready(function(){
 <hr>
 
 <p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="addPicture" name="addPicture">
 <font color="red"><span id="pictureMessage"></span></font></p>
 <table id="picture_table">
-<tr>
-	<td><input type="file" name="pictureName"></td>
-	<td>
-		<button id="picture_add">＋</button>
-		<button id="picture_del">－</button>
-	</td>
+<tr id="pictureTemp">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </table>
 
