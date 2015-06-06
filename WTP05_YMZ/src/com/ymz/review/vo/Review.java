@@ -15,7 +15,7 @@ public class Review implements Serializable{
 	////////////////////////////////////////////// 참조용 변수들
 	private String nickname;		// 회원 닉네임
 	private int replyCount;			// 댓글 개수
-	private int pageNo;
+	private int pageNo;				// 페이지 번호
 	private String sortType;		// 정렬 방식
 	
 	public Review(){
