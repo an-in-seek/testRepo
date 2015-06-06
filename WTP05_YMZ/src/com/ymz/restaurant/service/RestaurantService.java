@@ -22,7 +22,7 @@ public interface RestaurantService {
 	public int increaseHits(int restaurantNo);
 	public List<String> getRestaurantsByBuildingName(String buildingName);
 	public Map<String, Object> getRestaurantsPaging(String buildingName, String floor, String align, int currentPage, String searchWord);
-	public int removeRestaurant(int restaurantNo);
+	public void removeRestaurant(int restaurantNo, HttpServletRequest request);
 	public Map setRestaurantModifyForm(int restaurantNo, HttpServletRequest request) throws Exception;
 	public void modifyRestaurant(Restaurant restaurant, String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception;
 }

@@ -175,8 +175,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public int removeRestaurant(int restaurantNo) {
-		return dao.deleteRestaurant(restaurantNo);
+	public void removeRestaurant(int restaurantNo, HttpServletRequest request) {
+		Restaurant restaurant = dao.selectRestaurantByNo(restaurantNo);
+		String[] pictureNames = restaurant.getPictureName().split(",");
+		String path = request.getServletContext().getRealPath("/uploadPhoto");
+		for(int i=0; i<pictureNames.length; i++) {
+			new File(path, pictureNames[i]).delete();
+		}
+		
+		dao.deleteRestaurant(restaurantNo);
 	}
 
 	@Override

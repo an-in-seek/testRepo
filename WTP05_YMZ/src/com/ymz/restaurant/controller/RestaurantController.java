@@ -266,18 +266,11 @@ public class RestaurantController {
 		
 	}
 	
-	
-	
-	
-
 	@RequestMapping("/login/admin/removeRestaurant.do")
-	public String removeRestaurant(int restaurantNo) {
-		service.removeRestaurant(restaurantNo);
+	public String removeRestaurant(int restaurantNo, HttpServletRequest request) {
+		service.removeRestaurant(restaurantNo, request);
 		return "redirect:/restaurant/showListByType.do";
 	}
-	
-	
-	
 	
 }
 
