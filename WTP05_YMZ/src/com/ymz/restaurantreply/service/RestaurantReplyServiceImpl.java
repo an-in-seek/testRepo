@@ -31,15 +31,16 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 
 	// 수정하기
 	@Override
-	public void modifyRestaurantReply(int number, String userId) {
-		dao.updateRestaurantReply(number,userId);
+	public void modifyRestaurantReply(RestaurantReply restaurantReply) {
+		dao.updateRestaurantReply(restaurantReply);
 
 	}
 
 	// 삭제하기
 	@Override
-	public void removeRestaurantReply(int number, String userId) {
+	public void removeRestaurantReply(RestaurantReply restaurantReply,int number, String userId) {
 		dao.deleteRestaurantReply(number,userId);
+		dao.updateReplyCount2(restaurantReply.getRestaurantNo());
 
 	}
 

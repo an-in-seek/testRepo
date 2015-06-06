@@ -37,19 +37,24 @@
 					#{memberId},
 					#{restaurantNo})
 	</insert>
-
+<!-- 게시물 댓글 개수 +1 -->
 	<update id="updateReplyCount" parameterType="_int">
 		update restaurant
 		set reply_count = reply_count + 1
 		where restaurant_no=#{restaurantNo}
 	</update>
-
-	<update id="updateRestaurantReply" parameterType="map">
+	
+	<!-- 게시물 댓글 개수 -1 -->
+<update id="updateReplyCount2" parameterType="_int">
+		update restaurant
+		set reply_count = reply_count - 1
+		where restaurant_no=#{restaurantNo}
+	</update>
+	
+<!-- 수정 -->
+	<update id="updateRestaurantReply" parameterType="RestaurantReply">
 		update 	restaurant_reply
-
-		set content=#{content},
-			 score=#{score}
-
+		set content=#{content}, score=#{score}
 		where restaurant_reply_no=#{number} and member_id=#{memberId}
 
 	</update>
@@ -61,21 +66,12 @@
 	</delete>
 
 
-	<select id="selectRestaurantReplyByReplyNo" parameterType="string"
-		resultMap="restaurantReply-resultmap">
-		select restaurant_reply
-
-		set content=#{content}
-
-		where restaurant_reply_no =
-		#{number}
-	</select>
 
 	<!-- 조회 -->
 	<select id="selectAllRestaurantReply" parameterType="int"
 		resultMap="restaurantReply-resultmap">
 		<include refid="restaurant_reply" />
-		where restaurant_no =#{restNumber}
+		where restaurant_no =#{restaurantNo}
 	</select>
 
 	<!-- 평점 -->

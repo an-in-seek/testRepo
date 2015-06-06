@@ -13,9 +13,9 @@ public interface RestaurantReplyService {
 
 	
 		//수정
-	public abstract void modifyRestaurantReply(int number, String userId);
+	public abstract void modifyRestaurantReply(RestaurantReply restaurantReply);
 		//삭제
-	void removeRestaurantReply(int number, String userId);
+	void removeRestaurantReply(RestaurantReply restaurantReply, int number, String userId);
 		//조회
 	RestaurantReply selectRestaurantReplyByReplyNo(int number);
 	//댓글리스트 조회

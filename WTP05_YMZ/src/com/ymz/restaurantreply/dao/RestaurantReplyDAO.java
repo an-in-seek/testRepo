@@ -12,9 +12,13 @@ public interface RestaurantReplyDAO {
 	//리플개수 보여주기
  public abstract int updateReplyCount(int restaurantNo);
 	// 게시물 수정
-	public abstract int updateRestaurantReply(int number, String userId);
+	public abstract int updateRestaurantReply(RestaurantReply restaurantReply);
 	// 게시물 삭제
 	public abstract void deleteRestaurantReply(int number, String userId);
+	//게시물 갯수 삭제
+	public abstract void updateReplyCount2(int restaurantNo);
+	
+	
 	// 게시물 신고
 	public abstract int reportRestaurantReplyByReplyNo(int number);
 	// 게시물 평점
