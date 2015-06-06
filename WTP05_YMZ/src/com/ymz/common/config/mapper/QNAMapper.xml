@@ -30,6 +30,14 @@
 		<result column="member_id" property="memberId"/>
 	</resultMap>
 	
+<!-- 	<resultMap type="QNA" id="qna-member-resultmap" extends="qna-resultmap">
+		<association property="Member">
+			<id column="member_id" property="memberId"/>
+			<result column="name" property="name"/>
+			<result column="nickname" property="nickname"/>
+		</association>
+	</resultMap> -->
+	
 	<!-- Member 테이블과  join 처리를 할 resultMap -->
 	<resultMap type="QNA" id="qna-member-resultmap" extends="qna-resultmap">
 		<association property="member" javaType="member" resultMap="member.dao.memberMapper.member-resultmap"/>
