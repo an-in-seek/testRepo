@@ -8,7 +8,6 @@ $(document).ready(function(){
 			$("#title").focus();
 			return false;
 		}
-
 		if (!$("#content").val()) {
 			alert("내용을 입력하세요");
 			$("#content").focus();
@@ -30,14 +29,15 @@ article{
 }
 </style>
 
-<h2 align="center">고객센터(FAQ)</h2>
+<h2 align="center">FAQ게시물 등록 </h2>
 
+<div style="padding:20px">
 <form id="writeForm" method="post" action="${initParam.rootPath}/faq/login/write.do" >
 
 	<table id="tb" align="center" width="700px" style="border:solid 2px #050099">
 		<thead>
 			<tr style="text-align: center;">
-				<td colspan="4"><font size="bold">글쓰기</font></td>
+				<td colspan="4"><font size="4">글쓰기</font></td>
 			</tr>
 		</thead>
 		<tr height="1" >
@@ -46,7 +46,7 @@ article{
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center" width="40px">제목</td>
-			<td><input type="text" id="title" name="title" style="width: 600px" maxlength="100" style="height:20px;"></td>
+			<td><input type="text" id="title" name="title" style="width: 580px" maxlength="50" style="height:20px;" placeholder="제목을 입력하세요."></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">
@@ -55,7 +55,7 @@ article{
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center">내용</td>
-			<td><textarea id="content" name="content" rows="20" style="width: 600px"></textarea></td>
+			<td><textarea id="content" name="content" rows="20" style="width: 580px" placeholder="내용을 입력하세요."></textarea></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">
@@ -71,3 +71,4 @@ article{
 		</tr>
 	</table>
 </form>
+</div>

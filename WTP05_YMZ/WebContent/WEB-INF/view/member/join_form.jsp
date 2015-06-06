@@ -31,7 +31,8 @@ function openDaumPostcode(){
 	}).open();
 }
 $(document).ready(function(){
-	
+var check = false;
+var nickChe = false;	
 	//ID 중복 체크
 	$("#id").on("keyup", function(){
 		var id = this.value;
@@ -59,7 +60,38 @@ $(document).ready(function(){
 			
 		})
 	});
-	//email 중복체크
+	/*
+	 * 닉네임 중복확인
+	 */
+	$("#exNick").on("click",function(){
+		check = true;
+		var nickname = $("#nickname").val();
+		alert(nickname);
+		$.ajax({
+			url:"${initParam.rootPath}/member/nickExistCheck.do",
+			data:{"nickname":nickname},
+			dataType:"text",
+			beforeSend:function(){
+				if(!nickname){//id에 입력된 값이 없으면 전송하지 않는다.
+					alert("닉네임을 입력해주세요")
+					return false;
+				}
+			},
+			success:function(ret){
+				if(ret=="false"){
+					$("#dupNicknameMessageLayer").text("중복된 닉네임입니다.");
+					$("#dupNicknameMessageLayer").addClass("errorMessage");
+					nickChe = false;
+				}else{
+					$("#dupNicknameMessageLayer").text("사용할 수 있는 닉네임입니다.");
+					$("#dupNicknameMessageLayer").addClass("normalMessage");
+					nickChe = true;
+				}
+			}
+			
+		})
+	
+	});
 	
 	//ID 존재 유무 체크
 	$("#recommend").on("keyup", function(){
@@ -129,6 +161,11 @@ $(document).ready(function(){
 			alert("닉네임을 입력하세요");
 			$("#nickname").focus();
 			return false;
+		}
+		
+		if(!check){
+			alert("중복체크를 해주십시오");
+			return false
 		}
 		if(!$("#postcode1").val()){
 			alert("우편번호를 입력하세요");
@@ -239,7 +276,9 @@ div#table{
 		<tr>
 			<td>닉네임</td>
 			<td>
-				<input type="text" id="nickname" name="nickname" value="${requestScope.nickname }"><span class="errorMessage"><form:errors path="member.nickname"/></span>
+				<input type="text" id="nickname" name="nickname" value="${requestScope.nickname }">
+				<input type="button" id="exNick" name="exNick" value="중복체크">
+				<span id="dupNicknameMessageLayer"> </span><span class="errorMessage"></span>
 			</td>	
 		</tr>
 			<tr>

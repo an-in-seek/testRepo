@@ -84,7 +84,7 @@ article{
 <h2 align="center">맛집 정보</h2> 	
 <div align="center" id="table">
 <c:if test="${fn:length(requestScope.member_list) != 0 }">
-	<table align="center" id="listTB" style="width:800px">
+	<table align="center" id="listTB" style="width:800px" border="1">
 		<thead>
 			<tr align="center">
 				<td>ID</td>

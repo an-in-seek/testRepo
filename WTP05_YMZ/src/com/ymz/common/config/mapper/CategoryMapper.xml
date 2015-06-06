@@ -4,13 +4,14 @@
 <mapper namespace="category.dao.CategoryMapper">
 
 	<sql id="category-select">
-		select 	category_id, category_name
+		select 	category_id, category_name, category_info
 		from		category
 	</sql>
 	
 	<resultMap type="Category" id="category-resultmap">
 		<id column="category_id" property="categoryId"/>
 		<result column="category_name" property="categoryName"/>
+		<result column="category_info" property="categoryInfo"/>
 	</resultMap>
 	
 	<select id="selectAllCategory" resultMap="category-resultmap">

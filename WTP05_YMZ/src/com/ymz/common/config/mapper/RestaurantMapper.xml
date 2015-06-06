@@ -262,4 +262,14 @@
 	<select id="selectFloorByLocationNo" parameterType="_int" resultType="String">
 		select floor from location where location_no=#{locationNo}
 	</select>
+	
+	<update id="updateRestaurant" parameterType="restaurant">
+		update restaurant set restaurant_name=#{restaurantName}, category=#{category}, phone_no=#{phoneNo},
+			address=#{address}, description=#{description}, picture_name=#{pictureName}, theme=#{theme}, location_no=#{locationNo}
+		where restaurant_no=#{restaurantNo}
+	</update>
+	
+	<delete id="deleteFoods" parameterType="_int">
+		delete from food where restaurant_no=#{restaurantNo}
+	</delete>
 </mapper>

@@ -61,9 +61,29 @@
 	<!-- 마이페이지 폼-->
 	<mvc:view-controller path="/member/mypage.do" view-name="member/info/mypage.tiles"/>
 	
+	
+	<!-- gmail -->
+    <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+       <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="username" value="isomorphism1126@gmail.com" />
+       	<property name="password" value="S21moonEl" />       
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+       </property>
+    </bean>
+    <bean id="email" class="com.ymz.member.mail.Email"/>
+    <bean id="emailSender" class="com.ymz.member.mail.EmailSender">
+    	<property name="mailSender" ref="mailSender"/>
+    </bean>
+
+
 	<!-- file upload 처리 multipartResolver 등록 -->
 	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
-	
 	<!-- Validator에서 사용할 properties 파일 등록 -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
 		      p:basename="com.ymz.common.message.error" p:defaultEncoding="UTF-8"/>

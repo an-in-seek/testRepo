@@ -20,8 +20,11 @@
 				$("#deleteBtn").hide();
 			},
 			success:function(member){
-				if(member){
-					$("#commentBtn").show();
+				$("#commentBtn").show();
+				if(member.grade == 'master'){
+					$("#modifyBtn").show();
+					$("#deleteBtn").show();
+				}else if(member.id == '${requestScope.qna.memberId}'){
 					$("#modifyBtn").show();
 					$("#deleteBtn").show();
 				}
@@ -82,6 +85,7 @@ article {
 
 <h2 align="center">게시물 내용</h2>
 
+<div align="center" style="padding:20px">
 <table id="tb" align="center" width="700px" style="border:solid 2px #050099">
 	<thead>
 		<tr style="text-align:center">
@@ -108,7 +112,7 @@ article {
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td align="center">아이디</td>
+		<td align="center">작성자</td>
 		<td>${requestScope.qna.memberId}</td>
 		<td>&nbsp;</td>
 	</tr>
@@ -162,3 +166,4 @@ article {
 		<td width="0">&nbsp;</td>
 	</tr>
 </table>
+</div>

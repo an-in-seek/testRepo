@@ -4,53 +4,79 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery.js"></script>
 <script type="text/javascript">
+	/*
+	 * 이메일주소 select 값 선택
+	 */
+	function mailCheck(selectObj){ 
+		document.getElementById('emailAddress').value=selectObj.value;
+		if(selectObj.value==""){
+			$("#emailAddress").focus();	
+		}
+	}
 $(document).ready(function(){
+
 	$("#findPw").on("submit",function(){
+		var flag = confirm("비밀번호를 수정하시겠습니까");
+		if(!flag){
+			alert("취소하셨습니다");
+			return false;
+			window.close();
+		}else{
+		if(!$("#id").val()){
+			alert("아이디를 입력하세요");
+			return false;
+		}
 		if(!$("#name").val()){
 			alert("이름을 입력하세요");
 			return false;
 		}
-		if(!$("#num1").val()){
-			alert("전화번호를 입력하세요");
+		if(!$("#emailName").val()){
+			alert("이메일을 입력하세요");
 			return false;
 		}
-		if(!$("#num2").val()){
-			alert("전화번호를 입력하세요");
+		if(!$("#emailAddress").val()){
+			alert("이메일을 입력하세요");
 			return false;
 		}
+		
+		}
+		//window.close();
 	})
 })
 </script>
-<title>비밀번호찾기 팝업창</title>
 <h2>비밀번호찾기</h2>
-<label for="phone"> 휴대폰으로찾기</label> <input type="radio" name="find" value="phone" id="phone">
-<label for="email">이메일로찾기</label> <input type="radio" name="find" value="email" id="email">
-<label for="ipin">아이핀으로찾기</label> <input type="radio" name="find" value="ipin" id="ipin">  
-<form method="post" id="findPw" action="${initParam.rootPath }/member/loginPwFind.do">
+<form method="post" action="${initParam.rootPath }/member/sendpw.do"  id="findPw" enctype="multipart/form-data">
 <c:if test="${requestScope.error_message != null}">
 	<font color="red" size="2">${requestScope.error_message}</font>
 </c:if>
 	<table>
 		<tr>
 			<td>
+				ID
+			</td>
+			<td>
+				<input type="text" id="id" name="id">
+			</td>
+		</tr>
+		<tr>
+			<td>
 				이름
 			</td>
-			<td colspan="2">
+			<td>
 				<input type="text" id="name" name="name">
 			</td>
 		</tr>
 		<tr>
+			<td>이메일</td>
 			<td>
-				전화번호
+				<input type="text" id="emailName" name="emailName">@<input type="text" id="emailAddress" name="emailAddress">
+				<select name="selectEmail"  style="vertical-align:middle" onChange="javascript:mailCheck(this)">
+				<option value="">직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
 			</td>
-			<td>
-				<select name="phoneCP" id="phoneCP" class="input_text w60" style="vertical-align:middle">
-			<option value="010" >010</option><option value="011" >011</option><option value="017" >017</option><option value="018" >018</option><option value="019" >019</option></select>
-			&nbsp;-&nbsp;<input type="text" id="num1" name="num1" size="2" style="vertical-align:middle">&nbsp;&nbsp;<input type="text" id="num2" name="num2" size="2" class="input_text w60" style="vertical-align:middle">
 		</tr>
 		<tr>
 			<td>
-				<input type="submit" value="확인">
+				<input type="submit" value="보내기">
 			</td>
 			<td>
 				<input type="button" onclick="window.close();" value="취소">

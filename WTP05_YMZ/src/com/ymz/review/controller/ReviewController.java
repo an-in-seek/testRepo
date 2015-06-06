@@ -67,10 +67,11 @@ public class ReviewController {
 	
 	//게시물 번호로 정보조회
 	@RequestMapping("reviewView.do")
-	public ModelAndView ReviewView(@ModelAttribute Review review){ //@RequestParam int reviewNo, @RequestParam int pageNo
+	public ModelAndView ReviewView(@ModelAttribute Review review){ 
 		Map<String, Object> map =replyService.getReplyList(review.getReviewNo()); //DB로 reviewNo을 보내서 해당댓글들 가꼬오기
 		
 		Review rev = service.getReviewByNo(review.getReviewNo());
+		System.out.println("글쓴이의 닉네임 : " + rev.getNickname());
 		map.put("pageNo", review.getPageNo());
 		map.put("review", rev);
 		
@@ -176,14 +177,6 @@ public class ReviewController {
 			return "redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////댓글 수정(글옮기기) 필요없음
-		@RequestMapping(value="login/modifyReviewReplyform.do")
-		public ModelAndView modifyReviewReplyform(@ModelAttribute ReviewReply reply, ModelMap map){
-			reply = replyService.getReviewReplyContent(reply.getReplyNo());
-			System.out.println(reply.getContent());
-			map.addAttribute("reply", reply);
-			return new ModelAndView("/review/reviewView.do?reviewNo="+reply.getReviewNo() + "&pageNo="+reply.getPageNo(), map);
-		}
 		
 		//댓글 수정 
 		@RequestMapping(value="login/modifyReviewReply.do", method=RequestMethod.POST)
@@ -191,11 +184,6 @@ public class ReviewController {
 			Member member = (Member)session.getAttribute("login_info");
 			String userId = member.getId();
 			reply.setMemberId(userId);
-			System.out.println("수정할 댓글 : "+ reply.getContent());
-			System.out.println("로그인한 아이디 : "+userId);
-			System.out.println("리뷰번호 : "+reply.getReviewNo());
-			System.out.println("댓글번호 : "+reply.getReplyNo());
-			System.out.println("페이지번호 : "+reply.getPageNo());
 			replyService.modifyReviewReply(reply);
 			map.addAttribute("reply", reply);
 			return new ModelAndView("redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo() + "&pageNo="+reply.getPageNo(), map);

@@ -27,4 +27,6 @@ public interface RestaurantDAO {
 	public int deleteRestaurant(int restaurantNo);
 	public String selectBuildingNameByLocationNo(int locationNo);
 	public String selectFloorByLocationNo(int locationNo);
+	public int updateRestaurant(Restaurant restaurant);
+	public int deleteFoods(int restaurantNo);
 }

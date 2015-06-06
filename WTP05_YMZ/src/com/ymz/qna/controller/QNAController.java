@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.common.category.service.CategoryService;
 import com.ymz.common.category.vo.Category;
+import com.ymz.common.validator.QNAValidator;
 import com.ymz.member.vo.Member;
 import com.ymz.qna.service.QNAService;
 import com.ymz.qna.vo.QNA;
@@ -36,12 +36,12 @@ public class QNAController {
 	//QNA게시물 등록
 	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
 	public String registerQNA(@ModelAttribute QNA qna, Errors errors, HttpSession session, ModelMap map) throws Exception{
+		new QNAValidator().validate(qna, errors);
 		if(errors.hasErrors()){
 			return "qna/qna_write_form.tiles";
 		}//등록 성공
 		//현재 로그인되어있는 사용자 아이디정보 삽입
 		Member member = (Member)session.getAttribute("login_info");
-		System.out.println(member.getId());
 		qna.setMemberId(member.getId());
 		service.registerQNA(qna);
 		return "redirect:/qna/qnaList.do";
@@ -55,7 +55,6 @@ public class QNAController {
 		}//등록 성공
 		//현재 로그인되어있는 사용자 아이디정보 삽입
 		Member member = (Member)session.getAttribute("login_info");
-		System.out.println(member.getId());
 		qna.setMemberId(member.getId());
 		service.registerQNAComment(qna);
 		return "redirect:/qna/qnaList.do";
@@ -81,7 +80,6 @@ public class QNAController {
 	@RequestMapping("searchQna.do")
 	public ModelAndView QNAListBySearch(@RequestParam String text){
 		int pageNo = 1;
-		System.out.println(text);
 		Map map = service.getQNAListPagingBySearch(pageNo, text);
 		return new ModelAndView("qna/qna_list.tiles", map);
 	}
@@ -122,7 +120,7 @@ public class QNAController {
 		map.put("categoryList", categoryList);
 		return "qna/qna_modify_form.tiles";
 	}
-				
+	
 	// 게시물 수정
 	@RequestMapping(value="login/modifyQna.do", method=RequestMethod.POST)
 	public String modifyQNAInfo(@ModelAttribute QNA qna, Errors errors)throws Exception{

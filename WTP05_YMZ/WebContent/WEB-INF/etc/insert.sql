@@ -33,9 +33,9 @@ update member set grade='master' 	where member_id='2';
 update member set mileage=11111 	where member_id='2';
 select * from member;
 delete member where member_id='1';
-insert into CATEGORY values('회원관련', '회원관련');
-insert into CATEGORY values('맛집관련', '맛집관련');
-insert into CATEGORY values('리뷰관련', '리뷰관련');
+insert into CATEGORY values('회원관련', '회원관련', 'QNA게시판에서 분류할 때 사용');
+insert into CATEGORY values('맛집관련', '맛집관련', 'QNA게시판에서 분류할 때 사용');
+insert into CATEGORY values('리뷰관련', '리뷰관련', 'QNA게시판에서 분류할 때 사용');
 
 insert into location values(location_no_seq.nextval, '유스페이스 1동', '3');
 insert into location values(location_no_seq.nextval, '유스페이스 1동', '2');
