@@ -30,52 +30,85 @@ $(document).ready(function(){
  			$("#save").click(function() {
  				if($("#category").val() == '분류'){
  					alert("분류항목을 선택하세요.");
+ 					$("#category").focus();
  					return false;
  				}
+ 				if(!$("#title").val()){
+ 					alert("제목을 입력하세요");
+ 					$("#title").focus();
+ 					return false;
+ 				}
+ 				if(!$("#content").val()){
+ 					alert("내용을 입력하세요");
+ 					$("#content").focus();
+ 					return false;
+ 				} 
 				oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD");
 			}); 
 	});
 </script>
+
 <style type="text/css">
 h2 {
 	text-align: center;
 }
-table#t1 {
+table#tb thead tr{
 	width: auto;
+	font-weight: bold;
+	background: lightgray;
 }
 </style>
 
-<div align="center">
-	<h2>QNA게시물 등록</h2>
+<h2>QNA게시물 등록</h2>
+<div align="center" style="padding:20px">
 	<!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
 	<form id="write" method="post" action="${initParam.rootPath}/qna/login/write.do">
 		<!-- 테이블 -->
-		<table id="t1">
+		<table id="tb" align="center" style="border:solid 2px #050099">
+			<thead>
+				<tr style="text-align: center;">
+					<td colspan="4"><font size="4">글쓰기</font></td>
+				</tr>
+			</thead>
 			<tr>
-				<td>분류</td>
+				<td>&nbsp;</td>
+				<td align="center" width="40px">분류</td>
 				<td><select id="category" name="category">
 					<option>분류</option>
 					<option value="회원관련">회원관련</option>
 					<option value="맛집관련">맛집관련</option>
 					<option value="리뷰관련">리뷰관련</option>
 				</select></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
 			</tr>
 			<tr>
-				<td width="60px">제목</td>
+				<td>&nbsp;</td>
+				<td align="center" >제목</td>
 				<td><input type="text" id="title" name="title" style="width: 700px" placeholder="제목을 입력하세요."></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
 			</tr>
 			<tr>
-				<td>내용</td>
-				<td>
-				<textarea name="content" id="content" rows="10" cols="100" style="width: 700px; height: 350px;"></textarea><br>
-				</td>
+				<td>&nbsp;</td>
+				<td align="center">내용</td>
+				<td><textarea name="content" id="content" rows="10" cols="100" style="width: 700px; height: 350px;"></textarea><br></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
 			</tr>
 			<tr align="center">
-				<td></td>
-				<td>
+				<td>&nbsp;</td>
+				<td colspan="2">
 				<input type="submit" id="save" value="등록">
 				<input type="button" value="취소" onclick="javascript:history.back(-1);">
 				</td>
+				<td>&nbsp;</td>
 			</tr>
 		</table>
 		<!-- 테이블 끝 -->
