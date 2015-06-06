@@ -13,13 +13,16 @@ public interface RestaurantReplyService {
 
 	
 		//수정
-	public abstract void modifyRestaurantReply(RestaurantReply restaurantReply);
+	public abstract void modifyRestaurantReply(int number, String userId);
 		//삭제
-	public abstract void removeRestaurantReplyByReplyNo(int number);
+	void removeRestaurantReply(int number, String userId);
 		//조회
 	RestaurantReply selectRestaurantReplyByReplyNo(int number);
 	//댓글리스트 조회
 	public abstract List selectAllRestaurantReply(int restNumber);
+
+
+	
 
 		// 게시물 신고
 

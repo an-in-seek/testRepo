@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-$(document).ready(function(){	
+$(document).ready(function(){
 	if("${requestScope.isAdmin}"){
-		$("#modifyAndDelete").append("<a href='${initParam.rootPath}/restaurant/login/admin/modifyRestaurantForm.do?restaurantNo=${requestScope.restaurant.restaurantNo}'><button id='btn_modify'>수정</button></a> <button id='btn_delete'>삭제</button>");
+		$("#modifyAndDelete").append("<button id='btn_modify'>수정</button> <button id='btn_delete'>삭제</button>");
 		
 		$("#btn_delete").on("click",function(){
 			if(confirm("삭제하시겠습니까?")){
@@ -114,16 +114,21 @@ $(document).ready(function(){
 	});
 //송이꺼-----------------------------------------------------------
 
-	$("#registerFrom").on("submit", function() {
+	$("#registerFrom").click( function() {
 		if (!$("#content").val()) {
 			alert("내용을 입력하세요");
 			$("#content").focus();
-			return true;
+			return false;
 		}
-	});
+	})
 
-	$("#reply_modifyButton").on("click", function() {
-		alert("로그인을 해야합니다.");
+	$("#replyModifyButton").on("click", function() {
+		var isDel = confirm("수정하시겠습니까?");
+		if (isDel) {
+			document.location.href="${initParam.rootPath}/restaurant/login/updateReply.do?number=" +number+"&restaurantNo="+restaurantNo;
+		} else {
+			return;
+		}
 	});
 
 	$("#reply_reportButton").on("click", function() {
@@ -131,16 +136,30 @@ $(document).ready(function(){
 	});
 });
 
+function modifyReply(number, restaurantNo){
+	var isDel=confirm("수정하시겠습니까?");
+	if(isDel){
+		document.location.href="${initParam.rootPath}/restaurant/login/updateReply.do?number=" +number+"&restaurantNo="+restaurantNo;
+		}else{
+		return;
+	}
+}
+
+
 
 //송이꺼
-function removeReply(restaurantNo, number){
+function removeReply(number, restaurantNo){
 	var isDel=confirm("삭제할까요?");
 	if(isDel){
-		document.location.href="${initParam.rootPath}/restaurant/login/removeReply.do?restaurantNo="+restaurantNo+"&number"+number;
+		document.location.href="${initParam.rootPath}/restaurant/login/removeReply.do?number=" +number+"&restaurantNo="+restaurantNo;
 	}else{
 		return;
 	}
 }
+
+
+
+
 
 </script>
 </head>
@@ -324,8 +343,8 @@ function removeReply(restaurantNo, number){
 					<td colspan="4" height="30px">내용 : ${reply.content }</td>
 				</tr>
 				<td align="right" colspan="4">
-				<button id="reply_modifyButton" style="width: 80px; heigth: 20px;">수정</button>
-				<input type="button" id="reply_removeButton${reply.number }" onclick="removeReply(${requestScope.restaurant.restaurantNo},${reply.number})" value="삭제">
+				<input type="button" id="replyModifyButton${reply.number}" onclick="modifReply(${reply.number},${requestScope.restaurant.restaurantNo})" value="수정">
+				<input type="button" id="replyRemoveButton${reply.number }" onclick="removeReply(${reply.number},${requestScope.restaurant.restaurantNo})" value="삭제">
 				<button id="reply_reportButton" style="width: 80px; heigth: 20px;">신고</button>
 				</td>
 				<tr>

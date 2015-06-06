@@ -26,16 +26,20 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO{
 
 	//수정하기
 	@Override
-	public int updateRestaurantReply(RestaurantReply restaurantReply) {
-		
-		return session.update(namespace+"updateRestaurantReply", restaurantReply);
+	public int updateRestaurantReply(int number, String userId) {
+		Map map = new HashMap();
+		map.put("number", number);
+		map.put("memberId", userId);
+		return session.update(namespace+"updateRestaurantReply", map);
 	}
 
 	//삭제하기
 	@Override
-	public int deleteRestaurantReplyByReplyNo(int number) {
-	
-		return session.delete(namespace+"deleteRestaurantReplyByReplyNo", number);
+	public void deleteRestaurantReply(int number, String userId) {
+		Map map = new HashMap();
+		map.put("number", number);
+		map.put("memberId", userId);
+		 session.delete(namespace+"deleteRestaurantReply", map);
 	}
 
 	//신고하기

@@ -25,22 +25,21 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 	
 		int sum =dao.selectScore(restaurantReply.getRestaurantNo());
 		int replyCount=dao.selectReplyCount(restaurantReply.getRestaurantNo());
-		
 		double score =(double) sum/replyCount;
 		dao.updateScore(score, restaurantReply.getRestaurantNo());
 		}
 
 	// 수정하기
 	@Override
-	public void modifyRestaurantReply(RestaurantReply restaurantReply) {
-		dao.updateRestaurantReply(restaurantReply);
+	public void modifyRestaurantReply(int number, String userId) {
+		dao.updateRestaurantReply(number,userId);
 
 	}
 
 	// 삭제하기
 	@Override
-	public void removeRestaurantReplyByReplyNo(int number) {
-		dao.deleteRestaurantReplyByReplyNo(number);
+	public void removeRestaurantReply(int number, String userId) {
+		dao.deleteRestaurantReply(number,userId);
 
 	}
 

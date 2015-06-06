@@ -32,7 +32,7 @@
 		restaurant_no)
 		values( restaurant_reply_no_seq.nextval,
 					to_char(sysdate, 'yyyymmdd'),
-					#{content},
+					#{content, jdbcType=VARCHAR},
 					#{score},
 					#{memberId},
 					#{restaurantNo})
@@ -44,18 +44,20 @@
 		where restaurant_no=#{restaurantNo}
 	</update>
 
-	<update id="updateRestaurantReply" parameterType="RestaurantReply">
-		update
-		restaurant_reply
+	<update id="updateRestaurantReply" parameterType="map">
+		update 	restaurant_reply
 
-		set content=#{content}
+		set content=#{content},
+			 score=#{score}
 
-		where reply = #{number}
+		where restaurant_reply_no=#{number} and member_id=#{memberId}
 
 	</update>
 	<!-- 삭제 -->
-	<delete id="deleteRestaurantReplyByReplyNo" parameterType="int">
-		delete from restaurant_reply where reply = #{number}
+	<delete id="deleteRestaurantReply" parameterType="map">
+		delete from restaurant_reply 
+
+		where restaurant_reply_no=#{number} and member_id=#{memberId}
 	</delete>
 
 
@@ -65,7 +67,7 @@
 
 		set content=#{content}
 
-		where reply =
+		where restaurant_reply_no =
 		#{number}
 	</select>
 

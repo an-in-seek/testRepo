@@ -12,9 +12,9 @@ public interface RestaurantReplyDAO {
 	//리플개수 보여주기
  public abstract int updateReplyCount(int restaurantNo);
 	// 게시물 수정
-	public abstract int updateRestaurantReply(RestaurantReply restaurantReply);
+	public abstract int updateRestaurantReply(int number, String userId);
 	// 게시물 삭제
-	public abstract int deleteRestaurantReplyByReplyNo(int number);
+	public abstract void deleteRestaurantReply(int number, String userId);
 	// 게시물 신고
 	public abstract int reportRestaurantReplyByReplyNo(int number);
 	// 게시물 평점
@@ -23,9 +23,10 @@ public interface RestaurantReplyDAO {
 	public abstract RestaurantReply selectRestaurantReplyByReplyNo(int number);
 	//댓글 리스트 조회
 	public abstract List selectAllRestaurantReply(int restNumber);
-	//댓글 평저
+	//댓글 평점
 	public abstract int selectScore(int restaurantNo);
-	//평점-뎃글 몇개인지
+	//평점- 댓글 몇개인지
 	public abstract int selectReplyCount(int restaurantNo);
+	//평점 - 맛집정보 리스트에 나오는 평점
 	public abstract double updateScore(double score, int restaurantNo);
 }
