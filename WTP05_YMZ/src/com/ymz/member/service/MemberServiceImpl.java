@@ -31,33 +31,20 @@ public class MemberServiceImpl implements MemberService {
 	 */
 	@Override
 	public void joinMember(Member member) throws DuplicatedIdException{
-		
-		//1. 등록된 ID가 있는 지 체크
-		//    - 이미 등록된 ID라면 DuplicatedIdException를 발생 시킨다.
 		if(dao.selectMemberById(member.getId())!=null){
 			throw new DuplicatedIdException(member.getId()+"는 이미 등록된 아이디입니다. ID를 변경하세요");
 		}
-		//2. 디비에 회원정보 등록 처리
-	
 		dao.insertMember(member);
-		
-		//3. connection close
-		
 	}
 	/**
 	 * 전체 회원 목록 조회 처리
-	 * @return List<Member>
 	 */
 	@Override
 	public List<Member> getMemberList(String info, String command){
-		
 		List <Member> list = dao.selectAllMember(info, command);
-		
 		return list;
 	}
-	/* **********************************************
-	 * 페이징 처리 service 메소드
-	 * **********************************************/
+
 	/**
 	 * 전체 회원 목록 조회 처리 - Paging 처리
 	 *  - 목록에 뿌려줄 회원리스트(List<Member>)와 페이징 처리를 PagingBean 객체를 생성해 Map에 넣어 리턴
@@ -87,6 +74,8 @@ public class MemberServiceImpl implements MemberService {
 		HashMap map = new HashMap();
 		map.put("member_list", list);
 		map.put("pagingBean", pagingBean);
+		map.put("command", command);
+		map.put("info", info);
 		return map;
 	}
 	

@@ -146,36 +146,8 @@
 					</choose>
 					order by join_date
 			)
-			<choose>
-				<when test="command == 'member_id'">
-					where member_id = #{info}
-				</when>
-				<when test="command == 'member_name'">
-					where name = #{info}
-				</when>
-				<when test="command == 'member_nickname'">
-					where nickname = #{info}
-				</when>
-				<when test="command == 'grade'">
-					where grade = #{info}
-				</when>
-			</choose>
 		) 
 		where page = #{pageNo} 
-		<choose>
-			<when test="command == 'member_id'">
-				and member_id = #{info}
-			</when>
-			<when test="command == 'member_name'">
-				and name = #{info}
-			</when>
-			<when test="command == 'member_nickname'">
-				and nickname = #{info}
-			</when>
-			<when test="command == 'grade'">
-				and grade = #{info}
-			</when>
-		</choose>
 	</select>
 	
 	<select id="selectTotalMemberCountByInfo" resultType="_int" parameterType="map">
