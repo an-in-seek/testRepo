@@ -1,15 +1,12 @@
 package com.ymz.review.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,21 +40,24 @@ public class ReviewController {
 		}
 		Member member = (Member)session.getAttribute("login_info");
 		review.setMemberId(member.getId());
+		review.setNickname(member.getName());
+		System.out.println(" 글 작성자 : " + member.getName());
 		service.registerReview(review);
 		return "redirect:/review/reviewList.do"; 
 	}
 
-	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
+	//리뷰 목록 - 페이징 처리 + 인기글 가져오기 + 검색
 		@RequestMapping("reviewList.do")
-		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo){
-			System.out.println("정렬 타입 : " + sortType);
-			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType);
+		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo, 
+													@RequestParam (defaultValue="") String searchType,@RequestParam (defaultValue="") String query){
+			
+			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType, searchType, query);
 			/////////////////////////////////
 			//Map<String, Object> map = service.getReviewListPaging(pageNo);
 			return new ModelAndView("review/review_list.tiles", map);
 		}
-	
-	
+
+		
 //	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
 //	@RequestMapping("reviewList.do")
 //	public ModelAndView reviewList(@RequestParam (defaultValue="1") int pageNo){
@@ -176,30 +176,29 @@ public class ReviewController {
 			return "redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo();
 		}
 
-		//댓글 수정
+		/////////////////////////////////////////////////////////////////////////////////////////댓글 수정(글옮기기) 필요없음
+		@RequestMapping(value="login/modifyReviewReplyform.do")
+		public ModelAndView modifyReviewReplyform(@ModelAttribute ReviewReply reply, ModelMap map){
+			reply = replyService.getReviewReplyContent(reply.getReplyNo());
+			System.out.println(reply.getContent());
+			map.addAttribute("reply", reply);
+			return new ModelAndView("/review/reviewView.do?reviewNo="+reply.getReviewNo() + "&pageNo="+reply.getPageNo(), map);
+		}
+		
+		//댓글 수정 
 		@RequestMapping(value="login/modifyReviewReply.do", method=RequestMethod.POST)
-		public String modifyReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session) throws Exception{
+		public ModelAndView modifyReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session, ModelMap map) throws Exception{
 			Member member = (Member)session.getAttribute("login_info");
 			String userId = member.getId();
 			reply.setMemberId(userId);
+			System.out.println("수정할 댓글 : "+ reply.getContent());
+			System.out.println("로그인한 아이디 : "+userId);
+			System.out.println("리뷰번호 : "+reply.getReviewNo());
+			System.out.println("댓글번호 : "+reply.getReplyNo());
+			System.out.println("페이지번호 : "+reply.getPageNo());
 			replyService.modifyReviewReply(reply);
-			return "redirect:/review/reviewView.do?reviewNo=";
+			map.addAttribute("reply", reply);
+			return new ModelAndView("redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo() + "&pageNo="+reply.getPageNo(), map);
 		}
-		
-		
-	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 검색
-	
-	public String searchReview(    ){
-		
-		return "/review/reviewList.do";
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////// 리뷰 정렬
-	@RequestMapping("sortReview.do")
-	public ModelAndView sortReaview(@RequestParam String sortType, @RequestParam(defaultValue="1") int pageNo, HttpSession session){
-		System.out.println("정렬 타입 : " + sortType);
-		Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType);
-		return new ModelAndView("review/review_list.tiles", map);
-	}
-	
+
 }

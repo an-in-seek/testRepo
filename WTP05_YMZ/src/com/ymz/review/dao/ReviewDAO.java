@@ -17,15 +17,13 @@ public interface ReviewDAO {
 	
 	// 리뷰 삭제
 	public abstract void deleteReview(Review review);
-	
-	// 리뷰 목록
-	public abstract List<Review> selectAllReviewPaging(int pageNo);
+
 	
 	//게시물 ID번호로 조회
 	public abstract Review selectReviewByNo(int reviewNo);
 	
 	// 리뷰 전체 페이지 수
-	public abstract int selectTotalReviewCount();
+	public abstract int selectTotalReviewCount(String searchType, String query);
 
 	// 리뷰 추천테이블에서 값 조회
 	public abstract int getRecommendCount(Map rmap);
@@ -46,7 +44,7 @@ public interface ReviewDAO {
 	public abstract List<Review> selectMonthBestHits();
 
 	// 정렬
-	public abstract List<Review> selectSortReviewPaging(int pageNo, String type);
+	public abstract List<Review> selectSortReviewPaging(int pageNo, String type, String searchType, String query);
 
 	
 }

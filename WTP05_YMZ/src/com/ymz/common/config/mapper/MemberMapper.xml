@@ -84,19 +84,34 @@
 		where	 nickname=#{nickname}
 	</select>
 	
-	<select id="selectAllMember" resultMap="member-resultmap">
+	<select id="selectMemberByName" parameterType="string" resultMap="member-resultmap">
 		<include refid="member-select"/>
+		where	 name=#{name}
+	</select>
+	
+	<select id="selectAllMember" parameterType="map" resultMap="member-resultmap">
+		<include refid="member-select"/>
+		<choose>
+				<when test="command == 'member_id'">
+					where member_id = #{info}
+				</when>
+				<when test="command == 'member_name'">
+					where name = #{info}
+				</when>
+				<when test="command == 'member_nickname'">
+					where nickname = #{info}
+				</when>
+				<when test="command == 'grade'">
+					where grade = #{info}
+				</when>
+			</choose>
 	</select>
 	
 	<!-- Paging 추가 -->
 	<select id="selectAllMemberPaging" parameterType="map" resultMap="member-resultmap">
-
-		select member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
-							 favorite_food, mileage, grade, join_date
+		select member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date
 		from (
-
-			select ceil(rownum/#{contentsPerPage}) page, member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
-													favorite_food, mileage, grade, join_date
+			select ceil(rownum/#{contentsPerPage}) page, member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date
 			from (
 					<include refid="member-select"/>
 					order by join_date
@@ -108,4 +123,77 @@
 	<select id="selectTotalMemberCount" resultType="_int">
 		select count(member_id) from member
 	</select>
+	
+	<select id="selectAllMemberByInfo" parameterType="map" resultMap="member-resultmap">
+		select member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date
+		from (
+			select ceil(rownum/#{contentsPerPage}) page, member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date
+			from (
+					<include refid="member-select"/>
+					<choose>
+						<when test="command == 'member_id'">
+							where member_id = #{info}
+						</when>
+						<when test="command == 'member_name'">
+							where name = #{info}
+						</when>
+						<when test="command == 'member_nickname'">
+							where nickname = #{info}
+						</when>
+						<when test="command == 'grade'">
+							where grade = #{info}
+						</when>
+					</choose>
+					order by join_date
+			)
+			<choose>
+				<when test="command == 'member_id'">
+					where member_id = #{info}
+				</when>
+				<when test="command == 'member_name'">
+					where name = #{info}
+				</when>
+				<when test="command == 'member_nickname'">
+					where nickname = #{info}
+				</when>
+				<when test="command == 'grade'">
+					where grade = #{info}
+				</when>
+			</choose>
+		) 
+		where page = #{pageNo} 
+		<choose>
+			<when test="command == 'member_id'">
+				and member_id = #{info}
+			</when>
+			<when test="command == 'member_name'">
+				and name = #{info}
+			</when>
+			<when test="command == 'member_nickname'">
+				and nickname = #{info}
+			</when>
+			<when test="command == 'grade'">
+				and grade = #{info}
+			</when>
+		</choose>
+	</select>
+	
+	<select id="selectTotalMemberCountByInfo" resultType="_int" parameterType="map">
+		select count(member_id) from member 
+		<choose>
+			<when test="command == 'member_id'">
+				where member_id = #{info}
+			</when>
+			<when test="command == 'member_name'">
+				where name = #{info}
+			</when>
+			<when test="command == 'member_nickname'">
+				where nickname = #{info}
+			</when>
+			<when test="command == 'grade'">
+				where grade = #{info}
+			</when>
+		</choose>
+	</select>
+	
 </mapper>

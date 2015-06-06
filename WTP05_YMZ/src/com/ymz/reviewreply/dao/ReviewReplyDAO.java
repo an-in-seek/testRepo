@@ -17,4 +17,9 @@ public interface ReviewReplyDAO {
 	    
 	//댓글 목록
 	public abstract List<ReviewReply> selectAllReply(int reviewNo);
+	
+	//댓글 내용 갖고오기
+	public abstract ReviewReply getReviewReplyContent(int replyNo);
+	
+	
 }

@@ -49,9 +49,9 @@ public class MemberServiceImpl implements MemberService {
 	 * @return List<Member>
 	 */
 	@Override
-	public List<Member> getMemberList(){
+	public List<Member> getMemberList(String info, String command){
 		
-		List <Member> list = dao.selectAllMember();
+		List <Member> list = dao.selectAllMember(info, command);
 		
 		return list;
 	}
@@ -77,25 +77,28 @@ public class MemberServiceImpl implements MemberService {
 		map.put("pagingBean", pagingBean);
 		return map;
 	}
-	/**
-	 * ID로 회원 조회 메소드
-	 * @param id : 조회할 회원 ID
-	 * @return
-	 */
+	
+	//ID, 이름, 닉네임으로 회원 조회 메소드
 	@Override
-	public Member getMemberById(String id){
-		
-		return dao.selectMemberById(id);
-		
+	public Map getMemberByInfo(String info, String command, int pageNo) {
+		List<Member> list = dao.selectAllMemberByInfo(info, command, pageNo);
+		int totalContent = dao.selectTotalMemberCountByInfo(info, command);
+		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
+		HashMap map = new HashMap();
+		map.put("member_list", list);
+		map.put("pagingBean", pagingBean);
+		return map;
 	}
 	
-	/**
-	 * Email로 회원정보 조회 메소드
-	 */
+	 //ID로 회원 조회 메소드
+	@Override
+	public Member getMemberById(String id){
+		return dao.selectMemberById(id);
+	}
 	
+	// Email로 회원정보 조회 메소드
 	@Override
 	public Member getMemberByEmail(String email) {
-		
 		return dao.selectMemberByEmail(email);
 	}
 	
@@ -107,6 +110,16 @@ public class MemberServiceImpl implements MemberService {
 	public Member getMemberByNickname(String nickname) {
 
 		return dao.selectMemberByNickname(nickname);
+	}
+	
+	/**
+	 * name으로 회원정보 조회 메소드
+	 */
+	
+	
+	@Override
+	public Member getMemberByName(String name) {
+		return dao.selectMemberByName(name);
 	}
 	/**
 	 * 회원 정보 수정 처리 메소드
@@ -157,7 +170,6 @@ public class MemberServiceImpl implements MemberService {
 		dao.insertMember(m2);
 
 	}
-	
 	
 	
 }

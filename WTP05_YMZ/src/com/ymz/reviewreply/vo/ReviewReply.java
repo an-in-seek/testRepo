@@ -1,4 +1,4 @@
-package com.ymz.reviewreply.vo;
+	package com.ymz.reviewreply.vo;
 
 import java.io.Serializable;
 
@@ -17,6 +17,8 @@ public class ReviewReply implements Serializable{
 	
 	
 	public ReviewReply(){ 	}
+	
+	
 
 
 	public ReviewReply(int replyNo, String regDate, String content,

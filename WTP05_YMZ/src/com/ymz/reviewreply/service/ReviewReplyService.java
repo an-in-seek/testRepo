@@ -17,5 +17,8 @@ public interface ReviewReplyService {
 	
 	//댓글 목록
 	public abstract Map<String, Object> getReplyList(int reviewNo);
+
+	//댓글 내용갖고오기
+	public abstract ReviewReply getReviewReplyContent(int replyNo);
 	
 }

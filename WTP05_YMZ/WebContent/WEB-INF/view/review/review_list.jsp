@@ -10,30 +10,31 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <script type="text/javascript">
-$(document).ready(function(){
 	
-	
-	// 오늘 날짜 뽑아오기
+
+function chagee(time, num){
 	var nowdate = new Date();
 	var year = nowdate.getFullYear();
 	var month = nowdate.getMonth() + 1;
-	var day = nowdate.getDate()
-	date_str = year + "-" + (month<=9? '0'+month:month) + "-" + (day<=9? '0'+day:day);
-	alert(date_str);
- 
+	var day = nowdate.getDate();
+	var date_str = year + "-" + (month<=9? '0'+month:month) + "-" + (day<=9? '0'+day:day);
+	var regDate = time.substring(0,10);
+	//alert(regDate);
+	if(date_str == regDate){
+		$("#regDate"+num).html(time.substring(11,19));
+	}else{
+		$("#regDate"+num).html(regDate);
+	}
+}
+
+$(document).ready(function(){
 	
 	var txt = "";
-	// 검색 버튼 이벤트
-	$("#searchBtn").on("click", function(){
-		var search = $("#searchText").val();
-		alert(search+" 검색!!!은 아직 안돼");
-	});
-	
 	
 	// 검색 방식 셀렉터 이벤트
 	$("#searchSort").on("change", function(){
 		txt = $(this).val(); // $(select객체).val() - 선택된 option의 value가 리턴
-		alert("검색방식 : "+txt);
+		// alert("검색방식 : "+txt);
 	});
 	
 	// 조회수 정렬
@@ -61,7 +62,16 @@ $(document).ready(function(){
 		 $(this).css("background-color", "linen");
 	});
 	
-	
+	// 검색 전송 이벤트
+	$("#searchForm").on("submit",function(){
+		if($("#searchText").val().trim()==""){
+			return false;
+		}
+		var type = $("#searchSort").val();
+		var search = $("#searchText").val();
+		$(this).append("<input type='hidden' name='searchType' value='"+type+"'>");
+		$(this).append("<input type='hidden' name='query' value='"+search+"'>");
+	});
 });
 </script>
 <style type="text/css">
@@ -216,7 +226,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.reviewList }" var="review">
+			<c:forEach items="${requestScope.reviewList }" var="review" varStatus="status">
 				<tr>
 					<td align="center">${review.reviewNo }</td>
 					<td align="left" id="title">
@@ -228,8 +238,13 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 					</a>
 					</td>
 					<td align="center">${review.memberId}</td>
-					<td id="regDate" align="center">
-					${review.regDate.substring(0,10)}</td>
+					<td id="regDate${status.index+1}" align="center">
+						<script type="text/javascript">
+							var tt = "${review.regDate}";
+							var num = "${status.index+1}";
+							chagee(tt, num);
+						</script>
+					</td>
 					<td align="center" style="width:50px">${review.recommend}</td>
 					<td align="center">${review.hits}</td>
 				</tr> 
@@ -245,7 +260,8 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<!-- 이전 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.previousPageGroup }">
-			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.startPageOfPageGroup-1}&sortType=${requestScope.sortType}">◀</a>
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.startPageOfPageGroup-1}&sortType=${requestScope.sortType}
+										&searchType=${requestScope.searchType}&query=${requestScope.query}">◀</a>
 		</c:when>
 		<c:otherwise>◀</c:otherwise>
 	</c:choose>
@@ -256,7 +272,8 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 				<font color="red"><b>${pageNum}</b></font>
 			</c:when>
 			<c:otherwise>
-				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}&sortType=${requestScope.sortType}">${pageNum} </a>
+				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}&sortType=${requestScope.sortType}
+										&searchType=${requestScope.searchType}&query=${requestScope.query}">${pageNum} </a>
 			</c:otherwise>
 		</c:choose>
 	&nbsp;&nbsp;
@@ -264,31 +281,35 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<!-- 다음 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.nextPageGroup }">
-			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.endPageOfPageGroup+1}&sortType=${requestScope.sortType}">▶</a>
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.endPageOfPageGroup+1}&sortType=${requestScope.sortType}
+										&searchType=${requestScope.searchType}&query=${requestScope.query}">▶</a>
 		</c:when>
 		<c:otherwise>▶</c:otherwise>
 	</c:choose>
 	<br>
 
-	<!-- 검색 기능 (아직안함) -->
-	<form action="${initParam.rootPath }/review/login/review_write_form.do" method="post">
+	<!-- 검색 기능 & 글쓰기 -->
 	<table>
 		<tr>
 			<td>
+			<form id="searchForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
 			<select id="searchSort">
 					<option value="title">제목</option>
 					<option value="id">아이디</option>
 					<option value="nickname">닉네임</option>
 			</select>
+			
+			<input type="text" id="searchText">
+			<input type="submit" id="searchBtn" value="검색">
+			</form>
 			</td>
-			<td><input type="text" id="searchText"></td>
-			<td><input type="button" id="searchBtn" value="검색"></td>
 			<td>
-					<input type="submit" value="글쓰기">
+			<form id="writeForm" action="${initParam.rootPath }/review/login/review_write_form.do">
+				<input type="submit" value="글쓰기">
+			</form>
 			</td>
 		</tr>
 	</table>
-	</form>
 	<br>
 	</div>
 	

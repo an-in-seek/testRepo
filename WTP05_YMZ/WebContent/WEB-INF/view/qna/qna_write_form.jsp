@@ -22,7 +22,7 @@ $(document).ready(function(){
 				},
 				fOnAppLoad : function() {
 					// 기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할 때 사용
-					oEditors.getById["content"].exec("PASTE_HTML", []);
+					oEditors.getById["content"].exec("PASTE_HTML", ["내용을 입력하세요."]);
 				},
 				fCreator : "createSEditor2"
 			});
@@ -62,7 +62,7 @@ table#t1 {
 			</tr>
 			<tr>
 				<td width="60px">제목</td>
-				<td><input type="text" id="title" name="title" style="width: 700px"></td>
+				<td><input type="text" id="title" name="title" style="width: 700px" placeholder="제목을 입력하세요."></td>
 			</tr>
 			<tr>
 				<td>내용</td>

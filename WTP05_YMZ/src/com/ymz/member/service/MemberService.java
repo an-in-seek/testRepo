@@ -17,9 +17,11 @@ public interface MemberService {
 
 	/**
 	 * 전체 회원 목록 조회 처리
+	 * @param command 
+	 * @param info 
 	 * @return List<Member>
 	 */
-	public abstract List<Member> getMemberList();
+	public abstract List<Member> getMemberList(String info, String command);
 
 	/* **********************************************
 	 * 페이징 처리 service 메소드
@@ -50,6 +52,11 @@ public interface MemberService {
 	public abstract Member getMemberByNickname(String nickname);
 	
 	/**
+	 * name으로 회원 조회 메소드
+	 */
+	
+	public abstract Member getMemberByName(String name);
+	/**
 	 * 회원 정보 수정 처리 메소드
 	 * @param member 수정할 회원 전보
 	 */
@@ -72,4 +79,6 @@ public interface MemberService {
 	public abstract void removeMemberById(String id);
 
 	public abstract void transactionTest(Member m1, Member m2) throws Exception;
+
+	public abstract Map getMemberByInfo(String info, String command, int pageNo);
 }

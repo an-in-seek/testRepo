@@ -13,19 +13,24 @@ function removeFaq(number){
 } 
 
 $(document).ready(function(){
+	var idx;
 	$.ajax({
 		url:"${initParam.rootPath}/faq/findLoginMember.do", //요청 url 설정
 		type:"post", //HTTP 요청 방식(method)
 		dataType:"json", //javascript객체로 변환해서 응답데이터를 전달.
 		beforeSend:function(){
 			$("#writeBtn").hide();
-			$("#modifyBtn").hide();
+			for(idx=1 ; idx<=10 ; idx++){
+				$("#modifyBtn"+idx).hide();
+			}
 			$("#listTB2").hide();
 		},
 		success:function(member){
 			if(member){
 				$("#writeBtn").show();
-				$("#modifyBtn").show();
+				for(idx=1 ; idx<=10 ; idx++){
+					$("#modifyBtn"+idx).show();
+				}
 				$("#listTB2").show();
 			}
 		}
@@ -53,7 +58,7 @@ $(document).ready(function(){
 								<p class="q"><a href="#a${faq.number}">Q${faq.number} : ${faq.title}</a></p>
 								<p class="a">
 									A : ${faq.content}
-									<input id="modifyBtn" type="button" value="수정하기" onclick="window.location='${initParam.rootPath }/faq/login/modifyForm.do?number=${faq.number}'">
+									<input id="modifyBtn${faq.number}" type="button" value="수정하기" onclick="window.location='${initParam.rootPath }/faq/login/modifyForm.do?number=${faq.number}'">
 								</p>
 							</li>
 						</ul>

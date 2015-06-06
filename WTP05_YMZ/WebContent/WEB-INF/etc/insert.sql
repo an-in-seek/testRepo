@@ -7,7 +7,10 @@ delete from qna CASCADE CONSTRAINTS;
 
 
 
-insert into member values('master', 1111, '관리자', '관리자', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140514');
+insert into member values('master01', 1111, '관리자1', '관리자1', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master1@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140514');
+insert into member values('master02', 2222, '관리자2', '관리자2', '20100504', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master2@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140515');
+insert into member values('master03', 3333, '관리자3', '관리자3', '20100503', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master3@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140516');
+insert into member values('master04', 3333, '관리자4', '관리자4', '20100502', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master4@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140517');
 insert into member values('user01', 1111, '피카츄', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '양식', 10, 'user', '20140513');
 insert into member values('user02', 5555, '라이츄', '라이츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user02@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140512');
 insert into member values('user03', 5555, '파이리', '파이리', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user03@naver.com', '010-1111-1111', '일식', 100000, 'user', '20140511');
@@ -24,9 +27,9 @@ insert into member values('user13', 5555, '아상해씨', '이상해씨', '20100
 insert into member values('user14', 5555, '이상해풀', '이상해풀', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user14@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140510');
 insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user15@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140501');
 
+update member set grade='master' where member_id='master'
 
-
-update member set grade='su' 	where member_id='2';
+update member set grade='master' 	where member_id='2';
 update member set mileage=11111 	where member_id='2';
 select * from member;
 delete member where member_id='1';
@@ -166,7 +169,31 @@ insert into review(review_no, title, content, hits, recommend, reg_date, member_
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','39','644','1972-04-04 11:00:10','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','29','744','1972-03-04 11:00:10','user01');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','19','643','1972-02-04 11:00:10','user01');
-
+--
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','69','344','1972-07-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','59','444','1972-06-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','49','544','1972-05-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','39','644','1972-04-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','29','744','1972-03-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','19','643','1972-02-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','69','344','1972-07-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','59','444','1972-06-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','49','544','1972-05-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','39','644','1972-04-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','29','744','1972-03-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','19','643','1972-02-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','69','344','1972-07-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','59','444','1972-06-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','49','544','1972-05-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','39','644','1972-04-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','29','744','1972-03-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','19','643','1972-02-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','69','344','1972-07-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','59','444','1972-06-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','49','544','1972-05-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','39','644','1972-04-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','29','744','1972-03-04 11:00:10','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'프로듀사롤하느라못봄','1','19','643','1972-02-04 11:00:10','user01');
 
 
 insert into review_reply values(review_reply_no_seq.nextval, '20150530111220', '노맛', 'user01', 1);

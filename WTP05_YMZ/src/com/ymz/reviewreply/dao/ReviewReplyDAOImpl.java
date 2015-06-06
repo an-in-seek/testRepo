@@ -39,4 +39,12 @@ public class ReviewReplyDAOImpl implements ReviewReplyDAO {
 	public List<ReviewReply> selectAllReply(int reviewNo) {
 		return session.selectList(namespace + "selectAllReply", reviewNo);
 	}
+
+	//댓글 내용 갖고오기
+	@Override
+	public ReviewReply getReviewReplyContent(int replyNo) {
+		return session.selectOne(namespace + "selectReviewReplyByNo", replyNo);
+	}
+	
+	
 }

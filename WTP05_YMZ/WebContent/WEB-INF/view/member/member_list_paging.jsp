@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -16,19 +17,39 @@ $(document).ready(function(){
 			type:"post",
 			dataType:"json",
 			success:function(ret){
-				$("#id").text("아이디 : "+ret.id);
+				$("#pic").html("<img src='${initParam.rootPath }/uploadPhoto/no-photo.png'>");
+				$("#memberId").text("아이디 : "+ret.id);
 				$("#password").text("패스워드 : "+ret.password);
 				$("#name").text("이름 : "+ret.name);
+				$("#nickname").text("닉네임 : "+ret.nickname);
+				$("#birth").text("생일 : "+ret.birth);
+				$("#sex").text("성별 : "+ret.sex);
+				$("#address").text("주소 : "+ret.address);
 				$("#email").text("이메일 : "+ret.email);
 				$("#joinDate").text("가입일 : "+ret.joinDate);
+				$("#mileage").text("마일리지 : "+ret.mileage);
+				$("#grade").text("등급 : "+ret.grade);
 				//Dialog 띄우기 
-				$("#dialog").dialog({modal:true,width:400});
+				$("#dialog").dialog({modal:true,width:500});
 			},
 			error:function(xhr, dd, ddd){
 				alert(xhr.status + dd + ddd);
 			}
 		});
 	});
+	
+	$("#categorySelect").on("change", function(){
+		var txt = $(this).val();
+		$("#command").val(txt)
+	}); 
+	
+	$("#searchBtn").on("click", function(){
+		var state = $("#categorySelect").val()
+		if(state == '검색방식'){
+			alert("검색방식을 선택하세요.");
+			return false;
+		}
+	}); 
 });
 </script>
 
@@ -75,6 +96,7 @@ article{
 				<td>닉네임</td>
 				<td>Email</td>
 				<td>전화번호</td>
+				<td>등급</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -86,6 +108,7 @@ article{
 					<td>${member.nickname }</td>
 					<td>${member.email}</td>
 					<td>${member.phoneNo}</td>
+					<td>${member.grade}</td>
 				</tr> 
 			</c:forEach>
 		</tbody>
@@ -97,7 +120,7 @@ article{
 <!-- 이전 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.previousPageGroup }">
-		<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
+		<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
 	</c:when>
 	<c:otherwise>◀&nbsp;</c:otherwise>
 </c:choose>	
@@ -108,14 +131,14 @@ article{
 			&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
 		</c:when>
 		<c:otherwise>
-			<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
+			<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 <!-- 다음 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pagingBean.nextPageGroup }">
-		<a href="${initParam.rootPath }/member/memberListPaging.do?page=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
+		<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
 	</c:when>
 	<c:otherwise>&nbsp;▶</c:otherwise>
 </c:choose>	
@@ -124,18 +147,18 @@ article{
 <table align="center">
 				<tr>
 					<td>
-						<form id="categoryForm" name="categoryForm" action="${initParam.rootPath }/qna/qnaListByCategory.do" method="post">
-							<select id="category" name="category">
-								<option>검색방식</option>
-								<option value="아이디">아이디(ID)</option>
-								<option value="이름">이름</option>
-								<option value="닉네임">닉네임</option>
-							</select>
-						</form>
+						<select id="categorySelect" name="category">
+							<option value="검색방식">검색방식</option> 
+							<option value="member_id">아이디</option>
+							<option value="member_name">이름</option>
+							<option value="member_nickname">닉네임</option>
+							<option value="grade">등급</option>
+						</select>
 					</td>
 					<td colspan="2">
-						<form id="searchQna" name="searchQna" action="${initParam.rootPath }/qna/searchQna.do" method="post">
-							<input type="text" id="text" name="text" placeholder="검색하기">						
+						<form id="searchForm" name="searchForm" action="${initParam.rootPath }/member/login/findMemberByInfo.do" method="post">
+							<input type="text" id="info" name="info" placeholder="검색하기">			
+							<input type="hidden" id="command" name="command">
 							<input type="submit" id="searchBtn" value="검색">
 						</form>
 					</td>
@@ -149,13 +172,19 @@ article{
 </div>
 
 <div id="dialog" title="선택 회원 정보">
-	<figure id="pic"></figure>
+	<figure id="pic" align="center"></figure>
 	<section>
 		<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 정보 </header>
-		<article id="id"></article>
+		<article id="memberId"></article>
 		<article id="password"></article>
 		<article id="name"></article>
+		<article id="nickname"></article>
+		<article id="birth"></article>
+		<article id="sex"></article>
+		<article id="address"></article>
 		<article id="email"></article>
 		<article id="joinDate"></article>
+		<article id="mileage"></article>
+		<article id="grade"></article>
 	</section>
 </div>
