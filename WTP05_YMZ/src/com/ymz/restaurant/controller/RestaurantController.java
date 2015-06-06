@@ -156,56 +156,28 @@ public class RestaurantController {
 	
 	@RequestMapping("/login/admin/modifyRestaurant.do")
 	public String modifyRestaurant(Restaurant restaurant, String addedPicture, String building, String floor,
-			String[] foodName, String[] foodPrice, String[] foodDescription) {
+			String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception {
 		restaurant.setPictureName(addedPicture+",");
 		restaurant.setTheme(restaurant.getTheme()+",");
 		
-		System.out.println(restaurant);
-		System.out.println(building);
-		System.out.println(floor);
-		System.out.println(foodName);
-		System.out.println(foodPrice);
-		System.out.println(foodDescription);
+		int locationNo = service.getLocationNo(building, floor);
+		restaurant.setLocationNo(locationNo);
 		
-		return "restaurant/restaurant_view.tiles";
+		service.modifyRestaurant(restaurant, foodName, foodPrice, foodDescription, request);
+		
+		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurant.getRestaurantNo();
 	}
 	
 	@RequestMapping("/login/admin/addNewRestaurant.do")
-	public String addNewRestaurant(String restaurantName, String category, String phoneNo1, String phoneNo2, String phoneNo3, String address, String[] theme, String building, String floor, String description,
-			@RequestParam("pictureName") MultipartFile[] pictureName, String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception {
+	public String addNewRestaurant(Restaurant restaurant, String addedPicture, String building, String floor, 
+			String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception {
+		restaurant.setPictureName(addedPicture+",");
+		restaurant.setTheme(restaurant.getTheme()+",");
 		
-		// Restaurant 객체에 값 세팅
-		Restaurant restaurant = new Restaurant();
-		restaurant.setRestaurantName(restaurantName);
-		restaurant.setCategory(category);
-		restaurant.setPhoneNo(phoneNo1+"-"+phoneNo2+"-"+phoneNo3);
-		restaurant.setAddress(address);
+		int locationNo = service.getLocationNo(building, floor);
+		restaurant.setLocationNo(locationNo);
 		
-		String themeTemp = "";
-		for(int i=0; i<theme.length; i++) {
-			themeTemp += theme[i]+",";
-		}
-		restaurant.setTheme(themeTemp);
-		
-		int locationNoTemp = service.getLocationNo(building, floor);
-		restaurant.setLocationNo(locationNoTemp);
-		
-		restaurant.setDescription(description);
-		
-		String pictureNameTemp = "";
-		String path = request.getServletContext().getRealPath("/uploadPhoto");
-		for(int i=0; i<pictureName.length; i++) {
-			if(pictureName[i].getSize()!=0) {
-				String fileName = System.nanoTime()+"";
-				File file = new File(path, fileName);
-				pictureName[i].transferTo(file);
-				pictureNameTemp += fileName+",";
-			}
-		}
-		restaurant.setPictureName(pictureNameTemp);
-		// 여기까지 세팅 끝
-		
-		service.addRestaurant(restaurant, foodName, foodPrice, foodDescription);
+		service.addRestaurant(restaurant, foodName, foodPrice, foodDescription, request);
 		
 		return "redirect:/restaurant/showListByType.do";
 	}
