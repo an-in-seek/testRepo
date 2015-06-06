@@ -52,8 +52,16 @@
 	
 	<!-- 조회 -->
 	<select id="selectReviewByNo" resultMap="review-resultmap" parameterType="int">
-		<include refid="review-select"/>
-		where review_no=#{reviewNo}
+		select  review_no, 
+				title, 
+				content, 
+				hits, 
+				nickname,
+				recommend, 
+				reg_date, 
+				r.member_id
+		from review r, member m
+		where 1=1 and review_no=#{reviewNo} and r.member_id = m.member_id
 	</select>
 	
 	<!-- 조회수 증가 -->
@@ -125,10 +133,10 @@
 								and title like '%'||#{query}||'%'
 							</when>
 							<when test="searchType=='id'">
-								and m.member_id like '%'||#{query}||'%'
+								and review.member_id = #{query}
 							</when>
 							<when test="searchType=='nickname'">
-								and m.nickname like '%'||#{query}||'%'
+								and m.nickname = #{query}
 							</when>
 						</choose>
 						<choose>
@@ -156,16 +164,17 @@
 	
 	<!-- 검색된 전체 게시물 수  -->
 	<select id="selectSearchReviewCount" parameterType="map" resultType="_int">
-		select count(review_no) from review
+		select count(review_no) from review r, member m
+		where 1=1 and r.member_id = m.member_id
 		<choose>
 						<when test="searchType=='title'">
-							where title like '%'||#{query}||'%'
+							and title like '%'||#{query}||'%'
 						</when>
 						<when test="searchType=='id'">
-							where member_id like '%'||#{query}||'%'
+							and r.member_id = #{query}
 						</when>
 						<when test="searchType=='nickname'">
-							where nickname like '%'||#{query}||'%'
+							and nickname = #{query}
 						</when>
 		</choose>
 	</select>
