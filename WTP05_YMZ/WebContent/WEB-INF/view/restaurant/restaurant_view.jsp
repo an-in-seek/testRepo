@@ -158,45 +158,45 @@ function removeReply(restaurantNo, number){
 </tr>
 <tr id="selectPicture" align="center">
 <td style="width:20%;padding:5px;padding-bottom:1px;">
-	<c:if test="${!empty requestScope.pic1 }"><img style="width:80px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic1}"></c:if>
+	<c:if test="${!empty requestScope.pic1 }"><img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic1}"></c:if>
 </td>
 <td style="width:20%;padding:5px;padding-bottom:1px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic2 }">
-			<img style="width:80px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic2}">
+			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic2}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:80px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
 		</c:otherwise>
 	</c:choose>
 </td>
 <td style="width:20%;padding:5px;padding-bottom:1px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic3 }">
-			<img style="width:80px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic3}">
+			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic3}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:80px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
 		</c:otherwise>
 	</c:choose>
 </td>
 <td style="width:20%;padding:5px;padding-bottom:1px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic4 }">
-			<img style="width:80px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic4}">
+			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic4}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:80px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
 		</c:otherwise>
 	</c:choose>
 </td>
 <td style="width:20%;padding:5px;padding-bottom:1px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic5 }">
-			<img style="width:80px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic5}">
+			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic5}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:80px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
 		</c:otherwise>
 	</c:choose>
 </td>
