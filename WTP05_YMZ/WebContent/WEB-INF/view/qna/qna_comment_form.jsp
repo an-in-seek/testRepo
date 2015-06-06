@@ -29,6 +29,16 @@ $(document).ready(function(){
 			// 등록버튼 클릭시 form 전송
  			$("#save").click(function() {
 				oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD");
+				if(!$("#title").val()){
+ 					alert("제목을 입력하세요");
+ 					$("#title").focus();
+ 					return false;
+ 				}
+ 				if(!$("#content").val()){
+ 					alert("내용을 입력하세요");
+ 					$("#content").focus();
+ 					return false;
+ 				} 
 			}); 
 	});
 </script>
@@ -36,22 +46,30 @@ $(document).ready(function(){
 h2 {
 	text-align: center;
 }
-table#t1 {
+table#tb thead tr{
 	width: auto;
+	font-weight: bold;
+	background: lightgray;
 }
 </style>
 
-<div align="center">
-	<h2>QNA게시물 답글${requestScope.qna.refamily}</h2>
+<h2>QNA게시물 답글${requestScope.qna.refamily}</h2>
+<div align="center" style="padding:20px">
 	<!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
 	<form id="write" method="post" action="${initParam.rootPath}/qna/login/writeComment.do">
 		<input type="hidden" id="number" name="number" value="${requestScope.qna.number}" >
 		<input type="hidden" id="refamily" name="refamily" value="${requestScope.qna.refamily}" >
 		<input type="hidden" id="restep" name="restep" value="${requestScope.qna.restep}" >
 		<input type="hidden" id="relevel" name="relevel" value="${requestScope.qna.relevel}" >
-		<table id="t1">
+		<table id="tb" align="center" style="border:solid 2px #050099">
+			<thead>
+				<tr style="text-align: center;">
+					<td colspan="4"><font size="4">답글 등록하기</font></td>
+				</tr>
+			</thead>
 			<tr>
-				<td>분류</td>
+				<td>&nbsp;</td>
+				<td align="center"  width="50px">분류</td>
 				<td><select id="category" name="category">
 					<c:forEach items="${requestScope.categoryList}" var="c">
 						<c:if test="${c.categoryId == requestScope.qna.category}">
@@ -59,23 +77,36 @@ table#t1 {
 						</c:if>
 						</c:forEach>
 				</select></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
 			</tr>
 			<tr>
-				<td width="60px">제목</td>
+				<td>&nbsp;</td>
+				<td align="center" >제목</td>
 				<td><input type="text" id="title" name="title" style="width: 700px" value="${requestScope.qna.title}" required="required"></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
 			</tr>
 			<tr>
-				<td>내용</td>
-				<td>
-				<textarea name="content" id="content" rows="10" cols="100" style="width: 700px; height: 350px;" required="required"></textarea><br>
-				</td>
+				<td>&nbsp;</td>
+				<td align="center" >내용</td>
+				<td><textarea name="content" id="content" rows="10" cols="100" style="width: 700px; height: 350px;" required="required"></textarea><br></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
 			</tr>
 			<tr align="center">
-				<td></td>
-				<td>
+				<td>&nbsp;</td>
+				<td colspan="2">
 				<input type="submit" id="save" value="등록">
 				<input type="button" value="취소" onclick="javascript:history.back(-1);">
 				</td>
+				<td>&nbsp;</td>
 			</tr>
 		</table>
 	</form>
