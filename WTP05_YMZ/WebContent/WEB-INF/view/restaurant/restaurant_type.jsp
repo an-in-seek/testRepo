@@ -33,16 +33,16 @@ $(document).ready(function(){
 		$(this).append("<input type='hidden' name='align' value='${requestScope.align}'>");
 	});
 	
-	$("td.pagingNo").hover(function(){
-		$(this).css("border-style","solid").css("border-color","red");
-	},function(){
-		$(this).css("border-style","none");
-	});
-	
 	$("tr.selectList").hover(function(){
 		$(this).css("background-color","lightgray");
 	},function(){
 		$(this).css("background","none");
+	});
+	
+	$(".pagingNo").hover(function(){
+		$(this).css("border-style","solid").css("border-width","2px").css("border-color","red");
+	},function(){
+		$(this).css("border","none");
 	});
 	
 	$("#category option[value=${requestScope.category}]").prop("selected","selected");
@@ -122,8 +122,8 @@ $(document).ready(function(){
 <p>
 
 <!-- 페이징 처리 -->
-<table border="1" style="border-style:none;border-color:white;">
-<tr style="border-style:none;">
+<table>
+<tr>
 <!-- 이전 페이지 그룹 -->
 <td>
 <c:choose>
@@ -139,14 +139,14 @@ $(document).ready(function(){
 <c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
 	<c:choose>
 		<c:when test="${pageNum == pagingBean.currentPage }">
-			<td style="padding:1px;border-color:red;border-style:solid;">
+			<td style="padding:1px;border-style:solid;border-width:2px;border-color:red;">
 				&nbsp;
 				<font color="red"><b>${pageNum}</b></font>
 				&nbsp;
 			</td>
 		</c:when>
 		<c:otherwise>
-			<td class="pagingNo" style="padding:1px;">
+			<td class="pagingNo" style="padding:1px;border:none;">
 				&nbsp;
 				<a href="${initParam.rootPath }/restaurant/showListByType.do?currentPage=${pageNum}&category=${requestScope.category}&align=${requestScope.align}&searchWord=${requestScope.searchWord}">${pageNum}</a>
 				&nbsp;

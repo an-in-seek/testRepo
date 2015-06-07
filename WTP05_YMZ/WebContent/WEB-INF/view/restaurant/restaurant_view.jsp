@@ -113,12 +113,18 @@ $(document).ready(function(){
 			$("#totalDiv").text(Math.ceil($("#total").text()/$("#calcTotal input").val()));
 		}
 	});
+	$("#numofpeopleUp").on("mouseover",function(){
+		$(this).css("cursor","pointer");
+	});
 	
 	$("#numofpeopleDown").on("click",function(){
 		if($("#calcTotal input").val()>1){
 			$("#calcTotal input").val(eval($("#calcTotal input").val())-1);
 			$("#totalDiv").text(Math.ceil($("#total").text()/$("#calcTotal input").val()));
 		}
+	});
+	$("#numofpeopleDown").on("mouseover",function(){
+		$(this).css("cursor","pointer");
 	});
 //송이꺼-----------------------------------------------------------
 
