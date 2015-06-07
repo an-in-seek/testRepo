@@ -11,6 +11,7 @@ public class Review implements Serializable{
 	private int hits;
 	private String content;
 	private int recommend;
+	private int report;             // 비추천수
 	private String memberId;
 	////////////////////////////////////////////// 참조용 변수들
 	private String nickname;		// 회원 닉네임
@@ -23,8 +24,8 @@ public class Review implements Serializable{
 	}
 
 	public Review(int reviewNo, String title, String regDate, int hits,
-			String content, int recommend, String memberId, String nickname,
-			int replyCount, int pageNo, String sortType) {
+			String content, int recommend, int report, String memberId,
+			String nickname, int replyCount, int pageNo, String sortType) {
 		super();
 		this.reviewNo = reviewNo;
 		this.title = title;
@@ -32,6 +33,7 @@ public class Review implements Serializable{
 		this.hits = hits;
 		this.content = content;
 		this.recommend = recommend;
+		this.report = report;
 		this.memberId = memberId;
 		this.nickname = nickname;
 		this.replyCount = replyCount;
@@ -85,6 +87,14 @@ public class Review implements Serializable{
 
 	public void setRecommend(int recommend) {
 		this.recommend = recommend;
+	}
+
+	public int getReport() {
+		return report;
+	}
+
+	public void setReport(int report) {
+		this.report = report;
 	}
 
 	public String getMemberId() {
@@ -141,6 +151,7 @@ public class Review implements Serializable{
 		result = prime * result + recommend;
 		result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
 		result = prime * result + replyCount;
+		result = prime * result + report;
 		result = prime * result + reviewNo;
 		result = prime * result
 				+ ((sortType == null) ? 0 : sortType.hashCode());
@@ -185,6 +196,8 @@ public class Review implements Serializable{
 			return false;
 		if (replyCount != other.replyCount)
 			return false;
+		if (report != other.report)
+			return false;
 		if (reviewNo != other.reviewNo)
 			return false;
 		if (sortType == null) {
@@ -204,15 +217,13 @@ public class Review implements Serializable{
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", title=" + title
 				+ ", regDate=" + regDate + ", hits=" + hits + ", content="
-				+ content + ", recommend=" + recommend + ", memberId="
-				+ memberId + ", nickname=" + nickname + ", replyCount="
-				+ replyCount + ", pageNo=" + pageNo + ", sortType=" + sortType
-				+ "]";
+				+ content + ", recommend=" + recommend + ", report=" + report
+				+ ", memberId=" + memberId + ", nickname=" + nickname
+				+ ", replyCount=" + replyCount + ", pageNo=" + pageNo
+				+ ", sortType=" + sortType + "]";
 	}
 
 	
-	
-
 	
 	
 }

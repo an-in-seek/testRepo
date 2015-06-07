@@ -64,14 +64,16 @@ $(document).ready(function(){
 	
 	// 검색 전송 이벤트
 	$("#searchForm").on("submit",function(){
-		if($("#searchText").val().trim()==""){
+		if($("#searchText").val().trim()==""){  // 검색어를 입력하지 않았을 경우에 경고창
+			alert("검색어를 입력하세요!!");
 			return false;
 		}
-		var type = $("#searchSort").val();
-		var search = $("#searchText").val();
+		var type = $("#searchSort").val();		// 검색 종류 
+		var search = $("#searchText").val();	// 검색어
 		$(this).append("<input type='hidden' name='searchType' value='"+type+"'>");
 		$(this).append("<input type='hidden' name='query' value='"+search+"'>");
 	});
+
 });
 </script>
 <style type="text/css">
@@ -167,9 +169,9 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 							</c:forEach>
 							<c:forEach begin="${fn:length(requestScope.todayBest)}" end="4"> <!-- 5개 이하일 경우 빈공간을 만들어준다. -->
 								<tr>
-									<td align="center">&nbsp</td>
+									<td align="center">&nbsp;</td>
 									<td align="left" id="title">
-									&nbsp
+										<font color="blue">등록된 글이 없습니다.</font>
 									</td>
 								</tr> 
 							</c:forEach>
@@ -199,10 +201,8 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 						</c:forEach>
 						<c:forEach begin="${fn:length(requestScope.monthBest)}" end="4">
 								<tr>
-									<td align="center">&nbsp</td>
-									<td align="left" id="title">
-									&nbsp
-									</td>
+									<td align="center">&nbsp;</td>
+									<td align="left" id="title">&nbsp;</td>
 								</tr> 
 						</c:forEach>
 					</tbody>
@@ -214,6 +214,8 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<br>
 	
 	<!-- 테이블 시작 -->
+	<c:choose>
+	<c:when test="${fn:length(requestScope.reviewList) != 0 }">
 	<table id="listTB" style="width:1000px">
 		<thead>
 			<tr>
@@ -252,6 +254,28 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 		</tbody>
 	</table>
 	<br>
+	</c:when>
+	<c:otherwise>
+	<table id="listTB" style="width:1000px">
+		<thead>
+			<tr>
+				<td style="width:50px">번호</td>
+				<td style="width:350px">제목</td>
+				<td style="width:150px">작성자</td>
+				<td style="width:100px">작성일</td>
+				<td style="width:50px">추천</td>
+				<td style="width:50px">조회</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr align="center">
+				<td colspan="6"><font color="red">검색결과가 없습니다.</font></td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	</c:otherwise>
+	</c:choose>
 	<!-- 테이블 끝 -->
 
 

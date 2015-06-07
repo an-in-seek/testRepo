@@ -70,7 +70,6 @@ public class ReviewController {
 	public ModelAndView ReviewView(@ModelAttribute Review review){ 
 		Map<String, Object> map =replyService.getReplyList(review.getReviewNo()); //DB로 reviewNo을 보내서 해당 댓글들 가져오기
 		Review rev = service.getReviewByNo(review.getReviewNo()); 				  // 리뷰글 가져오기
-		System.out.println("글쓴이의 닉네임 : " + rev.getNickname());
 		map.put("pageNo", review.getPageNo());
 		map.put("review", rev);
 		return new ModelAndView("review/review_view.tiles", map);
@@ -146,6 +145,14 @@ public class ReviewController {
 		Review review = service.getReviewByNo(reviewNo);
 		int hits = review.getHits();
 		return hits;
+	}
+	
+	// 현재 로그인정보를 체크해서 리턴
+	@RequestMapping("ajax/findLoginMember")
+	@ResponseBody
+	public Member findLoginMember(HttpSession session){
+		Member member = (Member) session.getAttribute("login_info");
+		return member;
 	}
 	
 

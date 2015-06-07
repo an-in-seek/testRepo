@@ -29,8 +29,16 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 		$("#dialog2").append("<input type='hidden' name='replyNo' value='"+replyNum+"'>"); // 댓글 번호값을 다이얼로그 폼으로 보낸다.
 		$("#reviewModifyContent").html(rrr);		// 원본 리플을 화면에 출력해준다.
 		$("#dialog").dialog({modal:true, width:800});
-		
+	}else{
+		return;
+	}
+}
 
+//댓글 삭제
+function reportReply(reviewNo, rnum, pNo){
+	var isUp=confirm("신고할랭???")
+	if(isUp){
+		alert("아직 준비중이야!!!");
 	}else{
 		return;
 	}
@@ -51,6 +59,29 @@ $(document).ready(function(){
 			}
 		});
 	}
+	
+	
+	///////////////////////////////////////////////////////////////////////// 회원별 버튼 보여주기 유/무 
+	$.ajax({
+		url:"${initParam.rootPath}/review/ajax/findLoginMember.do", //요청 url 설정
+		type:"post", //HTTP 요청 방식(method)
+		dataType:"json", //javascript객체로 변환해서 응답데이터를 전달.
+		beforeSend:function(){
+			$("#modifyBtn").hide();
+			$("#deleteBtn").hide();
+			$("#reportBtn").hide();
+		},
+		success:function(member){
+			if(member.grade == 'master'){							// 관리자
+				$("#modifyBtn").show();
+				$("#deleteBtn").show();
+			}else if(member.id == '${requestScope.review.memberId}'){	// 글쓴이와 로그인한 회원이 같을 경우
+				$("#modifyBtn").show();
+				$("#deleteBtn").show();
+				$("#reportBtn").show();
+			}
+		}
+	});
 	
 	
 	////////////////////////////////////////////////////// 리뷰 본문
@@ -225,7 +256,8 @@ ${requestScope.review.content }<br>
 							onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
 						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
 							onclick="removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});"  value="삭제" >
-						<input type="button"  id="reply_reportBtn"  value ="신고">
+						<input type="button"  id="reply_reportBtn${reply.replyNo}"  
+							onclick="reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" value ="신고">
 					
 					</td>
 					
