@@ -123,7 +123,8 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping("/selectLocation.do")
-	public String selectLocation() {
+	public String selectLocation(String selectedBuildingName, Model model) {
+		model.addAttribute("selectedBuildingName", selectedBuildingName);
 		return "restaurant/restaurant_location.tiles";
 	}
 	
@@ -189,7 +190,7 @@ public class RestaurantController {
 	
 	@RequestMapping("/restaurantView.do")
 	@Transactional
-	public String restaurantView(int restaurantNo, Model model, HttpSession session, ModelMap map) {
+	public String restaurantView(int restaurantNo, String backURL, Model model, HttpSession session, ModelMap map) {
 		Member member = (Member)session.getAttribute("login_info");
 		if(member!=null) {
 			if(member.getGrade().equals("master")) {
@@ -214,8 +215,13 @@ public class RestaurantController {
 		List<Food> foods = service.getFoodsByRestaurantNo(restaurant.getRestaurantNo());
 		model.addAttribute("foods", foods);
 		
+		// 목록으로 돌아갈 url을 request scope에 올린다
+		model.addAttribute("backURL", backURL);
+		
 		// 조회수 1증가
 		service.increaseHits(restaurantNo);
+		
+		
 		//송이꺼-----------------------------------------------------------------------------
 	
 		List list = replyService.selectAllRestaurantReply(restaurant.getRestaurantNo());

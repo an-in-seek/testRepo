@@ -30,7 +30,7 @@ function restaurantsTableSetting(txt){
 					code=code+"</tr><tr style='height:40px;'>"
 					k=0;
 				}
-				code=code+"<td style='border-right-style:hidden;'><a id='count"+(++a_count)+"' href='${initParam.rootPath}/restaurant/restaurantViewByRestaurantName.do?restaurantName="+temp[j]+"'>"+temp[j]+"</a></td>";
+				code=code+"<td style='border-right-style:hidden;'><a id='count"+(++a_count)+"' href='${initParam.rootPath}/restaurant/restaurantViewByRestaurantName.do?restaurantName="+temp[j]+"&backURL=${initParam.rootPath}/restaurant/selectLocation.do?selectedBuildingName="+selectedBuildingName+"'>"+temp[j]+"</a></td>";
 				if(j==temp.length-2 && k<4){
 					for(var l=k;l<3;l++){
 						code=code+"<td style='border-right-style:hidden;'></td>";
@@ -81,6 +81,21 @@ function restaurantsTableSetting(txt){
 };
 
 $(document).ready(function(){
+	$.ajax({
+		url:"${initParam.rootPath}/restaurant/ajax/getRestaurantsByBuildingName.do",
+		type:"post",
+		data:{'buildingName':'${requestScope.selectedBuildingName}'},
+		dataType:"json",
+		beforeSend:function(){
+			if(eval("${empty requestScope.selectedBuildingName}")){
+				return false;
+			}else{
+				selectedBuildingName="${requestScope.selectedBuildingName}";
+			}
+		},
+		success:restaurantsTableSetting
+	});
+	
 	$("#uspace2").hover(function(){
 		$("#pangyo-map").css("background-image","url('${initParam.rootPath }/uploadPhoto/uspace2.png')");
 	},function(){
