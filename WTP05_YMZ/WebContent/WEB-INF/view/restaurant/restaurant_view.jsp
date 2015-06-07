@@ -399,8 +399,6 @@ display:none;
 			</tr>
 		</table>
 	</form>
-</body>
-
 
 <div id="dialog" title="댓글 수정">
 		<section>
@@ -421,3 +419,9 @@ display:none;
 		</form>
 		</section>
 	</div>
+	
+<p/>
+<hr>
+<p align="center"><a href="${requestScope.backURL }"><button style="width:200px;height:50px;">목록으로 돌아가기</button></a></p>
+</body>
+</html>

@@ -106,7 +106,7 @@ $(document).ready(function(){
 							<img style="width:80px;height:60px;" src="${initParam.rootPath }/uploadPhoto/${fn:split(restaurant.pictureName,',')[0]}">
 						</td>
 						<td align="left" style="border-right-style:hidden;">
-							<a href="${initParam.rootPath }/restaurant/restaurantView.do?restaurantNo=${restaurant.restaurantNo }">${restaurant.restaurantName}</a>
+							<a href="${initParam.rootPath }/restaurant/restaurantView.do?restaurantNo=${restaurant.restaurantNo }&backURL=${initParam.rootPath}/restaurant/showListByType.do?category=${requestScope.category}%26align=${requestScope.align}%26currentPage=${requestScope.pagingBean.currentPage}%26searchWord=${requestScope.searchWord}">${restaurant.restaurantName}</a>
 							<c:if test="${restaurant.replyCount>0 }"><font color="gray">[${restaurant.replyCount }]</font></c:if>
 							<c:if test="${requestScope.today==restaurant.regDate }"><img style="width:12px;height:10px;" src="${initParam.rootPath }/uploadPhoto/new.png"></c:if>
 						</td>

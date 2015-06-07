@@ -136,6 +136,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 	@Override
 	public List<String> getRestaurantsByBuildingName(String buildingName) {
+		if(buildingName==null) {
+			return null;
+		}
+		
 		List<String> floors = dao.selectFloorsByBuildingName(buildingName);
 		List<String> data = new ArrayList<String>();
 		for(int i=0; i<floors.size(); i++) {
