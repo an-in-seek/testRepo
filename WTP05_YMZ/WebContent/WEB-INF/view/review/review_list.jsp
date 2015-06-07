@@ -123,7 +123,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 
 <section>
 	<div align="center">
-	<h2>맛집 리뷰</h2>
+	<h4>맛집 리뷰</h4>
 
 	
 	<!-- 인기글 테이블 -->
@@ -144,17 +144,30 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 						<tbody>
 							<c:forEach items="${requestScope.todayBest }" var="review" varStatus="status">
 								<tr>
-									<th align="center" width="100px">${status.index+1}위</th>
-									<td align="left" id="title">
+									<c:choose>
+										<c:when test="${status.index+1 == 1}">
+											<th align="center" width="100px"><font color="#FF3636">${status.index+1}위</font></th>
+											<td align="left" id="title">
 										<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-										${review.title}
+										<font color="#FF3636">${review.title}</font>
 										</a>
-									</td>
+										</td>
+										</c:when>
+										<c:otherwise>
+											<th align="center" width="100px">${status.index+1}위</th>
+											<td align="left" id="title">
+											<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+											${review.title}
+											</a>
+										</td>
+										</c:otherwise>
+									</c:choose>
+								
 								</tr> 
 							</c:forEach>
-							<c:forEach begin="${fn:length(requestScope.todayBest)}" end="4"> <!-- 5개 이하일 경우 빈공간을 만들어준다. -->
+							<c:forEach begin="${fn:length(requestScope.todayBest)}" end="4" varStatus="status"> <!-- 5개 이하일 경우 빈공간을 만들어준다. -->
 								<tr>
-									<th align="center">&nbsp;</th>
+									<th align="center"  width="100px">${status.index+1}위</th>
 									<td align="left" id="title">
 									&nbsp;
 									</td>
@@ -176,17 +189,29 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 					<tbody>
 						<c:forEach items="${requestScope.monthBest }" var="review" varStatus="status">
 						<tr>
-							<th align="center" width="100px">${status.index+1}위</th>
-							<td align="left" id="title">
-							<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-							${review.title}
-							</a>
-							</td>
+							<c:choose>
+							<c:when test="${status.index+1 == 1}">
+								<th align="center" width="100px"><font color="#FF3636">${status.index+1}위</font></th>
+								<td align="left" id="title">
+								<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+								<font color="#FF3636">${review.title}</font>
+								</a>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<th align="center" width="100px">${status.index+1}위</th>
+								<td align="left" id="title">
+								<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+								${review.title}
+								</a>
+								</td>
+							</c:otherwise>
+							</c:choose>
 						</tr> 
 						</c:forEach>
-						<c:forEach begin="${fn:length(requestScope.monthBest)}" end="4">
+						<c:forEach begin="${fn:length(requestScope.monthBest)}" end="4" varStatus="status">
 								<tr>
-									<td align="center">&nbsp;</td>
+									<td align="center">${status.index+1}위</td>
 									<td align="left" id="title">&nbsp;</td>
 								</tr> 
 						</c:forEach>
@@ -220,7 +245,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
 					${review.title} 
 					<c:if test="${review.replyCount != 0}">
-					<font color="red">[${review.replyCount}]</font>
+					<font color="#A748FF">[${review.replyCount}]</font>
 					</c:if>
 					</a>
 					</td>
@@ -241,7 +266,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 	<br>
 	</c:when>
 	<c:otherwise>
-	<table class="listTable" style="width:1000px">
+	<table class="listTable" style="width:1100px">
 		<thead>
 			<tr>
 				<td style="width:50px">번호</td>

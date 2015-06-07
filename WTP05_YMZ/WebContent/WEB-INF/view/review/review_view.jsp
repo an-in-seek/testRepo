@@ -166,7 +166,7 @@ button{
 button#recommendBtn{
 	width:200px;
 	height:100px;
-	background: palegreen;
+	background: mediumslateblue;
 }
 div#dialog{
 	width:800px;
@@ -205,18 +205,18 @@ div#dialog{
 </head>
 <body>
 
-<div align="center">
-<h2>리뷰</h2>
+<h4>리뷰</h4>
+<div align="left">
 <!-- ************************************** 리뷰 정보 ************************************* -->
 <table class="listTable" style="width:1000px">
 		<thead>
 			<tr>
-				<th style="height:100px" colspan="4"><font size="5">${requestScope.review.title}</font></th>
+				<th style="height:80px" colspan="4"><font size="5">${requestScope.review.title}</font></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr align="right">
-				<td style="width:200px"><font color="blue" size="4">${requestScope.review.nickname}</font></td> 
+				<td style="width:300px"><font color="blue" size="4">${requestScope.review.nickname}</font></td> 
 				<td style="width:500px">${requestScope.review.regDate}</td>
 				<td id="hitsCount" style="width:150px">조회수 : ${requestScope.review.hits}</td> 
 				<td id="recommendCount" style="width:150px">추천수 : <font color="red">${requestScope.review.recommend}</font></td>
@@ -228,8 +228,9 @@ div#dialog{
 
 
 <!-- ********************************* 리뷰 내용이 들어가는 공간 *************************************** -->
-
+<div id="reviewContent" style="width: 1000px">
 ${requestScope.review.content }<br>
+</div>
 
 	<div align="center" id="recommend"> <!-- 추천 버튼 -->
 		<button id="recommendBtn">
@@ -242,33 +243,33 @@ ${requestScope.review.content }<br>
 
 
 
-<div id="reply" align="center">
+<div id="reply" align="right">
 	<!-- 버튼 -->
 	<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${requestScope.pageNo}"><button>목록</button></a>
 	<a href="${initParam.rootPath }/review/login/modifyForm.do?reviewNo=${requestScope.review.reviewNo}">
 	<button id="modifyBtn">수정</button></a>
 	<button id="deleteBtn">삭제</button>
-	<button id="reportBtn">신고</button>
-
-<hr>
+	<button id="reportBtn">신고</button><br><br>
+</div>
 <!-- ****************************************  댓 글 영 역  ****************************************** -->
 
-<form action="${initParam.rootPath }/review/login/register.do"  method="post">
+<div id="repTable" align="left">
+	<form action="${initParam.rootPath }/review/login/register.do"  method="post">
 	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}">
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}">
 <!-- 테이블 시작 -->
 <table id="replyTB" style="width:1000px;">
 		<thead>
 			<tr>
-				<td colspan="3">댓글개수 써노면 개이득???</td>
+				<td colspan="3">댓글달아줘!!</td>
 			</tr>
 		</thead>
 		<tbody> 
 			<c:forEach items="${requestScope.reviewReplyList }" var="reply"  varStatus="status">
 				<tr id="reply${status.index+1}">
-					<th width="100" style="text-align: center">${reply.nickname}</th>
+					<th width="100" style="text-align: center"><font color="#FF4848">${reply.nickname}</font></th>
 					<td id="rContent${status.index+1}" width="700"><font size='4'>${reply.content}</font></td>
-					<td width="100"><font size="3">${reply.regDate}</font><br>
+					<td width="200"><font size="3">${reply.regDate}</font><br>
 						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.name =='관리자')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
 						<input type="button" id="reply_modifyBtn${reply.replyNo}"  
 							onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
@@ -300,7 +301,7 @@ ${requestScope.review.content }<br>
 		</tr>
 	</table>
 </form>
-<div id="dialog" title="댓글 수정">
+<div id="dialog" title="댓글 수정" align="left">
 	<figure id="pic"></figure>
 	<section>
 	<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 댓글을 입력하세요. </header>
