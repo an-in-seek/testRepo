@@ -57,7 +57,7 @@ $(document).ready(function(){
 			type:"post",
 			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
 			success:function(txt){
-				$("#hitsCount").html(txt);
+				$("#hitsCount").html("조회수 : "+txt);
 			}
 		});
 	}
@@ -98,7 +98,7 @@ $(document).ready(function(){
 			type:"post",
 			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
 			success:function(txt){
-				$("#recommendCount").html(txt);
+				$("#recommendCount").html("추천수 : "+txt);
 				$("#recommendCountBtn").html(txt);
 			}
 		});
@@ -137,20 +137,25 @@ $(document).ready(function(){
 </script>	
 <!-- css -->
 <style type="text/css">
-table#contentTB thead tr{
-	font-weight: bold;
-	background: lightgray;
-	text-align: center;
+@import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+
+table#replyTB tbody tr:nth-child(even) {
+    background-color: lavenderblush;
 }
-table#contentTB tbody tr{
-	cursor: pointer;
+table#replyTB tbody tr:nth-child(odd) {
+   background-color:#fff;
 }
+
 table#replyTB thead tr{
 	font-weight: bold;
-	background: lightgray;
+	background: mistyrose;
 	text-align: center;
 }
 table#replyTB tbody tr{
+	font-family: 'Nanum Pen Script', cursive;
+	font-size: 40px;
+	height: 140px;
 	cursor: pointer;
 }
 button{
@@ -167,6 +172,34 @@ div#dialog{
 	width:800px;
 	display: none;
 }
+
+.listTable{
+	font-family: 'Jeju Hallasan', cursive;
+    border-collapse:collapse;
+    border: 0px;
+}
+.listTable thead tr{
+	font-weight: bold;
+	background: lavender;
+	text-align: center;
+	border-collapse: collapse;
+}
+.listTable tbody td{
+    border-bottom:1px solid;
+    border-color:#ccc;
+    border-top:1px solid #6c9d31;
+}
+
+.listTable th, .listTable td{
+    border-color:#ccc;
+    padding:6px 12px 2px;
+}
+.listTable tr:first-child th, .listTable tr:first-child td{
+    border-top:1px solid #6c9d31;
+}
+.listTable tr th:first-child{
+    border-left:none;
+}
 </style>
 <!-- css 끝 -->
 </head>
@@ -175,32 +208,22 @@ div#dialog{
 <div align="center">
 <h2>리뷰</h2>
 <!-- ************************************** 리뷰 정보 ************************************* -->
-<table id="contentTB" style="width:1000px">
+<table class="listTable" style="width:1000px">
 		<thead>
 			<tr>
-				<td style="width:100px">글번호</td>
-				<td style="width:400px">제목</td>
-				<td style="width:100px">닉네임</td>
-				<td style="width:100px">ID</td>
-				<td style="width:100px">조회수</td>
-				<td style="width:100px">등록일</td>
-				<td style="width:100px">추천수</td>
+				<th style="height:100px" colspan="4"><font size="5">${requestScope.review.title}</font></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr align="center">
-				<td>${requestScope.review.reviewNo}</td>
-				<td>${requestScope.review.title}</td>
-				<td>${requestScope.review.nickname}</td> <!-- 닉네임 -->
-				<td>${requestScope.review.memberId}</td> 
-				<td id="hitsCount">${requestScope.review.hits}</td> 
-				<td>${requestScope.review.regDate}</td>
-				<td id="recommendCount">${requestScope.review.recommend}</td>
+			<tr align="right">
+				<td style="width:200px"><font color="blue" size="4">${requestScope.review.nickname}</font></td> 
+				<td style="width:500px">${requestScope.review.regDate}</td>
+				<td id="hitsCount" style="width:150px">조회수 : ${requestScope.review.hits}</td> 
+				<td id="recommendCount" style="width:150px">추천수 : <font color="red">${requestScope.review.recommend}</font></td>
 			</tr> 
 		</tbody>
 	</table>
 	<br>
-<hr>
 </div>
 
 
@@ -234,24 +257,18 @@ ${requestScope.review.content }<br>
 	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}">
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}">
 <!-- 테이블 시작 -->
-<table id="replyTB" style="width:1000px">
+<table id="replyTB" style="width:1000px;">
 		<thead>
 			<tr>
-				<td>NO</td>
-				<td>작성자</td>
-				<td>내용</td>
-				<td>등록일</td>
-				<td></td>
+				<td colspan="3">댓글개수 써노면 개이득???</td>
 			</tr>
 		</thead>
-		<tbody id="replyBody">
+		<tbody> 
 			<c:forEach items="${requestScope.reviewReplyList }" var="reply"  varStatus="status">
-					<tr id="reply${status.index+1}">
-					<td>${reply.replyNo}</td>
-					<td>${reply.nickname}</td>
-					<td id="rContent${status.index+1}">${reply.content}</td>
-					<td>${reply.regDate}</td>
-					<td>
+				<tr id="reply${status.index+1}">
+					<th width="100" style="text-align: center">${reply.nickname}</th>
+					<td id="rContent${status.index+1}" width="700"><font size='4'>${reply.content}</font></td>
+					<td width="100"><font size="3">${reply.regDate}</font><br>
 						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.name =='관리자')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
 						<input type="button" id="reply_modifyBtn${reply.replyNo}"  
 							onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
@@ -260,8 +277,8 @@ ${requestScope.review.content }<br>
 						</c:if>
 						<input type="button"  id="reply_reportBtn${reply.replyNo}"  
 							onclick="reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" value ="신고">
-					</td>
-				</tr> 
+						</td>
+				</tr > 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->
 		</tbody>

@@ -9,17 +9,16 @@
 <title>먹자먹자 야 먹자</title>
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
-<script type="text/javascript">
-	
 
-function chagee(time, num){
+<script type="text/javascript">
+
+function chagee(time, num){			// 오늘 날짜 비교하기
 	var nowdate = new Date();
 	var year = nowdate.getFullYear();
 	var month = nowdate.getMonth() + 1;
 	var day = nowdate.getDate();
 	var date_str = year + "-" + (month<=9? '0'+month:month) + "-" + (day<=9? '0'+day:day);
 	var regDate = time.substring(0,10);
-	//alert(regDate);
 	if(date_str == regDate){
 		$("#regDate"+num).html(time.substring(11,19));
 	}else{
@@ -56,10 +55,10 @@ $(document).ready(function(){
 	});
 	
 	// 리뷰 제목 클릭 이벤트
-	$("table#listTB tbody tr").hover(function(){
-		 $(this).css("background-color", "lavender");
+	$(".listTable tbody tr").hover(function(){
+		 $(this).css("background-color", "lightcyan");
 	}, function(){
-		 $(this).css("background-color", "linen");
+		 $(this).css("background-color", "white");
 	});
 	
 	// 검색 전송 이벤트
@@ -77,60 +76,46 @@ $(document).ready(function(){
 });
 </script>
 <style type="text/css">
-
-table#listTB thead tr{
-	color: azure;
-	font-weight: bold;
-	background: darkcyan;
-	text-align: center;
-}
-table#listTB tbody tr td#title{
-	cursor: pointer;
-}
-table#listTB thead tr td#hitsSort{
-	cursor: pointer;
-}
-table#listTB thead tr td#recommendSort{
-	cursor: pointer;
-}
-table#listTB thead tr td#latestSort{
-	cursor: pointer;
-}
-table#listTB tbody tr{
-	background: linen;
-}
-table#bestTodayTB thead tr{
-	color: azure;
-	font-weight: bold;
-	background: limegreen;
-	text-align: center;
-}
-table#bestTodayTB tbody tr{
-	font-weight: bold;
-	background: lavender;
-	text-align: left;
-}
-table#bestMonthTB thead tr{
-	color: azure;
-	font-weight: bold;
-	background: limegreen;
-	text-align: left;
-}
-table#bestMonthTB tbody tr{
-	font-weight: bold;
-	background: lavender;
-	text-align: left;
-}
-button{
-	width:100px;
-	height:50px;
-}
-
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 a.list:link {text-decoration:none; color: black;}/*방문하지 않은 페이지*/
 a.list:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/ 
-a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 올라갔을 때*/
+a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라갔을 때*/
 
-
+.listTable{
+	font-family: 'Hanna', sans-serif;
+    border-collapse:collapse;
+    table-layout:fixed; 
+    min-width:800px;
+}
+.todayBestTB, .bestMonthTB{
+	font-family: 'Hanna', sans-serif;
+}
+.listTable thead tr, .todayBestTB thead tr, .bestMonthTB thead tr{
+	font-weight: bold;
+	background: lavender;
+	text-align: center;
+}
+.listTable th, .listTable td, .todayBestTB th, .todayBestTB td, .bestMonthTB th, .bestMonthTB td{
+    border-left:1px solid;
+    border-bottom:1px solid;
+    border-color:#ccc;
+    padding:6px 12px 2px;
+}
+.listTable tr:first-child th, .listTable tr:first-child td{
+    border-top:1px solid #6c9d31;
+}
+.listTable tr th:first-child{
+    border-left:none;
+}
+.listTable thead tr td#hitsSort{
+	cursor: pointer;
+}
+.listTable thead tr td#recommendSort{
+	cursor: pointer;
+}
+.listTable thead tr td#latestSort{
+	cursor: pointer;
+}
 </style>
 </head>
 
@@ -148,7 +133,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 			<tr>
 				<td>
 					<!-- 오늘 인기글 -->
-					<table id="bestTodayTB" style="width:500px">
+					<table class="todayBestTB" style="width:500px">
 						<thead>
 							<tr>
 								<td colspan="2" align="center">
@@ -159,7 +144,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 						<tbody>
 							<c:forEach items="${requestScope.todayBest }" var="review" varStatus="status">
 								<tr>
-									<td align="center">${status.index+1}위</td>
+									<th align="center" width="100px">${status.index+1}위</th>
 									<td align="left" id="title">
 										<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
 										${review.title}
@@ -169,9 +154,9 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 							</c:forEach>
 							<c:forEach begin="${fn:length(requestScope.todayBest)}" end="4"> <!-- 5개 이하일 경우 빈공간을 만들어준다. -->
 								<tr>
-									<td align="center">&nbsp;</td>
+									<th align="center">&nbsp;</th>
 									<td align="left" id="title">
-										<font color="blue">등록된 글이 없습니다.</font>
+									&nbsp;
 									</td>
 								</tr> 
 							</c:forEach>
@@ -180,18 +165,18 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 				</td>
 				<td>
 				<!-- 이번달 인기글 -->
-				<table id="bestMonthTB" style="width:500px">
+				<table class="bestMonthTB" style="width:500px">
 					<thead>
 						<tr>
 							<td colspan="2" align="center">
 							이번달 인기글
-						</td>
+							</td>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${requestScope.monthBest }" var="review" varStatus="status">
 						<tr>
-							<td align="center">${status.index+1}위</td>
+							<th align="center" width="100px">${status.index+1}위</th>
 							<td align="left" id="title">
 							<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
 							${review.title}
@@ -216,21 +201,21 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<!-- 테이블 시작 -->
 	<c:choose>
 	<c:when test="${fn:length(requestScope.reviewList) != 0 }">
-	<table id="listTB" style="width:1000px">
+	<table class="listTable" style="width:1000px">
 		<thead>
 			<tr>
 				<td style="width:50px">번호</td>
-				<td style="width:350px">제목</td>
-				<td style="width:150px">작성자</td>
+				<td style="width:400px">제목</td>
+				<td style="width:100px">작성자</td>
 				<td id="latestSort" style="width:100px">작성일<font size="1" color="red">▼</font></td>
-				<td id="recommendSort" style="width:50px">추천<font size="1" color="red">▼</font></td>
-				<td id="hitsSort" style="width:50px">조회<font size="1" color="red">▼</font></td>
+				<td id="recommendSort" style="width:70px">추천<font size="1" color="red">▼</font></td>
+				<td id="hitsSort" style="width:70px">조회<font size="1" color="red">▼</font></td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${requestScope.reviewList }" var="review" varStatus="status">
 				<tr>
-					<td align="center">${review.reviewNo }</td>
+					<th align="center">${review.reviewNo }</th>
 					<td align="left" id="title">
 					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
 					${review.title} 
@@ -256,7 +241,7 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 	<br>
 	</c:when>
 	<c:otherwise>
-	<table id="listTB" style="width:1000px">
+	<table class="listTable" style="width:1000px">
 		<thead>
 			<tr>
 				<td style="width:50px">번호</td>
@@ -317,19 +302,19 @@ a.list:hover {text-decoration:underline; color: tomato;}/*링크에 마우스 �
 		<tr>
 			<td>
 			<form id="searchForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
-			<select id="searchSort">
+			<select id="searchSort" style="width: 100px; height: 30px;">
 					<option value="title">제목</option>
 					<option value="id">아이디</option>
 					<option value="nickname">닉네임</option>
 			</select>
 			
-			<input type="text" id="searchText">
-			<input type="submit" id="searchBtn" value="검색">
+			<input type="text" id="searchText" style="width: 190px; height: 30px;">
+			<input type="submit" id="searchBtn" value="검색" style="width: 100px; height: 30px;">
 			</form>
 			</td>
 			<td>
 			<form id="writeForm" action="${initParam.rootPath }/review/login/review_write_form.do">
-				<input type="submit" value="글쓰기">
+				<input type="submit" value="글쓰기" style="width: 100px; height: 30px;">
 			</form>
 			</td>
 		</tr>

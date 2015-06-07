@@ -27,7 +27,6 @@ img{
 a{
 	text-decoration: none;
 }
-
 /*테이블 기본 스타일*/
 table, td, th{
 	border-collapse: collapse;
@@ -35,6 +34,7 @@ table, td, th{
 td, th{
 	padding: 5px;
 }
+
 
 
 div.template2{
