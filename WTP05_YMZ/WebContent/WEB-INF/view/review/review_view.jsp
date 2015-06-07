@@ -11,11 +11,12 @@
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <script type="text/javascript">
 
+
 //댓글 삭제
-function removeReply(reviewNo, rnum, pNo){
+function removeReply(reviewNo, replyNum, pNo){
 	var isDel = confirm("정말로 삭제하시겠습니까?");
 	if (isDel) {
-		document.location.href="${initParam.rootPath }/review/login/removeReviewReply.do?reviewNo="+reviewNo+"&replyNo="+rnum+"&pageNo="+pNo;
+		document.location.href="${initParam.rootPath }/review/login/removeReviewReply.do?reviewNo="+reviewNo+"&replyNo="+replyNum+"&pageNo="+pNo;
 	} else {
 		return;
 	}
@@ -34,7 +35,7 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 	}
 }
 
-//댓글 삭제
+//댓글 신고
 function reportReply(reviewNo, rnum, pNo){
 	var isUp=confirm("신고할랭???")
 	if(isUp){
@@ -45,6 +46,7 @@ function reportReply(reviewNo, rnum, pNo){
 }
 
 $(document).ready(function(){
+	
 	var reviewNumber = ${requestScope.review.reviewNo};
 	// 새로고침 조회수 증가 막기
 	var c = $.cookie('reviewNo'); // 쿠키 조회
@@ -59,7 +61,6 @@ $(document).ready(function(){
 			}
 		});
 	}
-	
 	
 	///////////////////////////////////////////////////////////////////////// 회원별 버튼 보여주기 유/무 
 	$.ajax({
@@ -153,7 +154,7 @@ table#replyTB tbody tr{
 	cursor: pointer;
 }
 button{
-	background: hotpink;
+	background: gold;
 	width:100px;
 	height:50px;
 }
@@ -173,7 +174,6 @@ div#dialog{
 
 <div align="center">
 <h2>리뷰</h2>
-
 <!-- ************************************** 리뷰 정보 ************************************* -->
 <table id="contentTB" style="width:1000px">
 		<thead>
@@ -246,21 +246,21 @@ ${requestScope.review.content }<br>
 		</thead>
 		<tbody id="replyBody">
 			<c:forEach items="${requestScope.reviewReplyList }" var="reply"  varStatus="status">
-				<tr id="reply${status.index+1}">
+					<tr id="reply${status.index+1}">
 					<td>${reply.replyNo}</td>
 					<td>${reply.nickname}</td>
 					<td id="rContent${status.index+1}">${reply.content}</td>
 					<td>${reply.regDate}</td>
 					<td>
+						<c:if test="${sessionScope.login_info.id == reply.memberId}"> <!-- 로그인 안했을 시 보이지 않는다. -->
 						<input type="button" id="reply_modifyBtn${reply.replyNo}"  
 							onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
 						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
 							onclick="removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});"  value="삭제" >
+						</c:if>
 						<input type="button"  id="reply_reportBtn${reply.replyNo}"  
 							onclick="reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" value ="신고">
-					
 					</td>
-					
 				</tr> 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->
