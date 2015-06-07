@@ -31,7 +31,7 @@ public class CategoryController {
 	@RequestMapping("login/category.do")
 	@ResponseBody
 	public ModelAndView CategoryView(@RequestParam String categoryId) {
-		Category category = service.getCategoryById(categoryId);
-		return new ModelAndView("qna/qna_modify_form.tiles", "category", category);
+		List<Category> categoryList = service.getCategoryByFirstId(categoryId);
+		return new ModelAndView("qna/qna_modify_form.tiles", "categoryList", categoryList);
 	}
 }

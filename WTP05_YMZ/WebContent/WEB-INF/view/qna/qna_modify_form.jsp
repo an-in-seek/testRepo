@@ -84,19 +84,21 @@ table#tb thead tr{
 			<tr>
 				<td>&nbsp;</td>
 				<td align="center" >분류</td>
-				<td><select id="category" name="category">
-					<option>분류</option>
-					<c:forEach items="${requestScope.categoryList}" var="c">
-							<c:choose>
-								<c:when test="${c.categoryId == requestScope.qna.category}">
-									<option value="${c.categoryId}" selected="selected">${c.categoryName}</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${c.categoryId}">${c.categoryName}</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-				</select></td>
+				<td>
+					<select id="category" name="category">
+						<option>분류</option>
+						<c:forEach items="${requestScope.categoryList}" var="c">
+								<c:choose>
+									<c:when test="${c.categoryName == requestScope.qna.category}">
+										<option value="${c.categoryName}" selected="selected">${c.categoryName}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${c.categoryName}">${c.categoryName}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+					</select>
+				</td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr height="1" bgcolor="#dddddd">

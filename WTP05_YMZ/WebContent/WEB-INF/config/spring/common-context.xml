@@ -42,7 +42,6 @@
 	<mvc:view-controller path="/member/loginForm.do" view-name="member/login_form.tiles"/>
 	<mvc:view-controller path="/member/mypage/modify_password_success.do" view-name="member/info/modify_password_success.tiles"/>
 	<mvc:view-controller path="/faq/login/writeForm.do" view-name="faq/faq_write_form.tiles"/>
-	<mvc:view-controller path="/qna/login/writeForm.do" view-name="qna/qna_write_form.tiles"/>
 	<mvc:view-controller path="/qna/login/commentForm.do" view-name="qna/qna_comment_form.tiles"/>
 	<mvc:view-controller path="/review/login/review_write_form.do" view-name="review/review_write_form.tiles"/>
 	

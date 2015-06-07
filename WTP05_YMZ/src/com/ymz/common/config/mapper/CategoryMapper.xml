@@ -4,24 +4,31 @@
 <mapper namespace="category.dao.CategoryMapper">
 
 	<sql id="category-select">
-		select 	category_id, category_name, category_info
-		from		category
+		select 	first_category_id, first_category_name, first_category_info
+		from		first_category
 	</sql>
 	
-	<resultMap type="Category" id="category-resultmap">
-		<id column="category_id" property="categoryId"/>
-		<result column="category_name" property="categoryName"/>
-		<result column="category_info" property="categoryInfo"/>
+	<resultMap type="Category" id="first-category-resultmap">
+		<id column="first_category_id" property="categoryId"/>
+		<result column="first_category_name" property="categoryName"/>
+		<result column="first_category_info" property="categoryInfo"/>
 	</resultMap>
 	
-	<select id="selectAllCategory" resultMap="category-resultmap">
+	<select id="selectAllCategory" resultMap="first-category-resultmap">
 		<include refid="category-select"/>
-		order by category_id
-	</select>
-
-	<select id="selectCategoryByNo" resultMap="category-resultmap" parameterType="String">
-		<include refid="category-select"/>
-		where category_id=#{categoryId}
+		order by first_category_id
 	</select>
 	
+	<resultMap type="Category" id="second-category-resultmap">
+		<id column="second_category_id" property="categoryId"/>
+		<result column="second_category_name" property="categoryName"/>
+		<result column="second_category_info" property="categoryInfo"/>
+	</resultMap>
+	
+	<select id="selectSecondCategoryByFId" resultMap="second-category-resultmap" parameterType="String">
+		select 	second_category_id, second_category_name, second_category_info
+		from 		second_category 
+		where	 	first_category_id = #{categoryId}
+	</select>
+
 </mapper>
