@@ -274,10 +274,49 @@ insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_c
 values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '회원탈퇴 어떻게 해요?', '회원관련', '20150502', 17, '7안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user01');
 
 insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
-values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '회원탈퇴 어떻게 해요?', '맛집관련', '20150503', 18, '8안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user01');
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '유스페이스 건물이 어디에 있나요?', '맛집관련', '20150503', 18, '8안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user01');
 
 insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
-values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '회원탈퇴 어떻게 해요?', '리뷰관련', '20150504', 19, '9안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user01');
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '리뷰 게시물 양식은 어떻게 써요?', '리뷰관련', '20150504', 19, '9안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user01');
 
 insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
-values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '회원탈퇴 어떻게 해요?', '회원관련', '20150506', 20, '10안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user01');
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '리뷰 게시물 양식은 어떻게 써요?', '리뷰관련', '20150506', 20, '10안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user01');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '유스페이스A 건물이 어디에 있나요?', '맛집관련', '20150506', 20, '10안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user02');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '유스페이스B 건물이 어디에 있나요', '맛집관련', '20150506', 20, '10안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user02');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '유스페이스C 건물이 어디에 있나요?', '맛집관련', '20150506', 20, '10안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user02');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '회원탈퇴 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '회원탈퇴 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '회원탈퇴 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '회원탈퇴 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '정보수정 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '정보수정 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '정보수정 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '정보수정 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '정보수정 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');
+
+insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
+values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '정보수정 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');

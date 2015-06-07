@@ -110,7 +110,6 @@ public class QNAController {
 		List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
 		map.put("categoryList", categoryList);
 		map.put("category", category);
-		System.out.println("카테고리 : "+category);
 		return new ModelAndView("qna/qna_list.tiles", map);
 	}
 	
