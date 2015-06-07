@@ -8,6 +8,6 @@ public interface CategoryService {
 
 	public abstract List<Category> getCategoryList();
 
-	public abstract Category getCategoryById(String categoryId);
+	public abstract List<Category> getCategoryByFirstId(String categoryId);
 
 }

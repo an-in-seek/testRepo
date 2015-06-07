@@ -8,6 +8,6 @@ public interface CategoryDAO {
 
 	public abstract List<Category> selectAllCategory();
 
-	public abstract Category selectCategoryById(String categoryId);
+	public abstract List<Category> selectSecondCategoryByFId(String categoryId);
 
 }

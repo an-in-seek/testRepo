@@ -74,12 +74,14 @@ table#tb thead tr{
 			<tr>
 				<td>&nbsp;</td>
 				<td align="center" width="40px">분류</td>
-				<td><select id="category" name="category">
-					<option>분류</option>
-					<option value="회원관련">회원관련</option>
-					<option value="맛집관련">맛집관련</option>
-					<option value="리뷰관련">리뷰관련</option>
-				</select></td>
+				<td>
+					<select id="category" name="category">
+						<option value="default">분류</option>
+							<c:forEach items="${requestScope.categoryList}" var="c">
+								<option value="${c.categoryName}">${c.categoryName}</option>
+							</c:forEach>
+					</select>
+				</td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr height="1" bgcolor="#dddddd">

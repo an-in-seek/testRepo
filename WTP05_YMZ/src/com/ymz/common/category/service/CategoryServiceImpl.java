@@ -21,8 +21,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 	
 	@Override
-	public Category getCategoryById(String categoryId){
-		Category category = dao.selectCategoryById(categoryId);
+	public List<Category> getCategoryByFirstId(String categoryId){
+		List<Category> category = dao.selectSecondCategoryByFId(categoryId);
 		return category;
 	}
 	

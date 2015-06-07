@@ -22,7 +22,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	}
 	
 	@Override
-	public Category selectCategoryById(String categoryId){
-		return session.selectOne(namespace+"selectCategoryById", categoryId);
+	public List<Category> selectSecondCategoryByFId(String categoryId){
+		return session.selectList(namespace+"selectSecondCategoryByFId", categoryId);
 	}
 }

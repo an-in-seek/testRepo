@@ -130,17 +130,18 @@
 			select ceil(rownum/#{contentsPerPage}) page, qna_no,  qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, member_id, qna_registration_date,  qna_hits
 			from (
 					<include refid="qna-select"/>
-					order by qna_refamily desc, qna_restep asc
+					<choose>
+						<when test="category == '전체보기'">
+							order by qna_refamily desc, qna_restep asc
+						</when>	
+						<otherwise>
+							where 	qna_category = #{category}
+							order 		by qna_refamily desc, qna_restep asc
+						</otherwise>
+					</choose>
 			)
 		) 
-		<choose>
-			<when test="category == '전체보기'">
-				where page = #{pageNo}
-			</when>	
-			<otherwise>
-				where page = #{pageNo} and qna_category = #{category}
-			</otherwise>
-		</choose>
+		where page = #{pageNo}
 	</select>
 	
 	<!-- 검색으로 전체 정보 조회 -->
@@ -150,17 +151,15 @@
 			select ceil(rownum/#{contentsPerPage}) page, qna_no,  qna_refamily, qna_restep, qna_relevel, qna_title, qna_content, qna_category, member_id, qna_registration_date,  qna_hits
 			from (
 					<include refid="qna-select"/>
+					<choose>
+						<when test="text != null">
+							where qna_title like '%'||#{text}||'%'
+						</when>	                                                                                                                                                                                             
+					</choose>
 					order by qna_refamily desc, qna_restep asc
 			)
 		) 
-		<choose>
-			<when test="text != null">
-				where page = #{pageNo} and qna_title like '%'||#{text}||'%'
-			</when>	                                                                                                                                                                                             
-			<otherwise>
-				where page = #{pageNo} 
-			</otherwise>
-		</choose>
+		where page = #{pageNo} 
 	</select>
 
 	<!-- DB 데이터 총 개수 -->
@@ -171,7 +170,14 @@
 	<!-- 분류별 DB 데이터 총 개수 -->
 	<select id="selectTotalQNACountByCategory" resultType="_int" parameterType="String">
 		select count(qna_no) from qna 
-		where qna_category = #{category} 
+		<choose>
+			<when test="category == '전체보기'">
+				order by qna_refamily desc, qna_restep asc
+			</when>	
+			<otherwise>
+				where qna_category = #{category} 
+			</otherwise>
+		</choose>
 	</select>
 	
 	<!-- 분류별 DB 데이터 총 개수 -->

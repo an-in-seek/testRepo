@@ -6,7 +6,6 @@ delete from faq CASCADE CONSTRAINTS;
 delete from qna CASCADE CONSTRAINTS;
 
 
-
 insert into member values('master01', 1111, '관리자1', '관리자1', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master1@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140514');
 insert into member values('master02', 2222, '관리자2', '관리자2', '20100504', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master2@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140515');
 insert into member values('master03', 3333, '관리자3', '관리자3', '20100503', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master3@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140516');
@@ -33,9 +32,16 @@ update member set grade='master' 	where member_id='2';
 update member set mileage=11111 	where member_id='2';
 select * from member;
 delete member where member_id='1';
-insert into CATEGORY values('회원관련', '회원관련', 'QNA게시판에서 분류할 때 사용');
-insert into CATEGORY values('맛집관련', '맛집관련', 'QNA게시판에서 분류할 때 사용');
-insert into CATEGORY values('리뷰관련', '리뷰관련', 'QNA게시판에서 분류할 때 사용');
+
+
+INSERT INTO FIRST_CATEGORY (FIRST_CATEGORY_ID, FIRST_CATEGORY_NAME, FIRST_CATEGORY_INFO) VALUES('F-1',  '맛집정보', '맛집정보 게시판에서 사용될 카테고리 정보');
+INSERT INTO FIRST_CATEGORY (FIRST_CATEGORY_ID, FIRST_CATEGORY_NAME, FIRST_CATEGORY_INFO) VALUES('F-2',  '맛집리뷰', '맛집리뷰 게시판에서 사용될 카테고리 정보');
+INSERT INTO FIRST_CATEGORY (FIRST_CATEGORY_ID, FIRST_CATEGORY_NAME, FIRST_CATEGORY_INFO) VALUES('F-3',  '고객센터', '고객센터 게시판에서 사용될 카테고리 정보');
+
+INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-1', '회원관련', '회원관련 QNA게시물 보기', 'F-3' );
+INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-2', '맛집관련', '맛집정보관련 QNA게시물 보기', 'F-3' );
+INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-3', '리뷰관련', '맛집리뷰관련 QNA게시물 보기', 'F-3' );
+
 
 insert into location values(location_no_seq.nextval, '유스페이스 1동', '3');
 insert into location values(location_no_seq.nextval, '유스페이스 1동', '2');

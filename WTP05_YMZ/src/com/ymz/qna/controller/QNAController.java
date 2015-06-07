@@ -33,6 +33,7 @@ public class QNAController {
 	@Autowired
 	private CategoryService categoryService;
 	
+	//------------------------------------------비지니스 로직 처리하기-----------------------------------------
 	//QNA게시물 등록
 	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
 	public String registerQNA(@ModelAttribute QNA qna, Errors errors, HttpSession session, ModelMap map) throws Exception{
@@ -60,27 +61,11 @@ public class QNAController {
 		return "redirect:/qna/qnaList.do";
 	}
 	
-	//QNA게시물 전체목록 조회(페이징)
-	@RequestMapping("qnaList.do")
-	public ModelAndView QNAList(@RequestParam(defaultValue="1")int page){
-		Map map = service.getQNAListPaging(page);
-		return new ModelAndView("qna/qna_list.tiles", map);
-	}
-	
-	//QNA게시물 전체목록 분류별 조회(페이징)
-	@RequestMapping("qnaListByCategory.do")
-	public ModelAndView QNAListByCategory(@ModelAttribute QNA qna){
-		int pageNo = 1;
-		String category = qna.getCategory();
-		Map map = service.getQNAListPagingByCategory(pageNo, category);
-		return new ModelAndView("qna/qna_list.tiles", map);
-	}
-	
 	//QNA게시물 전체목록 검색으로 조회(페이징)
 	@RequestMapping("searchQna.do")
 	public ModelAndView QNAListBySearch(@RequestParam String text){
 		int pageNo = 1;
-		Map map = service.getQNAListPagingBySearch(pageNo, text);
+		Map<String, Object> map = service.getQNAListPagingBySearch(pageNo, text);
 		return new ModelAndView("qna/qna_list.tiles", map);
 	}
 	
@@ -101,26 +86,6 @@ public class QNAController {
 		return hits;
 	}
 	
-	// 게시물 답글폼으로 이동
-	@RequestMapping("login/commentForm.do")//로그인 체크 - interceptor가 처리
-	public String moveQNACommentForm(@RequestParam int number, ModelMap map)throws Exception{
-		QNA qna = service.getQNAByNo(number);
-		List<Category> categoryList = categoryService.getCategoryList();
-		map.put("qna", qna);
-		map.put("categoryList", categoryList);
-		return "qna/qna_comment_form.tiles";
-	}
-	
-	// 게시물 수정폼으로 이동
-	@RequestMapping("login/modifyForm.do")//로그인 체크 - interceptor가 처리
-	public String moveQNAModifyForm(@RequestParam int number, ModelMap map)throws Exception{
-		QNA qna = service.getQNAByNo(number);
-		List<Category> categoryList = categoryService.getCategoryList();
-		map.put("qna", qna);
-		map.put("categoryList", categoryList);
-		return "qna/qna_modify_form.tiles";
-	}
-	
 	// 게시물 수정
 	@RequestMapping(value="login/modifyQna.do", method=RequestMethod.POST)
 	public String modifyQNAInfo(@ModelAttribute QNA qna, Errors errors)throws Exception{
@@ -128,7 +93,7 @@ public class QNAController {
 		service.modifyQNA(qna);//수정 처리
 		return "redirect:/qna/qnaView.do?qnaNo="+qna.getNumber();
 	}
-		
+	
 	// 게시물 삭제
 	@RequestMapping("login/removeQna.do")
 	public String removeQNAByNo(@ModelAttribute QNA qna){
@@ -136,7 +101,60 @@ public class QNAController {
 		service.removeQNAByNo(qna.getNumber());
 		return "redirect:/qna/qnaList.do";//삭제후 메인페이지로 이동
 	}
+	
+	//------------------------------------------폼으로 이동시키기-----------------------------------------
+	//QNA게시물 전체목록 조회하는 리스트 페이지로 이동
+	@RequestMapping("qnaList.do")
+	public ModelAndView QNAList(@RequestParam(defaultValue="1")int pageNo, @RequestParam(defaultValue="전체보기") String category){
+		Map<String, Object> map = service.getQNAListPagingByCategory(pageNo, category);
+		List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
+		map.put("categoryList", categoryList);
+		map.put("category", category);
+		System.out.println("카테고리 : "+category);
+		return new ModelAndView("qna/qna_list.tiles", map);
+	}
+	
+	//QNA게시물 전체목록 분류별로 조회해서 리스트 페이지로 이동
+		@RequestMapping("qnaListByCategory.do")
+		public ModelAndView QNAListByCategory(@ModelAttribute QNA qna, @RequestParam(defaultValue="1") int pageNo){
+			String category = qna.getCategory();
+			Map<String, Object> map = service.getQNAListPagingByCategory(pageNo, category);
+			List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
+			map.put("categoryList", categoryList);
+			map.put("category", category);
+			return new ModelAndView("qna/qna_list.tiles", map);
+		}
 		
+	// 게시물 등록폼으로 이동
+	@RequestMapping("login/writeForm.do")//로그인 체크 - interceptor가 처리
+	public String moveQNAWriteForm(ModelMap map)throws Exception{
+		List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
+		map.put("categoryList", categoryList);
+		return "qna/qna_write_form.tiles";
+	}
+	
+	// 게시물 수정폼으로 이동
+	@RequestMapping("login/modifyForm.do")//로그인 체크 - interceptor가 처리
+	public String moveQNAModifyForm(@RequestParam int number, ModelMap map)throws Exception{
+		QNA qna = service.getQNAByNo(number);
+		List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
+		map.put("qna", qna);
+		map.put("categoryList", categoryList);
+		return "qna/qna_modify_form.tiles";
+	}
+		
+	// 게시물 답글폼으로 이동
+	@RequestMapping("login/commentForm.do")//로그인 체크 - interceptor가 처리
+	public String moveQNACommentForm(@RequestParam int number, ModelMap map)throws Exception{
+		QNA qna = service.getQNAByNo(number);
+		List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
+		map.put("qna", qna);
+		map.put("categoryList", categoryList);
+		return "qna/qna_comment_form.tiles";
+	}
+	
+	
+	//------------------------------------------Ajax 처리-----------------------------------------
 	// 리스트에서 id로 회원정보 요청한 것 처리 -Ajax 요청처리
 	@RequestMapping("findQnaByNo")
 	@ResponseBody
