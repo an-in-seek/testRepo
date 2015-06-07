@@ -252,7 +252,7 @@ ${requestScope.review.content }<br>
 					<td id="rContent${status.index+1}">${reply.content}</td>
 					<td>${reply.regDate}</td>
 					<td>
-						<c:if test="${sessionScope.login_info.id == reply.memberId}"> <!-- 로그인 안했을 시 보이지 않는다. -->
+						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.name =='관리자')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
 						<input type="button" id="reply_modifyBtn${reply.replyNo}"  
 							onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
 						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
