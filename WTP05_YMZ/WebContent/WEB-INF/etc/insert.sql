@@ -27,10 +27,9 @@ insert into member values('user14', 5555, '이상해풀', '이상해풀', '20100
 insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user15@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140501');
 
 update member set grade='master' where member_id='master'
-
 update member set grade='master' 	where member_id='2';
 update member set mileage=11111 	where member_id='2';
-select * from member;
+
 delete member where member_id='1';
 
 
