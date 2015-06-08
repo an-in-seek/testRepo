@@ -155,7 +155,6 @@ table#replyTB tbody tr{
 	font-family: 'Hanna', sans-serif;
 	font-size: 25px;
 	height: 140px;
-	cursor: pointer;
 }
 button{
 	background: gold;
@@ -232,9 +231,16 @@ ${requestScope.review.content }<br>
 </div>
 
 	<div align="center" id="recommend"> <!-- 추천 버튼 -->
+		<table style="width: 190px; height: 90px;">
+			<tr>
+				<td background="${initParam.rootPath}/uploadPhoto/recommend.jpg">
+					ㅋㅋㅋ
+				</td>
+			</tr>
+		</table>
 		<button id="recommendBtn">
 			<span id="recommendCountBtn">${requestScope.review.recommend}</span>
-			<font color="" size='4'>♥</font>
+			<font color="red" size='4'>♥</font>
 		</button>
 	</div><br><br>
 	
