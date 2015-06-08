@@ -321,7 +321,10 @@ $(document).ready(function(){
 <hr>
 
 <p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="addPicture" name="addPicture">
+<span style="position:absolute;width:100px;height:30px;overflow:hidden;margin-left:15px;margin-top:3px;">
+	<input type="button" value="사진 선택" style="width:100px;height:30px;position:absolute;top:0px;background-color:#33BB00;color:#FFFFFF;border-style:solid;"/>
+	<input type="file" id="addPicture" name="addPicture" style="font-size:45px;position:absolute;right:0px;top:0px;cursor:pointer;"/>
+</span>
 <font color="red"><span id="pictureMessage"></span></font></p>
 <table id="picture_table">
 <tr id="pictureTemp">
