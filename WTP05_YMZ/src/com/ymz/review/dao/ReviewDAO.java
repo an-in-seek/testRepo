@@ -46,5 +46,8 @@ public interface ReviewDAO {
 	// 정렬
 	public abstract List<Review> selectSortReviewPaging(int pageNo, String type, String searchType, String query);
 
+	// 공지글 가져오기
+	public abstract List<Review> selectNotice();
+
 	
 }

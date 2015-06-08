@@ -98,7 +98,7 @@ $(document).ready(function(){
 			type:"post",
 			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
 			success:function(txt){
-				$("#recommendCount").html("추천수 : "+txt);
+				$("#recommendCount").html("추천수 : " + "<font color='red'>"+txt+"</font>");
 				$("#recommendCountBtn").html(txt);
 			}
 		});
@@ -143,8 +143,7 @@ $(document).ready(function(){
 </script>	
 <!-- css -->
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
-@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
 table#replyTB tbody tr:nth-child(even) {
     background-color: lavenderblush;
@@ -159,8 +158,8 @@ table#replyTB thead tr{
 	text-align: center;
 }
 table#replyTB tbody tr{
-	font-family: 'Nanum Pen Script', cursive;
-	font-size: 40px;
+	font-family: 'Hanna', sans-serif;
+	font-size: 25px;
 	height: 140px;
 	cursor: pointer;
 }
@@ -180,7 +179,7 @@ div#dialog{
 }
 
 .listTable{
-	font-family: 'Jeju Hallasan', cursive;
+	font-family: 'Hanna', sans-serif;
     border-collapse:collapse;
     border: 0px;
 }
@@ -276,6 +275,7 @@ ${requestScope.review.content }<br>
 					<th width="100" style="text-align: center"><font color="#FF4848">${reply.nickname}</font></th>
 					<td id="rContent${status.index+1}" width="700"><font size='4'>${reply.content}</font></td>
 					<td width="200"><font size="3">${reply.regDate}</font><br>
+<<<<<<< HEAD
 						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.name =='관리자')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
 						
 						<!-- 수정 -->
@@ -285,6 +285,13 @@ ${requestScope.review.content }<br>
 						<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});">
 						<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
 						
+=======
+						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.grade =='master')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
+						<input type="button" id="reply_modifyBtn${reply.replyNo}"  
+							onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
+						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
+							onclick="removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});"  value="삭제" >
+>>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 						</c:if>
 						<!-- 신고 -->
 						<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});">

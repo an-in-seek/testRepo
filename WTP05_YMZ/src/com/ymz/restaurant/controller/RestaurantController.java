@@ -215,8 +215,10 @@ public class RestaurantController {
 		List<Food> foods = service.getFoodsByRestaurantNo(restaurant.getRestaurantNo());
 		model.addAttribute("foods", foods);
 		
-		// 목록으로 돌아갈 url을 request scope에 올린다
-		model.addAttribute("backURL", backURL);
+		// 목록으로 돌아갈 url을 session scope에 올린다
+		if(backURL!=null) {
+			session.setAttribute("backURL", backURL);
+		}
 		
 		// 조회수 1증가
 		service.increaseHits(restaurantNo);

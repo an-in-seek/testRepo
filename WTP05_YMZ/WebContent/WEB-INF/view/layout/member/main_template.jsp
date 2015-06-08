@@ -47,11 +47,7 @@ header.main_template{
 	padding: 5px;
 }
 
-nav.main_template{
-	font-weight:bold;
-	float:right;  /*오른쪽으로 띄움 */
-}
-#right{
+nav#right{
 	margin-top:10px;
 	background-color: lightsteelblue;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/

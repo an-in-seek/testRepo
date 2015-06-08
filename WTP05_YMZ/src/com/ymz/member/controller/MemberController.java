@@ -1,7 +1,6 @@
 package com.ymz.member.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,6 +64,12 @@ public class MemberController {
 		String zipcode = post1+"-"+post2;
 		member.setZipcode(zipcode);
 		member.setGrade("user");
+//		String food[] = request.getParameterValues("favoriteFood");
+//		if( food != null )
+//			   for(int i = 0; i < food.length; ++i)
+//			    {
+//			     member.setFavoriteFood(food[i]);
+//			    }
 		String recommend = (String)request.getParameter("recommend");
 		String year = (String)request.getParameter("year");
 		String month = (String)request.getParameter("month");
@@ -265,13 +270,16 @@ public class MemberController {
 	/**********************리스트에서 nickname으로 회원정보 존재 유무 요청 처리 -Ajax 요청처리********************/
 	@RequestMapping("nickExistCheck.do")
 	@ResponseBody
-	public String nickExistCheck(@RequestParam String nickname){
+	public String nickExistCheck(String nickname){
+		System.out.println(nickname);
 		String result = null;
-		if(nickname=="" || service.getMemberByNickname(nickname)!=null){
-			result = "true";
-		}else{
+		
+		if(service.getMemberByNickname(nickname)!=null){
 			result = "false";
+		}else{
+			result = "true";
 		}
+		System.out.println(result);
 		return result;
 	}
 

@@ -43,6 +43,7 @@ public class ReviewDAOImpl implements ReviewDAO{
 	 */
 	@Override
 	public void deleteReview(Review review) {
+		System.out.println(review);
 		session.delete(namespace+"deleteReview", review);
 	}
 
@@ -136,6 +137,15 @@ public class ReviewDAOImpl implements ReviewDAO{
 		
 	}
 
+	/**
+	 * 공지글 가져오기
+	 */
+	@Override
+	public List<Review> selectNotice() {
+		return session.selectList(namespace+"selectNotice");
+	}
+
+	
 	
 	
 }

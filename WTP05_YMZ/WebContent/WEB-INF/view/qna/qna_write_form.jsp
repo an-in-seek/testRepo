@@ -44,7 +44,6 @@ $(document).ready(function(){
  					$("#content").focus();
  					return false;
  				} 
-				
 			}); 
 	});
 </script>
@@ -62,7 +61,7 @@ table#tb thead tr{
 
 <h2>QNA게시물 등록</h2>
 <div align="center" style="padding:20px">
-	<!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
+<!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
 	<form id="write" method="post" action="${initParam.rootPath}/qna/login/write.do">
 		<!-- 테이블 -->
 		<table id="tb" align="center" style="border:solid 2px #050099">
