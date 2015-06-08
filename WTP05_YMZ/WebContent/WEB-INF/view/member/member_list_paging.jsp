@@ -61,8 +61,24 @@ $(document).ready(function(){
 			 alert("검색할 내용를 입력하세요.");
 			return false;
 		} 
-		var command = $("#categorySelect").val()
+		var command = $("#selectCategory").val()
 		$("#command").val(command);
+	});
+	
+	$("#selectSort").on("change",function(){
+		 if($("#selectSort").val()=="정렬기준"){
+			 alert("정렬기준을 선택하세요.");
+			return false;
+		} 
+		 document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#selectSort").val()+"&command=sort";
+	});
+	
+	$("#stateCategory").on("change",function(){
+		 if($("#stateCategory").val() == "분류"){
+			 alert("카테고리를 선택 하세요.");
+			return false;
+		} 
+		document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#stateCategory").val()+"&command=state";
 	});
 });
 </script>
@@ -113,7 +129,13 @@ article{
 				<td>Email</td>
 				<td>전화번호</td>
 				<td>등급</td>
-				<td>탈퇴여부</td>
+				<td>
+					<select id="stateCategory">
+						<option>탈퇴여부</option>
+						<option id="가입" value="가입">가입</option>
+						<option id="탈퇴" value="탈퇴">탈퇴</option>
+					</select>
+				</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -187,7 +209,16 @@ article{
 <table align="center">
 				<tr>
 					<td>
-						<select id="categorySelect" name="category">
+						<select id="selectSort" name="category">
+							<option value="default">정렬기준</option>
+							<option value="sortDate">가입날짜</option>
+							<option value="sortId">아이디</option>
+							<option value="sortName">이름</option>
+							<option value="sortNickname">닉네임</option>
+						</select>
+					</td>
+					<td>
+						<select id="selectCategory" name="category">
 							<option value="member_id">아이디</option>
 							<option value="member_name">이름</option>
 							<option value="member_nickname">닉네임</option>
