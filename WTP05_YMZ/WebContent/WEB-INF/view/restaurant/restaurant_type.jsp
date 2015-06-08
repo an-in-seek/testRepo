@@ -64,10 +64,9 @@ $(document).ready(function(){
 				분류:
 				<select id="category" name="category">
 					<option value="전체">전체보기</option>
-					<option value="한식">한식</option>
-					<option value="양식">양식</option>
-					<option value="중식">중식</option>
-					<option value="일식">일식</option>
+					<c:forEach items="${requestScope.categories }" var="category">
+						<option value="${category.categoryId }">${category.categoryName }</option>
+					</c:forEach>
 				</select>
 				정렬:
 				<select id="align" name="align">

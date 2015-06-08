@@ -14,7 +14,6 @@ var categoryCheck = false;
 var phoneCheck1 = false;
 var phoneCheck2 = false;
 var phoneCheck3 = false;
-var addressCheck = false;
 var themeCheck = false;
 var locationCheck = false;
 var infoCheck = false;
@@ -87,15 +86,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#address").on("blur",function(){
-		if($(this).val().trim()!=""){
-			addressCheck = true;
-			$("#addressMessage").text("");
-		}else{
-			addressCheck = false;
-		}
-	});
-	
 	$("input[type=checkbox]").on("click",function(){
 		if($("input[type=checkbox]:checked").length>0){
 			themeCheck = true;
@@ -147,9 +137,6 @@ $(document).ready(function(){
 		if(!(phoneCheck1&&phoneCheck2&&phoneCheck3)){
 			$("#phoneMessage").text("전화번호를 입력하세요");
 		}
-		if(!addressCheck){
-			$("#addressMessage").text("주소를 입력하세요");
-		}
 		if(!themeCheck){
 			$("#themeMessage").text("테마를 1개 이상 선택하세요");
 		}
@@ -163,7 +150,7 @@ $(document).ready(function(){
 			$("#pictureMessage").text("사진을 한장 이상 등록하세요");
 		}
 		
-		if(!nameCheck||!categoryCheck||!phoneCheck1||!phoneCheck2||!phoneCheck3||!addressCheck||!themeCheck||!locationCheck||!infoCheck||!pictureCheck){
+		if(!nameCheck||!categoryCheck||!phoneCheck1||!phoneCheck2||!phoneCheck3||!themeCheck||!locationCheck||!infoCheck||!pictureCheck){
 			return false;
 		}
 		
@@ -282,10 +269,9 @@ $(document).ready(function(){
 	<td>
 		<select id="category" name="category">
 			<option value="default">업종을 선택하세요</option>
-			<option>한식</option>
-			<option>양식</option>
-			<option>중식</option>
-			<option>일식</option>
+			<c:forEach items="${requestScope.categories }" var="category">
+				<option value="${category.categoryId }">${category.categoryName }</option>
+			</c:forEach>
 		</select>
 		<font color="red"><span id="categoryMessage"></span></font>
 	</td>
@@ -300,19 +286,11 @@ $(document).ready(function(){
 	</td>
 </tr>
 <tr>
-	<td>주소</td>
-	<td>
-		<input type="text" id="address" name="address" style="width:500px">
-		<font color="red"><span id="addressMessage"></span></font>
-	</td>
-</tr>
-<tr>
 	<td>테마</td>
 	<td>
-		<label><input type="checkbox" name="theme" value="가족">가족</label>
-		<label><input type="checkbox" name="theme" value="연인">연인</label>
-		<label><input type="checkbox" name="theme" value="친구">친구</label>
-		<label><input type="checkbox" name="theme" value="회식">회식</label>
+		<c:forEach items="${requestScope.themes }" var="theme">
+			<label><input type="checkbox" name="theme" value="${theme.categoryId }">${theme.categoryName }</label>
+		</c:forEach>
 		<font color="red"><span id="themeMessage"></span></font>
 	</td>
 </tr>
@@ -343,7 +321,10 @@ $(document).ready(function(){
 <hr>
 
 <p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="addPicture" name="addPicture">
+<span style="position:absolute;width:100px;height:30px;overflow:hidden;margin-left:15px;margin-top:3px;">
+	<input type="button" value="사진 선택" style="width:100px;height:30px;position:absolute;top:0px;background-color:#33BB00;color:#FFFFFF;border-style:solid;"/>
+	<input type="file" id="addPicture" name="addPicture" style="font-size:45px;position:absolute;right:0px;top:0px;cursor:pointer;"/>
+</span>
 <font color="red"><span id="pictureMessage"></span></font></p>
 <table id="picture_table">
 <tr id="pictureTemp">

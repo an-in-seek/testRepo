@@ -64,7 +64,7 @@ public class RestaurantController {
 		String path = request.getServletContext().getRealPath("/tempPhoto");
 		String fileName = null;
 		if(picture!=null) {
-			fileName = System.nanoTime()+"";
+			fileName = System.currentTimeMillis()+"";
 			File file = new File(path, fileName);
 			picture.transferTo(file);
 		}
@@ -147,8 +147,8 @@ public class RestaurantController {
 	
 	@RequestMapping("/login/admin/addNewRestaurantForm.do")
 	public String addNewRestaurantForm(Model model) {
-		List<String> buildingNames = service.getBuildingNames();
-		model.addAttribute("buildingNames", buildingNames);
+		Map map = service.addNewRestaurantForm();
+		model.addAllAttributes(map);
 		
 		return "restaurant/restaurant_write_form.tiles";
 	}
@@ -177,8 +177,7 @@ public class RestaurantController {
 	@RequestMapping("/login/admin/addNewRestaurant.do")
 	public String addNewRestaurant(Restaurant restaurant, String addedPicture, String building, String floor, 
 			String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception {
-		restaurant.setPictureName(addedPicture+",");
-		restaurant.setTheme(restaurant.getTheme()+",");
+		restaurant.setPictureName(addedPicture);
 		
 		int locationNo = service.getLocationNo(building, floor);
 		restaurant.setLocationNo(locationNo);

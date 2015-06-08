@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 
-function chagee(time, num){			// 오늘 날짜 비교하기
+function regDate(time, num){			// 오늘 날짜 비교하기
 	var nowdate = new Date();
 	var year = nowdate.getFullYear();
 	var month = nowdate.getMonth() + 1;
@@ -21,6 +21,7 @@ function chagee(time, num){			// 오늘 날짜 비교하기
 	var regDate = time.substring(0,10);
 	if(date_str == regDate){
 		$("#regDate"+num).html(time.substring(11,19));
+		$("#reviewNew"+num).html(" <img src='${initParam.rootPath}/uploadPhoto/newIcon.jpg'/>");
 	}else{
 		$("#regDate"+num).html(regDate);
 	}
@@ -81,6 +82,9 @@ a.list:link {text-decoration:none; color: black;}/*방문하지 않은 페이지
 a.list:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/ 
 a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라갔을 때*/
 
+.pageNumber{
+	font-family: 'Hanna', sans-serif;
+}
 .listTable{
 	font-family: 'Hanna', sans-serif;
     border-collapse:collapse;
@@ -137,7 +141,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 						<thead>
 							<tr>
 								<td colspan="2" align="center">
-								오늘 인기글
+								오늘의 조회수 Best 5
 								</td>
 							</tr>
 						</thead>
@@ -182,7 +186,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 					<thead>
 						<tr>
 							<td colspan="2" align="center">
-							이번달 인기글
+							이달의 추천 Best 5
 							</td>
 						</tr>
 					</thead>
@@ -232,9 +236,9 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 				<td style="width:50px">번호</td>
 				<td style="width:400px">제목</td>
 				<td style="width:100px">작성자</td>
-				<td id="latestSort" style="width:100px">작성일<font size="1" color="red">▼</font></td>
-				<td id="recommendSort" style="width:70px">추천<font size="1" color="red">▼</font></td>
-				<td id="hitsSort" style="width:70px">조회<font size="1" color="red">▼</font></td>
+				<td id="latestSort" style="width:100px">작성일<font size="1" color="red"> ▼</font></td>
+				<td id="recommendSort" style="width:70px">추천<font size="1" color="red"> ▼</font></td>
+				<td id="hitsSort" style="width:70px">조회<font size="1" color="red"> ▼</font></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -259,10 +263,11 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 					<th align="center">${review.reviewNo }</th>
 					<td align="left" id="title">
 					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-					${review.title} 
+					${review.title}
 					<c:if test="${review.replyCount != 0}">
 					<font color="#A748FF">[${review.replyCount}]</font>
 					</c:if>
+					<span id="reviewNew${status.index+1}"></span>
 					</a>
 					</td>
 					<td align="center">${review.nickname}</td>
@@ -270,7 +275,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 						<script type="text/javascript">
 							var tt = "${review.regDate}";
 							var num = "${status.index+1}";
-							chagee(tt, num);
+							regDate(tt, num);
 						</script>
 					</td>
 					<td align="center" style="width:50px">${review.recommend}</td>
@@ -303,10 +308,9 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 	</c:otherwise>
 	</c:choose>
 	<!-- 테이블 끝 -->
-
-
 	<!-- 페이징 처리 -->
 	
+	<div class="pageNumber">	
 	<!-- 이전 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.previousPageGroup }">
@@ -360,9 +364,9 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 			</td>
 		</tr>
 	</table>
+	</div>
 	<br>
 	</div>
-	
 </section>
 
 </body>

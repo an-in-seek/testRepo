@@ -37,8 +37,8 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 
 //댓글 신고
 function reportReply(reviewNo, rnum, pNo){
-	var isUp=confirm("신고할랭???")
-	if(isUp){
+	var isCom=confirm("신고할랭???")
+	if(isCom){
 		alert("아직 준비중이야!!!");
 	}else{
 		return;
@@ -87,7 +87,7 @@ $(document).ready(function(){
 	
 	////////////////////////////////////////////////////// 리뷰 본문
 	// 추천
-	$("#recommendBtn").on("click", function(){		
+	$(".recommendBtn").on("click", function(){		
 		var id = "${empty sessionScope.login_info}";
 		if(id=="true"){
 			alert("로그인 안했엉");
@@ -98,8 +98,8 @@ $(document).ready(function(){
 			type:"post",
 			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
 			success:function(txt){
-				$("#recommendCount").html("추천수 : "+txt);
-				$("#recommendCountBtn").html(txt);
+				$("#recommendCount").html("추천수 : " + "<font color='red'>"+txt+"</font>");
+				$("#recommendCountBtn").html("<font color='red'>"+txt+"</font>");
 			}
 		});
 		
@@ -127,6 +127,12 @@ $(document).ready(function(){
 		$("#reply_content").focus();
 			return false;
 	   }
+		//내용 입력안했을시 경고창
+		if($("#reply_content").val().trim()==""){
+			alert("내용을 입력하세요");
+			$("#reply_content").focus();
+			return false;
+		}
 	})
 	
 	$("#reply_reportBtn").on("click", function(){
@@ -155,21 +161,19 @@ table#replyTB tbody tr{
 	font-family: 'Hanna', sans-serif;
 	font-size: 25px;
 	height: 140px;
-	cursor: pointer;
 }
 button{
 	background: gold;
 	width:100px;
 	height:50px;
 }
-button#recommendBtn{
-	width:200px;
-	height:100px;
-	background: mediumslateblue;
-}
+
 div#dialog{
 	width:800px;
 	display: none;
+}
+.recommendBtn{
+	cursor: pointer;
 }
 
 .listTable{
@@ -231,11 +235,10 @@ div#dialog{
 ${requestScope.review.content }<br>
 </div>
 
-	<div align="center" id="recommend"> <!-- 추천 버튼 -->
-		<button id="recommendBtn">
-			<span id="recommendCountBtn">${requestScope.review.recommend}</span>
-			<font color="" size='4'>♥</font>
-		</button>
+	
+		<div align="center" id="recommend"> <!-- 추천 버튼 -->
+			<img src="${initParam.rootPath}/uploadPhoto/recommend.jpg" class="recommendBtn"> <br>
+			<span id="recommendCountBtn"><font color="red">${requestScope.review.recommend}</font></span>
 	</div><br><br>
 	
 <!-- ******************************* 리뷰 내용이 들어가는 공간 끝 ************************************** -->
@@ -270,13 +273,16 @@ ${requestScope.review.content }<br>
 					<td id="rContent${status.index+1}" width="700"><font size='4'>${reply.content}</font></td>
 					<td width="200"><font size="3">${reply.regDate}</font><br>
 						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.grade =='master')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
-						<input type="button" id="reply_modifyBtn${reply.replyNo}"  
-							onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
-						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
-							onclick="removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});"  value="삭제" >
+						<!-- 수정 -->
+						<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});">
+						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyEdit.png" ></a>
+						<!-- 제거 -->
+						<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});">
+						<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
 						</c:if>
-						<input type="button"  id="reply_reportBtn${reply.replyNo}"  
-							onclick="reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" value ="신고">
+						<!-- 신고 -->
+						<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});">
+						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
 						</td>
 				</tr > 
 			</c:forEach>
@@ -289,11 +295,11 @@ ${requestScope.review.content }<br>
 		<tr>
 			<td>
 				<!-- 댓글 작성 영역 -->
-				<textarea name="content" id="reply_content" style="width:780px; height:100px;"></textarea><br>
+				<textarea name="content" id="reply_content" style="width:830px; height:80px;"></textarea><br>
 			</td>
 			<td>
 				<!-- 등록 버튼 -->
-				<input type="submit" style="width:200px;height:100px;" id="reply_registerBtn" value="등록">
+				<input type="submit" style="width:150px;height:85px;" id="reply_registerBtn" value="등록">
 				
 				
 			</td>

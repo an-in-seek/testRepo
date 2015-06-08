@@ -64,12 +64,6 @@ public class MemberController {
 		String zipcode = post1+"-"+post2;
 		member.setZipcode(zipcode);
 		member.setGrade("user");
-//		String food[] = request.getParameterValues("favoriteFood");
-//		if( food != null )
-//			   for(int i = 0; i < food.length; ++i)
-//			    {
-//			     member.setFavoriteFood(food[i]);
-//			    }
 		String recommend = (String)request.getParameter("recommend");
 		String year = (String)request.getParameter("year");
 		String month = (String)request.getParameter("month");
@@ -94,6 +88,19 @@ public class MemberController {
 			request.setAttribute("sex", exSex);
 			request.setAttribute("recommend", recommend);
 			return "member/join_form.tiles";
+		}else if(service.getMemberByPhone(phoneNo)!=null){
+			map.addAttribute("error_message", "이미 가입된 전화번호입니다");
+			request.setAttribute("id", exId);
+			request.setAttribute("name", exName);
+			request.setAttribute("nickname",exNickname);
+			request.setAttribute("postcode1", post1);
+			request.setAttribute("postcode2", post2);
+			request.setAttribute("address", exAddress);
+			request.setAttribute("detailAddress", exDetailAddress);
+			request.setAttribute("sex", exSex);
+			request.setAttribute("recommend", recommend);
+			return "member/join_form.tiles";
+			
 		}else{
 		member.setEmail(exEmail);
 		if(service.getMemberById(recommend)!=null){
@@ -247,11 +254,15 @@ public class MemberController {
 	}
 	
 	/**********************ID 중복검사 -Ajax 요청처리***********************/
-	@RequestMapping("idDuplicateCheck")
+	@RequestMapping("idDuplicateCheck.do")
 	@ResponseBody
-	public Map<String , Boolean> idDuplicateCheck(@RequestParam String id){
-		HashMap<String , Boolean> result = new HashMap<String , Boolean>();
-		result.put("result", service.getMemberById(id)==null ? true:false);
+	public String idDuplicateCheck(String id){
+		String result = null;
+		if(id=="" || service.getMemberById(id)!=null){
+			result = "false";
+		}else{
+			result = "true";
+		}
 		return result;
 	}
 	

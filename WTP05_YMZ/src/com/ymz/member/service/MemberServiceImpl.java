@@ -108,6 +108,17 @@ public class MemberServiceImpl implements MemberService {
 	public Member getMemberByName(String name) {
 		return dao.selectMemberByName(name);
 	}
+	
+	/**
+	 * 전화번호로 회원정보 조회 메소드
+	 */
+	
+	
+	@Override
+	public Member getMemberByPhone(String phoneNo) {
+		return dao.seleMemberByPhone(phoneNo);
+	}
+
 	/**
 	 * 회원 정보 수정 처리 메소드
 	 * @param member 수정할 회원 전보

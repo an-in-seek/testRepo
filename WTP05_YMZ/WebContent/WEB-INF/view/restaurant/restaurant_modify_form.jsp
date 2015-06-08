@@ -15,27 +15,12 @@ var categoryCheck = true;
 var phoneCheck1 = true;
 var phoneCheck2 = true;
 var phoneCheck3 = true;
-var addressCheck = true;
 var themeCheck = true;
 var locationCheck = true;
 var infoCheck = true;
 var pictureCheck = true;
 
 $(document).ready(function(){
-	// 처음 화면을 띄우면서 테마를 세팅한다
-	if(${fn:contains(requestScope.restaurant.theme,'가족') }){
-		$("input:checkbox[value=가족]").prop("checked","checked");
-	}
-	if(${fn:contains(requestScope.restaurant.theme,'연인') }){
-		$("input:checkbox[value=연인]").prop("checked","checked");
-	}
-	if(${fn:contains(requestScope.restaurant.theme,'친구') }){
-		$("input:checkbox[value=친구]").prop("checked","checked");
-	}
-	if(${fn:contains(requestScope.restaurant.theme,'회식') }){
-		$("input:checkbox[value=회식]").prop("checked","checked");
-	}
-	
 	// 건물 바뀌면 해당건물의 층수만큼 층 select를 바꾼다
 	$("#building").on("change",function(){
 		$.ajax({
@@ -181,15 +166,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#address").on("blur",function(){
-		if($(this).val().trim()!=""){
-			addressCheck = true;
-			$("#addressMessage").text("");
-		}else{
-			addressCheck = false;
-		}
-	});
-	
 	$("input[type=checkbox]").on("click",function(){
 		if($("input[type=checkbox]:checked").length>0){
 			themeCheck = true;
@@ -232,9 +208,6 @@ $(document).ready(function(){
 		if(!(phoneCheck1&&phoneCheck2&&phoneCheck3)){
 			$("#phoneMessage").text("전화번호를 입력하세요");
 		}
-		if(!addressCheck){
-			$("#addressMessage").text("주소를 입력하세요");
-		}
 		if(!themeCheck){
 			$("#themeMessage").text("테마를 1개 이상 선택하세요");
 		}
@@ -248,7 +221,7 @@ $(document).ready(function(){
 			$("#pictureMessage").text("사진을 한장 이상 등록하세요");
 		}
 		
-		if(!nameCheck||!categoryCheck||!phoneCheck1||!phoneCheck2||!phoneCheck3||!addressCheck||!themeCheck||!locationCheck||!infoCheck||!pictureCheck){
+		if(!nameCheck||!categoryCheck||!phoneCheck1||!phoneCheck2||!phoneCheck3||!themeCheck||!locationCheck||!infoCheck||!pictureCheck){
 			return false;
 		}
 		
@@ -297,38 +270,16 @@ $(document).ready(function(){
 	<td>
 		<select id="category" name="category">
 			<option value="default">업종을 선택하세요</option>
-			<c:choose>
-				<c:when test="${requestScope.restaurant.category=='한식' }">
-					<option selected="selected">한식</option>
-				</c:when>
-				<c:otherwise>
-					<option>한식</option>
-				</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${requestScope.restaurant.category=='양식' }">
-					<option selected="selected">양식</option>
-				</c:when>
-				<c:otherwise>
-					<option>양식</option>
-				</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${requestScope.restaurant.category=='중식' }">
-					<option selected="selected">중식</option>
-				</c:when>
-				<c:otherwise>
-					<option>중식</option>
-				</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${requestScope.restaurant.category=='일식' }">
-					<option selected="selected">일식</option>
-				</c:when>
-				<c:otherwise>
-					<option>일식</option>
-				</c:otherwise>
-			</c:choose>
+			<c:forEach items="${requestScope.categories }" var="category">
+				<c:choose>
+					<c:when test="${category.categoryName==requestScope.restaurant.category }">
+						<option value="${category.categoryId }" selected="selected">${category.categoryName }</option>
+					</c:when>
+					<c:otherwise>
+						<option value="${category.categoryId }">${category.categoryName }</option>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
 		</select>
 		<font color="red"><span id="categoryMessage"></span></font>
 	</td>
@@ -343,19 +294,18 @@ $(document).ready(function(){
 	</td>
 </tr>
 <tr>
-	<td>주소</td>
-	<td>
-		<input type="text" id="address" name="address" style="width:500px" value="${requestScope.restaurant.address }">
-		<font color="red"><span id="addressMessage"></span></font>
-	</td>
-</tr>
-<tr>
 	<td>테마</td>
 	<td>
-		<label><input type="checkbox" name="theme" value="가족">가족</label>
-		<label><input type="checkbox" name="theme" value="연인">연인</label>
-		<label><input type="checkbox" name="theme" value="친구">친구</label>
-		<label><input type="checkbox" name="theme" value="회식">회식</label>
+		<c:forEach items="${requestScope.themes }" var="theme">
+			<c:choose>
+				<c:when test="${fn:contains(requestScope.restaurant.theme, theme.categoryName) }">
+					<label><input type="checkbox" name="theme" value="${theme.categoryId }" checked="checked">${theme.categoryName }</label>
+				</c:when>
+				<c:otherwise>
+					<label><input type="checkbox" name="theme" value="${theme.categoryId }">${theme.categoryName }</label>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
 		<font color="red"><span id="themeMessage"></span></font>
 	</td>
 </tr>
@@ -403,7 +353,10 @@ $(document).ready(function(){
 <hr>
 
 <p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="addPicture" name="addPicture">
+<span style="position:absolute;width:100px;height:30px;overflow:hidden;margin-left:15px;margin-top:3px;">
+	<input type="button" value="사진 선택" style="width:100px;height:30px;position:absolute;top:0px;background-color:#33BB00;color:#FFFFFF;border-style:solid;"/>
+	<input type="file" id="addPicture" name="addPicture" style="font-size:45px;position:absolute;right:0px;top:0px;cursor:pointer;"/>
+</span>
 <font color="red"><span id="pictureMessage"></span></font></p>
 <table id="picture_table">
 <tr id="pictureTemp">

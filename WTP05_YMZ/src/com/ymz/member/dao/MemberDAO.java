@@ -29,6 +29,13 @@ public interface MemberDAO {
 	 */
 	
 	public abstract Member selectMemberByName(String name);
+	
+	/**
+	 * 전화번호로 회원 정보를 조회하여 return하는 메소드
+	 */
+	public abstract Member seleMemberByPhone(String phoneNo);
+	
+	
 	/**
 	 * 회원 정보를 DB에 insert하는 메소드
 	 * @param member 등록할 회원 정보

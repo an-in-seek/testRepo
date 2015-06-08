@@ -32,29 +32,27 @@ function openDaumPostcode(){
 }
 $(document).ready(function(){
 var check = false;
-var nickChe = false;	
+var nickChe = false;
+var idChe = false;
 	//ID 중복 체크
-	$("#id").on("keyup", function(){
-		var id = this.value;
+	$("#idDup").on("click", function(){
+		var id = $("#id").val();
 		$.ajax({
 			url:"${initParam.rootPath}/member/idDuplicateCheck.do",
 			data:{"id":id},
-			dataType:"JSON",
+			dataType:"text",
 			beforeSend:function(){
 				if(!id){//id에 입력된 값이 없으면 전송하지 않는다.
 					return false;
 				}
 			},
 			success:function(ret){
-				idDup = ret.result;
-				if(!idDup){
-					$("#dupMessageLayer").text("중복된 아이디 입니다.");
-					$("#dupMessageLayer").addClass("errorMessage");
-					return pwChe = false;
+				if(ret=="false"){
+					alert("중복된 아이디입니다.ㄴㅁㅇㄻㄴㅇㄹ")
+					idChe = false;
 				}else{
-					$("#dupMessageLayer").text("사용할 수 있는 아이디 입니다.");
-					$("#dupMessageLayer").addClass("normalMessage");
-					return pwChe = true;
+					alert("사용가능한 아이디입니다.")
+					idChe = true;
 				}
 			}
 			
@@ -66,7 +64,6 @@ var nickChe = false;
 	$("#exNick").on("click",function(){
 		check = true;
 		var nickname = $("#nickname").val();
-		alert(nickname);
 		$.ajax({
 			url:"${initParam.rootPath}/member/nickExistCheck.do",
 			data:{"nickname":nickname},
@@ -125,6 +122,8 @@ var nickChe = false;
 	});
 	//Validator 검사위해 주석처리
 	$("#registerForm").on("submit", function(){
+		//성별 체크
+		var sexChe = $("input:radio[name='sex']:checked").val(); 
 		//비밀번호 확인 체크
 		var passwordCh = $("#passwordCheck").val();
 		var password = $("#password").val();
@@ -140,6 +139,11 @@ var nickChe = false;
 		if(!$("#id").val()){
 			alert("id를 입력하세요");
 			$("#id").focus();
+			return false;
+		}
+		
+		if(!idChe){
+			alert("아이디 중복체크를 해주세요");
 			return false;
 		}
 		
@@ -162,7 +166,7 @@ var nickChe = false;
 		}
 		
 		if(!check){
-			alert("중복체크를 해주십시오");
+			alert("닉네임 중복체크를 해주십시오");
 			return false
 		}
 		if(!$("#postcode1").val()){
@@ -206,10 +210,9 @@ var nickChe = false;
 			$("#emailAddress").focus();
 			return false;
 		}
-	
-		if(!idDup){
-			alert("중복된 아이디 입니다.");
-			$("#id").focus();
+		
+		if(!sexChe){
+			alert("성별은 필수입력사항입니다");
 			return false;
 		}
 		
@@ -251,6 +254,7 @@ div#table{
 			<td>ID</td>
 			<td>
 				<input type="text" name="id" id='id' value="${requestScope.id }"> <span id="dupMessageLayer"> </span><span class="errorMessage"><form:errors path="member.id"/></span>
+				<input type="button" name="idDup" id="idDup" value="중복체크">
 			</td>
 		</tr>
 		<tr>
@@ -326,7 +330,7 @@ div#table{
 				<input type="text" id="emailName" name="emailName">@<input type="text" id="emailAddress" name="emailAddress">
 				<select name="selectEmail"  style="vertical-align:middle" onChange="javascript:mailCheck(this)">
 				<option value="">직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
-				<span class="errorMessage"><form:errors path="member.email"/></span>
+				<span class="errorMessage"></span>
 			</td>
 		</tr>
 		<tr>
@@ -335,6 +339,7 @@ div#table{
 				<select name="phoneCP" id="phoneCP" class="input_text w60" style="vertical-align:middle">
 			<option value="010" >010</option><option value="011" >011</option><option value="017" >017</option><option value="018" >018</option><option value="019" >019</option></select>
 			&nbsp;-&nbsp;<input type="text" id="num1" name="num1" size="2" style="vertical-align:middle">&nbsp;&nbsp;<input type="text" id="num2" name="num2" size="2" class="input_text w60" style="vertical-align:middle"> 
+			<span class="errorMessage"></span>
 			</td>
 		</tr>
 		<tr>

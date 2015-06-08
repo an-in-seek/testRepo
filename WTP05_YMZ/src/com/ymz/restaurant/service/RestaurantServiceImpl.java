@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ymz.common.category.dao.CategoryDAO;
 import com.ymz.common.util.PagingBean;
 import com.ymz.restaurant.dao.RestaurantDAO;
+import com.ymz.restaurant.properties.Properties;
 import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
 
@@ -27,6 +29,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 	
 	@Autowired
 	private RestaurantDAO dao;
+	@Autowired
+	private CategoryDAO categoryDAO;
 	
 	@Override
 	public Map<String, Object> getListByTypePaging(String category, String align, int currentPage, String searchWord) {
@@ -42,6 +46,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		map.put("align", align);
 		map.put("searchWord", searchWord);
 		map.put("today", new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		map.put("categories", categoryDAO.selectCategories(Properties.TYPE_CATEGORY_ID));
 		return map;
 	}
 	
@@ -59,6 +64,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		map.put("align", align);
 		map.put("searchWord", searchWord);
 		map.put("today", new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		map.put("themes", categoryDAO.selectCategories(Properties.THEME_CATEGORY_ID));
 		return map;
 	}
 
@@ -195,6 +201,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		Map map = new HashMap();
 		
 		Restaurant restaurant = dao.selectRestaurantByNo(restaurantNo);
+		System.out.println(restaurant);
 		map.put("restaurant", restaurant);
 		map.put("buildingNames", dao.selectBuildingNames());
 		String currentBuildingName = dao.selectBuildingNameByLocationNo(restaurant.getLocationNo());
@@ -202,6 +209,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 		map.put("floors", dao.selectFloorsByBuildingName(currentBuildingName));
 		map.put("currentFloor", dao.selectFloorByLocationNo(restaurant.getLocationNo()));
 		map.put("menus", dao.selectFoodsByRestaurantNo(restaurantNo));
+		map.put("categories", categoryDAO.selectCategories(Properties.TYPE_CATEGORY_ID));
+		map.put("themes", categoryDAO.selectCategories(Properties.THEME_CATEGORY_ID));
 		
 		String path = request.getServletContext().getRealPath("/uploadPhoto");
 		String tempPath = request.getServletContext().getRealPath("/tempPhoto");
@@ -247,6 +256,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 		}
 	}
 	
+	@Override
+	public Map addNewRestaurantForm() {
+		Map map = new HashMap();
+		map.put("categories", categoryDAO.selectCategories(Properties.TYPE_CATEGORY_ID));
+		map.put("themes", categoryDAO.selectCategories(Properties.THEME_CATEGORY_ID));
+		map.put("buildingNames", dao.selectBuildingNames());
+		
+		return map;
+	}
+
 	public void fileCopy(File srcFile, File targetFile) throws IOException {
 		// byte[]을 이용한 입출력
 		FileInputStream fis = null;

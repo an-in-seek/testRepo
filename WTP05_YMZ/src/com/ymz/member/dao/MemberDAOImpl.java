@@ -53,6 +53,14 @@ public class MemberDAOImpl implements MemberDAO {
 	public Member selectMemberByName(String name) {
 		return session.selectOne(namespace+"selectMemberByName",name);
 	}
+	
+	/**
+	 * 전화번호로 회원 정보를 조회하여 return하는 메소드
+	 */
+	@Override
+	public Member seleMemberByPhone(String phoneNo) {
+		return session.selectOne(namespace+"selectMemberByPhone",phoneNo);
+	}
 
 	/**
 	 * 회원 정보를 DB에 insert하는 메소드

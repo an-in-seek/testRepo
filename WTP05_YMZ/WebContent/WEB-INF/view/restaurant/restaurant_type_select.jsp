@@ -44,12 +44,12 @@ $(document).ready(function(){
 <td colspan="2"><a href="${initParam.rootPath }/restaurant/showListByType.do"><img style="width:610px;" id="all" src="${initParam.rootPath }/uploadPhoto/all-view-1.jpg"></a></td>
 </tr>
 <tr>
-<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=한식"><img id="hansik" src="${initParam.rootPath }/uploadPhoto/hansik-1.jpg"></a></td>
-<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=양식"><img id="yangsik" src="${initParam.rootPath }/uploadPhoto/yangsik-1.jpg"></a></td>
+<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-4"><img id="hansik" src="${initParam.rootPath }/uploadPhoto/hansik-1.jpg"></a></td>
+<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-5"><img id="yangsik" src="${initParam.rootPath }/uploadPhoto/yangsik-1.jpg"></a></td>
 </tr>
 <tr>
-<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=중식"><img id="jungsik" src="${initParam.rootPath }/uploadPhoto/jungsik-1.jpg"></a></td>
-<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=일식"><img id="ilsik" src="${initParam.rootPath }/uploadPhoto/ilsik-1.jpg"></a></td>
+<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-6"><img id="jungsik" src="${initParam.rootPath }/uploadPhoto/jungsik-1.jpg"></a></td>
+<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-7"><img id="ilsik" src="${initParam.rootPath }/uploadPhoto/ilsik-1.jpg"></a></td>
 </tr>
 </table>
 </div></body>
