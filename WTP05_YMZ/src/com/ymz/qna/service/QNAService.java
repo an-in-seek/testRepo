@@ -22,10 +22,7 @@ public interface QNAService {
 	public abstract Map<String, Object> getQNAListPaging(int pageNo);
 	
 	//분류별 게시물 조회
-	public abstract Map<String, Object> getQNAListPagingByCategory(int page, String category);
-	
-	//검색으로 게시물 조회
-	public abstract Map getQNAListPagingBySearch(int defaultpageNo, String text);
+	public abstract Map<String, Object> getQNAListPagingByCategory(int page, String category, String searchInfo);
 	
 	//게시물 ID번호로 조회
 	public abstract QNA getQNAByNo(int number);

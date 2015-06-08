@@ -18,16 +18,19 @@ public class FAQServiceImpl implements FAQService {
 	private FAQDAO dao;
 
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void registerFAQ(FAQ faq) {
 		dao.insertFAQ(faq);
 	}
 
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void modifyFAQ(FAQ faq) {
 		dao.updateFAQ(faq);
 	}
 
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void removeFAQByNo(int number) {
 		dao.deleteFAQByNo(number);
 	}

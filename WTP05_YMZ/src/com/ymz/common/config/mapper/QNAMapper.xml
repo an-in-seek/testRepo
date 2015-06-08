@@ -123,7 +123,12 @@
 		where page = #{pageNo}
 	</select>
 	
-	<!-- 분류별 전체 정보 조회 -->
+	<!-- DB 데이터 총 개수 -->
+	<select id="selectTotalQNACount" resultType="_int">
+		select count(qna_no) from qna
+	</select>
+	
+	<!-- 카테고리 분류별 전체 정보 조회 -->
 	<select id="selectAllQNAByCategory" parameterType="map" resultMap="qna-resultmap">
 		select qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, member_id, qna_registration_date,  qna_hits
 		from (
@@ -132,16 +137,40 @@
 					<include refid="qna-select"/>
 					<choose>
 						<when test="category == '전체보기'">
+							<if test="searchInfo != null">
+								where qna_title like '%' || #{searchInfo} || '%'
+							</if>	
 							order by qna_refamily desc, qna_restep asc
 						</when>	
 						<otherwise>
 							where 	qna_category = #{category}
+							<if test="searchInfo != null">
+								and qna_title like '%' || #{searchInfo} || '%'
+							</if>
 							order 		by qna_refamily desc, qna_restep asc
 						</otherwise>
 					</choose>
 			)
 		) 
 		where page = #{pageNo}
+	</select>
+	
+	<!-- 카테고리 분류별 DB 데이터 총 개수 -->
+	<select id="selectTotalQNACountByCategory" resultType="_int" parameterType="map">
+		select count(qna_no) from qna 
+		<choose>
+			<when test="category == '전체보기'">
+				<if test="searchInfo != null">
+					where qna_title like '%' || #{searchInfo} || '%'
+				</if>	
+			</when>	
+			<otherwise>
+				where qna_category = #{category} 
+				<if test="searchInfo != null">
+					and qna_title like '%' || #{searchInfo} || '%'
+				</if>	
+			</otherwise>
+		</choose>
 	</select>
 	
 	<!-- 검색으로 전체 정보 조회 -->
@@ -152,39 +181,17 @@
 			from (
 					<include refid="qna-select"/>
 					<choose>
-						<when test="text != null">
-							where qna_title like '%'||#{text}||'%'
-						</when>	                                                                                                                                                                                             
+						<when test="searchInfo != null">
+							where qna_title like '%' || #{searchInfo} || '%'
+						</when>	  
+						<otherwise></otherwise>                                                                                                                                                                                           
 					</choose>
 					order by qna_refamily desc, qna_restep asc
 			)
 		) 
 		where page = #{pageNo} 
-	</select>
+	</select>	
 
-	<!-- DB 데이터 총 개수 -->
-	<select id="selectTotalQNACount" resultType="_int">
-		select count(qna_no) from qna
-	</select>
-	
-	<!-- 분류별 DB 데이터 총 개수 -->
-	<select id="selectTotalQNACountByCategory" resultType="_int" parameterType="String">
-		select count(qna_no) from qna 
-		<choose>
-			<when test="category == '전체보기'">
-				order by qna_refamily desc, qna_restep asc
-			</when>	
-			<otherwise>
-				where qna_category = #{category} 
-			</otherwise>
-		</choose>
-	</select>
-	
-	<!-- 분류별 DB 데이터 총 개수 -->
-	<select id="selectTotalQNACountBySearch" resultType="_int" parameterType="String">
-		select count(qna_no) from qna 
-		where qna_title = #{title} 
-	</select>
 	
 	<!-- 번호로 게시물 조회 -->
 	<select id="selectQNAByNo" resultMap="qna-resultmap" parameterType="int">
