@@ -233,9 +233,9 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 				<td style="width:50px">번호</td>
 				<td style="width:400px">제목</td>
 				<td style="width:100px">작성자</td>
-				<td id="latestSort" style="width:100px">작성일<font size="1" color="red">▼</font></td>
-				<td id="recommendSort" style="width:70px">추천<font size="1" color="red">▼</font></td>
-				<td id="hitsSort" style="width:70px">조회<font size="1" color="red">▼</font></td>
+				<td id="latestSort" style="width:100px">작성일<font size="1" color="red"> ▼</font></td>
+				<td id="recommendSort" style="width:70px">추천<font size="1" color="red"> ▼</font></td>
+				<td id="hitsSort" style="width:70px">조회<font size="1" color="red"> ▼</font></td>
 			</tr>
 		</thead>
 		<tbody>
