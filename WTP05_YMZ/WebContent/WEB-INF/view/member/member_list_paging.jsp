@@ -5,12 +5,13 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	var id;
 	$("#listTB tbody tr").on("mouseover", function(){
 		$("table#listTB tbody tr").css("background-color", "white");
 		$(this).css("background-color", "lightgray");
 	});
 	$("#listTB tbody tr").on("click", function(){
-		var id = $(this).find(":nth-child(2)").text();
+		id = $(this).find(":nth-child(2)").text();
 		$.ajax({
 			url:"${initParam.rootPath}/member/findMemberById.do",
 			data:{"id":id},
@@ -31,6 +32,7 @@ $(document).ready(function(){
 				$("#joinDate").text("가입일 : "+ret.joinDate);
 				$("#mileage").text("마일리지 : "+ret.mileage);
 				$("#grade").text("등급 : "+ret.grade);
+				$("#state").text("탈퇴여부 : "+ret.state);
 				//Dialog 띄우기 
 				$("#dialog").dialog({modal:true,width:500});
 			},
@@ -46,8 +48,12 @@ $(document).ready(function(){
 	});
 	
 	$("#deleteBtn").on("click",function(){
-		alert("삭제버튼 클릭");
-		document.location.href="${initParam.rootPath }/member/login/removeMemberByMaster.do?id="+$("#memberId").val();
+		var isDel = confirm("정말로 삭제하시겠습니까?");
+		if (isDel) {
+			document.location.href="${initParam.rootPath }/member/login/removeMemberByMaster.do?id="+id;
+		} else {
+			return;
+		}
 	});
 	
 	$("#searchBtn").on("click",function(){
@@ -107,6 +113,7 @@ article{
 				<td>Email</td>
 				<td>전화번호</td>
 				<td>등급</td>
+				<td>탈퇴여부</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -119,6 +126,7 @@ article{
 					<td>${member.email}</td>
 					<td>${member.phoneNo}</td>
 					<td>${member.grade}</td>
+					<td>${member.state}</td>
 				</tr> 
 			</c:forEach>
 		</tbody>
@@ -164,6 +172,7 @@ article{
 				<td>Email</td>
 				<td>전화번호</td>
 				<td>등급</td>
+				<td>탈퇴여부</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -183,6 +192,7 @@ article{
 							<option value="member_name">이름</option>
 							<option value="member_nickname">닉네임</option>
 							<option value="grade">등급</option>
+							<option value="state">탈퇴여부</option>
 						</select>
 					</td>
 					<td colspan="2">
@@ -218,6 +228,7 @@ article{
 		<article id="joinDate"></article>
 		<article id="mileage"></article>
 		<article id="grade"></article>
+		<article id="state"></article>
 		<table align="center">
 			<tr align="center">
 				<td align="center"><input id="modifyBtn" type="button" value="수정" onclick="modifyF()"></td>
