@@ -1,16 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
 	.seek ul{ padding:0; list-style: none;}
-    .seek ul li{ width:140px; display: inline-block; position: relative; text-align: center; line-height: 20px; }
-    .seek ul li a{ width:100px; display: block; padding:5px 10px; color:#ffffff; border:1px solid #ffffff; background:skyblue; text-decoration:none; nowrap;}
-    .seek ul li a:hover{color: #fff; background: #939393;}
+    .seek ul li{ width:120px; display: inline-block; position: relative; text-align: center; line-height: 20px; }
+    .seek ul li a{ width:100px; display: block; padding:5px 10px; color:#ffffff; border:0px solid #ffffff; background:#B70000; text-decoration:none; nowrap;}
+    .seek ul li a:hover{color: gold;}
     .seek ul li ul{display: none; position: absolute; z-index: 999; left: 0;}
-    .seek ul li:hover ul{display: block; /* display the dropdown */} 
+    .seek ul li:hover ul{display: block; border:1px #ffffff; /* display the dropdown */} 
     
     .seek{
-    	height: 60px;
-    	background: red;
+    	margin-top: -25px;
+    	font-family: 'Hanna', sans-serif;
+    	height: 30px;
+    	background: #B70000;
     }
 </style>    
 

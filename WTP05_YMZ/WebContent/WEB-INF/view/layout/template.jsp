@@ -66,8 +66,9 @@ section.template{
 footer.template{
 	height:50px;
 	width:1024px;
-	padding: 5px;
-	background-color:skyblue;
+	padding-top: 4px;
+	padding-bottom: 12px;
+	background-color:#B70000;
 	color:white;
 	text-align:center;
 	clear:both;   /*위에 float한 애들을 무시한다. */

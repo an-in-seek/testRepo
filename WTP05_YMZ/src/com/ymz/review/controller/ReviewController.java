@@ -41,7 +41,6 @@ public class ReviewController {
 		Member member = (Member)session.getAttribute("login_info");
 		review.setMemberId(member.getId());
 		review.setNickname(member.getName());
-		System.out.println(" 글 작성자 : " + member.getName());
 		service.registerReview(review);
 		return "redirect:/review/reviewList.do"; 
 	}

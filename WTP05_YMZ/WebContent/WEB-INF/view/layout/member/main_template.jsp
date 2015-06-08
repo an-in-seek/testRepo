@@ -74,9 +74,10 @@ nav#right{
 	float:left;  /*왼쪽으로 띄움 */
 }
 footer.main_template{
-	background-color:skyblue;
+	background-color:#B70000;
 	color:white;
-	padding-top:20px;
+	padding-top: 4px;
+	padding-bottom: 12px;
 	text-align:center;
 	height:50px;
 	clear:both;   /*위에 float한 애들을 무시한다. */

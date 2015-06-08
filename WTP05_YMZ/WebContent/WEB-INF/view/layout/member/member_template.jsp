@@ -57,9 +57,10 @@ header.member_template{
 footer.member_template{
 	height:50px;
 	width:1024px;
-	background-color:skyblue;
+	background-color:#B70000;
 	color:white;
-	padding-top:20px;
+	padding-top: 4px;
+	padding-bottom: 12px;
 	text-align:center;
 	clear:both;   /*위에 float한 애들을 무시한다. */
 }
