@@ -82,6 +82,9 @@ a.list:link {text-decoration:none; color: black;}/*방문하지 않은 페이지
 a.list:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/ 
 a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라갔을 때*/
 
+.pageNumber{
+	font-family: 'Hanna', sans-serif;
+}
 .listTable{
 	font-family: 'Hanna', sans-serif;
     border-collapse:collapse;
@@ -138,7 +141,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 						<thead>
 							<tr>
 								<td colspan="2" align="center">
-								오늘 인기글
+								오늘의 조회수 Best 5
 								</td>
 							</tr>
 						</thead>
@@ -183,7 +186,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 					<thead>
 						<tr>
 							<td colspan="2" align="center">
-							이번달 인기글
+							이달의 추천 Best 5
 							</td>
 						</tr>
 					</thead>
@@ -305,10 +308,9 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 	</c:otherwise>
 	</c:choose>
 	<!-- 테이블 끝 -->
-
-
 	<!-- 페이징 처리 -->
 	
+	<div class="pageNumber">	
 	<!-- 이전 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.previousPageGroup }">
@@ -362,9 +364,9 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 			</td>
 		</tr>
 	</table>
+	</div>
 	<br>
 	</div>
-	
 </section>
 
 </body>

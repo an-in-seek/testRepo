@@ -87,7 +87,7 @@ $(document).ready(function(){
 	
 	////////////////////////////////////////////////////// 리뷰 본문
 	// 추천
-	$("#recommendBtn").on("click", function(){		
+	$(".recommendBtn").on("click", function(){		
 		var id = "${empty sessionScope.login_info}";
 		if(id=="true"){
 			alert("로그인 안했엉");
@@ -99,7 +99,7 @@ $(document).ready(function(){
 			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
 			success:function(txt){
 				$("#recommendCount").html("추천수 : " + "<font color='red'>"+txt+"</font>");
-				$("#recommendCountBtn").html(txt);
+				$("#recommendCountBtn").html("<font color='red'>"+txt+"</font>");
 			}
 		});
 		
@@ -161,21 +161,19 @@ table#replyTB tbody tr{
 	font-family: 'Hanna', sans-serif;
 	font-size: 25px;
 	height: 140px;
-	cursor: pointer;
 }
 button{
 	background: gold;
 	width:100px;
 	height:50px;
 }
-button#recommendBtn{
-	width:200px;
-	height:100px;
-	background: mediumslateblue;
-}
+
 div#dialog{
 	width:800px;
 	display: none;
+}
+.recommendBtn{
+	cursor: pointer;
 }
 
 .listTable{
@@ -237,11 +235,10 @@ div#dialog{
 ${requestScope.review.content }<br>
 </div>
 
-	<div align="center" id="recommend"> <!-- 추천 버튼 -->
-		<button id="recommendBtn">
-			<span id="recommendCountBtn">${requestScope.review.recommend}</span>
-			<font color="" size='4'>♥</font>
-		</button>
+	
+		<div align="center" id="recommend"> <!-- 추천 버튼 -->
+			<img src="${initParam.rootPath}/uploadPhoto/recommend.jpg" class="recommendBtn"> <br>
+			<span id="recommendCountBtn"><font color="red">${requestScope.review.recommend}</font></span>
 	</div><br><br>
 	
 <!-- ******************************* 리뷰 내용이 들어가는 공간 끝 ************************************** -->
