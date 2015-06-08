@@ -208,7 +208,9 @@ insert into review(review_no, title, content, hits, recommend, reg_date, member_
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'맥도날드','1','15','11','2015-06-01 05:12:20','user04');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'버거킹','1','221','0','2015-06-02 07:12:20','user03');
 insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'새마을식당','1','1','1','2015-06-02 09:12:20','user02');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','2015-06-03 11:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','2015-06-08 11:12:20','user01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'광고글 올리면 강퇴처리 됩니다!!','1','1','1','2015-06-02 01:11:12','master01');
+insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'사진이 없는 글은 삭제됩니다.','1','1','1','2015-06-02 09:10:20','master02');
 
 
 insert into review_reply values(review_reply_no_seq.nextval, '2015-05-28 01:10:20', '노맛', 'user01', 79);
@@ -220,7 +222,14 @@ insert into review_reply values(review_reply_no_seq.nextval, '2015-06-01 01:15:2
 insert into review_reply values(review_reply_no_seq.nextval, '2015-06-02 01:16:20', '비싸....', 'user05', 78);
 insert into review_reply values(review_reply_no_seq.nextval, '2015-05-28 01:17:20', '맛있엉!!', 'user06', 78);
 insert into review_reply values(review_reply_no_seq.nextval, '2015-05-29 01:18:20', '알바 쩌네요...', 'user07', 78);
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 01:19:20', 'ㅋㅋㅋㅋㅋㅋㅋㅋ', 'user08', 77);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 01:19:20', 'ㅋㅋㅋㅋ', 'user08', 77);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-31 01:19:20', 'ㅋㅋㅋㅋㅋㅋㅋ', 'user07', 76);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-04-30 01:19:20', 'ㅋㅋㅋㅋㅋ', 'user06', 76);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-03-30 01:19:20', 'ㅋㅋㅋㅋㅋㅋㅋ', 'user05', 76);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-02-30 01:19:20', 'ㅋㅋㅋㅋㅋ', 'user04', 75);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-03-30 01:19:20', 'ㅋㅋㅋㅋㅋㅋ', 'user03', 75);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-04-30 01:19:20', 'ㅋㅋㅋㅋㅋㅋㅋ', 'user02', 74);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-01-30 01:19:20', 'ㅋㅋㅋㅋㅋㅋㅋㅋ', 'user01', 73);
 
 
 insert into FAQ (faq_no, faq_title, faq_content) values(faq_no_seq.nextval, '개명으로 인한 이름을 변경하고 싶습니다.', 

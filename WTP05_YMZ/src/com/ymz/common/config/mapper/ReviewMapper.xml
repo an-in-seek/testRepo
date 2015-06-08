@@ -91,6 +91,13 @@
 		where review_no=#{reviewNo} 
 	</select>
 	
+	<!-- 공지글 목록 조회 -->
+	<select id="selectNotice" resultMap="review-resultmap">
+		select review_no, title, content, hits, recommend, reg_date, nickname
+		from review r, member m
+		where r.member_id = m.member_id and m.grade = 'master' 
+	</select>
+	
 	<!-- 리뷰 목록 페이징 -->
 	<select id="selectAllReviewPaging" parameterType="map" resultMap="review-resultmap">
 		select review_no, title, content, hits, recommend, reg_date, member_id, reply_count
@@ -127,7 +134,7 @@
 								(select count(*) from REVIEW_REPLY where review_reply.review_no = review.review_no) reply_count
 						from 	review, member m
 						where 1=1
-						and review.member_id = m.member_id
+						and review.member_id = m.member_id and m.grade != 'master'
 						<choose>
 							<when test="searchType=='title'">
 								and title like '%'||#{query}||'%'
@@ -158,8 +165,6 @@
 	<!-- 전체 게시물 수  -->
 	<select id="selectTotalReviewCount" resultType="_int">
 		select count(review_no) from review
-
-	
 	</select>
 	
 	<!-- 검색된 전체 게시물 수  -->
@@ -187,11 +192,11 @@
 		ORDER BY HITS desc   
 	</select>
 	
-	<!-- 이번달 인기글(조회순) -->
+	<!-- 이번달 인기글(추천순) -->
 	<select id="selectMonthBestHits" resultMap="review-resultmap" parameterType="String">
-		select review_no, title
+		select review_no, title, recommend
 		from review
 		where substr(reg_date, 1,7) = #{month} and rownum <![CDATA[<]]> 6
-		ORDER BY HITS desc   
+		ORDER BY recommend desc   
 	</select>
 </mapper>
