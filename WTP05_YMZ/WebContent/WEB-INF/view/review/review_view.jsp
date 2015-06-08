@@ -99,7 +99,7 @@ $(document).ready(function(){
 			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
 			success:function(txt){
 				$("#recommendCount").html("추천수 : " + "<font color='red'>"+txt+"</font>");
-				$("#recommendCountBtn").html("<font color='red'>"+txt+"</font>");
+				$("#recommendCountBtn").html("<font color='red' size='5'>"+txt+"</font>");
 			}
 		});
 		
@@ -144,12 +144,13 @@ $(document).ready(function(){
 <!-- css -->
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
 
 table#replyTB tbody tr:nth-child(even) {
     background-color: lavenderblush;
 }
 table#replyTB tbody tr:nth-child(odd) {
-   background-color:#fff;
+  	background-color:#fff;
 }
 
 table#replyTB thead tr{
@@ -172,10 +173,12 @@ div#dialog{
 	width:800px;
 	display: none;
 }
-.recommendBtn{
+.recommendBtn{		
 	cursor: pointer;
 }
-
+#recommendCountBtn{
+	ffont-family: 'Nanum Brush Script', cursive;
+}
 .listTable{
 	font-family: 'Hanna', sans-serif;
     border-collapse:collapse;
@@ -238,7 +241,7 @@ ${requestScope.review.content }<br>
 	
 		<div align="center" id="recommend"> <!-- 추천 버튼 -->
 			<img src="${initParam.rootPath}/uploadPhoto/recommend.jpg" class="recommendBtn"> <br>
-			<span id="recommendCountBtn"><font color="red">${requestScope.review.recommend}</font></span>
+			<span id="recommendCountBtn"><font color="red" size="5">${requestScope.review.recommend}</font></span>
 	</div><br><br>
 	
 <!-- ******************************* 리뷰 내용이 들어가는 공간 끝 ************************************** -->
@@ -271,17 +274,17 @@ ${requestScope.review.content }<br>
 				<tr id="reply${status.index+1}">
 					<th width="100" style="text-align: center"><font color="#FF4848">${reply.nickname}</font></th>
 					<td id="rContent${status.index+1}" width="700"><font size='4'>${reply.content}</font></td>
-					<td width="200"><font size="3">${reply.regDate}</font><br>
+					<td width="200" align="center"><font size="3">${reply.regDate}</font><br>
 						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.grade =='master')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
 						<!-- 수정 -->
-						<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});">
+						<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="수정">
 						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyEdit.png" ></a>
 						<!-- 제거 -->
-						<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});">
+						<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="삭제">
 						<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
 						</c:if>
 						<!-- 신고 -->
-						<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});">
+						<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="신고">
 						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
 						</td>
 				</tr > 
@@ -299,7 +302,7 @@ ${requestScope.review.content }<br>
 			</td>
 			<td>
 				<!-- 등록 버튼 -->
-				<input type="submit" style="width:150px;height:85px;" id="reply_registerBtn" value="등록">
+				<input type="submit" style="width:150px;height:85px;" id="reply_registerBtn" value="등록" title="댓글 입력">
 				
 				
 			</td>
