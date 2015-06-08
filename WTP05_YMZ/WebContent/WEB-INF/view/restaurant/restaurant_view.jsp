@@ -186,9 +186,9 @@ display:none;
 <td style="width:50%">
 <table style="width:100%">
 <tr align="center">
-<td colspan="5" style="padding:1px;padding-top:5px;"><img id="selectedPicture" style="width:450px;height:300px;"></td>
+<td colspan="5" style="padding:1px;padding-top:5px;border-style:solid;border-color:lightgray;"><img id="selectedPicture" style="width:450px;height:300px;"></td>
 </tr>
-<tr id="selectPicture" align="center">
+<tr id="selectPicture" align="center" style="border-style:solid;border-color:lightgray;">
 <td style="width:20%;padding:5px;padding-bottom:1px;">
 	<c:if test="${!empty requestScope.pic1 }"><img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic1}"></c:if>
 </td>
@@ -239,31 +239,31 @@ display:none;
 <td valign="top" style="width:50%">
 <table>
 <tr>
-	<td style="width:100px" align="center">상호명</td>
+	<td style="width:100px;" align="center"><b>상호명</b></td>
 	<td>${requestScope.restaurant.restaurantName }</td>
 </tr>
 <tr>
-	<td align="center">업종</td>
+	<td align="center"><b>업종</b></td>
 	<td>${requestScope.restaurant.category }</td>
 </tr>
 <tr>
-	<td align="center">전화번호</td>
+	<td align="center"><b>전화번호</b></td>
 	<td>${requestScope.restaurant.phoneNo }</td>
 </tr>
 <tr>
-	<td align="center">위치</td>
+	<td align="center"><b>위치</b></td>
 	<td>${requestScope.restaurant_location }</td>
 </tr>
 <tr>
-	<td align="center">평점</td>
+	<td align="center"><b>평점</b></td>
 	<td>${requestScope.restaurant.score }</td>
 </tr>
 <tr>
-	<td align="center">테마</td>
+	<td align="center"><b>테마</b></td>
 	<td>${requestScope.restaurant.theme }</td>
 </tr>
 <tr>
-	<td align="center">소개</td>
+	<td align="center"><b>소개</b></td>
 	<td>${requestScope.restaurant.description }</td>
 </tr>
 </table><p>
@@ -428,6 +428,6 @@ display:none;
 	
 <p/>
 <hr>
-<p align="center"><a href="${requestScope.backURL }"><button style="width:200px;height:50px;">목록으로 돌아가기</button></a></p>
+<p align="center"><a href="${sessionScope.backURL }"><button style="width:200px;height:50px;">목록으로 돌아가기</button></a></p>
 </body>
 </html>
