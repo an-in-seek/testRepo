@@ -45,7 +45,7 @@ div.template2{
 	
 }
 header.template2{
-	background-color:skyblue;
+	background-color:white;
 	color:white;
 	text-align:center;
 	padding: 5px;

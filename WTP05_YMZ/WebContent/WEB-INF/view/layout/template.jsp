@@ -43,7 +43,7 @@ div.template{
 header.template{
 	width:1024px;
 	padding: 5px;
-	background-color:skyblue;
+	background-color:white;
 	color:white;
 	text-align:center;
 }
