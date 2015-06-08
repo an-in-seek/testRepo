@@ -214,7 +214,7 @@ div#dialog{
 <h4>리뷰</h4>
 <div align="left">
 <!-- ************************************** 리뷰 정보 ************************************* -->
-<table class="listTable" style="width:1000px">
+<table class="listTable" style="width:1020px">
 		<thead>
 			<tr>
 				<th style="height:80px" colspan="4"><font size="5">${requestScope.review.title}</font></th>
@@ -234,7 +234,7 @@ div#dialog{
 
 
 <!-- ********************************* 리뷰 내용이 들어가는 공간 *************************************** -->
-<div id="reviewContent" style="width: 1000px">
+<div id="reviewContent" style="width: 1020px">
 ${requestScope.review.content }<br>
 </div>
 
@@ -263,7 +263,7 @@ ${requestScope.review.content }<br>
 	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}">
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}">
 <!-- 테이블 시작 -->
-<table id="replyTB" style="width:1000px;">
+<table id="replyTB" style="width:1020px;">
 		<thead>
 			<tr>
 				<td colspan="3">댓글달아줘!!</td>
@@ -274,17 +274,17 @@ ${requestScope.review.content }<br>
 				<tr id="reply${status.index+1}">
 					<th width="100" style="text-align: center"><font color="#FF4848">${reply.nickname}</font></th>
 					<td id="rContent${status.index+1}" width="700"><font size='4'>${reply.content}</font></td>
-					<td width="200" align="center"><font size="3">${reply.regDate}</font><br>
+					<td width="200" align="center"><font size="3">${reply.regDate}</font><br><br>
 						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.grade =='master')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
 						<!-- 수정 -->
-						<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="수정">
+						<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="댓글 수정">
 						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyEdit.png" ></a>
 						<!-- 제거 -->
-						<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="삭제">
+						<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 삭제">
 						<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
 						</c:if>
 						<!-- 신고 -->
-						<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="신고">
+						<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
 						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
 						</td>
 				</tr > 

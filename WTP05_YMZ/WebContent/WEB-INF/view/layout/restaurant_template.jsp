@@ -41,7 +41,7 @@ div.template{
 	width:1024px;
 }
 header.template{
-	background-color:skyblue;
+	background-color:white;
 	color:white;
 	text-align:center;
 	padding: 5px;
