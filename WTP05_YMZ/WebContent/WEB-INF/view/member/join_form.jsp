@@ -79,12 +79,10 @@ var nickChe = false;
 			},
 			success:function(ret){
 				if(ret=="false"){
-					$("#dupNicknameMessageLayer").text("중복된 닉네임입니다.");
-					$("#dupNicknameMessageLayer").addClass("errorMessage");
+					alert("중복된 닉네임입니다.")
 					nickChe = false;
 				}else{
-					$("#dupNicknameMessageLayer").text("사용할 수 있는 닉네임입니다.");
-					$("#dupNicknameMessageLayer").addClass("normalMessage");
+					alert("사용가능한 닉네임입니다.")
 					nickChe = true;
 				}
 			}

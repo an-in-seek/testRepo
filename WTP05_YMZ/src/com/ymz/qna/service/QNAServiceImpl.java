@@ -22,24 +22,28 @@ public class QNAServiceImpl implements QNAService {
 
 	//QNA게시판 글 등록
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void registerQNA(QNA qna) {
 		dao.insertQNA(qna);
 	}
 	
 	//QNA게시판 답글 등록
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void registerQNAComment(QNA qna) {
 		dao.insertQNAComment(qna);
 	}
 
 	//QNA게시판 글 수정
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void modifyQNA(QNA qna) {
 		dao.updateQNA(qna);
 	}
 
 	//QNA게시판 글 제거
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void removeQNAByNo(int number) {
 		dao.deleteQNAByNo(number);
 	}
@@ -59,9 +63,9 @@ public class QNAServiceImpl implements QNAService {
 	
 	//QNA게시판 글 전체목록 분류별 조회
 	@Override
-	public Map<String, Object> getQNAListPagingByCategory(int pageNo, String category) {
-		List<QNA> list = dao.selectAllQNAByCategory(pageNo, category);
-		int totalContent = dao.selectTotalQNACountByCategory(category);
+	public Map<String, Object> getQNAListPagingByCategory(int pageNo, String category, String searchInfo) {
+		List<QNA> list = dao.selectAllQNAByCategory(pageNo, category, searchInfo);
+		int totalContent = dao.selectTotalQNACountByCategory(category, searchInfo);
 		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
 		
 		HashMap map = new HashMap();
@@ -70,18 +74,6 @@ public class QNAServiceImpl implements QNAService {
 		return map;
 	}
 	
-	//QNA게시판 글 전체목록 검색으로 조회
-	@Override
-	public Map<String, Object> getQNAListPagingBySearch(int pageNo, String text) {
-		List<QNA> list = dao.selectAllQNABySearch(pageNo, text);
-		int totalContent = dao.selectTotalQNACountBySearch(text);
-		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
-		
-		HashMap map = new HashMap();
-		map.put("qna_list", list);
-		map.put("pagingBean1", pagingBean); //5개
-		return map;
-	}
 	
 	//QNA게시판 글 번호로 조회
 	@Override
@@ -106,5 +98,6 @@ public class QNAServiceImpl implements QNAService {
 		}
 		dao.insertQNA(q2);
 	}
+
 
 }

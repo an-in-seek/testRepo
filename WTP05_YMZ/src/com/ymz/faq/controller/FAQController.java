@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ymz.common.validator.FAQValidator;
 import com.ymz.faq.service.FAQService;
 import com.ymz.faq.vo.FAQ;
 import com.ymz.member.vo.Member;
@@ -30,11 +31,27 @@ public class FAQController {
 	// FAQ게시물 등록
 	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
 	public String registerFAQ(@ModelAttribute FAQ faq, Errors errors, HttpServletRequest request) throws Exception{
+		new FAQValidator().validate(faq, errors);
+		//등록 실패
 		if(errors.hasErrors()){
 			return "faq/faq_write_form.tiles";
 		}
+		//등록 성공
 		service.registerFAQ(faq);
 		return "/faq/faqList.do";//등록후 원래페이지로 이동
+	}
+	
+	// 게시물 수정
+	@RequestMapping(value="login/modify.do", method=RequestMethod.POST)
+	public String modifyFAQ(@ModelAttribute FAQ faq, Errors errors) throws Exception{
+		new FAQValidator().validate(faq, errors);
+		//등록 실패
+		if(errors.hasErrors()){
+			return "faq/faq_modify_form.tiles";
+		}
+		//등록 성공
+		service.modifyFAQ(faq);//수정 처리
+		return "/faq/faqList.do";
 	}
 	
 	// FAQ게시판 전체 조회
@@ -50,14 +67,6 @@ public class FAQController {
 		//로그인 체크 - interceptor가 처리
 		map.put("faq", service.getFAQByNo(number));
 		return "faq/faq_modify_form.tiles";
-	}
-	
-	// 게시물 수정
-	@RequestMapping(value="login/modify.do", method=RequestMethod.POST)
-	public String modifyFAQ(@ModelAttribute FAQ faq, Errors errors) throws Exception{
-		//로그인 체크 - interceptor가 처리
-		service.modifyFAQ(faq);//수정 처리
-		return "/faq/faqList.do";
 	}
 	
 	// 게시물 삭제

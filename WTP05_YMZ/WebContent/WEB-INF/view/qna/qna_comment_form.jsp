@@ -53,7 +53,7 @@ table#tb thead tr{
 }
 </style>
 
-<h2>QNA게시물 답글${requestScope.qna.refamily}</h2>
+<h2>QNA게시물 답글</h2>
 <div align="center" style="padding:20px">
 	<!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
 	<form id="write" method="post" action="${initParam.rootPath}/qna/login/writeComment.do">
@@ -72,8 +72,8 @@ table#tb thead tr{
 				<td align="center"  width="50px">분류</td>
 				<td><select id="category" name="category">
 					<c:forEach items="${requestScope.categoryList}" var="c">
-						<c:if test="${c.categoryId == requestScope.qna.category}">
-							<option value="${c.categoryId}" selected="selected">${c.categoryName}</option>
+						<c:if test="${c.categoryName == requestScope.qna.category}">
+							<option value="${c.categoryName}" selected="selected">${c.categoryName}</option>
 						</c:if>
 						</c:forEach>
 				</select></td>

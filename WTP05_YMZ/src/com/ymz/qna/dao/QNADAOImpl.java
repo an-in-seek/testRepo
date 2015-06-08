@@ -55,24 +55,17 @@ public class QNADAOImpl implements QNADAO {
 		return session.selectList(namespace+"selectAllQNA", map);
 	}
 	
-	//QNA게시판 글 분류별 전체목록 조회
+	//QNA게시판 글 분류별 전체목록 조회 & QNA게시판 검색 정보로 목록조회
 	@Override
-	public List<QNA> selectAllQNAByCategory(int pageNo, String category) {
+	public List<QNA> selectAllQNAByCategory(int pageNo, String category, String searchInfo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
 		map.put("pageNo", pageNo);
 		map.put("category", category);
+		map.put("searchInfo", searchInfo);
 		return session.selectList(namespace+"selectAllQNAByCategory", map);
 	}
 	
-	@Override
-	public List<QNA> selectAllQNABySearch(int pageNo, String text) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
-		map.put("pageNo", pageNo);
-		map.put("text", text);
-		return session.selectList(namespace+"selectAllQNABySearch", map);
-	}
 
 	//DB에 있는 데이터 총 개수
 	@Override
@@ -80,20 +73,15 @@ public class QNADAOImpl implements QNADAO {
 		return session.selectOne(namespace+"selectTotalQNACount");
 	}
 	
-	//DB에 있는 분류별 데이터 총 개수
+	//DB에 있는 분류별 데이터 총 개수 & 검색한 정보와 일치하는 데이터 총 개수
 	@Override
-	public int selectTotalQNACountByCategory(String category) {
-		Map<String, String> map = new HashMap<String, String>();
+	public int selectTotalQNACountByCategory(String category, String searchInfo) {
+		Map map = new HashMap();
 		map.put("category", category);
+		map.put("searchInfo", searchInfo);
 		return session.selectOne(namespace+"selectTotalQNACountByCategory", map);
 	}
 	
-	@Override
-	public int selectTotalQNACountBySearch(String title) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("title", title);
-		return session.selectOne(namespace+"selectTotalQNACountBySearch", map);
-	}
 	
 	// QNA게시판 글 번호로 조회
 	@Override
