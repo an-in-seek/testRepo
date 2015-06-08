@@ -10,14 +10,10 @@ public interface RestaurantReplyService {
 	
 	  // 등록
 	public abstract void registerRestaurantReply(RestaurantReply restaurantReply);
-
-	
 		//수정
 	public abstract void modifyRestaurantReply(RestaurantReply restaurantReply);
 		//삭제
 	void removeRestaurantReply(RestaurantReply restaurantReply, int number, String userId);
-		//조회
-	RestaurantReply selectRestaurantReplyByReplyNo(int number);
 	//댓글리스트 조회
 	public abstract List selectAllRestaurantReply(int restNumber);
 

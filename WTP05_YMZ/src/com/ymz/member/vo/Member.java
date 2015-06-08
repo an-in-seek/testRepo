@@ -21,42 +21,18 @@ public class Member implements Serializable{
 	private int mileage;
 	private String grade;
 	private String joinDate;
+	private String state;
 	
 	/*
 	 * no-arg 생성자
 	 */
 	public Member(){}
 
-	/*
-	 * favoriteFood를 제외한 생성자 
-	 */
-	public Member(String id, String password, String name, String nickname,
-			String birth, String sex, String zipcode, String address,
-			String detailAddress, String email, String phoneNo, int mileage,
-			String grade, String joinDate) {
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.nickname = nickname;
-		this.birth = birth;
-		this.sex = sex;
-		this.zipcode = zipcode;
-		this.address = address;
-		this.detailAddress = detailAddress;
-		this.email = email;
-		this.phoneNo = phoneNo;
-		this.mileage = mileage;
-		this.grade = grade;
-		this.joinDate = joinDate;
-	}
-	
-	/*
-	 * 생성자
-	 */
 	public Member(String id, String password, String name, String nickname,
 			String birth, String sex, String zipcode, String address,
 			String detailAddress, String email, String phoneNo,
 			String favoriteFood, int mileage, String grade, String joinDate) {
+		super();
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -73,10 +49,30 @@ public class Member implements Serializable{
 		this.grade = grade;
 		this.joinDate = joinDate;
 	}
-	
-	/*
-	 * setter, getter, toString, hashCode
-	 */
+
+	public Member(String id, String password, String name, String nickname,
+			String birth, String sex, String zipcode, String address,
+			String detailAddress, String email, String phoneNo,
+			String favoriteFood, int mileage, String grade, String joinDate,
+			String state) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.nickname = nickname;
+		this.birth = birth;
+		this.sex = sex;
+		this.zipcode = zipcode;
+		this.address = address;
+		this.detailAddress = detailAddress;
+		this.email = email;
+		this.phoneNo = phoneNo;
+		this.favoriteFood = favoriteFood;
+		this.mileage = mileage;
+		this.grade = grade;
+		this.joinDate = joinDate;
+		this.state = state;
+	}
 
 	public String getId() {
 		return id;
@@ -198,6 +194,14 @@ public class Member implements Serializable{
 		this.joinDate = joinDate;
 	}
 
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", password=" + password + ", name=" + name
@@ -206,7 +210,7 @@ public class Member implements Serializable{
 				+ ", detailAddress=" + detailAddress + ", email=" + email
 				+ ", phoneNo=" + phoneNo + ", favoriteFood=" + favoriteFood
 				+ ", mileage=" + mileage + ", grade=" + grade + ", joinDate="
-				+ joinDate + "]";
+				+ joinDate + ", state=" + state + "]";
 	}
 
 	@Override
@@ -232,6 +236,7 @@ public class Member implements Serializable{
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phoneNo == null) ? 0 : phoneNo.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((zipcode == null) ? 0 : zipcode.hashCode());
 		return result;
 	}
@@ -312,6 +317,11 @@ public class Member implements Serializable{
 				return false;
 		} else if (!sex.equals(other.sex))
 			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
+			return false;
 		if (zipcode == null) {
 			if (other.zipcode != null)
 				return false;
@@ -319,10 +329,6 @@ public class Member implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 
-	
-	
 	
 }

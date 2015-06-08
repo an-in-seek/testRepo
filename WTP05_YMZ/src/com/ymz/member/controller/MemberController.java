@@ -1,6 +1,5 @@
 package com.ymz.member.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +38,15 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	
+	//회원가입 가기 전 category 뿌려주기
+	@RequestMapping("joinForm.do")
+	@ResponseBody
+	public String joinForm(){
+		
+		
+		return "member/join_form.tiles";
+	}
 	
 	//회원 가입
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
@@ -239,12 +247,12 @@ public class MemberController {
 	}
 	
 	// 정보 제거하기(관리자 전용)
-		@RequestMapping("login/removeMemberByMaster.do")
-		public String removeMember(@RequestParam String id, ModelMap map){
-			service.removeMemberById(id);
-			//session 제거
-			return "member_list_paging.tiles";//삭제후 메인페이지로 이동
-		}
+	@RequestMapping("login/removeMemberByMaster.do")
+	public String removeMember(@RequestParam String id, ModelMap map){
+		service.removeMemberById(id);
+		//session 제거
+		return "/member/login/memberListPaging.do";//삭제후 메인페이지로 이동
+	}
 	
 	// 로그아웃
 	@RequestMapping("login/logout")

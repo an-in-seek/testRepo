@@ -5,12 +5,13 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	var id;
 	$("#listTB tbody tr").on("mouseover", function(){
 		$("table#listTB tbody tr").css("background-color", "white");
 		$(this).css("background-color", "lightgray");
 	});
 	$("#listTB tbody tr").on("click", function(){
-		var id = $(this).find(":nth-child(2)").text();
+		id = $(this).find(":nth-child(2)").text();
 		$.ajax({
 			url:"${initParam.rootPath}/member/findMemberById.do",
 			data:{"id":id},
@@ -31,6 +32,7 @@ $(document).ready(function(){
 				$("#joinDate").text("가입일 : "+ret.joinDate);
 				$("#mileage").text("마일리지 : "+ret.mileage);
 				$("#grade").text("등급 : "+ret.grade);
+				$("#state").text("탈퇴여부 : "+ret.state);
 				//Dialog 띄우기 
 				$("#dialog").dialog({modal:true,width:500});
 			},
@@ -46,8 +48,12 @@ $(document).ready(function(){
 	});
 	
 	$("#deleteBtn").on("click",function(){
-		alert("삭제버튼 클릭");
-		document.location.href="${initParam.rootPath }/member/login/removeMemberByMaster.do?id="+$("#memberId").val();
+		var isDel = confirm("정말로 삭제하시겠습니까?");
+		if (isDel) {
+			document.location.href="${initParam.rootPath }/member/login/removeMemberByMaster.do?id="+id;
+		} else {
+			return;
+		}
 	});
 	
 	$("#searchBtn").on("click",function(){
@@ -55,8 +61,24 @@ $(document).ready(function(){
 			 alert("검색할 내용를 입력하세요.");
 			return false;
 		} 
-		var command = $("#categorySelect").val()
+		var command = $("#selectCategory").val()
 		$("#command").val(command);
+	});
+	
+	$("#selectSort").on("change",function(){
+		 if($("#selectSort").val()=="정렬기준"){
+			 alert("정렬기준을 선택하세요.");
+			return false;
+		} 
+		 document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#selectSort").val()+"&command=sort";
+	});
+	
+	$("#stateCategory").on("change",function(){
+		 if($("#stateCategory").val() == "분류"){
+			 alert("카테고리를 선택 하세요.");
+			return false;
+		} 
+		document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#stateCategory").val()+"&command=state";
 	});
 });
 </script>
@@ -107,6 +129,13 @@ article{
 				<td>Email</td>
 				<td>전화번호</td>
 				<td>등급</td>
+				<td>
+					<select id="stateCategory">
+						<option>탈퇴여부</option>
+						<option id="가입" value="가입">가입</option>
+						<option id="탈퇴" value="탈퇴">탈퇴</option>
+					</select>
+				</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -119,6 +148,7 @@ article{
 					<td>${member.email}</td>
 					<td>${member.phoneNo}</td>
 					<td>${member.grade}</td>
+					<td>${member.state}</td>
 				</tr> 
 			</c:forEach>
 		</tbody>
@@ -164,6 +194,7 @@ article{
 				<td>Email</td>
 				<td>전화번호</td>
 				<td>등급</td>
+				<td>탈퇴여부</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -178,11 +209,21 @@ article{
 <table align="center">
 				<tr>
 					<td>
-						<select id="categorySelect" name="category">
+						<select id="selectSort" name="category">
+							<option value="default">정렬기준</option>
+							<option value="sortDate">가입날짜</option>
+							<option value="sortId">아이디</option>
+							<option value="sortName">이름</option>
+							<option value="sortNickname">닉네임</option>
+						</select>
+					</td>
+					<td>
+						<select id="selectCategory" name="category">
 							<option value="member_id">아이디</option>
 							<option value="member_name">이름</option>
 							<option value="member_nickname">닉네임</option>
 							<option value="grade">등급</option>
+							<option value="state">탈퇴여부</option>
 						</select>
 					</td>
 					<td colspan="2">
@@ -218,6 +259,7 @@ article{
 		<article id="joinDate"></article>
 		<article id="mileage"></article>
 		<article id="grade"></article>
+		<article id="state"></article>
 		<table align="center">
 			<tr align="center">
 				<td align="center"><input id="modifyBtn" type="button" value="수정" onclick="modifyF()"></td>

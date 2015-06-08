@@ -7,6 +7,11 @@
     .seek ul li a:hover{color: #fff; background: #939393;}
     .seek ul li ul{display: none; position: absolute; z-index: 999; left: 0;}
     .seek ul li:hover ul{display: block; /* display the dropdown */} 
+    
+    .seek{
+    	height: 60px;
+    	background: skyblue;
+    }
 </style>    
 
 <body>

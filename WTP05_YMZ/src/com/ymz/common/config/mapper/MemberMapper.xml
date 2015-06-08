@@ -17,7 +17,8 @@
 					favorite_food,
 					mileage,
 					grade,
-					to_char(to_date(join_date, 'yyyymmdd'), 'yyyy-mm-dd') join_date
+					to_char(to_date(join_date, 'yyyymmdd'), 'yyyy-mm-dd') join_date,
+					state
 		from		member			
 	</sql>
 	
@@ -37,6 +38,7 @@
 		<result column="mileage" property="mileage"/>
 		<result column="grade" property="grade"/>
 		<result column="join_date" property="joinDate"/>	
+		<result column="state" property="state"/>	
 	</resultMap>
 	
 <!-- 	<resultMap type="member" id="member-qna-resultmap" extends="member-resultmap">
@@ -52,10 +54,9 @@
 	</resultMap> -->
 	
 	<insert id="insertMember" parameterType="member">
-		insert into member (member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
-							 favorite_food, mileage, grade, join_date)
-		values (#{id}, #{password}, #{name},#{nickname},#{birth},#{sex},#{zipcode},#{address},#{detailAddress},
-		#{email},#{phoneNo},#{favoriteFood,jdbcType=VARCHAR},#{mileage},#{grade}, to_char(sysdate, 'yyyymmdd'))
+		insert 	into member 
+					(member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date)
+		values		(#{id}, #{password}, #{name},#{nickname},#{birth},#{sex},#{zipcode},#{address},#{detailAddress}, #{email},#{phoneNo},#{favoriteFood,jdbcType=VARCHAR},#{mileage},#{grade}, to_char(sysdate, 'yyyymmdd')), '가입'
 	</insert>
 	
 	<update id="updateMember" parameterType="member">
@@ -77,9 +78,16 @@
 		where member_id=#{id}
 	</update>
 	
-	<delete id="deleteMemberById" parameterType="string">
-		delete from member where member_id=#{id}
-	</delete>
+	<update id="deleteMemberById" parameterType="string">
+		update 	member 
+		set			state='탈퇴'
+		where 	member_id=#{id}
+	</update>
+	
+	<!-- category 가져오기 -->
+	<select id="selectCategory" parameterType="string">
+		select SECOND_CATEGORY_ID from SECOND_CATEGORY where FIRST_CATEGORY_ID='F-1';
+	</select>
 		
 	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
 		<include refid="member-select"/>
@@ -126,9 +134,9 @@
 	
 	<!-- Paging 추가 -->
 	<select id="selectAllMemberPaging" parameterType="map" resultMap="member-resultmap">
-		select member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date
+		select member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date, state
 		from (
-			select ceil(rownum/#{contentsPerPage}) page, member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date
+			select ceil(rownum/#{contentsPerPage}) page, member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date, state
 			from (
 					<include refid="member-select"/>
 					order by join_date
@@ -142,9 +150,9 @@
 	</select>
 	
 	<select id="selectAllMemberByInfo" parameterType="map" resultMap="member-resultmap">
-		select member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date
+		select member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date, state
 		from (
-			select ceil(rownum/#{contentsPerPage}) page, member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date
+			select ceil(rownum/#{contentsPerPage}) page, member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date, state
 			from (
 					<include refid="member-select"/>
 					<choose>
@@ -159,6 +167,9 @@
 						</when>
 						<when test="command == 'grade'">
 							where grade = #{info}
+						</when>
+						<when test="command == 'state'">
+							where state = #{info}
 						</when>
 					</choose>
 					order by join_date
@@ -181,6 +192,9 @@
 			</when>
 			<when test="command == 'grade'">
 				where grade = #{info}
+			</when>
+			<when test="command == 'state'">
+				where state = #{info}
 			</when>
 		</choose>
 	</select>

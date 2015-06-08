@@ -171,10 +171,10 @@ function modifyReply(number, restaurantNo){
 }
 
 //송이꺼
-function removeReply(number, restaurantNo){
+function removeReply(number,score, restaurantNo){
 	var isDel=confirm("삭제할까요?");
 	if(isDel){
-		document.location.href="${initParam.rootPath}/restaurant/login/removeReply.do?number=" +number+"&restaurantNo="+restaurantNo;
+		document.location.href="${initParam.rootPath}/restaurant/login/removeReply.do?number=" +number+"&score="+score+"&restaurantNo="+restaurantNo;
 	}else{
 		return;
 	}
@@ -387,7 +387,7 @@ display:none;
 				</tr>
 				<td align="right" colspan="4">
 				<input type="button" id="replyModifyButton${reply.number}" onclick="modifyReply(${reply.number},${requestScope.restaurant.restaurantNo})" value="수정">
-				<input type="button" id="replyRemoveButton${reply.number }" onclick="removeReply(${reply.number},${requestScope.restaurant.restaurantNo})" value="삭제">
+				<input type="button" id="replyRemoveButton${reply.number }" onclick="removeReply(${reply.number},${reply.score },${requestScope.restaurant.restaurantNo})" value="삭제">
 				<button id="reply_reportButton" style="width: 80px; heigth: 20px;">신고</button>
 				</td>
 				<tr>

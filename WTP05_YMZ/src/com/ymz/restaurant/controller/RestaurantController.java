@@ -248,7 +248,7 @@ public class RestaurantController {
 	}
 	//댓글 삭제
 	@RequestMapping("/login/removeReply.do")
-	public String removeRestaurantReply(@ModelAttribute RestaurantReply restaurantReply,@RequestParam int number, @RequestParam int restaurantNo ,HttpSession session){
+	public String removeRestaurantReply(@ModelAttribute RestaurantReply restaurantReply,@RequestParam int number, @RequestParam int restaurantNo ,HttpSession session) throws Exception {
 		Member member = (Member)session.getAttribute("login_info");
 		String userId = member.getId();
 		System.out.println(number);
