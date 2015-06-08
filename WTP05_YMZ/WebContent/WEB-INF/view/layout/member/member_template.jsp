@@ -40,8 +40,8 @@ div.member_template{
 	width:1024px;
 }
 header.member_template{
+	background-color:white;
 	width:1024px;
-	background-color:skyblue;
 	color:white;
 	text-align:center;
 	padding: 5px;

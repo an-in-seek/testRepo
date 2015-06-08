@@ -39,7 +39,7 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 function reportReply(reviewNo, rnum, pNo){
 	var isCom=confirm("신고할랭???")
 	if(isCom){
-		alert("아직 준비중이야!!!");
+		$("#report_dialog").dialog({modal:true, width:800});
 	}else{
 		return;
 	}
@@ -214,7 +214,7 @@ div#dialog{
 <h4>리뷰</h4>
 <div align="left">
 <!-- ************************************** 리뷰 정보 ************************************* -->
-<table class="listTable" style="width:1000px">
+<table class="listTable" style="width:1020px">
 		<thead>
 			<tr>
 				<th style="height:80px" colspan="4"><font size="5">${requestScope.review.title}</font></th>
@@ -234,7 +234,7 @@ div#dialog{
 
 
 <!-- ********************************* 리뷰 내용이 들어가는 공간 *************************************** -->
-<div id="reviewContent" style="width: 1000px">
+<div id="reviewContent" style="width: 1020px">
 ${requestScope.review.content }<br>
 </div>
 
@@ -263,7 +263,7 @@ ${requestScope.review.content }<br>
 	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}">
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}">
 <!-- 테이블 시작 -->
-<table id="replyTB" style="width:1000px;">
+<table id="replyTB" style="width:1020px;">
 		<thead>
 			<tr>
 				<td colspan="3">댓글달아줘!!</td>
@@ -274,17 +274,17 @@ ${requestScope.review.content }<br>
 				<tr id="reply${status.index+1}">
 					<th width="100" style="text-align: center"><font color="#FF4848">${reply.nickname}</font></th>
 					<td id="rContent${status.index+1}" width="700"><font size='4'>${reply.content}</font></td>
-					<td width="200" align="center"><font size="3">${reply.regDate}</font><br>
+					<td width="200" align="center"><font size="3">${reply.regDate}</font><br><br>
 						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.grade =='master')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
 						<!-- 수정 -->
-						<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="수정">
+						<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="댓글 수정">
 						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyEdit.png" ></a>
 						<!-- 제거 -->
-						<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="삭제">
+						<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 삭제">
 						<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
 						</c:if>
 						<!-- 신고 -->
-						<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="신고">
+						<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
 						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
 						</td>
 				</tr > 
@@ -298,17 +298,19 @@ ${requestScope.review.content }<br>
 		<tr>
 			<td>
 				<!-- 댓글 작성 영역 -->
-				<textarea name="content" id="reply_content" style="width:830px; height:80px;"></textarea><br>
+				<textarea name="content" id="reply_content" style="width:800px; height:80px;"></textarea><br>
 			</td>
 			<td>
 				<!-- 등록 버튼 -->
-				<input type="submit" style="width:150px;height:85px;" id="reply_registerBtn" value="등록" title="댓글 입력">
+				<input type="image" src="${initParam.rootPath }/uploadPhoto/reviewregis.png"  id="reply_registerBtn" value="댓글 입력">
 				
 				
 			</td>
 		</tr>
 	</table>
 </form>
+
+<!-- 댓글수정 dialog -->
 <div id="dialog" title="댓글 수정" align="left">
 	<figure id="pic"></figure>
 	<section>
@@ -329,6 +331,19 @@ ${requestScope.review.content }<br>
 	</form>
 	</section>
 </div>
+	<!-- 댓글신고 dialog -->
+	<div id="report_dialog" title="댓글 신고" align="left" >
+	<figure id="pic"></figure>
+	<section>
+	<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 신고내용 접수 </header>
+	<select>
+		<option value="fuck">욕설신고</option>
+		<option value="badman">성희롱</option>
+		<option value="money">상업적 홍보글</option>
+		<option value="guitar">기타</option>
+	</select>
+	</section>
+	</div>
 </div>
 </body>
 

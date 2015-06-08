@@ -24,8 +24,7 @@ public interface RestaurantReplyDAO {
 	// 게시물 신고
 	public abstract int reportRestaurantReplyByReplyNo(int number);
 
-	//댓글 번호로 댓글찾기
-	public abstract RestaurantReply selectRestaurantReplyByReplyNo(int number);
+
 	//댓글 리스트 조회
 	public abstract List selectAllRestaurantReply(int restNumber);
 	//댓글 평점
