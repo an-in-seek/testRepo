@@ -29,7 +29,7 @@ td, th{
 			<table style="width:1024px; text-align: right">
 			<tr>
 				<td align="right">
-				<font size="2" style="font-weight: bold">${sessionScope.login_info.nickname}님 환영합니다.</font><br>
+				<font color="red" size="2" style="font-weight: bold">${sessionScope.login_info.nickname}님 환영합니다.</font><br>
 				<a href="${initParam.rootPath }/member/mypage.do"><font size="2">마이페이지 | </font></a>
 				<a href="${initParam.rootPath }/member/login/logout.do"><font size="2">로그아웃</font></a>
 				</td>	
