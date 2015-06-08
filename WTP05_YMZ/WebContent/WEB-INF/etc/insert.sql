@@ -28,7 +28,8 @@ insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100
 update member set grade='master' where member_id='master'
 update member set grade='master' 	where member_id='2';
 update member set mileage=11111 	where member_id='2';
-select * from member;
+select * from FIRST_CATEGORY where FIRST_CATEGORY_ID='F-1';
+select SECOND_CATEGORY_ID from SECOND_CATEGORY where FIRST_CATEGORY_ID='F-1';
 delete member where member_id='1';
 
 

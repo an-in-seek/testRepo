@@ -345,10 +345,18 @@ div#table{
 		<tr>
 			<td>좋아하는음식</td>
 			<td>
-				<label>한식<input type="checkbox" name="favoriteFood" value="korean"></label>
-				<label>중식<input type="checkbox" name="favoriteFood" value="chinese"></label>
-				<label>양식<input type="checkbox" name="favoriteFood" value="western"></label>
-				<label>일식<input type="checkbox" name="favoriteFood" value="japanese"></label>
+				<label>한식<input type="checkbox" name="favoriteFood" value=""></label>
+				<label>중식<input type="checkbox" name="favoriteFood" value="중식"></label>
+				<label>양식<input type="checkbox" name="favoriteFood" value="양식"></label>
+				<label>일식<input type="checkbox" name="favoriteFood" value="일식"></label>
+			</td>
+			<td>
+			<select id="category" name="category">
+					<option value="전체">전체보기</option>
+					<c:forEach items="${requestScope.categories }" var="category">
+						<option value="${category.categoryId }">${category.categoryName }</option>
+					</c:forEach>
+			</select>
 			</td>
 		</tr>
 		<tr>

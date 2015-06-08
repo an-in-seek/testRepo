@@ -39,6 +39,15 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
+	//회원가입 가기 전 category 뿌려주기
+	@RequestMapping("joinForm.do")
+	@ResponseBody
+	public String joinForm(){
+		
+		
+		return "member/join_form.tiles";
+	}
+	
 	//회원 가입
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
 	public String joinMember(@ModelAttribute Member member, Errors errors, HttpServletRequest request,ModelMap map) throws Exception{
