@@ -42,22 +42,22 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 
 	// 삭제하기
 	@Override
+	@Transactional
 	public void removeRestaurantReply(RestaurantReply restaurantReply,int number, String userId) {
-		dao.deleteRestaurantReply(number,userId);
+		int sum =dao.selectScore(restaurantReply.getRestaurantNo())-restaurantReply.getScore();//총합계
 		dao.updateReplyCount2(restaurantReply.getRestaurantNo());
-		int sum =dao.selectScore(restaurantReply.getRestaurantNo());
-		int replyCount=dao.selectReplyCount(restaurantReply.getRestaurantNo());
-		double score =(double) sum/replyCount;
+		int replyCount=dao.selectReplyCount(restaurantReply.getRestaurantNo());//총겟수
+		
+		double score=0;
+		if(sum!=0){
+			score =(double) sum/replyCount;
+		}
+		
 		dao.updateScore(score, restaurantReply.getRestaurantNo());
+		dao.deleteRestaurantReply(number,userId);
 
 	}
 
-	// 조회하기
-	@Override
-	public RestaurantReply selectRestaurantReplyByReplyNo(int number) {
-
-		return dao.selectRestaurantReplyByReplyNo(number);
-	}
 
 	// 댓글 리스트 조회하기
 

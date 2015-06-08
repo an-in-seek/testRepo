@@ -52,13 +52,6 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO {
 		return session.selectOne(namespace + "reportRestaurantReplyByReplyNo", number);
 	}
 
-	// 댓글 번호로 댓글찾기
-	@Override
-	public RestaurantReply selectRestaurantReplyByReplyNo(int number) {
-
-		return session.selectOne(namespace + "selectRestaurantReplyByReplyNo",
-				number);
-	}
 
 	@Override
 	public List selectAllRestaurantReply(int restNumber) {
@@ -73,7 +66,7 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO {
 		return session.update(namespace + "updateReplyCount", restaurantNo);
 
 	}
-
+//평점조회
 	@Override
 	public int selectScore(int restaurantNo) {
 		return session.selectOne(namespace + "selectScore", restaurantNo);
@@ -82,7 +75,6 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO {
 	// 댓글 갯수세기
 	@Override
 	public int selectReplyCount(int restaurantNo) {
-
 		return session.selectOne(namespace + "selectReplyCount", restaurantNo);
 	}
 
