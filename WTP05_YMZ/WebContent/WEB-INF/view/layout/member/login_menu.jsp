@@ -72,7 +72,6 @@ function pw_pop(){
 <c:choose>
 	<c:when test="${sessionScope.login_info==null }">
 		<form action="${initParam.rootPath }/member/login.do" method="post" >
-		
 			<table align="center"  style="border:solid 1px #050099; margin-top:4%">
 				<tr align="center" >
 					<td><font size="3">아이디</font></td>
@@ -83,7 +82,6 @@ function pw_pop(){
 					<td><input type="password" name="password"  placeholder="Password" class="int" required="required" maxlength="16"></td>
 				</tr>
 			</table>
-			
 			<table align="center" style="margin-top:1%">
 				<tr align="center" >
 					<td class="btn"><input type="submit"  value="로그인" style="font-size:16px; border:solid 1px #050099; "></td>
