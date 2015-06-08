@@ -272,4 +272,5 @@
 	<delete id="deleteFoods" parameterType="_int">
 		delete from food where restaurant_no=#{restaurantNo}
 	</delete>
+	
 </mapper>

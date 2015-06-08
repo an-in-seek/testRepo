@@ -282,10 +282,9 @@ $(document).ready(function(){
 	<td>
 		<select id="category" name="category">
 			<option value="default">업종을 선택하세요</option>
-			<option>한식</option>
-			<option>양식</option>
-			<option>중식</option>
-			<option>일식</option>
+			<c:forEach items="${requestScope.categories }" var="category">
+				<option value="${category.categoryId }">${category.categoryName }</option>
+			</c:forEach>
 		</select>
 		<font color="red"><span id="categoryMessage"></span></font>
 	</td>
@@ -309,10 +308,9 @@ $(document).ready(function(){
 <tr>
 	<td>테마</td>
 	<td>
-		<label><input type="checkbox" name="theme" value="가족">가족</label>
-		<label><input type="checkbox" name="theme" value="연인">연인</label>
-		<label><input type="checkbox" name="theme" value="친구">친구</label>
-		<label><input type="checkbox" name="theme" value="회식">회식</label>
+		<c:forEach items="${requestScope.themes }" var="theme">
+			<label><input type="checkbox" name="theme" value="${theme.categoryId }">${theme.categoryName }</label>
+		</c:forEach>
 		<font color="red"><span id="themeMessage"></span></font>
 	</td>
 </tr>

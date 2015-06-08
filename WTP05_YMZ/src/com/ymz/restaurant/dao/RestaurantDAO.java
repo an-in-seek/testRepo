@@ -2,6 +2,7 @@ package com.ymz.restaurant.dao;
 
 import java.util.List;
 
+import com.ymz.common.category.vo.Category;
 import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
 

@@ -8,7 +8,12 @@
 		from		first_category
 	</sql>
 	
-	<resultMap type="Category" id="first-category-resultmap">
+	<sql id="second-category-select">
+		select second_category_id, second_category_name, second_category_info
+		from second_category
+	</sql>
+	
+	<resultMap type="category" id="first-category-resultmap">
 		<id column="first_category_id" property="categoryId"/>
 		<result column="first_category_name" property="categoryName"/>
 		<result column="first_category_info" property="categoryInfo"/>
@@ -19,7 +24,7 @@
 		order by first_category_id
 	</select>
 	
-	<resultMap type="Category" id="second-category-resultmap">
+	<resultMap type="category" id="second-category-resultmap">
 		<id column="second_category_id" property="categoryId"/>
 		<result column="second_category_name" property="categoryName"/>
 		<result column="second_category_info" property="categoryInfo"/>
@@ -30,5 +35,15 @@
 		from 		second_category 
 		where	 	first_category_id = #{categoryId}
 	</select>
-
+	
+	<select id="selectCategories" parameterType="String" resultMap="second-category-resultmap">
+		<include refid="second-category-select"/>
+		where first_category_id=#{id}
+	</select>
+	
+	<select id="selectCategoryName" parameterType="String" resultType="String">
+		select second_category_name from second_category
+		where second_category_id=#{categoryId}
+	</select>
+	
 </mapper>
