@@ -128,33 +128,47 @@ $(document).ready(function(){
 	});
 //송이꺼-----------------------------------------------------------
 
-	$("#registerReplyForm").click( function() {
+	$("#registerBtn").click( function() {
 		if (!$("#content").val()) {
 			$("#content").focus();
-			return false;
 			alert("내용을 입력하세요");
+			return false;
+		}else if($("input[type=radio][name=score]:checked").length<1){
+			alert("평점을 선택해");
+			return false;
 		}
-	})
+	});
 
-
+	$("#replyModifyBtn").click(function(){
+		if (!$("#ModifyContent").val()) {
+			$("#ModifyContent").focus();
+			alert("내용을 써주세욤");
+			return false;
+		}else if($("input[type=radio][name=score]:checked").length<1){
+			alert("평점을 선택해");
+			return false;
+		}
+		
+	});
 
 	$("#reply_reportButton").on("click", function() {
 		alert("로그인을 해야합니다.미구현");
 	});
+	
 });
-
+ 	
 function modifyReply(number, restaurantNo){
-	var isUp=confirm("수정하시겠습니까?");
+	var isUp=confirm("수정하시겠습니까?")
 	if(isUp){
-		$("#updateReplyForm").append("<input type='hidden'  name='number' value='"+number+"'>");
-		$("#updateReplyForm").append("<input type='hidden'  name='restaurantNo' value='"+restaurantNo+"'>");
-		$("#dialog").dialog({modal:true, width:400});
-	}else{
-		return;
-	}
+			var con = $("#replyContent"+number).text();
+				$("#updateReplyForm").append("<input type='hidden'  name='number' value='"+number+"'>");
+				$("#updateReplyForm").append("<input type='hidden'  name='restaurantNo' value='"+restaurantNo+"'>");
+				$("#ModifyContent").val(con);	
+				$("#dialog").dialog({modal:true, width:400});
+		}else{
+				return false;
+		}
 }
-
-
 
 //송이꺼
 function removeReply(number, restaurantNo){
@@ -368,7 +382,8 @@ display:none;
 					<td>평점 : ${reply.score }</td>
 				</tr>
 				<tr>
-					<td colspan="4" height="30px">내용 : ${reply.content }</td>
+				내용 :
+					<td id="replyContent${reply.number}" colspan="4" height="30px">${reply.content }</td>
 				</tr>
 				<td align="right" colspan="4">
 				<input type="button" id="replyModifyButton${reply.number}" onclick="modifyReply(${reply.number},${requestScope.restaurant.restaurantNo})" value="수정">
@@ -387,20 +402,19 @@ display:none;
 	</p>
 	<form method="post" action="${initParam.rootPath}/restaurant/login/registerReply.do" id="registerReplyForm">
 		<table align="center" style="width: 700px;" border='1'>
-			<tr>
-				<td>
-				<font size='6'><b>내용</b></font>
+			<tr >
+				<td>	<font size='6'><b>내용</b></font>
 					<input type="text" id="content" name="content" style="width: 600px; height: 80px"> 
 					<input type="hidden"	id="restaurantNo" name="restaurantNo" value="${requestScope.restaurant.restaurantNo }">
 				<p>
 				평점주기
-					<label for="1">1</label><input type="radio" name="score" value="1" id="1"><span class="errorMessage"></span>
-					<label for="2">2</label><input type="radio" name="score" value="2" id="2"><span class="errorMessage"></span>
-					<label for="3">3</label><input type="radio" name="score" value="3" id="3"><span class="errorMessage"></span>
-					<label for="4">4</label><input type="radio" name="score" value="4" id="4"><span class="errorMessage"></span>
-					<label for="5">5</label><input type="radio" name="score" value="5" id="5"><span class="errorMessage"></span>
+					<label for="1">1</label><input type="radio" name="score" value="1" id="score1">
+					<label for="2">2</label><input type="radio" name="score" value="2" id="score2">
+					<label for="3">3</label><input type="radio" name="score" value="3" id="score3">
+					<label for="4">4</label><input type="radio" name="score" value="4" id="score4">
+					<label for="5">5</label><input type="radio" name="score" value="5" id="score5">
 				</p>
-					<input type="submit" value="등록">
+					<input id="registerBtn" type="submit" value="등록">
 				</td>
 			</tr>
 		</table>
@@ -411,16 +425,16 @@ display:none;
 			<header style="text-align: center; font-weight: bolder; font-size: 1.3em; border-bottom: 2px solid black; padding: 5px">댓글을 수정하세요</header>
 				<form id="updateReplyForm" method="post" action="${initParam.rootPath}/restaurant/login/updateReply.do"  >
 					<article>내용</article>
-						<input type="text" id="content" name="content" style="width: 300px; height: 40px" autofocus="autofocus">
+						<input type="text" id="ModifyContent" name="content" style="width: 300px; height: 40px" autofocus="autofocus">
 						<p>
 							평점주기
-							<label for="1">1</label><input type="radio" name="score" value="1" id="1"><span class="errorMessage"></span>
-							<label for="2">2</label><input type="radio" name="score" value="2" id="2"><span class="errorMessage"></span>
-							<label for="3">3</label><input type="radio" name="score" value="3" id="3"><span class="errorMessage"></span>
-							<label for="4">4</label><input type="radio" name="score" value="4" id="4"><span class="errorMessage"></span>
-							<label for="5">5</label><input type="radio" name="score" value="5" id="5"><span class="errorMessage"></span>
+							<label for="1">1</label><input type="radio" name="score" value="1" id="1">
+							<label for="2">2</label><input type="radio" name="score" value="2" id="2">
+							<label for="3">3</label><input type="radio" name="score" value="3" id="3">
+							<label for="4">4</label><input type="radio" name="score" value="4" id="4">
+							<label for="5">5</label><input type="radio" name="score" value="5" id="5">
 						</p>
-				<input type="submit" value="등록">
+				<input id="replyModifyBtn" type="submit" value="등록">
 				
 		</form>
 		</section>

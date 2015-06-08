@@ -14,7 +14,6 @@ var categoryCheck = false;
 var phoneCheck1 = false;
 var phoneCheck2 = false;
 var phoneCheck3 = false;
-var addressCheck = false;
 var themeCheck = false;
 var locationCheck = false;
 var infoCheck = false;
@@ -87,15 +86,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#address").on("blur",function(){
-		if($(this).val().trim()!=""){
-			addressCheck = true;
-			$("#addressMessage").text("");
-		}else{
-			addressCheck = false;
-		}
-	});
-	
 	$("input[type=checkbox]").on("click",function(){
 		if($("input[type=checkbox]:checked").length>0){
 			themeCheck = true;
@@ -147,9 +137,6 @@ $(document).ready(function(){
 		if(!(phoneCheck1&&phoneCheck2&&phoneCheck3)){
 			$("#phoneMessage").text("전화번호를 입력하세요");
 		}
-		if(!addressCheck){
-			$("#addressMessage").text("주소를 입력하세요");
-		}
 		if(!themeCheck){
 			$("#themeMessage").text("테마를 1개 이상 선택하세요");
 		}
@@ -163,7 +150,7 @@ $(document).ready(function(){
 			$("#pictureMessage").text("사진을 한장 이상 등록하세요");
 		}
 		
-		if(!nameCheck||!categoryCheck||!phoneCheck1||!phoneCheck2||!phoneCheck3||!addressCheck||!themeCheck||!locationCheck||!infoCheck||!pictureCheck){
+		if(!nameCheck||!categoryCheck||!phoneCheck1||!phoneCheck2||!phoneCheck3||!themeCheck||!locationCheck||!infoCheck||!pictureCheck){
 			return false;
 		}
 		
@@ -296,13 +283,6 @@ $(document).ready(function(){
 		<input type="text" id="phoneNo2" name="phoneNo2" maxlength="4" style="width: 50px"> -
 		<input type="text" id="phoneNo3" name="phoneNo3" maxlength="4" style="width: 50px">
 		<font color="red"><span id="phoneMessage"></span></font>
-	</td>
-</tr>
-<tr>
-	<td>주소</td>
-	<td>
-		<input type="text" id="address" name="address" style="width:500px">
-		<font color="red"><span id="addressMessage"></span></font>
 	</td>
 </tr>
 <tr>
