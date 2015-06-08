@@ -7,9 +7,8 @@ function id_pop(){
 function pw_pop(){
 	  window.open('${initParam.rootPath }/popup/pwFind.jsp','네이버팝업','width=450, height=350, scrollbars=no');
 	 }
-	
-
 </script>
+
 <style>
 #main-title {color:#050099;font-size:70pt;margin-top:20%;}
 .se {font-family: serif;}

@@ -137,8 +137,7 @@ $(document).ready(function(){
 </script>	
 <!-- css -->
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
-@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
 table#replyTB tbody tr:nth-child(even) {
     background-color: lavenderblush;
@@ -153,8 +152,8 @@ table#replyTB thead tr{
 	text-align: center;
 }
 table#replyTB tbody tr{
-	font-family: 'Nanum Pen Script', cursive;
-	font-size: 40px;
+	font-family: 'Hanna', sans-serif;
+	font-size: 25px;
 	height: 140px;
 	cursor: pointer;
 }
@@ -174,7 +173,7 @@ div#dialog{
 }
 
 .listTable{
-	font-family: 'Jeju Hallasan', cursive;
+	font-family: 'Hanna', sans-serif;
     border-collapse:collapse;
     border: 0px;
 }
@@ -270,7 +269,7 @@ ${requestScope.review.content }<br>
 					<th width="100" style="text-align: center"><font color="#FF4848">${reply.nickname}</font></th>
 					<td id="rContent${status.index+1}" width="700"><font size='4'>${reply.content}</font></td>
 					<td width="200"><font size="3">${reply.regDate}</font><br>
-						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.name =='관리자')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
+						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.grade =='master')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
 						<input type="button" id="reply_modifyBtn${reply.replyNo}"  
 							onclick="modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" value="수정" >
 						<input type="button"  id="reply_deleteBtn${reply.replyNo}" 
