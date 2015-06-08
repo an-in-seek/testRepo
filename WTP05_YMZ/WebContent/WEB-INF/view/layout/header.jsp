@@ -11,6 +11,15 @@ $(document).ready(function(){
 });
 </script>
 <style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+#main{
+	font-family: 'Hanna', sans-serif;
+}
+#login{
+	font-family: 'Hanna', sans-serif;
+}
+
+
 /*테이블 기본 스타일*/
 table, td, th{
 	border-collapse: collapse;
@@ -46,7 +55,7 @@ td, th{
 
 <c:choose>
 	<c:when test="${sessionScope.login_info==null }">
-		<div id="login">	
+	<div id="login">	
 		<table style="width:1024px; text-align: right">	
 			<tr>
 				<td>

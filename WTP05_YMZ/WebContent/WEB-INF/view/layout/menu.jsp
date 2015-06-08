@@ -10,7 +10,7 @@
     
     .seek{
     	height: 60px;
-    	background: skyblue;
+    	background: red;
     }
 </style>    
 
