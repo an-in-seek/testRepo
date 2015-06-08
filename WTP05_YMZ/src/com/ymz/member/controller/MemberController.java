@@ -231,6 +231,14 @@ public class MemberController {
 		return "main.tiles";//삭제후 메인페이지로 이동
 	}
 	
+	// 정보 제거하기(관리자 전용)
+		@RequestMapping("login/removeMemberByMaster.do")
+		public String removeMember(@RequestParam String id, ModelMap map){
+			service.removeMemberById(id);
+			//session 제거
+			return "member_list_paging.tiles";//삭제후 메인페이지로 이동
+		}
+	
 	// 로그아웃
 	@RequestMapping("login/logout")
 	public String logout(HttpSession session, HttpServletResponse response){
