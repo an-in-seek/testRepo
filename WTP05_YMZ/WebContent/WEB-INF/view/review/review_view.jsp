@@ -39,7 +39,7 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 function reportReply(reviewNo, rnum, pNo){
 	var isCom=confirm("신고할랭???")
 	if(isCom){
-		alert("아직 준비중이야!!!");
+		$("#report_dialog").dialog({modal:true, width:800});
 	}else{
 		return;
 	}
@@ -298,17 +298,19 @@ ${requestScope.review.content }<br>
 		<tr>
 			<td>
 				<!-- 댓글 작성 영역 -->
-				<textarea name="content" id="reply_content" style="width:830px; height:80px;"></textarea><br>
+				<textarea name="content" id="reply_content" style="width:800px; height:80px;"></textarea><br>
 			</td>
 			<td>
 				<!-- 등록 버튼 -->
-				<input type="submit" style="width:150px;height:85px;" id="reply_registerBtn" value="등록" title="댓글 입력">
+				<input type="image" src="${initParam.rootPath }/uploadPhoto/reviewregis.png"  id="reply_registerBtn" value="댓글 입력">
 				
 				
 			</td>
 		</tr>
 	</table>
 </form>
+
+<!-- 댓글수정 dialog -->
 <div id="dialog" title="댓글 수정" align="left">
 	<figure id="pic"></figure>
 	<section>
@@ -329,6 +331,19 @@ ${requestScope.review.content }<br>
 	</form>
 	</section>
 </div>
+	<!-- 댓글신고 dialog -->
+	<div id="report_dialog" title="댓글 신고" align="left" >
+	<figure id="pic"></figure>
+	<section>
+	<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 신고내용 접수 </header>
+	<select>
+		<option value="fuck">욕설신고</option>
+		<option value="badman">성희롱</option>
+		<option value="money">상업적 홍보글</option>
+		<option value="guitar">기타</option>
+	</select>
+	</section>
+	</div>
 </div>
 </body>
 
