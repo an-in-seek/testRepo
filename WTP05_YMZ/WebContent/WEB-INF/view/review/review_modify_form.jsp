@@ -63,40 +63,59 @@ button{
 	height:50px;
 }
 table#t1{
-	width: 100%;
+	width: 900px;
+}
+table#t1 thead tr{
+	width: auto;
+	font-weight: bold;
+	background: lightgray;
 }
 </style>
 </head>
 <body>
-<div align="center">
+
 <h2>리뷰 수정폼</h2>
-
+<div align="center" style="padding:20px">
 <!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
-<form id="write" method="post" action="${initParam.rootPath }/review/login/modifyReview.do?reviewNo=${review.reviewNo}">
-
-<!-- 테이블 -->
-<table id="t1">
-	<tr>
-		<td align="center">제목</td>
-		<td><input type="text" id="title" name="title" style="width:900px" value="${requestScope.review.title}"></td>
-	</tr>
-	<tr>
-		<td align="center">내용</td>
-		<td>
-			<textarea name="content" id="content" rows="10" cols="100"
-			 style="width:900px; height:420px;">${requestScope.review.content}</textarea><br>
-		</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td align="center">
-			<input type="submit" id="save" value="수정">
-			<input type="button" value="취소" onclick="javascript:history.back(-1);">
-		</td>
-	</tr>	
-</table>
-<!-- 테이블 끝 -->
-</form>
+	<form id="write" method="post" action="${initParam.rootPath }/review/login/modifyReview.do?reviewNo=${review.reviewNo}">
+	<!-- 테이블 -->
+	<table id="t1" align="center" style="border:solid 2px #050099">
+		<thead>
+			<tr style="text-align: center;">
+				<td colspan="4"><font size="4">리뷰 게시물 수정</font></td>
+			</tr>
+		</thead>
+		<tr>
+			<td>&nbsp;</td>
+			<td align="center" width="50px">제목</td>
+			<td><input type="text" id="title" name="title" style="width:800px" value="${requestScope.review.title}"></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr height="1" bgcolor="#dddddd">
+			<td colspan="4"></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td align="center">내용</td>
+			<td>
+				<textarea name="content" id="content" rows="10" cols="100" style="width:800px; height:420px;">${requestScope.review.content}</textarea><br>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr height="1" bgcolor="#dddddd">
+			<td colspan="4"></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td align="center" colspan="2">
+				<input type="submit" id="save" value="수정">
+				<input type="button" value="취소" onclick="javascript:history.back(-1);">
+			</td>
+			<td>&nbsp;</td>
+		</tr>	
+	</table>
+	<!-- 테이블 끝 -->
+	</form>
 </div>
 
 </body>
