@@ -68,7 +68,6 @@ public class MemberDAOImpl implements MemberDAO {
 	 */
 	@Override
 	public int insertMember(Member member){
-		
 		return session.insert(namespace+"insertMember", member);
 	}
 
@@ -99,7 +98,7 @@ public class MemberDAOImpl implements MemberDAO {
 	 */
 	@Override
 	public int deleteMemberById(String id){
-		return session.delete(namespace+"deleteMemberById", id);
+		return session.update(namespace+"deleteMemberById", id);
 	}
 	/**
 	 * Member 테이블의 전체 회원정보 조회 처리

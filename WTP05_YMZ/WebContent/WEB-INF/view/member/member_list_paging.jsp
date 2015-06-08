@@ -5,12 +5,13 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	var id;
 	$("#listTB tbody tr").on("mouseover", function(){
 		$("table#listTB tbody tr").css("background-color", "white");
 		$(this).css("background-color", "lightgray");
 	});
 	$("#listTB tbody tr").on("click", function(){
-		var id = $(this).find(":nth-child(2)").text();
+		id = $(this).find(":nth-child(2)").text();
 		$.ajax({
 			url:"${initParam.rootPath}/member/findMemberById.do",
 			data:{"id":id},
@@ -26,9 +27,12 @@ $(document).ready(function(){
 				$("#sex").text("성별 : "+ret.sex);
 				$("#address").text("주소 : "+ret.address);
 				$("#email").text("이메일 : "+ret.email);
+				$("#phoneNo").text("전화번호 : "+ret.phoneNo);
+				$("#favoriteFood").text("선호음식 : "+ret.favoriteFood);
 				$("#joinDate").text("가입일 : "+ret.joinDate);
 				$("#mileage").text("마일리지 : "+ret.mileage);
 				$("#grade").text("등급 : "+ret.grade);
+				$("#state").text("탈퇴여부 : "+ret.state);
 				//Dialog 띄우기 
 				$("#dialog").dialog({modal:true,width:500});
 			},
@@ -36,6 +40,20 @@ $(document).ready(function(){
 				alert(xhr.status + dd + ddd);
 			}
 		});
+	});
+	
+	$("#modifyBtn").on("click",function(){
+		alert("수정버튼 클릭");
+		/* document.location.href="login/commentForm.do?id="+${requestScope.member.id}; */
+	});
+	
+	$("#deleteBtn").on("click",function(){
+		var isDel = confirm("정말로 삭제하시겠습니까?");
+		if (isDel) {
+			document.location.href="${initParam.rootPath }/member/login/removeMemberByMaster.do?id="+id;
+		} else {
+			return;
+		}
 	});
 	
 	$("#searchBtn").on("click",function(){
@@ -61,6 +79,7 @@ div#table{
 }
 #listTB {
 	margin-left: 20px;
+	align:center;
 }
 #listTB thead tr {
 	font-weight: bold;
@@ -84,7 +103,7 @@ article{
 <div align="center" id="table">	
 <c:choose>
 	<c:when test="${fn:length(requestScope.member_list) != 0 }">
-	<table align="center" id="listTB" style="width:800px" border="1">
+	<table id="listTB" style="width:800px" border="1">
 		<thead>
 			<tr align="center">
 				<td>번호</td>
@@ -94,6 +113,7 @@ article{
 				<td>Email</td>
 				<td>전화번호</td>
 				<td>등급</td>
+				<td>탈퇴여부</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -106,6 +126,7 @@ article{
 					<td>${member.email}</td>
 					<td>${member.phoneNo}</td>
 					<td>${member.grade}</td>
+					<td>${member.state}</td>
 				</tr> 
 			</c:forEach>
 		</tbody>
@@ -151,6 +172,7 @@ article{
 				<td>Email</td>
 				<td>전화번호</td>
 				<td>등급</td>
+				<td>탈퇴여부</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -170,6 +192,7 @@ article{
 							<option value="member_name">이름</option>
 							<option value="member_nickname">닉네임</option>
 							<option value="grade">등급</option>
+							<option value="state">탈퇴여부</option>
 						</select>
 					</td>
 					<td colspan="2">
@@ -191,7 +214,7 @@ article{
 <div id="dialog" title="선택 회원 정보">
 	<!-- <figure id="pic" align="center"></figure> -->
 	<section>
-		<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 정보 </header>
+		<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 회원정보 </header>
 		<article id="memberId"></article>
 		<article id="password"></article>
 		<article id="name"></article>
@@ -200,8 +223,17 @@ article{
 		<article id="sex"></article>
 		<article id="address"></article>
 		<article id="email"></article>
+		<article id="phoneNo"></article>
+		<article id="favoriteFood"></article>
 		<article id="joinDate"></article>
 		<article id="mileage"></article>
 		<article id="grade"></article>
+		<article id="state"></article>
+		<table align="center">
+			<tr align="center">
+				<td align="center"><input id="modifyBtn" type="button" value="수정" onclick="modifyF()"></td>
+				<td align="center"><input id="deleteBtn" type="button" value="삭제" onclick="deleteF()"></td>
+			</tr>
+		</table>
 	</section>
 </div>

@@ -41,24 +41,26 @@ div.member_template{
 }
 header.member_template{
 	background-color:white;
+	width:1024px;
 	color:white;
 	text-align:center;
 	padding: 5px;
 }
 
 #body{
-	padding: 20px;
-	height:700px; /*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	width:1024px;
+	padding: 5px;
+	height:auto; /*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	float:left;   /*왼쪽으로 띄움 */
 }
 
 footer.member_template{
+	height:50px;
+	width:1024px;
 	background-color:skyblue;
 	color:white;
 	padding-top:20px;
 	text-align:center;
-	height:50px;
 	clear:both;   /*위에 float한 애들을 무시한다. */
 }
 </style>

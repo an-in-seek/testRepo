@@ -1,6 +1,5 @@
 package com.ymz.member.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -236,6 +235,14 @@ public class MemberController {
 		//session 제거
 		session.invalidate();
 		return "main.tiles";//삭제후 메인페이지로 이동
+	}
+	
+	// 정보 제거하기(관리자 전용)
+	@RequestMapping("login/removeMemberByMaster.do")
+	public String removeMember(@RequestParam String id, ModelMap map){
+		service.removeMemberById(id);
+		//session 제거
+		return "/member/login/memberListPaging.do";//삭제후 메인페이지로 이동
 	}
 	
 	// 로그아웃
