@@ -30,12 +30,14 @@ public class MemberServiceImpl implements MemberService {
 	 * @throws DuplicatedIdException 중복된 아이디일 경우 발생
 	 */
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void joinMember(Member member) throws DuplicatedIdException{
 		if(dao.selectMemberById(member.getId())!=null){
 			throw new DuplicatedIdException(member.getId()+"는 이미 등록된 아이디입니다. ID를 변경하세요");
 		}
 		dao.insertMember(member);
 	}
+	
 	/**
 	 * 전체 회원 목록 조회 처리
 	 */
@@ -91,21 +93,17 @@ public class MemberServiceImpl implements MemberService {
 		return dao.selectMemberByEmail(email);
 	}
 	
-	
 	/**
 	 * Nickname로 회원정보 조회 메소드
 	 */
 	@Override
 	public Member getMemberByNickname(String nickname) {
-
 		return dao.selectMemberByNickname(nickname);
 	}
 	
 	/**
 	 * name으로 회원정보 조회 메소드
 	 */
-	
-	
 	@Override
 	public Member getMemberByName(String name) {
 		return dao.selectMemberByName(name);
@@ -115,8 +113,8 @@ public class MemberServiceImpl implements MemberService {
 	 * @param member 수정할 회원 전보
 	 */
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void modifyMember(Member member){
-		
 		dao.updateMember(member);
 		
 	}
@@ -125,6 +123,7 @@ public class MemberServiceImpl implements MemberService {
 	 */
 	
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void modifyPassword(Member member) {
 		// TODO Auto-generated method stub
 		dao.updatePassword(member);
@@ -134,6 +133,7 @@ public class MemberServiceImpl implements MemberService {
 	 * 마일리지 수정 메소드
 	 */
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void modifyMileage(Member member) {
 		// TODO Auto-generated method stub
 		dao.updateMember(member);
@@ -144,8 +144,8 @@ public class MemberServiceImpl implements MemberService {
 	 * @param id 탈퇴할 회원 ID
 	 */
 	@Override
+	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void removeMemberById(String id) {
-		
 		dao.deleteMemberById(id);
 		
 	}

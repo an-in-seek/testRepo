@@ -38,9 +38,11 @@ public class QNAController {
 	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
 	public String registerQNA(@ModelAttribute QNA qna, Errors errors, HttpSession session, ModelMap map) throws Exception{
 		new QNAValidator().validate(qna, errors);
+		//등록 실패
 		if(errors.hasErrors()){
 			return "qna/qna_write_form.tiles";
-		}//등록 성공
+		}
+		//등록 성공
 		//현재 로그인되어있는 사용자 아이디정보 삽입
 		Member member = (Member)session.getAttribute("login_info");
 		qna.setMemberId(member.getId());
@@ -51,9 +53,12 @@ public class QNAController {
 	//QNA답글 등록
 	@RequestMapping(value="login/writeComment.do", method=RequestMethod.POST)
 	public String registerQNAComment(@ModelAttribute QNA qna, Errors errors, HttpSession session, ModelMap map) throws Exception{
+		new QNAValidator().validate(qna, errors);
+		//등록 실패
 		if(errors.hasErrors()){
 			return "qna/qna_comment_form.tiles";
-		}//등록 성공
+		}
+		//등록 성공
 		//현재 로그인되어있는 사용자 아이디정보 삽입
 		Member member = (Member)session.getAttribute("login_info");
 		qna.setMemberId(member.getId());
@@ -61,12 +66,18 @@ public class QNAController {
 		return "redirect:/qna/qnaList.do";
 	}
 	
-	//QNA게시물 전체목록 검색으로 조회(페이징)
-	@RequestMapping("searchQna.do")
-	public ModelAndView QNAListBySearch(@RequestParam String text){
-		int pageNo = 1;
-		Map<String, Object> map = service.getQNAListPagingBySearch(pageNo, text);
-		return new ModelAndView("qna/qna_list.tiles", map);
+	// 게시물 수정
+	@RequestMapping(value="login/modifyQna.do", method=RequestMethod.POST)
+	public String modifyQNAInfo(@ModelAttribute QNA qna, Errors errors)throws Exception{
+		new QNAValidator().validate(qna, errors);
+		//등록 실패
+		if(errors.hasErrors()){
+			return "qna/qna_modify_form.tiles";
+		}
+		//등록 성공
+		//로그인 체크 - interceptor가 처리
+		service.modifyQNA(qna);//수정 처리
+		return "redirect:/qna/qnaView.do?qnaNo="+qna.getNumber();
 	}
 	
 	//QNA게시물 번호로 정보를 조회하기 위해 View페이지로 이동
@@ -86,14 +97,6 @@ public class QNAController {
 		return hits;
 	}
 	
-	// 게시물 수정
-	@RequestMapping(value="login/modifyQna.do", method=RequestMethod.POST)
-	public String modifyQNAInfo(@ModelAttribute QNA qna, Errors errors)throws Exception{
-		//로그인 체크 - interceptor가 처리
-		service.modifyQNA(qna);//수정 처리
-		return "redirect:/qna/qnaView.do?qnaNo="+qna.getNumber();
-	}
-	
 	// 게시물 삭제
 	@RequestMapping("login/removeQna.do")
 	public String removeQNAByNo(@ModelAttribute QNA qna){
@@ -106,7 +109,7 @@ public class QNAController {
 	//QNA게시물 전체목록 조회하는 리스트 페이지로 이동
 	@RequestMapping("qnaList.do")
 	public ModelAndView QNAList(@RequestParam(defaultValue="1")int pageNo, @RequestParam(defaultValue="전체보기") String category){
-		Map<String, Object> map = service.getQNAListPagingByCategory(pageNo, category);
+		Map<String, Object> map = service.getQNAListPagingByCategory(pageNo, category, null);
 		List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
 		map.put("categoryList", categoryList);
 		map.put("category", category);
@@ -114,15 +117,28 @@ public class QNAController {
 	}
 	
 	//QNA게시물 전체목록 분류별로 조회해서 리스트 페이지로 이동
-		@RequestMapping("qnaListByCategory.do")
-		public ModelAndView QNAListByCategory(@ModelAttribute QNA qna, @RequestParam(defaultValue="1") int pageNo){
-			String category = qna.getCategory();
-			Map<String, Object> map = service.getQNAListPagingByCategory(pageNo, category);
-			List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
-			map.put("categoryList", categoryList);
-			map.put("category", category);
-			return new ModelAndView("qna/qna_list.tiles", map);
-		}
+	@RequestMapping("qnaListByCategory.do")
+	public ModelAndView QNAListByCategory(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="전체보기") String category, @RequestParam String searchInfo){
+		Map<String, Object> map = service.getQNAListPagingByCategory(pageNo, category, searchInfo);
+		List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
+		map.put("categoryList", categoryList);
+		map.put("category", category);
+		map.put("searchInfo", searchInfo);
+		System.out.println(category+"+"+searchInfo);
+		return new ModelAndView("qna/qna_list.tiles", map);
+	}
+	
+	/*//QNA게시물 전체목록 검색으로 조회(페이징)
+	@RequestMapping("searchQna.do")
+	public ModelAndView QNAListBySearch(@RequestParam String searchInfo){
+		int pageNo = 1;
+		String category="전체보기";
+		Map<String, Object> map = service.getQNAListPagingBySearch(pageNo, searchInfo);
+		List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
+		map.put("categoryList", categoryList);
+		map.put("category", category);
+		return new ModelAndView("qna/qna_list.tiles", map);
+	}*/
 		
 	// 게시물 등록폼으로 이동
 	@RequestMapping("login/writeForm.do")//로그인 체크 - interceptor가 처리

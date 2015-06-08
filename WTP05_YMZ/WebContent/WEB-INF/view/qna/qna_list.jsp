@@ -21,6 +21,13 @@
 			var category = this.value; //카테고리 값(회원관련, 맛집관련, 리뷰관련)
 			document.categoryForm.submit();
 		});
+		
+		$("#searchBtn").on("click",  function() {
+			if(!$("#searchInfo1").val()){
+				alert("검색할 내용을 입력하세요.");
+				return false;
+			}
+		});
 	});
 </script>
 
@@ -96,7 +103,7 @@ article {
 					<!-- 이전 페이지 그룹 -->
 					<c:choose>
 						<c:when test="${pagingBean1.previousPageGroup }">
-							<a href="${initParam.rootPath }/qna/qnaList.do?pageNo=${pagingBean1.startPageOfPageGroup-1}&category=${requestScope.category}">◀&nbsp;</a>
+							<a href="${initParam.rootPath }/qna/qnaListByCategory.do?pageNo=${pagingBean1.startPageOfPageGroup-1}&category=${requestScope.category}&searchInfo=${requestScope.searchInfo}">◀&nbsp;</a>
 						</c:when>
 						<c:otherwise>◀&nbsp;</c:otherwise>
 					</c:choose>
@@ -107,14 +114,14 @@ article {
 								&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
 							</c:when>
 							<c:otherwise>
-								<a href="${initParam.rootPath }/qna/qnaList.do?pageNo=${pageNum}&category=${requestScope.category}">&nbsp;${pageNum}&nbsp;</a>
+								<a href="${initParam.rootPath }/qna/qnaListByCategory.do?pageNo=${pageNum}&category=${requestScope.category}&searchInfo=${requestScope.searchInfo}">&nbsp;${pageNum}&nbsp;</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					<!-- 다음 페이지 그룹 -->
 					<c:choose>
 						<c:when test="${pagingBean1.nextPageGroup }">
-							<a href="${initParam.rootPath }/qna/qnaList.do?pageNo=${pagingBean1.endPageOfPageGroup+1}&category=${requestScope.category}">&nbsp;▶</a>
+							<a href="${initParam.rootPath }/qna/qnaListByCategory.do?pageNo=${pagingBean1.endPageOfPageGroup+1}&category=${requestScope.category}&searchInfo=${requestScope.searchInfo}">&nbsp;▶</a>
 						</c:when>
 						<c:otherwise>&nbsp;▶</c:otherwise>
 					</c:choose>
@@ -149,6 +156,7 @@ article {
 			<td>
 				<form id="categoryForm" name="categoryForm" action="${initParam.rootPath }/qna/qnaListByCategory.do" method="post">
 					<input type="hidden" id="pageNo" name="pageNo" value="1">
+					<input type="hidden" id="searchInfo2" name="searchInfo">	
 					<select id="category" name="category">
 						<option value="전체보기">전체보기</option>
 						<c:forEach items="${requestScope.categoryList}" var="c">
@@ -158,8 +166,8 @@ article {
 				</form>
 			</td>
 			<td colspan="2">
-				<form id="searchQna" name="searchQna" action="${initParam.rootPath }/qna/searchQna.do" method="post">
-					<input type="text" id="text" name="text" placeholder="제목으로만 검색">						
+				<form id="searchQna" name="searchQna" action="${initParam.rootPath }/qna/qnaListByCategory.do" method="post">
+					<input type="text" id="searchInfo1" name="searchInfo" placeholder="제목으로만 검색">						
 					<input type="submit" id="searchBtn" value="검색">
 				</form>
 			</td>
