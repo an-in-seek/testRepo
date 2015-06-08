@@ -83,6 +83,11 @@
 		set			state='탈퇴'
 		where 	member_id=#{id}
 	</update>
+	
+	<!-- category 가져오기 -->
+	<select id="selectCategory" parameterType="string">
+		select SECOND_CATEGORY_ID from SECOND_CATEGORY where FIRST_CATEGORY_ID='F-1';
+	</select>
 		
 	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
 		<include refid="member-select"/>
