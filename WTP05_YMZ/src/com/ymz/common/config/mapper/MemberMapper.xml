@@ -55,7 +55,7 @@
 		insert into member (member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no,
 							 favorite_food, mileage, grade, join_date)
 		values (#{id}, #{password}, #{name},#{nickname},#{birth},#{sex},#{zipcode},#{address},#{detailAddress},
-		#{email},#{phoneNo},#{favoriteFood},#{mileage},#{grade}, to_char(sysdate, 'yyyymmdd'))
+		#{email},#{phoneNo},#{favoriteFood,jdbcType=VARCHAR},#{mileage},#{grade}, to_char(sysdate, 'yyyymmdd'))
 	</insert>
 	
 	<update id="updateMember" parameterType="member">
@@ -99,6 +99,11 @@
 	<select id="selectMemberByName" parameterType="string" resultMap="member-resultmap">
 		<include refid="member-select"/>
 		where	 name=#{name}
+	</select>
+	
+	<select id="selectMemberByPhone" parameterType="string" resultMap="member-resultmap">
+		<include refid="member-select"/>
+		where	 phone_no=#{phoneNo}
 	</select>
 	
 	<select id="selectAllMember" parameterType="map" resultMap="member-resultmap">
