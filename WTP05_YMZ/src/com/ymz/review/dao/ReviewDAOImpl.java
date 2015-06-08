@@ -43,6 +43,7 @@ public class ReviewDAOImpl implements ReviewDAO{
 	 */
 	@Override
 	public void deleteReview(Review review) {
+		System.out.println(review);
 		session.delete(namespace+"deleteReview", review);
 	}
 

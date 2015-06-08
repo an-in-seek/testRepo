@@ -98,7 +98,7 @@ $(document).ready(function(){
 			type:"post",
 			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
 			success:function(txt){
-				$("#recommendCount").html("추천수 : "+txt);
+				$("#recommendCount").html("추천수 : " + "<font color='red'>"+txt+"</font>");
 				$("#recommendCountBtn").html(txt);
 			}
 		});

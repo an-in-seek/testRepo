@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 
-function chagee(time, num){			// 오늘 날짜 비교하기
+function regDate(time, num){			// 오늘 날짜 비교하기
 	var nowdate = new Date();
 	var year = nowdate.getFullYear();
 	var month = nowdate.getMonth() + 1;
@@ -21,6 +21,7 @@ function chagee(time, num){			// 오늘 날짜 비교하기
 	var regDate = time.substring(0,10);
 	if(date_str == regDate){
 		$("#regDate"+num).html(time.substring(11,19));
+		$("#reviewNew"+num).html(" <img src='${initParam.rootPath}/uploadPhoto/newIcon.jpg'/>");
 	}else{
 		$("#regDate"+num).html(regDate);
 	}
@@ -259,10 +260,11 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 					<th align="center">${review.reviewNo }</th>
 					<td align="left" id="title">
 					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-					${review.title} 
+					${review.title}
 					<c:if test="${review.replyCount != 0}">
 					<font color="#A748FF">[${review.replyCount}]</font>
 					</c:if>
+					<span id="reviewNew${status.index+1}"></span>
 					</a>
 					</td>
 					<td align="center">${review.nickname}</td>
@@ -270,7 +272,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 						<script type="text/javascript">
 							var tt = "${review.regDate}";
 							var num = "${status.index+1}";
-							chagee(tt, num);
+							regDate(tt, num);
 						</script>
 					</td>
 					<td align="center" style="width:50px">${review.recommend}</td>

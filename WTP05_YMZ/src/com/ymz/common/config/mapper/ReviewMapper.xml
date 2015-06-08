@@ -46,8 +46,9 @@
 	<!-- 삭제 -->
 
 	<delete id="deleteReview" parameterType="review">
-		delete from review 
-		where review_no=#{reviewNo} and member_id=#{memberId}
+		delete from review r
+		where r.review_no=#{reviewNo} 
+		
 	</delete>
 	
 	<!-- 조회 -->
@@ -186,17 +187,25 @@
 	
 	<!-- 오늘 인기글(조회순) -->
 	<select id="selectTodayBestHits" resultMap="review-resultmap" parameterType="String">
-		select review_no, title
-		from review
-		where substr(reg_date, 1,10) = #{today} and rownum <![CDATA[<]]> 6
-		ORDER BY HITS desc   
+		select review_no, title, hits
+		from(
+			select review_no, title, hits
+			from review
+			where substr(reg_date, 1,10) = #{today}
+			ORDER BY HITS desc   
+		)
+		where rownum <![CDATA[<]]> 6
 	</select>
 	
 	<!-- 이번달 인기글(추천순) -->
 	<select id="selectMonthBestHits" resultMap="review-resultmap" parameterType="String">
-		select review_no, title, recommend
-		from review
-		where substr(reg_date, 1,7) = #{month} and rownum <![CDATA[<]]> 6
-		ORDER BY recommend desc   
+		select review_no, title
+		from(
+			select review_no, title, recommend
+			from review
+			where substr(reg_date, 1,7) = #{month}
+			ORDER BY recommend desc
+			)
+		where rownum <![CDATA[<]]> 6
 	</select>
 </mapper>
