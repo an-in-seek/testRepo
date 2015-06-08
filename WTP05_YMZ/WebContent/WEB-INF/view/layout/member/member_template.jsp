@@ -7,7 +7,6 @@
 <title>야먹자~!~!</title>
 <!-- jQuery Library import -->
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery.js"></script>
-
 <style type="text/css">
 /*메세지 스타일*/
 .errorMessage{
@@ -41,25 +40,25 @@ div.member_template{
 	width:1024px;
 }
 header.member_template{
-	width:1024px;
-	padding: 5px;
 	background-color:skyblue;
 	color:white;
 	text-align:center;
-}
-section.member_template{
-	width:1024px;
 	padding: 5px;
-	height:auto; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+}
+
+#body{
+	padding: 20px;
+	height:700px; /*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	width:1024px;
 	float:left;   /*왼쪽으로 띄움 */
 }
+
 footer.member_template{
-	height:50px;
-	width:1024px;
-	padding: 5px;
 	background-color:skyblue;
 	color:white;
+	padding-top:20px;
 	text-align:center;
+	height:50px;
 	clear:both;   /*위에 float한 애들을 무시한다. */
 }
 </style>

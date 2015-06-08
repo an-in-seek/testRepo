@@ -33,7 +33,7 @@ public class QNAController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	//------------------------------------------비지니스 로직 처리하기-----------------------------------------
+	//--------------------------------------------------비지니스 로직 처리하기----------------------------------------------
 	//QNA게시물 등록
 	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
 	public String registerQNA(@ModelAttribute QNA qna, Errors errors, HttpSession session, ModelMap map) throws Exception{

@@ -130,16 +130,16 @@ $(document).ready(function(){
 
 	$("#registerReplyForm").click( function() {
 		if (!$("#content").val()) {
-			alert("내용을 입력하세요");
 			$("#content").focus();
 			return false;
+			alert("내용을 입력하세요");
 		}
 	})
 
 
 
 	$("#reply_reportButton").on("click", function() {
-		alert("로그인을 해야합니다.");
+		alert("로그인을 해야합니다.미구현");
 	});
 });
 

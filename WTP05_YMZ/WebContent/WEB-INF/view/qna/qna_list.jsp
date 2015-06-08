@@ -10,20 +10,6 @@
 			$(this).css("background-color", "lightgray");
 		});
 
-		$.ajax({
-			url : "${initParam.rootPath}/qna/findLoginMember.do", //요청 url 설정
-			type : "post", //HTTP 요청 방식(method)
-			dataType : "json", //javascript객체로 변환해서 응답데이터를 전달.
-			beforeSend : function() {
-				$("#writeBtn").hide();
-			},
-			success : function(member) {
-				if (member) {
-					$("#writeBtn").show();
-				}
-			}
-		});
-
 		if("${requestScope.category}" != null){
 			$("#category").val("${requestScope.category}");
 		}else if("${requestScope.category}" == '전체보기'){
