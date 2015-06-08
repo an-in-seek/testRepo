@@ -13,8 +13,7 @@ public interface RestaurantReplyDAO {
  public abstract int updateReplyCount(int restaurantNo);
 	// 게시물 수정
 	public abstract int updateRestaurantReply(RestaurantReply restaurantReply);
-//게시물 수정- 평점 변동	
-	public abstract double ModifyUpdateScore(double score, int restaurantNo);
+
 	
 	// 게시물 삭제
 	public abstract void deleteRestaurantReply(int number, String userId);

@@ -37,7 +37,7 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 		int sum =dao.selectScore(restaurantReply.getRestaurantNo());
 		int replyCount=dao.selectReplyCount(restaurantReply.getRestaurantNo());
 		double score =(double) sum/replyCount;
-		dao.ModifyUpdateScore(score, restaurantReply.getRestaurantNo());
+		dao.updateScore(score, restaurantReply.getRestaurantNo());
 	}
 
 	// 삭제하기
@@ -45,6 +45,10 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 	public void removeRestaurantReply(RestaurantReply restaurantReply,int number, String userId) {
 		dao.deleteRestaurantReply(number,userId);
 		dao.updateReplyCount2(restaurantReply.getRestaurantNo());
+		int sum =dao.selectScore(restaurantReply.getRestaurantNo());
+		int replyCount=dao.selectReplyCount(restaurantReply.getRestaurantNo());
+		double score =(double) sum/replyCount;
+		dao.updateScore(score, restaurantReply.getRestaurantNo());
 
 	}
 

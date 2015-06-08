@@ -96,13 +96,6 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO {
 		return session.update(namespace + "updateScore", map);
 	}
 
-//	수정했을때 댓글 변동
-	@Override
-	public double ModifyUpdateScore(double score, int restaurantNo) {
-		Map map = new HashMap();
-		map.put("score", score);
-		map.put("restaurantNo", restaurantNo);
-		return session.update(namespace + "ModifyUpdateScore", map);
-	}
+
 
 }

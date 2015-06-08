@@ -58,10 +58,11 @@
 		where restaurant_reply_no=#{number} and member_id=#{memberId}
 
 	</update>
+
+	
 	<!-- 삭제 -->
 	<delete id="deleteRestaurantReply" parameterType="map">
 		delete from restaurant_reply 
-
 		where restaurant_reply_no=#{number} and member_id=#{memberId}
 	</delete>
 
@@ -77,26 +78,21 @@
 	<!-- 평점 -->
 	<select id="selectScore" parameterType="int" resultType="int">
 		select sum(score)
-
 		from restaurant_reply
-
 		where restaurant_no =#{restNumber}
-
 	</select>
+	
 <!-- 게시물 댓글 갯수 보여주기 -->
 	<select id="selectReplyCount" parameterType="int" resultType="int">
 		select reply_count
-
 		from restaurant
-
 		where restaurant_no =#{restNumber}
 	</select>
+	
 <!-- 평점 계산 -->
 	<update id="updateScore" parameterType="Map">
 		update restaurant
-
 		set score = #{score}
-		
 		where restaurant_no =#{restaurantNo}
 	</update>
 
