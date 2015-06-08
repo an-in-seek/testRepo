@@ -54,10 +54,9 @@ $(document).ready(function(){
 </head>
 <body><div align="center">
 <a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=전체&align=${requestScope.align}">전체보기</a>
-<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=가족&align=${requestScope.align}">가족</a>
-<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=연인&align=${requestScope.align}">연인</a>
-<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=친구&align=${requestScope.align}">친구</a>
-<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=회식&align=${requestScope.align}">회식</a>
+<c:forEach items="${requestScope.themes }" var="theme">
+	<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=${theme.categoryId }&align=${requestScope.align}">${theme.categoryName }</a>
+</c:forEach>
 <p/>
 <table border="1" style="width:100%;">
 	<thead>

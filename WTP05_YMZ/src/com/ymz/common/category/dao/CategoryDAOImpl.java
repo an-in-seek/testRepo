@@ -25,4 +25,14 @@ public class CategoryDAOImpl implements CategoryDAO {
 	public List<Category> selectSecondCategoryByFId(String categoryId){
 		return session.selectList(namespace+"selectSecondCategoryByFId", categoryId);
 	}
+
+	@Override
+	public List<Category> selectCategories(String id) {
+		return session.selectList(namespace+"selectCategories", id);
+	}
+
+	@Override
+	public String selectCategoryName(String categoryId) {
+		return session.selectOne(namespace+"selectCategoryName", categoryId);
+	}
 }

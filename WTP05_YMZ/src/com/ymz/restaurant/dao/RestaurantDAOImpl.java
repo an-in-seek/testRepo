@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ymz.common.category.dao.CategoryDAO;
 import com.ymz.common.util.PagingBean;
 import com.ymz.restaurant.vo.Food;
 import com.ymz.restaurant.vo.Restaurant;
@@ -15,6 +16,8 @@ import com.ymz.restaurant.vo.Restaurant;
 @Repository
 public class RestaurantDAOImpl implements RestaurantDAO {
 	
+	@Autowired
+	private CategoryDAO categoryDAO;
 	@Autowired
 	private SqlSessionTemplate session;
 	private String namespace = "restaurant.dao.RestaurantMapper.";
@@ -27,7 +30,25 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		map.put("align", align);
 		map.put("currentPage", currentPage);
 		map.put("searchWord", searchWord);
-		return session.selectList(namespace+"selectListByTypePaging", map);
+		
+		List<Restaurant> restaurants = session.selectList(namespace+"selectListByTypePaging", map);
+		for(int i=0; i<restaurants.size(); i++) {
+			Restaurant restaurant = restaurants.get(i);
+			restaurant.setCategory(categoryDAO.selectCategoryName(restaurant.getCategory()));
+			
+			String[] themes = restaurant.getTheme().split(",");
+			String newThemes = "";
+			for(int j=0; j<themes.length; j++) {
+				if(j==themes.length-1) {
+					newThemes+=themes[j];
+					break;
+				}
+				newThemes+=categoryDAO.selectCategoryName(themes[j])+",";
+			}
+			restaurant.setTheme(newThemes);
+		}
+		
+		return restaurants;
 	}
 	
 	@Override
@@ -38,7 +59,52 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		map.put("align", align);
 		map.put("currentPage", currentPage);
 		map.put("searchWord", searchWord);
-		return session.selectList(namespace+"selectListByThemePaging", map);
+		
+		List<Restaurant> restaurants = session.selectList(namespace+"selectListByThemePaging", map);
+		for(int i=0; i<restaurants.size(); i++) {
+			Restaurant restaurant = restaurants.get(i);
+			restaurant.setCategory(categoryDAO.selectCategoryName(restaurant.getCategory()));
+			
+			String[] themes = restaurant.getTheme().split(",");
+			String newThemes = "";
+			for(int j=0; j<themes.length; j++) {
+				if(j==themes.length-1) {
+					newThemes+=themes[j];
+					break;
+				}
+				newThemes+=categoryDAO.selectCategoryName(themes[j])+",";
+			}
+			restaurant.setTheme(newThemes);
+		}
+		return restaurants;
+	}
+	
+	@Override
+	public List<Restaurant> selectRestaurantsPaging(String buildingName, String floor, String align, int currentPage, String searchWord) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("buildingName", buildingName);
+		map.put("floor", floor);
+		map.put("align", align);
+		map.put("currentPage", currentPage);
+		map.put("searchWord", searchWord);
+		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		List<Restaurant> restaurants = session.selectList(namespace+"selectRestaurantsPaging", map);
+		for(int i=0; i<restaurants.size(); i++) {
+			Restaurant restaurant = restaurants.get(i);
+			restaurant.setCategory(categoryDAO.selectCategoryName(restaurant.getCategory()));
+			
+			String[] themes = restaurant.getTheme().split(",");
+			String newThemes = "";
+			for(int j=0; j<themes.length; j++) {
+				if(j==themes.length-1) {
+					newThemes+=themes[j];
+					break;
+				}
+				newThemes+=categoryDAO.selectCategoryName(themes[j])+",";
+			}
+			restaurant.setTheme(newThemes);
+		}
+		return restaurants;
 	}
 
 	@Override
@@ -86,7 +152,21 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 
 	@Override
 	public Restaurant selectRestaurantByNo(int restaurantNo) {
-		return session.selectOne(namespace+"selectRestaurantByNo", restaurantNo);
+		Restaurant restaurant = session.selectOne(namespace+"selectRestaurantByNo", restaurantNo);
+		restaurant.setCategory(categoryDAO.selectCategoryName(restaurant.getCategory()));
+		String[] themes = restaurant.getTheme().split(",");
+		String newThemes = "";
+		for(int i=0; i<themes.length; i++) {
+			themes[i] = categoryDAO.selectCategoryName(themes[i]);
+			
+			if(i==themes.length-1) {
+				newThemes+=themes[i];
+				break;
+			}
+			newThemes+=themes[i]+",";
+		}
+		restaurant.setTheme(newThemes);
+		return restaurant;
 	}
 
 	@Override
@@ -110,18 +190,6 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 		map.put("buildingName", buildingName);
 		map.put("floor", floor);
 		return session.selectList(namespace+"selectRestaurantsByBuildingNameAndFloor", map);
-	}
-
-	@Override
-	public List<Restaurant> selectRestaurantsPaging(String buildingName, String floor, String align, int currentPage, String searchWord) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("buildingName", buildingName);
-		map.put("floor", floor);
-		map.put("align", align);
-		map.put("currentPage", currentPage);
-		map.put("searchWord", searchWord);
-		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
-		return session.selectList(namespace+"selectRestaurantsPaging", map);
 	}
 
 	@Override
