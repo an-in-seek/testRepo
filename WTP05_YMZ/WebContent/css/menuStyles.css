@@ -2,7 +2,7 @@
 #cssmenu {
   position: relative;
   height: 44px;
-  width: auto;
+  width: 1014px;
   font-family: 'Hanna', sans-serif;
 }
 #cssmenu ul {
@@ -195,7 +195,7 @@
   color: #FFFF48;
 }
 #cssmenu ul ul li:last-child > a,
-#cssmenu ul ul li.last > a {
+#cssmenu ul ul li.last > a {			/* 서브 메뉴 바닥선 */
     border-bottom: solid 1px #B70000;
 }
 #cssmenu > ul > li > ul::after {   /* 서브메뉴 화살표 */
