@@ -56,7 +56,7 @@ $(document).ready(function(){
 	});
 	
 	$("tr.selectList").hover(function(){
-		$(this).css("background-color","lightgray");
+		$(this).css("background-color","#FFE08C");
 	},function(){
 		$(this).css("background","none");
 	});
