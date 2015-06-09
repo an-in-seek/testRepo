@@ -60,7 +60,7 @@ nav#right{
 }
 #body{
 	padding: 20px;
-	height:580px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	height:550px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	width:500px;
 	float:left;   /*왼쪽으로 띄움 */
 }
@@ -90,15 +90,19 @@ footer.main_template{
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="menu" />
 		</header>
-		<aside id="left" class="main_template">
+		
+		<%-- <aside id="left" class="main_template">
 			<tiles:insertAttribute name="aside_menu" /><!-- 서브메뉴로 -->
-		</aside>
+		</aside> --%>
+		
 		<section id="body" class="main_template">
 			<tiles:insertAttribute name="body" />
 		</section>
+		
 		<nav id="right" class="main_template">
 			<tiles:insertAttribute name="right_menu" /><!-- 서브메뉴로 -->
 		</nav>
+		
 		<footer class="main_template">
 			<tiles:insertAttribute name="footer" />
 		</footer>

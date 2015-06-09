@@ -34,15 +34,11 @@ table, td, th{
 td, th{
 	padding: 5px;
 }
-
-
-
 div.template2{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	width:1024px;
-	
 }
 header.template2{
 	background-color:white;
@@ -50,7 +46,6 @@ header.template2{
 	text-align:center;
 	padding: 5px;
 }
-
 section.template2{
 	width:1024px;
 	float:left;   /*왼쪽으로 띄움 */

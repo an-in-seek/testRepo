@@ -9,12 +9,13 @@
     .seek ul li a:hover{color: gold;}
     .seek ul li ul{display: none; position: absolute; z-index: 999; left: 0;}
     .seek ul li:hover ul{display: block; border:1px #ffffff; /* display the dropdown */} 
-    
     .seek{
-    	margin-top: -25px;
+    	width:100%;
+    	margin-top: 2px;
     	font-family: 'Hanna', sans-serif;
     	height: 30px;
     	background: #B70000;
+    	/* border:solid 2px #050099;  */
     }
 </style>    
 
