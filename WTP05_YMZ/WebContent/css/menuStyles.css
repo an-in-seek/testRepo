@@ -8,7 +8,7 @@
 #cssmenu ul {
 	list-style: none;
 	padding: 0;
-	background: #4c4e5a;
+	background: #B70000;
 	background: -webkit-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
 	background: -moz-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
 	background: -o-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
@@ -22,7 +22,7 @@
   font-family: 'Hanna', sans-serif;
   position: relative;
   display: block;
-  background: #4c4e5a;
+  background: #B70000;
   width: 100%;
   z-index: 500;
 }
@@ -79,7 +79,7 @@
   padding-right: 32px;
 }
 #cssmenu > ul > li:hover > a {	/* 메뉴위에 마우스 위치할 때*/
-  color: #99E000;
+  color: #FFFF48;
 }
 #cssmenu li.has-sub::after {
   display: block;
@@ -188,8 +188,8 @@
 }
 #cssmenu ul ul li:hover > a {	/* 마우스로 서브메뉴 이동시 */
   font-family: 'Hanna', sans-serif;
-  background: #2b2f3a;
-  color: #99E000;
+  background: #B70000;
+  color: #FFFF48;
 }
 #cssmenu ul ul li:last-child > a,
 #cssmenu ul ul li.last > a {
