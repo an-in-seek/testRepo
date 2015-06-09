@@ -2,26 +2,64 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<script type="text/javascript"src="${initParam.rootPath }/script/jquery-ui.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#listTB tbody tr").on("mouseover", function() {
+			$("#listTB tbody tr").css("background-color", "white");
+			$(this).css("background-color", "lightgray");
+		});
+	});
+</script>
+
+<link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
+<style type="text/css">
+#table{
+	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-left:auto;
+	padding: 20px;
+	text-align:center;
+	float:center;   /*왼쪽으로 띄움 */
+}
+#listTB{
+	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-left:auto;
+	align:center;
+	width:600px;
+	border: 1;
+}
+#listTB thead tr {
+	font-weight: bold;
+	background: silver;
+}
+</style>
 
 <h2 align="center">신고 목록</h2> 
-
+<div id="table">
 <c:choose>
 	<c:when test="${fn:length(requestScope.reported_list) != 0 }">
-	<table id="listTB"  border="1">
+	<table id="listTB" border="1" >
 		<thead>
 			<tr align="center">
-				<td>번호</td>
-				<td>신고번호</td>
+				<td>NO</td>
 				<td>분류</td>
+				<td>게시물 번호</td>
+				<td>신고사유</td>
+				<td>신고날짜</td>
+				<td>처리상태</td>
+				<td>신고자</td>
 			</tr>
 		</thead>
 		<tbody>
-				<c:forEach items="${requestScope.reported_list }" var="reported"
-					varStatus="cnt">
+				<c:forEach items="${requestScope.reported_list }" var="reported" varStatus="cnt">
 					<tr align="center">
-						<td>${cnt.count }</td>
 						<td>${reported.reportNo }</td>
 						<td>${reported.category}</td>
+						<td>${reported.reviewNo}</td>
+						<td>${reported.state}</td>
+						<td>${reported.reason}</td>
+						<td>${reported.reportedDate}</td>
+						<td>${reported.reporterId}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -57,3 +95,4 @@
 	</p>
 	</c:when>
 </c:choose>
+</div>

@@ -41,18 +41,19 @@ div.main_template{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
-	width:1014px;
+	width:1024px;
 }
 header.main_template{
+	width:1024px;
+	padding-bottom: 5px;
 	background-color:white;
 	color:white;
 	text-align:center;
-	padding: 5px;
 }
-
-nav#right{										/* 메인화면 오른쪽 로그인창 */
+#right{										/* 메인화면 오른쪽 로그인창 */
 	font-family: 'Hanna', sans-serif;
 	margin-top:5px;
+	margin-right:5px;
 	background-color: #f8f8f8;
 	border: solid 1px #b70000;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
@@ -68,7 +69,7 @@ nav#right{										/* 메인화면 오른쪽 로그인창 */
 #body{
 	padding: 20px;
 	height:550px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-	width:500px;
+	width:auto;
 	float:left;   /*왼쪽으로 띄움 */
 }
 #left{
@@ -81,13 +82,13 @@ nav#right{										/* 메인화면 오른쪽 로그인창 */
 	float:left;  /*왼쪽으로 띄움 */
 }
 footer.main_template{
-	background-color:#B70000;
-	font-size: 16px;
-	color:white;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	text-align:center;
 	height:50px;
+	width:1024px;
+	background-color:#B70000;
+	color:white;
+	font-size: 16px;
+	padding: 5px;
+	text-align:center;
 	clear:both;   /*위에 float한 애들을 무시한다. */
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
