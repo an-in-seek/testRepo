@@ -43,7 +43,7 @@
 	<!-- 삭제 -->
 	<delete id="deleteReply" parameterType="reviewReply">
 		delete from review_reply
-		where  review_reply_no=#{replyNo} and member_id=#{memberId}
+		where  review_reply_no=#{replyNo}
 	</delete>
 	
 	<!-- 목록 --> 

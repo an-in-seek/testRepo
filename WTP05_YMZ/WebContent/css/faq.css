@@ -1,5 +1,6 @@
 @charset "utf-8";
 /* FAQ */
+
 .faq{border-bottom:1px solid #ddd;margin:1em 0}
 .faq .faqHeader{position:relative;zoom:1}
 .faq .faqHeader .showAll{position:absolute;bottom:0;right:0;border:0;padding:0;overflow:visible;background:none;cursor:pointer}
@@ -12,6 +13,3 @@
 #listTB1 thead tr{font-weight: bold;background: silver;}
 #listTB2 thead tr{font-weight: bold;background: silver;}
 [id^=contentTr]{cursor: pointer;display: none;/*최초로딩시에는 안보이도록 처리*/}
-div#dialog{width:400px;display: none;}
-article{border-bottom: 1px solid black;padding: 5px;padding-left: 10px;}
-#table1{margin-left: 20px;}

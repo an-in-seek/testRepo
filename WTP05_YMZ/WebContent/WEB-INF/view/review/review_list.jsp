@@ -10,6 +10,7 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 
+
 <script type="text/javascript">
 
 function regDate(time, num){			// 오늘 날짜 비교하기
@@ -120,6 +121,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 .listTable thead tr td#latestSort{
 	cursor: pointer;
 }
+
 </style>
 </head>
 

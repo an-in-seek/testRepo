@@ -201,7 +201,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 		Map map = new HashMap();
 		
 		Restaurant restaurant = dao.selectRestaurantByNo(restaurantNo);
-		System.out.println(restaurant);
 		map.put("restaurant", restaurant);
 		map.put("buildingNames", dao.selectBuildingNames());
 		String currentBuildingName = dao.selectBuildingNameByLocationNo(restaurant.getLocationNo());

@@ -163,22 +163,41 @@
 					<include refid="member-select"/>
 					<choose>
 						<when test="command == 'member_id'">
-							where member_id = #{info}
+							where member_id = #{info} order by join_date
 						</when>
 						<when test="command == 'member_name'">
-							where name = #{info}
+							where name = #{info} order by join_date
 						</when>
 						<when test="command == 'member_nickname'">
-							where nickname = #{info}
+							where nickname = #{info} order by join_date
 						</when>
 						<when test="command == 'grade'">
-							where grade = #{info}
+							where grade = #{info} order by join_date
 						</when>
 						<when test="command == 'state'">
-							where state = #{info}
+							where state = #{info} order by join_date
 						</when>
 					</choose>
-					order by join_date
+					
+					<if test="command == 'sort'">
+						<choose>
+							<when test="info == 'sortLatest'">
+								order by join_date desc
+							</when>
+							<when test="info == 'sortLate'">
+								order by join_date asc
+							</when>
+							<when test="info == 'sortId'">
+								order by member_id
+							</when>
+							<when test="info == 'sortName'">
+								order by name
+							</when>
+							<otherwise>
+								order by join_date
+							</otherwise>
+						</choose>
+					</if>
 			)
 		) 
 		where page = #{pageNo} 
@@ -202,6 +221,7 @@
 			<when test="command == 'state'">
 				where state = #{info}
 			</when>
+			<otherwise></otherwise>
 		</choose>
 	</select>
 	
