@@ -15,7 +15,7 @@ var selectedBuildingName;
 function restaurantsTableSetting(txt){
 	var floor_gaesu=0;
 	var a_count=0;
-	var code="<tr><td id='all' style='background-color:lightgray;height:50px;border-style:hidden;' align='center' colspan='5'><b>"+selectedBuildingName+" 맛집 전체보기</b></td></tr><tr><td colspan='5' style='border-left-style:hidden;border-right-style:hidden;'></td></tr>";
+	var code="<tr><td id='all' style='background-color:#FFE08C;height:50px;border-style:hidden;' align='center' colspan='5'><b>"+selectedBuildingName+" 맛집 전체보기</b></td></tr><tr><td colspan='5' style='border-left-style:hidden;border-right-style:hidden;'></td></tr>";
 	for(var i=0;i<txt.length;i++){
 		if(i%2==0){
 			code=code+"<tr style='height:40px;'><td id='row"+(++floor_gaesu)+"' style='border-left-style:hidden;border-right-style:hidden;width:100px;' align='center' rowspan='"+Math.ceil((txt[i+1].split(',').length-1)/4)+"'><b>"+txt[i]+"</b></td>";
@@ -57,7 +57,6 @@ function restaurantsTableSetting(txt){
 	for(var i=0;i<floor_gaesu;i++){
 		$("#row"+(i+1)).hover(function(){
 			$(this).css("text-decoration","underline");
-			$(this).css("background-color","lightgray");
 			$(this).css("cursor","pointer");
 		},function(){
 			$(this).css("text-decoration","none");

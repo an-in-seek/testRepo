@@ -28,7 +28,7 @@
 				<a href="${initParam.rootPath }/restaurant/restaurantTypeSelect.do" class="menu">맛집정보 &#9662;</a>
 				<ul>
 					<li><a href="${initParam.rootPath }/restaurant/restaurantTypeSelect.do">유형별</a></li>
-					<li><a href="${initParam.rootPath }/restaurant/showListByTheme.do">테마별</a></li>
+					<li><a href="${initParam.rootPath }/restaurant/restaurantThemeSelect.do">테마별</a></li>
 					<li><a href="${initParam.rootPath }/restaurant/selectLocation.do">위치별</a></li>
 				</ul>
 			</li>
