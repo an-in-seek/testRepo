@@ -3,7 +3,7 @@
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
-	.seek ul{ padding:0; list-style: none; margin-top: 5px; margin-bottom: 5px; }
+	.seek ul{ padding:0; list-style: none;}
     .seek ul li{ width:120px; display: inline-block; position: relative; text-align: center; line-height: 20px; }
     .seek ul li a{ width:100px; display: block; padding:5px 10px; color:#ffffff; border:0px solid #ffffff; background:#B70000; text-decoration:none; nowrap;}
     .seek ul li a:hover{color: gold;}
