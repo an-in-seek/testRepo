@@ -14,9 +14,9 @@
 	background: -o-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
 	background: -ms-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
 	background: linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
-	-webkit-border-radius: 10px;
+	-webkit-border-radius: 10px; /* 모서리 둥글게 시작 */
 	-moz-border-radius: 10px;
-	border-radius: 10px;
+	border-radius: 10px;		/* 모서리 둥글게 끝 */
 }
 #cssmenu > ul {
   font-family: 'Hanna', sans-serif;

@@ -95,19 +95,26 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 .todayBestTB, .bestMonthTB{
 	font-family: 'Hanna', sans-serif;
 }
-.listTable thead tr, .todayBestTB thead tr, .bestMonthTB thead tr{
-	color: white;	/* 글자색 */
-	background: #545c72;
+.todayBestTB thead, .bestMonthTB thead,.listTable thead{
+	background: #F8F8F8;
+	color: #545c72;	/* 글자색 */
+	border: 2px solid #B70000;
 	text-align: center;
 }
-.listTable th, .listTable td, .todayBestTB th, .todayBestTB td, .bestMonthTB th, .bestMonthTB td{
+.listTable th, .listTable td, .todayBestTB tbody th, .todayBestTB tbody td, .bestMonthTB tbody th, .bestMonthTB tbody td{
     border-left:1px solid;
     border-bottom:1px solid;
     border-color:#ccc;
     padding:6px 12px 2px;
 }
-.listTable tr:first-child th, .listTable tr:first-child td{
-    border-top:1px solid #6c9d31;
+.todayBestTB tbody th, .bestMonthTB tbody th{
+	border-left: 0px;
+    border-bottom:1px solid;
+    border-color:#ccc;
+    padding:6px 12px 2px;
+}
+.listTable tbody tr:first-child th, .listTable tbody tr:first-child td{
+    border-top:1px solid #B70000;
 }
 .listTable tr th:first-child{
     border-left:none;
