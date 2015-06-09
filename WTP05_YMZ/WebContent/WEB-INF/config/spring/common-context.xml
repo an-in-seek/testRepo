@@ -19,8 +19,8 @@
 	<context:component-scan base-package="com.ymz.qna.dao, com.ymz.qna.service, com.ymz.qna.controller"/>
 	<context:component-scan base-package="com.ymz.reviewreply.dao, com.ymz.reviewreply.service, com.ymz.reviewreply.controller"/>
 	<context:component-scan base-package="com.ymz.restaurantreply.dao, com.ymz.restaurantreply.service"/>
-	<!--  
 	<context:component-scan base-package="com.ymz.reportedbbs.dao, com.ymz.reportedbbs.service, com.ymz.reportedbbs.controller"/>
+	<!--  
 	<context:component-scan base-package="com.ymz.reportedreply.dao, com.ymz.reportedreply.service, com.ymz.reportedreply.controller"/>
 	-->
 	
@@ -44,7 +44,6 @@
 	<mvc:view-controller path="/faq/login/writeForm.do" view-name="faq/faq_write_form.tiles"/>
 	<mvc:view-controller path="/qna/login/commentForm.do" view-name="qna/qna_comment_form.tiles"/>
 	<mvc:view-controller path="/review/login/review_write_form.do" view-name="review/review_write_form.tiles"/>
-	<mvc:view-controller path="/reported/login/reportedBBSForm.do" view-name="reported/reported_bbs_list.tiles"/>
 	
 	<!-- 로그인 후 요청하는 페이지중 로그인 체크 부분이 interceptor로 빠지면 단순 링크로 바뀌는 것들 view-controller로 처리 -->
 	<!-- 자기정보 조회 -->

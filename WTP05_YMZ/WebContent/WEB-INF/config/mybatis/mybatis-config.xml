@@ -10,10 +10,10 @@
 		<package name="com.ymz.review.vo"/>
 		<package name="com.ymz.reviewreply.vo"/>
 		<package name="com.ymz.restaurantreply.vo"/>
+		<package name="com.ymz.reportedbbs.vo"/>
 	</typeAliases>
 	
 		<!--  
-		<package name="com.ymz.reportedbbs.vo"/>
 		<package name="com.ymz.reportedreply.vo"/>
 		
 		<typeAlias type="com.ymz.faq.vo.FAQ" alias="FAQ"/>
@@ -31,9 +31,9 @@
 		<mapper resource="com/ymz/common/config/mapper/ReviewMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/ReviewReplyMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/RestaurantReplyMapper.xml"/>
+		<mapper resource="com/ymz/common/config/mapper/ReportedBBSMapper.xml"/>
 
 		<!--  
-		<mapper resource="com/ymz/common/config/mapper/ReportedBBSMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/ReportedReplyMapper.xml"/>
 		-->
 	</mappers>
