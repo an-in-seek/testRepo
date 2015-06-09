@@ -5,11 +5,14 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	
 	var id;
+	
 	$("#listTB tbody tr").on("mouseover", function(){
 		$("table#listTB tbody tr").css("background-color", "white");
 		$(this).css("background-color", "lightgray");
 	});
+	
 	$("#listTB tbody tr").on("click", function(){
 		id = $(this).find(":nth-child(2)").text();
 		$.ajax({
@@ -42,14 +45,25 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#deleteBtn").on("click",function(){
-		var isDel = confirm("정말로 삭제하시겠습니까?");
-		if (isDel) {
-			document.location.href="${initParam.rootPath }/member/login/removeMemberByMaster.do?id="+id;
-		} else {
-			return;
+	if("${requestScope.command}" == 'sort'){
+		if("${requestScope.info}" == 'sortLatest'){
+			$("#dateCategory").val("${requestScope.info}");
+		}else if("${requestScope.info}" == 'sortLate'){
+			$("#dateCategory").val("${requestScope.info}");
+		}else{
+			$("#selectSort").val("${requestScope.info}");
 		}
-	});
+	}else if("${requestScope.command}" == 'grade'){
+		$("#gradeCategory").val("${requestScope.info}");
+	}else if("${requestScope.command}" == 'state'){
+		$("#stateCategory").val("${requestScope.info}");
+	}else if("${requestScope.command}" == 'member_id'){
+		$("#selectSearchCategory").val("${requestScope.command}");
+	}else if("${requestScope.command}" == 'member_name'){
+		$("#selectSearchCategory").val("${requestScope.command}");
+	}else if("${requestScope.command}" == 'member_nickname'){
+		$("#selectSearchCategory").val("${requestScope.command}");
+	}
 	
 	$("#searchBtn").on("click",function(){
 		if($("#searchText").val().trim()==""){
@@ -68,12 +82,25 @@ $(document).ready(function(){
 		 document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#selectSort").val()+"&command=sort";
 	});
 	
+	$("#dateCategory").on("change",function(){
+		document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#dateCategory").val()+"&command=sort";
+	});
+	
 	$("#gradeCategory").on("change",function(){
 		document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#gradeCategory").val()+"&command=grade";
 	});
 	
 	$("#stateCategory").on("change",function(){
 		document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#stateCategory").val()+"&command=state";
+	});
+	
+	$("#deleteBtn").on("click",function(){
+		var isDel = confirm("정말로 삭제하시겠습니까?");
+		if (isDel) {
+			document.location.href="${initParam.rootPath }/member/login/removeMemberByMaster.do?id="+id;
+		} else {
+			return;
+		}
 	});
 });
 </script>
@@ -124,10 +151,10 @@ article{
 				<td>Email</td>
 				<td>전화번호</td>
 				<td>
-					<select id="gradeCategory">
+					<select id="dateCategory">
 						<option>가입일</option>
-						<option id="latest" value="latest">최신순</option>
-						<option id="late" value="late">늦은순</option>
+						<option id="sortLatest" value="sortLatest">최신순</option>
+						<option id="sortLate" value="sortLate">늦은순</option>
 					</select>
 				</td>
 				<td>
@@ -221,7 +248,6 @@ article{
 					<td>
 						<select id="selectSort" name="category">
 							<option value="default">정렬기준</option>
-							<option value="sortDate">가입날짜</option>
 							<option value="sortId">아이디</option>
 							<option value="sortName">이름</option>
 						</select>

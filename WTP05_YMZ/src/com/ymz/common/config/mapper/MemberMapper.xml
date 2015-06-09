@@ -175,8 +175,11 @@
 					
 					<if test="command == 'sort'">
 						<choose>
-							<when test="info == 'sortDate'">
-								order by join_date
+							<when test="info == 'sortLatest'">
+								order by join_date desc
+							</when>
+							<when test="info == 'sortLate'">
+								order by join_date asc
 							</when>
 							<when test="info == 'sortId'">
 								order by member_id
