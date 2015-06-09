@@ -3,6 +3,7 @@ package com.ymz.member.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,6 +112,31 @@ public class MemberDAOImpl implements MemberDAO {
 		param.put("command", command);
 		return session.selectList(namespace+"selectAllMember", param);
 	}
+	
+	/**
+	 * category조회
+	 * @param  
+	 * @return 
+	 */
+	@Override
+	public List<Map<String,Object>> selectCategory() {
+//		HashMap category = new HashMap();
+		return session.selectList(namespace+"selectAllCategory");
+	}
+	
+	@Override
+	public List selectCategoryId() {
+//		HashMap category = new HashMap();
+		return session.selectList(namespace+"selectCategoryId");
+	}
+	
+	
+
+	@Override
+	public List selectCategoryName() {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+"selectCategoryName");
+	}
 
 	/**
 	 * Member 테이블의 페이징 처리 전체 회원 조회 처리
@@ -124,6 +150,8 @@ public class MemberDAOImpl implements MemberDAO {
 		param.put("pageNo", pageNo);
 		return session.selectList(namespace+"selectAllMemberPaging", param);
 	}
+	
+	
 	
 	@Override
 	public List<Member> selectAllMemberByInfo(String info,  String command, int pageNo) {
