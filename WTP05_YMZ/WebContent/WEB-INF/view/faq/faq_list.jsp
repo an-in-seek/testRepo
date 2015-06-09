@@ -20,7 +20,7 @@ $(document).ready(function(){
 		dataType:"json", //javascript객체로 변환해서 응답데이터를 전달.
 		beforeSend:function(){
 			$("#writeBtn").hide();
-			for(idx=1 ; idx<=10 ; idx++){
+			for(idx=1 ; idx<="${fn:length(requestScope.faq_list)}" ; idx++){
 				$("#modifyBtn"+idx).hide();
 			}
 			$("#listTB2").hide();
@@ -28,7 +28,7 @@ $(document).ready(function(){
 		success:function(member){
 			if(member.grade == 'master'){
 				$("#writeBtn").show();
-				for(idx=1 ; idx<=10 ; idx++){
+				for(idx=1 ; idx<="${fn:length(requestScope.faq_list)}" ; idx++){
 					$("#modifyBtn"+idx).show();
 				}
 				$("#listTB2").show();
@@ -38,8 +38,8 @@ $(document).ready(function(){
 });
 </script>
 
-<link type="text/css" href="${initParam.rootPath}/css/jquery-ui.css" rel="stylesheet"></link>	
 <link type="text/css" href="${initParam.rootPath}/css/faq.css" rel="stylesheet"/>
+
 <div align="center">
 <%-- <c:if test="${fn:length(requestScope.faq_list) != 0 }"> --%>
 <form id="removeForm" method=post action="${initParam.rootPath }/faq/login/removeFaq.do">

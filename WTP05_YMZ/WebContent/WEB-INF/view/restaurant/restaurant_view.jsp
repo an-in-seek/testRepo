@@ -9,7 +9,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	if("${requestScope.isAdmin}"){
-		$("#modifyAndDelete").append("<a href='${initParam.rootPath}/restaurant/login/admin/modifyRestaurantForm.do?restaurantNo=${requestScope.restaurant.restaurantNo}'><button>수정</button></a> <button id='btn_delete'>삭제</button>");
+		$("#modifyAndDelete").append("<a href='${initParam.rootPath}/restaurant/login/admin/modifyRestaurantForm.do?restaurantNo=${requestScope.restaurant.restaurantNo}'><button style='width:60px;height:40px;background-color:#FF5E00;border-color:#FF5E00;color:white;'><b>수정</b></button></a> <button id='btn_delete' style='width:60px;height:40px;background-color:#FF5E00;border-color:#FF5E00;color:white;'><b>삭제</b></button>");
 		
 		$("#btn_delete").on("click",function(){
 			if(confirm("삭제하시겠습니까?")){
@@ -302,14 +302,14 @@ display:none;
 <p><font size="5"><b>메뉴판</b></font></p>
 <table border="1" style="width:100%">
 <thead>
-<tr align="center" style="background-color:lightgray;">
+<tr align="center" style="background-color:#FFE08C;">
 <td rowspan="2"><b>메뉴</b></td>
 <td rowspan="2" style="width:15%;"><b>가격</b></td>
 <td colspan="2"><b>예산짜기</b></td>
 </tr>
-<tr align="center" style="background-color:lightgray;">
-<td style="width:6%;"><font color="gray">선택</font></td>
-<td style="width:15%;"><font color="gray">수량</font></td>
+<tr align="center" style="background-color:#FFE08C;">
+<td style="width:6%;">선택</td>
+<td style="width:15%;">수량</td>
 </tr>
 </thead>
 <tbody id="menus">
@@ -347,7 +347,7 @@ display:none;
 <p><font size="5"><b>예산짜기</b></font></p>
 <table border="1" style="width:100%">
 <thead>
-<tr align="center" height="50px" style="background-color:lightgray;">
+<tr align="center" height="50px" style="background-color:#FFE08C;">
 <td><b>메뉴</b></td>
 <td style="width:15%;"><b>가격</b></td>
 <td style="width:6%;"><b>수량</b></td>
@@ -360,7 +360,7 @@ display:none;
 </tr>
 </tbody>
 <tfoot id="calcTotal">
-<tr style="background-color:lightgray;">
+<tr style="background-color:#FFE08C;">
 <td colspan="2" style="padding-left:20px;border:0px;">
 	<table>
 	<tr>
@@ -467,6 +467,6 @@ display:none;
 	
 <p/>
 <hr>
-<p align="center"><a href="${sessionScope.backURL }"><button style="width:200px;height:50px;">목록으로 돌아가기</button></a></p>
+<p align="center"><a href="${sessionScope.backURL }"><button style="width:200px;height:50px;background-color:#FF5E00;border-color:#FF5E00;color:white;"><b>목록으로 돌아가기</b></button></a></p>
 </body>
 </html>

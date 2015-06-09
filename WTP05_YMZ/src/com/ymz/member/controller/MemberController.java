@@ -1,5 +1,6 @@
 package com.ymz.member.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,9 +43,12 @@ public class MemberController {
 	//회원가입 가기 전 category 뿌려주기
 	@RequestMapping("joinBefore.do")
 	@ResponseBody
-	public ModelAndView joinForm(){
-		
-		
+	public ModelAndView joinForm(HttpSession session){
+		System.out.println("asdfasdfas");
+		Map<String,Object> map = new HashMap<String,Object>();
+//		Map<String,Object> map2 = new HashMap<String,Object>();
+		map = service.getCategory();
+		session.setAttribute("map", map);
 		return new ModelAndView("member/join_form.tiles");
 	}
 	
@@ -78,6 +82,16 @@ public class MemberController {
 		String day = (String)request.getParameter("day");
 		String exbirth = year+"-"+month+"-"+day;
 		member.setBirth(exbirth);
+		String[] favoriteFood = request.getParameterValues("favoriteFood");
+		String food = "";
+		if(favoriteFood==null){
+			food ="없음";
+		}else{
+		for(String s :favoriteFood ){
+			food += s+" ";
+			}
+		}
+		member.setFavoriteFood(food);
 		String emailName = (String)request.getParameter("emailName");
 		String emailAddress = (String)request.getParameter("emailAddress");
 		String exEmail = emailName+"@"+emailAddress;
@@ -124,11 +138,11 @@ public class MemberController {
 			String detailAddress = rm.getDetailAddress();
 			String email = rm.getEmail();
 			String phone = rm.getPhoneNo();
-			String favoriteFood = rm.getFavoriteFood();
+			String foodRm = rm.getFavoriteFood();
 			int mileage = rm.getMileage()+100;
 			String grade = rm.getGrade();
 			String joinDate = rm.getJoinDate();
-			Member newRm = new Member(id,password,name,nickname,birth,sex,zipcode2,address,detailAddress,email,phone,favoriteFood,mileage,grade,joinDate);
+			Member newRm = new Member(id,password,name,nickname,birth,sex,zipcode2,address,detailAddress,email,phone,foodRm,mileage,grade,joinDate);
 			
 			service.modifyMember(newRm);
 			member.setMileage(10);

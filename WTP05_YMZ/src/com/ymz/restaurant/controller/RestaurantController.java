@@ -31,6 +31,7 @@ public class RestaurantController {
 	
 	@Autowired
 	private RestaurantService service;
+	private Member prevMember = new Member();
 	//송이꺼
 	@Autowired
 	private RestaurantReplyService replyService;
@@ -82,6 +83,11 @@ public class RestaurantController {
 	@RequestMapping("/restaurantTypeSelect.do")
 	public String restaurantTypeSelect() {
 		return "restaurant/restaurant_type_select.tiles";
+	}
+	
+	@RequestMapping("/restaurantThemeSelect.do")
+	public String restaurantThemeSelect() {
+		return "restaurant/restaurant_theme_select.tiles";
 	}
 	
 	@RequestMapping("/showListByType.do")
@@ -220,8 +226,10 @@ public class RestaurantController {
 		}
 		
 		// 조회수 1증가
-		service.increaseHits(restaurantNo);
-		
+		if(member!=prevMember){
+			prevMember = member;
+			service.increaseHits(restaurantNo);
+		}
 		
 		//송이꺼-----------------------------------------------------------------------------
 	

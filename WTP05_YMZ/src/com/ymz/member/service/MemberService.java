@@ -63,6 +63,13 @@ public interface MemberService {
 	public abstract Member getMemberByPhone(String phoneNo);
 	
 	/**
+	 * category 조회하기
+	 */
+	public abstract Map<String,Object> getCategory();
+	
+//	public abstract Map getCategoryName();
+	
+	/**
 	 * 회원 정보 수정 처리 메소드
 	 * @param member 수정할 회원 전보
 	 */

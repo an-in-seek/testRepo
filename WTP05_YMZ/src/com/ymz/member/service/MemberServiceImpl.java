@@ -21,7 +21,7 @@ import com.ymz.member.vo.Member;
  */
 @Service
 public class MemberServiceImpl implements MemberService {
-	
+//	Map<String,Object> map2 = new HashMap();
 	@Autowired
 	private MemberDAO dao;
 	/**
@@ -66,6 +66,26 @@ public class MemberServiceImpl implements MemberService {
 		map.put("pagingBean", pagingBean);
 		return map;
 	}
+	
+
+	/**
+	 * category 가져오기
+	 */
+	@Override
+	public Map<String,Object> getCategory(){
+		Map<String,Object> map2 = new HashMap<String,Object>();
+		List list = dao.selectCategoryId();
+		List list2 = dao.selectCategoryName();
+		for(int i=0;i<list.size();i++){
+			map2.put((String) list.get(i), list2.get(i));
+		}
+		for(Map.Entry<String,Object> entry : map2.entrySet()){
+			System.out.println(entry.getKey()+"-"+entry.getValue());
+		}
+		return map2;
+	}
+
+	
 	
 	//ID, 이름, 닉네임으로 회원 조회 메소드
 	@Override
