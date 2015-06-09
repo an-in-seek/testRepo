@@ -23,9 +23,8 @@
   position: relative;
   display: block;
   background: #B70000;
-  width: 100%;
+  width: 1024px;
   z-index: 500;
-  margin-left: -10px;
 }
 #cssmenu:after,
 #cssmenu > ul:after {
