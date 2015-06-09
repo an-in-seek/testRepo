@@ -107,8 +107,7 @@ $(document).ready(function(){
 
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <style type="text/css">
-div#table{
-	width:1024px;
+#table{
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	padding: 20px;
