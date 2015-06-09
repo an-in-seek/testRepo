@@ -72,7 +72,7 @@ $(document).ready(function(){
 						pictureCheck=true;
 						$("#pictureMessage").text("");
 					}
-					$("#pictureTemp td:nth-child("+pictureCount+")").html("<img style='width:160px;height:140px' src='${initParam.rootPath}/tempPhoto/"+fileName+"'><input type='hidden' name='addedPicture' value='"+fileName+"'>");
+					$("#pictureTemp td:nth-child("+pictureCount+")").html("<img class='uploaded' style='width:160px;height:140px' src='${initParam.rootPath}/tempPhoto/"+fileName+"'><input type='hidden' name='addedPicture' value='"+fileName+"'>");
 				}
 			}
 		});
@@ -82,7 +82,7 @@ $(document).ready(function(){
 	pictureCount = ${fn:length(fn:split(requestScope.restaurant.pictureName,',')) };
 	
 	// 그림 클릭시 이벤트(클릭시 삭제)
-	$("#pictureTemp").on("click","img",function(){
+	$("#pictureTemp").on("click","img.uploaded",function(){
 		var src = $(this).prop("src");
 		$.ajax({
 			url:"${initParam.rootPath}/restaurant/ajax/removePictureTemp.do",
@@ -91,7 +91,7 @@ $(document).ready(function(){
 		});
 		
 		$(this).parent().remove();
-		$("#pictureTemp").append("<td></td>");
+		$("#pictureTemp").append("<td><img style='width:160px;height:140px' src='${initParam.rootPath}/uploadPhoto/noimage.jpg'></td>");
 		pictureCount--;
 		if(pictureCount==0){
 			pictureCheck=false;
@@ -110,6 +110,10 @@ $(document).ready(function(){
 				if($("#restaurantName").val().trim()==""){
 					nameMessage = "상호명을 입력하세요";
 					nameCheck = false;
+					return false;
+				}else if($("#restaurantName").val()=='${requestScope.restaurant.restaurantName}'){
+					$("#nameMessage").text("");
+					nameCheck = true;
 					return false;
 				}
 			},
@@ -352,8 +356,8 @@ $(document).ready(function(){
 
 <hr>
 
-<p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능)
-<span style="position:absolute;width:100px;height:30px;overflow:hidden;margin-left:15px;margin-top:3px;">
+<p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능, 첨부된 사진 클릭시 첨부 취소)
+<span style="position:absolute;width:100px;height:30px;overflow:hidden;margin-left:270px;margin-top:4px;">
 	<input type="button" value="사진 선택" style="width:100px;height:30px;position:absolute;top:0px;background-color:gray;border-color:gray;color:white;font-weight:bold;"/>
 	<input type="file" id="addPicture" name="addPicture" style="font-size:45px;position:absolute;right:0px;top:0px;cursor:pointer;"/>
 </span>
@@ -361,10 +365,10 @@ $(document).ready(function(){
 <table id="picture_table">
 <tr id="pictureTemp">
 <c:forEach items="${fn:split(requestScope.restaurant.pictureName,',') }" var="picture">
-	<td><img style="width:160px;height:140px;" src="${initParam.rootPath }/uploadPhoto/${picture}"><input type="hidden" name="addedPicture" value="${picture }"></td>
+	<td><img class="uploaded" style="width:160px;height:140px;" src="${initParam.rootPath }/uploadPhoto/${picture}"><input type="hidden" name="addedPicture" value="${picture }"></td>
 </c:forEach>
 <c:forEach begin="${fn:length(fn:split(requestScope.restaurant.pictureName,','))+1 }" end="5">
-<td></td>
+<td><img style='width:160px;height:140px' src='${initParam.rootPath}/uploadPhoto/noimage.jpg'></td>
 </c:forEach>
 </tr>
 </table>
