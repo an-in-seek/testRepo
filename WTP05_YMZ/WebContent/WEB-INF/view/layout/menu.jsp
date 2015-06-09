@@ -2,30 +2,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script type="text/javascript" src="${initParam.rootPath}/script/menuScript.js"></script>
+
 <link type="text/css" href="${initParam.rootPath }/css/menuStyles.css"  rel="stylesheet">
 <style type="text/css">
-/*
-	.seek ul{ padding:0; list-style: none;}
-    .seek ul li{ width:120px; display: inline-block; position: relative; text-align: center; line-height: 20px; }
-    .seek ul li a{ width:100px; display: block; padding:5px 10px; color:#ffffff; border:0px solid #ffffff; background:#B70000; text-decoration:none; nowrap;}
-    .seek ul li a:hover{color: gold;}
-    .seek ul li ul{display: none; position: absolute; z-index: 999; left: 0;}
-    .seek ul li:hover ul{display: block; border:1px #ffffff; /* display the dropdown */} 
-/*    .seek{
-    	width:100%;
-    	margin-top: 2px;
-    	height: 30px;
-    	background: #B70000;
-    	/* border:solid 2px #050099;  */
- /*   }*/
-    
-    #menu{
-    	background: #2b2f3a;
-    }
+#menu{ background: #2b2f3a; }
 </style> 
+
 <body>
 	<div id = "cssmenu" align="center">
-		<ul class="jjooo">
+		<ul>
 			<li><a href='${initParam.rootPath }/index.do' class="menu">메인페이지</a></li>
 			<li>
 				<a href="${initParam.rootPath }/restaurant/restaurantTypeSelect.do" class="menu">맛집정보 &#9662;</a>
