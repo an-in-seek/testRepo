@@ -1,8 +1,8 @@
 /*
 
-HOW TO CREATE A CSS3 DROPDOWN jjooo [TUTORIAL]
+HOW TO CREATE A CSS3 DROPDOWN MENU [TUTORIAL]
 
-"How to create a CSS3 Dropdown jjooo [Tutorial]" was specially made for DesignModo by our friend Valeriu Timbuc.
+"How to create a CSS3 Dropdown Menu [Tutorial]" was specially made for DesignModo by our friend Valeriu Timbuc.
 
 Links:
 http://vtimbuc.net/
@@ -23,10 +23,10 @@ http://vladimirkudinov.com
 	outline: none;
 }
 
-/* jjooo */
+/* Menu */
 .jjooo {	
 	height: 40px;
-	width: 1009px;  /*메뉴 꺼먼거*/
+	width: 1014px;
 
 	background: #4c4e5a;
 	background: -webkit-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
@@ -41,8 +41,6 @@ http://vladimirkudinov.com
 }
 
 .jjooo li {
-	width:14%;
-	left:25%;
 	position: relative;
 	list-style: none;
 	float: left;
@@ -55,7 +53,7 @@ http://vladimirkudinov.com
 .jjooo li a {
 	display: block;
 	padding: 0 14px;
-	margin: 6px auto ; 
+	margin: 6px 0;
 	line-height: 28px;
 	text-decoration: none;
 	
@@ -81,10 +79,9 @@ http://vladimirkudinov.com
 
 .jjooo li:hover > a { color: #8fde62; }
 
-/* Sub jjooo */
+/* Sub Menu */
 
 .jjooo ul {
-	
 	position: absolute;
 	top: 40px;
 	left: 0;
@@ -110,6 +107,7 @@ http://vladimirkudinov.com
 	height: 0;
 	overflow: hidden;
 	padding: 0;
+
 	-webkit-transition: height .25s ease .1s;
 	-moz-transition: height .25s ease .1s;
 	-o-transition: height .25s ease .1s;
@@ -118,7 +116,6 @@ http://vladimirkudinov.com
 }
 
 .jjooo li:hover > ul li {
-	
 	height: 36px;
 	overflow: visible;
 	padding: 0;
@@ -127,7 +124,7 @@ http://vladimirkudinov.com
 .jjooo ul li a {
 	width: 100px;
 	padding: 4px 0 4px 40px;
-	margin: 0 ; 
+	margin: 0;
 
 	border: none;
 	border-bottom: 1px solid #353539;
