@@ -7,7 +7,7 @@
 
 <tiles-definitions>
 
-	<!-- 인식 : 타일즈 프레임 -->
+	<!-- 공통 타일즈 프레임 -->
 	<definition name="template" template="/WEB-INF/view/layout/template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
@@ -23,46 +23,19 @@
 	<definition name="qna/*.tiles" extends="template">
 		<put-attribute name="body" value="/WEB-INF/view/qna/{1}.jsp"/>
 	</definition>
+	<definition name="member/*.tiles" extends="template">
+		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
+	</definition>
 	<definition name="reported/*.tiles" extends="template">
 		<put-attribute name="body" value="/WEB-INF/view/reported/{1}.jsp"/>
 	</definition>
-	<!-- 인식 : 타일즈 프레임 -->
-	
-	
-	<!-- 맛집정보 화면에서 템플릿:지훈이코드 -->
-	<definition name="restaurant_template" template="/WEB-INF/view/layout/restaurant_template.jsp">
-		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
-		<put-attribute name="sub_menu" value="/WEB-INF/view/restaurant/restaurant_sidemenu.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
-	</definition>
-	
-	<definition name="restaurant/*.tiles" extends="restaurant_template">
+	<definition name="restaurant/*.tiles" extends="template">
 		<put-attribute name="body" value="/WEB-INF/view/restaurant/{1}.jsp"/>
 	</definition>
-	<!-- 여기까지 지훈이코드 -->
-	
-	
-	<!-- 맛집리뷰 : 코스타 롤 대장 -->
-	<definition name="template_no_submenu" template="/WEB-INF/view/layout/template_no_submenu.jsp">
-		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
-	</definition>
-	<definition name="review_template" template="/WEB-INF/view/layout/template_no_submenu.jsp">
-		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
-	</definition>
-	<definition name="*.tiles" extends="template_no_submenu">
-		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp"/>
-	</definition>
-	
-	<definition name="review/*.tiles" extends="template_no_submenu">
+	<definition name="review/*.tiles" extends="template">
 		<put-attribute name="body" value="/WEB-INF/view/review/{1}.jsp"/>
 	</definition>
-	<!-- 맛집리뷰 끝 -->
-	
+	<!-- 공통 타일즈 프레임 -->
 	
 	<!-- 메인페이지:달이 -->
  	<definition name="main_template" template="/WEB-INF/view/layout/member/main_template.jsp">
@@ -75,17 +48,6 @@
 		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp"/>
 		<put-attribute name="right_menu" value="/WEB-INF/view/layout/member/login_menu.jsp"/>
 	</definition>
-	
-	<!-- 회원가입 로그인 메뉴바를 누르면 네비게이션이 안보이게 한다. -->
-	 <definition name="member_template" template="/WEB-INF/view/layout/member/member_template.jsp">
-		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
-	</definition>
-	<definition name="member/*.tiles" extends="member_template">
-		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
-	</definition>
-	<!-- 메인페이지:끝 -->
 	
 	<!-- 마이페이지:달이 -->
 	<definition name="mypage_template" template="/WEB-INF/view/layout/member/mypage_template.jsp">

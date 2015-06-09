@@ -10,7 +10,7 @@
 
 <body>
 	<div id="cssmenu" align="center">
-		<ul style="width:1024px">
+		<ul>
 			<li><a href='${initParam.rootPath }/index.do' class="menu">메인페이지</a></li>
 			<li>
 				<a href="${initParam.rootPath }/restaurant/restaurantTypeSelect.do" class="menu">맛집정보 &#9662;</a>
