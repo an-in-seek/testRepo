@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<style type="text/css">
+
+<link type="text/css" href="${initParam.rootPath }/css/menudropbox.css"  rel="stylesheet">
+<!-- <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
 	.seek ul{ padding:0; list-style: none;}
@@ -17,15 +19,13 @@
     	background: #B70000;
     	/* border:solid 2px #050099;  */
     }
-</style>    
-
+</style>     -->
 <body>
-
-	<div class="seek">
-		<ul >
+	<div>
+		<ul class="jjooo">
 			<li><a href='${initParam.rootPath }/index.do' class="menu">메인페이지</a></li>
 			<li>
-				<a href="${initParam.rootPath }/restaurant/restaurantTypeSelect.do" class="menu">맛집정보&#9662;</a>
+				<a href="${initParam.rootPath }/restaurant/restaurantTypeSelect.do" class="menu">맛집정보 &#9662;</a>
 				<ul>
 					<li><a href="${initParam.rootPath }/restaurant/restaurantTypeSelect.do">유형별</a></li>
 					<li><a href="${initParam.rootPath }/restaurant/showListByTheme.do">테마별</a></li>
@@ -34,16 +34,17 @@
 			</li>
 			<li><a href="${initParam.rootPath }/review/reviewList.do" class="menu">맛집리뷰</a></li>
 			<li>
-				<a href="${initParam.rootPath }/faq/faqList.do" class="menu">고객센터&#9662;</a>
+				<a href="${initParam.rootPath }/faq/faqList.do" class="menu">고객센터 &#9662;</a>
 				<ul>
 					<li><a href="${initParam.rootPath }/faq/faqList.do">FAQ</a></li>
 					<li><a href="${initParam.rootPath }/qna/qnaList.do">QNA</a></li>
 				</ul>
 			</li>
-			
+			<li>
 			<c:if test="${sessionScope.login_info.grade=='master'}">
 				<li><a href="${initParam.rootPath }/member/login/memberListPaging.do" class="menu">회원관리</a></li>
 			</c:if>
+			</li>
 		</ul>
 	</div>
 
