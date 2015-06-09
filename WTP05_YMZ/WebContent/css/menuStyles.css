@@ -25,6 +25,7 @@
   background: #B70000;
   width: 100%;
   z-index: 500;
+  margin-left: -10px;
 }
 #cssmenu:after,
 #cssmenu > ul:after {
@@ -100,7 +101,7 @@
 }
 #indicatorContainer {
   position: absolute;
-  height: 12px;
+  height: 0px; /* 원본 12px */
   width: 100%;
   bottom: 0px;
   overflow: hidden;

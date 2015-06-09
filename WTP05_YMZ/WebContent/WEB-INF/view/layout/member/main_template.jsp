@@ -61,6 +61,9 @@ header.main_template{
 	height:160px;
 	width:220px;
 	text-align:center;
+	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
+	-moz-border-radius: 10px;
+	border-radius: 10px;		 /* 둥근 모서리 끝 */
 	float:right;  /*오른쪽으로 띄움 */
 }
 #body{
@@ -87,6 +90,9 @@ footer.main_template{
 	padding: 5px;
 	text-align:center;
 	clear:both;   /*위에 float한 애들을 무시한다. */
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 </style>
 </head>
