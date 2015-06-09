@@ -190,6 +190,8 @@ public class MemberController {
 	@RequestMapping("login/findMemberByInfo.do")
 	public  ModelAndView findMemberByInfo(@RequestParam String info, @RequestParam String command, @RequestParam(defaultValue="1")int page){
 		Map map = service.getMemberByInfo(info, command, page);
+		map.put("command", command);
+		map.put("info", info);
 		return new ModelAndView("member/member_list_paging.tiles", map);
 	}
 	
