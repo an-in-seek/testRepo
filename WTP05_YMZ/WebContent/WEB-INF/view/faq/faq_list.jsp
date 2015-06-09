@@ -39,6 +39,7 @@ $(document).ready(function(){
 </script>
 
 <link type="text/css" href="${initParam.rootPath}/css/faq.css" rel="stylesheet"/>
+
 <div align="center">
 <%-- <c:if test="${fn:length(requestScope.faq_list) != 0 }"> --%>
 <form id="removeForm" method=post action="${initParam.rootPath }/faq/login/removeFaq.do">

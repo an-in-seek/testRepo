@@ -68,7 +68,7 @@ footer.template{
 	width:1024px;
 	padding-top: 4px;
 	padding-bottom: 12px;
-	background-color:#B70000;
+	background-color:#2b2f3a;
 	color:white;
 	text-align:center;
 	clear:both;   /*위에 float한 애들을 무시한다. */

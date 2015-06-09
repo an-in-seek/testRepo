@@ -228,14 +228,14 @@ $(document).ready(function(){
 						pictureCheck=true;
 						$("#pictureMessage").text("");
 					}
-					$("#pictureTemp td:nth-child("+pictureCount+")").html("<img style='width:160px;height:140px' src='${initParam.rootPath}/tempPhoto/"+fileName+"'><input type='hidden' name='addedPicture' value='"+fileName+"'>");
+					$("#pictureTemp td:nth-child("+pictureCount+")").html("<img class='uploaded' style='width:160px;height:140px' src='${initParam.rootPath}/tempPhoto/"+fileName+"'><input type='hidden' name='addedPicture' value='"+fileName+"'>");
 				}
 			}
 		});
 	});
 	
 	// 그림 클릭시 이벤트(클릭시 삭제)
-	$("#pictureTemp").on("click","img",function(){
+	$("#pictureTemp").on("click","img.uploaded",function(){
 		var src = $(this).prop("src");
 		$.ajax({
 			url:"${initParam.rootPath}/restaurant/ajax/removePictureTemp.do",
@@ -244,7 +244,7 @@ $(document).ready(function(){
 		});
 		
 		$(this).parent().remove();
-		$("#pictureTemp").append("<td></td>");
+		$("#pictureTemp").append("<td><img style='width:160px;height:140px' src='${initParam.rootPath}/uploadPhoto/noimage.jpg'></td>");
 		pictureCount--;
 		if(pictureCount==0){
 			pictureCheck=false;
@@ -320,19 +320,19 @@ $(document).ready(function(){
 
 <hr>
 
-<p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능)
-<span style="position:absolute;width:100px;height:30px;overflow:hidden;margin-left:15px;margin-top:3px;">
-	<input type="button" value="사진 선택" style="width:100px;height:30px;position:absolute;top:0px;background-color:#33BB00;color:#FFFFFF;border-style:solid;"/>
+<p><font size="5"><b>사진첨부</b></font>&nbsp;&nbsp;(최대 5장 첨부 가능, 첨부된 사진 클릭시 첨부 취소)
+<span style="position:absolute;width:100px;height:30px;overflow:hidden;margin-left:270px;margin-top:4px;">
+	<input type="button" value="사진 선택" style="width:100px;height:30px;position:absolute;top:0px;background-color:gray;border-color:gray;color:white;font-weight:bold;"/>
 	<input type="file" id="addPicture" name="addPicture" style="font-size:45px;position:absolute;right:0px;top:0px;cursor:pointer;"/>
 </span>
 <font color="red"><span id="pictureMessage"></span></font></p>
 <table id="picture_table">
 <tr id="pictureTemp">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><img style='width:160px;height:140px' src='${initParam.rootPath}/uploadPhoto/noimage.jpg'></td>
+<td><img style='width:160px;height:140px' src='${initParam.rootPath}/uploadPhoto/noimage.jpg'></td>
+<td><img style='width:160px;height:140px' src='${initParam.rootPath}/uploadPhoto/noimage.jpg'></td>
+<td><img style='width:160px;height:140px' src='${initParam.rootPath}/uploadPhoto/noimage.jpg'></td>
+<td><img style='width:160px;height:140px' src='${initParam.rootPath}/uploadPhoto/noimage.jpg'></td>
 </tr>
 </table>
 
@@ -342,17 +342,16 @@ $(document).ready(function(){
 <table>
 <thead>
 <tr align="center">
-<td>메뉴명</td>
-<td>가격</td>
-<td>설명</td>
-<td></td>
+<td style="background-color:lightgray;border-style:solid;border-color:white;"><b>메뉴명</b></td>
+<td style="background-color:lightgray;border-style:solid;border-color:white;"><b>가격</b></td>
+<td style="background-color:lightgray;border-style:solid;border-color:white;"><b>설명</b></td>
 </tr>
 </thead>
 <tbody id="menu_table">
 <c:forEach begin="1" end="10">
 <tr>
 	<td><input type="text" name="foodName" maxlength="10"></td>
-	<td><input type="number" name="foodPrice" min="0" max="99999999">원</td>
+	<td><input type="number" name="foodPrice" min="0" max="99999999"> 원</td>
 	<td><input type="text" name="foodDescription" maxlength="30" style="width:300px"></td>
 </tr>
 </c:forEach>

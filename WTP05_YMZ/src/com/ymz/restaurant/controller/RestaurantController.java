@@ -84,6 +84,11 @@ public class RestaurantController {
 		return "restaurant/restaurant_type_select.tiles";
 	}
 	
+	@RequestMapping("/restaurantThemeSelect.do")
+	public String restaurantThemeSelect() {
+		return "restaurant/restaurant_theme_select.tiles";
+	}
+	
 	@RequestMapping("/showListByType.do")
 	public String showListByType(
 			@RequestParam(defaultValue="전체") String category,
