@@ -9,6 +9,7 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery.js"></script>
 
 <style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 /*메세지 스타일*/
 .errorMessage{
 	font-size: 12px;
@@ -38,7 +39,7 @@ div.main_template{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
-	width:1024px;
+	width:1014px;
 }
 header.main_template{
 	background-color:white;
@@ -47,14 +48,14 @@ header.main_template{
 	padding: 5px;
 }
 
-nav#right{
+nav#right{										/* 메인화면 오른쪽 로그인창 */
+	font-family: 'Hanna', sans-serif;
 	margin-top:10px;
-	background-color: lightsteelblue;   
+	background-color: #f8f8f8;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	padding:10px;
 	height:160px;
 	width:260px;
-	font-weight:bold;
 	text-align:center;
 	float:right;  /*오른쪽으로 띄움 */
 }
@@ -75,9 +76,10 @@ nav#right{
 }
 footer.main_template{
 	background-color:#B70000;
+	font-size: 16px;
 	color:white;
 	padding-top: 4px;
-	padding-bottom: 12px;
+	padding-bottom: 4px;
 	text-align:center;
 	height:50px;
 	clear:both;   /*위에 float한 애들을 무시한다. */

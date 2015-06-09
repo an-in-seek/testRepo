@@ -4,9 +4,9 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 #footer{
 	padding-top: 4px;
-	padding-bottom: 12px;
+	padding-bottom: 4px;
 	font-family: 'Hanna', sans-serif;
-	font-size: 2;
+	font-size: 16px;
 	text-align: center;
 }
 </style>

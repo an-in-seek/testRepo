@@ -38,10 +38,10 @@ div.template{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
-	width:1024px;
+	width:1014px;
 }
 header.template{
-	width:1024px;
+	width:1014px;
 	padding: 5px;
 	background-color:white;
 	color:white;
@@ -58,18 +58,19 @@ nav.template{
 	float:left;   /*왼쪽으로 띄움 */
 }
 section.template{
-	width:1024px;
+	width:1014px;
 	padding: 5px;
 	height:auto; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	float:left;   /*왼쪽으로 띄움 */
 }
 footer.template{
 	height:50px;
-	width:1024px;
+	width:1014px;
 	padding-top: 4px;
-	padding-bottom: 12px;
+	padding-bottom: 4px;
 	background-color:#B70000;
 	color:white;
+	font-size: 16px;
 	text-align:center;
 	clear:both;   /*위에 float한 애들을 무시한다. */
 }

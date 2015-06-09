@@ -9,7 +9,7 @@
 </style>
 </head>
 <body>
-<h1 >고치는중</h1>
-<font color="red">하하하하하하하</font>
+<h1 >배고파</h1>
+<font color="red">ㅎㅎㅎㅎㅎㅎㅎ</font>
 
 </body>

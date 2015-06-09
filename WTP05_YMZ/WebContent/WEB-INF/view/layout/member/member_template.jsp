@@ -37,18 +37,18 @@ div.member_template{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
-	width:1024px;
+	width:1014px;
 }
 header.member_template{
 	background-color:white;
-	width:1024px;
+	width:1014px;
 	color:white;
 	text-align:center;
 	padding: 5px;
 }
 
 #body{
-	width:1024px;
+	width:1014px;
 	padding: 5px;
 	height:auto; /*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	float:left;   /*왼쪽으로 띄움 */
@@ -56,11 +56,12 @@ header.member_template{
 
 footer.member_template{
 	height:50px;
-	width:1024px;
+	width:1014px;
 	background-color:#B70000;
+	font-size: 16px;
 	color:white;
 	padding-top: 4px;
-	padding-bottom: 12px;
+	padding-bottom: 4px;
 	text-align:center;
 	clear:both;   /*위에 float한 애들을 무시한다. */
 }

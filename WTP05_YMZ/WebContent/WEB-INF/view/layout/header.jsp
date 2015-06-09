@@ -33,7 +33,7 @@ td, th{
 <c:if test="${sessionScope.login_info!=null }">
 	<div id="main">
 		<div id="login">
-			<table style="width:1024px; text-align: right">
+			<table style="width:1014px; text-align: right">
 			<tr>
 				<td align="right">
 				<font color="#B70000" size="2" style="font-weight: bold">${sessionScope.login_info.nickname}님 환영합니다.</font>
@@ -54,7 +54,7 @@ td, th{
 <c:choose>
 	<c:when test="${sessionScope.login_info==null }">
 	<div id="login">	
-		<table style="width:1024px; text-align: right">	
+		<table style="width:1014px; text-align: right">	
 			<tr>
 				<td>
 				<a href="${initParam.rootPath }/member/loginForm.do"><font size="2">로그인 | </font></a>
@@ -64,7 +64,7 @@ td, th{
 		</table>
 		</div>
 	<div id="main">
-	<table cellspacing="0" cellpadding="0" style="border-left:none; width:1024px; height:50px; background: white">
+	<table cellspacing="0" cellpadding="0" style="border-left:none; width:1014px; height:50px; background: white">
 	<tr>
 		<td><img src="${initParam.rootPath}/uploadPhoto/logo.png" height="50px" width="300px" id="mainLogo"/></td>
 	</tr>

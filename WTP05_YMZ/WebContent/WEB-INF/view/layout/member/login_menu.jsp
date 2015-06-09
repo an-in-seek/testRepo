@@ -10,7 +10,7 @@ function pw_pop(){
 </script>
 
 <style>
-#main-title {color:#050099;font-size:70pt;margin-top:20%;}
+#main-title {color:#f8f8f8;font-size:70pt;margin-top:20%;}
 .se {font-family: serif;}
 .sa {font-family: sans-serif;}
 .cu {font-family: cursive;}

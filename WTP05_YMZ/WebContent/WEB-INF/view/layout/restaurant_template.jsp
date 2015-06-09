@@ -38,7 +38,7 @@ div.template{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
-	width:1024px;
+	width:1014px;
 }
 header.template{
 	background-color:white;
@@ -52,8 +52,9 @@ section.template{
 footer.template{
 	background-color:#B70000;
 	color:white;
+	font-size: 16px;
 	padding-top: 4px;
-	padding-bottom: 12px;
+	padding-bottom: 4px;
 	text-align:center;
 	height:50px;
 	clear:both;   /*위에 float한 애들을 무시한다. */
