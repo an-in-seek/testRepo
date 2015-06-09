@@ -96,8 +96,8 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 	font-family: 'Hanna', sans-serif;
 }
 .listTable thead tr, .todayBestTB thead tr, .bestMonthTB thead tr{
-	font-weight: bold;
-	background: lavender;
+	color: white;	/* 글자색 */
+	background: #545c72;
 	text-align: center;
 }
 .listTable th, .listTable td, .todayBestTB th, .todayBestTB td, .bestMonthTB th, .bestMonthTB td{

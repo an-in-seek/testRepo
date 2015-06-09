@@ -1,25 +1,29 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 #cssmenu {
-
   position: relative;
   height: 44px;
   background: #2b2f3a;
   width: auto;
-  
 
 }
-#cssmenu ul {
-  font-family: 'Hanna', sans-serif;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  line-height: 1;
-  
+#cssmenu ul {  
+	list-style: none;
+	padding: 0;
+	background: #4c4e5a;
+	background: -webkit-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
+	background: -moz-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
+	background: -o-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
+	background: -ms-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
+	background: linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 #cssmenu > ul {
+  font-family: 'Hanna', sans-serif;
   position: relative;
   display: block;
-  background: #2b2f3a;
+  background: #4c4e5a;
   width: 100%;
   z-index: 500;
 }
@@ -42,10 +46,15 @@
   text-align: left;
 }
 #cssmenu > ul > li {
-  display: inline-block;
-  position: relative;
-  margin: 0;
-  padding: 0;
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	
+	display: inline-block;
+	text-align: center; 
+	line-height: 20px; 
+	list-style: none;
 }
 #cssmenu > ul > #menu-button {
   display: none;
