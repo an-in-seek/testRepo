@@ -12,6 +12,3 @@
 #listTB1 thead tr{font-weight: bold;background: silver;}
 #listTB2 thead tr{font-weight: bold;background: silver;}
 [id^=contentTr]{cursor: pointer;display: none;/*최초로딩시에는 안보이도록 처리*/}
-div#dialog{width:400px;display: none;}
-article{border-bottom: 1px solid black;padding: 5px;padding-left: 10px;}
-#table1{margin-left: 20px;}
