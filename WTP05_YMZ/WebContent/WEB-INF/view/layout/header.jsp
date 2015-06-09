@@ -58,7 +58,7 @@ td, th{
 			<tr>
 				<td>
 				<a href="${initParam.rootPath }/member/loginForm.do"><font size="2">로그인 | </font></a>
-				<a href="${initParam.rootPath }/member/joinForm.do"><font size="2">회원가입</font></a>
+				<a href="${initParam.rootPath }/member/joinBefore.do"><font size="2">회원가입</font></a>
 				</td>
 			</tr>
 		</table>

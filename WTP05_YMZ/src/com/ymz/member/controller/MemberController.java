@@ -40,12 +40,12 @@ public class MemberController {
 	private MemberService service;
 	
 	//회원가입 가기 전 category 뿌려주기
-	@RequestMapping("joinForm.do")
+	@RequestMapping("joinBefore.do")
 	@ResponseBody
-	public String joinForm(){
+	public ModelAndView joinForm(){
 		
 		
-		return "member/join_form.tiles";
+		return new ModelAndView("member/join_form.tiles");
 	}
 	
 	//회원 가입

@@ -167,7 +167,7 @@ article {
 			</td>
 			<td colspan="2">
 				<form id="searchQna" name="searchQna" action="${initParam.rootPath }/qna/qnaListByCategory.do" method="post">
-					<input type="text" id="searchInfo1" name="searchInfo" placeholder="제목으로만 검색">						
+					<input type="text" id="searchInfo1" name="searchInfo" placeholder="제목검색">						
 					<input type="submit" id="searchBtn" value="검색">
 				</form>
 			</td>
