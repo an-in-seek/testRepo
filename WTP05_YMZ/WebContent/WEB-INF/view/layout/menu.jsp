@@ -5,7 +5,7 @@
 
 <link type="text/css" href="${initParam.rootPath }/css/menuStyles.css"  rel="stylesheet">
 <style type="text/css">
-#menu{ background: #2b2f3a; }
+
 </style> 
 
 <body>

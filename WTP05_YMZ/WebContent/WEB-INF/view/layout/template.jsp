@@ -23,9 +23,11 @@ img{
 	max-width: 100%; 
 	height: auto;
 }
-/*링크에 밑줄 제거*/
+/*링크에 밑줄 제거 + 색 고정*/
 a{
 	text-decoration: none;
+	color: #808080;
+	
 }
 /*테이블 기본 스타일*/
 table, td, th{
@@ -73,6 +75,9 @@ footer.template{
 	font-size: 16px;
 	text-align:center;
 	clear:both;   /*위에 float한 애들을 무시한다. */
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 </style>
 </head>
