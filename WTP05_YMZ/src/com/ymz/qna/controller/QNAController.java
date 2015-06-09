@@ -124,7 +124,6 @@ public class QNAController {
 		map.put("categoryList", categoryList);
 		map.put("category", category);
 		map.put("searchInfo", searchInfo);
-		System.out.println(category+"+"+searchInfo);
 		return new ModelAndView("qna/qna_list.tiles", map);
 	}
 	

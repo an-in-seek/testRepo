@@ -42,11 +42,6 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#modifyBtn").on("click",function(){
-		alert("수정버튼 클릭");
-		/* document.location.href="login/commentForm.do?id="+${requestScope.member.id}; */
-	});
-	
 	$("#deleteBtn").on("click",function(){
 		var isDel = confirm("정말로 삭제하시겠습니까?");
 		if (isDel) {
@@ -57,27 +52,27 @@ $(document).ready(function(){
 	});
 	
 	$("#searchBtn").on("click",function(){
-		 if($("#searchText").val().trim()==""){
+		if($("#searchText").val().trim()==""){
 			 alert("검색할 내용를 입력하세요.");
 			return false;
+		}
+		if($("#selectSearchCategory").val()=="default"){
+			 alert("검색기준을 선택하세요.");
+			return false;
 		} 
-		var command = $("#selectCategory").val()
+		var command = $("#selectSearchCategory").val()
 		$("#command").val(command);
 	});
 	
 	$("#selectSort").on("change",function(){
-		 if($("#selectSort").val()=="정렬기준"){
-			 alert("정렬기준을 선택하세요.");
-			return false;
-		} 
 		 document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#selectSort").val()+"&command=sort";
 	});
 	
+	$("#gradeCategory").on("change",function(){
+		document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#gradeCategory").val()+"&command=grade";
+	});
+	
 	$("#stateCategory").on("change",function(){
-		 if($("#stateCategory").val() == "분류"){
-			 alert("카테고리를 선택 하세요.");
-			return false;
-		} 
 		document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#stateCategory").val()+"&command=state";
 	});
 });
@@ -86,16 +81,16 @@ $(document).ready(function(){
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
 <style type="text/css">
 div#table{
+	width:1024px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	padding: 20px;
-	width:800px;
 	text-align:center;
-	float:center;   /*왼쪽으로 띄움 */
 }
 #listTB {
-	margin-left: 20px;
-	align:center;
+	width:900px;
+	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-left:auto;
 }
 #listTB thead tr {
 	font-weight: bold;
@@ -119,7 +114,7 @@ article{
 <div align="center" id="table">	
 <c:choose>
 	<c:when test="${fn:length(requestScope.member_list) != 0 }">
-	<table id="listTB" style="width:800px" border="1">
+	<table id="listTB"  border="1">
 		<thead>
 			<tr align="center">
 				<td>번호</td>
@@ -128,7 +123,20 @@ article{
 				<td>닉네임</td>
 				<td>Email</td>
 				<td>전화번호</td>
-				<td>등급</td>
+				<td>
+					<select id="gradeCategory">
+						<option>가입일</option>
+						<option id="latest" value="latest">최신순</option>
+						<option id="late" value="late">늦은순</option>
+					</select>
+				</td>
+				<td>
+					<select id="gradeCategory">
+						<option>등급</option>
+						<option id="master" value="master">관리자</option>
+						<option id="user" value="user">사용자</option>
+					</select>
+				</td>
 				<td>
 					<select id="stateCategory">
 						<option>탈퇴여부</option>
@@ -147,6 +155,7 @@ article{
 					<td>${member.nickname }</td>
 					<td>${member.email}</td>
 					<td>${member.phoneNo}</td>
+					<td>${member.joinDate}</td>
 					<td>${member.grade}</td>
 					<td>${member.state}</td>
 				</tr> 
@@ -184,7 +193,7 @@ article{
 	</p>
 	</c:when>
 	<c:otherwise>
-	<table align="center" id="listTB" style="width:800px" border="1">
+	<table align="center" id="listTB" border="1">
 		<thead>
 			<tr align="center">
 				<td>번호</td>
@@ -193,13 +202,14 @@ article{
 				<td>닉네임</td>
 				<td>Email</td>
 				<td>전화번호</td>
+				<td>가입일</td>
 				<td>등급</td>
 				<td>탈퇴여부</td>
 			</tr>
 		</thead>
 		<tbody>
 				<tr align="center">
-					<td colspan="7"><font color="red">등록된 회원이 없습니다.</font></td>
+					<td colspan="9"><font color="red">등록된 회원이 없습니다.</font></td>
 				</tr> 
 		</tbody>
 	</table>
@@ -214,16 +224,14 @@ article{
 							<option value="sortDate">가입날짜</option>
 							<option value="sortId">아이디</option>
 							<option value="sortName">이름</option>
-							<option value="sortNickname">닉네임</option>
 						</select>
 					</td>
 					<td>
-						<select id="selectCategory" name="category">
+						<select id="selectSearchCategory" name="category">
+							<option value="default">검색기준</option>
 							<option value="member_id">아이디</option>
 							<option value="member_name">이름</option>
 							<option value="member_nickname">닉네임</option>
-							<option value="grade">등급</option>
-							<option value="state">탈퇴여부</option>
 						</select>
 					</td>
 					<td colspan="2">
@@ -262,8 +270,7 @@ article{
 		<article id="state"></article>
 		<table align="center">
 			<tr align="center">
-				<td align="center"><input id="modifyBtn" type="button" value="수정" onclick="modifyF()"></td>
-				<td align="center"><input id="deleteBtn" type="button" value="삭제" onclick="deleteF()"></td>
+				<td align="center"><input id="deleteBtn" type="button" value="탈퇴시키기"></td>
 			</tr>
 		</table>
 	</section>
