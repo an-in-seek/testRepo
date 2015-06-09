@@ -4,53 +4,56 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link type="text/css" href="${initParam.rootPath }/css/imageMenu.css" rel="stylesheet" />	
+<link type="text/css" href="${initParam.rootPath }/css/common.css" rel="stylesheet" />	
 <script type="text/javascript">
-$(document).ready(function(){
-	$("#hansik").hover(function(){
-		$(this).prop("src","${initParam.rootPath }/uploadPhoto/hansik.png");
-	},function(){
-		$(this).prop("src","${initParam.rootPath }/uploadPhoto/hansik-1.jpg");
-	});
-	
-	$("#yangsik").hover(function(){
-		$(this).prop("src","${initParam.rootPath }/uploadPhoto/yangsik.png");
-	},function(){
-		$(this).prop("src","${initParam.rootPath }/uploadPhoto/yangsik-1.jpg");
-	});
-	
-	$("#jungsik").hover(function(){
-		$(this).prop("src","${initParam.rootPath }/uploadPhoto/jungsik.png");
-	},function(){
-		$(this).prop("src","${initParam.rootPath }/uploadPhoto/jungsik-1.jpg");
-	});
-	
-	$("#ilsik").hover(function(){
-		$(this).prop("src","${initParam.rootPath }/uploadPhoto/ilsik.png");
-	},function(){
-		$(this).prop("src","${initParam.rootPath }/uploadPhoto/ilsik-1.jpg");
-	});
-	
-	$("#all").hover(function(){
-		$(this).prop("src","${initParam.rootPath }/uploadPhoto/all-view.png");
-	},function(){
-		$(this).prop("src","${initParam.rootPath }/uploadPhoto/all-view-1.jpg");
-	});
-});
+
 </script>
 </head>
-<body><div align="center">
-<table>
-<tr>
-<td colspan="2"><a href="${initParam.rootPath }/restaurant/showListByType.do"><img style="width:610px;" id="all" src="${initParam.rootPath }/uploadPhoto/all-view-1.jpg"></a></td>
-</tr>
-<tr>
-<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-4"><img id="hansik" src="${initParam.rootPath }/uploadPhoto/hansik-1.jpg"></a></td>
-<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-5"><img id="yangsik" src="${initParam.rootPath }/uploadPhoto/yangsik-1.jpg"></a></td>
-</tr>
-<tr>
-<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-6"><img id="jungsik" src="${initParam.rootPath }/uploadPhoto/jungsik-1.jpg"></a></td>
-<td><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-7"><img id="ilsik" src="${initParam.rootPath }/uploadPhoto/ilsik-1.jpg"></a></td>
-</tr>
-</table>
-</div></body>
+<body>
+<div align="center">
+<ul class="ch-grid">
+	<li>
+		<div class="ch-item ch-img-1">
+			<div class="ch-info">
+				<p id="type"><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-4">
+				<font size="7"><br>한식</font></a></p>
+			</div>
+		</div>
+	</li>
+	<li>
+		<div class="ch-item ch-img-2">
+			<div class="ch-info">
+				<p id="type"><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-5">
+				<font size="7"><br>양식</font></a></p>
+			</div>
+		</div>
+	</li>
+	<li>
+		<div class="ch-item ch-img-3">
+			<div class="ch-info">
+				<p id="type"><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-7">
+				<font size="7"><br>일식</font></a></p>
+			</div>
+		</div>
+	</li>
+	<li>
+		<div class="ch-item ch-img-4">
+			<div class="ch-info">
+				<p id="type"><a href="${initParam.rootPath }/restaurant/showListByType.do?category=S-6">
+				<font size="7"><br>중식</font></a></p>
+			</div>
+		</div>
+	</li>
+	<li>
+		<div class="ch-item ch-img-5">
+			<div class="ch-info">
+				<p id="type"><a href="${initParam.rootPath }/restaurant/showListByType.do">
+				<font size="7">전체보기</font></a></p>
+			</div>
+		</div>
+	</li>
+</ul>
+</div>
+</body>
 </html>
