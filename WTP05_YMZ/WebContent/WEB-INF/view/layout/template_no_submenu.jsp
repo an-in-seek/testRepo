@@ -51,7 +51,7 @@ section.template2{
 	float:left;   /*왼쪽으로 띄움 */
 }
 footer.template2{
-	background-color:#2b2f3a;
+	background-color:#B70000;
 	color:white;
 	padding-top: 4px;
 	padding-bottom: 12px;

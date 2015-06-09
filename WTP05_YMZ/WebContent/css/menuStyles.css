@@ -63,10 +63,11 @@
   font-family: Helvetica, sans-serif;
   text-decoration: none;
 }
-#cssmenu > ul > li > a {
-  font-size: 14px;
-  font-weight: bold;
-  padding: 15px 20px;
+#cssmenu > ul > li > a {	/* 메인 메뉴 화면 */
+  font-family: 'Hanna', sans-serif;
+  font-size: 18px;
+  padding: 15px 50px;   /* 메뉴 간격 */
+  padding-left: 10px;
   color: #ffffff;
   text-transform: uppercase;
   -webkit-transition: color 0.25s ease-out;
@@ -78,7 +79,7 @@
 #cssmenu > ul > li.has-sub > a {
   padding-right: 32px;
 }
-#cssmenu > ul > li:hover > a {	/* 메뉴위에 마우스 위치할 때*/
+#cssmenu > ul > li:hover > a {	/* 메뉴위에 마우스 위치할 때  */
   color: #FFFF48;
 }
 #cssmenu li.has-sub::after {
@@ -174,7 +175,7 @@
   width: 55px;
   border-bottom: 1px solid #eeeeee;
   padding: 10px 20px;
-  font-size: 14px;
+  font-size: 16px;
   color: black;
   background: #f2f2f2;
   -webkit-transition: all .35s ease;
@@ -203,7 +204,7 @@
   border-bottom-color: #ffffff;
   position: absolute;
   top: -12px;
-  left: 30px;
+  left: 40px;
 }
 #cssmenu.align-right > ul > li > ul::after {
   left: auto;

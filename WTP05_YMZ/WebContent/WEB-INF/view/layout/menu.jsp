@@ -25,7 +25,7 @@
 				<a href="${initParam.rootPath }/faq/faqList.do" class="menu">고객센터 &#9662;</a>
 				<ul>
 					<li><a href="${initParam.rootPath }/faq/faqList.do">FAQ</a></li>
-					<li><a href="${initParam.rootPath }/qna/qnaList.do">QNA</a></li>
+					<li><a href="${initParam.rootPath }/qna/qnaList.do">Q&A</a></li>
 				</ul>
 			</li>
 			<li>
