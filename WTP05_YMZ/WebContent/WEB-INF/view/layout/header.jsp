@@ -18,8 +18,6 @@ $(document).ready(function(){
 #login{
 	font-family: 'Hanna', sans-serif;
 }
-
-
 /*테이블 기본 스타일*/
 table, td, th{
 	border-collapse: collapse;
