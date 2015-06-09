@@ -38,7 +38,14 @@ function pw_pop(){
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	  cursor: pointer;
+	cursor: pointer;
+}
+#loginSuccess{
+	color: #B70000;
+}
+#loginSuccessStatus{
+	
+	margin-top:4%
 }
 .int {position: relative;
   z-index: 10;
@@ -67,33 +74,33 @@ function pw_pop(){
 }
 </style>
   
-<c:if test="${sessionScope.login_info!=null }">
-	<table align="center">
+<c:if test="${sessionScope.login_info!=null }">	
+	<table id="loginSuccess" align="center">
 		<tr align="center" height="30px" >
 			<td></td>
 		</tr>
 		<tr align="center" >
 			<td>
-			<font size="6" color="blue">${sessionScope.login_info.nickname }</font><font size="2">님 환영합니다.</font>
+			<font size="5">${sessionScope.login_info.nickname }</font><font size="2">님 환영합니다.</font>
 			</td>
 		</tr>
 	</table>
 	
-	<table align="center"  style="border:solid 1px #050099; margin-top:4%" width="220px">
+	<table id="loginSuccessStatus" align="center" width="220px">
 		<tr align="center" height="50px" >
-			<td>
-			<input type="button"  value="마이페이지" style="border:solid 1px #050099; " 
+			<td class="btn">
+			<input type="button"  value="마이페이지" 
 					OnClick="window.location='${initParam.rootPath }/member/mypage.do'">
 			</td>
-			<td>
-				<input type="button"  value="로그아웃" style="border:solid 1px #050099; " 
+			<td class="btn">
+				<input type="button"  value="로그아웃" 
 					OnClick="window.location='${initParam.rootPath }/member/login/logout.do'">
 			</td>
 		</tr>
 	</table>
 	
 </c:if>
-<c:choose>
+<c:choose>	
 	<c:when test="${sessionScope.login_info==null }">
 		<form action="${initParam.rootPath }/member/login.do" method="post" >
 			<table id="mainLoginForm">
