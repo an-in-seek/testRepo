@@ -166,8 +166,8 @@ public class Member implements Serializable{
 		return favoriteFood;
 	}
 
-	public void setFavoriteFood(String favoriteFood) {
-		this.favoriteFood = favoriteFood;
+	public void setFavoriteFood(String string) {
+		this.favoriteFood = string;
 	}
 
 	public int getMileage() {

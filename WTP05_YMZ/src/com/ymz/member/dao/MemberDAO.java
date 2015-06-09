@@ -2,6 +2,7 @@ package com.ymz.member.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.ymz.member.vo.Member;
 
@@ -70,7 +71,15 @@ public interface MemberDAO {
 	 * @return
 	 */
 	public abstract List<Member> selectAllMember(String info, String command);
+	
+	/**
+	 * category조회
+	 */
+	public abstract List<Map<String, Object>> selectCategory();
+	
+	public abstract List selectCategoryId();
 
+	public abstract List selectCategoryName();
 	/**
 	 * Member 테이블의 페이징 처리 전체 회원 조회 처리
 	 * @param pageNo 조회할 페이지 번호

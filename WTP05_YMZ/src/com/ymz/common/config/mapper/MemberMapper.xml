@@ -55,8 +55,8 @@
 	
 	<insert id="insertMember" parameterType="member">
 		insert 	into member 
-					(member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date)
-		values		(#{id}, #{password}, #{name},#{nickname},#{birth},#{sex},#{zipcode},#{address},#{detailAddress}, #{email},#{phoneNo},#{favoriteFood,jdbcType=VARCHAR},#{mileage},#{grade}, to_char(sysdate, 'yyyymmdd')), '가입'
+					(member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date,state)
+		values		(#{id}, #{password}, #{name},#{nickname},#{birth},#{sex},#{zipcode},#{address},#{detailAddress}, #{email},#{phoneNo},#{favoriteFood,jdbcType=VARCHAR},#{mileage},#{grade}, to_char(sysdate, 'yyyymmdd'),'가입')
 	</insert>
 	
 	<update id="updateMember" parameterType="member">
@@ -85,10 +85,16 @@
 	</update>
 	
 	<!-- category 가져오기 -->
-	<select id="selectCategory" parameterType="string">
-		select SECOND_CATEGORY_ID from SECOND_CATEGORY where FIRST_CATEGORY_ID='F-1';
+	<select id="selectAllCategory" resultType="hashMap">
+		select SECOND_CATEGORY_ID, SECOND_CATEGORY_NAME from SECOND_CATEGORY where FIRST_CATEGORY_ID='F-1'
 	</select>
-		
+	<select id="selectCategoryId" resultType="string">
+		select SECOND_CATEGORY_ID from SECOND_CATEGORY where FIRST_CATEGORY_ID='F-1'
+	</select>
+	
+	<select id="selectCategoryName" resultType="string">
+		select SECOND_CATEGORY_NAME from SECOND_CATEGORY where FIRST_CATEGORY_ID='F-1'
+	</select>
 	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
 		<include refid="member-select"/>
 		where 	member_id=#{id}
