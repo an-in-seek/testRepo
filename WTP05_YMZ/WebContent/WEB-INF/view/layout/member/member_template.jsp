@@ -57,7 +57,7 @@ header.member_template{
 footer.member_template{
 	height:50px;
 	width:1024px;
-	background-color:#B70000;
+	background-color:#2b2f3a;
 	color:white;
 	padding-top: 4px;
 	padding-bottom: 12px;
