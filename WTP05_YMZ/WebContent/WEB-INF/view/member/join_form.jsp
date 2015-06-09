@@ -239,23 +239,24 @@ var idChe = false;
 </script>
 <style type="text/css">
 div#table{
-	margin-right:100px;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
-	margin-left:150px;
 	padding: 20px;
-	width:1000px;
 	font-weight:bold;
 	text-align:left;
 	float:center;   /*왼쪽으로 띄움 */
 }	
+table{
+	margin-left: auto;
+	margin-right: auto;
+}
 	
 </style>
-<div id="table">
-<h2>회원가입</h2>
+<div id="table" align="center">
+<h2 align="center">회원가입</h2>
 <c:if test="${requestScope.error_message != null}">
 	<font color="red" size="2">${requestScope.error_message}</font>
 </c:if>
-<form method="post" action="${initParam.rootPath }/member/join.do"  id="registerForm" enctype="multipart/form-data">
-	<table border="1">
+<form method="post" action="${initParam.rootPath }/member/join.do"  id="registerForm" enctype="multipart/form-data" >
+	<table border="1" >
 		<tr>
 			<td align="center">ID</td>
 			<td>
