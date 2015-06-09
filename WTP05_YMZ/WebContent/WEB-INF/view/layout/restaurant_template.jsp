@@ -50,7 +50,7 @@ section.template{
 	padding: 50px;
 }
 footer.template{
-	background-color:#B70000;
+	background-color:#2b2f3a;
 	color:white;
 	padding-top: 4px;
 	padding-bottom: 12px;
