@@ -408,4 +408,6 @@ create sequence review_no_seq;
 -- 리뷰댓글에서 사용하는 시퀀스
 drop sequence review_reply_no_seq;
 create sequence review_reply_no_seq;
-
+-- 리뷰신고게시물에서 사용하는 시퀀스
+drop sequence reported_no_seq;
+create sequence reported_no_seq;
