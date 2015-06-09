@@ -30,7 +30,7 @@
 			</li>
 			<li>
 			<c:if test="${sessionScope.login_info.grade=='master'}">
-				<li><a href="${initParam.rootPath }/member/login/memberListPaging.do" class="menu">신고관리</a></li>
+				<li><a href="${initParam.rootPath }/reported/login/reportedList.do" class="menu">신고관리</a></li>
 				<li><a href="${initParam.rootPath }/member/login/memberListPaging.do" class="menu">회원관리</a></li>
 			</c:if>
 			</li>

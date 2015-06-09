@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="reported.dao.ReportedBBSMapper">
+
+	<sql id="report-select">
+		select	REPORTED_REVIEW_NO,
+				CATEGORY,
+				BBS_NO,
+				STATE,
+				REASON,
+				to_char(to_date(reported_date, 'yyyymmdd'), 'yyyy-mm-dd') reported_date, 
+				REPORTER_ID
+		from 	REPORTED_REVIEW
+	</sql>
+	
+	<resultMap type="ReportedBBS" id="report-resultmap">
+		<id column="reported_review_no" property="reportNo"/>
+		<result column="category" property="category"/>
+		<result column="bbs_no" property="reviewNo"/>
+		<result column="state" property="state"/>
+		<result column="reason" property="reason"/>
+		<result column="reported_date" property="reportedDate"/>
+		<result column="reporter_id" property="reporterId"/>
+	</resultMap>
+	
+	<!-- 전체 정보 조회 -->
+	<select id="selectAllReportedBBS" parameterType="map" resultMap="report-resultmap">
+		select  REPORTED_REVIEW_NO, CATEGORY, BBS_NO, STATE, REASON, reported_date, REPORTER_ID
+		from (
+			select ceil(rownum/#{contentsPerPage}) page, REPORTED_REVIEW_NO, CATEGORY, BBS_NO, STATE, REASON, reported_date, REPORTER_ID
+			from (
+					<include refid="report-select"/>
+					order by REPORTED_REVIEW_NO
+			)
+		) 
+		where page = #{pageNo}
+	</select>
+	
+	<!-- DB 데이터 총 개수 -->
+	<select id="selectTotalReportedBBSCount" resultType="_int">
+		select 	count(REPORTED_REVIEW_NO) 
+		from 		REPORTED_REVIEW
+	</select>
+	
 </mapper>

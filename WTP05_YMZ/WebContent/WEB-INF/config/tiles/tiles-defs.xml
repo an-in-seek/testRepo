@@ -23,6 +23,9 @@
 	<definition name="qna/*.tiles" extends="template">
 		<put-attribute name="body" value="/WEB-INF/view/qna/{1}.jsp"/>
 	</definition>
+	<definition name="reported/*.tiles" extends="template">
+		<put-attribute name="body" value="/WEB-INF/view/reported/{1}.jsp"/>
+	</definition>
 	<!-- 인식 : 타일즈 프레임 -->
 	
 	
