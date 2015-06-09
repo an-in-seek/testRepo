@@ -71,6 +71,7 @@ function pw_pop(){
   color:white; 
   -webkit-appearance: none;
   cursor: pointer;
+  font-family: 'Hanna', sans-serif;
 }
 </style>
   
