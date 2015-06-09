@@ -24,9 +24,11 @@ img{
 	max-width: 100%; 
 	height: auto;
 }
-/*링크에 밑줄 제거*/
+/*링크에 밑줄 제거 + 색 고정*/
 a{
 	text-decoration: none;
+	color: #808080;
+	
 }
 /*테이블 기본 스타일*/
 table, td, th{
@@ -50,12 +52,13 @@ header.main_template{
 
 nav#right{										/* 메인화면 오른쪽 로그인창 */
 	font-family: 'Hanna', sans-serif;
-	margin-top:10px;
-	background-color: #f8f8f8;   
+	margin-top:5px;
+	background-color: #f8f8f8;
+	border: solid 1px #b70000;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	padding:10px;
 	height:160px;
-	width:260px;
+	width:220px;
 	text-align:center;
 	float:right;  /*오른쪽으로 띄움 */
 }

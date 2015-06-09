@@ -10,12 +10,36 @@ function pw_pop(){
 </script>
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
 #main-title {color:#f8f8f8;font-size:70pt;margin-top:20%;}
 .se {font-family: serif;}
 .sa {font-family: sans-serif;}
 .cu {font-family: cursive;}
 .fa {font-family: fantasy;}
-.mo {font-family: monospace;}
+#mainInfofind {					/* 회원 정보 찾기 */
+	font-family: 'Hanna', sans-serif;
+	margin-left: auto;
+	margin-right: auto;
+	height: 20px;
+	font-size: 2;
+	text-align: center;
+}
+#mainLoginForm {				/* 로그인 입력 폼 */
+	text-align: center;
+	border: solid 1px #bfbfbf;  /* 로그인 입력폼 테두리 선 */ 
+	margin-top: 4%;
+	margin-left: auto;
+	margin-right: auto;
+	color: #808080;
+}
+#mainLoginInput{
+	font-family: 'Hanna', sans-serif;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	  cursor: pointer;
+}
 .int {position: relative;
   z-index: 10;
   width: 120px;
@@ -26,15 +50,15 @@ function pw_pop(){
   background: #fff;
   line-height: 16px;
   font-size: 12px;
-  color: #4a4a4a;
+  color: #808080;
   -webkit-appearance: none;
   zoom: 1;}
-.btn input {
+.btn input {			/* 버튼 */
   width: 90px;
   height: 30px;
   border: 0;
   border-radius: 0;
-  background: darkslateblue;
+  background: #808080;
   font-size: 12px;
   line-height: 55px\9;
   color:white; 
@@ -57,11 +81,11 @@ function pw_pop(){
 	
 	<table align="center"  style="border:solid 1px #050099; margin-top:4%" width="220px">
 		<tr align="center" height="50px" >
-			<td class="btn">
+			<td>
 			<input type="button"  value="마이페이지" style="border:solid 1px #050099; " 
 					OnClick="window.location='${initParam.rootPath }/member/mypage.do'">
 			</td>
-			<td class="btn">
+			<td>
 				<input type="button"  value="로그아웃" style="border:solid 1px #050099; " 
 					OnClick="window.location='${initParam.rootPath }/member/login/logout.do'">
 			</td>
@@ -72,7 +96,7 @@ function pw_pop(){
 <c:choose>
 	<c:when test="${sessionScope.login_info==null }">
 		<form action="${initParam.rootPath }/member/login.do" method="post" >
-			<table align="center"  style="border:solid 1px #050099; margin-top:4%">
+			<table id="mainLoginForm">
 				<tr align="center" >
 					<td><font size="3">아이디</font></td>
 					<td><input type="text" name="id"  placeholder="ID" class="int" required="required"></td>
@@ -82,18 +106,18 @@ function pw_pop(){
 					<td><input type="password" name="password"  placeholder="Password" class="int" required="required" maxlength="16"></td>
 				</tr>
 			</table>
-			<table align="center" style="margin-top:1%">
+			<table id="mainLoginInput" style="margin-top:1%">
 				<tr align="center" >
-					<td class="btn"><input type="submit"  value="로그인" style="font-size:16px; border:solid 1px #050099; "></td>
-					<td class="btn"><input type="button"  value="회원가입" style="font-size:16px; border:solid 1px #050099; " 
+					<td class="btn"><input type="submit"  value="로그인"></td>
+					<td class="btn"><input type="button"  value="회원가입"
 					OnClick="window.location='${initParam.rootPath }/member/joinForm.do'"></td>
 				</tr>
 			</table>
 			
-			<table align="center" height="50" style="margin-top:1%" class="mo">
+			<table id="mainInfofind">
 				<tr>
-					<td><a style="text-decoration:none;" href="javascript:id_pop();"><font size="2">아이디 찾기 |</font></a></td>
-					<td><a style="text-decoration:none;" href="javascript:pw_pop();"><font size="2">비밀번호 찾기</font></a></td>
+					<td><a style="text-decoration:none;" href="javascript:id_pop();">아이디 찾기 |</a></td>
+					<td><a style="text-decoration:none;" href="javascript:pw_pop();">비밀번호 찾기</a></td>
 				</tr>
 			</table>
 		</form>
