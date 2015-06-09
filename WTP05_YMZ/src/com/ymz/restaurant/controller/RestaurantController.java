@@ -31,6 +31,7 @@ public class RestaurantController {
 	
 	@Autowired
 	private RestaurantService service;
+	private Member prevMember = new Member();
 	//송이꺼
 	@Autowired
 	private RestaurantReplyService replyService;
@@ -225,8 +226,10 @@ public class RestaurantController {
 		}
 		
 		// 조회수 1증가
-		service.increaseHits(restaurantNo);
-		
+		if(member!=prevMember){
+			prevMember = member;
+			service.increaseHits(restaurantNo);
+		}
 		
 		//송이꺼-----------------------------------------------------------------------------
 	
