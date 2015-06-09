@@ -133,8 +133,9 @@ $(document).ready(function(){
 			$("#content").focus();
 			alert("내용을 입력하세요");
 			return false;
-		}else if($("input[type=radio][name=score]:checked").length<1){
-			alert("평점을 선택해");
+			}
+		else if($("input[type=radio][name=score]:checked").length<1){
+				alert("평점을 선택해");
 			return false;
 		}
 	});
@@ -164,7 +165,7 @@ function modifyReply(number, restaurantNo){
 				$("#updateReplyForm").append("<input type='hidden'  name='number' value='"+number+"'>");
 				$("#updateReplyForm").append("<input type='hidden'  name='restaurantNo' value='"+restaurantNo+"'>");
 				$("#ModifyContent").val(con);	
-				$("#dialog").dialog({modal:true, width:400});
+				$("#dialog").dialog({modal:true, width:650});
 		}else{
 				return false;
 		}
@@ -187,6 +188,16 @@ function removeReply(number,score, restaurantNo){
 width:400px;
 display:none;
 }
+/* UI Object */
+
+.star_rating,
+.star_rating span{display:inline-block;overflow:hidden;height:14px;height:14px;background:transparent url(${initParam.rootPath }/css/images/ico_star.gif) no-repeat}
+.star_rating{width:79px;vertical-align:middle}
+.star_rating span{background-position:0 -14px;font-size:0;line-height:0;text-indent:-100px;*text-indent:0;vertical-align:top}
+
+/* //UI Object */
+
+
 </style>
 
 </head>
@@ -366,24 +377,31 @@ display:none;
 </tr>
 </tfoot>
 </table>
-<!-- ---------------------------------------------------------------------------------------------------- -->
+<!-- -----------------------------------------------------송이----------------------------------------------- -->
 <hr>
 	<p>
 		<font size="5"><b>댓글</b></font>
 	</p>
-
 	<hr>
-	<table align="center" style="width: 700px;" border='1'>
+	<table align="center" style="width: 700px;" "background-color: blue;" border='1'>
 		<c:forEach items="${requestScope.replyList}" var="reply">
 				<tr>
-					<td>글번호 : ${reply.number }</td>
-					<td>작성일 : ${reply.regDate }
-					<td>작성자 : ${reply.memberId }</td>
-					<td>평점 : ${reply.score }</td>
+					<td><font color="#80000">글번호 : ${reply.number }</td>
+					<td><font color="#80000">작성일 : ${reply.regDate }</td>
+					<td><font color="#80000">작성자 : ${reply.memberId }</td>
+					<td><font color="#80000">평점 : ${reply.score }
+							<c:choose>
+								<c:when test="${reply.score==1}"><span class="star_rating"><span style="width:20%">1점</span></span></c:when>
+								<c:when test="${reply.score==2}"><span class="star_rating"><span style="width:40%">2점</span></span></c:when>
+								<c:when test="${reply.score==3}"><span class="star_rating"><span style="width:60%">3점</span></span></c:when>
+								<c:when test="${reply.score==4}"><span class="star_rating"><span style="width:80%">4점</span></span></c:when>
+								<c:when test="${reply.score==5}"><span class="star_rating"><span style="width:100%">5점</span></span></c:when>
+							</c:choose>
+					</td>
 				</tr>
 				<tr>
-				내용 :
-					<td id="replyContent${reply.number}" colspan="4" height="30px">${reply.content }</td>
+			
+					<td id="replyContent${reply.number}" colspan="4" height="30px"><font color="#FF7F50">${reply.content }</td>
 				</tr>
 				<td align="right" colspan="4">
 				<input type="button" id="replyModifyButton${reply.number}" onclick="modifyReply(${reply.number},${requestScope.restaurant.restaurantNo})" value="수정">
@@ -404,17 +422,22 @@ display:none;
 		<table align="center" style="width: 700px;" border='1'>
 			<tr >
 				<td>	<font size='6'><b>내용</b></font>
+				
 					<input type="text" id="content" name="content" style="width: 600px; height: 80px"> 
 					<input type="hidden"	id="restaurantNo" name="restaurantNo" value="${requestScope.restaurant.restaurantNo }">
+ 	
+		
 				<p>
-				평점주기
-					<label for="1">1</label><input type="radio" name="score" value="1" id="score1">
-					<label for="2">2</label><input type="radio" name="score" value="2" id="score2">
-					<label for="3">3</label><input type="radio" name="score" value="3" id="score3">
-					<label for="4">4</label><input type="radio" name="score" value="4" id="score4">
-					<label for="5">5</label><input type="radio" name="score" value="5" id="score5">
+					평점주기
+					<label for="1"></label><input type="radio" name="score" value="1" id="1"><span class="star_rating"><span style="width:20%"></span></span>
+					<label for="2"></label><input type="radio" name="score" value="2" id="2"><span class="star_rating"><span style="width:40%"></span></span>
+					<label for="3"></label><input type="radio" name="score" value="3" id="3"><span class="star_rating"><span style="width:60%"></span></span>
+					<label for="4"></label><input type="radio" name="score" value="4" id="4"><span class="star_rating"><span style="width:80%"></span></span>
+					<label for="5"></label><input type="radio" name="score" value="5" id="5"><span class="star_rating"><span style="width:100%"></span></span>
 				</p>
-					<input id="registerBtn" type="submit" value="등록">
+				
+				
+				<input id="registerBtn" type="submit" value="등록">
 				</td>
 			</tr>
 		</table>
@@ -424,16 +447,18 @@ display:none;
 		<section>
 			<header style="text-align: center; font-weight: bolder; font-size: 1.3em; border-bottom: 2px solid black; padding: 5px">댓글을 수정하세요</header>
 				<form id="updateReplyForm" method="post" action="${initParam.rootPath}/restaurant/login/updateReply.do"  >
+					<p>
 					<article>내용</article>
-						<input type="text" id="ModifyContent" name="content" style="width: 300px; height: 40px" autofocus="autofocus">
-						<p>
-							평점주기
-							<label for="1">1</label><input type="radio" name="score" value="1" id="1">
-							<label for="2">2</label><input type="radio" name="score" value="2" id="2">
-							<label for="3">3</label><input type="radio" name="score" value="3" id="3">
-							<label for="4">4</label><input type="radio" name="score" value="4" id="4">
-							<label for="5">5</label><input type="radio" name="score" value="5" id="5">
 						</p>
+						<input type="text" id="ModifyContent" name="content" style="width: 600px; height: 40px" autofocus="autofocus">
+						<p>
+					평점주기
+					<label for="1"></label><input type="radio" name="score" value="1" id="1"><span class="star_rating"><span style="width:20%"></span></span>
+					<label for="2"></label><input type="radio" name="score" value="2" id="2"><span class="star_rating"><span style="width:40%"></span></span>
+					<label for="3"></label><input type="radio" name="score" value="3" id="3"><span class="star_rating"><span style="width:60%"></span></span>
+					<label for="4"></label><input type="radio" name="score" value="4" id="4"><span class="star_rating"><span style="width:80%"></span></span>
+					<label for="5"></label><input type="radio" name="score" value="5" id="5"><span class="star_rating"><span style="width:100%"></span></span>
+				</p>
 				<input id="replyModifyBtn" type="submit" value="등록">
 				
 		</form>
