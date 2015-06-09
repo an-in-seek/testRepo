@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link type="text/css" href="${initParam.rootPath }/css/menudropbox.css"  rel="stylesheet">
-<!-- <style type="text/css">
+<style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
 	.seek ul{ padding:0; list-style: none;}
@@ -19,7 +19,7 @@
     	background: #B70000;
     	/* border:solid 2px #050099;  */
     }
-</style>     -->
+</style> 
 <body>
 	<div>
 		<ul class="jjooo">
