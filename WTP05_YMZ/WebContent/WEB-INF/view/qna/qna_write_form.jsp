@@ -75,7 +75,7 @@ table#tb thead tr{
 				<td align="center" width="40px">분류</td>
 				<td>
 					<select id="category" name="category">
-						<option value="default">분류</option>
+						<option>분류</option>
 							<c:forEach items="${requestScope.categoryList}" var="c">
 								<option value="${c.categoryName}">${c.categoryName}</option>
 							</c:forEach>

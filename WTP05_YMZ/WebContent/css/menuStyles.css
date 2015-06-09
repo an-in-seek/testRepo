@@ -2,11 +2,10 @@
 #cssmenu {
   position: relative;
   height: 44px;
-  background: #2b2f3a;
   width: auto;
-
+  font-family: 'Hanna', sans-serif;
 }
-#cssmenu ul {  
+#cssmenu ul {
 	list-style: none;
 	padding: 0;
 	background: #4c4e5a;

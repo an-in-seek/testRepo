@@ -7,5 +7,7 @@
 </head>
 <body>
 
+게시물 신고관리
+
 </body>
 </html>
