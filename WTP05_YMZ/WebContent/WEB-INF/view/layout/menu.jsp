@@ -11,11 +11,11 @@
     .seek ul li:hover ul{display: block; border:1px #ffffff; /* display the dropdown */} 
     .seek{
     	width:100%;
-    	margin-top: 5px;
+    	margin-top: 2px;
     	font-family: 'Hanna', sans-serif;
-    	height: 50px;
+    	height: 30px;
     	background: #B70000;
-    	border:solid 2px #050099; 
+    	/* border:solid 2px #050099;  */
     }
 </style>    
 
