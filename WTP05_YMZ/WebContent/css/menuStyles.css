@@ -20,15 +20,11 @@
 }
 #cssmenu > ul {
   font-family: 'Hanna', sans-serif;
-  position: relative;
+  position initial;
   display: block;
   background: #B70000;
   width: 1024px;
   z-index: 500;
-<<<<<<< HEAD
-  
-=======
->>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 }
 #cssmenu:after,
 #cssmenu > ul:after {
