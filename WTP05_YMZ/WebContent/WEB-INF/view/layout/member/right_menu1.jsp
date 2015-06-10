@@ -76,6 +76,7 @@ function pw_pop(){
 }
 </style>
   
+<div>
 <c:if test="${sessionScope.login_info!=null }">	
 	<table id="loginSuccess" align="center">
 		<tr align="center" height="30px" >
@@ -132,4 +133,4 @@ function pw_pop(){
 		</form>
 	</c:when>
 </c:choose>
-	
+</div>
