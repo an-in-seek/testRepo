@@ -34,19 +34,22 @@ $(document).ready(function(){
 		fCreator: "createSEditor2"
 	});
 	
+	
 	// 등록버튼 클릭시 form 전송
 	$("#save").click(function(){
-		if (!$("#title").val()) {
-			alert("제목을 입력하세요");
-			$("#title").focus();
-			return false;
-		}
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD");
 		if(!$("#content").val()){
-			alert("내용을 입력하세요");
+			alert("내용을 입력하세요!!");
 			$("#content").focus();
 			return false;
 		} 
-		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD");
+		
+		if (!$("#title").val()) {
+			alert("제목을 입력하세요!!");
+			$("#title").focus();
+			return false;
+		}
+		
 	});
 
 	
