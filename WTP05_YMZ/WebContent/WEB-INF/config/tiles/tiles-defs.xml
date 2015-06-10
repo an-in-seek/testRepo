@@ -35,6 +35,9 @@
 	<definition name="review/*.tiles" extends="template">
 		<put-attribute name="body" value="/WEB-INF/view/review/{1}.jsp"/>
 	</definition>
+	<definition name="member/*.tiles" extends="template">
+		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
+	</definition>
 	<!-- 공통 타일즈 프레임 -->
 	
 	<!-- 메인페이지:달이 -->
@@ -49,15 +52,6 @@
 		<put-attribute name="right_menu" value="/WEB-INF/view/layout/member/login_menu.jsp"/>
 	</definition>
 	
-	<!-- 회원가입 로그인 메뉴바를 누르면 네비게이션이 안보이게 한다. -->
-	 <definition name="member_template" template="/WEB-INF/view/layout/member/member_template.jsp">
-		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
-	</definition>
-	<definition name="member/*.tiles" extends="member_template">
-		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
-	</definition>
 	<!-- 메인페이지:끝 -->
 	<!-- 마이페이지:달이 -->
 	<definition name="mypage_template" template="/WEB-INF/view/layout/member/mypage_template.jsp">

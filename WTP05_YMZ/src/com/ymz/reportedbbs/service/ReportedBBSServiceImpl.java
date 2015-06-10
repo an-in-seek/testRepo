@@ -28,4 +28,7 @@ public class ReportedBBSServiceImpl implements ReportedBBSService {
 		map.put("pagingBean", pagingBean); //5개
 		return map;
 	}
+	
+	
+	/*public insert()*/
 }

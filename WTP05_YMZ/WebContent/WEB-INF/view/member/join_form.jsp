@@ -250,8 +250,8 @@ table{
 }
 	
 </style>
-<div id="table" align="center">
 <h2 align="center">회원가입</h2>
+<div id="table" align="center">
 <c:if test="${requestScope.error_message != null}">
 	<font color="red" size="2">${requestScope.error_message}</font>
 </c:if>
