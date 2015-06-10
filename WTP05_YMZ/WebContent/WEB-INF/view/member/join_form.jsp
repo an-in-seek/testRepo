@@ -113,7 +113,7 @@ var emailVal = false;
 			nickVal = false;
 			return false;
 		}
-		if(!/^[가-힣a-zA-Z]{2,8}$/.test(nickname)){
+		if(!/^[가-힣a-zA-Z0-9]{2,8}$/.test(nickname)){
 			$("#nicksMessage").text("");
 			$("#nickMessage").text("닉네임은 영문과 한글로 입력해 주세요.");
 			nickVal = false;
