@@ -31,12 +31,169 @@ function openDaumPostcode(){
 	}).open();
 }
 $(document).ready(function(){
+var idVal = false;	
 var check = false;
 var nickChe = false;
 var idChe = false;
-	//ID 중복 체크
+var pwVal = false;
+var nameVal = false;
+var nickVal = false;
+var numVal = false;
+var emailVal = false;
+	//ID 유효성 체크
+	$("#id").keyup(function(){
+		var id = $("#id").val();
+		var idSize = id.length;
+		 // 아이디 검사
+		if(idSize<5){
+			$("#idsMessage").text("");
+			$("#idMessage").text("ID는 5자리이상 입력하세요.");
+			idVal = false;
+			return false;
+		}
+		if(!/^[a-zA-Z0-9]{5,12}$/.test(id)){
+			$("#idsMessage").text("");
+			$("#idMessage").text("ID는 영문과 숫자로 입력해 주세요.");
+			idVal = false;
+			return false;
+		}
+		$('#idMessage').text("");	
+		$("#idsMessage").text("사용가능한 ID입니다");
+		idVal = true;
+	});
+	
+	//password 유효성검사
+	$("#password").keyup(function(){
+		var password = $("#password").val();
+		var pwSize = password.length;
+		 // 아이디 검사
+		if(pwSize<4){
+			$("#pwsMessage").text("");
+			$("#pwMessage").text("password는 4자리이상 입력하세요.");
+			pwVal = false;
+			return false;
+		}
+		if(!/^.*(?=.{4,24}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(password)){
+			$("#pwsMessage").text("");
+			$("#pwMessage").text("password는 영문,숫자,특수문자를 혼합하여 주세요.");
+			pwVal = false;
+			return false;
+		}
+		$('#pwMessage').text("");	
+		$("#pwsMessage").text("사용가능한 password입니다");
+		pwVal = true;
+	});
+	//이름 유효성 검사
+	$("#name").keyup(function(){
+		var name = $("#name").val();
+		var nameSize = name.length;
+		if(nameSize<2){
+			$("#namesMessage").text("");
+			$("#nameMessage").text("이름은 두자리이상 입력하세요.");
+			nameVal = false;
+			return false;
+		}
+		if(!/^[가-힣]{2,10}|^[a-zA-Z]{2,10}$/.test(name)){
+			$("#namesMessage").text("");
+			$("#nameMessage").text("이름은 영문또는 한글로 입력해 주세요.");
+			nameVal = false;
+			return false;
+		}
+		$('#nameMessage').text("");	
+		$("#namesMessage").text("사용가능한 이름입니다");
+		nameVal = true;
+	});
+	//닉네임 유효성 검사
+	$("#nickname").keyup(function(){
+		var nickname = $("#nickname").val();
+		var nickSize = nickname.length;
+		if(nickSize<2){
+			$("#nicksMessage").text("");
+			$("#nickMessage").text("닉네임은 두자리이상 입력하세요.");
+			nickVal = false;
+			return false;
+		}
+		if(!/^[가-힣a-zA-Z]{2,8}$/.test(nickname)){
+			$("#nicksMessage").text("");
+			$("#nickMessage").text("닉네임은 영문과 한글로 입력해 주세요.");
+			nickVal = false;
+			return false;
+		}
+		$("#nickMessage").text("");	
+		$("#nicksMessage").text("사용가능한 닉네임입니다");
+		nickVal = true;
+	});
+	//이메일 유효성 검사
+	$("#emailName").keyup(function(){
+		var emailName = $("#emailName").val();
+		var emailSize = emailName.length;
+		if(emailSize<2){
+			$("#emailsMessage").text("");
+			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
+			emailVal = false;
+			return false;
+		}
+		if(!/^[a-zA-Z0-9]{1,11}$/.test(emailName)){
+			$("#emailsMessage").text("");
+			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
+			emailVal = false;
+			return false;
+		}
+		$("#emailMessage").text("");	
+		emailVal = true;
+	});
+	
+	$("#emailAddress").keyup(function(){
+		var emailAddress = $("#emailAddress").val();
+		var addressSize = emailAddress.length;
+		 // 아이디 검사
+		if(addressSize<1){
+			$("#emailsMessage").text("");
+			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
+			emailVal = false;
+			return false;
+		}
+		if(!/^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(emailAddress)){
+			$("#emailsMessage").text("");
+			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
+			emailVal = false;
+			return false;
+		}
+		$("#emailMessage").text("");	
+		emailVal = true;
+	});
+	
+	$("#num1").keyup(function(){
+		var num1 = $("#num1").val();
+		var num1Size = num1.length;
+		if(!/^[0-9]{3,4}$/.test(num1)){
+			$("#numsMessage").text("");
+			$("#numMessage").text("잘못된 전화번호입니다");
+			numVal = false;
+			return false;
+		}
+		$('#numMessage').text("");	
+		$("#numsMessage").text("");
+		numVal = true;
+	});
+	
+	$("#num2").keyup(function(){
+		var num2 = $("#num2").val();
+		var num2Size = num2.length;
+		if(!/^[0-9]{3,4}$/.test(num2)){
+			$("#numsMessage").text("");
+			$("#numMessage").text("잘못된 전화번호입니다");
+			numVal = false;
+			return false;
+		}
+		$('#numMessage').text("");	
+		$("#numsMessage").text("");
+		numVal = true;
+	});
+	
 	$("#idDup").on("click", function(){
 		var id = $("#id").val();
+		var idSize = $("#id").val().length;
 		$.ajax({
 			url:"${initParam.rootPath}/member/idDuplicateCheck.do",
 			data:{"id":id},
@@ -48,10 +205,10 @@ var idChe = false;
 			},
 			success:function(ret){
 				if(ret=="false"){
-					alert("중복된 아이디입니다.")
+					alert("중복된 아이디입니다.");
 					idChe = false;
 				}else{
-					alert("사용가능한 아이디입니다.")
+					alert("사용가능한 아이디입니다.");
 					idChe = true;
 				}
 			}
@@ -77,6 +234,7 @@ var idChe = false;
 			success:function(ret){
 				if(ret=="false"){
 					alert("중복된 닉네임입니다.")
+					document.getElementById('nickname').value= "";
 					nickChe = false;
 				}else{
 					alert("사용가능한 닉네임입니다.")
@@ -120,29 +278,66 @@ var idChe = false;
 					pwChe=true;
 			}
 	});
+	
+	var re_pw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-]|.*[0-9])$/;
+	var re_name =/^[가-힣]{2,4}|^[a-zA-Z]{2,10}$/;
+	var re_nick =/^[가-힣]{2,4}|^[a-zA-Z]{2,10}$/;
+	var re_emailName =/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]){1,20}/;
+	var re_emailAddress =/^[a-zA-Z]([-_.]?[a-zA-Z])*.[a-zA-Z]{2,3}/;
+	var re_address =/^[가-힣]{2,20}|^[a-zA-Z]{2,20}$/;
 	//Validator 검사위해 주석처리
 	$("#registerForm").on("submit", function(){
-		
-		//좋아하는 음식 값 String으로 전달하기
-		
 		
 		//성별 체크
 		var sexChe = $("input:radio[name='sex']:checked").val(); 
 		//비밀번호 확인 체크
+		
 		var passwordCh = $("#passwordCheck").val();
 		var password = $("#password").val();
+		var pwSize = $("#password").val().length;
 		if(passwordCh!=password){
 			pwChe=false;
 		}else{
 			pwChe=true;
 		}
 		
-		//이메일 중복 체크
+		//좋아하는 음식 값 String으로 전달하기
 		
-	
+		//이메일 중복 체크
+		if(!pwVal){
+			alert("비밀번호 양식이 맞지 않습니다");
+			$("#password").focus();
+			return false;
+		}
+		
+		if(!nameVal){
+			alert("이름 양식이 맞지 않습니다");
+			$("#name").focus();
+			return false;
+		}
+		
+		if(!nickVal){
+			alert("닉네임 양식이 맞지 않습니다");
+			$("#nickname").focus();
+			return false;
+		}
+		if(!numVal){
+			alert("전화번호가 올바르지 않습니다");
+			return false;
+		}
+		if(!emailVal){
+			alert("이메일이 올바르지 않습니다");
+			$("#emailName").focus();
+			return false;
+		}	
 		if(!$("#id").val()){
 			alert("id를 입력하세요");
 			$("#id").focus();
+			return false;
+		}
+		
+		if(!idVal){
+			alert("아이디 양식이 맞지 않습니다");
 			return false;
 		}
 		
@@ -169,9 +364,15 @@ var idChe = false;
 			return false;
 		}
 		
+		if(!nickChe){
+			alert("닉네임 중복체크를 해주십시오");
+			$("#nickname").focus();
+			return false;
+		}
+		
 		if(!check){
 			alert("닉네임 중복체크를 해주십시오");
-			return false
+			return false;
 		}
 		if(!$("#postcode1").val()){
 			alert("우편번호를 입력하세요");
@@ -260,34 +461,38 @@ table{
 		<tr>
 			<td align="center">ID</td>
 			<td>
-				<input type="text" name="id" id='id' value="${requestScope.id }"> <span id="dupMessageLayer"> </span><span class="errorMessage"><form:errors path="member.id"/></span>
-				<input type="button" name="idDup" id="idDup" value="중복체크">
+				<input type="text" name="id" id='id' maxlength='11'> <span id="dupMessageLayer"> </span><span class="errorMessage"><form:errors path="member.id"/></span>
+				<input type="button" name="idDup" id="idDup" value="중복체크"><font color="red" size="1"><span  id="idMessage"> </span></font>
+				<font color="blue" size="1"><span  id="idsMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
 			<td align="center">비밀번호</td>
 			<td>
-				<input type="password" id="password" name="password" > 
+				<input type="password" id="password" name="password" maxlength='24'><font color="red" size="1"><span id="pwMessage"> </span></font>
+				<font color="blue" size="1"><span  id="pwsMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
 			<td align="center">비밀번호확인</td>
 			<td>
-				<input type="password" id="passwordCheck" name="passwordCheck"><span id="pwMessageLayer"> </span><span class="errorMessage"><form:errors path="member.password"/></span>
+				<input type="password" id="passwordCheck" name="passwordCheck" maxlength='24'><font color="red" size="1"><span id="pwMessageLayer"> </span></font><span class="errorMessage"><form:errors path="member.password"/></span>
 			</td>
 		</tr>
 		<tr>
 			<td align="center">이름</td>
 			<td>
-				<input type="text" id="name" name="name" value="${requestScope.name }"> <span class="errorMessage"><form:errors path="member.name"/></span>
+				<input type="text" id="name" name="name" maxlength='10'><font color="red" size="1"><span id="nameMessage"></span></font>
+				<font color="blue" size="1"><span  id="namesMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
 			<td align="center">닉네임</td>
 			<td>
-				<input type="text" id="nickname" name="nickname" value="${requestScope.nickname }">
+				<input type="text" id="nickname" name="nickname"  maxlength='8'>
 				<input type="button" id="exNick" name="exNick" value="중복체크">
-				<span id="dupNicknameMessageLayer"> </span><span class="errorMessage"></span>
+				<font color="red" size="1"><span id="nickMessage"></span></font><span class="errorMessage"></span>
+				<font color="blue" size="1"><span  id="nicksMessage"></span></font>
 			</td>	
 		</tr>
 			<tr>
@@ -328,16 +533,17 @@ table{
 		</tr>		
 		<tr>
 			<td align="center">상세주소</td>
-			<td><input type="text" id="detailAddress" name="detailAddress" value="${requestScope.detailAddress }" style="width:400px;"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
+			<td><input type="text" id="detailAddress" name="detailAddress" maxlength='20' value="${requestScope.detailAddress }" style="width:400px;"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
 			</td>
 		</tr>
 		<tr>
 			<td align="center">이메일</td>
 			<td>
-				<input type="text" id="emailName" name="emailName">@<input type="text" id="emailAddress" name="emailAddress">
+				<input type="text" id="emailName" name="emailName" maxlength='11'>@<input type="text" id="emailAddress" name="emailAddress">
 				<select name="selectEmail"  style="vertical-align:middle" onChange="javascript:mailCheck(this)">
 				<option value="">직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
-				<span class="errorMessage"></span>
+				<font color="red" size="1"><span id="emailMessage"></span></font>
+				<font color="blue" size="1"><span id="emailsMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
@@ -345,8 +551,9 @@ table{
 			<td>
 				<select name="phoneCP" id="phoneCP" class="input_text w60" style="vertical-align:middle">
 			<option value="010" >010</option><option value="011" >011</option><option value="017" >017</option><option value="018" >018</option><option value="019" >019</option></select>
-			&nbsp;-&nbsp;<input type="text" id="num1" name="num1" size="2" style="vertical-align:middle">&nbsp;&nbsp;<input type="text" id="num2" name="num2" size="2" class="input_text w60" style="vertical-align:middle"> 
-			<span class="errorMessage"></span>
+			&nbsp;-&nbsp;<input type="text" id="num1" name="num1" maxlength='4' size="2" style="vertical-align:middle">&nbsp;&nbsp;<input type="text" id="num2" name="num2" size="2" maxlength='4'class="input_text w60" style="vertical-align:middle"> 
+			<font color="red" size="1"><span id="numMessage"></span></font>
+			<font color="blue" size="1"><span id="numsMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
@@ -362,7 +569,7 @@ table{
 		<tr>
 			<td align="center">추천인</td>
 			<td>
-				<input type="text" name="recommend" id="recommend" value="${requestScope.recommend }">
+				<input type="text" name="recommend" id="recommend" maxlength='20' value="${requestScope.recommend }">
 			</td>
 		</tr>
 		<tr>

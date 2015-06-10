@@ -42,4 +42,9 @@
 		from 		REPORTED_REVIEW
 	</select>
 	
+	<insert id="insertReportedBBS" parameterType="ReportedBBS">
+		insert into reported_review
+		values (reported_no_seq.nextval, #{category}, #{reviewNo}, #{state}, #{reason}, to_char(sysdate, 'yyyymmdd'), #{reporterId})
+	</insert>
+	
 </mapper>
