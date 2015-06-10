@@ -56,7 +56,7 @@ $(document).ready(function(){
 						<ul class="faqBody">
 							<li class="article" id="a${faq.number}" align="center" height="40px">
 								<p class="q"><a href="#a${faq.number}">Q${faq.number} : ${faq.title}</a></p>
-								<p class="a">
+								<p class="a" >
 									A : ${faq.content}
 									<input id="modifyBtn${faq.number}" type="button" value="수정하기" onclick="window.location='${initParam.rootPath }/faq/login/admin/modifyForm.do?number=${faq.number}'">
 								</p>
