@@ -42,9 +42,10 @@
 		from 		REPORTED_REVIEW
 	</select>
 	
+	<!-- 신고된 게시물 삽입하기 -->
 	<insert id="insertReportedBBS" parameterType="ReportedBBS">
 		insert into reported_review
-		values (reported_no_seq.nextval, #{category}, #{reviewNo}, #{state}, #{reason}, to_char(sysdate, 'yyyymmdd'), #{reporterId})
+		values (reported_no_seq.nextval, '리뷰', #{reviewNo}, #{state}, #{reason}, to_char(sysdate, 'yyyymmdd'), #{reporterId})
 	</insert>
 	
 </mapper>

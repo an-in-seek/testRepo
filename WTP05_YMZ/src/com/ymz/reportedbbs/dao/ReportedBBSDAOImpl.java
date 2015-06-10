@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ymz.common.util.PagingBean;
+import com.ymz.qna.vo.QNA;
 import com.ymz.reportedbbs.vo.ReportedBBS;
 
 @Repository
@@ -30,5 +31,10 @@ public class ReportedBBSDAOImpl implements ReportedBBSDAO {
 	@Override
 	public int selectTotalReportedBBSCount(){
 		return session.selectOne(namespace+"selectTotalReportedBBSCount");
+	}
+	
+	@Override
+	public int insertReportedBBS(ReportedBBS reportedBBS) {
+		return session.insert(namespace+"insertReportedBBS", reportedBBS);
 	}
 }
