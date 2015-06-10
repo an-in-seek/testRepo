@@ -78,12 +78,20 @@ public class MemberController {
 		member.setBirth(exbirth);
 		String[] favoriteFood = request.getParameterValues("favoriteFood");
 		String food = "";
+<<<<<<< HEAD
 			if(favoriteFood==null){
 				food ="없음";
 			}else{
 			for(String s :favoriteFood ){
 				food += s+" ";
 				}
+=======
+		if(favoriteFood==null){
+			food ="없음";
+		}else{
+		for(String s :favoriteFood ){
+			food += s+",";
+>>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 			}
 		String emailName = (String)request.getParameter("emailName");
 		String emailAddress = (String)request.getParameter("emailAddress");
@@ -141,8 +149,10 @@ public class MemberController {
 	@RequestMapping(value="login.do",method=RequestMethod.POST)
 	public String login(String id, String password, HttpSession session, HttpServletRequest request, HttpServletResponse response, ModelMap map){
 		Member m = service.getMemberById(id);
+		String state = m.getState();
+		System.out.println(state);
 		String url = null;
-		if(m!=null){
+		if(m!=null&&!state.equals("탈퇴")){
 			if(password.equals(m.getPassword())){
 				session.setAttribute("login_info", m);
 				url = "main.tiles";
@@ -161,21 +171,21 @@ public class MemberController {
 
 	
 	// 전체 정보 조회1
-	@RequestMapping("memberList.do")
+	@RequestMapping("login/admin/memberList.do")
 	public ModelAndView memberList(@RequestParam(defaultValue="1")int page){
 		Map map = service.getMemberListPaging(page);
 		return new ModelAndView("member/member_list.tiles",  map);
 	}
 	
 	// 전체 정보 조회2
-	@RequestMapping("login/memberListPaging.do")
+	@RequestMapping("login/admin/memberListPaging.do")
 	public ModelAndView memberListPaging(@RequestParam(defaultValue="1")int page){
 		Map map = service.getMemberListPaging(page);
 		return new ModelAndView("member/member_list_paging.tiles", map);
 	}
 	
 	//리스트에서 (ID,이름,닉네임,등급)으로 회원정보 조회
-	@RequestMapping("login/findMemberByInfo.do")
+	@RequestMapping("login/admin/findMemberByInfo.do")
 	public  ModelAndView findMemberByInfo(@RequestParam String info, @RequestParam String command, @RequestParam(defaultValue="1")int page){
 		Map map = service.getMemberByInfo(info, command, page);
 		map.put("command", command);
@@ -237,11 +247,11 @@ public class MemberController {
 	}
 	
 	// 정보 제거하기(관리자 전용)
-	@RequestMapping("login/removeMemberByMaster.do")
+	@RequestMapping("login/admin/removeMemberByMaster.do")
 	public String removeMember(@RequestParam String id, ModelMap map){
 		service.removeMemberById(id);
 		//session 제거
-		return "/member/login/memberListPaging.do";//삭제후 메인페이지로 이동
+		return "/member/login/admin/memberListPaging.do";//삭제후 메인페이지로 이동
 	}
 	
 	// 로그아웃
@@ -265,7 +275,7 @@ public class MemberController {
 	}
 	
 	/**********************리스트에서 id로 회원정보 요청한 것 처리 -Ajax 요청처리***********************/
-	@RequestMapping("findMemberById")
+	@RequestMapping("login/admin/findMemberById")
 	@ResponseBody
 	public Member findMemberById(@RequestParam String id){
 		return service.getMemberById(id);

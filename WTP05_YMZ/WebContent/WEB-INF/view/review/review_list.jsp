@@ -129,7 +129,6 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 .listTable thead tr td#latestSort{
 	cursor: pointer;
 }
-
 </style>
 </head>
 

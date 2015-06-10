@@ -120,6 +120,11 @@
 		where	 phone_no=#{phoneNo}
 	</select>
 	
+	<select id="selectMemberState" resultType="string" resultMap="member-resultmap">
+		<include refid="member-select"/>
+		member_id=#{id}
+	</select>
+	
 	<select id="selectAllMember" parameterType="map" resultMap="member-resultmap">
 		<include refid="member-select"/>
 		<choose>

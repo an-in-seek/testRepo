@@ -29,24 +29,24 @@ $(document).ready(function(){
 		},
 		fOnAppLoad : function(){
 			// 기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할 때 사용
-			oEditors.getById["content"].exec("PASTE_HTML", [""]);
+			oEditors.getById["content"].exec("PASTE_HTML", ["${requestScope.review.content}"]);
 		},
 		fCreator: "createSEditor2"
 	});
 	
 	// 등록버튼 클릭시 form 전송
 	$("#save").click(function(){
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		if (!$("#title").val()) {
 			alert("제목을 입력하세요");
 			$("#title").focus();
 			return false;
 		}
-		if (!$("#content").val()) {
-			alert("내용을 입력하세요");
+		if (!$("#content").val() || $("#content").val().trim()=="<p>&nbsp;</p>") {
+			alert("내용을 입력하세요!!");
 			$("#content").focus();
 			return false;
 		}
-		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		
 	});
 
@@ -88,7 +88,7 @@ table#t1 thead tr{
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center" width="50px">제목</td>
-			<td><input type="text" id="title" name="title" style="width:800px" value="${requestScope.review.title}"></td>
+			<td><input type="text" id="title" name="title" style="width:800px" required="required" value="${requestScope.review.title}"></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">
@@ -98,7 +98,7 @@ table#t1 thead tr{
 			<td>&nbsp;</td>
 			<td align="center">내용</td>
 			<td>
-				<textarea name="content" id="content" rows="10" cols="100" style="width:800px; height:420px;">${requestScope.review.content}</textarea><br>
+				<textarea name="content" id="content" rows="10" cols="100" style="width:800px; height:420px;"></textarea><br>
 			</td>
 			<td>&nbsp;</td>
 		</tr>

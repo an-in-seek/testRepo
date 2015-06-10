@@ -18,7 +18,7 @@ public class ReportedBBSController {
 	private ReportedBBSService service;
 	
 	//QNA게시물 전체목록 조회하는 리스트 페이지로 이동
-	@RequestMapping("login/reportedList.do")
+	@RequestMapping("login/admin/reportedList.do")
 	public ModelAndView ReportedBBSList(@RequestParam(defaultValue="1")int pageNo){
 		Map<String, Object> map = service.getReportedBBSList(pageNo);
 		return new ModelAndView("reported/reported_bbs_list.tiles", map);

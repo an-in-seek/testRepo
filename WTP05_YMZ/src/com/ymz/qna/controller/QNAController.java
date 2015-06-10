@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.common.category.service.CategoryService;
@@ -40,7 +41,7 @@ public class QNAController {
 		new QNAValidator().validate(qna, errors);
 		//등록 실패
 		if(errors.hasErrors()){
-			return "qna/qna_write_form.tiles";
+			return "/qna/login/writeForm.do";
 		}
 		//등록 성공
 		//현재 로그인되어있는 사용자 아이디정보 삽입
@@ -56,7 +57,7 @@ public class QNAController {
 		new QNAValidator().validate(qna, errors);
 		//등록 실패
 		if(errors.hasErrors()){
-			return "qna/qna_comment_form.tiles";
+			return "/qna/login/commentForm.do";
 		}
 		//등록 성공
 		//현재 로그인되어있는 사용자 아이디정보 삽입
@@ -72,7 +73,7 @@ public class QNAController {
 		new QNAValidator().validate(qna, errors);
 		//등록 실패
 		if(errors.hasErrors()){
-			return "qna/qna_modify_form.tiles";
+			return "/qna/login/modifyForm.do";
 		}
 		//등록 성공
 		//로그인 체크 - interceptor가 처리
@@ -99,8 +100,13 @@ public class QNAController {
 	
 	// 게시물 삭제
 	@RequestMapping("login/removeQna.do")
-	public String removeQNAByNo(@ModelAttribute QNA qna){
+	public String removeQNAByNo(@RequestParam int number, HttpSession session){
 		//로그인 처리는 interceptor가 처리
+		QNA qna = service.getQNAByNo(number);
+		Member member = (Member) session.getAttribute("login_info");
+		if(!qna.getMemberId().equals(member.getId())){
+			return "view/loginInfoCheck.tiles";
+		}
 		service.removeQNAByNo(qna.getNumber());
 		return "redirect:/qna/qnaList.do";//삭제후 메인페이지로 이동
 	}

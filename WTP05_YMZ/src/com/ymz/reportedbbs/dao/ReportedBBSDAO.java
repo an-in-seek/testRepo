@@ -10,4 +10,6 @@ public interface ReportedBBSDAO {
 
 	public abstract int selectTotalReportedBBSCount();
 
+	public abstract int insertReportedBBS(ReportedBBS reportedBBS);
+
 }
