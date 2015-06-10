@@ -78,63 +78,55 @@ public class MemberController {
 		member.setBirth(exbirth);
 		String[] favoriteFood = request.getParameterValues("favoriteFood");
 		String food = "";
-<<<<<<< HEAD
-			if(favoriteFood==null){
-				food ="없음";
-			}else{
-			for(String s :favoriteFood ){
-				food += s+" ";
-				}
-=======
 		if(favoriteFood==null){
 			food ="없음";
 		}else{
-		for(String s :favoriteFood ){
-			food += s+",";
->>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
+			for(String s :favoriteFood ){
+				food += s+" ";
 			}
-		String emailName = (String)request.getParameter("emailName");
-		String emailAddress = (String)request.getParameter("emailAddress");
-		String exEmail = emailName+"@"+emailAddress;
-		if(service.getMemberByEmail(exEmail)!=null){
-			map.addAttribute("error_message", "이미 가입된 이메일입니다.");
-			request.setAttribute("postcode1", post1);
-			request.setAttribute("postcode2", post2);
-			request.setAttribute("address", exAddress);
-			request.setAttribute("detailAddress", exDetailAddress);
-			request.setAttribute("phoneCP", phoneCP);
-			request.setAttribute("num1", num1);
-			request.setAttribute("num2", num2);
-			request.setAttribute("recommend", recommend);
-			return "member/join_form.tiles";
-		}else if(service.getMemberByPhone(phoneNo)!=null){
-			map.addAttribute("error_message", "이미 가입된 전화번호입니다");
-			request.setAttribute("postcode1", post1);
-			request.setAttribute("postcode2", post2);
-			request.setAttribute("address", exAddress);
-			request.setAttribute("detailAddress", exDetailAddress);
-			request.setAttribute("recommend", recommend);
-			return "member/join_form.tiles";
-			
-		}else{
-		member.setZipcode(zipcode);
-		member.setEmail(exEmail);
-		member.setPhoneNo(phoneNo);
-		member.setGrade("user");
-		member.setFavoriteFood(food);
-		if(service.getMemberById(recommend)!=null){
-			Member rm =service.getMemberById(recommend);
-			int mileage = rm.getMileage()+100;
-			rm.setMileage(mileage);
-			service.modifyMember(rm);
-			member.setMileage(10);
-			service.joinMember(member);
-		}else{
-			member.setMileage(0);
-			service.joinMember(member);
-		}
+		}	
+			String emailName = (String)request.getParameter("emailName");
+			String emailAddress = (String)request.getParameter("emailAddress");
+			String exEmail = emailName+"@"+emailAddress;
+			if(service.getMemberByEmail(exEmail)!=null){
+				map.addAttribute("error_message", "이미 가입된 이메일입니다.");
+				request.setAttribute("postcode1", post1);
+				request.setAttribute("postcode2", post2);
+				request.setAttribute("address", exAddress);
+				request.setAttribute("detailAddress", exDetailAddress);
+				request.setAttribute("phoneCP", phoneCP);
+				request.setAttribute("num1", num1);
+				request.setAttribute("num2", num2);
+				request.setAttribute("recommend", recommend);
+				return "member/join_form.tiles";
+			}else if(service.getMemberByPhone(phoneNo)!=null){
+				map.addAttribute("error_message", "이미 가입된 전화번호입니다");
+				request.setAttribute("postcode1", post1);
+				request.setAttribute("postcode2", post2);
+				request.setAttribute("address", exAddress);
+				request.setAttribute("detailAddress", exDetailAddress);
+				request.setAttribute("recommend", recommend);
+				return "member/join_form.tiles";
+
+			}
+				member.setZipcode(zipcode);
+				member.setEmail(exEmail);
+				member.setPhoneNo(phoneNo);
+				member.setGrade("user");
+				member.setFavoriteFood(food);
+				if(service.getMemberById(recommend)!=null){
+					Member rm =service.getMemberById(recommend);
+					int mileage = rm.getMileage()+100;
+					rm.setMileage(mileage);
+					service.modifyMember(rm);
+					member.setMileage(10);
+					service.joinMember(member);
+				}else{
+					member.setMileage(0);
+					service.joinMember(member);
+				}
+		
 		return "redirect:/member/joinSuccess.do?id="+member.getId();
-		}
 	}
 	
 	// 등록 성공
