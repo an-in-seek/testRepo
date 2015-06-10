@@ -53,6 +53,8 @@ section.template{
 	width:1024px;
 	height:auto; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	float:left;   /*왼쪽으로 띄움 */
+	padding-top:20px;
+	padding-bottom:20px;
 }
 footer.template{
 	height:50px;
