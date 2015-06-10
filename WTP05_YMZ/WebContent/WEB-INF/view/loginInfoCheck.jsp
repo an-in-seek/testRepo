@@ -6,6 +6,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2 align="center"><font color="red">작성자만 접근 할 수 있습니다.</font></h2>
+<h2 align="center"><font color="red">당신은 접근할 수 없습니다.</font></h2>
 </body>
 </html>
+
+
+

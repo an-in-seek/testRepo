@@ -105,7 +105,7 @@ public class QNAController {
 		QNA qna = service.getQNAByNo(number);
 		Member member = (Member) session.getAttribute("login_info");
 		if(!qna.getMemberId().equals(member.getId())){
-			return "view/not_admin.tiles";
+			return "view/loginInfoCheck.tiles";
 		}
 		service.removeQNAByNo(qna.getNumber());
 		return "redirect:/qna/qnaList.do";//삭제후 메인페이지로 이동
