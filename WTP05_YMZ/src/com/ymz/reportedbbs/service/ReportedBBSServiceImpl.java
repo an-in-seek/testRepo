@@ -30,10 +30,15 @@ public class ReportedBBSServiceImpl implements ReportedBBSService {
 		return map;
 	}
 	
+
+	
+	/*public insert()*/
+
 	//신고된 게시물 등록
 	@Override
 	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
 	public void registerReportedBBS(ReportedBBS reportedBBS) {
 		dao.insertReportedBBS(reportedBBS);
 	}
+
 }

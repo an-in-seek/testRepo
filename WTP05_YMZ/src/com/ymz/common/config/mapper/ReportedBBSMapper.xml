@@ -42,6 +42,7 @@
 		from 		REPORTED_REVIEW
 	</select>
 	
+	
 	<!-- 신고된 게시물 삽입하기 -->
 	<insert id="insertReportedBBS" parameterType="ReportedBBS">
 		insert into reported_review

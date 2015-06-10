@@ -18,8 +18,20 @@ var themeCheck = false;
 var locationCheck = false;
 var infoCheck = false;
 var pictureCheck = false;
-
 $(document).ready(function(){
+	$(window).on("unload",function(){
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/test.do",
+			type:"post"
+		});
+	});
+	$(window).on("close",function(){
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/test.do",
+			type:"post"
+		});
+	});
+	
 	$("#restaurantName").on("blur",function(){
 		$.ajax({
 			url:"${initParam.rootPath}/restaurant/ajax/checkName.do",
@@ -127,6 +139,7 @@ $(document).ready(function(){
 		}
 	});
 	////////////////////////////////////////
+	
 	$("#regForm").on("submit",function(){
 		if(!nameCheck){
 			$("#nameMessage").text(nameMessage);
@@ -175,6 +188,7 @@ $(document).ready(function(){
 		
 		$("#description").val($("#description").val().replace(/\n/g, '<br>'));
 	});
+	
 	////////////////////////////////////////
 	
 	$("#btn_cancel").on("click",function(){

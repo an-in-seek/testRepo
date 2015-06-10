@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.ymz.member.exception.DuplicatedIdException;
+import com.ymz.member.exception.DuplicatedNameException;
+import com.ymz.member.exception.DuplicatedNickException;
+import com.ymz.member.exception.DuplicatedPhoneException;
 import com.ymz.member.vo.Member;
 
 public interface MemberService {
@@ -12,8 +15,11 @@ public interface MemberService {
 	 * 가입 처리 메소드
 	 * @param member 가입 정보
 	 * @throws DuplicatedIdException 중복된 아이디일 경우 발생
+	 * @throws DuplicatedNameException 
+	 * @throws DuplicatedNickException 
+	 * @throws DuplicatedPhoneException 
 	 */
-	public abstract void joinMember(Member member) throws DuplicatedIdException;
+	public abstract void joinMember(Member member) throws DuplicatedIdException, DuplicatedNameException, DuplicatedNickException, DuplicatedPhoneException;
 
 	/**
 	 * 전체 회원 목록 조회 처리
