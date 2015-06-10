@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,10 @@ public class RestaurantController {
 	@Autowired
 	private RestaurantReplyService replyService;
 	
+	@RequestMapping("/ajax/test.do")
+	public void test() {
+		System.out.println("왔다");
+	}
 	
 	@RequestMapping("/ajax/checkName.do")
 	@ResponseBody
