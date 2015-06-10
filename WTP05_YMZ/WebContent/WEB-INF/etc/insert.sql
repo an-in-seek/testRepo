@@ -65,9 +65,15 @@ insert into location values(location_no_seq.nextval, 'H스퀘어 N동', 'B1');
 insert into location values(location_no_seq.nextval, 'H스퀘어 S동', '2');
 insert into location values(location_no_seq.nextval, 'H스퀘어 S동', '1');
 insert into location values(location_no_seq.nextval, 'H스퀘어 S동', 'B1');
+insert into location values(location_no_seq.nextval, '삼환하이펙스 A동', '2');
+insert into location values(location_no_seq.nextval, '삼환하이펙스 A동', '1');
+insert into location values(location_no_seq.nextval, '삼환하이펙스 A동', 'B1');
+insert into location values(location_no_seq.nextval, '삼환하이펙스 B동', '2');
+insert into location values(location_no_seq.nextval, '삼환하이펙스 B동', '1');
+insert into location values(location_no_seq.nextval, '삼환하이펙스 B동', 'B1');
 
 --유스페이스2동2층
-insert into restaurant values(restaurant_no_seq.nextval, '새마을식당', 'S-4', '031-628-6694', '백주부의 새마을식당이쥬', '11111111111111,11111111111112,11111111111113,11111111111114', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '새마을식당', 'S-4', '031-628-6694', '백주부의 새마을식당이쥬', '11111111111111,11111111111112,11111111111113,11111111111114', 0, 153, 'S-8,S-9,S-10,S-11', '20150530', 0, 5);
 insert into food values(food_no_seq.nextval, '열탄불고기', 8000, '5330원/100g', 1);
 insert into food values(food_no_seq.nextval, '소금구이', 9000, '6000원/100g', 1);
 insert into food values(food_no_seq.nextval, '만신창삼겹살', 9000, '(오리지날/마늘/간장) 6000원/100g', 1);
@@ -77,100 +83,189 @@ insert into food values(food_no_seq.nextval, '7분돼지김치', 5000, null, 1);
 insert into food values(food_no_seq.nextval, '새마을된장찌개', 6000, null, 1);
 insert into food values(food_no_seq.nextval, '냉김치말이국수', 4000, null, 1);
 insert into food values(food_no_seq.nextval, '옛날도시락', 3000, null, 1);
-insert into restaurant values(restaurant_no_seq.nextval, '육회드림', 'S-4', '031-628-7354', '육회드림림', '11111111111121', 0, 0, 'S-11', '20150530', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '육회드림', 'S-4', '031-628-7354', '육회드림림', '11111111111121', 0, 136, 'S-11', '20150530', 0, 5);
 insert into food values(food_no_seq.nextval, '육회비빔밥', 6000, null, 2);
 insert into food values(food_no_seq.nextval, '시골국밥', 5000, null, 2);
-insert into restaurant values(restaurant_no_seq.nextval, '원할머니보쌈', 'S-4', '031-628-6755', '원할머니보쌈입니다<br>할매의손맛을봐라', '11111111111131', 0, 0, 'S-8,S-10,S-11', '20150530', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '원할머니보쌈', 'S-4', '031-628-6755', '원할머니보쌈입니다<br>할매의손맛을봐라', '11111111111131', 0, 12, 'S-8,S-10,S-11', '20150530', 0, 5);
 insert into food values(food_no_seq.nextval, '보쌈정식', 8000, null, 3);
 insert into food values(food_no_seq.nextval, '오리보쌈정식', 9000, null, 3);
 insert into food values(food_no_seq.nextval, '원쌈버섯육개장', 6000, null, 3);
-insert into restaurant values(restaurant_no_seq.nextval, '봉추찜닭', 'S-4', '031-628-6981', '봉<br>추<br>찜<br>닭', '11111111111141', 0, 0, 'S-10,S-11', '20150530', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '봉추찜닭', 'S-4', '031-628-6981', '봉<br>추<br>찜<br>닭', '11111111111141', 0, 45, 'S-10,S-11', '20150530', 0, 5);
 insert into food values(food_no_seq.nextval, '찜닭-小', 20000, '2인분 (닭:국산)', 4);
 insert into food values(food_no_seq.nextval, '찜닭-中', 30000, '3~4인분 (닭:국산)', 4);
 insert into food values(food_no_seq.nextval, '찜닭-大', 40000, '4~5인분 (닭:국산)', 4);
-insert into restaurant values(restaurant_no_seq.nextval, '얼큰이 찌개마을', 'S-4', '031-628-2222', '얼큰이<br>찌개마을', '11111111111181', 0, 0, 'S-8', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '얼큰이 찌개마을', 'S-4', '031-628-2222', '얼큰이<br>찌개마을', '11111111111181', 0, 78, 'S-8', '20150531', 0, 5);
 insert into food values(food_no_seq.nextval, '돼지김치찌개', 6000, null, 5);
 insert into food values(food_no_seq.nextval, '동태탕', 6000, null, 5);
 insert into food values(food_no_seq.nextval, '부대찌개', 12000, '2인분', 5);
-insert into restaurant values(restaurant_no_seq.nextval, '평안도찹쌀순대', 'S-4', '031-739-8900', '평안도<br>찹쌀순대', '11111111111191', 0, 0, 'S-8,S-10,S-11', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '평안도찹쌀순대', 'S-4', '031-739-8900', '평안도<br>찹쌀순대', '11111111111191', 0, 31, 'S-8,S-10,S-11', '20150531', 0, 5);
 insert into food values(food_no_seq.nextval, '순대국밥', 6500, '순대+고기', 6);
 insert into food values(food_no_seq.nextval, '순대만국밥', 6500, null, 6);
 insert into food values(food_no_seq.nextval, '고기만국밥', 6500, null, 6);
-insert into restaurant values(restaurant_no_seq.nextval, '이치류', 'S-7', '031-739-0706', '일류', '11111111111201', 0, 0, 'S-8,S-9', '20150531', 0, 5);
-insert into restaurant values(restaurant_no_seq.nextval, '선어', 'S-7', '031-739-1585', '횟집입니다', '11111111111211', 0, 0, 'S-8,S-9,S-11', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '이치류', 'S-7', '031-739-0706', '일류', '11111111111201', 0, 34, 'S-8,S-9', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '선어', 'S-7', '031-739-1585', '횟집입니다', '11111111111211', 0, 78, 'S-8,S-9,S-11', '20150531', 0, 5);
 insert into food values(food_no_seq.nextval, '무한리필코스', 33000, null, 8);
 insert into food values(food_no_seq.nextval, '정식코스', 26000, '회/스끼다시 리필 안되요', 8);
-insert into restaurant values(restaurant_no_seq.nextval, '머구리', 'S-7', '031-628-6766', '횟집입니다', '11111111111221', 0, 0, 'S-8,S-9,S-11', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '머구리', 'S-7', '031-628-6766', '횟집입니다', '11111111111221', 0, 98, 'S-8,S-9,S-11', '20150531', 0, 5);
 insert into food values(food_no_seq.nextval, '머구리사시미', 40000, null, 9);
 insert into food values(food_no_seq.nextval, '특사시미', 50000, null, 9);
 insert into food values(food_no_seq.nextval, '회덮밥', 8000, null, 9);
-insert into restaurant values(restaurant_no_seq.nextval, '홍스쭈꾸미', 'S-4', '031-628-1222', '쭈꾸미', '11111111111231', 0, 0, 'S-8,S-10', '20150531', 0, 5);
-insert into restaurant values(restaurant_no_seq.nextval, '후니네 생선굽네', 'S-4', '031-628-1223', '생선', '11111111111241', 0, 0, 'S-8,S-10', '20150531', 0, 5);
-insert into restaurant values(restaurant_no_seq.nextval, 'PUZZLE', 'S-5', '031-628-1224', '피자', '11111111111251', 0, 0, 'S-9,S-10', '20150531', 0, 5);
-insert into restaurant values(restaurant_no_seq.nextval, '정원오리부추구이', 'S-4', '031-628-1225', '오리', '11111111111261', 0, 0, 'S-8,S-11', '20150531', 0, 5);
-insert into restaurant values(restaurant_no_seq.nextval, '교동전선생', 'S-4', '031-628-1226', '전집', '11111111111271', 0, 0, 'S-9,S-10', '20150531', 0, 5);
-insert into restaurant values(restaurant_no_seq.nextval, '고메부인', 'S-4', '031-628-1227', '고메고메', '11111111111281', 0, 0, 'S-8,S-9,S-10,S-11', '20150531', 0, 5);
-insert into restaurant values(restaurant_no_seq.nextval, '토속상황삼계탕', 'S-4', '031-628-1228', '삼계탕', '11111111111291', 0, 0, 'S-8,S-9,S-10,S-11', '20150531', 0, 5);
-insert into restaurant values(restaurant_no_seq.nextval, '복불복', 'S-4', '031-628-1229', '복집', '11111111111301', 0, 0, 'S-8,S-11', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '홍스쭈꾸미', 'S-4', '031-628-1222', '쭈꾸미', '11111111111231', 0, 55, 'S-8,S-10', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '후니네 생선굽네', 'S-4', '031-628-1223', '생선', '11111111111241', 0, 64, 'S-8,S-10', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, 'PUZZLE', 'S-5', '031-628-1224', '피자', '11111111111251', 0, 64, 'S-9,S-10', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '정원오리부추구이', 'S-4', '031-628-1225', '오리', '11111111111261', 0, 25, 'S-8,S-11', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '교동전선생', 'S-4', '031-628-1226', '전집', '11111111111271', 0, 17, 'S-9,S-10', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '고메부인', 'S-4', '031-628-1227', '고메고메', '11111111111281', 0, 36, 'S-8,S-9,S-10,S-11', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '토속상황삼계탕', 'S-4', '031-628-1228', '삼계탕', '11111111111291', 0, 83, 'S-8,S-9,S-10,S-11', '20150531', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '복불복', 'S-4', '031-628-1229', '복집', '11111111111301', 0, 23, 'S-8,S-11', '20150531', 0, 5);
 
 --유스페이스2동1층
-insert into restaurant values(restaurant_no_seq.nextval, '본스치킨', 'S-5', '031-628-2362', '본스본스', '11111111111151', 0, 0, 'S-9', '20150530', 0, 6);
+insert into restaurant values(restaurant_no_seq.nextval, '본스치킨', 'S-5', '031-628-2362', '본스본스', '11111111111151', 0, 22, 'S-9', '20150530', 0, 6);
 insert into food values(food_no_seq.nextval, '스파이시감자튀김', 13000, 'SPICY POTATO', 18);
 insert into food values(food_no_seq.nextval, '본스소세지', 17000, 'SAUSAGE COMBO', 18);
 insert into food values(food_no_seq.nextval, '무뼈닭발', 16000, 'BONELESS CHICKEN FEET', 18);
-insert into restaurant values(restaurant_no_seq.nextval, '종로김밥', 'S-4', '031-628-6969', '김밥집', '11111111111161', 0, 0, 'S-9,S-10', '20150530', 0, 6);
+insert into restaurant values(restaurant_no_seq.nextval, '종로김밥', 'S-4', '031-628-6969', '김밥집', '11111111111161', 0, 127, 'S-9,S-10', '20150530', 0, 6);
 insert into food values(food_no_seq.nextval, '종로김밥', 2500, null, 19);
 insert into food values(food_no_seq.nextval, '치즈김밥', 3000, null, 19);
 insert into food values(food_no_seq.nextval, '참치김밥', 3500, null, 19);
 insert into food values(food_no_seq.nextval, '신라면', 3000, null, 19);
 insert into food values(food_no_seq.nextval, '떡라면', 3500, null, 19);
 insert into food values(food_no_seq.nextval, '제육덮밥', 5500, null, 19);
-insert into restaurant values(restaurant_no_seq.nextval, 'SUBWAY', 'S-5', '031-739-8300', '샌드위치집', '11111111111171', 0, 0, 'S-8,S-9,S-10', '20150530', 0, 6);
+insert into restaurant values(restaurant_no_seq.nextval, 'SUBWAY', 'S-5', '031-739-8300', '샌드위치집', '11111111111171', 0, 58, 'S-8,S-9,S-10', '20150530', 0, 6);
 insert into food values(food_no_seq.nextval, '베지샐러드', 5000, null, 20);
 insert into food values(food_no_seq.nextval, '에그마요샐러드', 5400, null, 20);
+insert into restaurant values(restaurant_no_seq.nextval, '전주현대옥', 'S-4', '031-739-8301', '전주현대옥', '1111111111841', 0, 63, 'S-8,S-9,S-10,S-11', '20150530', 0, 6);
+insert into restaurant values(restaurant_no_seq.nextval, '누들박스', 'S-5', '031-739-8302', '누들박스', '1111111111851', 0, 83, 'S-8,S-9,S-10,S-11', '20150530', 0, 6);
+
+--유스페이스2동 B1층
+insert into restaurant values(restaurant_no_seq.nextval, '홍짜장', 'S-6', '031-739-8303', '홍짜장', '1111111111861', 0, 35, 'S-9,S-10', '20150530', 0, 7);
+insert into restaurant values(restaurant_no_seq.nextval, '짱가네포크포크', 'S-5', '031-628-6629', '짱가네포크포크', '1111111111871', 0, 33, 'S-9,S-10', '20150530', 0, 7);
+insert into restaurant values(restaurant_no_seq.nextval, '이가네양꼬치', 'S-6', '031-724-2688', '이가네양꼬치', '1111111111881', 0, 27, 'S-10,S-11', '20150530', 0, 7);
+insert into restaurant values(restaurant_no_seq.nextval, '안동국시 소호정', 'S-4', '031-628-6678', '안동국시 소호정', '1111111111891', 0, 33, 'S-8,S-9,S-10', '20150530', 0, 7);
+insert into restaurant values(restaurant_no_seq.nextval, '이태원천상', 'S-7', '031-739-8335', '이태원천상', '1111111111901', 0, 37, 'S-8,S-9,S-10,S-11', '20150530', 0, 7);
+insert into restaurant values(restaurant_no_seq.nextval, '됐소', 'S-4', '031-628-6092', '됐소', '1111111111911', 0, 42, 'S-8,S-9,S-11', '20150530', 0, 7);
 
 --H스퀘어S동 B1층
-insert into restaurant values(restaurant_no_seq.nextval, '재크와콩나물', 'S-4', '031-789-3799', '재크와콩나물', '1111111111181', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '하코야', 'S-7', '031-789-3800', '하코야', '1111111111191', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '미정국수0410', 'S-4', '031-789-3669', '미정국수0410', '1111111111201', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '판교토종순대국', 'S-4', '031-789-3670', '판교토종순대국', '1111111111211', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '와플반트', 'S-5', '031-789-3671', '와플', '1111111111221', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '다온', 'S-4', '031-8018-4800', '다온', '1111111111231', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '별별치킨', 'S-5', '031-789-3672', '별별치킨', '1111111111241', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '김밥천국', 'S-4', '031-789-3673', '김밥', '1111111111251', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '죠샌드위치', 'S-5', '031-789-3939', '샌드위치', '1111111111261', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '스마일쿡', 'S-4', '031-789-3940', '스마일쿡', '1111111111271', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '명동칼국수', 'S-4', '031-696-7499', '명동칼국수', '1111111111281', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '신기소', 'S-7', '031-696-7500', '신기소', '1111111111291', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '백만불', 'S-4', '031-696-7501', '백만불', '1111111111301', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '재크와콩나물', 'S-4', '031-789-3799', '재크와콩나물', '1111111111181', 0, 85, 'S-8,S-9,S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '하코야', 'S-7', '031-789-3800', '하코야', '1111111111191', 0, 55, 'S-8,S-9,S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '미정국수0410', 'S-4', '031-789-3669', '미정국수0410', '1111111111201', 0, 136, 'S-8,S-9,S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '판교토종순대국', 'S-4', '031-789-3670', '판교토종순대국', '1111111111211', 0, 64, 'S-8,S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '와플반트', 'S-5', '031-789-3671', '와플', '1111111111221', 0, 32, 'S-9,S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '다온', 'S-4', '031-8018-4800', '다온', '1111111111231', 0, 22, 'S-8,S-10,S-11', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '별별치킨', 'S-5', '031-789-3672', '별별치킨', '1111111111241', 0, 15, 'S-9,S-10,S-11', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '김밥천국', 'S-4', '031-789-3673', '김밥', '1111111111251', 0, 74, 'S-9,S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '죠샌드위치', 'S-5', '031-789-3939', '샌드위치', '1111111111261', 0, 52, 'S-9,S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '스마일쿡', 'S-4', '031-789-3940', '스마일쿡', '1111111111271', 0, 382, 'S-10', '20150530', 0, 12);
+insert into food values(food_no_seq.nextval, '정식', 5000, null, 38);
+insert into restaurant values(restaurant_no_seq.nextval, '명동칼국수', 'S-4', '031-696-7499', '명동칼국수', '1111111111281', 0, 42, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '신기소', 'S-7', '031-696-7500', '신기소', '1111111111291', 0, 137, 'S-8,S-9,S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '백만불', 'S-4', '031-696-7501', '백만불', '1111111111301', 0, 52, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
 
 --H스퀘어S동 1층
-insert into restaurant values(restaurant_no_seq.nextval, '병천황토방순대', 'S-4', '031-696-7502', '순대', '1111111111311', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 11);
-insert into restaurant values(restaurant_no_seq.nextval, '한우공간', 'S-4', '031-696-7503', '한우공간', '1111111111321', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 11);
-insert into restaurant values(restaurant_no_seq.nextval, '담소사골순대', 'S-4', '031-696-7504', '담소사골순대', '1111111111331', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 11);
-insert into restaurant values(restaurant_no_seq.nextval, '알촌', 'S-4', '031-789-3533', '알촌', '1111111111341', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 11);
-insert into restaurant values(restaurant_no_seq.nextval, '한솥도시락', 'S-4', '031-789-3534', '한솥', '1111111111351', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 11);
-insert into restaurant values(restaurant_no_seq.nextval, '조마루감자탕', 'S-4', '031-789-3535', '감자탕', '1111111111361', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 11);
-insert into restaurant values(restaurant_no_seq.nextval, 'THE진국', 'S-4', '031-789-3536', '진국', '1111111111371', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 11);
+insert into restaurant values(restaurant_no_seq.nextval, '병천황토방순대', 'S-4', '031-696-7502', '순대', '1111111111311', 0, 53, 'S-8,S-10,S-11', '20150530', 0, 11);
+insert into restaurant values(restaurant_no_seq.nextval, '한우공간', 'S-4', '031-696-7503', '한우공간', '1111111111321', 0, 22, 'S-8,S-10,S-11', '20150530', 0, 11);
+insert into restaurant values(restaurant_no_seq.nextval, '담소사골순대', 'S-4', '031-696-7504', '담소사골순대', '1111111111331', 0, 74, 'S-8,S-11', '20150530', 0, 11);
+insert into restaurant values(restaurant_no_seq.nextval, '알촌', 'S-4', '031-789-3533', '알촌', '1111111111341', 0, 62, 'S-9,S-10', '20150530', 0, 11);
+insert into restaurant values(restaurant_no_seq.nextval, '한솥도시락', 'S-4', '031-789-3534', '한솥', '1111111111351', 0, 52, 'S-9,S-10', '20150530', 0, 11);
+insert into restaurant values(restaurant_no_seq.nextval, '조마루감자탕', 'S-4', '031-789-3535', '감자탕', '1111111111361', 0, 23, 'S-8,S-9,S-10,S-11', '20150530', 0, 11);
+insert into restaurant values(restaurant_no_seq.nextval, 'THE진국', 'S-4', '031-789-3536', '진국', '1111111111371', 0, 16, 'S-8,S-9,S-10,S-11', '20150530', 0, 11);
 
 --H스퀘어S동 2층
-insert into restaurant values(restaurant_no_seq.nextval, '미각', 'S-6', '031-789-3537', '미각', '1111111111381', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 10);
-insert into restaurant values(restaurant_no_seq.nextval, '본가', 'S-4', '031-789-3538', '본가', '1111111111391', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 10);
-insert into restaurant values(restaurant_no_seq.nextval, '청자家', 'S-4', '031-789-3539', '청자가', '1111111111401', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 10);
-insert into restaurant values(restaurant_no_seq.nextval, '이꾸', 'S-7', '031-789-3540', '이꾸', '1111111111411', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 10);
+insert into restaurant values(restaurant_no_seq.nextval, '미각', 'S-6', '031-789-3537', '미각', '1111111111381', 0, 85, 'S-8,S-9,S-10,S-11', '20150530', 0, 10);
+insert into restaurant values(restaurant_no_seq.nextval, '본가', 'S-4', '031-789-3538', '본가', '1111111111391', 0, 32, 'S-8,S-9,S-10,S-11', '20150530', 0, 10);
+insert into restaurant values(restaurant_no_seq.nextval, '청자家', 'S-4', '031-789-3539', '청자가', '1111111111401', 0, 53, 'S-8,S-9,S-10,S-11', '20150530', 0, 10);
+insert into restaurant values(restaurant_no_seq.nextval, '이꾸', 'S-7', '031-789-3540', '이꾸', '1111111111411', 0, 33, 'S-8,S-9,S-10,S-11', '20150530', 0, 10);
 
 --H스퀘어N동 B1층
-insert into restaurant values(restaurant_no_seq.nextval, '진수성찬', 'S-4', '031-789-3541', '진수성찬', '1111111111421', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 9);
-insert into restaurant values(restaurant_no_seq.nextval, '두부가보쌈애', 'S-4', '031-789-3542', '두부가보쌈애', '1111111111431', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 9);
-insert into restaurant values(restaurant_no_seq.nextval, '커먼키친', 'S-5', '031-789-3543', '커먼키친', '1111111111441', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 9);
+insert into restaurant values(restaurant_no_seq.nextval, '진수성찬', 'S-4', '031-789-3541', '진수성찬', '1111111111421', 0, 74, 'S-8,S-9,S-10,S-11', '20150530', 0, 9);
+insert into restaurant values(restaurant_no_seq.nextval, '두부가보쌈애', 'S-4', '031-789-3542', '두부가보쌈애', '1111111111431', 0, 85, 'S-8,S-10', '20150530', 0, 9);
+insert into restaurant values(restaurant_no_seq.nextval, '커먼키친', 'S-5', '031-789-3543', '커먼키친', '1111111111441', 0, 58, 'S-9,S-10', '20150530', 0, 9);
 
 --H스퀘어N동 1층
-insert into restaurant values(restaurant_no_seq.nextval, '강호동육칠팔', 'S-4', '031-789-3544', '강호동', '1111111111451', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 8);
-insert into restaurant values(restaurant_no_seq.nextval, '미소한우소고기국밥', 'S-4', '031-789-3545', '미소한우소고기국밥', '1111111111461', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 8);
-insert into restaurant values(restaurant_no_seq.nextval, '홍대교동짬뽕', 'S-6', '031-789-3546', '홍대교동짬뽕', '1111111111471', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 8);
-insert into restaurant values(restaurant_no_seq.nextval, '러브미텐더', 'S-5', '031-789-3547', '러브미텐더', '1111111111481', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 8);
-insert into restaurant values(restaurant_no_seq.nextval, '메콩타이', 'S-5', '031-789-3547', '메콩타이', '1111111111491', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 8);
-insert into restaurant values(restaurant_no_seq.nextval, '만복국수', 'S-4', '031-789-3548', '만복국수', '1111111111501', 0, 0, 'S-8,S-9,S-10,S-11', '20150530', 0, 8);
+insert into restaurant values(restaurant_no_seq.nextval, '강호동육칠팔', 'S-4', '031-789-3544', '강호동', '1111111111451', 0, 52, 'S-8,S-9,S-10,S-11', '20150530', 0, 8);
+insert into restaurant values(restaurant_no_seq.nextval, '미소한우소고기국밥', 'S-4', '031-789-3545', '미소한우소고기국밥', '1111111111461', 0, 37, 'S-8,S-10,S-11', '20150530', 0, 8);
+insert into restaurant values(restaurant_no_seq.nextval, '홍대교동짬뽕', 'S-6', '031-789-3546', '홍대교동짬뽕', '1111111111471', 0, 184, 'S-9,S-10', '20150530', 0, 8);
+insert into restaurant values(restaurant_no_seq.nextval, '러브미텐더', 'S-5', '031-789-3547', '러브미텐더', '1111111111481', 0, 44, 'S-8,S-9,S-10,S-11', '20150530', 0, 8);
+insert into restaurant values(restaurant_no_seq.nextval, '메콩타이', 'S-5', '031-789-3549', '메콩타이', '1111111111491', 0, 36, 'S-8,S-9,S-10,S-11', '20150530', 0, 8);
+insert into restaurant values(restaurant_no_seq.nextval, '만복국수', 'S-4', '031-789-3548', '만복국수', '1111111111501', 0, 57, 'S-8,S-9,S-10,S-11', '20150530', 0, 8);
+
+--삼환하이펙스A동 2층
+insert into restaurant values(restaurant_no_seq.nextval, '외고집설렁탕', 'S-4', '031-698-4877', '설렁탕', '1111111111511', 0, 89, 'S-8,S-10,S-11', '20150530', 0, 13);
+insert into restaurant values(restaurant_no_seq.nextval, '킹콩부대찌개', 'S-4', '031-698-3240', '부대찌개', '1111111111521', 0, 57, 'S-8,S-10,S-11', '20150530', 0, 13);
+insert into restaurant values(restaurant_no_seq.nextval, '하나스시', 'S-7', '031-696-1795', '하나스시', '1111111111531', 0, 33, 'S-9,S-11', '20150530', 0, 13);
+insert into restaurant values(restaurant_no_seq.nextval, '캠뜰', 'S-4', '031-698-2925', '캠뜰', '1111111111541', 0, 17, 'S-9', '20150530', 0, 13);
+
+--삼환하이펙스A동 1층
+insert into restaurant values(restaurant_no_seq.nextval, '스위트럭', 'S-5', '031-698-2926', '스위트럭', '1111111111551', 0, 57, 'S-9,S-10', '20150530', 0, 14);
+insert into restaurant values(restaurant_no_seq.nextval, '영심이떡볶이김밥', 'S-4', '031-698-2927', '분식', '1111111111561', 0, 36, 'S-9,S-10', '20150530', 0, 14);
+insert into restaurant values(restaurant_no_seq.nextval, '치킨플러스', 'S-5', '031-698-2928', '치킨플러스', '1111111111571', 0, 55, 'S-9,S-10', '20150530', 0, 14);
+insert into restaurant values(restaurant_no_seq.nextval, '꼬꼬와톡', 'S-5', '031-698-3256', '꼬꼬와톡', '1111111111581', 0, 27, 'S-8,S-9,S-10,S-11', '20150530', 0, 14);
+insert into restaurant values(restaurant_no_seq.nextval, '라빠네', 'S-5', '031-698-3257', '라빠네', '1111111111591', 0, 32, 'S-8,S-9,S-10,S-11', '20150530', 0, 14);
+insert into restaurant values(restaurant_no_seq.nextval, '강창구찹쌀진순대', 'S-4', '031-698-3969', '순대', '1111111111601', 0, 36, 'S-9,S-10,S-11', '20150530', 0, 14);
+insert into restaurant values(restaurant_no_seq.nextval, '양바위', 'S-4', '031-698-3592', '양바위', '1111111111611', 0, 41, 'S-9,S-11', '20150530', 0, 14);
+
+--삼환하이펙스A동 B1층
+insert into restaurant values(restaurant_no_seq.nextval, '키친사이', 'S-7', '031-698-3593', '키친사이', '1111111111621', 0, 27, 'S-10,S-11', '20150530', 0, 15);
+insert into restaurant values(restaurant_no_seq.nextval, '그남자네떡볶이', 'S-4', '031-698-3594', '그남자네떡볶이', '1111111111631', 0, 25, 'S-8,S-11', '20150530', 0, 15);
+insert into restaurant values(restaurant_no_seq.nextval, '소공동뚝배기', 'S-4', '031-698-4548', '소공동뚝배기', '1111111111641', 0, 37, 'S-8,S-9', '20150530', 0, 15);
+insert into restaurant values(restaurant_no_seq.nextval, '식객', 'S-5', '031-698-4549', '식객', '1111111111651', 0, 25, 'S-10,S-11', '20150530', 0, 15);
+insert into restaurant values(restaurant_no_seq.nextval, '옛날그집', 'S-4', '031-709-0176', '옛날그집', '1111111111661', 0, 52, 'S-9,S-11', '20150530', 0, 15);
+insert into restaurant values(restaurant_no_seq.nextval, '우리셀프식당', 'S-4', '031-709-0177', '우리셀프식당', '1111111111671', 0, 47, 'S-10,S-11', '20150530', 0, 15);
+insert into restaurant values(restaurant_no_seq.nextval, '까로치아', 'S-5', '031-698-2816', '까로치아', '1111111111681', 0, 46, 'S-8,S-9', '20150530', 0, 15);
+
+--삼환하이펙스B동 2층
+insert into restaurant values(restaurant_no_seq.nextval, '제주돌담촌', 'S-4', '031-698-3292', '제주돌담촌', '1111111111691', 0, 15, 'S-9,S-10', '20150530', 0, 16);
+insert into restaurant values(restaurant_no_seq.nextval, '369부대찌개생삼겹살', 'S-4', '031-698-3293', '369', '1111111111701', 0, 32, 'S-11', '20150530', 0, 16);
+insert into restaurant values(restaurant_no_seq.nextval, '달구소', 'S-4', '031-698-3294', '달구소', '1111111111711', 0, 58, 'S-8,S-11', '20150530', 0, 16);
+insert into restaurant values(restaurant_no_seq.nextval, '홍천원조닭갈비야', 'S-4', '031-698-3295', '닭갈비', '1111111111721', 0, 32, 'S-10,S-11', '20150530', 0, 16);
+insert into restaurant values(restaurant_no_seq.nextval, '통통낙지마을', 'S-4', '031-709-1851', '통통낙지마을', '1111111111731', 0, 26, 'S-9,S-11', '20150530', 0, 16);
+insert into restaurant values(restaurant_no_seq.nextval, '오늘한점', 'S-4', '031-709-1852', '오늘한점', '1111111111741', 0, 63, 'S-8,S-9,S-10', '20150530', 0, 16);
+
+--삼환하이펙스B동 1층
+insert into restaurant values(restaurant_no_seq.nextval, '슈퍼스테이크', 'S-5', '031-698-4443', '슈퍼스테이크', '1111111111751', 0, 192, 'S-11', '20150530', 0, 17);
+insert into restaurant values(restaurant_no_seq.nextval, '한국인의팥집', 'S-5', '031-698-4444', '한국인의팥집', '1111111111761', 0, 48, 'S-9', '20150530', 0, 17);
+insert into restaurant values(restaurant_no_seq.nextval, '베이징스토리', 'S-6', '031-696-0306', '베이징스토리', '1111111111771', 0, 52, 'S-8,S-11', '20150530', 0, 17);
+insert into restaurant values(restaurant_no_seq.nextval, '한그릇한사발', 'S-4', '031-696-0307', '한그릇한사발', '1111111111781', 0, 32, 'S-8,S-11', '20150530', 0, 17);
+
+--삼환하이펙스B동 B1층
+insert into restaurant values(restaurant_no_seq.nextval, '비타민민물장어', 'S-4', '031-698-2831', '비타민민물장어', '1111111111791', 0, 38, 'S-10,S-11', '20150530', 0, 18);
+insert into restaurant values(restaurant_no_seq.nextval, '메양꼬치', 'S-6', '031-698-3557', '메양꼬치', '1111111111801', 0, 57, 'S-8,S-11', '20150530', 0, 18);
+insert into restaurant values(restaurant_no_seq.nextval, '양평해장국', 'S-4', '031-698-4500', '양평해장국', '1111111111811', 0, 33, 'S-8,S-11', '20150530', 0, 18);
+insert into restaurant values(restaurant_no_seq.nextval, '마미밥', 'S-4', '031-698-4501', '마미밥', '1111111111821', 0, 26, 'S-8,S-9', '20150530', 0, 18);
+insert into restaurant values(restaurant_no_seq.nextval, '빙스퐁', 'S-5', '031-698-4502', '빙스퐁', '1111111111831', 0, 21, 'S-8', '20150530', 0, 18);
+
+-- 유스페이스1동 3층
+insert into restaurant values(restaurant_no_seq.nextval, '강남교자', 'S-6', '031-628-4000', '강남교자', '1111111111921', 0, 28, 'S-11', '20150530', 0, 1);
+insert into restaurant values(restaurant_no_seq.nextval, '군산오징어', 'S-4', '031-628-1979', '군산오징어', '1111111111931', 0, 47, 'S-10,S-11', '20150530', 0, 1);
+insert into restaurant values(restaurant_no_seq.nextval, '명품직화', 'S-4', '031-628-1933', '명품직화', '1111111111941', 0, 88, 'S-9,S-11', '20150530', 0, 1);
+insert into restaurant values(restaurant_no_seq.nextval, '참소', 'S-4', '031-628-1200', '참소', '1111111111951', 0, 43, 'S-8,S-11', '20150530', 0, 1);
+insert into restaurant values(restaurant_no_seq.nextval, '천지양꺼먹돼지', 'S-4', '031-628-1878', '천지양꺼먹돼지', '1111111111961', 0, 32, 'S-9,S-10', '20150530', 0, 1);
+insert into restaurant values(restaurant_no_seq.nextval, '포메인', 'S-5', '031-628-6712', '포메인', '1111111111971', 0, 37, 'S-8,S-9', '20150530', 0, 1);
+insert into restaurant values(restaurant_no_seq.nextval, '흑돈가', 'S-4', '031-724-2700', '흑돈가', '1111111111981', 0, 54, 'S-9,S-10', '20150530', 0, 1);
+
+-- 유스페이스1동 2층
+insert into restaurant values(restaurant_no_seq.nextval, '돈세이지', 'S-5', '031-724-2701', '돈세이지', '1111111111991', 0, 56, 'S-8,S-11', '20150530', 0, 2);
+insert into restaurant values(restaurant_no_seq.nextval, '미스터쫀득이', 'S-4', '031-724-2702', '미스터쫀득이', '1111111112001', 0, 58, 'S-11', '20150530', 0, 2);
+insert into restaurant values(restaurant_no_seq.nextval, '삼대곱창', 'S-4', '031-724-2777', '삼대곱창', '1111111112011', 0, 32, 'S-10,S-11', '20150530', 0, 2);
+insert into restaurant values(restaurant_no_seq.nextval, '소담애', 'S-4', '031-628-1055', '소담애', '1111111112021', 0, 16, 'S-8,S-11', '20150530', 0, 2);
+insert into restaurant values(restaurant_no_seq.nextval, '찌개애감동', 'S-4', '031-628-1479', '찌개애감동', '1111111112031', 0, 113, 'S-8,S-10,S-11', '20150530', 0, 2);
+insert into restaurant values(restaurant_no_seq.nextval, '참치지기', 'S-7', '031-628-1480', '참치지기', '1111111112041', 0, 36, 'S-9', '20150530', 0, 2);
+insert into restaurant values(restaurant_no_seq.nextval, '청구칼국수', 'S-4', '031-628-1481', '청구칼국수', '1111111112051', 0, 63, 'S-11', '20150530', 0, 2);
+
+-- 유스페이스1동 1층
+insert into restaurant values(restaurant_no_seq.nextval, 'THE MORE', 'S-5', '031-628-1177', '더모어', '1111111112061', 0, 35, 'S-10,S-11', '20150530', 0, 3);
+insert into restaurant values(restaurant_no_seq.nextval, 'THE PICNIC', 'S-5', '031-628-1178', 'THE PICNIC', '1111111112071', 0, 62, 'S-8,S-11', '20150530', 0, 3);
+insert into restaurant values(restaurant_no_seq.nextval, '조이포', 'S-5', '070-7769-2602', '조이포', '1111111112081', 0, 73, 'S-11', '20150530', 0, 3);
+
+-- 유스페이스1동 B1층
+insert into restaurant values(restaurant_no_seq.nextval, '앙샹떼', 'S-5', '031-628-2603', '앙샹떼', '1111111112091', 0, 22, 'S-8', '20150530', 0, 4);
+insert into restaurant values(restaurant_no_seq.nextval, '요거트캐슬', 'S-5', '031-628-4555', '요거트캐슬', '1111111112101', 0, 37, 'S-8,S-10,S-11', '20150530', 0, 4);
+insert into restaurant values(restaurant_no_seq.nextval, '유나인', 'S-5', '031-628-1966', '유나인', '1111111112111', 0, 43, 'S-10,S-11', '20150530', 0, 4);
+insert into restaurant values(restaurant_no_seq.nextval, '육백과진챠이', 'S-6', '031-628-1967', '육백과진챠이', '1111111112121', 0, 46, 'S-8,S-10,S-11', '20150530', 0, 4);
+insert into restaurant values(restaurant_no_seq.nextval, '진챠이객잔', 'S-6', '031-628-1930', '진챠이객잔', '1111111112131', 0, 48, 'S-8,S-9', '20150530', 0, 4);
+insert into restaurant values(restaurant_no_seq.nextval, '찰스숯불김밥', 'S-4', '031-628-1931', '찰스숯불김밥', '1111111112141', 0, 51, 'S-8,S-9,S-10', '20150530', 0, 4);
+insert into restaurant values(restaurant_no_seq.nextval, '코벤트가든', 'S-5', '031-628-1883', '코벤트가든', '1111111112151', 0, 52, 'S-9,S-10,S-11', '20150530', 0, 4);
+insert into restaurant values(restaurant_no_seq.nextval, '하누랑돈이랑', 'S-4', '031-628-1944', '하누랑돈이랑', '1111111112161', 0, 42, 'S-11', '20150530', 0, 4);
 
 
 
@@ -382,5 +477,3 @@ insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '처리
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '미처리', '음담패설', '20150505', 'user03');
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '미처리', '폭언욕설', '20150505', 'user04');
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '처리중', '폭언욕설', '20150505', 'user05');
-
-select * from reported_review
