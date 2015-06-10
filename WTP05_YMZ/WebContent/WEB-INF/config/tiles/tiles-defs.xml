@@ -50,6 +50,7 @@
 	<definition name="*.tiles" extends="main_template">
 		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp"/>
 		<put-attribute name="right_menu" value="/WEB-INF/view/layout/member/login_menu.jsp"/>
+		<!-- <put-attribute name="right_menu2" value="/WEB-INF/view/layout/member/random.jsp"/> -->
 	</definition>
 	
 	<!-- 메인페이지:끝 -->

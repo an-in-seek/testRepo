@@ -98,6 +98,7 @@ footer.main_template{
 </head>
 <body>
 	<div class="main_template">
+	
 		<header class="main_template">
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="menu" />
@@ -113,11 +114,13 @@ footer.main_template{
 		
 		<nav id="right" class="main_template">
 			<tiles:insertAttribute name="right_menu" /><!-- 서브메뉴로 -->
+			<%-- <tiles:insertAttribute name="right_menu2" /><!-- 서브메뉴로 --> --%>
 		</nav>
 		
 		<footer class="main_template">
 			<tiles:insertAttribute name="footer" />
 		</footer>
+		
 	</div>
 </body>
 </html>

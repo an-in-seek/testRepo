@@ -7,7 +7,7 @@
 	$(document).ready(function() {
 		$("#listTB tbody tr").on("mouseover", function() {
 			$("#listTB tbody tr").css("background-color", "white");
-			$(this).css("background-color", "lightgray");
+			$(this).css("background-color", "#f8f8f8");
 		});
 
 		if("${requestScope.category}" != null){
@@ -45,9 +45,16 @@
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 }
+.listTB thead{
+	background: #F8F8F8;
+	border: 2px solid #B70000;
+	text-align: center;
+}
+.listTB tbody{
+	border: 1px solid white;
+}
 .listTB thead tr {
 	font-weight: bold;
-	background: silver;
 }
 div#dialog {
 	width: 400px;
@@ -65,9 +72,9 @@ article {
 <div align="center" id="table">
 <c:choose>
 	<c:when test="${fn:length(requestScope.qna_list) != 0 }">
-	<table id="listTB"  border="1" class="listTB">
+	<table id="listTB"  class="listTB" border="1">
 		<thead>
-			<tr align="center">
+			<tr align="center" style="border-color:#ccc;">
 				<td width="40px">NO</td>
 				<td width="320px">제목</td>
 				<td width="90px">분류</td>
@@ -76,9 +83,9 @@ article {
 				<td width="70px">조회수</td>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody style="border-color:#ccc;">
 			<c:forEach items="${requestScope.qna_list}" var="qna">
-				<tr align="center">
+				<tr align="center" style="border-color:#ccc;">
 					<td>${qna.number }</td>
 					<td align="left"><c:forEach begin="1" end="${qna.relevel}">
 							&nbsp;&nbsp;

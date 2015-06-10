@@ -19,7 +19,7 @@ $(document).ready(function(){
 		type:"post", //HTTP 요청 방식(method)
 		dataType:"json", //javascript객체로 변환해서 응답데이터를 전달.
 		beforeSend:function(){
-			//$("#writeBtn").hide();
+			$("#writeBtn").hide();
 			for(idx=1 ; idx<="${fn:length(requestScope.faq_list)}" ; idx++){
 				$("#modifyBtn"+idx).hide();
 			}
