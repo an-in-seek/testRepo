@@ -7,7 +7,7 @@
 	$(document).ready(function() {
 		$("#listTB tbody tr").on("mouseover", function() {
 			$("#listTB tbody tr").css("background-color", "white");
-			$(this).css("background-color", "#f8f8f8");
+			$(this).css("background-color", "lightcyan");
 		});
 
 		if("${requestScope.category}" != null){
@@ -33,6 +33,10 @@
 
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <style type="text/css">
+a.list:link {text-decoration:none; color: #545c72;}/*방문하지 않은 페이지*/
+a.list:visited {text-decoration:none; color: #545c72;}/*방문한 링크 표시*/ 
+a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라갔을 때*/
+
 #table{
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
@@ -50,11 +54,11 @@
 	border: 2px solid #B70000;
 	text-align: center;
 }
-.listTB tbody{
-	border: 1px solid white;
-}
 .listTB thead tr {
 	font-weight: bold;
+}
+.listTB tbody{
+	border: 1px solid white;
 }
 div#dialog {
 	width: 400px;
@@ -91,8 +95,7 @@ article {
 							&nbsp;&nbsp;
 						</c:forEach> <c:if test="${qna.relevel != 0}">
 							<img src="${initParam.rootPath}/se2/img/reply_icon.gif" />
-						</c:if> <a
-						href="${initParam.rootPath}/qna/qnaView.do?qnaNo=${qna.number}">${qna.title}</a>
+						</c:if> <a href="${initParam.rootPath}/qna/qnaView.do?qnaNo=${qna.number}" class="list">${qna.title}</a>
 					</td>
 					<td>${qna.category}</td>
 					<td>${qna.memberId}</td>
