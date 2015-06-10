@@ -23,9 +23,11 @@ img{
 	max-width: 100%; 
 	height: auto;
 }
-/*링크에 밑줄 제거*/
+/*링크에 밑줄 제거 + 색 고정*/
 a{
 	text-decoration: none;
+	color: #808080;
+	
 }
 /*테이블 기본 스타일*/
 table, td, th{
@@ -42,36 +44,31 @@ div.template{
 }
 header.template{
 	width:1024px;
-	padding: 5px;
+	padding-bottom: 5px;
 	background-color:white;
 	color:white;
 	text-align:center;
 }
-nav.template{
-	height:620px;
-	width:100px;
-	padding:5px;
-	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
-	background-color:#F5F5DC;
-	font-weight:bold;
-	text-align:center;
-	float:left;   /*왼쪽으로 띄움 */
-}
 section.template{
 	width:1024px;
-	padding: 5px;
 	height:auto; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	float:left;   /*왼쪽으로 띄움 */
+	padding-top:20px;
+	padding-bottom:20px;
 }
 footer.template{
 	height:50px;
 	width:1024px;
-	padding-top: 4px;
-	padding-bottom: 12px;
-	background-color:#2b2f3a;
+	background-color:#B70000;
 	color:white;
+	font-size: 16px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	text-align:center;
 	clear:both;   /*위에 float한 애들을 무시한다. */
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 </style>
 </head>
@@ -82,12 +79,6 @@ footer.template{
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="menu" />
 		</header>
-
-		<%-- 	
-		<nav class="template">
-			<tiles:insertAttribute name="sub_menu" />서브메뉴로
-		</nav> 
-		--%>
 
 		<section class="template">
 			<tiles:insertAttribute name="body" />

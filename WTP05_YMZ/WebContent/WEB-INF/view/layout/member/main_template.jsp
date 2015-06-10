@@ -9,6 +9,7 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery.js"></script>
 
 <style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 /*메세지 스타일*/
 .errorMessage{
 	font-size: 12px;
@@ -23,9 +24,11 @@ img{
 	max-width: 100%; 
 	height: auto;
 }
-/*링크에 밑줄 제거*/
+/*링크에 밑줄 제거 + 색 고정*/
 a{
 	text-decoration: none;
+	color: #808080;
+	
 }
 /*테이블 기본 스타일*/
 table, td, th{
@@ -41,27 +44,32 @@ div.main_template{
 	width:1024px;
 }
 header.main_template{
+	width:1024px;
+	padding-bottom: 5px;
 	background-color:white;
 	color:white;
 	text-align:center;
-	padding: 5px;
 }
-
-nav#right{
-	margin-top:10px;
-	background-color: lightsteelblue;   
+#right{										/* 메인화면 오른쪽 로그인창 */
+	font-family: 'Hanna', sans-serif;
+	margin-top:5px;
+	margin-right:5px;
+	background-color: #f8f8f8;
+	border: solid 1px #b70000;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	padding:10px;
 	height:160px;
-	width:260px;
-	font-weight:bold;
+	width:220px;
 	text-align:center;
+	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
+	-moz-border-radius: 10px;
+	border-radius: 10px;		 /* 둥근 모서리 끝 */
 	float:right;  /*오른쪽으로 띄움 */
 }
 #body{
 	padding: 20px;
 	height:550px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-	width:500px;
+	width:auto;
 	float:left;   /*왼쪽으로 띄움 */
 }
 #left{
@@ -74,13 +82,17 @@ nav#right{
 	float:left;  /*왼쪽으로 띄움 */
 }
 footer.main_template{
+	height:50px;
+	width:1024px;
 	background-color:#B70000;
 	color:white;
-	padding-top: 4px;
-	padding-bottom: 12px;
+	font-size: 16px;
+	padding: 5px;
 	text-align:center;
-	height:50px;
 	clear:both;   /*위에 float한 애들을 무시한다. */
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 </style>
 </head>

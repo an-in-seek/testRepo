@@ -5,11 +5,11 @@
 
 <link type="text/css" href="${initParam.rootPath }/css/menuStyles.css"  rel="stylesheet">
 <style type="text/css">
-#menu{ background: #2b2f3a; }
+
 </style> 
 
 <body>
-	<div id = "cssmenu" align="center">
+	<div id="cssmenu" align="center">
 		<ul>
 			<li><a href='${initParam.rootPath }/index.do' class="menu">메인페이지</a></li>
 			<li>
@@ -25,12 +25,12 @@
 				<a href="${initParam.rootPath }/faq/faqList.do" class="menu">고객센터 &#9662;</a>
 				<ul>
 					<li><a href="${initParam.rootPath }/faq/faqList.do">FAQ</a></li>
-					<li><a href="${initParam.rootPath }/qna/qnaList.do">QNA</a></li>
+					<li><a href="${initParam.rootPath }/qna/qnaList.do">Q&A</a></li>
 				</ul>
 			</li>
 			<li>
 			<c:if test="${sessionScope.login_info.grade=='master'}">
-				<li><a href="${initParam.rootPath }/member/login/memberListPaging.do" class="menu">신고관리</a></li>
+				<li><a href="${initParam.rootPath }/reported/login/reportedList.do" class="menu">신고관리</a></li>
 				<li><a href="${initParam.rootPath }/member/login/memberListPaging.do" class="menu">회원관리</a></li>
 			</c:if>
 			</li>

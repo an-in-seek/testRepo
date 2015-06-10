@@ -223,6 +223,7 @@ CREATE TABLE REPORTED_REVIEW (
 	BBS_NO NUMBER(10) NOT NULL, /* 게시판 번호 */
 	STATE VARCHAR2(12) NOT NULL, /* 상태 */
 	REASON VARCHAR2(12) NOT NULL, /* 이유 */
+	REPORTED_DATE VARCHAR2(8) NOT NULL, /* 날짜 */
 	REPORTER_ID VARCHAR2(10) NOT NULL /* 신고자_ID */
 );
 
@@ -407,4 +408,6 @@ create sequence review_no_seq;
 -- 리뷰댓글에서 사용하는 시퀀스
 drop sequence review_reply_no_seq;
 create sequence review_reply_no_seq;
-
+-- 리뷰신고게시물에서 사용하는 시퀀스
+drop sequence reported_no_seq;
+create sequence reported_no_seq;

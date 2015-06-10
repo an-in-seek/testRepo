@@ -27,9 +27,11 @@ img{
 	max-width: 100%; 
 	height: auto;
 }
-/*링크에 밑줄 제거*/
+/*링크에 밑줄 제거 + 색 고정*/
 a{
 	text-decoration: none;
+	color: #808080;
+	
 }
 /*테이블 기본 스타일*/
 table, td, th{
@@ -42,7 +44,7 @@ div.mypage_template{
 	margin-top:10px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
-	width:1024px;
+	width:1014px;
 }
 header.mypage_template{
 	background-color:white;
@@ -68,13 +70,17 @@ header.mypage_template{
 	float:left;  /*왼쪽으로 띄움 */
 }
 footer.mypage_template{
-	background-color:#2b2f3a;
+	background-color:#B70000;
+	font-size: 16px;
 	color:white;
 	padding-top: 4px;
-	padding-bottom: 12px;
+	padding-bottom: 4px;
 	text-align:center;
 	height:50px;
 	clear:both;   /*위에 float한 애들을 무시한다. */
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 </style>
 </head>

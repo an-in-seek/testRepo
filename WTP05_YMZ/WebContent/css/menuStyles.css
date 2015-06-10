@@ -2,7 +2,7 @@
 #cssmenu {
   position: relative;
   height: 44px;
-  width: auto;
+  width: 1014px;
   font-family: 'Hanna', sans-serif;
 }
 #cssmenu ul {
@@ -14,16 +14,16 @@
 	background: -o-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
 	background: -ms-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
 	background: linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
-	-webkit-border-radius: 10px;
+	-webkit-border-radius: 10px; /* 모서리 둥글게 시작 */
 	-moz-border-radius: 10px;
-	border-radius: 10px;
+	border-radius: 10px;		/* 모서리 둥글게 끝 */
 }
 #cssmenu > ul {
   font-family: 'Hanna', sans-serif;
-  position: relative;
+  position initial;
   display: block;
   background: #B70000;
-  width: 100%;
+  width: 1024px;
   z-index: 500;
 }
 #cssmenu:after,
@@ -63,10 +63,11 @@
   font-family: Helvetica, sans-serif;
   text-decoration: none;
 }
-#cssmenu > ul > li > a {
-  font-size: 14px;
-  font-weight: bold;
-  padding: 15px 20px;
+#cssmenu > ul > li > a {	/* 메인 메뉴 화면 */
+  font-family: 'Hanna', sans-serif;
+  font-size: 18px;
+  padding: 15px 50px;   /* 메뉴 간격 */
+  padding-left: 10px;
   color: #ffffff;
   text-transform: uppercase;
   -webkit-transition: color 0.25s ease-out;
@@ -78,7 +79,7 @@
 #cssmenu > ul > li.has-sub > a {
   padding-right: 32px;
 }
-#cssmenu > ul > li:hover > a {	/* 메뉴위에 마우스 위치할 때*/
+#cssmenu > ul > li:hover > a {	/* 메뉴위에 마우스 위치할 때  */
   color: #FFFF48;
 }
 #cssmenu li.has-sub::after {
@@ -99,7 +100,7 @@
 }
 #indicatorContainer {
   position: absolute;
-  height: 12px;
+  height: 0px; /* 원본 12px */
   width: 100%;
   bottom: 0px;
   overflow: hidden;
@@ -172,11 +173,13 @@
 #cssmenu ul ul li a {			/* 서브 메뉴 배경 */
   font-family: 'Hanna', sans-serif;
   width: 55px;
-  border-bottom: 1px solid #eeeeee;
+  border-left: solid 1px #B70000;
+  border-right: solid 1px #B70000;
+   
   padding: 10px 20px;
-  font-size: 14px;
+  font-size: 16px;
   color: black;
-  background: #f2f2f2;
+  background: #f8f8f8;
   -webkit-transition: all .35s ease;
   -moz-transition: all .35s ease;
   -ms-transition: all .35s ease;
@@ -192,8 +195,8 @@
   color: #FFFF48;
 }
 #cssmenu ul ul li:last-child > a,
-#cssmenu ul ul li.last > a {
-  border-bottom: 0;
+#cssmenu ul ul li.last > a {			/* 서브 메뉴 바닥선 */
+    border-bottom: solid 1px #B70000;
 }
 #cssmenu > ul > li > ul::after {   /* 서브메뉴 화살표 */
   content: '';
@@ -203,7 +206,7 @@
   border-bottom-color: #ffffff;
   position: absolute;
   top: -12px;
-  left: 30px;
+  left: 40px;
 }
 #cssmenu.align-right > ul > li > ul::after {
   left: auto;

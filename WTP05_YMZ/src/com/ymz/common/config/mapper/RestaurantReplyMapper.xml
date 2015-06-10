@@ -18,6 +18,7 @@
 		<result column="content" property="content" />
 		<result column="score" property="score" />
 		<result column="member_id" property="memberId" />
+			<result column="nickname" property="nickname"/>
 		<result column="restaurant_no" property="restaurantNo" />
 		<!-- 등록 -->
 	</resultMap>
@@ -72,6 +73,7 @@
 	<select id="selectAllRestaurantReply" parameterType="int"
 		resultMap="restaurantReply-resultmap">
 		<include refid="restaurant_reply" />
+	
 		where restaurant_no =#{restaurantNo}
 	</select>
 

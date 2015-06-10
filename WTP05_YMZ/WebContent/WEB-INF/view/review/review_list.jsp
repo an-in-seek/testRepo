@@ -79,8 +79,8 @@ $(document).ready(function(){
 </script>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-a.list:link {text-decoration:none; color: black;}/*방문하지 않은 페이지*/
-a.list:visited {text-decoration:none; color: black;}/*방문한 링크 표시*/ 
+a.list:link {text-decoration:none; color: #545c72;}/*방문하지 않은 페이지*/
+a.list:visited {text-decoration:none; color: #545c72;}/*방문한 링크 표시*/ 
 a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라갔을 때*/
 
 .pageNumber{
@@ -95,19 +95,27 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 .todayBestTB, .bestMonthTB{
 	font-family: 'Hanna', sans-serif;
 }
-.listTable thead tr, .todayBestTB thead tr, .bestMonthTB thead tr{
-	color: white;	/* 글자색 */
-	background: #545c72;
+.todayBestTB thead, .bestMonthTB thead,.listTable thead{
+	background: #F8F8F8;
+	color: #545c72;	/* 글자색 */
+	border: 2px solid #B70000;
 	text-align: center;
 }
-.listTable th, .listTable td, .todayBestTB th, .todayBestTB td, .bestMonthTB th, .bestMonthTB td{
+.listTable th, .listTable td, .todayBestTB tbody th, .todayBestTB tbody td, .bestMonthTB tbody th, .bestMonthTB tbody td{
     border-left:1px solid;
     border-bottom:1px solid;
     border-color:#ccc;
     padding:6px 12px 2px;
+    color: #545c72;
 }
-.listTable tr:first-child th, .listTable tr:first-child td{
-    border-top:1px solid #6c9d31;
+.todayBestTB tbody th, .bestMonthTB tbody th{
+	border-left: 0px;
+    border-bottom:1px solid;
+    border-color:#ccc;
+    padding:6px 12px 2px;
+}
+.listTable tbody tr:first-child th, .listTable tbody tr:first-child td{
+    border-top:1px solid #B70000;
 }
 .listTable tr th:first-child{
     border-left:none;
@@ -152,10 +160,10 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 								<tr>
 									<c:choose>
 										<c:when test="${status.index+1 == 1}">
-											<th align="center" width="100px"><font color="#FF3636">${status.index+1}위</font></th>
+											<th align="center" width="100px"><font color="#B70000">${status.index+1}위</font></th>
 											<td align="left" id="title">
 										<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-										<font color="#FF3636">${review.title}</font>
+										<font color="#B70000">${review.title}</font>
 										</a>
 										</td>
 										</c:when>
@@ -197,10 +205,10 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 						<tr>
 							<c:choose>
 							<c:when test="${status.index+1 == 1}">
-								<th align="center" width="100px"><font color="#FF3636">${status.index+1}위</font></th>
+								<th align="center" width="100px"><font color="#B70000">${status.index+1}위</font></th>
 								<td align="left" id="title">
 								<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-								<font color="#FF3636">${review.title}</font>
+								<font color="#B70000">${review.title}</font>
 								</a>
 								</td>
 							</c:when>
@@ -238,9 +246,9 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 				<td style="width:50px">번호</td>
 				<td style="width:400px">제목</td>
 				<td style="width:100px">작성자</td>
-				<td id="latestSort" style="width:100px">작성일<font size="1" color="red"> ▼</font></td>
-				<td id="recommendSort" style="width:70px">추천<font size="1" color="red"> ▼</font></td>
-				<td id="hitsSort" style="width:70px">조회<font size="1" color="red"> ▼</font></td>
+				<td id="latestSort" style="width:100px">작성일<font size="3" color="red"> &#9662;</font></td>
+				<td id="recommendSort" style="width:70px">추천<font size="3" color="red"> &#9662;</font></td>
+				<td id="hitsSort" style="width:70px">조회<font size="3" color="red"> &#9662;</font></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -267,7 +275,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
 					${review.title}
 					<c:if test="${review.replyCount != 0}">
-					<font color="#A748FF">[${review.replyCount}]</font>
+					<font color="#B70000">[${review.replyCount}]</font>
 					</c:if>
 					<span id="reviewNew${status.index+1}"></span>
 					</a>
@@ -319,13 +327,13 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.startPageOfPageGroup-1}&sortType=${requestScope.sortType}
 										&searchType=${requestScope.searchType}&query=${requestScope.query}">◀</a>
 		</c:when>
-		<c:otherwise>◀</c:otherwise>
+		<c:otherwise>◁</c:otherwise>
 	</c:choose>
 	<!-- 페이지 번호 -->
 	<c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
 		<c:choose>
 			<c:when test="${pageNum == pagingBean.currentPage }">
-				<font color="red"><b>${pageNum}</b></font>
+				<font color="#B70000"><b>${pageNum}</b></font>
 			</c:when>
 			<c:otherwise>
 				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}&sortType=${requestScope.sortType}
@@ -340,7 +348,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.endPageOfPageGroup+1}&sortType=${requestScope.sortType}
 										&searchType=${requestScope.searchType}&query=${requestScope.query}">▶</a>
 		</c:when>
-		<c:otherwise>▶</c:otherwise>
+		<c:otherwise>▷</c:otherwise>
 	</c:choose>
 	<br>
 

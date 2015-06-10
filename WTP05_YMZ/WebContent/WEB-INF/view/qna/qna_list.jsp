@@ -33,18 +33,19 @@
 
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <style type="text/css">
-div#table{
+#table{
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	padding: 20px;
-	width:800px;
 	text-align:center;
 	float:center;   /*왼쪽으로 띄움 */
 }
-#listTB {
-	margin-left: 20px;
+.listTB {
+	width: 800px;
+	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-left:auto;
 }
-table#listTB thead tr {
+.listTB thead tr {
 	font-weight: bold;
 	background: silver;
 }
@@ -64,7 +65,7 @@ article {
 <div align="center" id="table">
 <c:choose>
 	<c:when test="${fn:length(requestScope.qna_list) != 0 }">
-	<table align="left" id="listTB" style="width: 800px" border="1">
+	<table id="listTB"  border="1" class="listTB">
 		<thead>
 			<tr align="center">
 				<td width="40px">NO</td>
@@ -131,7 +132,7 @@ article {
 	</table>
 	</c:when>
 	<c:otherwise>
-	<table align="left" id="listTB" style="width: 800px" border="1">
+	<table style="width: 800px" border="1" class="listTB">
 		<thead>
 			<tr align="center">
 				<td width="40px">NO</td>
