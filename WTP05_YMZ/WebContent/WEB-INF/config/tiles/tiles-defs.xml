@@ -14,7 +14,7 @@
 		<put-attribute name="sub_menu" value="/WEB-INF/view/layout/sub_menu.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 	</definition>
-	<definition name="*.tiles" extends="template">
+	<definition name="view/*.tiles" extends="template">
 		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp"/>
 	</definition>
 	<definition name="faq/*.tiles" extends="template">

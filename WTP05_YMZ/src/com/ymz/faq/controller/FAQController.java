@@ -62,7 +62,7 @@ public class FAQController {
 	}
 	
 	//FAQ게시물 수정폼으로 이동
-	@RequestMapping("login/modifyForm.do")
+	@RequestMapping("login/admin/modifyForm.do")
 	public String moveModifyForm(@RequestParam int number, ModelMap map)throws Exception{
 		//로그인 체크 - interceptor가 처리
 		map.put("faq", service.getFAQByNo(number));
@@ -70,7 +70,7 @@ public class FAQController {
 	}
 	
 	// 게시물 삭제
-	@RequestMapping(value="login/removeFaq.do", method=RequestMethod.POST) //login/removeFaq.do
+	@RequestMapping(value="login/admin/removeFaq.do", method=RequestMethod.POST) //login/removeFaq.do
 	public String removeFAQByNo(@ModelAttribute FAQ faq, HttpServletRequest request){
 		//로그인 처리는 interceptor가 처리
 		System.out.println(faq.getNumber());

@@ -19,7 +19,7 @@ $(document).ready(function(){
 		type:"post", //HTTP 요청 방식(method)
 		dataType:"json", //javascript객체로 변환해서 응답데이터를 전달.
 		beforeSend:function(){
-			$("#writeBtn").hide();
+			//$("#writeBtn").hide();
 			for(idx=1 ; idx<="${fn:length(requestScope.faq_list)}" ; idx++){
 				$("#modifyBtn"+idx).hide();
 			}
@@ -42,7 +42,7 @@ $(document).ready(function(){
 
 <div align="center">
 <%-- <c:if test="${fn:length(requestScope.faq_list) != 0 }"> --%>
-<form id="removeForm" method=post action="${initParam.rootPath }/faq/login/removeFaq.do">
+<form id="removeForm" method=post action="${initParam.rootPath }/faq/login/admin/removeFaq.do">
 	<input type="hidden" id="number" name="number">
 	<table id="table1">
 		<tr align="center">
@@ -58,14 +58,14 @@ $(document).ready(function(){
 								<p class="q"><a href="#a${faq.number}">Q${faq.number} : ${faq.title}</a></p>
 								<p class="a">
 									A : ${faq.content}
-									<input id="modifyBtn${faq.number}" type="button" value="수정하기" onclick="window.location='${initParam.rootPath }/faq/login/modifyForm.do?number=${faq.number}'">
+									<input id="modifyBtn${faq.number}" type="button" value="수정하기" onclick="window.location='${initParam.rootPath }/faq/login/admin/modifyForm.do?number=${faq.number}'">
 								</p>
 							</li>
 						</ul>
 						</c:forEach>
 					<table align="center">
 						<tr>
-							<td align="center"><input id="writeBtn" type="button" value="글쓰기" onclick="window.location='${initParam.rootPath }/faq/login/writeForm.do'"></td>
+							<td align="center"><input id="writeBtn" type="button" value="글쓰기" onclick="window.location='${initParam.rootPath }/faq/login/admin/writeForm.do'"></td>
 						</tr>
 					</table>
 				</div>

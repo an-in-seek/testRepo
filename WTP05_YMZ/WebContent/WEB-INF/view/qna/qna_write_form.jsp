@@ -27,8 +27,9 @@ $(document).ready(function(){
 				fCreator : "createSEditor2"
 			});
 			// 등록버튼 클릭시 form 전송
- 			$("#save").click(function() {
+ 		 	$("#save").click(function() {
  				oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD");
+ 				
  				if($("#category").val() == '분류'){
  					alert("분류항목을 선택하세요.");
  					$("#category").focus();
@@ -44,7 +45,7 @@ $(document).ready(function(){
  					$("#content").focus();
  					return false;
  				} 
-			}); 
+			});  
 	});
 </script>
 
@@ -108,7 +109,7 @@ table#tb thead tr{
 				<td>&nbsp;</td>
 				<td colspan="2">
 				<input type="submit" id="save" value="등록">
-				<input type="button" value="취소" onclick="javascript:history.back(-1);">
+				<input type="button" value="취소" onclick="location='${initParam.rootPath }/qna/qnaList.do'">
 				</td>
 				<td>&nbsp;</td>
 			</tr>
