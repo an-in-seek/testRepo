@@ -11,24 +11,15 @@ public class ReportedBBS implements Serializable{
 	private String reason;
 	private String reportedDate;
 	private String reporterId;
+	private int pageNo;				// 페이지 번호
 	
 	public ReportedBBS() {
 		super();
 	}
-	
-	public ReportedBBS(int reportNo, String category, int reviewNo,
-			String state, String reason, String reporterId) {
-		super();
-		this.reportNo = reportNo;
-		this.category = category;
-		this.reviewNo = reviewNo;
-		this.state = state;
-		this.reason = reason;
-		this.reporterId = reporterId;
-	}
 
 	public ReportedBBS(int reportNo, String category, int reviewNo,
-			String state, String reason, String reportedDate, String reporterId) {
+			String state, String reason, String reportedDate,
+			String reporterId, int pageNo) {
 		super();
 		this.reportNo = reportNo;
 		this.category = category;
@@ -37,6 +28,7 @@ public class ReportedBBS implements Serializable{
 		this.reason = reason;
 		this.reportedDate = reportedDate;
 		this.reporterId = reporterId;
+		this.pageNo = pageNo;
 	}
 
 	public int getReportNo() {
@@ -95,12 +87,12 @@ public class ReportedBBS implements Serializable{
 		this.reporterId = reporterId;
 	}
 
-	@Override
-	public String toString() {
-		return "ReportedBBS [reportNo=" + reportNo + ", category=" + category
-				+ ", reviewNo=" + reviewNo + ", state=" + state + ", reason="
-				+ reason + ", reportedDate=" + reportedDate + ", reporterId="
-				+ reporterId + "]";
+	public int getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
 	}
 
 	@Override
@@ -109,6 +101,7 @@ public class ReportedBBS implements Serializable{
 		int result = 1;
 		result = prime * result
 				+ ((category == null) ? 0 : category.hashCode());
+		result = prime * result + pageNo;
 		result = prime * result + ((reason == null) ? 0 : reason.hashCode());
 		result = prime * result + reportNo;
 		result = prime * result
@@ -133,6 +126,8 @@ public class ReportedBBS implements Serializable{
 			if (other.category != null)
 				return false;
 		} else if (!category.equals(other.category))
+			return false;
+		if (pageNo != other.pageNo)
 			return false;
 		if (reason == null) {
 			if (other.reason != null)
@@ -160,5 +155,15 @@ public class ReportedBBS implements Serializable{
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "ReportedBBS [reportNo=" + reportNo + ", category=" + category
+				+ ", reviewNo=" + reviewNo + ", state=" + state + ", reason="
+				+ reason + ", reportedDate=" + reportedDate + ", reporterId="
+				+ reporterId + ", pageNo=" + pageNo + "]";
+	}
+	
+	
 	
 }

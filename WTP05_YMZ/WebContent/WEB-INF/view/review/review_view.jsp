@@ -39,7 +39,7 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 function reportReply(reviewNo, rnum, pNo){
 	var isCom=confirm("신고할랭???")
 	if(isCom){
-		$("#report_dialog").dialog({modal:true, width:800});
+		$("#reportReply_dialog").dialog({modal:true, width:800});
 	}else{
 		return;
 	}
@@ -80,6 +80,8 @@ $(document).ready(function(){
 				$("#modifyBtn").show();
 				$("#deleteBtn").show();
 				$("#reportBtn").show();
+			}else if("${not empty sessionScope.login_info}"){			// 로그인한 사람만 신고버튼이 보인다.
+				$("#reportBtn").show();
 			}
 		}
 	});
@@ -114,8 +116,20 @@ $(document).ready(function(){
 		}
 	});
 	
+	// 신고버튼
 	$("#reportBtn").on("click", function(){
-		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+		var isCom=confirm("리뷰 신고?? ㅇㅋ??")
+		if(isCom){
+			$("#reportReview_dialog").dialog({modal:true, resizable: false, 
+				buttons: {
+					"취소":function(){
+						$(this).dialog("close");
+					}
+				}	
+			});
+		}else{
+			return;
+		}
 	});
 	
 	// 댓글 등록 버튼
@@ -137,12 +151,20 @@ $(document).ready(function(){
 		alert("로그인부터 하세욥!!!");
 	});
 	
+	
+	
 });
 </script>	
 <!-- css -->
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+
+.ui-dialog .ui-dialog-buttonpane button {  /* 다이어로그 취소버튼 */
+  margin: .5em .4em .5em 0;
+  width: 120px;
+  cursor: pointer;
+}
 
 table#replyTB tbody tr:nth-child(even) {
     background-color: lavenderblush;
@@ -175,6 +197,14 @@ button{
 }
 
 div#dialog{
+	width:800px;
+	display: none;
+}
+div#reportReply_dialog{
+	width:800px;
+	display: none;
+}
+div#reportReview_dialog{
 	width:800px;
 	display: none;
 }
@@ -269,7 +299,7 @@ ${requestScope.review.content }<br>
 <table id="replyTB" style="width:1020px;">
 		<thead>
 			<tr>
-				<td colspan="3">댓글달아줘!!</td>
+				<td colspan="3">댓글</td>
 			</tr>
 		</thead>
 		<tbody> 
@@ -286,10 +316,12 @@ ${requestScope.review.content }<br>
 						<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 삭제">
 						<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
 						</c:if>
-						<!-- 신고 -->
+						<!-- 신고 : 로그인해야만 보인다 -->
+						<c:if test="${not empty sessionScope.login_info }">
 						<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
 						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
-						</td>
+						</c:if>
+					</td>
 				</tr > 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->
@@ -334,20 +366,42 @@ ${requestScope.review.content }<br>
 	</form>
 	</section>
 </div>
+	<!-- 리뷰신고 dialog -->
+<div id="reportReview_dialog" title="리뷰 신고" align="left" >
+	<figure id="pic"></figure>
+	<section>
+	<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 신고내용 접수 </header>
+	
+	<form id="reportReviewForm" action="${initParam.rootPath }/review/login/reportReview.do" method="post">
+	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}"> <!-- 글번호 -->
+	<input type="hidden" name="reporterId" value="${sessionScope.login_info.id}"> <!-- 신고자 ID -->
+	<input type="hidden" name="state" value="unhandled"> <!-- 처리상태 : 미처리 -->
+	<input type="hidden" name="category" value="review"> <!-- 카테고리 : 리뷰 -->
+	<input type="hidden" name="pageNo" value="${requestScope.pageNo}"> <!-- 페이지 번호 -->
+	<select name="reason">
+		<option value="abuse">욕설신고</option>
+		<option value="sexual">성희롱</option>
+		<option value="advertising">광고글</option>
+		<option value="etc">기타</option>
+	</select>
+	<input type="submit" name="reviewReport" value="신고">
+	</form>
+	</section>
+</div>
 	<!-- 댓글신고 dialog -->
-	<div id="report_dialog" title="댓글 신고" align="left" >
+<div id="reportReply_dialog" title="댓글 신고" align="left" >
 	<figure id="pic"></figure>
 	<section>
 	<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 신고내용 접수 </header>
 	<select>
 		<option value="fuck">욕설신고</option>
-		<option value="badman">성희롱</option>
-		<option value="money">상업적 홍보글</option>
+		<option value="sexual">성희롱</option>
+		<option value="money">광고글</option>
 		<option value="guitar">기타</option>
 	</select>
 	</section>
-	</div>
+</div>
+	<!-- 댓글신고 dialog 끝 -->
 </div>
 </body>
-
 </html>

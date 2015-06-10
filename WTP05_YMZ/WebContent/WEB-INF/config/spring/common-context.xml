@@ -20,9 +20,8 @@
 	<context:component-scan base-package="com.ymz.reviewreply.dao, com.ymz.reviewreply.service, com.ymz.reviewreply.controller"/>
 	<context:component-scan base-package="com.ymz.restaurantreply.dao, com.ymz.restaurantreply.service"/>
 	<context:component-scan base-package="com.ymz.reportedbbs.dao, com.ymz.reportedbbs.service, com.ymz.reportedbbs.controller"/>
-	<!--  
 	<context:component-scan base-package="com.ymz.reportedreply.dao, com.ymz.reportedreply.service, com.ymz.reportedreply.controller"/>
-	-->
+
 	
 	<mvc:annotation-driven/>
 	<mvc:interceptors>
