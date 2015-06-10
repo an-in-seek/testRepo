@@ -19,11 +19,13 @@ var locationCheck = false;
 var infoCheck = false;
 var pictureCheck = false;
 $(document).ready(function(){
-	$(window).on("unload",function(){
+	$(window).on("beforeunload",function(){
 		$.ajax({
 			url:"${initParam.rootPath}/restaurant/ajax/test.do",
 			type:"post"
 		});
+		
+		return "종료";
 	});
 	$(window).on("close",function(){
 		$.ajax({
