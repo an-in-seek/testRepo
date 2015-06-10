@@ -140,10 +140,16 @@ public class MemberController {
 	// 로그인
 	@RequestMapping(value="login.do",method=RequestMethod.POST)
 	public String login(String id, String password, HttpSession session, HttpServletRequest request, HttpServletResponse response, ModelMap map){
+		String url = null;
 		Member m = service.getMemberById(id);
+		if(m==null){
+			url = "member/login_form.tiles";
+			 map.addAttribute("error_message", "ID를 확인하세요");
+			return url;
+		}
 		String state = m.getState();
 		System.out.println(state);
-		String url = null;
+		
 		if(m!=null&&!state.equals("탈퇴")){
 			if(password.equals(m.getPassword())){
 				session.setAttribute("login_info", m);
