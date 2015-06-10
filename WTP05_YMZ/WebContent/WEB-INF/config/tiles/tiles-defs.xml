@@ -49,7 +49,6 @@
 		<put-attribute name="right_menu" value="/WEB-INF/view/layout/member/login_menu.jsp"/>
 	</definition>
 	
-<<<<<<< HEAD
 	<!-- 회원가입 로그인 메뉴바를 누르면 네비게이션이 안보이게 한다. -->
 	 <definition name="member_template" template="/WEB-INF/view/layout/member/member_template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
@@ -60,8 +59,6 @@
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
 	</definition>
 	<!-- 메인페이지:끝 -->
-=======
->>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 	<!-- 마이페이지:달이 -->
 	<definition name="mypage_template" template="/WEB-INF/view/layout/member/mypage_template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
