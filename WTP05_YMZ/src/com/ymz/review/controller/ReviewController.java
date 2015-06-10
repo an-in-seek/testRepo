@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ymz.common.validator.ReviewValidator;
 import com.ymz.member.vo.Member;
 import com.ymz.review.service.ReviewService;
 import com.ymz.review.vo.Review;
@@ -35,7 +36,10 @@ public class ReviewController {
 	//리뷰 등록
 	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
 	public String registerReview(@ModelAttribute Review review, Errors errors, HttpSession session) throws Exception{
+		new ReviewValidator().validate(review, errors);
+		// 제목과 내용 미입력시 등록 실패
 		if(errors.hasErrors()){
+			System.out.println("모두 입력하지 않아 등록 실패");
 			return "review/review_write_form.tiles";
 		}
 		Member member = (Member)session.getAttribute("login_info");
@@ -83,8 +87,14 @@ public class ReviewController {
 	}
 	
 	//리뷰 수정(로그인시 가능)
-	@RequestMapping(value="login/modifyReview.do")
+	@RequestMapping(value="login/modifyReview.do", method=RequestMethod.POST)
 	public String modifyReview(@ModelAttribute Review review, Errors errors, HttpSession session){
+		new ReviewValidator().validate(review, errors);
+		// 제목과 내용 미입력시 수정 실패
+		if(errors.hasErrors()){
+			System.out.println("모두 입력하지 않아 수정 실패");
+			return "review/review_modify_form.tiles";
+		}
 		Member member = (Member)session.getAttribute("login_info");
 		String userid = member.getId();
 		review.setMemberId(userid);
