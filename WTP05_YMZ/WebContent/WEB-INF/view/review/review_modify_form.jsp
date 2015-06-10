@@ -36,17 +36,17 @@ $(document).ready(function(){
 	
 	// 등록버튼 클릭시 form 전송
 	$("#save").click(function(){
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		if (!$("#title").val()) {
 			alert("제목을 입력하세요");
 			$("#title").focus();
 			return false;
 		}
-		if (!$("#content").val()) {
-			alert("내용을 입력하세요");
+		if (!$("#content").val() || $("#content").val().trim()=="<p>&nbsp;</p>") {
+			alert("내용을 입력하세요!!");
 			$("#content").focus();
 			return false;
 		}
-		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		
 	});
 

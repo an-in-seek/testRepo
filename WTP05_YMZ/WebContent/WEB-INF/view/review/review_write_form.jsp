@@ -36,17 +36,20 @@ $(document).ready(function(){
 	
 	
 	// 등록버튼 클릭시 form 전송
+	
+	
 	$("#save").click(function(){
+		
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD");
-		if(!$("#content").val()){
-			alert("내용을 입력하세요!!");
-			$("#content").focus();
-			return false;
-		} 
 		
 		if (!$("#title").val()) {
 			alert("제목을 입력하세요!!");
 			$("#title").focus();
+			return false;
+		}
+		if (!$("#content").val() || $("#content").val().trim()=="<p>&nbsp;</p>") {
+			alert("내용을 입력하세요!!");
+			$("#content").focus();
 			return false;
 		}
 		
@@ -78,7 +81,6 @@ table#t1 thead tr{
 
 <h2>리뷰 글쓰기 폼</h2>
 <div align="center" style="padding:20px">
-<!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
 	<form id="write" method="post" action="${initParam.rootPath }/review/login/write.do">
 	
 	<!-- 테이블 -->
