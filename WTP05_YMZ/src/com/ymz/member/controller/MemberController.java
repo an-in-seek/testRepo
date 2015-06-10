@@ -88,7 +88,7 @@ public class MemberController {
 			food ="없음";
 		}else{
 		for(String s :favoriteFood ){
-			food += s+" ";
+			food += s+",";
 			}
 		}
 		member.setFavoriteFood(food);
@@ -167,8 +167,10 @@ public class MemberController {
 	@RequestMapping(value="login.do",method=RequestMethod.POST)
 	public String login(String id, String password, HttpSession session, HttpServletRequest request, HttpServletResponse response, ModelMap map){
 		Member m = service.getMemberById(id);
+		String state = m.getState();
+		System.out.println(state);
 		String url = null;
-		if(m!=null){
+		if(m!=null&&!state.equals("탈퇴")){
 			if(password.equals(m.getPassword())){
 				session.setAttribute("login_info", m);
 				url = "main.tiles";

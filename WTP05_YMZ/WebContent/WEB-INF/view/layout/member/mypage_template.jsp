@@ -50,7 +50,6 @@ header.mypage_template{
 	text-align:center;
 	padding: 5px;
 }
-
 #body{
 	padding: 20px;
 	height:580px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/

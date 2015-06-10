@@ -83,7 +83,6 @@
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
 	</definition>
 	<!-- 메인페이지:끝 -->
-	
 	<!-- 마이페이지:달이 -->
 	<definition name="mypage_template" template="/WEB-INF/view/layout/member/mypage_template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
@@ -91,8 +90,8 @@
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 	</definition>
 	<definition name="member/info/*.tiles" extends="mypage_template">
-		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
 		<put-attribute name="aside_menu" value="/WEB-INF/view/layout/member/mypage.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
 	</definition>
 		<definition name="member/mypage/*.tiles" extends="mypage_template">
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />

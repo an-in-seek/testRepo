@@ -56,6 +56,10 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	/**
+	 * id로 회원 상태
+	 */
+	
+	/**
 	 * 전화번호로 회원 정보를 조회하여 return하는 메소드
 	 */
 	@Override
