@@ -239,11 +239,11 @@ public class RestaurantController {
 			session.setAttribute("backURL", backURL);
 		}
 		
-		// 조회수 1증가
-		if(member!=prevMember){
-			prevMember = member;
-			service.increaseHits(restaurantNo);
-		}
+//		// 조회수 1증가
+//		if(member!=prevMember){
+//			prevMember = member;
+//			service.increaseHits(restaurantNo);
+//		}
 		
 		//송이꺼-----------------------------------------------------------------------------
 	

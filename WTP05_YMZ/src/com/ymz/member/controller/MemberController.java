@@ -44,9 +44,7 @@ public class MemberController {
 	@RequestMapping("joinBefore.do")
 	@ResponseBody
 	public ModelAndView joinForm(HttpSession session){
-		System.out.println("asdfasdfas");
 		Map<String,Object> map = new HashMap<String,Object>();
-//		Map<String,Object> map2 = new HashMap<String,Object>();
 		map = service.getCategory();
 		session.setAttribute("map", map);
 		return new ModelAndView("member/join_form.tiles");
@@ -60,6 +58,29 @@ public class MemberController {
 		if(errors.hasErrors()){
 			return "member/join_form.tiles";
 		}
+		String id = member.getId();
+		String password = member.getPassword();
+		String name = member.getName();
+		String nickname = member.getNickname();
+		if(!id.matches("[A-Za-z0-9]{4,12}$")){
+			map.addAttribute("error_message", "ID의 양식에 맞지 않습니다");
+			return "member/join_form.tiles";
+		}
+		
+		if(!password.matches("[a-zA-Z0-9]{4,24}$")){
+			map.addAttribute("error_message", "password의 양식에 맞지 않습니다");
+			return "member/join_form.tiles";
+		}
+		
+		if(!name.matches("[가-힣]{2,10}|^[a-zA-Z]{2,10}$")){
+			map.addAttribute("error_message", "이름의 양식에 맞지 않습니다");
+			return "member/join_form.tiles";
+		}
+		
+		if(!nickname.matches("[가-힣a-zA-Z0-9]{2,8}$")){
+			map.addAttribute("error_message", "닉네임의 양식에 맞지 않습니다");
+			return "member/join_form.tiles";
+		}
 		String post1 = (String) request.getParameter("postcode1");
 		String post2 = (String) request.getParameter("postcode2");
 		String exAddress = (String) request.getParameter("address");
@@ -67,6 +88,14 @@ public class MemberController {
 		String phoneCP = (String) request.getParameter("phoneCP");
 		String num1 = (String)request.getParameter("num1");
 		String num2 = (String)request.getParameter("num2");
+		if(!num1.matches("[0-9]{3,4}$")||!num2.matches("[0-9]{3,4}$")){
+			map.addAttribute("error_message", "전화번호의 양식에 맞지 않습니다");
+			return "member/join_form.tiles";
+		}
+		if(!num2.matches("[0-9]{3,4}$")||!num2.matches("[0-9]{3,4}$")){
+			map.addAttribute("error_message", "전화번호의 양식에 맞지 않습니다");
+			return "member/join_form.tiles";
+		}
 		String phoneNo = phoneCP+"-"+num1+"-"+num2;
 		String exSex = (String)request.getParameter("sex");
 		String zipcode = post1+"-"+post2;
@@ -88,6 +117,10 @@ public class MemberController {
 			String emailName = (String)request.getParameter("emailName");
 			String emailAddress = (String)request.getParameter("emailAddress");
 			String exEmail = emailName+"@"+emailAddress;
+			if(!exEmail.matches("[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}")){
+				map.addAttribute("error_message", "이메일의 양식에 맞지 않습니다");
+				return "member/join_form.tiles";
+			}
 			if(service.getMemberByEmail(exEmail)!=null){
 				map.addAttribute("error_message", "이미 가입된 이메일입니다.");
 				request.setAttribute("postcode1", post1);
@@ -125,7 +158,6 @@ public class MemberController {
 					member.setMileage(0);
 					service.joinMember(member);
 				}
-		
 		return "redirect:/member/joinSuccess.do?id="+member.getId();
 	}
 	
@@ -153,7 +185,7 @@ public class MemberController {
 		if(m!=null&&!state.equals("탈퇴")){
 			if(password.equals(m.getPassword())){
 				session.setAttribute("login_info", m);
-				url = "main.tiles";
+				url = "main1.tiles";
 			}else{
 				url = "member/login_form.tiles";
 				map.addAttribute("error_message", "Password를 확인하세요");
@@ -193,6 +225,7 @@ public class MemberController {
 	
 	
 	/*************로그인이 필요한 서비스 - interceptor에서 로그인 체크**********************/
+	@SuppressWarnings("unused")
 	@RequestMapping("modifyMemberInfo.do")
 	@ResponseBody
 	public ModelAndView modifyMemberInfo(@ModelAttribute Member member, Errors errors, HttpSession session,  HttpServletRequest request, ModelMap map ){
@@ -204,8 +237,14 @@ public class MemberController {
 //		}
 		//session의 login_info 속성의 property들을  수정된 정보로 변경(id, joinDate는 변경 안한다.)
 		//로그인 체크 - interceptor가 처리
+		String exEmail = loginInfo.getEmail();
+		String exPhone = loginInfo.getPhoneNo();
 		String nickname = (String) request.getParameter("nickname");
-		request.setAttribute("nickname", nickname);
+		if(!nickname.matches("[가-힣a-zA-Z0-9]{2,8}$")){
+			map.addAttribute("error_message", "닉네임의 양식에 맞지 않습니다");
+			return new ModelAndView("member/info/modify_info.tiles",map);
+		}
+//		request.setAttribute("nickname", nickname);
 		String exNick = loginInfo.getNickname();
 		String post1 = (String) request.getParameter("postcode1");
 		String post2 = (String) request.getParameter("postcode2");
@@ -214,14 +253,32 @@ public class MemberController {
 		String emailName = (String) request.getParameter("emailName");
 		String emailAddress = (String) request.getParameter("emailAddress");
 		String email = emailName+"@"+emailAddress;
-		String phoneNo = (String) request.getParameter("phoneNo");
+		if(!email.matches("[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}")){
+			map.addAttribute("error_message", "이메일의 양식에 맞지 않습니다");
+			return new ModelAndView("member/info/modify_info.tiles",map);
+		}
+		String phoneCP = (String) request.getParameter("phoneCP");
+		String num1 = (String) request.getParameter("num1");
+		String num2 = (String) request.getParameter("num2");
+		if(!num1.matches("[0-9]{3,4}$")||!num2.matches("[0-9]{3,4}$")){
+			map.addAttribute("error_message", "전화번호의 양식에 맞지 않습니다");
+			return new ModelAndView("member/info/modify_info.tiles",map);
+		}
+		if(!num2.matches("[0-9]{3,4}$")||!num2.matches("[0-9]{3,4}$")){
+			map.addAttribute("error_message", "전화번호의 양식에 맞지 않습니다");
+			return new ModelAndView("member/info/modify_info.tiles",map);
+		}
+		String phoneNo = phoneCP+"-"+num1+"-"+num2;
+		System.out.println(phoneNo);
 		String zipcode = post1+"-"+post2;
-		Member flag = service.getMemberByEmail(email);
-		String m = loginInfo.getEmail();
-		if(flag!=null&&!m.equals(email)){
+		if(service.getMemberByEmail(email)!=null&&!email.equals(exEmail)){
 			map.addAttribute("error_message", "이미 가입된 이메일입니다.");
 			return new ModelAndView("member/info/modify_info.tiles",map);
-		}else{
+		}
+		if(service.getMemberByPhone(phoneNo)!=null&&!phoneNo.equals(exPhone)){
+			map.addAttribute("error_message", "이미 가입된 전화번호입니다.");
+			return new ModelAndView("member/info/modify_info.tiles",map);
+		}
 			loginInfo.setNickname(nickname);
 			loginInfo.setZipcode(zipcode);
 			loginInfo.setAddress(address);
@@ -230,8 +287,10 @@ public class MemberController {
 			loginInfo.setPhoneNo(phoneNo);
 			service.modifyMember(loginInfo);
 			return new ModelAndView("member/mypage/mypage.tiles");
+			
 		}
-	}
+	
+	
 	
 	// 정보 제거하기
 	@RequestMapping("login/removeMember.do")

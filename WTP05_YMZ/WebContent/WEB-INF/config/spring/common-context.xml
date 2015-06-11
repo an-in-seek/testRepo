@@ -37,7 +37,7 @@
 	</mvc:interceptors>
 	
 	<!-- Link controller들 설정 -->
-	<mvc:view-controller path="/index.do" view-name="main.tiles"/>
+	<mvc:view-controller path="/index.do" view-name="main1.tiles"/>
 	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>
 	<mvc:view-controller path="/member/loginForm.do" view-name="member/login_form.tiles"/>
 	<mvc:view-controller path="/member/mypage/modify_password_success.do" view-name="member/info/modify_password_success.tiles"/>
