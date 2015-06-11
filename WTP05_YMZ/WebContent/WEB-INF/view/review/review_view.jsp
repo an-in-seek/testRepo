@@ -43,7 +43,7 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 function reportReply(reviewNo, rnum, pNo){
 	var isCom=confirm("신고할랭???")
 	if(isCom){
-		$("#report_dialog").dialog({modal:true, width:800});
+		$("#reportReply_dialog").dialog({modal:true, width:800});
 	}else{
 		return;
 	}
@@ -84,6 +84,8 @@ $(document).ready(function(){
 				$("#modifyBtn").show();
 				$("#deleteBtn").show();
 				$("#reportBtn").show();
+			}else if("${not empty sessionScope.login_info}"){			// 로그인한 사람만 신고버튼이 보인다.
+				$("#reportBtn").show();
 			}
 		}
 	});
@@ -121,8 +123,20 @@ $(document).ready(function(){
 		}
 	});
 	
+	// 신고버튼
 	$("#reportBtn").on("click", function(){
-		alert("아직 안했엉!! ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+		var isCom=confirm("리뷰 신고?? ㅇㅋ??")
+		if(isCom){
+			$("#reportReview_dialog").dialog({modal:true, resizable: false
+			});
+		}else{
+			return;
+		}
+	});
+	
+	// 신고 다이어로그 취소 버튼
+	$("#reviewReportCancel").on("click", function(){
+		$("#reportReview_dialog").dialog("close");
 	});
 	
 	// 댓글 등록 버튼
@@ -139,12 +153,21 @@ $(document).ready(function(){
 		alert("로그인부터 하세욥!!!");
 	});
 	
+	
+	
+	
 });
 </script>	
 <!-- css -->
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+
+.ui-dialog .ui-dialog-buttonpane button {  /* 다이어로그 취소버튼 */
+  margin: .5em .4em .5em 0;
+  width: 120px;
+  cursor: pointer;
+}
 
 table#replyTB tbody tr:nth-child(even) {
     background-color: lavenderblush;
@@ -180,6 +203,14 @@ div#dialog{
 	width:800px;
 	display: none;
 }
+div#reportReply_dialog{
+	width:800px;
+	display: none;
+}
+div#reportReview_dialog{
+	width:800px;
+	display: none;
+}
 .recommendBtn{		
 	cursor: pointer;
 }
@@ -189,7 +220,7 @@ div#dialog{
 .listTable{
 	font-family: 'Hanna', sans-serif;
 	color: #545c72;
-	border:2px solid #B70000;
+	border:1px solid #B70000;
     -webkit-border-radius: 10px; /* 둥근 모서리 시작 */
 	-moz-border-radius: 10px;
 	border-radius: 10px;		 /* 둥근 모서리 끝 */
@@ -227,7 +258,7 @@ div#dialog{
 }
 #reviewContent{
   	margin-top: -20px;
-	border: 2px solid #B70000;
+	border: 1px solid #B70000;
 }
 </style>
 <!-- css 끝 -->
@@ -237,7 +268,7 @@ div#dialog{
 <h4>리뷰</h4>
 <div align="left">
 <!-- ************************************** 리뷰 정보 ************************************* -->
-<table class="listTable" style="width:1020px">
+<table class="listTable">
 		<thead>
 			<tr>
 				<th style="height:80px" colspan="5"><font size="5">${requestScope.review.title}</font></th>
@@ -256,11 +287,9 @@ div#dialog{
 	<br>
 </div>
 <!-- ********************************* 리뷰 내용이 들어가는 공간 *************************************** -->
-<div id="reviewContent" style="width: 1020px">
+<div id="reviewContent">
 ${requestScope.review.content }<br>
 
-
-	
 		<div align="center" id="recommend"> <!-- 추천 버튼 -->
 			<img src="${initParam.rootPath}/uploadPhoto/recommend.jpg" class="recommendBtn"> <br>
 			<span id="recommendCountBtn"><font color="red" size="5">${requestScope.review.recommend}</font></span>
@@ -289,7 +318,7 @@ ${requestScope.review.content }<br>
 <table id="replyTB" style="width:1020px;">
 		<thead>
 			<tr>
-				<td colspan="3">댓글달아줘!!</td>
+				<td colspan="3">댓글</td>
 			</tr>
 		</thead>
 		<tbody> 
@@ -391,20 +420,43 @@ ${requestScope.review.content }<br>
 	</form>
 	</section>
 </div>
+	<!-- 리뷰신고 dialog -->
+<div id="reportReview_dialog" title="리뷰 신고" align="left" >
+	<figure id="pic"></figure>
+	<section>
+	<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 신고내용 접수 </header>
+	
+	<form id="reportReviewForm" action="${initParam.rootPath }/review/login/reportReview.do" method="post">
+	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}"> <!-- 글번호 -->
+	<input type="hidden" name="reporterId" value="${sessionScope.login_info.id}"> <!-- 신고자 ID -->
+	<input type="hidden" name="state" value="미처리"> <!-- 처리상태 : 미처리 -->
+	<input type="hidden" name="category" value="review"> <!-- 카테고리 : 리뷰 -->
+	<input type="hidden" name="pageNo" value="${requestScope.pageNo}"> <!-- 페이지 번호 -->
+	<select name="reason">
+		<option value="욕설신고">욕설신고</option>
+		<option value="성희롱">성희롱</option>
+		<option value="광고글">광고글</option>
+		<option value="기타">기타</option>
+	</select>
+	<input type="submit" name="reviewReport" value="신고">
+	<input type="button" id="reviewReportCancel" value="취소">
+	</form>
+	</section>
+</div>
 	<!-- 댓글신고 dialog -->
-	<div id="report_dialog" title="댓글 신고" align="left" >
+<div id="reportReply_dialog" title="댓글 신고" align="left" >
 	<figure id="pic"></figure>
 	<section>
 	<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 신고내용 접수 </header>
 	<select>
 		<option value="fuck">욕설신고</option>
-		<option value="badman">성희롱</option>
-		<option value="money">상업적 홍보글</option>
+		<option value="sexual">성희롱</option>
+		<option value="money">광고글</option>
 		<option value="guitar">기타</option>
 	</select>
 	</section>
-	</div>
+</div>
+	<!-- 댓글신고 dialog 끝 -->
 
 </body>
-
 </html>
