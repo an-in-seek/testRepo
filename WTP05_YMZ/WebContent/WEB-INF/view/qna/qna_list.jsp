@@ -38,6 +38,7 @@ a.list:visited {text-decoration:none; color: #545c72;}/*방문한 링크 표시*
 a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라갔을 때*/
 
 #table{
+	font-family:'Malgun Gothic', dotum;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	padding: 20px;
@@ -57,8 +58,8 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 .listTB thead tr {
 	font-weight: bold;
 }
-.listTB tbody{
-	border: 1px solid white;
+.listTB tbody tr td{
+	border-bottom: 1px solid black;
 }
 div#dialog {
 	width: 400px;
@@ -76,7 +77,7 @@ article {
 <div align="center" id="table">
 <c:choose>
 	<c:when test="${fn:length(requestScope.qna_list) != 0 }">
-	<table id="listTB"  class="listTB" border="1">
+	<table id="listTB"  class="listTB">
 		<thead>
 			<tr align="center" style="border-color:#ccc;">
 				<td width="40px">NO</td>
@@ -89,7 +90,7 @@ article {
 		</thead>
 		<tbody style="border-color:#ccc;">
 			<c:forEach items="${requestScope.qna_list}" var="qna">
-				<tr align="center" style="border-color:#ccc;">
+				<tr align="center">
 					<td>${qna.number }</td>
 					<td align="left"><c:forEach begin="1" end="${qna.relevel}">
 							&nbsp;&nbsp;
