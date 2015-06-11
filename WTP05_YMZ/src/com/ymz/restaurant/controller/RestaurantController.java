@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,9 +36,17 @@ public class RestaurantController {
 	@Autowired
 	private RestaurantReplyService replyService;
 	
-	@RequestMapping("/ajax/test.do")
-	public void test() {
-		System.out.println("왔다");
+	@RequestMapping("/ajax/deleteTempFile.do")
+	public void deleteTempFile(String pictures, HttpServletRequest request) {
+		if(pictures.equals("")) {
+			return;
+		}
+		
+		String[] arr = pictures.split(",");
+		String path = request.getServletContext().getRealPath("/tempPhoto");
+		for(int i=0; i<arr.length; i++) {
+			new File(path, arr[i]).delete();
+		}
 	}
 	
 	@RequestMapping("/ajax/checkName.do")
@@ -230,11 +237,11 @@ public class RestaurantController {
 			session.setAttribute("backURL", backURL);
 		}
 		
-		// 조회수 1증가
-		if(member!=prevMember){
-			prevMember = member;
-			service.increaseHits(restaurantNo);
-		}
+//		// 조회수 1증가
+//		if(member!=prevMember){
+//			prevMember = member;
+//			service.increaseHits(restaurantNo);
+//		}
 		
 		//송이꺼-----------------------------------------------------------------------------
 	
