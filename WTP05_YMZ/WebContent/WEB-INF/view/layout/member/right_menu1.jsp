@@ -18,17 +18,16 @@ function pw_pop(){
 .cu {font-family: cursive;}
 .fa {font-family: fantasy;}
 #right_menu1{										/* 메인화면 오른쪽 로그인창 */
+	width:220px;
+	height:auto;
 	font-family: 'Hanna', sans-serif;
 	background-color: #f8f8f8;
 	border: solid 1px #b70000;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
-	height:auto;
-	width:220px;
 	text-align:center;
 	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
 	-moz-border-radius: 10px;
 	border-radius: 10px;		 /* 둥근 모서리 끝 */
-	float:right;  /*오른쪽으로 띄움 */
 }
 #mainInfofind {					/* 회원 정보 찾기 */
 	font-family: 'Hanna', sans-serif;

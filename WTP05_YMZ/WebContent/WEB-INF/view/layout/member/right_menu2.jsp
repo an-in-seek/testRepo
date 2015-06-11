@@ -6,15 +6,20 @@
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 #right_menu2{				/* 로그인 입력 폼 */
+	width: auto; 
+	height: auto;
+	font-family: 'Hanna', sans-serif;
+	background-color: lightgray; 
+	border: solid 1px #bfbfbf; 
+	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	text-align: center;
-	border: solid 1px #bfbfbf;  /* 로그인 입력폼 테두리 선 */ 
-	margin-top: 80%;
+	color: #808080;
+	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
+	-moz-border-radius: 10px;
+	border-radius: 10px;		 /* 둥근 모서리 끝 */
+	margin-top: 8%;
 	margin-left: auto;
 	margin-right: auto;
-	color: #808080;
-	background-color: blue; 
-	width: auto; 
-	height: auto
 }
 .btn input {			/* 버튼 */
   width: 90px;
