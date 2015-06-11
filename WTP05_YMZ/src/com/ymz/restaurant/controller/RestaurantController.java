@@ -33,10 +33,16 @@ public class RestaurantController {
 	
 	@Autowired
 	private RestaurantService service;
-	private Member prevMember = new Member();
+	
 	//송이꺼
 	@Autowired
 	private RestaurantReplyService replyService;
+	
+	@RequestMapping("/ajax/getMainRestaurants.do")
+	@ResponseBody
+	public List<Restaurant> getMainRestaurants() {
+		return service.getMainRestaurants();
+	}
 	
 	@RequestMapping("/ajax/deleteTempFile.do")
 	public void deleteTempFile(String pictures, HttpServletRequest request) {

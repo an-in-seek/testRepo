@@ -30,4 +30,7 @@ public interface RestaurantDAO {
 	public String selectFloorByLocationNo(int locationNo);
 	public int updateRestaurant(Restaurant restaurant);
 	public int deleteFoods(int restaurantNo);
+	public Restaurant selectRestaurantByManyHits();
+	public Restaurant selectRestaurantByHighScore();
+	public Restaurant selectRestaurantByManyScore();
 }
