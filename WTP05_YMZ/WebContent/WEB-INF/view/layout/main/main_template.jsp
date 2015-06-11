@@ -51,15 +51,16 @@ header.main_template{
 	text-align:center;
 }
 #right{										/* 메인화면 오른쪽 로그인창 */
+	width:220px;
+	height:560px;
 	font-family: 'Hanna', sans-serif;
-	margin-top:5px;
-	margin-right:5px;
+	margin-top:10px;
+	margin-right:10px;
+	margin-bottom:10px;
 	background-color: #f8f8f8;
 	border: solid 1px #b70000;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	padding:10px;
-	height:160px;
-	width:220px;
 	text-align:center;
 	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
 	-moz-border-radius: 10px;
@@ -67,19 +68,20 @@ header.main_template{
 	float:right;  /*오른쪽으로 띄움 */
 }
 #body{
-	padding: 20px;
-	height:550px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-	width:auto;
-	float:left;   /*왼쪽으로 띄움 */
-}
-#left{
-	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
+	width:720px;
+	height:560px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	margin:10px;
 	padding:10px;
-	height:600px;
-	width:100px;
+	background-color: #f8f8f8;
+	border: solid 1px #b70000;   
 	font-weight:bold;
+	line-height:10px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	text-align:center;
-	float:left;  /*왼쪽으로 띄움 */
+	padding: 10px;
+	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
+	-moz-border-radius: 10px;
+	border-radius: 10px;		 /* 둥근 모서리 끝 */
+	float:left;   /*왼쪽으로 띄움 */
 }
 footer.main_template{
 	height:50px;
@@ -109,7 +111,8 @@ footer.main_template{
 		</aside> --%>
 		
 		<section id="body" class="main_template">
-			<tiles:insertAttribute name="body" />
+			<tiles:insertAttribute name="body1" />
+			<tiles:insertAttribute name="body2" />
 		</section>
 		
 		<nav id="right" class="main_template">

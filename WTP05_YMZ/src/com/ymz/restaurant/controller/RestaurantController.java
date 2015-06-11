@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ymz.common.validator.RestaurantReplyValidator;
 import com.ymz.member.vo.Member;
 import com.ymz.restaurant.service.RestaurantService;
 import com.ymz.restaurant.vo.Food;
@@ -259,10 +260,19 @@ public class RestaurantController {
 	
 	
 	@RequestMapping("/login/registerReply.do")
-	public String registerRestaurantReply(@ModelAttribute RestaurantReply restaurantReply, HttpSession session){	
+	public String registerRestaurantReply(@ModelAttribute RestaurantReply restaurantReply, Errors errors, HttpSession session){	
+		//만약에 jsp브라우저단에서 유효성 검사를 못해줄 경우(내용이 없을 때,평점을 안줬을 때)
+		//처리가 안된 댓글 정보를 컨트롤러(서버)에서 유효성 검사를 해준다. 
+		//클래스단에서 에러잡기
+		new RestaurantReplyValidator().validate(restaurantReply, errors);
+		if(errors.hasErrors()){
+			System.out.println("댓글 정보를 입력하지 않아 등록 실패");
+			return "/restaurant/restaurantView.do";
+		}
 		//등록
 		Member member = (Member)session.getAttribute("login_info");
 		restaurantReply.setMemberId(member.getId());
+		restaurantReply.setNickname(member.getNickname());
 		 replyService.registerRestaurantReply(restaurantReply);
 		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getRestaurantNo();
 	}
@@ -278,7 +288,14 @@ public class RestaurantController {
 	}
 	//수정하기
 	@RequestMapping("/login/updateReply.do")
-	public String modifyRestaurantReply(@ModelAttribute RestaurantReply restaurantReply,HttpSession session){
+	public String modifyRestaurantReply(@ModelAttribute RestaurantReply restaurantReply,Errors errors,HttpSession session){
+		//클래스단에서 에러잡기
+		new RestaurantReplyValidator().validate(restaurantReply, errors);
+		if(errors.hasErrors()){
+			System.out.println("댓글 수정 정보를 입력하지 않아 등록 실패");
+			return "/login/updateReply.do";
+		}
+		
 		Member member = (Member)session.getAttribute("login_info");
 		String userId = member.getId();
 		restaurantReply.setMemberId(userId);
@@ -293,6 +310,7 @@ public class RestaurantController {
 		
 	}
 	
+	//레스토랑삭제하기
 	@RequestMapping("/login/admin/removeRestaurant.do")
 	public String removeRestaurant(int restaurantNo, HttpServletRequest request) {
 		service.removeRestaurant(restaurantNo, request);

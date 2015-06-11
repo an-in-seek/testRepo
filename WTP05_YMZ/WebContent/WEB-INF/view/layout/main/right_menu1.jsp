@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <script type="text/javascript">
 function id_pop(){
 	  window.open('${initParam.rootPath }/popup/idFind.jsp','네이버팝업','width=450, height=350, scrollbars=no');
@@ -11,12 +12,23 @@ function pw_pop(){
 
 <style>
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-
 #main-title {color:#f8f8f8;font-size:70pt;margin-top:20%;}
 .se {font-family: serif;}
 .sa {font-family: sans-serif;}
 .cu {font-family: cursive;}
 .fa {font-family: fantasy;}
+#right_menu1{										/* 메인화면 오른쪽 로그인창 */
+	width:220px;
+	height:auto;
+	font-family: 'Hanna', sans-serif;
+	background-color: #f8f8f8;
+	border: solid 1px #b70000;   
+	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
+	text-align:center;
+	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
+	-moz-border-radius: 10px;
+	border-radius: 10px;		 /* 둥근 모서리 끝 */
+}
 #mainInfofind {					/* 회원 정보 찾기 */
 	font-family: 'Hanna', sans-serif;
 	margin-left: auto;
@@ -45,8 +57,7 @@ function pw_pop(){
 	color: #B70000;
 }
 #loginSuccessStatus{
-	
-	margin-top:4%
+
 }
 .int {position: relative;
   z-index: 10;
@@ -76,13 +87,14 @@ function pw_pop(){
 }
 </style>
   
-<div>
+<div id="right_menu1">
+
 <c:if test="${sessionScope.login_info!=null }">	
 	<table id="loginSuccess" align="center">
-		<tr align="center" height="30px" >
-			<td></td>
+		<tr align="center" height="50px" >
+			<td>아이디 : ${sessionScope.login_info.id }</td>
 		</tr>
-		<tr align="center" >
+		<tr align="center" height="50px" >
 			<td>
 			<font size="5">${sessionScope.login_info.nickname }</font><font size="2">님 환영합니다.</font>
 			</td>
@@ -90,7 +102,7 @@ function pw_pop(){
 	</table>
 	
 	<table id="loginSuccessStatus" align="center" width="220px">
-		<tr align="center" height="50px" >
+		<tr align="center" height="56px" >
 			<td class="btn">
 			<input type="button"  value="마이페이지" 
 					OnClick="window.location='${initParam.rootPath }/member/mypage.do'">
@@ -101,8 +113,8 @@ function pw_pop(){
 			</td>
 		</tr>
 	</table>
-	
 </c:if>
+
 <c:choose>	
 	<c:when test="${sessionScope.login_info==null }">
 		<form action="${initParam.rootPath }/member/login.do" method="post" >
@@ -133,4 +145,6 @@ function pw_pop(){
 		</form>
 	</c:when>
 </c:choose>
+
 </div>
+

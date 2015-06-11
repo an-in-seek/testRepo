@@ -8,11 +8,12 @@ public class RestaurantReply {
 	private int score;
 	private String memberId;
 	private int restaurantNo;
-	
-	
-	
+	private String nickname;
+	public RestaurantReply() {
+		super();
+	}
 	public RestaurantReply(int number, String regDate, String content,
-			int score, String memberId, int restaurantNo) {
+			int score, String memberId, int restaurantNo, String nickname) {
 		super();
 		this.number = number;
 		this.regDate = regDate;
@@ -20,13 +21,8 @@ public class RestaurantReply {
 		this.score = score;
 		this.memberId = memberId;
 		this.restaurantNo = restaurantNo;
+		this.nickname = nickname;
 	}
-	public RestaurantReply() {
-		super();
-	}
-	
-	
-	
 	public int getNumber() {
 		return number;
 	}
@@ -63,11 +59,11 @@ public class RestaurantReply {
 	public void setRestaurantNo(int restaurantNo) {
 		this.restaurantNo = restaurantNo;
 	}
-	@Override
-	public String toString() {
-		return "RestaurantReply [number=" + number + ", regDate=" + regDate
-				+ ", content=" + content + ", score=" + score + ", memberId="
-				+ memberId + ", restaurantNo=" + restaurantNo + "]";
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	@Override
 	public int hashCode() {
@@ -76,6 +72,8 @@ public class RestaurantReply {
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result
 				+ ((memberId == null) ? 0 : memberId.hashCode());
+		result = prime * result
+				+ ((nickname == null) ? 0 : nickname.hashCode());
 		result = prime * result + number;
 		result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
 		result = prime * result + restaurantNo;
@@ -101,6 +99,11 @@ public class RestaurantReply {
 				return false;
 		} else if (!memberId.equals(other.memberId))
 			return false;
+		if (nickname == null) {
+			if (other.nickname != null)
+				return false;
+		} else if (!nickname.equals(other.nickname))
+			return false;
 		if (number != other.number)
 			return false;
 		if (regDate == null) {
@@ -114,8 +117,15 @@ public class RestaurantReply {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "RestaurantReply [number=" + number + ", regDate=" + regDate
+				+ ", content=" + content + ", score=" + score + ", memberId="
+				+ memberId + ", restaurantNo=" + restaurantNo + ", nickname="
+				+ nickname + "]";
+	}
 	
-
+	
 	
 	
 	
