@@ -36,16 +36,17 @@ var idDup = false;
 var check = false;
 var nickChe = false;
 var idChe = false;
-var pwVal = false;
-var nameVal = false;
-var nickVal = false;
-var numVal = false;
-var emailNameVal = false;
-var emailAddressVal = false;
+var pwVal = true;
+var nameVal = true;
+var nickVal = true;
+var numVal = true;
+var emailNameVal = true;
+var emailAddressVal = true;	
 
 	//ID 유효성 체크
-	/*
+	
 	$("#id").on("change",function(){
+		idChe = false;
 		var id = $("#id").val();
 		var idSize = id.length;
 		idDup = false;
@@ -66,7 +67,7 @@ var emailAddressVal = false;
 		$("#idsMessage").text("사용가능한 ID입니다");
 		idVal = true;
 	});
-	*/
+	
 	
 	//password 유효성검사
 	$("#password").on("change",function(){
@@ -135,41 +136,31 @@ var emailAddressVal = false;
 	
 	//이메일 유효성 검사
 	$("#emailName").on("change",function(){
+		
 		var emailName = $("#emailName").val();
 		var emailSize = emailName.length;
-		if(emailSize<2){
+		if(emailSize<2||!/^[a-zA-Z0-9]{1,11}$/.test(emailName)){
 			$("#emailsMessage").text("");
 			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
 			emailNameVal = false;
-			return false;
-		}
-		if(!/^[a-zA-Z0-9]{1,11}$/.test(emailName)){
-			$("#emailsMessage").text("");
-			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
-			emailNameVal = false;
-			return false;
-		}
+		}else{
 		$("#emailMessage").text("");	
 		emailNameVal = true;
+		}
 	});
 	
 	$("#emailAddress").on("change",function(){
 		var emailAddress = $("#emailAddress").val();
+		alert(emailAddress);
 		var addressSize = emailAddress.length;
-		if(addressSize<1){
+		if(addressSize<1||!/^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(emailAddress)){
 			$("#emailsMessage").text("");
 			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
 			emailAddressVal = false;
-			return false;
-		}
-		if(!/^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(emailAddress)){
-			$("#emailsMessage").text("");
-			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
-			emailAddressVal = false;
-			return false;
-		}
+		}else{
 		$("#emailMessage").text("");	
 		emailAddressVal = true;
+		}
 	});
 	
 	$("#num1").on("change",function(){
@@ -292,11 +283,10 @@ var emailAddressVal = false;
 	
 	//Validator 검사위해 주석처리
 	$("#registerForm").on("submit", function(){
-		
+		var address = $("#address").val();
 		//성별 체크
 		var sexChe = $("input:radio[name='sex']:checked").val(); 
 		//비밀번호 확인 체크
-		
 		var passwordCh = $("#passwordCheck").val();
 		var password = $("#password").val();
 		var pwSize = $("#password").val().length;
@@ -305,10 +295,7 @@ var emailAddressVal = false;
 		}else{
 			pwChe=true;
 		}
-		
-		//좋아하는 음식 값 String으로 전달하기
-		
-		//이메일 중복 체크
+	
 		if(!pwVal){
 			alert("비밀번호 양식이 맞지 않습니다");
 			$("#password").focus();
@@ -348,7 +335,7 @@ var emailAddressVal = false;
 		}
 		
 		if(!emailNameVal){
-			alert("이메일의 양식이 맞지 않습니다.");
+			alert("이메일의 양식이 맞지 않습니다.이");
 			return false;
 		}
 		
@@ -532,14 +519,14 @@ table{
 		<tr>
 			<td align="center">우편번호</td>
 			<td>
-				<input type="text" id="postcode1" name="postcode1" value="${requestScope.postcode1 }" style="width:50px;"  readonly>
-				<input type="text" id="postcode2" name="postcode2" value="${requestScope.postcode2 }" style="width:50px;"  readonly>
+				<input type="text" id="postcode1" name="postcode1"  style="width:50px;"  readonly>
+				<input type="text" id="postcode2" name="postcode2"  style="width:50px;"  readonly>
 				<input type="button" onclick="openDaumPostcode()" value="우편번호 찾기">
 			</td>
 		</tr>
 		<tr>
 			<td align="center">주소</td>
-			<td><input type="text" id="address" name="address" value="${requestScope.address }" style="width:400px;" readonly><span class="errorMessage"><form:errors path="member.address"></form:errors></span>
+			<td><input type="text" id="address" name="address"  style="width:400px;" readonly><span class="errorMessage"><form:errors path="member.address"></form:errors></span>
 			</td>
 		</tr>		
 		<tr>

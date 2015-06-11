@@ -1,8 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript">
-
+$(document).ready(function(){
+	$.ajax({
+		url:"${initParam.rootPath}/restaurant/ajax/getMainRestaurants.do",
+		type:"post",
+		success:function(restaurants){
+			var hits = restaurants[0];
+			var manyScore = restaurants[1];
+			var highScore = restaurants[2];
+			$("#first").html("<img style='width:200px;height:140px;' src='${initParam.rootPath}/uploadPhoto/"+hits.pictureName.split(",")[0]+"'><br>"+hits.restaurantName+"<br>"+"");
+			$("#second").html("<img style='width:200px;height:140px;' src='${initParam.rootPath}/uploadPhoto/"+manyScore.pictureName.split(",")[0]+"'><br>"+manyScore.restaurantName);
+			$("#third").html("<img style='width:200px;height:140px;' src='${initParam.rootPath}/uploadPhoto/"+highScore.pictureName.split(",")[0]+"'><br>"+highScore.restaurantName);
+		}
+	});
+});
 </script>
 
 <style>
@@ -42,9 +56,16 @@
 </style>
 
 <div id="main1">
-	<table align="center" style="height: 380px">
-		<tr >
-			<td>별점 : ★★★★★ 맛집정보 뿌려주는 화면(main1.jsp)</td>
+	<table border="1" align="center" style="width:95%;">
+		<tr>
+			<td><font color="red">★</font> 조회왕 <font color="red">★</font></td>
+			<td><font color="red">★</font> 댓글왕 <font color="red">★</font></td>
+			<td><font color="red">★</font> 별점왕 <font color="red">★</font></td>
+		</tr>
+		<tr>
+			<td id="first" style="width:33%"></td>
+			<td id="second" style="width:33%"></td>
+			<td id="third" style="width:33%"></td>
 		</tr>
 	</table>
 </div>

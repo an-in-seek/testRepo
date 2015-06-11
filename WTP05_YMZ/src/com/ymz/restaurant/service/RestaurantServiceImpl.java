@@ -288,4 +288,13 @@ public class RestaurantServiceImpl implements RestaurantService {
 			if(fos!=null) fos.close();
 		}
 	}
+
+	@Override
+	public List<Restaurant> getMainRestaurants() {
+		List<Restaurant> list = new ArrayList<Restaurant>();
+		list.add(dao.selectRestaurantByManyHits());
+		list.add(dao.selectRestaurantByManyScore());
+		list.add(dao.selectRestaurantByHighScore());
+		return list;
+	}
 }
