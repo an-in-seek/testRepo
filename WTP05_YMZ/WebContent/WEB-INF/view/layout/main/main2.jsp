@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript">
 
 </script>
@@ -43,9 +43,43 @@
 </style>
 
 <div id="main2">
-	<table align="center" style="height: 160px">
-		<tr >
-			<td>최근 리뷰 게시물 뿌려주는 화면(main2.jsp)</td>
-		</tr>
-	</table>
+	<table class="bestMonthTB" style="width:500px">
+					<thead>
+						<tr>
+							<td colspan="2" align="center">
+							이달의 추천 Best 5
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${requestScope.monthBest }" var="review" varStatus="status">
+						<tr>
+							<c:choose>
+							<c:when test="${status.index+1 == 1}">
+								<th align="center" width="100px"><font color="#B70000">${status.index+1}위</font></th>
+								<td align="left" id="title">
+								<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+								<font color="#B70000">${review.title}</font>
+								</a>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<th align="center" width="100px">${status.index+1}위</th>
+								<td align="left" id="title">
+								<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+								${review.title}
+								</a>
+								</td>
+							</c:otherwise>
+							</c:choose>
+						</tr> 
+						</c:forEach>
+						<c:forEach begin="${fn:length(requestScope.monthBest)}" end="4" varStatus="status">
+								<tr>
+									<td align="center">${status.index+1}위</td>
+									<td align="left" id="title">&nbsp;</td>
+								</tr> 
+						</c:forEach>
+					</tbody>
+				</table>
 </div>

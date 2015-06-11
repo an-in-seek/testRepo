@@ -203,7 +203,17 @@ div#dialog{
 .listTable tbody tr:first-child th, .listTable tbody tr:first-child td{
     border-top: none;
 }
-
+#writeReplyArea{
+	background: #eaeaea;
+	height: 105px;
+  	padding-top: 30px;
+  	border: 1px solid #bfbfbf;
+}
+#writeReplyTB{
+	margin-right : auto; /*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-left : auto; /*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-top: -10px;
+}
 </style>
 <!-- css 끝 -->
 </head>
@@ -215,13 +225,14 @@ div#dialog{
 <table class="listTable" style="width:1020px">
 		<thead>
 			<tr>
-				<th style="height:80px" colspan="4"><font size="5">${requestScope.review.title}</font></th>
+				<th style="height:80px" colspan="5"><font size="5">${requestScope.review.title}</font></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr align="right">
-				<td style="width:300px"><font color="blue" size="4">${requestScope.review.nickname}</font></td> 
-				<td style="width:500px">${requestScope.review.regDate}</td>
+				<td style="width:200px; text-align: left;">글번호 : ${requestScope.review.reviewNo}</td> 
+				<td style="width:200px"><font color="blue" size="4">${requestScope.review.nickname}</font></td> 
+				<td style="width:400px">${requestScope.review.regDate}</td>
 				<td id="hitsCount" style="width:150px">조회수 : ${requestScope.review.hits}</td> 
 				<td id="recommendCount" style="width:150px">추천수 : <font color="red">${requestScope.review.recommend}</font></td>
 			</tr> 
@@ -292,20 +303,20 @@ ${requestScope.review.content }<br>
 	</table>
 	<br>
 	
-	<table>
-		<tr>
-			<td>
-				<!-- 댓글 작성 영역 -->
-				<textarea name="content" id="reply_content" style="width:800px; height:80px;"></textarea><br>
-			</td>
+	<div id="writeReplyArea">
+		<table id="writeReplyTB">
+			<tr>
+				<td>
+					<!-- 댓글 작성 영역 -->
+					<textarea name="content" id="reply_content" style="width:800px; height:80px;"></textarea><br>
+				</td>	
 			<td>
 				<!-- 등록 버튼 -->
 				<input type="image" src="${initParam.rootPath }/uploadPhoto/reviewregis.png"  id="reply_registerBtn" value="댓글 입력">
-				
-				
 			</td>
 		</tr>
-	</table>
+		</table>
+	</div>
 </form>
 
 <!-- 댓글수정 dialog -->
