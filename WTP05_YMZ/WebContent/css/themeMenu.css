@@ -79,11 +79,11 @@
 	font-size: 12px;
 	border-top: 1px solid rgba(255,255,255,0.5);
 	opacity: 0;
-	-webkit-transition: all 1s ease-in-out 0.4s;
-	-moz-transition: all 1s ease-in-out 0.4s;
-	-o-transition: all 1s ease-in-out 0.4s;
-	-ms-transition: all 1s ease-in-out 0.4s;
-	transition: all 1s ease-in-out 0.4s;
+	-webkit-transition: all 0.1s ease-in-out 0.2s; /* 글씨뜨는 속도 */
+	-moz-transition: all 0.1s ease-in-out 0.2s;
+	-o-transition: all 0.1s ease-in-out 0.2s;
+	-ms-transition: all 0.1s ease-in-out 0.2s;
+	transition: all 0.1s ease-in-out 0.2s;
 }
 
 .ch-info p a {

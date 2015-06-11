@@ -120,17 +120,12 @@ $(document).ready(function(){
 	
 	// 댓글 등록 버튼
 	$("#reply_registerBtn").click(function() {
-		if(!$("#reply_content").val()){
-			alert("내용을 입력하세요");
-		$("#reply_content").focus();
-			return false;
-	   }
 		//내용 입력안했을시 경고창
-		if($("#reply_content").val().trim()==""){
+ 		if($("#reply_content").val().trim()==""){
 			alert("내용을 입력하세요");
 			$("#reply_content").focus();
 			return false;
-		}
+		} 
 	})
 	
 	$("#reply_reportBtn").on("click", function(){

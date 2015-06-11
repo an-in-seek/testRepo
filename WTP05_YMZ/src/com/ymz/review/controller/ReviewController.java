@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ymz.common.validator.ReviewReplyValidator;
 import com.ymz.common.validator.ReviewValidator;
 import com.ymz.member.vo.Member;
 import com.ymz.qna.vo.QNA;
@@ -186,9 +187,11 @@ public class ReviewController {
 	//댓글 등록
 		@RequestMapping(value="login/register.do", method=RequestMethod.POST)
 		public String registerReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session) throws Exception{
+			new ReviewReplyValidator().validate(reply, errors);
+			// 제목과 내용 미입력시 등록 실패
 			if(errors.hasErrors()){
 				System.out.println("에러 있엉");
-				return "review/review_view.tiles";
+				return "redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo();
 			}
 			Member member = (Member)session.getAttribute("login_info");
 			reply.setMemberId(member.getId());
@@ -210,6 +213,12 @@ public class ReviewController {
 		//댓글 수정 
 		@RequestMapping(value="login/modifyReviewReply.do", method=RequestMethod.POST)
 		public ModelAndView modifyReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session, ModelMap map) throws Exception{
+			new ReviewReplyValidator().validate(reply, errors);
+			// 제목과 내용 미입력시 등록 실패
+			if(errors.hasErrors()){
+				System.out.println("에러 있엉");
+				return new ModelAndView("redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo());
+			}
 			Member member = (Member)session.getAttribute("login_info");
 			String userId = member.getId();
 			reply.setMemberId(userId);
