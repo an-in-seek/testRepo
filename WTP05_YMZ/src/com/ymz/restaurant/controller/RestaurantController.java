@@ -38,9 +38,17 @@ public class RestaurantController {
 	@Autowired
 	private RestaurantReplyService replyService;
 	
-	@RequestMapping("/ajax/test.do")
-	public void test() {
-		System.out.println("왔다");
+	@RequestMapping("/ajax/deleteTempFile.do")
+	public void deleteTempFile(String pictures, HttpServletRequest request) {
+		if(pictures.equals("")) {
+			return;
+		}
+		
+		String[] arr = pictures.split(",");
+		String path = request.getServletContext().getRealPath("/tempPhoto");
+		for(int i=0; i<arr.length; i++) {
+			new File(path, arr[i]).delete();
+		}
 	}
 	
 	@RequestMapping("/ajax/checkName.do")
@@ -286,7 +294,7 @@ public class RestaurantController {
 		new RestaurantReplyValidator().validate(restaurantReply, errors);
 		if(errors.hasErrors()){
 			System.out.println("댓글 수정 정보를 입력하지 않아 등록 실패");
-			return "/login/updateReply.do";
+			return "/restaurant/restaurantView.do";
 		}
 		
 		Member member = (Member)session.getAttribute("login_info");
