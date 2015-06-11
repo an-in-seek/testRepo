@@ -111,7 +111,7 @@ public class MemberController {
 			food ="없음";
 		}else{
 			for(String s :favoriteFood ){
-				food += s+" ";
+				food += s+", ";
 			}
 		}	
 			String emailName = (String)request.getParameter("emailName");
