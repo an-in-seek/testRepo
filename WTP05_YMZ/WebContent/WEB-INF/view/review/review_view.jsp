@@ -284,17 +284,32 @@ ${requestScope.review.content }<br>
 					<th width="100" style="text-align: center"><font color="#FF4848">${reply.nickname}</font></th>
 					<td id="rContent${status.index+1}" width="700"><font size='4'>${reply.content}</font></td>
 					<td width="200" align="center"><font size="3">${reply.regDate}</font><br><br>
-						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.grade =='master')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
-						<!-- 수정 -->
-						<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="댓글 수정">
-						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyEdit.png" ></a>
-						<!-- 제거 -->
-						<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 삭제">
-						<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
-						</c:if>
-						<!-- 신고 -->
-						<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
-						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
+						<c:choose>
+							<c:when test="${sessionScope.login_info.id == reply.memberId}"> <!-- 글쓴이와 로그인 회원이 일치 -->
+								<!-- 수정 -->
+								<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="댓글 수정">
+								<img src="${initParam.rootPath}/uploadPhoto/reviewreplyEdit.png" ></a>
+								<!-- 제거 -->
+								<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 삭제">
+								<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
+								<!-- 신고 -->
+								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
+								<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
+							</c:when>
+							<c:when test="${sessionScope.login_info.grade =='master'}"> <!-- 관리자일때 -->
+								<!-- 제거 -->
+								<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 삭제">
+								<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
+								<!-- 신고 -->
+								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
+								<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
+							</c:when>
+							<c:when test="${not empty sessionScope.login_info }"> <!-- 로그인한 상태 -->
+								<!-- 신고 -->
+								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
+								<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
+							</c:when>						
+						</c:choose>
 						</td>
 				</tr > 
 			</c:forEach>
@@ -308,7 +323,10 @@ ${requestScope.review.content }<br>
 			<tr>
 				<td>
 					<!-- 댓글 작성 영역 -->
-					<textarea name="content" id="reply_content" style="width:800px; height:80px;"></textarea><br>
+					<textarea name="content" id="reply_content" placeholder="로그인후 등록이 가능합니다." style="width:800px; height:80px;">
+					저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시물은 이용약관 및 관련 법률에 의해 제재를 받을 수 있습니다.
+건전한 토론문화와 양질의 댓글 문화를 위해, 타인에게 불쾌감을 주는 욕설 또는 특정 계층/민족, 종교 등을 비하하는 단어들은 표시가 제한됩니다.
+					</textarea><br>
 				</td>	
 			<td>
 				<!-- 등록 버튼 -->

@@ -1,0 +1,16 @@
+package com.ymz.main.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class MainController {
+	@RequestMapping("/index.do")
+	public String main() {
+		
+		System.out.println("ddd");
+		
+		
+		return "main1.tiles";
+	}
+}
