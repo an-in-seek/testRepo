@@ -21,14 +21,15 @@ $(document).ready(function(){
 		beforeSend:function(){
 			$("#writeBtn").hide();
 			for(idx=1 ; idx<="${fn:length(requestScope.faq_list)}" ; idx++){
+				$("#deleteBtn"+idx).hide();
 				$("#modifyBtn"+idx).hide();
 			}
-			$("#listTB2").hide();
 		},
 		success:function(member){
 			if(member.grade == 'master'){
 				$("#writeBtn").show();
 				for(idx=1 ; idx<="${fn:length(requestScope.faq_list)}" ; idx++){
+					$("#deleteBtn"+idx).show();
 					$("#modifyBtn"+idx).show();
 				}
 				$("#listTB2").show();
