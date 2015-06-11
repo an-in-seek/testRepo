@@ -55,14 +55,14 @@ header.mypage_template{
 #body{
 	padding: 20px;
 	height:580px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-	width:800px;
+	width:780px;
 	font-weight:bold;
 	text-align:left;
 	float:left;   /*왼쪽으로 띄움 */
 }
 #left{
 	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
-	padding:10px;
+	padding:20px;
 	height:600px;
 	width:150px;
 	font-weight:bold;

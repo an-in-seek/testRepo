@@ -98,7 +98,7 @@ var pwCheck = false;
 <h2>비밀번호 수정 폼</h2>
 
 <form method="post" action="${initParam.rootPath }/member/modify_password.do" id="modifyPassword" enctype="multipart/form-data">
-		<table style="width:500px" align="center">
+		<table style="width:500px" >
 			<tr>
 				<td>기존비밀번호</td>
 				<td><input type="password" name="current_password" id="current_password" maxlength='24'></td>

@@ -44,7 +44,6 @@ function pw_pop(){
 	margin-left: auto;
 	margin-right: auto;
 	color: #808080;
-
 }
 #mainLoginInput{
 	font-family: 'Hanna', sans-serif;
