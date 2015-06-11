@@ -27,6 +27,11 @@ function openDaumPostcode(){
 $(document).ready(function(){
 var check = false;
 var nickChe = false;
+var nameVal = true;
+var nickVal = true;
+var numVal = true;
+var emailNameVal = true;
+var emailAddressVal = true;	
 	var emailNameEx = $("#email").val();
 	var i =emailNameEx.indexOf("@");
 	var e = emailNameEx.length;
@@ -35,12 +40,99 @@ var nickChe = false;
 	document.getElementById('emailName').value=emailName;
 	document.getElementById('emailAddress').value=emailAddress;
 	
+	var phoneNo = $("#phoneNo").val();
+	var num1 = phoneNo.substring(4,8);
+	var num2 = phoneNo.substring(9,13);
+	document.getElementById('num1').value = num1;
+	document.getElementById('num2').value = num2;
+	
+	//유효성검사
+	$("#nickname").on("change",function(){
+		check = false;
+		var nickname = $("#nickname").val();
+		nickChe = false;
+		var nickSize = nickname.length;
+		if(nickSize<2){
+			$("#nicksMessage").text("");
+			$("#nickMessage").text("닉네임은 두자리이상 입력하세요.");
+			nickVal = false;
+			return false;
+		}
+		if(!/^[가-힣a-zA-Z0-9]{2,8}$/.test(nickname)){
+			$("#nicksMessage").text("");
+			$("#nickMessage").text("닉네임은 영문과 한글로 입력해 주세요.");
+			nickVal = false;
+			return false;
+		}
+		$("#nickMessage").text("");	
+		$("#nicksMessage").text("사용가능한 닉네임입니다");
+		nickVal = true;
+	});
+	
+	//이메일 유효성 검사
+	$("#emailName").on("change",function(){
+		
+		var emailName = $("#emailName").val();
+		var emailSize = emailName.length;
+		if(emailSize<2||!/^[a-zA-Z0-9]{1,11}$/.test(emailName)){
+			$("#emailsMessage").text("");
+			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
+			emailNameVal = false;
+		}else{
+		$("#emailMessage").text("");	
+		emailNameVal = true;
+		}
+	});
+	
+	$("#emailAddress").on("change",function(){
+		var emailAddress = $("#emailAddress").val();
+		alert(emailAddress);
+		var addressSize = emailAddress.length;
+		if(addressSize<1||!/^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(emailAddress)){
+			$("#emailsMessage").text("");
+			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
+			emailAddressVal = false;
+		}else{
+		$("#emailMessage").text("");	
+		emailAddressVal = true;
+		}
+	});
+	
+	$("#num1").on("change",function(){
+		var num1 = $("#num1").val();
+		var num1Size = num1.length;
+		if(!/^[0-9]{3,4}$/.test(num1)){
+			$("#numsMessage").text("");
+			$("#numMessage").text("잘못된 전화번호입니다");
+			numVal = false;
+			return false;
+		}
+		$('#numMessage').text("");	
+		$("#numsMessage").text("");
+		numVal = true;
+	});
+	
+	$("#num2").on("change",function(){
+		var num2 = $("#num2").val();
+		var num2Size = num2.length;
+		if(!/^[0-9]{3,4}$/.test(num2)){
+			$("#numsMessage").text("");
+			$("#numMessage").text("잘못된 전화번호입니다");
+			numVal = false;
+			return false;
+		}
+		$('#numMessage').text("");	
+		$("#numsMessage").text("");
+		numVal = true;
+	});
+	
 	/*
 	 * 닉네임 중복확인
 	 */
 	$("#exNick").on("click",function(){
 		check = true;
 		var nickname = $("#nickname").val();
+		alert("asfasdfasdf");
 		$.ajax({
 			url:"${initParam.rootPath}/member/nickDuplicateCheck.do",
 			data:{"nickname":nickname},
@@ -53,12 +145,13 @@ var nickChe = false;
 			},
 			success:function(ret){
 				if(ret=="false"){
-					$("#dupMessageLayer").text("중복된 닉네임입니다.");
-					$("#dupMessageLayer").addClass("errorMessage");
+					$("#nicksMessage").text("");
+					$("#nickMessage").text("중복된 닉네임입니다.");
+					check = false;
 					nickChe = false;
 				}else{
-					$("#dupMessageLayer").text("사용할 수 있는 닉네임입니다.");
-					$("#dupMessageLayer").addClass("normalMessage");
+					$("#nickMessage").text("");
+					$("#nicksMessage").text("사용할 수 있는 닉네임입니다.");
 					nickChe = true;
 				}
 			}
@@ -74,6 +167,29 @@ var nickChe = false;
 			return false;
 		}else{
 			
+		if(!emailNameVal){
+			alert("이메일의 양식이 맞지 않습니다.이름");
+			return false;
+		}
+			
+		if(!emailAddressVal){
+			alert("이메일의 양식이 맞지 않습니다.주소");
+			return false;
+		}	
+		
+		if(!nickVal){
+			alert("닉네임 양식이 맞지 않습니다");
+			$("#nickname").focus();
+			return false;
+		}
+		
+		if(!numVal){
+			alert("전화번호가 올바르지 않습니다");
+			document.getElementById('num1').value="";
+			document.getElementById('num2').value="";
+			return false;
+		}
+		
 		if(!check){
 			alert("중복체크를 해주십시오");
 			return false
@@ -101,13 +217,18 @@ var nickChe = false;
 			return false;
 		}
 		if(!$("#emailAddress").val()){
-			alert("전화번호를 입력하세요");
+			alert("이메일을 입력하세요");
 			$("#emailAddress").focus();
 			return false;
 		}
 		
-		if(!$("#phoneNo").val()){
-			alert("이메일을 입력하세요");
+		if(!$("#num1").val()){
+			alert("전화번호를 입력하세요");
+			$("#phoneNo").focus();
+			return false;
+		}
+		if(!$("#num2").val()){
+			alert("전화번호를 입력하세요");
 			$("#phoneNo").focus();
 			return false;
 		}
@@ -127,15 +248,16 @@ var nickChe = false;
 	<input type="hidden" name="id" value="${sessionScope.login_info.id }">
 	<table style="width:700px">
 		<tr>
-			<td>ID</td>
+			<td align="center">ID</td>
 			<td>${sessionScope.login_info.id }</td>
 		</tr>
 		<tr>
-			<td>닉네임</td>
+			<td align="center">닉네임</td>
 			<td>
-				<input type="text" id="nickname" name="nickname" value="${sessionScope.login_info.nickname }">
+				<input type="text" id="nickname" name="nickname" maxlength='8' value="${sessionScope.login_info.nickname }">
 				<input type="button" id="exNick" name="exNick" value="중복체크">
-				<span id="dupMessageLayer"> </span><span class="errorMessage"></span>
+				<font color="red" size="1"><span id="nickMessage"></span></font><span class="errorMessage"></span>
+				<font color="blue" size="1"><span  id="nicksMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
@@ -153,23 +275,29 @@ var nickChe = false;
 		</tr>
 		<tr>
 			<td align="center">상세주소</td>
-			<td><input type="text" id="detailAddress" name="detailAddress" style="width:400px;" value="${sessionScope.login_info.detailAddress }"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
+			<td><input type="text" id="detailAddress" maxlength='20' name="detailAddress" style="width:400px;" value="${sessionScope.login_info.detailAddress }"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
 			</td>
 		</tr>	
 		<tr>
-			<td>이메일</td>
+			<td align="center">이메일</td>
 			<td>
 				<input type="hidden" id="email" value="${sessionScope.login_info.email }">
-				<input type="text" id="emailName" name="emailName" value="">@<input type="text" id="emailAddress" name="emailAddress">
+				<input type="text" id="emailName" name="emailName" maxlength='11'>@<input type="text" id="emailAddress" name="emailAddress" maxlength='11'>
 				<select name="selectEmail"  style="vertical-align:middle" onChange="javascript:mailCheck(this)">
 				<option value="">직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
-				
+				<font color="red" size="1"><span id="emailMessage"></span></font>
+				<font color="blue" size="1"><span id="emailsMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
-			<td>전화번호</td>
+			<td align="center">전화번호</td>
 			<td>
-				<input type="text" id="phoneNo" name="phoneNo" value="${sessionScope.login_info.phoneNo }"><span class="errorMessage"><form:errors path="member.phoneNo"/></span> 
+				<input type="hidden" id="phoneNo" value="${sessionScope.login_info.phoneNo }">
+				<select name="phoneCP" id="phoneCP" class="input_text w60" style="vertical-align:middle">
+			<option value="010" >010</option><option value="011" >011</option><option value="017" >017</option><option value="018" >018</option><option value="019" >019</option></select>
+			&nbsp;-&nbsp;<input type="text" id="num1" name="num1" maxlength='4' size="2" style="vertical-align:middle">&nbsp;&nbsp;<input type="text" id="num2" name="num2" size="2" maxlength='4'class="input_text w60" style="vertical-align:middle"> 
+			<font color="red" size="1"><span id="numMessage"></span></font>
+			<font color="blue" size="1"><span id="numsMessage"></span></font>
 			</td>
 		</tr>
 		<tr> 

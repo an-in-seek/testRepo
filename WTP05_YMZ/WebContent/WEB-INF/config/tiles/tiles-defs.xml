@@ -41,15 +41,17 @@
 	<!-- 공통 타일즈 프레임 -->
 	
 	<!-- 메인페이지:달이 -->
- 	<definition name="main_template" template="/WEB-INF/view/layout/member/main_template.jsp">
+ 	<definition name="main_template" template="/WEB-INF/view/layout/main/main_template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
-		<put-attribute name="right_menu1" value="/WEB-INF/view/layout/member/right_menu1.jsp"/>
-		<put-attribute name="right_menu2" value="/WEB-INF/view/layout/member/right_menu2.jsp"/>
+		<put-attribute name="right_menu1" value="/WEB-INF/view/layout/main/right_menu1.jsp"/>
+		<put-attribute name="right_menu2" value="/WEB-INF/view/layout/main/right_menu2.jsp"/>
+		<put-attribute name="body1" value="/WEB-INF/view/layout/main/main1.jsp"/>
+		<put-attribute name="body2" value="/WEB-INF/view/layout/main/main2.jsp"/>
 	</definition>
 	<definition name="*.tiles" extends="main_template">
-		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp"/>
+		<put-attribute name="body1" value="/WEB-INF/view/layout/main/{1}.jsp"/>
 	</definition>
 	
 	<!-- 메인페이지:끝 -->

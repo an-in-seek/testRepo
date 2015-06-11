@@ -472,8 +472,19 @@ values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '정보수정 어떻게 해
 insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
 values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '정보수정 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');
 
-insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '처리중', '음담패설', '20150505', 'user01');
-insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '처리중', '음담패설', '20150505', 'user02');
-insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '미처리', '음담패설', '20150505', 'user03');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 1, '처리중', '음담패설', '20150505', 'user01');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 2, '미처리', '음담패설', '20150505', 'user03');
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '미처리', '폭언욕설', '20150505', 'user04');
-insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '처리중', '폭언욕설', '20150505', 'user05');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 4, '처리중', '폭언욕설', '20150505', 'user06');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 5, '미처리', '인격모독', '20150505', 'user07');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 6, '미처리', '인격모독', '20150505', 'user09');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 7, '처리중', '영리추구', '20150505', 'user03');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 8, '처리중', '영리추구', '20150505', 'user03');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 9, '처리중', '악성코드', '20150505', 'user04');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 10, '처리중', '악성코드', '20150505', 'user04');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 1, '처리중', '맹목적비난', '20150505', 'user03');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 2, '처리중', '맹목적비난', '20150505', 'user03');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '처리중', '사회갈등유발', '20150505', 'user03');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 4, '처리중', '사회갈등유발', '20150505', 'user03');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 5, '미처리', '도배글', '20150505', 'user01');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 6, '처리중', '도배글', '20150505', 'user02');

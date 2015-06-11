@@ -33,14 +33,22 @@ public class RestaurantController {
 	
 	@Autowired
 	private RestaurantService service;
-	private Member prevMember = new Member();
+	
 	//송이꺼
 	@Autowired
 	private RestaurantReplyService replyService;
 	
-	@RequestMapping("/ajax/test.do")
-	public void test() {
-		System.out.println("왔다");
+	@RequestMapping("/ajax/deleteTempFile.do")
+	public void deleteTempFile(String pictures, HttpServletRequest request) {
+		if(pictures.equals("")) {
+			return;
+		}
+		
+		String[] arr = pictures.split(",");
+		String path = request.getServletContext().getRealPath("/tempPhoto");
+		for(int i=0; i<arr.length; i++) {
+			new File(path, arr[i]).delete();
+		}
 	}
 	
 	@RequestMapping("/ajax/checkName.do")
@@ -231,11 +239,11 @@ public class RestaurantController {
 			session.setAttribute("backURL", backURL);
 		}
 		
-		// 조회수 1증가
-		if(member!=prevMember){
-			prevMember = member;
-			service.increaseHits(restaurantNo);
-		}
+//		// 조회수 1증가
+//		if(member!=prevMember){
+//			prevMember = member;
+//			service.increaseHits(restaurantNo);
+//		}
 		
 		//송이꺼-----------------------------------------------------------------------------
 	
@@ -286,7 +294,7 @@ public class RestaurantController {
 		new RestaurantReplyValidator().validate(restaurantReply, errors);
 		if(errors.hasErrors()){
 			System.out.println("댓글 수정 정보를 입력하지 않아 등록 실패");
-			return "/login/updateReply.do";
+			return "/restaurant/restaurantView.do";
 		}
 		
 		Member member = (Member)session.getAttribute("login_info");

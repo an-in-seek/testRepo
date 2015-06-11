@@ -8,6 +8,7 @@ public class Member implements Serializable{
 	
 	private String id;
 	private String password;
+	private String passwordCheck;
 	private String name;
 	private String nickname;
 	private String birth;
@@ -28,36 +29,14 @@ public class Member implements Serializable{
 	 */
 	public Member(){}
 
-	public Member(String id, String password, String name, String nickname,
-			String birth, String sex, String zipcode, String address,
-			String detailAddress, String email, String phoneNo,
-			String favoriteFood, int mileage, String grade, String joinDate) {
-		super();
+	public Member(String id, String password, String passwordCheck,
+			String name, String nickname, String birth, String sex,
+			String zipcode, String address, String detailAddress, String email,
+			String phoneNo, String favoriteFood, int mileage, String grade,
+			String joinDate, String state) {
 		this.id = id;
 		this.password = password;
-		this.name = name;
-		this.nickname = nickname;
-		this.birth = birth;
-		this.sex = sex;
-		this.zipcode = zipcode;
-		this.address = address;
-		this.detailAddress = detailAddress;
-		this.email = email;
-		this.phoneNo = phoneNo;
-		this.favoriteFood = favoriteFood;
-		this.mileage = mileage;
-		this.grade = grade;
-		this.joinDate = joinDate;
-	}
-
-	public Member(String id, String password, String name, String nickname,
-			String birth, String sex, String zipcode, String address,
-			String detailAddress, String email, String phoneNo,
-			String favoriteFood, int mileage, String grade, String joinDate,
-			String state) {
-		super();
-		this.id = id;
-		this.password = password;
+		this.passwordCheck = passwordCheck;
 		this.name = name;
 		this.nickname = nickname;
 		this.birth = birth;
@@ -88,6 +67,14 @@ public class Member implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getPasswordCheck() {
+		return passwordCheck;
+	}
+
+	public void setPasswordCheck(String passwordCheck) {
+		this.passwordCheck = passwordCheck;
 	}
 
 	public String getName() {
@@ -166,8 +153,8 @@ public class Member implements Serializable{
 		return favoriteFood;
 	}
 
-	public void setFavoriteFood(String string) {
-		this.favoriteFood = string;
+	public void setFavoriteFood(String favoriteFood) {
+		this.favoriteFood = favoriteFood;
 	}
 
 	public int getMileage() {
@@ -204,7 +191,8 @@ public class Member implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", password=" + password + ", name=" + name
+		return "Member [id=" + id + ", password=" + password
+				+ ", passwordCheck=" + passwordCheck + ", name=" + name
 				+ ", nickname=" + nickname + ", birth=" + birth + ", sex="
 				+ sex + ", zipcode=" + zipcode + ", address=" + address
 				+ ", detailAddress=" + detailAddress + ", email=" + email
@@ -234,6 +222,8 @@ public class Member implements Serializable{
 				+ ((nickname == null) ? 0 : nickname.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result
+				+ ((passwordCheck == null) ? 0 : passwordCheck.hashCode());
 		result = prime * result + ((phoneNo == null) ? 0 : phoneNo.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
@@ -307,6 +297,11 @@ public class Member implements Serializable{
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (passwordCheck == null) {
+			if (other.passwordCheck != null)
+				return false;
+		} else if (!passwordCheck.equals(other.passwordCheck))
+			return false;
 		if (phoneNo == null) {
 			if (other.phoneNo != null)
 				return false;
@@ -329,6 +324,8 @@ public class Member implements Serializable{
 			return false;
 		return true;
 	}
-
+	
+	
+	
 	
 }

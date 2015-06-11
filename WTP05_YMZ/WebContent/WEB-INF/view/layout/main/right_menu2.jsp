@@ -13,7 +13,7 @@
 	border: solid 1px #bfbfbf; 
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	text-align: center;
-	color: #808080;
+	color: black;
 	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
 	-moz-border-radius: 10px;
 	border-radius: 10px;		 /* 둥근 모서리 끝 */
@@ -39,7 +39,7 @@
 <div id="right_menu2">
 	<table align="center" style="height: 380px">
 	<tr >
-	<td>맛집 랜덤 뿌려주는 화면</td>
+	<td>맛집 랜덤 뿌려주는 화면(right_menu2.sjp)</td>
 	</tr>
 	</table>
 </div>

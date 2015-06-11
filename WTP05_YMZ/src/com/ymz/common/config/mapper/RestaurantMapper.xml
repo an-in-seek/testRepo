@@ -272,4 +272,17 @@
 		delete from food where restaurant_no=#{restaurantNo}
 	</delete>
 	
+	<select id="selectRestaurantsTop5" resultMap="restaurant-resultmap">
+		select	restaurant_no, restaurant_name, category, phone_no, description,
+				picture_name, score, hits, theme, reg_date, reply_count, location_no
+		from	(
+			select	rownum, restaurant_no, restaurant_name, category, phone_no, description,
+					picture_name, score, hits, theme, reg_date, reply_count, location_no
+			from	(
+				<include refid="restaurant-select"/>
+				order by hits desc
+			)
+		)
+		where	rownum<![CDATA[<=]]>5
+	</select>
 </mapper>

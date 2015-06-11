@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,17 +19,29 @@ var themeCheck = false;
 var locationCheck = false;
 var infoCheck = false;
 var pictureCheck = false;
+
 $(document).ready(function(){
+	// 페이지에서 벗어날때/창종료할때 임시파일 삭제
 	$(window).on("unload",function(){
+		var queryStr="";
+		for(var i=0;i<$("input[name=addedPicture]").length;i++){
+			queryStr += $("input[name=addedPicture]")[i].value+",";
+		}
 		$.ajax({
-			url:"${initParam.rootPath}/restaurant/ajax/test.do",
-			type:"post"
+			url:"${initParam.rootPath}/restaurant/ajax/deleteTempFile.do",
+			type:"post",
+			data:{"pictures":queryStr}
 		});
 	});
 	$(window).on("close",function(){
+		var queryStr="";
+		for(var i=0;i<$("input[name=addedPicture]").length;i++){
+			queryStr += $("input[name=addedPicture]")[i].value+",";
+		}
 		$.ajax({
-			url:"${initParam.rootPath}/restaurant/ajax/test.do",
-			type:"post"
+			url:"${initParam.rootPath}/restaurant/ajax/deleteTempFile.do",
+			type:"post",
+			data:{"pictures":queryStr}
 		});
 	});
 	
@@ -259,6 +272,7 @@ $(document).ready(function(){
 		
 		$(this).parent().remove();
 		$("#pictureTemp").append("<td><img style='width:160px;height:140px' src='${initParam.rootPath}/uploadPhoto/noimage.jpg'></td>");
+		$("#addPicture").val("");
 		pictureCount--;
 		if(pictureCount==0){
 			pictureCheck=false;

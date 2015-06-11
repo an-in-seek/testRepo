@@ -3,6 +3,28 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script type="text/javascript">
 $(document).ready(function(){
+pwVal = false;	
+	//password 유효성검사
+	$("#password").on("change",function(){
+		var password = $("#password").val();
+		var pwSize = password.length;
+		 // 아이디 검사
+		if(pwSize<4){
+			$("#pwsMessage").text("");
+			$("#pwMessage").text("password는 4자리이상 입력하세요.");
+			pwVal = false;
+			return false;
+		}
+		if(!/^[a-zA-Z0-9]{4,24}$/.test(password)){
+			$("#pwsMessage").text("");
+			$("#pwMessage").text("password는 영문,숫자를 혼합하여 주세요.");
+			pwVal = false;
+			return false;
+		}
+		$('#pwMessage').text("");	
+		$("#pwsMessage").text("사용가능한 password입니다");
+		pwVal = true;
+	});
 var pwCheck = false;
 	$("#current_password").on("keyup",function(){
 		var current_password = $(this).val();
@@ -32,6 +54,11 @@ var pwCheck = false;
 				if(!flag){
 					return false;
 				}else{
+				if(!pwVal){
+					alert("비밀번호양식이 맞지 않습니다");
+					return false;
+				}
+					
 				if(!$("#current_password").val()){
 					alert("기존비밀번호를 입력하세요");
 					$("#current_password").focus();
@@ -71,18 +98,21 @@ var pwCheck = false;
 <h2>비밀번호 수정 폼</h2>
 
 <form method="post" action="${initParam.rootPath }/member/modify_password.do" id="modifyPassword" enctype="multipart/form-data">
-		<table style="width:500px" align="center">
+		<table style="width:500px" >
 			<tr>
 				<td>기존비밀번호</td>
-				<td><input type="password" name="current_password" id="current_password"></td>
+				<td><input type="password" name="current_password" id="current_password" maxlength='24'></td>
 			</tr>
 			<tr>
 				<td>변경할비밀번호</td>
-				<td><input type="password" name="password" id="password"></td>
+				<td><input type="password" name="password" id="password" maxlength='24'>
+				<font color="red" size="1"><span  id="pwMessage"></span></font>
+				<font color="blue" size="1"><span  id="pwsMessage"></span></font>
+				</td>
 			</tr>
 			<tr>
 				<td>비밀번호확인</td>
-				<td><input type="password" name="password_check" id="password_check"></td>
+				<td><input type="password" name="password_check" id="password_check" maxlength='24'></td>
 			</tr>
 			<tr>
 				<td colspan="2">

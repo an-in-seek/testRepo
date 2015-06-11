@@ -21,6 +21,30 @@ var infoCheck = true;
 var pictureCheck = true;
 
 $(document).ready(function(){
+	// 페이지에서 벗어날때/창종료할때 임시파일 삭제
+	$(window).on("unload",function(){
+		var queryStr="";
+		for(var i=0;i<$("input[name=addedPicture]").length;i++){
+			queryStr += $("input[name=addedPicture]")[i].value+",";
+		}
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/deleteTempFile.do",
+			type:"post",
+			data:{"pictures":queryStr}
+		});
+	});
+	$(window).on("close",function(){
+		var queryStr="";
+		for(var i=0;i<$("input[name=addedPicture]").length;i++){
+			queryStr += $("input[name=addedPicture]")[i].value+",";
+		}
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/deleteTempFile.do",
+			type:"post",
+			data:{"pictures":queryStr}
+		});
+	});
+	
 	// 건물 바뀌면 해당건물의 층수만큼 층 select를 바꾼다
 	$("#building").on("change",function(){
 		$.ajax({
@@ -92,6 +116,7 @@ $(document).ready(function(){
 		
 		$(this).parent().remove();
 		$("#pictureTemp").append("<td><img style='width:160px;height:140px' src='${initParam.rootPath}/uploadPhoto/noimage.jpg'></td>");
+		$("#addPicture").val("");
 		pictureCount--;
 		if(pictureCount==0){
 			pictureCheck=false;

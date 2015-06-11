@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ymz.common.validator.ReviewReplyValidator;
 import com.ymz.common.validator.ReviewValidator;
+import com.ymz.member.exception.ReviewRecommendException;
 import com.ymz.member.vo.Member;
-import com.ymz.qna.vo.QNA;
 import com.ymz.reportedbbs.controller.ReportedBBSController;
 import com.ymz.reportedbbs.vo.ReportedBBS;
 import com.ymz.review.service.ReviewService;
@@ -141,7 +142,7 @@ public class ReviewController {
 
 	@RequestMapping("login/ajax/recommendReview.do")
 	@ResponseBody
-	public int recommendReview(@RequestParam int reviewNo, HttpSession session, ModelMap map){
+	public int recommendReview(@RequestParam int reviewNo, HttpSession session, ModelMap map) throws Exception{
 		Member member = (Member)session.getAttribute("login_info"); // 회원 정보 갖고오기
 		int result = 0;
 		Map<String, Object> rmap = new HashMap<String, Object>();
@@ -159,7 +160,7 @@ public class ReviewController {
 			service.inputRecommend(rmap);					// 추천 테이블에 값 입력
 			service.recommendReview(reviewNo); 				// 리뷰 테이블에 추천 수 증가
 		}else if(result ==1){
-			
+			throw new ReviewRecommendException();
 		}
 		Review review = service.getReviewByNo(reviewNo);
 		int recommendCount = review.getRecommend();
@@ -200,9 +201,11 @@ public class ReviewController {
 	//댓글 등록
 		@RequestMapping(value="login/register.do", method=RequestMethod.POST)
 		public String registerReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session) throws Exception{
+			new ReviewReplyValidator().validate(reply, errors);
+			// 제목과 내용 미입력시 등록 실패
 			if(errors.hasErrors()){
 				System.out.println("에러 있엉");
-				return "review/review_view.tiles";
+				return "redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo();
 			}
 			Member member = (Member)session.getAttribute("login_info");
 			reply.setMemberId(member.getId());
@@ -224,6 +227,12 @@ public class ReviewController {
 		//댓글 수정 
 		@RequestMapping(value="login/modifyReviewReply.do", method=RequestMethod.POST)
 		public ModelAndView modifyReviewReply(@ModelAttribute ReviewReply reply, Errors errors, HttpSession session, ModelMap map) throws Exception{
+			new ReviewReplyValidator().validate(reply, errors);
+			// 제목과 내용 미입력시 등록 실패
+			if(errors.hasErrors()){
+				System.out.println("에러 있엉");
+				return new ModelAndView("redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo());
+			}
 			Member member = (Member)session.getAttribute("login_info");
 			String userId = member.getId();
 			reply.setMemberId(userId);

@@ -20,8 +20,11 @@
 	<context:component-scan base-package="com.ymz.reviewreply.dao, com.ymz.reviewreply.service, com.ymz.reviewreply.controller"/>
 	<context:component-scan base-package="com.ymz.restaurantreply.dao, com.ymz.restaurantreply.service"/>
 	<context:component-scan base-package="com.ymz.reportedbbs.dao, com.ymz.reportedbbs.service, com.ymz.reportedbbs.controller"/>
+	<context:component-scan base-package="com.ymz.main.controller"/>
+	
+	<!--  
 	<context:component-scan base-package="com.ymz.reportedreply.dao, com.ymz.reportedreply.service, com.ymz.reportedreply.controller"/>
-
+	-->
 	
 	<mvc:annotation-driven/>
 	<mvc:interceptors>
@@ -36,7 +39,6 @@
 	</mvc:interceptors>
 	
 	<!-- Link controller들 설정 -->
-	<mvc:view-controller path="/index.do" view-name="main.tiles"/>
 	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>
 	<mvc:view-controller path="/member/loginForm.do" view-name="member/login_form.tiles"/>
 	<mvc:view-controller path="/member/mypage/modify_password_success.do" view-name="member/info/modify_password_success.tiles"/>

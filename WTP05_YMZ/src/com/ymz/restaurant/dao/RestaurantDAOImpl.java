@@ -241,4 +241,9 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	public int deleteFoods(int restaurantNo) {
 		return session.delete(namespace+"deleteFoods", restaurantNo);
 	}
+
+	@Override
+	public List<Restaurant> selectRestaurantsTop5() {
+		return session.selectList(namespace+"selectRestaurantsTop5");
+	}
 }

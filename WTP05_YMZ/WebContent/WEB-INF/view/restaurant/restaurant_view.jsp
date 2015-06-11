@@ -127,8 +127,35 @@ $(document).ready(function(){
 		$(this).css("cursor","pointer");
 	});
 //송이꺼-----------------------------------------------------------
-		//내용 공백일때 경고창
-	$("#registerBtn").click( function() {
+	
+
+
+$("#star1").on("click", function(){
+	
+	$("#star").html("<span class='star_rating'><span style='width:20%'></span></span>");
+});
+
+$("#star2").on("click", function(){
+	
+	$("#star").html("<span class='star_rating'><span style='width:40%'></span></span>");	
+});
+
+$("#star3").on("click", function(){
+
+	$("#star").html("<span class='star_rating'><span style='width:60%'></span></span>");
+});
+
+$("#star4").on("click", function(){
+	$("#star").html("<span class='star_rating'><span style='width:80%'></span></span>");
+});
+$("#star5").on("click", function(){
+$("#star").html("<span class='star_rating'><span style='width:100%'></span></span>");
+});
+
+
+
+//내용 공백일때 경고창
+	/* $("#registerBtn").click( function() {
 		if (!$("#content").val()) {
 			$("#content").focus();
 			alert("내용을 입력하세요");
@@ -139,11 +166,11 @@ $(document).ready(function(){
 				alert("평점을 선택해");
 			return false;
 		}
-	}); 
+	});  */
 	
 		//댓글 수정할 때 
 		//내용 빈칸일 때 경고창
-	$("#replyModifyBtn").click(function(){
+/* 	$("#replyModifyBtn").click(function(){
 		if (!$("#ModifyContent").val()) {
 			$("#ModifyContent").focus();
 			alert("내용을 써주세욤");
@@ -153,7 +180,7 @@ $(document).ready(function(){
 			alert("평점을 선택해");
 			return false;
 		}
-	});
+	}); */
 
 	
 	$("#reply_reportButton").on("click", function() {
@@ -194,7 +221,8 @@ function removeReply(number,score, restaurantNo){
 width:400px;
 display:none;
 }
-/* UI Object */
+
+/* UI Object  빨간별*/
 
 .star_rating,
 .star_rating span{display:inline-block;overflow:hidden;height:14px;height:14px;background:transparent url(${initParam.rootPath }/css/images/ico_star.gif) no-repeat}
@@ -202,6 +230,21 @@ display:none;
 .star_rating span{background-position:0 -14px;font-size:0;line-height:0;text-indent:-100px;*text-indent:0;vertical-align:top}
 
 /* //UI Object */
+
+
+
+/* UI Object 노란별
+
+.star_rating{width:67px;height:10px;background:url(${initParam.rootPath }/css/images/bg_starpoint_off.gif) 0 0 no-repeat}
+.star_rating span{display:block;height:10px;background:url(${initParam.rootPath }/css/images/bg_starpoint_on.gif) 0 0 no-repeat}
+.star_rating .point{display:none}
+@media print {
+.star_rating span{display:none}
+.star_rating .point{display:block}
+}
+
+/* //UI Object */
+
 
 </style>
 
@@ -431,6 +474,7 @@ display:none;
 					<input type="text" id="content" name="content" style="width: 600px; height: 80px"> 
 					<input type="hidden"	id="restaurantNo" name="restaurantNo" value="${requestScope.restaurant.restaurantNo }">
  	
+
 		
 				<p>
 					평점주기
@@ -439,8 +483,19 @@ display:none;
 					<label for="3"></label><input type="radio" name="score" value="3" id="3"><span class="star_rating"><span style="width:60%"></span></span>
 					<label for="4"></label><input type="radio" name="score" value="4" id="4"><span class="star_rating"><span style="width:80%"></span></span>
 					<label for="5"></label><input type="radio" name="score" value="5" id="5"><span class="star_rating"><span style="width:100%"></span></span>
+					
+					
+					<table id="star" border='1' style="background-image:url('${initParam.rootPath }/css/images/ico_star.gif');width:80px;height:15px;">
+					<tr>
+					<td id="star1" name="score" value="1"></td>
+					<td id="star2" name="score" value="2"></td>
+					<td id="star3" name="score" value="3"></td>
+					<td id="star4" name="score" value="4"></td>
+					<td id="star5" name="score" value="5"></td>
+					</tr>
+					</table>
 				</p>
-						</td>
+						
 						<td>
 				<input type="image" src="${initParam.rootPath}/css/images/btn_registry.gif" id="registerBtn" value="등록" >
 

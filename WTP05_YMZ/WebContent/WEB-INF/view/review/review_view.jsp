@@ -11,6 +11,10 @@
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <script type="text/javascript">
 
+// 댓글입력창 꾸미기
+function focusReply(reply){
+	$("#reply_content").html("");
+}
 
 //댓글 삭제
 function removeReply(reviewNo, replyNum, pNo){
@@ -92,7 +96,7 @@ $(document).ready(function(){
 	$(".recommendBtn").on("click", function(){		
 		var id = "${empty sessionScope.login_info}";
 		if(id=="true"){
-			alert("로그인 안했엉");
+			alert("로그인 후 추천이 가능합니다.");
 			return;
 		}
 		$.ajax({
@@ -102,6 +106,9 @@ $(document).ready(function(){
 			success:function(txt){
 				$("#recommendCount").html("추천수 : " + "<font color='red'>"+txt+"</font>");
 				$("#recommendCountBtn").html("<font color='red' size='5'>"+txt+"</font>");
+			},
+			error:function(){
+				alert("이미 추천했습니다.");
 			}
 		});
 		
@@ -134,17 +141,12 @@ $(document).ready(function(){
 	
 	// 댓글 등록 버튼
 	$("#reply_registerBtn").click(function() {
-		if(!$("#reply_content").val()){
-			alert("내용을 입력하세요");
-		$("#reply_content").focus();
-			return false;
-	   }
 		//내용 입력안했을시 경고창
-		if($("#reply_content").val().trim()==""){
+ 		if($("#reply_content").val().trim()==""){
 			alert("내용을 입력하세요");
 			$("#reply_content").focus();
 			return false;
-		}
+		} 
 	})
 	
 	$("#reply_reportBtn").on("click", function(){
@@ -238,7 +240,25 @@ div#reportReview_dialog{
 .listTable tbody tr:first-child th, .listTable tbody tr:first-child td{
     border-top: none;
 }
-
+#writeReplyArea{
+	background: #eaeaea;
+	height: 105px;
+  	margin-top: 15px;
+  	padding-top: 30px;
+  	border: 1px solid #bfbfbf;
+}
+#writeReplyTB{
+	margin-right : auto; /*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-left : auto; /*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
+	margin-top: -10px;
+}
+#repTable{
+	border: 2px solid lavenderblush;
+}
+#reviewContent{
+  	margin-top: -20px;
+	border: 2px solid #B70000;
+}
 </style>
 <!-- css 끝 -->
 </head>
@@ -250,13 +270,14 @@ div#reportReview_dialog{
 <table class="listTable" style="width:1020px">
 		<thead>
 			<tr>
-				<th style="height:80px" colspan="4"><font size="5">${requestScope.review.title}</font></th>
+				<th style="height:80px" colspan="5"><font size="5">${requestScope.review.title}</font></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr align="right">
-				<td style="width:300px"><font color="blue" size="4">${requestScope.review.nickname}</font></td> 
-				<td style="width:500px">${requestScope.review.regDate}</td>
+				<td style="width:200px; text-align: left;">글번호 : ${requestScope.review.reviewNo}</td> 
+				<td style="width:200px"><font color="blue" size="4">${requestScope.review.nickname}</font></td> 
+				<td style="width:400px">${requestScope.review.regDate}</td>
 				<td id="hitsCount" style="width:150px">조회수 : ${requestScope.review.hits}</td> 
 				<td id="recommendCount" style="width:150px">추천수 : <font color="red">${requestScope.review.recommend}</font></td>
 			</tr> 
@@ -264,30 +285,29 @@ div#reportReview_dialog{
 	</table>
 	<br>
 </div>
-
-
 <!-- ********************************* 리뷰 내용이 들어가는 공간 *************************************** -->
 <div id="reviewContent" style="width: 1020px">
 ${requestScope.review.content }<br>
-</div>
+
 
 	
 		<div align="center" id="recommend"> <!-- 추천 버튼 -->
 			<img src="${initParam.rootPath}/uploadPhoto/recommend.jpg" class="recommendBtn"> <br>
 			<span id="recommendCountBtn"><font color="red" size="5">${requestScope.review.recommend}</font></span>
-	</div><br><br>
+		</div><br><br>
 	
 <!-- ******************************* 리뷰 내용이 들어가는 공간 끝 ************************************** -->
 
 
 
-<div id="reply" align="right">
-	<!-- 버튼 -->
-	<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${requestScope.pageNo}"><button>목록</button></a>
-	<a href="${initParam.rootPath }/review/login/modifyForm.do?reviewNo=${requestScope.review.reviewNo}">
-	<button id="modifyBtn">수정</button></a>
-	<button id="deleteBtn">삭제</button>
-	<button id="reportBtn">신고</button><br><br>
+		<div id="reply" align="right">
+			<!-- 버튼 -->
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${requestScope.pageNo}"><button>목록</button></a>
+			<a href="${initParam.rootPath }/review/login/modifyForm.do?reviewNo=${requestScope.review.reviewNo}">
+			<button id="modifyBtn">수정</button></a>
+			<button id="deleteBtn">삭제</button>
+			<button id="reportBtn">신고</button><br><br>
+		</div>
 </div>
 <!-- ****************************************  댓 글 영 역  ****************************************** -->
 
@@ -308,6 +328,7 @@ ${requestScope.review.content }<br>
 					<th width="100" style="text-align: center"><font color="#FF4848">${reply.nickname}</font></th>
 					<td id="rContent${status.index+1}" width="700"><font size='4'>${reply.content}</font></td>
 					<td width="200" align="center"><font size="3">${reply.regDate}</font><br><br>
+<<<<<<< HEAD
 						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.grade =='master')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
 						<!-- 수정 -->
 						<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="댓글 수정">
@@ -322,28 +343,78 @@ ${requestScope.review.content }<br>
 						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
 						</c:if>
 					</td>
+=======
+						<c:choose>
+							<c:when test="${sessionScope.login_info.id == reply.memberId}"> <!-- 글쓴이와 로그인 회원이 일치 -->
+								<!-- 수정 -->
+								<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="댓글 수정">
+								<img src="${initParam.rootPath}/uploadPhoto/reviewreplyEdit.png" ></a>
+								<!-- 제거 -->
+								<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 삭제">
+								<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
+								<!-- 신고 -->
+								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
+								<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
+							</c:when>
+							<c:when test="${sessionScope.login_info.grade =='master'}"> <!-- 관리자일때 -->
+								<!-- 제거 -->
+								<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 삭제">
+								<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
+								<!-- 신고 -->
+								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
+								<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
+							</c:when>
+							<c:when test="${not empty sessionScope.login_info }"> <!-- 로그인한 상태 -->
+								<!-- 신고 -->
+								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
+								<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
+							</c:when>						
+						</c:choose>
+						</td>
+>>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 				</tr > 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->
 		</tbody>
 	</table>
-	<br>
 	
-	<table>
-		<tr>
-			<td>
-				<!-- 댓글 작성 영역 -->
-				<textarea name="content" id="reply_content" style="width:800px; height:80px;"></textarea><br>
-			</td>
-			<td>
-				<!-- 등록 버튼 -->
-				<input type="image" src="${initParam.rootPath }/uploadPhoto/reviewregis.png"  id="reply_registerBtn" value="댓글 입력">
-				
-				
-			</td>
-		</tr>
-	</table>
+	<div id="writeReplyArea">
+		<table id="writeReplyTB">
+			<c:choose>
+				<c:when test="${empty sessionScope.login_info }">
+				<tr>
+					<td>
+					<!-- 댓글 작성 영역 -->
+					<textarea name="content" disabled="disabled" id="reply_content" onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">로그인부터 하세요!
+					</textarea><br>
+					</td>	
+					<td>
+					<!-- 등록 버튼 -->
+					<input type="image" disabled="disabled" src="${initParam.rootPath }/uploadPhoto/reviewregis.png"  id="reply_registerBtn" value="댓글 입력" onclick="replySubmit()">
+					</td>
+				</tr>
+				</c:when>
+				<c:otherwise>
+				<tr>
+					<td>
+					<!-- 댓글 작성 영역 -->
+					<textarea name="content" id="reply_content" onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">타인을 배려 하는 마음을 담아 댓글을 달아주세요.
+내용에 따라 이용약관 및 관련 법률에 의해 임의 조치를 수행 할 수 있습니다.
+					</textarea><br>
+					</td>	
+					<td>
+					<!-- 등록 버튼 -->
+					<input type="image" src="${initParam.rootPath }/uploadPhoto/reviewregis.png"  id="reply_registerBtn" value="댓글 입력" onclick="replySubmit()">
+					</td>
+				</tr>
+				</c:otherwise>
+
+		</c:choose>
+		</table>
+		
+	</div>
 </form>
+</div>
 
 <!-- 댓글수정 dialog -->
 <div id="dialog" title="댓글 수정" align="left">
@@ -356,7 +427,8 @@ ${requestScope.review.content }<br>
 	<table>
 		<tr>
 			<td>
-				<textarea id="reviewModifyContent" name="content" style="width:600px; height:100px;"></textarea><br>
+				<textarea id="reviewModifyContent" name="content" style="width:600px; height:100px;">
+				</textarea><br>
 			</td>
 			<td>
 				<input type="submit" style="width:140px;height:100px;" value="수정">
@@ -400,8 +472,13 @@ ${requestScope.review.content }<br>
 		<option value="guitar">기타</option>
 	</select>
 	</section>
+<<<<<<< HEAD
 </div>
 	<!-- 댓글신고 dialog 끝 -->
 </div>
+=======
+	</div>
+
+>>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 </body>
 </html>
