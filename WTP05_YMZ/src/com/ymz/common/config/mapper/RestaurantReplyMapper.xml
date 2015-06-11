@@ -18,7 +18,7 @@
 		<result column="content" property="content" />
 		<result column="score" property="score" />
 		<result column="member_id" property="memberId" />
-			<result column="nickname" property="nickname"/>
+		<result column="nickname" property="nickname"/>
 		<result column="restaurant_no" property="restaurantNo" />
 		<!-- 등록 -->
 	</resultMap>
@@ -70,11 +70,17 @@
 
 
 	<!-- 조회 -->
-	<select id="selectAllRestaurantReply" parameterType="int"
+	<select id="selectAllRestaurantReply" parameterType="_int"
 		resultMap="restaurantReply-resultmap">
-		<include refid="restaurant_reply" />
-	
-		where restaurant_no =#{restaurantNo}
+			select 	restaurant_reply_no,
+					to_char(to_date(reg_date, 'yyyymmdd'), 'yyyy-mm-dd') reg_date,
+					content,
+					score,
+					r.member_id,
+					nickname,
+					restaurant_no
+		from 		restaurant_reply r, member m
+		where restaurant_no =#{restaurantNo} and r.member_id = m.member_id
 	</select>
 
 	<!-- 평점 -->

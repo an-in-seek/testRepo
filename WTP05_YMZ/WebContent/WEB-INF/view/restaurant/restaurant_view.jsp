@@ -127,31 +127,35 @@ $(document).ready(function(){
 		$(this).css("cursor","pointer");
 	});
 //송이꺼-----------------------------------------------------------
-
+		//내용 공백일때 경고창
 	$("#registerBtn").click( function() {
 		if (!$("#content").val()) {
 			$("#content").focus();
 			alert("내용을 입력하세요");
 			return false;
 			}
+		//평점 선택 안했을 때 경고창
 		else if($("input[type=radio][name=score]:checked").length<1){
 				alert("평점을 선택해");
 			return false;
 		}
-	});
-
+	}); 
+	
+		//댓글 수정할 때 
+		//내용 빈칸일 때 경고창
 	$("#replyModifyBtn").click(function(){
 		if (!$("#ModifyContent").val()) {
 			$("#ModifyContent").focus();
 			alert("내용을 써주세욤");
 			return false;
+			//평점 선택 안했을 때 경고창
 		}else if($("input[type=radio][name=score]:checked").length<1){
 			alert("평점을 선택해");
 			return false;
 		}
-		
 	});
 
+	
 	$("#reply_reportButton").on("click", function() {
 		alert("로그인을 해야합니다.미구현");
 	});
@@ -171,6 +175,7 @@ function modifyReply(number, restaurantNo){
 		}
 }
 
+
 //송이꺼
 function removeReply(number,score, restaurantNo){
 	var isDel=confirm("삭제할까요?");
@@ -184,6 +189,7 @@ function removeReply(number,score, restaurantNo){
 
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet"/>
 <style type="text/css">
+
 #dialog{
 width:400px;
 display:none;
@@ -196,7 +202,6 @@ display:none;
 .star_rating span{background-position:0 -14px;font-size:0;line-height:0;text-indent:-100px;*text-indent:0;vertical-align:top}
 
 /* //UI Object */
-
 
 </style>
 
@@ -386,9 +391,9 @@ display:none;
 	<table align="center" style="width: 700px;" "background-color: blue;" border='1'>
 		<c:forEach items="${requestScope.replyList}" var="reply">
 				<tr>
-					<td><font color="#80000">글번호 : ${reply.number }</td>
+					
 					<td><font color="#80000">작성일 : ${reply.regDate }</td>
-					<td><font color="#80000">작성자 : ${reply.memberId }</td>
+					<td><font color="#80000">작성자 : ${reply.nickname}</td>
 					<td><font color="#80000">평점 : ${reply.score }
 							<c:choose>
 								<c:when test="${reply.score==1}"><span class="star_rating"><span style="width:20%">1점</span></span></c:when>
@@ -401,15 +406,15 @@ display:none;
 				</tr>
 				<tr>
 			
-					<td id="replyContent${reply.number}" colspan="4" height="30px"><font color="#FF7F50">${reply.content }</td>
+					<td id="replyContent${reply.number}" colspan="3" height="30px"><font color="#FF7F50">${reply.content }</td>
 				</tr>
-				<td align="right" colspan="4">
+				<td align="right" colspan="3">
 				<input type="button" id="replyModifyButton${reply.number}" onclick="modifyReply(${reply.number},${requestScope.restaurant.restaurantNo})" value="수정">
 				<input type="button" id="replyRemoveButton${reply.number }" onclick="removeReply(${reply.number},${reply.score },${requestScope.restaurant.restaurantNo})" value="삭제">
 				<button id="reply_reportButton" style="width: 80px; heigth: 20px;">신고</button>
 				</td>
 				<tr>
-					<td colspan="4"></td>
+					<td colspan="3"></td>
 				</tr>
 			</c:forEach>
 	</table>
@@ -419,9 +424,9 @@ display:none;
 		<font size="5"><b>댓글쓰기</b></font>
 	</p>
 	<form method="post" action="${initParam.rootPath}/restaurant/login/registerReply.do" id="registerReplyForm">
-		<table align="center" style="width: 700px;" border='1'>
+		<table align="center" style="width: 700px;" border='1' >
 			<tr >
-				<td>	<font size='6'><b>내용</b></font>
+				<td>	
 				
 					<input type="text" id="content" name="content" style="width: 600px; height: 80px"> 
 					<input type="hidden"	id="restaurantNo" name="restaurantNo" value="${requestScope.restaurant.restaurantNo }">
@@ -435,9 +440,10 @@ display:none;
 					<label for="4"></label><input type="radio" name="score" value="4" id="4"><span class="star_rating"><span style="width:80%"></span></span>
 					<label for="5"></label><input type="radio" name="score" value="5" id="5"><span class="star_rating"><span style="width:100%"></span></span>
 				</p>
-				
-				
-				<input id="registerBtn" type="submit" value="등록">
+						</td>
+						<td>
+				<input type="image" src="${initParam.rootPath}/css/images/btn_registry.gif" id="registerBtn" value="등록" >
+
 				</td>
 			</tr>
 		</table>
