@@ -11,10 +11,9 @@ $(document).ready(function(){
 			var hits = restaurants[0];
 			var manyScore = restaurants[1];
 			var highScore = restaurants[2];
-			$("#first").html("<img src='${initParam.rootPath}/uploadPhoto/${fn:split('"+hits.pictureName+"',',')[0]}'>"+hits.restaurantName);
-			$("#second").html("<img src='${initParam.rootPath}/uploadPhoto/${fn:split('"+manyScore.pictureName+"',',')[0]}'>"+manyScore.restaurantName);
-			alert(manyScore.pictureName);
-			$("#third").html("<img src='${initParam.rootPath}/uploadPhoto/${fn:split('"+highScore.pictureName+"',',')[0]}'>"+highScore.restaurantName);
+			$("#first").html("<img style='width:200px;height:140px;' src='${initParam.rootPath}/uploadPhoto/"+hits.pictureName.split(",")[0]+"'><br>"+hits.restaurantName+"<br>"+"");
+			$("#second").html("<img style='width:200px;height:140px;' src='${initParam.rootPath}/uploadPhoto/"+manyScore.pictureName.split(",")[0]+"'><br>"+manyScore.restaurantName);
+			$("#third").html("<img style='width:200px;height:140px;' src='${initParam.rootPath}/uploadPhoto/"+highScore.pictureName.split(",")[0]+"'><br>"+highScore.restaurantName);
 		}
 	});
 });
@@ -58,6 +57,11 @@ $(document).ready(function(){
 
 <div id="main1">
 	<table border="1" align="center" style="width:95%;">
+		<tr>
+			<td><font color="red">★</font> 조회왕 <font color="red">★</font></td>
+			<td><font color="red">★</font> 댓글왕 <font color="red">★</font></td>
+			<td><font color="red">★</font> 별점왕 <font color="red">★</font></td>
+		</tr>
 		<tr>
 			<td id="first" style="width:33%"></td>
 			<td id="second" style="width:33%"></td>
