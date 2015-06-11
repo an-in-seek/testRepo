@@ -11,6 +11,10 @@
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <script type="text/javascript">
 
+// 댓글입력창 꾸미기
+function focusReply(reply){
+	$("#reply_content").html("");
+}
 
 //댓글 삭제
 function removeReply(reviewNo, replyNum, pNo){
@@ -206,6 +210,7 @@ div#dialog{
 #writeReplyArea{
 	background: #eaeaea;
 	height: 105px;
+  	margin-top: 15px;
   	padding-top: 30px;
   	border: 1px solid #bfbfbf;
 }
@@ -213,6 +218,9 @@ div#dialog{
 	margin-right : auto; /*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left : auto; /*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-top: -10px;
+}
+#repTable{
+	border: 2px solid lavenderblush;
 }
 </style>
 <!-- css 끝 -->
@@ -316,26 +324,44 @@ ${requestScope.review.content }<br>
 			<!-- 수정해야행 끝 -->
 		</tbody>
 	</table>
-	<br>
 	
 	<div id="writeReplyArea">
 		<table id="writeReplyTB">
-			<tr>
-				<td>
+			<c:choose>
+				<c:when test="${empty sessionScope.login_info }">
+				<tr>
+					<td>
 					<!-- 댓글 작성 영역 -->
-					<textarea name="content" id="reply_content" placeholder="로그인후 등록이 가능합니다." style="width:800px; height:80px;">
-					저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시물은 이용약관 및 관련 법률에 의해 제재를 받을 수 있습니다.
-건전한 토론문화와 양질의 댓글 문화를 위해, 타인에게 불쾌감을 주는 욕설 또는 특정 계층/민족, 종교 등을 비하하는 단어들은 표시가 제한됩니다.
+					<textarea name="content" disabled="disabled" id="reply_content" onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">로그인부터 하세요!
 					</textarea><br>
-				</td>	
-			<td>
-				<!-- 등록 버튼 -->
-				<input type="image" src="${initParam.rootPath }/uploadPhoto/reviewregis.png"  id="reply_registerBtn" value="댓글 입력">
-			</td>
-		</tr>
+					</td>	
+					<td>
+					<!-- 등록 버튼 -->
+					<input type="image" disabled="disabled" src="${initParam.rootPath }/uploadPhoto/reviewregis.png"  id="reply_registerBtn" value="댓글 입력" onclick="replySubmit()">
+					</td>
+				</tr>
+				</c:when>
+				<c:otherwise>
+				<tr>
+					<td>
+					<!-- 댓글 작성 영역 -->
+					<textarea name="content" id="reply_content" onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">타인을 배려 하는 마음을 담아 댓글을 달아주세요.
+내용에 따라 이용약관 및 관련 법률에 의해 임의 조치를 수행 할 수 있습니다.
+					</textarea><br>
+					</td>	
+					<td>
+					<!-- 등록 버튼 -->
+					<input type="image" src="${initParam.rootPath }/uploadPhoto/reviewregis.png"  id="reply_registerBtn" value="댓글 입력" onclick="replySubmit()">
+					</td>
+				</tr>
+				</c:otherwise>
+
+		</c:choose>
 		</table>
+		
 	</div>
 </form>
+</div>
 
 <!-- 댓글수정 dialog -->
 <div id="dialog" title="댓글 수정" align="left">
@@ -348,7 +374,8 @@ ${requestScope.review.content }<br>
 	<table>
 		<tr>
 			<td>
-				<textarea id="reviewModifyContent" name="content" style="width:600px; height:100px;"></textarea><br>
+				<textarea id="reviewModifyContent" name="content" style="width:600px; height:100px;">
+				</textarea><br>
 			</td>
 			<td>
 				<input type="submit" style="width:140px;height:100px;" value="수정">
@@ -371,7 +398,7 @@ ${requestScope.review.content }<br>
 	</select>
 	</section>
 	</div>
-</div>
+
 </body>
 
 </html>
