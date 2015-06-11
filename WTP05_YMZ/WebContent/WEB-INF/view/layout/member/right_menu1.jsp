@@ -131,7 +131,7 @@ function pw_pop(){
 				<tr align="center" >
 					<td class="btn"><input type="submit"  value="로그인"></td>
 					<td class="btn"><input type="button"  value="회원가입"
-					OnClick="window.location='${initParam.rootPath }/member/joinForm.do'"></td>
+					OnClick="window.location='${initParam.rootPath }/member/joinBefore.do"></td>
 				</tr>
 			</table>
 			
