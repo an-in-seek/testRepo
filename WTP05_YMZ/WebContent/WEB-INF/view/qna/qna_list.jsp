@@ -7,7 +7,7 @@
 	$(document).ready(function() {
 		$("#listTB tbody tr").on("mouseover", function() {
 			$("#listTB tbody tr").css("background-color", "white");
-			$(this).css("background-color", "lightgray");
+			$(this).css("background-color", "lightcyan");
 		});
 
 		if("${requestScope.category}" != null){
@@ -33,6 +33,10 @@
 
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />
 <style type="text/css">
+a.list:link {text-decoration:none; color: #545c72;}/*방문하지 않은 페이지*/
+a.list:visited {text-decoration:none; color: #545c72;}/*방문한 링크 표시*/ 
+a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라갔을 때*/
+
 #table{
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
@@ -45,9 +49,16 @@
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 }
+.listTB thead{
+	background: #F8F8F8;
+	border: 2px solid #B70000;
+	text-align: center;
+}
 .listTB thead tr {
 	font-weight: bold;
-	background: silver;
+}
+.listTB tbody{
+	border: 1px solid white;
 }
 div#dialog {
 	width: 400px;
@@ -65,9 +76,9 @@ article {
 <div align="center" id="table">
 <c:choose>
 	<c:when test="${fn:length(requestScope.qna_list) != 0 }">
-	<table id="listTB"  border="1" class="listTB">
+	<table id="listTB"  class="listTB" border="1">
 		<thead>
-			<tr align="center">
+			<tr align="center" style="border-color:#ccc;">
 				<td width="40px">NO</td>
 				<td width="320px">제목</td>
 				<td width="90px">분류</td>
@@ -76,16 +87,15 @@ article {
 				<td width="70px">조회수</td>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody style="border-color:#ccc;">
 			<c:forEach items="${requestScope.qna_list}" var="qna">
-				<tr align="center">
+				<tr align="center" style="border-color:#ccc;">
 					<td>${qna.number }</td>
 					<td align="left"><c:forEach begin="1" end="${qna.relevel}">
 							&nbsp;&nbsp;
 						</c:forEach> <c:if test="${qna.relevel != 0}">
 							<img src="${initParam.rootPath}/se2/img/reply_icon.gif" />
-						</c:if> <a
-						href="${initParam.rootPath}/qna/qnaView.do?qnaNo=${qna.number}">${qna.title}</a>
+						</c:if> <a href="${initParam.rootPath}/qna/qnaView.do?qnaNo=${qna.number}" class="list">${qna.title}</a>
 					</td>
 					<td>${qna.category}</td>
 					<td>${qna.memberId}</td>

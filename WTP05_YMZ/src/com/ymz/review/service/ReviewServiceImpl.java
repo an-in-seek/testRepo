@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ymz.common.util.PagingBean;
 import com.ymz.restaurant.vo.Restaurant;
@@ -23,6 +24,7 @@ public class ReviewServiceImpl implements ReviewService {
 	 * 리뷰 등록
 	 */
 	@Override
+	@Transactional
 	public void registerReview(Review review) {
 		dao.insertReview(review);
 	}
@@ -31,6 +33,7 @@ public class ReviewServiceImpl implements ReviewService {
 	 * 리뷰 수정
 	 */
 	@Override
+	@Transactional
 	public void modifyReview(Review review) {
 		dao.updateReview(review);
 	}
@@ -66,6 +69,7 @@ public class ReviewServiceImpl implements ReviewService {
 	 * 리뷰 추천 등록
 	 */
 	@Override
+	@Transactional
 	public void inputRecommend(Map rmap) {
 		dao.inputRecommend(rmap);
 	}

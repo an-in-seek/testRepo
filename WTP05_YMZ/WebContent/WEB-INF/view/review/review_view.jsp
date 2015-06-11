@@ -73,7 +73,7 @@ $(document).ready(function(){
 			$("#reportBtn").hide();
 		},
 		success:function(member){
-			if(member.grade == 'master'){							// 관리자
+			if(member.grade == 'master'){								// 관리자
 				$("#modifyBtn").show();
 				$("#deleteBtn").show();
 			}else if(member.id == '${requestScope.review.memberId}'){	// 글쓴이와 로그인한 회원이 같을 경우
@@ -120,8 +120,6 @@ $(document).ready(function(){
 	
 	// 댓글 등록 버튼
 	$("#reply_registerBtn").click(function() {
-	//	var text = $("#reply_content").val();
-	//	alert(text);
 		if(!$("#reply_content").val()){
 			alert("내용을 입력하세요");
 		$("#reply_content").focus();
@@ -164,9 +162,16 @@ table#replyTB tbody tr{
 	height: 140px;
 }
 button{
-	background: gold;
-	width:100px;
-	height:50px;
+	font-family: 'Hanna', sans-serif;
+	font-size: 16px;
+	background: #808080;
+	color: #fffff7;
+	width:70px;
+	height:40px;
+	cursor: pointer;
+	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
+	-moz-border-radius: 10px;
+	border-radius: 10px;		 /* 둥근 모서리 끝 */
 }
 
 div#dialog{
@@ -181,31 +186,29 @@ div#dialog{
 }
 .listTable{
 	font-family: 'Hanna', sans-serif;
-    border-collapse:collapse;
-    border: 0px;
+	color: #545c72;
+	border:2px solid #B70000;
+    -webkit-border-radius: 10px; /* 둥근 모서리 시작 */
+	-moz-border-radius: 10px;
+	border-radius: 10px;		 /* 둥근 모서리 끝 */
 }
 .listTable thead tr{
 	font-weight: bold;
-	background: lavender;
+	background: #EAEAEA;
 	text-align: center;
 	border-collapse: collapse;
 }
 .listTable tbody td{
-    border-bottom:1px solid;
-    border-color:#ccc;
-    border-top:1px solid #6c9d31;
+	border-collapse: collapse;
 }
 
 .listTable th, .listTable td{
-    border-color:#ccc;
     padding:6px 12px 2px;
 }
-.listTable tr:first-child th, .listTable tr:first-child td{
-    border-top:1px solid #6c9d31;
+.listTable tbody tr:first-child th, .listTable tbody tr:first-child td{
+    border-top: none;
 }
-.listTable tr th:first-child{
-    border-left:none;
-}
+
 </style>
 <!-- css 끝 -->
 </head>

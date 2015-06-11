@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ymz.common.util.PagingBean;
 import com.ymz.member.dao.MemberDAO;
 import com.ymz.member.exception.DuplicatedIdException;
+import com.ymz.member.exception.DuplicatedNameException;
+import com.ymz.member.exception.DuplicatedNickException;
+import com.ymz.member.exception.DuplicatedPhoneException;
 import com.ymz.member.vo.Member;
 
 
@@ -28,14 +31,24 @@ public class MemberServiceImpl implements MemberService {
 	 * 가입 처리 메소드
 	 * @param member 가입 정보
 	 * @throws DuplicatedIdException 중복된 아이디일 경우 발생
+	 * @throws DuplicatedNameException 
+	 * @throws DuplicatedNickException 
+	 * @throws DuplicatedPhoneException 
 	 */
 	@Override
 	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
-	public void joinMember(Member member) throws DuplicatedIdException{
+	public void joinMember(Member member) throws DuplicatedIdException, DuplicatedNameException, DuplicatedNickException, DuplicatedPhoneException {
 		if(dao.selectMemberById(member.getId())!=null){
 			throw new DuplicatedIdException(member.getId()+"는 이미 등록된 아이디입니다. ID를 변경하세요");
+		}else if(dao.selectMemberByEmail(member.getEmail())!=null){
+			throw new DuplicatedNameException(member.getEmail()+"는 이미 등록된 이메일입니다. Email를 변경하세요");
+		}else if(dao.selectMemberByNickname(member.getNickname())!=null){
+			throw new DuplicatedNickException(member.getNickname()+"는 이미 등록된 닉네임입니다. 닉네임을 변경하세요");
+		}else if(dao.seleMemberByPhone(member.getPhoneNo())!=null){
+			throw new DuplicatedPhoneException(member.getPhoneNo()+"는 이미 등록된 전화번호입니다. 전화번호를 변경하세요");
 		}
 		dao.insertMember(member);
+		
 	}
 	
 	/**

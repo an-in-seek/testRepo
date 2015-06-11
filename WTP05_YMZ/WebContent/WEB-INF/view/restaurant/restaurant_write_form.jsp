@@ -18,8 +18,20 @@ var themeCheck = false;
 var locationCheck = false;
 var infoCheck = false;
 var pictureCheck = false;
-
 $(document).ready(function(){
+	$(window).on("unload",function(){
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/test.do",
+			type:"post"
+		});
+	});
+	$(window).on("close",function(){
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/test.do",
+			type:"post"
+		});
+	});
+	
 	$("#restaurantName").on("blur",function(){
 		$.ajax({
 			url:"${initParam.rootPath}/restaurant/ajax/checkName.do",
@@ -56,7 +68,7 @@ $(document).ready(function(){
 	});
 	
 	$("#phoneNo1").on("blur",function(){
-		if($(this).val().trim()!=""){
+		if($(this).val().trim()!=""&&!isNaN($(this).val().trim())){
 			phoneCheck1 = true;
 			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
 				$("#phoneMessage").text("");
@@ -66,7 +78,7 @@ $(document).ready(function(){
 		}
 	});
 	$("#phoneNo2").on("blur",function(){
-		if($(this).val().trim()!=""){
+		if($(this).val().trim()!=""&&!isNaN($(this).val().trim())){
 			phoneCheck2 = true;
 			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
 				$("#phoneMessage").text("");
@@ -76,7 +88,7 @@ $(document).ready(function(){
 		}
 	});
 	$("#phoneNo3").on("blur",function(){
-		if($(this).val().trim()!=""){
+		if($(this).val().trim()!=""&&!isNaN($(this).val().trim())){
 			phoneCheck3 = true;
 			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
 				$("#phoneMessage").text("");
@@ -127,6 +139,7 @@ $(document).ready(function(){
 		}
 	});
 	////////////////////////////////////////
+	
 	$("#regForm").on("submit",function(){
 		if(!nameCheck){
 			$("#nameMessage").text(nameMessage);
@@ -175,6 +188,7 @@ $(document).ready(function(){
 		
 		$("#description").val($("#description").val().replace(/\n/g, '<br>'));
 	});
+	
 	////////////////////////////////////////
 	
 	$("#btn_cancel").on("click",function(){
@@ -253,7 +267,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body>
+<body><div style="padding:20px;">
 <form id="regForm" action="${initParam.rootPath }/restaurant/login/admin/addNewRestaurant.do" method="post" enctype="multipart/form-data">
 <p><font size="5"><b>기본정보</b></font></p>
 <table>
@@ -363,5 +377,5 @@ $(document).ready(function(){
 <button id="btn_cancel" style="width:100px;height:50px;">취소</button>
 </p>
 </form>
-</body>
+</div></body>
 </html>

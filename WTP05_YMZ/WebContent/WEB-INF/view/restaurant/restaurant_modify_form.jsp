@@ -140,7 +140,7 @@ $(document).ready(function(){
 	});
 	
 	$("#phoneNo1").on("blur",function(){
-		if($(this).val().trim()!=""){
+		if($(this).val().trim()!=""&&!isNaN($(this).val().trim())){
 			phoneCheck1 = true;
 			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
 				$("#phoneMessage").text("");
@@ -150,7 +150,7 @@ $(document).ready(function(){
 		}
 	});
 	$("#phoneNo2").on("blur",function(){
-		if($(this).val().trim()!=""){
+		if($(this).val().trim()!=""&&!isNaN($(this).val().trim())){
 			phoneCheck2 = true;
 			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
 				$("#phoneMessage").text("");
@@ -160,7 +160,7 @@ $(document).ready(function(){
 		}
 	});
 	$("#phoneNo3").on("blur",function(){
-		if($(this).val().trim()!=""){
+		if($(this).val().trim()!=""&&!isNaN($(this).val().trim())){
 			phoneCheck3 = true;
 			if(phoneCheck1&&phoneCheck2&&phoneCheck3){
 				$("#phoneMessage").text("");

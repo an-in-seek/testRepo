@@ -104,7 +104,7 @@ table#tb thead tr{
 				<td>&nbsp;</td>
 				<td colspan="2">
 				<input type="submit" id="save" value="등록">
-				<input type="button" value="취소" onclick="javascript:history.back(-1);">
+				<input type="button" value="취소" onclick="location='${initParam.rootPath }/qna/qnaList.do'">
 				</td>
 				<td>&nbsp;</td>
 			</tr>

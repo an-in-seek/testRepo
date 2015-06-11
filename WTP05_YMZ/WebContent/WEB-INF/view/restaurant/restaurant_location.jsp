@@ -164,11 +164,31 @@ $(document).ready(function(){
 	},function(){
 		$("#pangyo-map").css("background-image","url('${initParam.rootPath }/uploadPhoto/pangyo-map.png')");
 	});
+	$("#hipex-a").on("click",function(){
+		selectedBuildingName = '삼환하이펙스 A동';
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/getRestaurantsByBuildingName.do",
+			type:"post",
+			data:{'buildingName':'삼환하이펙스 A동'},
+			dataType:"json",
+			success:restaurantsTableSetting
+		});
+	});
 	
 	$("#hipex-b").hover(function(){
 		$("#pangyo-map").css("background-image","url('${initParam.rootPath }/uploadPhoto/hipex-b.png')");
 	},function(){
 		$("#pangyo-map").css("background-image","url('${initParam.rootPath }/uploadPhoto/pangyo-map.png')");
+	});
+	$("#hipex-b").on("click",function(){
+		selectedBuildingName = '삼환하이펙스 B동';
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/ajax/getRestaurantsByBuildingName.do",
+			type:"post",
+			data:{'buildingName':'삼환하이펙스 B동'},
+			dataType:"json",
+			success:restaurantsTableSetting
+		});
 	});
 });
 </script>

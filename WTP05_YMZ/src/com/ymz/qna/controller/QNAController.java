@@ -40,7 +40,7 @@ public class QNAController {
 		new QNAValidator().validate(qna, errors);
 		//등록 실패
 		if(errors.hasErrors()){
-			return "qna/qna_write_form.tiles";
+			return "/qna/login/writeForm.do";
 		}
 		//등록 성공
 		//현재 로그인되어있는 사용자 아이디정보 삽입
@@ -56,7 +56,7 @@ public class QNAController {
 		new QNAValidator().validate(qna, errors);
 		//등록 실패
 		if(errors.hasErrors()){
-			return "qna/qna_comment_form.tiles";
+			return "/qna/login/commentForm.do";
 		}
 		//등록 성공
 		//현재 로그인되어있는 사용자 아이디정보 삽입
@@ -68,16 +68,22 @@ public class QNAController {
 	
 	// 게시물 수정
 	@RequestMapping(value="login/modifyQna.do", method=RequestMethod.POST)
-	public String modifyQNAInfo(@ModelAttribute QNA qna, Errors errors)throws Exception{
+	public String modifyQNAInfo(@ModelAttribute QNA qna, Errors errors, HttpSession session)throws Exception{
 		new QNAValidator().validate(qna, errors);
 		//등록 실패
 		if(errors.hasErrors()){
-			return "qna/qna_modify_form.tiles";
+			return "/qna/login/modifyForm.do";
 		}
-		//등록 성공
-		//로그인 체크 - interceptor가 처리
-		service.modifyQNA(qna);//수정 처리
-		return "redirect:/qna/qnaView.do?qnaNo="+qna.getNumber();
+		//로그인 처리는 interceptor가 처리
+		Member member = (Member) session.getAttribute("login_info");
+		if(qna.getMemberId().equals(member.getId())){
+			//등록 성공
+			//로그인 체크 - interceptor가 처리
+			service.modifyQNA(qna);//수정 처리
+			return "redirect:/qna/qnaView.do?qnaNo="+qna.getNumber();
+		}
+		return "view/loginInfoCheck.tiles";
+		
 	}
 	
 	//QNA게시물 번호로 정보를 조회하기 위해 View페이지로 이동
@@ -99,10 +105,16 @@ public class QNAController {
 	
 	// 게시물 삭제
 	@RequestMapping("login/removeQna.do")
-	public String removeQNAByNo(@ModelAttribute QNA qna){
+	public String removeQNAByNo(@RequestParam int number, HttpSession session){
 		//로그인 처리는 interceptor가 처리
-		service.removeQNAByNo(qna.getNumber());
-		return "redirect:/qna/qnaList.do";//삭제후 메인페이지로 이동
+		QNA qna = service.getQNAByNo(number);
+		Member member = (Member) session.getAttribute("login_info");
+		if(qna.getMemberId().equals(member.getId()) || member.getGrade().equals("master")){
+			//로그인 체크 - interceptor가 처리
+			service.removeQNAByNo(qna.getNumber());
+			return "redirect:/qna/qnaList.do";//삭제후 메인페이지로 이동
+		}
+		return "view/loginInfoCheck.tiles";
 	}
 	
 	//------------------------------------------폼으로 이동시키기-----------------------------------------
@@ -149,12 +161,20 @@ public class QNAController {
 	
 	// 게시물 수정폼으로 이동
 	@RequestMapping("login/modifyForm.do")//로그인 체크 - interceptor가 처리
-	public String moveQNAModifyForm(@RequestParam int number, ModelMap map)throws Exception{
+	public String moveQNAModifyForm(@RequestParam int number, ModelMap map, HttpSession session)throws Exception{
+		//로그인 처리는 interceptor가 처리
 		QNA qna = service.getQNAByNo(number);
-		List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
-		map.put("qna", qna);
-		map.put("categoryList", categoryList);
-		return "qna/qna_modify_form.tiles";
+		
+		Member member = (Member) session.getAttribute("login_info");
+		if(qna.getMemberId().equals(member.getId())){
+			//등록 성공
+			//로그인 체크 - interceptor가 처리
+			List<Category> categoryList = categoryService.getCategoryByFirstId("F-3"); //고객센터 QNA게시판 카테고리 정보
+			map.put("qna", qna);
+			map.put("categoryList", categoryList);
+			return "qna/qna_modify_form.tiles";
+			}
+		return "view/loginInfoCheck.tiles";
 	}
 		
 	// 게시물 답글폼으로 이동

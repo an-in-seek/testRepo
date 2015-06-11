@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.common.validator.ReviewValidator;
 import com.ymz.member.vo.Member;
+import com.ymz.qna.vo.QNA;
 import com.ymz.review.service.ReviewService;
 import com.ymz.review.vo.Review;
 import com.ymz.reviewreply.service.ReviewReplyService;
@@ -95,22 +96,36 @@ public class ReviewController {
 			System.out.println("모두 입력하지 않아 수정 실패");
 			return "review/review_modify_form.tiles";
 		}
-		Member member = (Member)session.getAttribute("login_info");
-		String userid = member.getId();
-		review.setMemberId(userid);
-		service.modifyReview(review); // 리뷰 수정
-		return "redirect:/review/reviewList.do";
+		
+		// 작성자만 글을 수정할 수 있다.
+		Review r = service.getReviewByNo(review.getReviewNo());			 // 글번호로 글내용을 가져온다.
+		Member member = (Member) session.getAttribute("login_info");    // 로그인한 회원의 정보를 가져온다.
+		if(r.getMemberId().equals(member.getId())){
+			// 수정
+			String userid = member.getId();
+			review.setMemberId(userid);
+			service.modifyReview(review); // 리뷰 수정
+			return "redirect:/review/reviewList.do";
+		}
+		
+		return "view/loginInfoCheck.tiles";	// 수정 실패 페이지
 	}
 	
 	
 	//리뷰 삭제(로그인시 가능)
 	@RequestMapping("login/removeReview.do")
-	public String removeReview(@ModelAttribute Review review, Errors errors, HttpSession session){
-		Member member = (Member)session.getAttribute("login_info");
-		String userid = member.getId();
-		review.setMemberId(userid);
-		service.removeReview(review);
-		return "redirect:/review/reviewList.do";
+	public String removeReview(@ModelAttribute Review review, HttpSession session){
+		// 작성자와 관리자만 삭제할 수 있다.
+		Review r = service.getReviewByNo(review.getReviewNo());			 // 글번호로 글내용을 가져온다.
+		Member member = (Member) session.getAttribute("login_info");    // 로그인한 회원의 정보를 가져온다.
+		if(r.getMemberId().equals(member.getId()) || member.getGrade().equals("master")){
+			// 삭제
+			String userid = member.getId();
+			review.setMemberId(userid);
+			service.removeReview(review);
+			return "redirect:/review/reviewList.do";
+		}
+		return "view/loginInfoCheck.tiles";	// 삭제 실패 페이지
 	}
 	
 	// 리뷰 추천(로그인시 가능)

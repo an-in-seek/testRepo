@@ -60,9 +60,6 @@ public class MemberController {
 		if(errors.hasErrors()){
 			return "member/join_form.tiles";
 		}
-		String exId = (String) request.getParameter("id");
-		String exNickname = (String) request.getParameter("nickname");
-		String exName = (String) request.getParameter("name");
 		String post1 = (String) request.getParameter("postcode1");
 		String post2 = (String) request.getParameter("postcode2");
 		String exAddress = (String) request.getParameter("address");
@@ -71,11 +68,8 @@ public class MemberController {
 		String num1 = (String)request.getParameter("num1");
 		String num2 = (String)request.getParameter("num2");
 		String phoneNo = phoneCP+"-"+num1+"-"+num2;
-		member.setPhoneNo(phoneNo);
 		String exSex = (String)request.getParameter("sex");
 		String zipcode = post1+"-"+post2;
-		member.setZipcode(zipcode);
-		member.setGrade("user");
 		String recommend = (String)request.getParameter("recommend");
 		String year = (String)request.getParameter("year");
 		String month = (String)request.getParameter("month");
@@ -87,72 +81,52 @@ public class MemberController {
 		if(favoriteFood==null){
 			food ="없음";
 		}else{
-		for(String s :favoriteFood ){
-			food += s+",";
+			for(String s :favoriteFood ){
+				food += s+" ";
 			}
-		}
-		member.setFavoriteFood(food);
-		String emailName = (String)request.getParameter("emailName");
-		String emailAddress = (String)request.getParameter("emailAddress");
-		String exEmail = emailName+"@"+emailAddress;
-		if(service.getMemberByEmail(exEmail)!=null){
-			map.addAttribute("error_message", "이미 가입된 이메일입니다.");
-			request.setAttribute("id", exId);
-			request.setAttribute("name", exName);
-			request.setAttribute("nickname",exNickname);
-			request.setAttribute("postcode1", post1);
-			request.setAttribute("postcode2", post2);
-			request.setAttribute("address", exAddress);
-			request.setAttribute("detailAddress", exDetailAddress);
-			request.setAttribute("phoneCP", phoneCP);
-			request.setAttribute("num1", num1);
-			request.setAttribute("num2", num2);
-			request.setAttribute("sex", exSex);
-			request.setAttribute("recommend", recommend);
-			return "member/join_form.tiles";
-		}else if(service.getMemberByPhone(phoneNo)!=null){
-			map.addAttribute("error_message", "이미 가입된 전화번호입니다");
-			request.setAttribute("id", exId);
-			request.setAttribute("name", exName);
-			request.setAttribute("nickname",exNickname);
-			request.setAttribute("postcode1", post1);
-			request.setAttribute("postcode2", post2);
-			request.setAttribute("address", exAddress);
-			request.setAttribute("detailAddress", exDetailAddress);
-			request.setAttribute("sex", exSex);
-			request.setAttribute("recommend", recommend);
-			return "member/join_form.tiles";
-			
-		}else{
-		member.setEmail(exEmail);
-		if(service.getMemberById(recommend)!=null){
-			Member rm =service.getMemberById(recommend);
-			String id =rm.getId();
-			String password = rm.getPassword();
-			String name = rm.getPassword();
-			String nickname = rm.getNickname();
-			String birth = rm.getBirth();
-			String sex = rm.getSex();
-			String zipcode2 = rm.getZipcode();
-			String address = rm.getAddress();
-			String detailAddress = rm.getDetailAddress();
-			String email = rm.getEmail();
-			String phone = rm.getPhoneNo();
-			String foodRm = rm.getFavoriteFood();
-			int mileage = rm.getMileage()+100;
-			String grade = rm.getGrade();
-			String joinDate = rm.getJoinDate();
-			Member newRm = new Member(id,password,name,nickname,birth,sex,zipcode2,address,detailAddress,email,phone,foodRm,mileage,grade,joinDate);
-			
-			service.modifyMember(newRm);
-			member.setMileage(10);
-			service.joinMember(member);
-		}else{
-			member.setMileage(0);
-			service.joinMember(member);
-		}
+		}	
+			String emailName = (String)request.getParameter("emailName");
+			String emailAddress = (String)request.getParameter("emailAddress");
+			String exEmail = emailName+"@"+emailAddress;
+			if(service.getMemberByEmail(exEmail)!=null){
+				map.addAttribute("error_message", "이미 가입된 이메일입니다.");
+				request.setAttribute("postcode1", post1);
+				request.setAttribute("postcode2", post2);
+				request.setAttribute("address", exAddress);
+				request.setAttribute("detailAddress", exDetailAddress);
+				request.setAttribute("phoneCP", phoneCP);
+				request.setAttribute("num1", num1);
+				request.setAttribute("num2", num2);
+				request.setAttribute("recommend", recommend);
+				return "member/join_form.tiles";
+			}else if(service.getMemberByPhone(phoneNo)!=null){
+				map.addAttribute("error_message", "이미 가입된 전화번호입니다");
+				request.setAttribute("postcode1", post1);
+				request.setAttribute("postcode2", post2);
+				request.setAttribute("address", exAddress);
+				request.setAttribute("detailAddress", exDetailAddress);
+				request.setAttribute("recommend", recommend);
+				return "member/join_form.tiles";
+
+			}
+				member.setZipcode(zipcode);
+				member.setEmail(exEmail);
+				member.setPhoneNo(phoneNo);
+				member.setGrade("user");
+				member.setFavoriteFood(food);
+				if(service.getMemberById(recommend)!=null){
+					Member rm =service.getMemberById(recommend);
+					int mileage = rm.getMileage()+100;
+					rm.setMileage(mileage);
+					service.modifyMember(rm);
+					member.setMileage(10);
+					service.joinMember(member);
+				}else{
+					member.setMileage(0);
+					service.joinMember(member);
+				}
+		
 		return "redirect:/member/joinSuccess.do?id="+member.getId();
-		}
 	}
 	
 	// 등록 성공
@@ -166,10 +140,16 @@ public class MemberController {
 	// 로그인
 	@RequestMapping(value="login.do",method=RequestMethod.POST)
 	public String login(String id, String password, HttpSession session, HttpServletRequest request, HttpServletResponse response, ModelMap map){
+		String url = null;
 		Member m = service.getMemberById(id);
+		if(m==null){
+			url = "member/login_form.tiles";
+			 map.addAttribute("error_message", "ID를 확인하세요");
+			return url;
+		}
 		String state = m.getState();
 		System.out.println(state);
-		String url = null;
+		
 		if(m!=null&&!state.equals("탈퇴")){
 			if(password.equals(m.getPassword())){
 				session.setAttribute("login_info", m);
@@ -189,21 +169,21 @@ public class MemberController {
 
 	
 	// 전체 정보 조회1
-	@RequestMapping("memberList.do")
+	@RequestMapping("login/admin/memberList.do")
 	public ModelAndView memberList(@RequestParam(defaultValue="1")int page){
 		Map map = service.getMemberListPaging(page);
 		return new ModelAndView("member/member_list.tiles",  map);
 	}
 	
 	// 전체 정보 조회2
-	@RequestMapping("login/memberListPaging.do")
+	@RequestMapping("login/admin/memberListPaging.do")
 	public ModelAndView memberListPaging(@RequestParam(defaultValue="1")int page){
 		Map map = service.getMemberListPaging(page);
 		return new ModelAndView("member/member_list_paging.tiles", map);
 	}
 	
 	//리스트에서 (ID,이름,닉네임,등급)으로 회원정보 조회
-	@RequestMapping("login/findMemberByInfo.do")
+	@RequestMapping("login/admin/findMemberByInfo.do")
 	public  ModelAndView findMemberByInfo(@RequestParam String info, @RequestParam String command, @RequestParam(defaultValue="1")int page){
 		Map map = service.getMemberByInfo(info, command, page);
 		map.put("command", command);
@@ -265,11 +245,11 @@ public class MemberController {
 	}
 	
 	// 정보 제거하기(관리자 전용)
-	@RequestMapping("login/removeMemberByMaster.do")
+	@RequestMapping("login/admin/removeMemberByMaster.do")
 	public String removeMember(@RequestParam String id, ModelMap map){
 		service.removeMemberById(id);
 		//session 제거
-		return "/member/login/memberListPaging.do";//삭제후 메인페이지로 이동
+		return "/member/login/admin/memberListPaging.do";//삭제후 메인페이지로 이동
 	}
 	
 	// 로그아웃
@@ -293,7 +273,7 @@ public class MemberController {
 	}
 	
 	/**********************리스트에서 id로 회원정보 요청한 것 처리 -Ajax 요청처리***********************/
-	@RequestMapping("findMemberById")
+	@RequestMapping("login/admin/findMemberById")
 	@ResponseBody
 	public Member findMemberById(@RequestParam String id){
 		return service.getMemberById(id);

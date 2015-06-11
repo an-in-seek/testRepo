@@ -12,12 +12,12 @@ import com.ymz.member.vo.Member;
 public class AdminCheckInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		Member member = (Member)request.getSession().getAttribute("login_info");
 		if(!member.getGrade().equals("master")) {
-			throw new ModelAndViewDefiningException(new ModelAndView("/WEB-INF/view/not_admin.jsp"));
+			throw new ModelAndViewDefiningException(new ModelAndView("view/not_admin.tiles"));
 		}
 		return super.preHandle(request, response, handler);
 	}
+	
 }

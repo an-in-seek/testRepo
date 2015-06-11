@@ -58,7 +58,7 @@ header.main_template{
 	border: solid 1px #b70000;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	padding:10px;
-	height:160px;
+	height:auto;
 	width:220px;
 	text-align:center;
 	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
@@ -98,6 +98,7 @@ footer.main_template{
 </head>
 <body>
 	<div class="main_template">
+	
 		<header class="main_template">
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="menu" />
@@ -112,12 +113,14 @@ footer.main_template{
 		</section>
 		
 		<nav id="right" class="main_template">
-			<tiles:insertAttribute name="right_menu" /><!-- 서브메뉴로 -->
+			<tiles:insertAttribute name="right_menu1" /><!-- 서브메뉴로 -->
+			<tiles:insertAttribute name="right_menu2" />
 		</nav>
 		
 		<footer class="main_template">
 			<tiles:insertAttribute name="footer" />
 		</footer>
+		
 	</div>
 </body>
 </html>

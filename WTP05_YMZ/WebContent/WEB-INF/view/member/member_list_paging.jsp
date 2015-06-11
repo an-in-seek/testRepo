@@ -16,7 +16,7 @@ $(document).ready(function(){
 	$("#listTB tbody tr").on("click", function(){
 		id = $(this).find(":nth-child(2)").text();
 		$.ajax({
-			url:"${initParam.rootPath}/member/findMemberById.do",
+			url:"${initParam.rootPath}/member/login/admin/findMemberById.do",
 			data:{"id":id},
 			type:"post",
 			dataType:"json",
@@ -79,25 +79,25 @@ $(document).ready(function(){
 	});
 	
 	$("#selectSort").on("change",function(){
-		 document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#selectSort").val()+"&command=sort";
+		 document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#selectSort").val()+"&command=sort";
 	});
 	
 	$("#dateCategory").on("change",function(){
-		document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#dateCategory").val()+"&command=sort";
+		document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#dateCategory").val()+"&command=sort";
 	});
 	
 	$("#gradeCategory").on("change",function(){
-		document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#gradeCategory").val()+"&command=grade";
+		document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#gradeCategory").val()+"&command=grade";
 	});
 	
 	$("#stateCategory").on("change",function(){
-		document.location.href="${initParam.rootPath }/member/login/findMemberByInfo.do?info="+$("#stateCategory").val()+"&command=state";
+		document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#stateCategory").val()+"&command=state";
 	});
 	
 	$("#deleteBtn").on("click",function(){
 		var isDel = confirm("정말로 삭제하시겠습니까?");
 		if (isDel) {
-			document.location.href="${initParam.rootPath }/member/login/removeMemberByMaster.do?id="+id;
+			document.location.href="${initParam.rootPath }/member/login/admin/removeMemberByMaster.do?id="+id;
 		} else {
 			return;
 		}
@@ -194,7 +194,7 @@ article{
 	<!-- 이전 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.previousPageGroup }">
-			<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pagingBean.startPageOfPageGroup-1}&command=${requestScope.command}&info=${requestScope.info}">◀&nbsp;</a>
+			<a href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?page=${pagingBean.startPageOfPageGroup-1}&command=${requestScope.command}&info=${requestScope.info}">◀&nbsp;</a>
 		</c:when>
 		<c:otherwise>◀&nbsp;</c:otherwise>
 	</c:choose>	
@@ -205,14 +205,14 @@ article{
 				&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
 			</c:when>
 			<c:otherwise>
-				<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pageNum}&command=${requestScope.command}&info=${requestScope.info}">&nbsp;${pageNum}&nbsp;</a>
+				<a href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?page=${pageNum}&command=${requestScope.command}&info=${requestScope.info}">&nbsp;${pageNum}&nbsp;</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 	<!-- 다음 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.nextPageGroup }">
-			<a href="${initParam.rootPath }/member/login/findMemberByInfo.do?page=${pagingBean.endPageOfPageGroup+1}&command=${requestScope.command}&info=${requestScope.info}">&nbsp;▶</a>
+			<a href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?page=${pagingBean.endPageOfPageGroup+1}&command=${requestScope.command}&info=${requestScope.info}">&nbsp;▶</a>
 		</c:when>
 		<c:otherwise>&nbsp;▶</c:otherwise>
 	</c:choose>	
@@ -260,7 +260,7 @@ article{
 						</select>
 					</td>
 					<td colspan="2">
-						<form id="searchForm" name="searchForm" action="${initParam.rootPath }/member/login/findMemberByInfo.do" method="post">
+						<form id="searchForm" name="searchForm" action="${initParam.rootPath }/member/login/admin/findMemberByInfo.do" method="post">
 							<input type="text" id="searchText" name="info" placeholder="검색하기">			
 							<input type="hidden" id="command" name="command">
 							<input type="submit" id="searchBtn" value="검색">

@@ -15,7 +15,6 @@
 			type:"post", //HTTP 요청 방식(method)
 			dataType:"json", //javascript객체로 변환해서 응답데이터를 전달.
 			beforeSend:function(){
-				$("#commentBtn").hide();
 				$("#modifyBtn").hide();
 				$("#deleteBtn").hide();
 			},
