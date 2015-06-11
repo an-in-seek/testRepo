@@ -127,16 +127,16 @@ $(document).ready(function(){
 	$("#reportBtn").on("click", function(){
 		var isCom=confirm("리뷰 신고?? ㅇㅋ??")
 		if(isCom){
-			$("#reportReview_dialog").dialog({modal:true, resizable: false, 
-				buttons: {
-					"취소":function(){
-						$(this).dialog("close");
-					}
-				}	
+			$("#reportReview_dialog").dialog({modal:true, resizable: false
 			});
 		}else{
 			return;
 		}
+	});
+	
+	// 신고 다이어로그 취소 버튼
+	$("#reviewReportCancel").on("click", function(){
+		$("#reportReview_dialog").dialog("close");
 	});
 	
 	// 댓글 등록 버튼
@@ -152,6 +152,7 @@ $(document).ready(function(){
 	$("#reply_reportBtn").on("click", function(){
 		alert("로그인부터 하세욥!!!");
 	});
+	
 	
 	
 	
@@ -219,7 +220,7 @@ div#reportReview_dialog{
 .listTable{
 	font-family: 'Hanna', sans-serif;
 	color: #545c72;
-	border:2px solid #B70000;
+	border:1px solid #B70000;
     -webkit-border-radius: 10px; /* 둥근 모서리 시작 */
 	-moz-border-radius: 10px;
 	border-radius: 10px;		 /* 둥근 모서리 끝 */
@@ -257,7 +258,7 @@ div#reportReview_dialog{
 }
 #reviewContent{
   	margin-top: -20px;
-	border: 2px solid #B70000;
+	border: 1px solid #B70000;
 }
 </style>
 <!-- css 끝 -->
@@ -267,7 +268,7 @@ div#reportReview_dialog{
 <h4>리뷰</h4>
 <div align="left">
 <!-- ************************************** 리뷰 정보 ************************************* -->
-<table class="listTable" style="width:1020px">
+<table class="listTable">
 		<thead>
 			<tr>
 				<th style="height:80px" colspan="5"><font size="5">${requestScope.review.title}</font></th>
@@ -286,11 +287,9 @@ div#reportReview_dialog{
 	<br>
 </div>
 <!-- ********************************* 리뷰 내용이 들어가는 공간 *************************************** -->
-<div id="reviewContent" style="width: 1020px">
+<div id="reviewContent">
 ${requestScope.review.content }<br>
 
-
-	
 		<div align="center" id="recommend"> <!-- 추천 버튼 -->
 			<img src="${initParam.rootPath}/uploadPhoto/recommend.jpg" class="recommendBtn"> <br>
 			<span id="recommendCountBtn"><font color="red" size="5">${requestScope.review.recommend}</font></span>
@@ -328,22 +327,6 @@ ${requestScope.review.content }<br>
 					<th width="100" style="text-align: center"><font color="#FF4848">${reply.nickname}</font></th>
 					<td id="rContent${status.index+1}" width="700"><font size='4'>${reply.content}</font></td>
 					<td width="200" align="center"><font size="3">${reply.regDate}</font><br><br>
-<<<<<<< HEAD
-						<c:if test="${(sessionScope.login_info.id == reply.memberId) || (sessionScope.login_info.grade =='master')}"> <!-- 로그인 안했을 시 보이지 않는다. -->
-						<!-- 수정 -->
-						<a href="javascript:modifyReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="댓글 수정">
-						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyEdit.png" ></a>
-						<!-- 제거 -->
-						<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 삭제">
-						<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
-						</c:if>
-						<!-- 신고 : 로그인해야만 보인다 -->
-						<c:if test="${not empty sessionScope.login_info }">
-						<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
-						<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
-						</c:if>
-					</td>
-=======
 						<c:choose>
 							<c:when test="${sessionScope.login_info.id == reply.memberId}"> <!-- 글쓴이와 로그인 회원이 일치 -->
 								<!-- 수정 -->
@@ -371,7 +354,6 @@ ${requestScope.review.content }<br>
 							</c:when>						
 						</c:choose>
 						</td>
->>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 				</tr > 
 			</c:forEach>
 			<!-- 수정해야행 끝 -->
@@ -447,16 +429,17 @@ ${requestScope.review.content }<br>
 	<form id="reportReviewForm" action="${initParam.rootPath }/review/login/reportReview.do" method="post">
 	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}"> <!-- 글번호 -->
 	<input type="hidden" name="reporterId" value="${sessionScope.login_info.id}"> <!-- 신고자 ID -->
-	<input type="hidden" name="state" value="unhandled"> <!-- 처리상태 : 미처리 -->
+	<input type="hidden" name="state" value="미처리"> <!-- 처리상태 : 미처리 -->
 	<input type="hidden" name="category" value="review"> <!-- 카테고리 : 리뷰 -->
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}"> <!-- 페이지 번호 -->
 	<select name="reason">
-		<option value="abuse">욕설신고</option>
-		<option value="sexual">성희롱</option>
-		<option value="advertising">광고글</option>
-		<option value="etc">기타</option>
+		<option value="욕설신고">욕설신고</option>
+		<option value="성희롱">성희롱</option>
+		<option value="광고글">광고글</option>
+		<option value="기타">기타</option>
 	</select>
 	<input type="submit" name="reviewReport" value="신고">
+	<input type="button" id="reviewReportCancel" value="취소">
 	</form>
 	</section>
 </div>
@@ -472,13 +455,8 @@ ${requestScope.review.content }<br>
 		<option value="guitar">기타</option>
 	</select>
 	</section>
-<<<<<<< HEAD
 </div>
 	<!-- 댓글신고 dialog 끝 -->
-</div>
-=======
-	</div>
 
->>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 </body>
 </html>

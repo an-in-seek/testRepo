@@ -21,6 +21,7 @@ import com.ymz.common.validator.ReviewValidator;
 import com.ymz.member.exception.ReviewRecommendException;
 import com.ymz.member.vo.Member;
 import com.ymz.reportedbbs.controller.ReportedBBSController;
+import com.ymz.reportedbbs.service.ReportedBBSService;
 import com.ymz.reportedbbs.vo.ReportedBBS;
 import com.ymz.review.service.ReviewService;
 import com.ymz.review.vo.Review;
@@ -38,7 +39,7 @@ public class ReviewController {
 	private ReviewReplyService replyService;
 	
 	@Autowired
-	private ReportedBBSController reportBBSService;
+	private ReportedBBSService reportBBSService;
 	
 	//리뷰 등록
 	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
@@ -192,6 +193,7 @@ public class ReviewController {
 		System.out.println("로그인한 회원 : " + member.getId());
 		System.out.println("신고리뷰 정보 : "+ bbs);
 		// 등록 메소드 추가
+		reportBBSService.registerReportedBBS(bbs);
 		return "redirect:/review/reviewView.do?reviewNo="+bbs.getReviewNo()+"&pageNo="+bbs.getPageNo();
 	}
 	
