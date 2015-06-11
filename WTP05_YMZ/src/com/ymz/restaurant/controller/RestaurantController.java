@@ -38,12 +38,6 @@ public class RestaurantController {
 	@Autowired
 	private RestaurantReplyService replyService;
 	
-	@RequestMapping("/ajax/getMainRestaurants.do")
-	@ResponseBody
-	public List<Restaurant> getMainRestaurants() {
-		return service.getMainRestaurants();
-	}
-	
 	@RequestMapping("/ajax/deleteTempFile.do")
 	public void deleteTempFile(String pictures, HttpServletRequest request) {
 		if(pictures.equals("")) {

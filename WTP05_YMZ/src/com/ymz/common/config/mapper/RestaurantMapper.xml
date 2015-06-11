@@ -272,33 +272,17 @@
 		delete from food where restaurant_no=#{restaurantNo}
 	</delete>
 	
-	<select id="selectRestaurantByManyHits" resultMap="restaurant-resultmap">
-		<include refid="restaurant-select"/>
-		where restaurant_no = (
-			select min(restaurant_no) from restaurant
-			where hits = (
-				select max(hits) from restaurant
+	<select id="selectRestaurantsTop5" resultMap="restaurant-resultmap">
+		select	restaurant_no, restaurant_name, category, phone_no, description,
+				picture_name, score, hits, theme, reg_date, reply_count, location_no
+		from	(
+			select	rownum, restaurant_no, restaurant_name, category, phone_no, description,
+					picture_name, score, hits, theme, reg_date, reply_count, location_no
+			from	(
+				<include refid="restaurant-select"/>
+				order by hits desc
 			)
 		)
-	</select>
-	
-	<select id="selectRestaurantByHighScore" resultMap="restaurant-resultmap">
-		<include refid="restaurant-select"/>
-		where restaurant_no = (
-			select min(restaurant_no) from restaurant
-			where score = (
-				select max(score) from restaurant
-			)
-		)
-	</select>
-	
-	<select id="selectRestaurantByManyScore" resultMap="restaurant-resultmap">
-		<include refid="restaurant-select"/>
-		where restaurant_no = (
-			select min(restaurant_no) from restaurant
-			where reply_count = (
-				select max(reply_count) from restaurant
-			)
-		)
+		where	rownum<![CDATA[<=]]>5
 	</select>
 </mapper>
