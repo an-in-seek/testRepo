@@ -3,19 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script type="text/javascript">
-var idDup = false;//ID 중복여부 체크 - true : 사용할 수 있다(중복아님), false : 사용할 수 없다(중복아님)
-var idExi = true;
-var pwChe = false;
 
 /*
  * 이메일주소 select 값 선택
  */
-function mailCheck(selectObj){ 
-	document.getElementById('emailAddress').value=selectObj.value;
-	if(selectObj.value==""){
-		$("#emailAddress").focus();	
-	}
-}
+
 
 /*
  * 다음api 주소찾기
@@ -31,8 +23,10 @@ function openDaumPostcode(){
 	}).open();
 }
 $(document).ready(function(){
-var idDup = false;	
-//var idVal = false;	
+var idDup = false;//ID 중복여부 체크 - true : 사용할 수 있다(중복아님), false : 사용할 수 없다(중복아님)
+var idExi = true;
+var pwChe = false;
+var idVal = false;	
 var check = false;
 var nickChe = false;
 var idChe = false;
@@ -42,6 +36,9 @@ var nickVal = true;
 var numVal = true;
 var emailNameVal = true;
 var emailAddressVal = true;	
+	
+	
+	
 
 	//ID 유효성 체크
 	
@@ -151,16 +148,38 @@ var emailAddressVal = true;
 	
 	$("#emailAddress").on("change",function(){
 		var emailAddress = $("#emailAddress").val();
-		alert(emailAddress);
 		var addressSize = emailAddress.length;
+		alert(emailAddress);
 		if(addressSize<1||!/^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(emailAddress)){
 			$("#emailsMessage").text("");
 			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
+			//alert(emailAddress);
 			emailAddressVal = false;
 		}else{
 		$("#emailMessage").text("");	
 		emailAddressVal = true;
 		}
+	});
+	
+	$("#selectEmail").change(function(){
+		$("#selectEmail option:selected").each(function(){
+			if($(this).val()==""){
+				$("#emailAddress").val("");
+				$("#emailAddress").attr("disabled",false);
+				if(addressSize<1||!/^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(emailAddress)){
+					$("#emailsMessage").text("");
+					$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
+					emailAddressVal = false;
+				}else{
+				$("#emailMessage").text("");	
+				emailAddressVal = true;
+				}
+			}else{
+				$("#emailAddress").val($(this).val());
+				$("#emailAddress").attr("disabled",true);
+				emailAddressVal = true;
+			}
+		})
 	});
 	
 	$("#num1").on("change",function(){
@@ -538,7 +557,7 @@ table{
 			<td align="center">이메일</td>
 			<td>
 				<input type="text" id="emailName" name="emailName" maxlength='11'>@<input type="text" id="emailAddress" name="emailAddress" maxlength="11">
-				<select name="selectEmail"  style="vertical-align:middle" onChange="javascript:mailCheck(this)">
+				<select name="selectEmail"  style="vertical-align:middle" id="selectEmail">
 				<option value="">직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
 				<font color="red" size="1"><span id="emailMessage"></span></font>
 				<font color="blue" size="1"><span id="emailsMessage"></span></font>
