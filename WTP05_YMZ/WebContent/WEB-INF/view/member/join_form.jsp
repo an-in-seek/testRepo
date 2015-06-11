@@ -31,6 +31,7 @@ function openDaumPostcode(){
 	}).open();
 }
 $(document).ready(function(){
+var diDup = false;	
 var idVal = false;	
 var check = false;
 var nickChe = false;
@@ -41,9 +42,10 @@ var nickVal = false;
 var numVal = false;
 var emailVal = false;
 	//ID 유효성 체크
-	$("#id").keyup(function(){
+	$("#id").on("change",function(){
 		var id = $("#id").val();
 		var idSize = id.length;
+		idDup = false;
 		 // 아이디 검사
 		if(idSize<5){
 			$("#idsMessage").text("");
@@ -104,8 +106,9 @@ var emailVal = false;
 		nameVal = true;
 	});
 	//닉네임 유효성 검사
-	$("#nickname").keyup(function(){
+	$("#nickname").on("change",function(){
 		var nickname = $("#nickname").val();
+		nickChe = false;
 		var nickSize = nickname.length;
 		if(nickSize<2){
 			$("#nicksMessage").text("");
@@ -146,7 +149,6 @@ var emailVal = false;
 	$("#emailAddress").keyup(function(){
 		var emailAddress = $("#emailAddress").val();
 		var addressSize = emailAddress.length;
-		 // 아이디 검사
 		if(addressSize<1){
 			$("#emailsMessage").text("");
 			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
@@ -192,6 +194,7 @@ var emailVal = false;
 	});
 	
 	$("#idDup").on("click", function(){
+		idDup = true;
 		var id = $("#id").val();
 		var idSize = $("#id").val().length;
 		$.ajax({
@@ -265,7 +268,7 @@ var emailVal = false;
 	});
 	
 	//비밀번호 일치 확인
-	$("#passwordCheck").on("change", function(){
+	$("#passwordCheck").on("keyup", function(){
 		var passwordCh = $("#passwordCheck").val();
 		var password = $("#password").val();
 				if(passwordCh!=password){
@@ -341,7 +344,7 @@ var emailVal = false;
 			return false;
 		}
 		
-		if(!idChe){
+		if(!idChe||!idDup){
 			alert("아이디 중복체크를 해주세요");
 			return false;
 		}
