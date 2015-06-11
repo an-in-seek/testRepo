@@ -21,8 +21,8 @@ a.menu:visited {text-decoration:none; color: white;}/*방문한 링크 표시*/
 	 height: 23px;
 	 _height: 33px;
 	 padding: 10px 0 0 15px;
-	 border-bottom: 1px solid #e9e9e9;
-	 text-align: left;
+	 border-bottom: 1px solid lightgray;
+	 text-align: center;
 }
 </style>
 <script type="text/javascript">

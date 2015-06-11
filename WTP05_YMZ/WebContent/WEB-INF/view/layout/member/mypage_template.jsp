@@ -53,16 +53,22 @@ header.mypage_template{
 	padding: 5px;
 }
 #body{
-	padding: 20px;
+	padding-top:20px;
+	padding-bottom:20px;
+	padding-left:10px;
+	padding-right:20px;
 	height:580px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
-	width:780px;
+	width:800px;
 	font-weight:bold;
 	text-align:left;
 	float:left;   /*왼쪽으로 띄움 */
 }
 #left{
 	line-height:50px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
-	padding:20px;
+	padding-top:20px;
+	padding-bottom:20px;
+	padding-left:20px;
+	padding-right:10px;
 	height:600px;
 	width:150px;
 	font-weight:bold;

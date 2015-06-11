@@ -56,10 +56,8 @@
 	<mvc:view-controller path="/member/mypage/modify_password.do" view-name="member/info/modify_password.tiles"/>
 	<!-- 쿠폰교환 폼 -->
 	<mvc:view-controller path="/member/mypage/tradeCoupon.do" view-name="member/info/trade_coupon.tiles"/>
-	<!-- 회원탈퇴 폼 -->
-
 	<!-- 마이페이지 폼-->
-	<mvc:view-controller path="/member/mypage.do" view-name="member/info/mypage.tiles"/>
+	<mvc:view-controller path="/member/mypage.do" view-name="member/main/mypage_body.tiles"/>
 	
 	
 	<!-- gmail -->
