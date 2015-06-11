@@ -18,8 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ymz.common.validator.ReviewReplyValidator;
 import com.ymz.common.validator.ReviewValidator;
+import com.ymz.member.exception.ReviewRecommendException;
 import com.ymz.member.vo.Member;
-import com.ymz.qna.vo.QNA;
 import com.ymz.review.service.ReviewService;
 import com.ymz.review.vo.Review;
 import com.ymz.reviewreply.service.ReviewReplyService;
@@ -137,7 +137,7 @@ public class ReviewController {
 
 	@RequestMapping("login/ajax/recommendReview.do")
 	@ResponseBody
-	public int recommendReview(@RequestParam int reviewNo, HttpSession session, ModelMap map){
+	public int recommendReview(@RequestParam int reviewNo, HttpSession session, ModelMap map) throws Exception{
 		Member member = (Member)session.getAttribute("login_info"); // 회원 정보 갖고오기
 		int result = 0;
 		Map<String, Object> rmap = new HashMap<String, Object>();
@@ -155,7 +155,7 @@ public class ReviewController {
 			service.inputRecommend(rmap);					// 추천 테이블에 값 입력
 			service.recommendReview(reviewNo); 				// 리뷰 테이블에 추천 수 증가
 		}else if(result ==1){
-			
+			throw new ReviewRecommendException();
 		}
 		Review review = service.getReviewByNo(reviewNo);
 		int recommendCount = review.getRecommend();

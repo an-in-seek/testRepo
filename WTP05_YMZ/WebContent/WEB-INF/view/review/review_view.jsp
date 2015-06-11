@@ -94,7 +94,7 @@ $(document).ready(function(){
 	$(".recommendBtn").on("click", function(){		
 		var id = "${empty sessionScope.login_info}";
 		if(id=="true"){
-			alert("로그인 안했엉");
+			alert("로그인 후 추천이 가능합니다.");
 			return;
 		}
 		$.ajax({
@@ -104,6 +104,9 @@ $(document).ready(function(){
 			success:function(txt){
 				$("#recommendCount").html("추천수 : " + "<font color='red'>"+txt+"</font>");
 				$("#recommendCountBtn").html("<font color='red' size='5'>"+txt+"</font>");
+			},
+			error:function(){
+				alert("이미 추천했습니다.");
 			}
 		});
 		
@@ -222,6 +225,10 @@ div#dialog{
 #repTable{
 	border: 2px solid lavenderblush;
 }
+#reviewContent{
+  	margin-top: -20px;
+	border: 2px solid #B70000;
+}
 </style>
 <!-- css 끝 -->
 </head>
@@ -248,30 +255,29 @@ div#dialog{
 	</table>
 	<br>
 </div>
-
-
 <!-- ********************************* 리뷰 내용이 들어가는 공간 *************************************** -->
 <div id="reviewContent" style="width: 1020px">
 ${requestScope.review.content }<br>
-</div>
+
 
 	
 		<div align="center" id="recommend"> <!-- 추천 버튼 -->
 			<img src="${initParam.rootPath}/uploadPhoto/recommend.jpg" class="recommendBtn"> <br>
 			<span id="recommendCountBtn"><font color="red" size="5">${requestScope.review.recommend}</font></span>
-	</div><br><br>
+		</div><br><br>
 	
 <!-- ******************************* 리뷰 내용이 들어가는 공간 끝 ************************************** -->
 
 
 
-<div id="reply" align="right">
-	<!-- 버튼 -->
-	<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${requestScope.pageNo}"><button>목록</button></a>
-	<a href="${initParam.rootPath }/review/login/modifyForm.do?reviewNo=${requestScope.review.reviewNo}">
-	<button id="modifyBtn">수정</button></a>
-	<button id="deleteBtn">삭제</button>
-	<button id="reportBtn">신고</button><br><br>
+		<div id="reply" align="right">
+			<!-- 버튼 -->
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${requestScope.pageNo}"><button>목록</button></a>
+			<a href="${initParam.rootPath }/review/login/modifyForm.do?reviewNo=${requestScope.review.reviewNo}">
+			<button id="modifyBtn">수정</button></a>
+			<button id="deleteBtn">삭제</button>
+			<button id="reportBtn">신고</button><br><br>
+		</div>
 </div>
 <!-- ****************************************  댓 글 영 역  ****************************************** -->
 
