@@ -182,7 +182,7 @@ public class MemberController {
 		if(m!=null&&!state.equals("탈퇴")){
 			if(password.equals(m.getPassword())){
 				session.setAttribute("login_info", m);
-				url = "main1.tiles";
+				url = "/index.do";
 			}else{
 				url = "member/login_form.tiles";
 				map.addAttribute("error_message", "Password를 확인하세요");
