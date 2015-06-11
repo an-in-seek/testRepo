@@ -294,7 +294,7 @@ public class RestaurantController {
 		new RestaurantReplyValidator().validate(restaurantReply, errors);
 		if(errors.hasErrors()){
 			System.out.println("댓글 수정 정보를 입력하지 않아 등록 실패");
-			return "/login/updateReply.do";
+			return "/restaurant/restaurantView.do";
 		}
 		
 		Member member = (Member)session.getAttribute("login_info");
