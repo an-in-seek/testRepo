@@ -5,10 +5,17 @@
 <script type="text/javascript"src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		$("#listTB tbody tr").on("mouseover", function() {
 			$("#listTB tbody tr").css("background-color", "white");
 			$(this).css("background-color", "lightgray");
 		});
+		
+		$("#listTB tbody tr").on("click", function(){
+			var reviewNo = $(this).find(":nth-child(3)").text();
+			document.location.href="${initParam.rootPath }/review/reviewView.do?reviewNo="+reviewNo;
+		});
+		
 	});
 </script>
 
@@ -25,12 +32,15 @@
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	align:center;
-	width:600px;
+	width:800px;
 	border: 1;
 }
 #listTB thead tr {
 	font-weight: bold;
 	background: silver;
+}
+#listTB tbody tr{
+	cursor: pointer;
 }
 </style>
 
@@ -43,7 +53,7 @@
 			<tr align="center">
 				<td>NO</td>
 				<td>분류</td>
-				<td>게시물 번호</td>
+				<td>신고된 게시물 번호</td>
 				<td>신고사유</td>
 				<td>신고날짜</td>
 				<td>처리상태</td>
@@ -56,9 +66,9 @@
 						<td>${reported.reportNo }</td>
 						<td>${reported.category}</td>
 						<td>${reported.reviewNo}</td>
-						<td>${reported.state}</td>
 						<td>${reported.reason}</td>
 						<td>${reported.reportedDate}</td>
+						<td>${reported.state}</td>
 						<td>${reported.reporterId}</td>
 					</tr>
 				</c:forEach>
@@ -70,7 +80,7 @@
 	<!-- 이전 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.previousPageGroup }">
-			<a href="${initParam.rootPath }/reported/login/reportedList.do?page=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
+			<a href="${initParam.rootPath }/reported/login/admin/reportedList.do?pageNo=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
 		</c:when>
 		<c:otherwise>◀&nbsp;</c:otherwise>
 	</c:choose>	
@@ -81,14 +91,14 @@
 				&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
 			</c:when>
 			<c:otherwise>
-				<a href="${initParam.rootPath }/reported/login/reportedList.do?page=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
+				<a href="${initParam.rootPath }/reported/login/admin/reportedList.do?pageNo=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 	<!-- 다음 페이지 그룹 -->
 	<c:choose>
 		<c:when test="${pagingBean.nextPageGroup }">
-			<a href="${initParam.rootPath }/reported/login/reportedList.do?page=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
+			<a href="${initParam.rootPath }/reported/login/admin/reportedList.do?pageNo=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
 		</c:when>
 		<c:otherwise>&nbsp;▶</c:otherwise>
 	</c:choose>	
