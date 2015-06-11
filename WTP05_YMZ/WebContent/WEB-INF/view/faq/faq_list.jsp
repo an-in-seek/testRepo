@@ -21,14 +21,15 @@ $(document).ready(function(){
 		beforeSend:function(){
 			$("#writeBtn").hide();
 			for(idx=1 ; idx<="${fn:length(requestScope.faq_list)}" ; idx++){
+				$("#deleteBtn"+idx).hide();
 				$("#modifyBtn"+idx).hide();
 			}
-			$("#listTB2").hide();
 		},
 		success:function(member){
 			if(member.grade == 'master'){
 				$("#writeBtn").show();
 				for(idx=1 ; idx<="${fn:length(requestScope.faq_list)}" ; idx++){
+					$("#deleteBtn"+idx).show();
 					$("#modifyBtn"+idx).show();
 				}
 				$("#listTB2").show();
@@ -44,21 +45,26 @@ $(document).ready(function(){
 <%-- <c:if test="${fn:length(requestScope.faq_list) != 0 }"> --%>
 <form id="removeForm" method=post action="${initParam.rootPath }/faq/login/admin/removeFaq.do">
 	<input type="hidden" id="number" name="number">
+	<h2>고객센터(FAQ)</h2>
 	<table id="table1">
 		<tr align="center">
 			<td>
 				<div class="faq" id="listTB1" style="width: 680px" align="center">
 					<div class="faqHeader">
-						<h1>고객센터(FAQ)</h1>
 						<button type="button" class="showAll"><font color="blue"><b>답변 모두 여닫기</b></font></button>
 					</div>
 					<c:forEach items="${requestScope.faq_list }" var="faq">
 						<ul class="faqBody">
 							<li class="article" id="a${faq.number}" align="center" height="40px">
-								<p class="q"><a href="#a${faq.number}">Q${faq.number} : ${faq.title}</a></p>
+								<p class="q">
+									<a href="#a${faq.number}">
+										<input id="deleteBtn${faq.number}" type="button" value="삭제" onclick="removeFaq(${faq.number});">
+										Q${faq.number} : ${faq.title}
+									</a>
+								</p>
 								<p class="a" >
 									A : ${faq.content}
-									<input id="modifyBtn${faq.number}" type="button" value="수정하기" onclick="window.location='${initParam.rootPath }/faq/login/admin/modifyForm.do?number=${faq.number}'">
+									<input id="modifyBtn${faq.number}" type="button" value="수정" onclick="window.location='${initParam.rootPath }/faq/login/admin/modifyForm.do?number=${faq.number}'">
 								</p>
 							</li>
 						</ul>
@@ -69,22 +75,6 @@ $(document).ready(function(){
 						</tr>
 					</table>
 				</div>
-			</td>
-			
-			<td>
-				<table id="listTB2" style="width: 120px" border="1" align="center">
-						<tr  align="center" height="40px">
-						</tr>
-					<tbody>
-						<c:forEach items="${requestScope.faq_list }" var="qna">
-							<tr align="center" height="40px">
-								<td>Q${qna.number}</td>
-								<td><input id="deleteBtn${qna.number}" type="button" value="삭제" onclick="removeFaq(${qna.number});"></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				
 			</td>
 		</tr>
 	</table>
