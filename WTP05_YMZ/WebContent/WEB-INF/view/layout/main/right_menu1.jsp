@@ -57,7 +57,7 @@ function pw_pop(){
 	color: #B70000;
 }
 #loginSuccessStatus{
-	margin-top:4%
+
 }
 .int {position: relative;
   z-index: 10;
@@ -88,12 +88,13 @@ function pw_pop(){
 </style>
   
 <div id="right_menu1">
+
 <c:if test="${sessionScope.login_info!=null }">	
 	<table id="loginSuccess" align="center">
-		<tr align="center" height="30px" >
-			<td></td>
+		<tr align="center" height="50px" >
+			<td>아이디 : ${sessionScope.login_info.id }</td>
 		</tr>
-		<tr align="center" >
+		<tr align="center" height="50px" >
 			<td>
 			<font size="5">${sessionScope.login_info.nickname }</font><font size="2">님 환영합니다.</font>
 			</td>
@@ -101,7 +102,7 @@ function pw_pop(){
 	</table>
 	
 	<table id="loginSuccessStatus" align="center" width="220px">
-		<tr align="center" height="50px" >
+		<tr align="center" height="56px" >
 			<td class="btn">
 			<input type="button"  value="마이페이지" 
 					OnClick="window.location='${initParam.rootPath }/member/mypage.do'">
@@ -112,8 +113,8 @@ function pw_pop(){
 			</td>
 		</tr>
 	</table>
-	
 </c:if>
+
 <c:choose>	
 	<c:when test="${sessionScope.login_info==null }">
 		<form action="${initParam.rootPath }/member/login.do" method="post" >
@@ -131,7 +132,7 @@ function pw_pop(){
 				<tr align="center" >
 					<td class="btn"><input type="submit"  value="로그인"></td>
 					<td class="btn"><input type="button"  value="회원가입"
-					OnClick="window.location='${initParam.rootPath }/member/joinBefore.do"></td>
+					OnClick="window.location='${initParam.rootPath }/member/joinForm.do'"></td>
 				</tr>
 			</table>
 			
@@ -144,5 +145,6 @@ function pw_pop(){
 		</form>
 	</c:when>
 </c:choose>
+
 </div>
 

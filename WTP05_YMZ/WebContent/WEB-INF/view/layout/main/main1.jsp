@@ -1,23 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script type="text/javascript"></script>
+<script type="text/javascript">
 
-<style type="text/css">
+</script>
+
+<style>
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-#right_menu2{				/* 로그인 입력 폼 */
-	width: auto; 
-	height: auto;
+#main-title {color:#f8f8f8;font-size:70pt;margin-top:20%;}
+.se {font-family: serif;}
+.sa {font-family: sans-serif;}
+.cu {font-family: cursive;}
+.fa {font-family: fantasy;}
+#main1{										/* 메인화면 오른쪽 로그인창 */
+	width:700px;
+	height:auto;
 	font-family: 'Hanna', sans-serif;
-	background-color: lightgray; 
-	border: solid 1px #bfbfbf; 
+	background-color: lightgray;
+	border: solid 1px #b70000;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
-	text-align: center;
-	color: #808080;
+	text-align:center;
 	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
 	-moz-border-radius: 10px;
 	border-radius: 10px;		 /* 둥근 모서리 끝 */
-	margin-top: 8%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -34,12 +39,12 @@
   cursor: pointer;
   font-family: 'Hanna', sans-serif;
 }
-</style> 
+</style>
 
-<div id="right_menu2">
+<div id="main1">
 	<table align="center" style="height: 380px">
-	<tr >
-	<td>맛집 랜덤 뿌려주는 화면</td>
-	</tr>
+		<tr >
+			<td>별점 : ★★★★★ 맛집정보 뿌려주는 화면(main1.jsp)</td>
+		</tr>
 	</table>
 </div>
