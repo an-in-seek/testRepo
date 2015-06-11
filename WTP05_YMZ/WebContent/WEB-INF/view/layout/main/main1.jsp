@@ -3,20 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$.ajax({
-		url:"${initParam.rootPath}/restaurant/ajax/getMainRestaurants.do",
-		type:"post",
-		success:function(restaurants){
-			var hits = restaurants[0];
-			var manyScore = restaurants[1];
-			var highScore = restaurants[2];
-			$("#first").html("<img style='width:200px;height:140px;' src='${initParam.rootPath}/uploadPhoto/"+hits.pictureName.split(",")[0]+"'><br>"+hits.restaurantName+"<br>"+"");
-			$("#second").html("<img style='width:200px;height:140px;' src='${initParam.rootPath}/uploadPhoto/"+manyScore.pictureName.split(",")[0]+"'><br>"+manyScore.restaurantName);
-			$("#third").html("<img style='width:200px;height:140px;' src='${initParam.rootPath}/uploadPhoto/"+highScore.pictureName.split(",")[0]+"'><br>"+highScore.restaurantName);
-		}
-	});
-});
+
 </script>
 
 <style>
@@ -30,7 +17,6 @@ $(document).ready(function(){
 	width:700px;
 	height:auto;
 	font-family: 'Hanna', sans-serif;
-	background-color: lightgray;
 	border: solid 1px #b70000;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	text-align:center;
@@ -56,16 +42,24 @@ $(document).ready(function(){
 </style>
 
 <div id="main1">
-	<table border="1" align="center" style="width:95%;">
-		<tr>
-			<td><font color="red">★</font> 조회왕 <font color="red">★</font></td>
-			<td><font color="red">★</font> 댓글왕 <font color="red">★</font></td>
-			<td><font color="red">★</font> 별점왕 <font color="red">★</font></td>
-		</tr>
-		<tr>
-			<td id="first" style="width:33%"></td>
-			<td id="second" style="width:33%"></td>
-			<td id="third" style="width:33%"></td>
-		</tr>
-	</table>
+맛집 TOP5
+<table style="width:100%;margin-bottom:20px;">
+	<tr>
+		<td style="width:50px;font-size:50px;"><font color="red">1.</font></td>
+		<td style="width:300px;"><img style="width:300px;height:250px;" src="${initParam.rootPath }/uploadPhoto/${fn:split(requestScope.top5[0].pictureName,',')[0] }"></td>
+		<td align="left">
+			<p><font size="5">${requestScope.top5[0].restaurantName }</font></p>
+			<p>${requestScope.top5[0].category } | ${requestScope.locations[0] }<br>${requestScope.top5[0].score } | ${requestScope.top5[0].replyCount }명 참여</p>
+			<p>${requestScope.top5[0].description }</p>
+		</td>
+	</tr>
+</table>
+<table style="width:100%;margin-bottom:20px;">
+	<tr align="left">
+		<td style="width:25%;">2.<br><img style="width:150px;height:120px;" src="${initParam.rootPath }/uploadPhoto/${fn:split(requestScope.top5[1].pictureName,',')[0] }"><br>${requestScope.top5[1].restaurantName }<br><font size="2" color="gray">${requestScope.top5[1].category } | ${requestScope.locations[1] }</font></td>
+		<td style="width:25%;">3.<br><img style="width:150px;height:120px;" src="${initParam.rootPath }/uploadPhoto/${fn:split(requestScope.top5[2].pictureName,',')[0] }"><br>${requestScope.top5[2].restaurantName }<br><font size="2" color="gray">${requestScope.top5[2].category } | ${requestScope.locations[2] }</font></td>
+		<td style="width:25%;">4.<br><img style="width:150px;height:120px;" src="${initParam.rootPath }/uploadPhoto/${fn:split(requestScope.top5[3].pictureName,',')[0] }"><br>${requestScope.top5[3].restaurantName }<br><font size="2" color="gray">${requestScope.top5[3].category } | ${requestScope.locations[3] }</font></td>
+		<td style="width:25%;">5.<br><img style="width:150px;height:120px;" src="${initParam.rootPath }/uploadPhoto/${fn:split(requestScope.top5[4].pictureName,',')[0] }"><br>${requestScope.top5[4].restaurantName }<br><font size="2" color="gray">${requestScope.top5[4].category } | ${requestScope.locations[4] }</font></td>
+	</tr>
+</table>
 </div>

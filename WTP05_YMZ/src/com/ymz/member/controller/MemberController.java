@@ -54,37 +54,27 @@ public class MemberController {
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
 	public String joinMember(@ModelAttribute Member member, Errors errors, HttpServletRequest request,ModelMap map) throws Exception{
 		//요청파라미터 Validator를 이용해 검증
-		new MemberValidator().validate(member, errors);
-		if(errors.hasErrors()){
-			return "member/join_form.tiles";
-		}
-		String id = member.getId();
-		String password = member.getPassword();
-		String name = member.getName();
-		String nickname = member.getNickname();
-		if(!id.matches("[A-Za-z0-9]{4,12}$")){
+		if(!member.getId().matches("[A-Za-z0-9]{4,12}$")){
 			map.addAttribute("error_message", "ID의 양식에 맞지 않습니다");
 			return "member/join_form.tiles";
 		}
 		
-		if(!password.matches("[a-zA-Z0-9]{4,24}$")){
+		if(!member.getPassword().matches("[a-zA-Z0-9]{4,24}$")){
 			map.addAttribute("error_message", "password의 양식에 맞지 않습니다");
 			return "member/join_form.tiles";
 		}
 		
-		if(!name.matches("[가-힣]{2,10}|^[a-zA-Z]{2,10}$")){
+		if(!member.getName().matches("[가-힣]{2,10}|^[a-zA-Z]{2,10}$")){
 			map.addAttribute("error_message", "이름의 양식에 맞지 않습니다");
 			return "member/join_form.tiles";
 		}
 		
-		if(!nickname.matches("[가-힣a-zA-Z0-9]{2,8}$")){
+		if(!member.getNickname().matches("[가-힣a-zA-Z0-9]{2,8}$")){
 			map.addAttribute("error_message", "닉네임의 양식에 맞지 않습니다");
 			return "member/join_form.tiles";
 		}
 		String post1 = (String) request.getParameter("postcode1");
 		String post2 = (String) request.getParameter("postcode2");
-		String exAddress = (String) request.getParameter("address");
-		String exDetailAddress = (String) request.getParameter("detailAddress");
 		String phoneCP = (String) request.getParameter("phoneCP");
 		String num1 = (String)request.getParameter("num1");
 		String num2 = (String)request.getParameter("num2");
@@ -97,7 +87,6 @@ public class MemberController {
 			return "member/join_form.tiles";
 		}
 		String phoneNo = phoneCP+"-"+num1+"-"+num2;
-		String exSex = (String)request.getParameter("sex");
 		String zipcode = post1+"-"+post2;
 		String recommend = (String)request.getParameter("recommend");
 		String year = (String)request.getParameter("year");
@@ -111,7 +100,7 @@ public class MemberController {
 			food ="없음";
 		}else{
 			for(String s :favoriteFood ){
-				food += s+" ";
+				food += s+", ";
 			}
 		}	
 			String emailName = (String)request.getParameter("emailName");
@@ -125,8 +114,8 @@ public class MemberController {
 				map.addAttribute("error_message", "이미 가입된 이메일입니다.");
 				request.setAttribute("postcode1", post1);
 				request.setAttribute("postcode2", post2);
-				request.setAttribute("address", exAddress);
-				request.setAttribute("detailAddress", exDetailAddress);
+				request.setAttribute("address", member.getAddress());
+				request.setAttribute("detailAddress", member.getDetailAddress());
 				request.setAttribute("phoneCP", phoneCP);
 				request.setAttribute("num1", num1);
 				request.setAttribute("num2", num2);
@@ -136,8 +125,8 @@ public class MemberController {
 				map.addAttribute("error_message", "이미 가입된 전화번호입니다");
 				request.setAttribute("postcode1", post1);
 				request.setAttribute("postcode2", post2);
-				request.setAttribute("address", exAddress);
-				request.setAttribute("detailAddress", exDetailAddress);
+				request.setAttribute("address", member.getAddress());
+				request.setAttribute("detailAddress", member.getDetailAddress());
 				request.setAttribute("recommend", recommend);
 				return "member/join_form.tiles";
 
@@ -153,9 +142,17 @@ public class MemberController {
 					rm.setMileage(mileage);
 					service.modifyMember(rm);
 					member.setMileage(10);
+					new MemberValidator().validate(member, errors);
+					if(errors.hasErrors()){
+						return "member/join_form.tiles";
+					}
 					service.joinMember(member);
 				}else{
 					member.setMileage(0);
+					new MemberValidator().validate(member, errors);
+					if(errors.hasErrors()){
+						return "member/join_form.tiles";
+					}
 					service.joinMember(member);
 				}
 		return "redirect:/member/joinSuccess.do?id="+member.getId();

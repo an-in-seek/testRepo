@@ -243,17 +243,7 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	}
 
 	@Override
-	public Restaurant selectRestaurantByManyHits() {
-		return session.selectOne(namespace+"selectRestaurantByManyHits");
-	}
-
-	@Override
-	public Restaurant selectRestaurantByHighScore() {
-		return session.selectOne(namespace+"selectRestaurantByHighScore");
-	}
-
-	@Override
-	public Restaurant selectRestaurantByManyScore() {
-		return session.selectOne(namespace+"selectRestaurantByManyScore");
+	public List<Restaurant> selectRestaurantsTop5() {
+		return session.selectList(namespace+"selectRestaurantsTop5");
 	}
 }

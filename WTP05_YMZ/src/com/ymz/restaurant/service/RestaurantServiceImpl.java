@@ -290,11 +290,18 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public List<Restaurant> getMainRestaurants() {
-		List<Restaurant> list = new ArrayList<Restaurant>();
-		list.add(dao.selectRestaurantByManyHits());
-		list.add(dao.selectRestaurantByManyScore());
-		list.add(dao.selectRestaurantByHighScore());
-		return list;
+	public Map getMainRestaurants() {
+		Map map = new HashMap();
+		List<Restaurant> list = dao.selectRestaurantsTop5();
+		List<String> locations = new ArrayList<String>();
+		for(int i=0; i<list.size(); i++) {
+			list.get(i).setCategory(categoryDAO.selectCategoryName(list.get(i).getCategory()));
+			locations.add(dao.selectLocationByNo(list.get(i).getLocationNo()));
+		}
+		
+		map.put("top5", list);
+		map.put("locations", locations);
+		
+		return map;
 	}
 }

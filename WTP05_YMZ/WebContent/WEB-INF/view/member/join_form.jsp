@@ -557,7 +557,6 @@ table{
 		<tr>
 			<td align="center">좋아하는음식</td>
 			<td>
-				<input type="hidden" name="food" id="food">
 				<c:forEach var="category" items="${map}"> 
 					<label><input type="checkbox" name="favoriteFood" value="${category.key}">${category.value}</label>
 				</c:forEach>
