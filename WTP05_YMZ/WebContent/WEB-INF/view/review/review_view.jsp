@@ -160,14 +160,10 @@ $(document).ready(function(){
 </script>	
 <!-- css -->
 <style type="text/css">
+
+
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
-
-.ui-dialog .ui-dialog-buttonpane button {  /* 다이어로그 취소버튼 */
-  margin: .5em .4em .5em 0;
-  width: 120px;
-  cursor: pointer;
-}
 
 table#replyTB tbody tr:nth-child(even) {
     background-color: lavenderblush;
@@ -266,7 +262,8 @@ div#reportReview_dialog{
 <body>
 
 <h4>리뷰</h4>
-<div align="left">
+
+	
 <!-- ************************************** 리뷰 정보 ************************************* -->
 <table class="listTable">
 		<thead>
@@ -285,11 +282,13 @@ div#reportReview_dialog{
 		</tbody>
 	</table>
 	<br>
-</div>
 <!-- ********************************* 리뷰 내용이 들어가는 공간 *************************************** -->
 <div id="reviewContent">
 ${requestScope.review.content }<br>
 
+
+
+	
 		<div align="center" id="recommend"> <!-- 추천 버튼 -->
 			<img src="${initParam.rootPath}/uploadPhoto/recommend.jpg" class="recommendBtn"> <br>
 			<span id="recommendCountBtn"><font color="red" size="5">${requestScope.review.recommend}</font></span>
@@ -432,12 +431,13 @@ ${requestScope.review.content }<br>
 	<input type="hidden" name="state" value="미처리"> <!-- 처리상태 : 미처리 -->
 	<input type="hidden" name="category" value="review"> <!-- 카테고리 : 리뷰 -->
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}"> <!-- 페이지 번호 -->
+
 	<select name="reason">
-		<option value="욕설신고">욕설신고</option>
-		<option value="성희롱">성희롱</option>
-		<option value="광고글">광고글</option>
-		<option value="기타">기타</option>
+	<c:forEach items="${requestScope.categoryList }" var="category">
+		<option value="${category.categoryName}">${category.categoryName}</option>
+	</c:forEach>
 	</select>
+	
 	<input type="submit" name="reviewReport" value="신고">
 	<input type="button" id="reviewReportCancel" value="취소">
 	</form>
