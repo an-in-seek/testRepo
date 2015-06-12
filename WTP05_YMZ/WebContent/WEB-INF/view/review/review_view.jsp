@@ -43,8 +43,7 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 function reportReply(reviewNo, rnum, pNo){
 	var isCom=confirm("신고할랭???")
 	if(isCom){
-		$("#reportReply_dialog").dialog({modal:true, resizable: false
-			});
+		$("#reportReply_dialog").dialog({modal:true, resizable: false});
 	}else{
 		return;
 	}
@@ -471,14 +470,18 @@ ${requestScope.review.content }<br>
 	<input type="hidden" name="state" value="미처리"> <!-- 처리상태 : 미처리 -->
 	<input type="hidden" name="category" value="reviewReply"> <!-- 카테고리 : 리뷰리플 -->
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}"> <!-- 페이지 번호 -->
-	<select name="reason">
-		<option value="fuck">욕설신고</option>
-		<option value="sexual">성희롱</option>
-		<option value="money">광고글</option>
-		<option value="guitar">기타</option>
-	</select>
+	<br>
+	<div id="reportReviewReplyArea">
+		<select name="reason" style="width:200px;">
+			<option value="fuck">욕설신고</option>
+			<option value="sexual">성희롱</option>
+			<option value="money">광고글</option>
+			<option value="guitar">기타</option>
+		</select>
+	<Br><br>
 		<input type="submit" name="replyReport" value="신고" style="width:80px; margin-left: 16px;">
 		<input type="button" id="replyReportCancel" value="취소" style="width:80px">
+		</div>
 	</form>
 	</section>
 </div>
