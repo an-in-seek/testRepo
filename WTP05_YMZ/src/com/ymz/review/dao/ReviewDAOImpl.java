@@ -107,6 +107,16 @@ public class ReviewDAOImpl implements ReviewDAO{
 		String month = td.format(new Date());
 		return session.selectList(namespace+"selectMonthBestHits", month);
 	}
+	
+	/**
+	 * 이번달 최고 리플글 가져오기
+	 */
+	@Override
+	public List<Review> selectMonthReply() {
+		SimpleDateFormat td = new SimpleDateFormat("yyyy-MM");
+		String month = td.format(new Date());
+		return session.selectList(namespace+"selectMonthReply", month);
+	}
 
 	/**
 	 * 리뷰 정렬 페이징 관련

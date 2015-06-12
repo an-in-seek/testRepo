@@ -209,4 +209,16 @@
 			)
 		where rownum <![CDATA[<]]> 6
 	</select>
+	
+		<!-- 이번달 인기글(댓글순) -->
+	<select id="selectMonthReply" resultMap="review-resultmap" parameterType="String">
+		select review_no, title, reply_count
+		from(
+			select review_no, title, (select count(*) from REVIEW_REPLY where review_reply.review_no = r.review_no) reply_count
+			from review r
+			where substr(reg_date, 1,7) = #{month}
+			ORDER BY reply_count desc
+			)
+		where rownum <![CDATA[<]]> 6
+	</select>
 </mapper>

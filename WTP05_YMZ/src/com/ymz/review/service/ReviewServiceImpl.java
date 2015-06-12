@@ -1,6 +1,5 @@
 package com.ymz.review.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ymz.common.util.PagingBean;
-import com.ymz.restaurant.vo.Restaurant;
 import com.ymz.review.dao.ReviewDAO;
 import com.ymz.review.vo.Review;
 
@@ -96,6 +94,7 @@ public class ReviewServiceImpl implements ReviewService {
 	public Map<String, Object> ReviewSortListPaging(int pageNo, String type, String searchType, String query) {
 		List<Review> bestHits = dao.selectTodayBestHits(); // 오늘 최고 조회수 글 목록 가져오기
 		List<Review> bestMonthHits = dao.selectMonthBestHits(); // 오늘 최고 조회수 글 목록 가져오기
+		List<Review> bestMonthReplys = dao.selectMonthReply(); // 이번달 최다 리플글 가져오기.
 		List<Review> notices = dao.selectNotice(); // 공지글 가져오기
 		// 목록에 뿌려질 List<Review> 조회
 		List<Review> sortlist = dao.selectSortReviewPaging(pageNo, type, searchType, query); // 수정 매개변수 추가
@@ -105,6 +104,7 @@ public class ReviewServiceImpl implements ReviewService {
 		// 두개의 값(List, PagingBean)을 Map에 넣어 return
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("notices", notices);
+		map.put("monthReplyList", bestMonthReplys);
 		map.put("reviewList", sortlist);
 		map.put("pagingBean", pagingBean);
 		map.put("todayBest", bestHits);
