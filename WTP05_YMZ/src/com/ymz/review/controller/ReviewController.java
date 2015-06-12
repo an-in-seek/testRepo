@@ -248,5 +248,7 @@ public class ReviewController {
 			map.addAttribute("reply", reply);
 			return new ModelAndView("redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo() + "&pageNo="+reply.getPageNo(), map);
 		}
-
+		
+		//댓글 신고
+		
 }

@@ -43,7 +43,8 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 function reportReply(reviewNo, rnum, pNo){
 	var isCom=confirm("신고할랭???")
 	if(isCom){
-		$("#reportReply_dialog").dialog({modal:true, width:800});
+		$("#reportReply_dialog").dialog({modal:true, resizable: false
+			});
 	}else{
 		return;
 	}
@@ -463,15 +464,22 @@ ${requestScope.review.content }<br>
 	<figure id="pic"></figure>
 	<section>
 	<header style="text-align: center;font-weight: bolder;font-size: 1.3em;border-bottom: 2px solid black;padding: 5px"> 신고내용 접수 </header>
-	<select>
+	
+	<form id="reportReviewReplyForm" action="${initParam.rootPath }/review/login/reportReviewReply.do" method="post">
+	<input type="hidden" name="reviewNo" value="${requestScope.review.reviewNo}"> <!-- 글번호 -->
+	<input type="hidden" name="reporterId" value="${sessionScope.login_info.id}"> <!-- 신고자 ID -->
+	<input type="hidden" name="state" value="미처리"> <!-- 처리상태 : 미처리 -->
+	<input type="hidden" name="category" value="reviewReply"> <!-- 카테고리 : 리뷰리플 -->
+	<input type="hidden" name="pageNo" value="${requestScope.pageNo}"> <!-- 페이지 번호 -->
+	<select name="reason">
 		<option value="fuck">욕설신고</option>
 		<option value="sexual">성희롱</option>
 		<option value="money">광고글</option>
 		<option value="guitar">기타</option>
 	</select>
-	
 		<input type="submit" name="replyReport" value="신고" style="width:80px; margin-left: 16px;">
 		<input type="button" id="replyReportCancel" value="취소" style="width:80px">
+	</form>
 	</section>
 </div>
 	<!-- 댓글신고 dialog 끝 -->
