@@ -567,7 +567,7 @@ public class MemberController {
 	    	
 	}
 	
-	@RequestMapping("mypage.do")
+	@RequestMapping("login/mypage.do")
 	public ModelAndView moveMypage(HttpSession session,  @RequestParam(defaultValue="1") int pageNo){
 		Member member = (Member) session.getAttribute("login_info");
 		Map<String, Object> map = reviewService.getReviewListPagingById(pageNo, member.getId());

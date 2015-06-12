@@ -3,6 +3,8 @@
 /* General Demo Style */
 
 .container{
+	width: auto;
+	height: auto;
 	position: relative;
 }
 .clr{

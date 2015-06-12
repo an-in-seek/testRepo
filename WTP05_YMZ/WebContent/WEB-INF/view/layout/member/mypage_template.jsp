@@ -57,7 +57,7 @@ header.mypage_template{
 	padding-bottom:20px;
 	padding-left:10px;
 	padding-right:20px;
-	height:auto; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	height:auto; /*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	width:800px;
 	font-weight:bold;
 	text-align:left;

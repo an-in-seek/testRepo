@@ -20,7 +20,7 @@
 				<tr align="center">
 					<td>${review.reviewNo}</td>
 					<td>${review.title}</td>
-					<td>${review.regDate}</td>
+					<td>${review.regDate.substring(0,10)}</td>
 					<td>${review.hits}</td>
 					<td>${review.memberId}</td>
 				</tr>

@@ -104,7 +104,7 @@ function pw_pop(){
 		<tr align="center" height="56px" >
 			<td class="btn">
 			<input type="button"  value="마이페이지" 
-					OnClick="window.location='${initParam.rootPath }/member/mypage.do'">
+					OnClick="window.location='${initParam.rootPath }/member/login/mypage.do'">
 			</td>
 			<td class="btn">
 				<input type="button"  value="로그아웃" 

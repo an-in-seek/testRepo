@@ -42,12 +42,12 @@ $(document).ready(function(){
 	margin-right: auto;
 }
 .titleTd{
-	width: 80px;
+	width: 85px;
 	text-align: right;
 	border: 1px solid lightgray;
 } 
 .contentTd{
-	width: 250px;
+	width: 270px;
 	border: 1px solid lightgray;
 }
 </style>
@@ -118,11 +118,11 @@ $(document).ready(function(){
 				</div>	
 		        <div class="content-2">
 					<h2>Services</h2>
-	                <p>Do you see</p>
+	                <p><%@include file="mypage_bbs1.jsp" %></p>
 			    </div>
 		        <div class="content-3">
 					<h2>Portfolio</h2>
-	                 <p>The path of the alley of darkness</p>
+	                <p><%@include file="mypage_bbs1.jsp" %></p>
 			    </div>
 	        </div>
 		</section>
