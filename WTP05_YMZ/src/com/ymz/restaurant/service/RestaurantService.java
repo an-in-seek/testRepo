@@ -27,4 +27,5 @@ public interface RestaurantService {
 	public void modifyRestaurant(Restaurant restaurant, String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception;
 	public Map addNewRestaurantForm();
 	public Map getMainRestaurants();
+	public Map getRandomRestaurant();
 }

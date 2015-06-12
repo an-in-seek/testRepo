@@ -55,7 +55,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body><div align="center">
+<body><div align="center" style="margin-bottom:20px;">
 <table border="1" style="width:100%">
 	<thead>
 		<tr height="50px">
@@ -168,8 +168,8 @@ $(document).ready(function(){
 </table>
 <p/>
 <form id="searchForm" action="${initParam.rootPath }/restaurant/showListByType.do">
-<input type="text" id="search" name="searchWord" value="${requestScope.searchWord }">
-<input type="submit" value="검색">
+<input style="width:200px;height:20px;" type="text" id="search" name="searchWord" value="${requestScope.searchWord }">
+<input style="width:50px;height:26px;background-color:gray;border-color:gray;color:white;font-weight:bold;" type="submit" value="검색">
 </form>
 
 </div></body>

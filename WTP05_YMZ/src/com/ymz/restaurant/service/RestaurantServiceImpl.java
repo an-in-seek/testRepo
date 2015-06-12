@@ -304,4 +304,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 		
 		return map;
 	}
+
+	@Override
+	public Map getRandomRestaurant() {
+		Map map = new HashMap();
+		int rownum = (int)(Math.random()*dao.selectTotalRestaurantCount())+1;
+		Restaurant randomRestaurant = dao.selectRestaurantByRownum(rownum);
+		randomRestaurant.setCategory(categoryDAO.selectCategoryName(randomRestaurant.getCategory()));
+		map.put("randomRestaurant", randomRestaurant);
+		map.put("randomLocation", dao.selectLocationByNo(randomRestaurant.getLocationNo()));
+		return map;
+	}
 }

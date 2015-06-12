@@ -285,4 +285,15 @@
 		)
 		where	rownum<![CDATA[<=]]>5
 	</select>
+	
+	<select id="selectRestaurantByRownum" parameterType="_int" resultMap="restaurant-resultmap">
+		select  restaurant_no, restaurant_name, category, phone_no, description,
+				picture_name, score, hits, theme, reg_date, reply_count, location_no
+		from    (
+	        select  rownum r, restaurant_no, restaurant_name, category, phone_no, description,
+	                picture_name, score, hits, theme, reg_date, reply_count, location_no
+	        from    restaurant
+		)
+		where r=#{rownum}
+	</select>
 </mapper>

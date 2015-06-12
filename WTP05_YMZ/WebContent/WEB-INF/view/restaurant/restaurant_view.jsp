@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <head>
 <meta charset="UTF-8">
@@ -225,8 +226,8 @@ display:none;
 /* UI Object  빨간별*/
 
 .star_rating,
-.star_rating span{display:inline-block;overflow:hidden;height:14px;height:14px;background:transparent url(${initParam.rootPath }/css/images/ico_star.gif) no-repeat}
-.star_rating{width:79px;vertical-align:middle}
+.star_rating span{display:inline-block;overflow:hidden;height:14px;background:transparent url(${initParam.rootPath }/css/images/ico_star.gif) no-repeat}
+.star_rating{width:79px;vertical-align:-1px;}
 .star_rating span{background-position:0 -14px;font-size:0;line-height:0;text-indent:-100px;*text-indent:0;vertical-align:top}
 
 /* //UI Object */
@@ -259,7 +260,7 @@ display:none;
 <td style="width:50%">
 <table style="width:100%">
 <tr align="center">
-<td colspan="5" style="padding:1px;padding-top:5px;border-style:solid;border-color:lightgray;"><img id="selectedPicture" style="width:450px;height:300px;"></td>
+<td colspan="5" style="padding:0px;"><img id="selectedPicture" style="width:450px;height:330px;border-style:solid;border-width:5px;border-color:lightgray;"></td>
 </tr>
 <tr id="selectPicture" align="center" style="border-style:solid;border-color:lightgray;">
 <td style="width:20%;padding:5px;padding-bottom:1px;">
@@ -309,7 +310,7 @@ display:none;
 </table>
 </td>
 
-<td valign="top" style="width:50%">
+<td valign="top" style="width:50%;padding-top:20px;">
 <table>
 <tr>
 	<td style="width:100px;" align="center"><b>상호명</b></td>
@@ -329,7 +330,17 @@ display:none;
 </tr>
 <tr>
 	<td align="center"><b>평점</b></td>
-	<td>${requestScope.restaurant.score }</td>
+	<td>
+		<c:choose>
+			<c:when test="${fn:startsWith(requestScope.restaurant.score,'0')}"><span class="star_rating"><span style="width:0%"></span></span></c:when>
+			<c:when test="${fn:startsWith(requestScope.restaurant.score,'1')}"><span class="star_rating"><span style="width:20%"></span></span></c:when>
+			<c:when test="${fn:startsWith(requestScope.restaurant.score,'2')}"><span class="star_rating"><span style="width:40%"></span></span></c:when>
+			<c:when test="${fn:startsWith(requestScope.restaurant.score,'3')}"><span class="star_rating"><span style="width:60%"></span></span></c:when>
+			<c:when test="${fn:startsWith(requestScope.restaurant.score,'4')}"><span class="star_rating"><span style="width:80%"></span></span></c:when>
+			<c:when test="${fn:startsWith(requestScope.restaurant.score,'5')}"><span class="star_rating"><span style="width:100%"></span></span></c:when>
+		</c:choose>
+		&nbsp;${requestScope.restaurant.score }
+	</td>
 </tr>
 <tr>
 	<td align="center"><b>테마</b></td>
@@ -364,7 +375,7 @@ display:none;
 <c:choose>
 <c:when test="${empty requestScope.foods }">
 <tr>
-<td colspan="4" align="center" height="50px">등록된 메뉴가 없습니다</td>
+<td colspan="4" align="center" height="50px" style="border-left-style:hidden;border-right-style:hidden;">등록된 메뉴가 없습니다</td>
 </tr>
 </c:when>
 <c:otherwise>
