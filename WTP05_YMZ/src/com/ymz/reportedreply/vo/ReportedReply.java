@@ -8,6 +8,7 @@ public class ReportedReply implements Serializable{
 	private String category;
 	private int reviewNo;
 	private int replyNo;
+	private String content;
 	private String state;
 	private String reason;
 	private String reportedDate;
@@ -17,13 +18,14 @@ public class ReportedReply implements Serializable{
 	public ReportedReply() {}
 
 	public ReportedReply(int reportNo, String category, int reviewNo,
-			int replyNo, String state, String reason, String reportedDate,
-			String reporterId, int pageNo) {
+			int replyNo, String content, String state, String reason,
+			String reportedDate, String reporterId, int pageNo) {
 		super();
 		this.reportNo = reportNo;
 		this.category = category;
 		this.reviewNo = reviewNo;
 		this.replyNo = replyNo;
+		this.content = content;
 		this.state = state;
 		this.reason = reason;
 		this.reportedDate = reportedDate;
@@ -61,6 +63,14 @@ public class ReportedReply implements Serializable{
 
 	public void setReplyNo(int replyNo) {
 		this.replyNo = replyNo;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public String getState() {
@@ -104,20 +114,12 @@ public class ReportedReply implements Serializable{
 	}
 
 	@Override
-	public String toString() {
-		return "ReportedReply [reportNo=" + reportNo + ", category=" + category
-				+ ", reviewNo=" + reviewNo + ", replyNo=" + replyNo
-				+ ", state=" + state + ", reason=" + reason + ", reportedDate="
-				+ reportedDate + ", reporterId=" + reporterId + ", pageNo="
-				+ pageNo + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
 				+ ((category == null) ? 0 : category.hashCode());
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + pageNo;
 		result = prime * result + ((reason == null) ? 0 : reason.hashCode());
 		result = prime * result + replyNo;
@@ -144,6 +146,11 @@ public class ReportedReply implements Serializable{
 			if (other.category != null)
 				return false;
 		} else if (!category.equals(other.category))
+			return false;
+		if (content == null) {
+			if (other.content != null)
+				return false;
+		} else if (!content.equals(other.content))
 			return false;
 		if (pageNo != other.pageNo)
 			return false;
@@ -174,6 +181,15 @@ public class ReportedReply implements Serializable{
 		} else if (!state.equals(other.state))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ReportedReply [reportNo=" + reportNo + ", category=" + category
+				+ ", reviewNo=" + reviewNo + ", replyNo=" + replyNo
+				+ ", content=" + content + ", state=" + state + ", reason="
+				+ reason + ", reportedDate=" + reportedDate + ", reporterId="
+				+ reporterId + ", pageNo=" + pageNo + "]";
 	}
 
 	

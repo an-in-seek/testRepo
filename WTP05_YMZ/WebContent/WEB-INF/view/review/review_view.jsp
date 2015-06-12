@@ -40,9 +40,12 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 }
 
 //댓글 신고
-function reportReply(reviewNo, rnum, pNo){
+function reportReply(reviewNo, replyNum, pNo, idx){
 	var isCom=confirm("신고할랭???")
+	
 	if(isCom){
+		var content = $("#rContent" + idx).text(); //리플내용
+		$("#reportReviewReplyForm").append("<input type='hidden' name='content' value='"+content+"'>"); // 댓글 내용을 다이얼로그 폼으로 보낸다.
 		$("#reportReply_dialog").dialog({modal:true, resizable: false});
 	}else{
 		return;
@@ -138,7 +141,7 @@ $(document).ready(function(){
 		$("#reportReview_dialog").dialog("close");
 	});
 	
-	$("#replyReportCancel").on("click", function(){
+	$("#replyReplyCancel").on("click", function(){
 		$("#reportReply_dialog").dialog("close");
 	});
 	
@@ -345,7 +348,7 @@ ${requestScope.review.content }<br>
 								<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 삭제">
 								<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
 								<!-- 신고 -->
-								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
+								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="댓글 신고">
 								<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
 							</c:when>
 							<c:when test="${sessionScope.login_info.grade =='master'}"> <!-- 관리자일때 -->
@@ -353,12 +356,12 @@ ${requestScope.review.content }<br>
 								<a href="javascript:removeReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 삭제">
 								<img src="${initParam.rootPath }/uploadPhoto/reviewreplyDel.png"></a>
 								<!-- 신고 -->
-								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
+								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="댓글 신고">
 								<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
 							</c:when>
 							<c:when test="${not empty sessionScope.login_info }"> <!-- 로그인한 상태 -->
 								<!-- 신고 -->
-								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo});" title="댓글 신고">
+								<a href="javascript:reportReply(${requestScope.review.reviewNo}, ${reply.replyNo}, ${requestScope.pageNo}, ${status.index+1});" title="댓글 신고">
 								<img src="${initParam.rootPath}/uploadPhoto/reviewreplyCom.png"></a>
 							</c:when>						
 						</c:choose>
@@ -472,15 +475,14 @@ ${requestScope.review.content }<br>
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}"> <!-- 페이지 번호 -->
 	<br>
 	<div id="reportReviewReplyArea">
-		<select name="reason" style="width:200px;">
-			<option value="fuck">욕설신고</option>
-			<option value="sexual">성희롱</option>
-			<option value="money">광고글</option>
-			<option value="guitar">기타</option>
+		<select name="reason" style="width: 200px">
+			<c:forEach items="${requestScope.categoryList }" var="category">
+				<option value="${category.categoryName}">${category.categoryName}</option>
+			</c:forEach>
 		</select>
-	<Br><br>
-		<input type="submit" name="replyReport" value="신고" style="width:80px; margin-left: 16px;">
-		<input type="button" id="replyReportCancel" value="취소" style="width:80px">
+		<br><br>
+		<input type="submit" name="reviewReplyReport" value="신고" style="width:80px; margin-left: 16px;">
+		<input type="button" id="reviewReplyReportCancel" value="취소" style="width:80px">
 		</div>
 	</form>
 	</section>
