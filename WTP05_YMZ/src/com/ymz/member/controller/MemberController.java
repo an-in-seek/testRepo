@@ -562,6 +562,13 @@ public class MemberController {
 		}	
 	    	
 	}
+	
+	@RequestMapping("mypage.do")
+	public ModelAndView moveMypage(HttpSession session, ModelMap map){
+		Member member = (Member) session.getAttribute("login_info");
+		map.put("member", member);
+		return new ModelAndView("member/main/mypage_body.tiles", map);
+	}
 	    	
 }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
+
 	<typeAliases>
 		<package name="com.ymz.common.category.vo"/>
 		<package name="com.ymz.faq.vo"/>
@@ -13,15 +14,12 @@
 		<package name="com.ymz.reportedbbs.vo"/>
 		<package name="com.ymz.reportedreply.vo"/>
 	</typeAliases>
-	
 		<!--  
-		
 		<typeAlias type="com.ymz.faq.vo.FAQ" alias="FAQ"/>
 		<typeAlias type="com.ymz.faq.vo.Member" alias="Member"/>
 		<typeAlias type="com.ymz.faq.vo.QNA" alias="QNA"/>
 		-->
-	
-	
+		
 	<mappers>
 		<mapper resource="com/ymz/common/config/mapper/CategoryMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/FAQMapper.xml"/>
@@ -33,8 +31,6 @@
 		<mapper resource="com/ymz/common/config/mapper/RestaurantReplyMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/ReportedBBSMapper.xml"/>
 		<mapper resource="com/ymz/common/config/mapper/ReportedReplyMapper.xml"/>
-
-		<!--  
-		-->
 	</mappers>
+	
 </configuration>
