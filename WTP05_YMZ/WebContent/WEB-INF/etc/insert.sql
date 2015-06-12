@@ -68,6 +68,14 @@ INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_C
 
 
 
+INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-20', 'title', null, 'F-5' );
+INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-21', 'nickname', null, 'F-5' );
+INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-22', 'id', null, 'F-5' );
+
+
+
+
+
 
 insert into location values(location_no_seq.nextval, '유스페이스 1동', '3');
 insert into location values(location_no_seq.nextval, '유스페이스 1동', '2');
@@ -504,3 +512,6 @@ insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '처리
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 4, '처리중', '사회갈등유발', '20150505', 'user03');
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 5, '미처리', '도배글', '20150505', 'user01');
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 6, '처리중', '도배글', '20150505', 'user02');
+
+insert into reported_reply values(reportedreply_no_seq.nextval, '리뷰', 1, 2, '처리중', '도배글', '20150505', 'user02');
+insert into reported_reply values(reportedreply_no_seq.nextval, '리뷰', 1, 2, '처리중', '도배글', '20150505', 'user02');
