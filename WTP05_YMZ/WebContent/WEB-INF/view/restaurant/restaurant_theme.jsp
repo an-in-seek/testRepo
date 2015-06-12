@@ -39,7 +39,7 @@ $(document).ready(function(){
 	});
 	
 	$("td.pagingNo").hover(function(){
-		$(this).css("border-style","solid").css("border-color","red");
+		$(this).css("border-style","solid").css("border-color","red").css("border-width","2px");
 	},function(){
 		$(this).css("border-style","none");
 	});
@@ -52,7 +52,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body><div align="center">
+<body><div align="center" style="margin-bottom:20px;">
 <a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=전체&align=${requestScope.align}">전체보기</a>
 <c:forEach items="${requestScope.themes }" var="theme">
 	<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=${theme.categoryId }&align=${requestScope.align}">${theme.categoryName }</a>
@@ -133,7 +133,7 @@ $(document).ready(function(){
 <c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
 	<c:choose>
 		<c:when test="${pageNum == pagingBean.currentPage }">
-			<td style="padding:1px;border-color:red;border-style:solid;">
+			<td style="padding:1px;border-color:red;border-style:solid;border-width:2px;">
 				&nbsp;
 				<font color="red"><b>${pageNum}</b></font>
 				&nbsp;
@@ -161,10 +161,10 @@ $(document).ready(function(){
 </td>
 </tr>
 </table>
-</p>
+<p/>
 <form id="searchForm" action="${initParam.rootPath }/restaurant/showListByTheme.do">
-<input type="text" id="search" name="searchWord" value="${requestScope.searchWord }">
-<input type="submit" value="검색">
+<input style="width:200px;height:20px;" type="text" id="search" name="searchWord" value="${requestScope.searchWord }">
+<input style="width:50px;height:26px;background-color:gray;border-color:gray;color:white;font-weight:bold;" type="submit" value="검색">
 </form>
 
 </div></body>

@@ -260,7 +260,7 @@ display:none;
 <td style="width:50%">
 <table style="width:100%">
 <tr align="center">
-<td colspan="5" style="padding:1px;padding-top:5px;border-style:solid;border-color:lightgray;"><img id="selectedPicture" style="width:450px;height:300px;"></td>
+<td colspan="5" style="padding:0px;"><img id="selectedPicture" style="width:450px;height:330px;border-style:solid;border-width:5px;border-color:lightgray;"></td>
 </tr>
 <tr id="selectPicture" align="center" style="border-style:solid;border-color:lightgray;">
 <td style="width:20%;padding:5px;padding-bottom:1px;">
@@ -310,7 +310,7 @@ display:none;
 </table>
 </td>
 
-<td valign="top" style="width:50%">
+<td valign="top" style="width:50%;padding-top:20px;">
 <table>
 <tr>
 	<td style="width:100px;" align="center"><b>상호명</b></td>
@@ -375,7 +375,7 @@ display:none;
 <c:choose>
 <c:when test="${empty requestScope.foods }">
 <tr>
-<td colspan="4" align="center" height="50px">등록된 메뉴가 없습니다</td>
+<td colspan="4" align="center" height="50px" style="border-left-style:hidden;border-right-style:hidden;">등록된 메뉴가 없습니다</td>
 </tr>
 </c:when>
 <c:otherwise>
