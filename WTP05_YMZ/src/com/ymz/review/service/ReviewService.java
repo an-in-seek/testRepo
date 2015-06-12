@@ -34,7 +34,8 @@ public interface ReviewService {
 	// 리뷰 정렬 관련
 	public abstract Map<String, Object> ReviewSortListPaging(int pageNo, String type, String searchType, String query);
 
-
+	// 메인페이지 (월간 BEST)
+	public Map getMainReview();
 	
 	
 }

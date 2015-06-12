@@ -86,7 +86,6 @@ public class ReviewController {
 		List<Category> list = categoryService.getCategoryByFirstId("F-2"); 		  	// 신고 카테고리 가져오기
 		Map<String, Object> map =replyService.getReplyList(review.getReviewNo()); 	//DB로 reviewNo을 보내서 해당 댓글들 가져오기
 		Review rev = service.getReviewByNo(review.getReviewNo()); 				  	// 리뷰글 가져오기
-		System.out.println("카테고리 : "  + list);
 		map.put("pageNo", review.getPageNo());
 		map.put("review", rev);
 		map.put("categoryList", list);

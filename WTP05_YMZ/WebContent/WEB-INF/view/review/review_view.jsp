@@ -173,8 +173,9 @@ table#replyTB tbody tr:nth-child(odd) {
 }
 
 table#replyTB thead tr{
-	font-weight: bold;
-	background: mistyrose;
+	font-family: 'Hanna', sans-serif;
+	color: #545c72;
+	background: #eaeaea;
 	text-align: center;
 }
 table#replyTB tbody tr{
@@ -254,7 +255,12 @@ div#reportReview_dialog{
 }
 #reviewContent{
   	margin-top: -20px;
+  	margin-bottom: 10px;
 	border: 1px solid #B70000;
+}
+#reportReviewArea{
+	width: 200px;
+	margin: 0 auto;
 }
 </style>
 <!-- css 끝 -->
@@ -298,7 +304,7 @@ ${requestScope.review.content }<br>
 
 
 
-		<div id="reply" align="right">
+		<div id="reply" align="right" style=" margin-right: 5px;">
 			<!-- 버튼 -->
 			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${requestScope.pageNo}"><button>목록</button></a>
 			<a href="${initParam.rootPath }/review/login/modifyForm.do?reviewNo=${requestScope.review.reviewNo}">
@@ -317,7 +323,7 @@ ${requestScope.review.content }<br>
 <table id="replyTB" style="width:1020px;">
 		<thead>
 			<tr>
-				<td colspan="3">댓글</td>
+				<td colspan="3"><font size="5" color="blue">${requestScope.review.replyCount}</font>개의 댓글이 있습니다.</td>
 			</tr>
 		</thead>
 		<tbody> 
@@ -419,6 +425,7 @@ ${requestScope.review.content }<br>
 	</form>
 	</section>
 </div>
+
 	<!-- 리뷰신고 dialog -->
 <div id="reportReview_dialog" title="리뷰 신고" align="left" >
 	<figure id="pic"></figure>
@@ -431,18 +438,22 @@ ${requestScope.review.content }<br>
 	<input type="hidden" name="state" value="미처리"> <!-- 처리상태 : 미처리 -->
 	<input type="hidden" name="category" value="review"> <!-- 카테고리 : 리뷰 -->
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}"> <!-- 페이지 번호 -->
-
-	<select name="reason">
-	<c:forEach items="${requestScope.categoryList }" var="category">
-		<option value="${category.categoryName}">${category.categoryName}</option>
-	</c:forEach>
-	</select>
-	
-	<input type="submit" name="reviewReport" value="신고">
-	<input type="button" id="reviewReportCancel" value="취소">
+	<br>
+	<div id="reportReviewArea">
+		<select name="reason" style="width: 200px">
+			<c:forEach items="${requestScope.categoryList }" var="category">
+				<option value="${category.categoryName}">${category.categoryName}</option>
+			</c:forEach>
+		</select>
+		<br><br>
+		<input type="submit" name="reviewReport" value="신고" style="width:80px; margin-left: 16px;">
+		<input type="button" id="reviewReportCancel" value="취소" style="width:80px">
+	</div>
 	</form>
 	</section>
 </div>
+	
+	
 	<!-- 댓글신고 dialog -->
 <div id="reportReply_dialog" title="댓글 신고" align="left" >
 	<figure id="pic"></figure>
