@@ -188,17 +188,17 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 					</table>
 				</td>
 				<td>
-				<!-- 이번달 인기글 -->
+				<!-- 이번달 댓글 많은 수 -->
 				<table class="bestMonthTB" style="width:500px">
 					<thead>
 						<tr>
 							<td colspan="2" align="center">
-							이달의 추천 Best 5
+							이달의 댓글수 Best 5
 							</td>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${requestScope.monthBest }" var="review" varStatus="status">
+						<c:forEach items="${requestScope.monthReplyList }" var="review" varStatus="status">
 						<tr>
 							<c:choose>
 							<c:when test="${status.index+1 == 1}">
@@ -220,7 +220,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 							</c:choose>
 						</tr> 
 						</c:forEach>
-						<c:forEach begin="${fn:length(requestScope.monthBest)}" end="4" varStatus="status">
+						<c:forEach begin="${fn:length(requestScope.monthReplyList)}" end="4" varStatus="status">
 								<tr>
 									<td align="center">${status.index+1}위</td>
 									<td align="left" id="title">&nbsp;</td>

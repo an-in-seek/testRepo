@@ -52,5 +52,8 @@ public interface ReviewDAO {
 	// 메인 베스트 리뷰
 	public abstract List<Review> selectReviewTop5();
 
+	// 이번달 최다 리플글 가져오기
+	List<Review> selectMonthReply();
+
 	
 }
