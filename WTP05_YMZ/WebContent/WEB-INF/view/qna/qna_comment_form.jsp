@@ -61,7 +61,7 @@ table#tb thead tr{
 		<input type="hidden" id="refamily" name="refamily" value="${requestScope.qna.refamily}" >
 		<input type="hidden" id="restep" name="restep" value="${requestScope.qna.restep}" >
 		<input type="hidden" id="relevel" name="relevel" value="${requestScope.qna.relevel}" >
-		<table id="tb" align="center" style="border:solid 2px #050099">
+		<table id="tb" align="center" style="border: 2px solid #B70000;">
 			<thead>
 				<tr style="text-align: center;">
 					<td colspan="4"><font size="4">답글 등록하기</font></td>

@@ -200,22 +200,6 @@ CREATE TABLE REVIEW_RECOMMEND (
 	MEMBER_ID VARCHAR2(10) NOT NULL
 );
 
-/* 신고당한 맛집 */
-CREATE TABLE REPORTED_RESTAURANT (
-	REPORTED_RESTAURANT_NO NUMBER(10) NOT NULL, /* 게시물 번호 */
-	CATEGORY VARCHAR2(12) NOT NULL, /* 분류 */
-	BBS_NO NUMBER(10) NOT NULL, /* 게시판 번호 */
-	STATE VARCHAR2(12) NOT NULL, /* 상태 */
-	REASON VARCHAR2(12) NOT NULL, /* 이유 */
-	REPORTER_ID VARCHAR2(10) NOT NULL /* 신고자_ID */
-);
-
-ALTER TABLE REPORTED_RESTAURANT
-	ADD
-		PRIMARY KEY (
-			REPORTED_RESTAURANT_NO
-		);
-
 /* 신고당한 리뷰 */
 CREATE TABLE REPORTED_REVIEW (
 	REPORTED_REVIEW_NO NUMBER(10) NOT NULL, /* 게시물 번호 */
@@ -235,18 +219,20 @@ ALTER TABLE REPORTED_REVIEW
 
 /* 신고당한 댓글 */
 CREATE TABLE REPORTED_REPLY (
-	REPORTED_REPLY_NO NUMBER(10) NOT NULL, /* 댓글 번호 */
+	REPORT_NO NUMBER(10) NOT NULL, /* 댓글 번호 */
 	CATEGORY VARCHAR2(12) NOT NULL, /* 분류 */
-	CONTENT CLOB NOT NULL, /* 내용 */
+	BBS_NO NUMBER NOT NULL, /* 신고된 댓글이 있는 게시물번호 */
+	REPLY_NO NUMBER NOT NULL, /* 신고된 댓글 번호 */
 	STATE VARCHAR2(12) NOT NULL, /* 상태 */
 	REASON VARCHAR2(12) NOT NULL, /* 이유 */
+	REPORTED_DATE VARCHAR2(8) NOT NULL, /* 신고 날짜 */
 	REPORTER_ID VARCHAR2(10) NOT NULL /* 신고자 id */
 );
 
 ALTER TABLE REPORTED_REPLY
 	ADD
 		PRIMARY KEY (
-			REPORTED_REPLY_NO
+			REPORT_NO
 		);
 
 /* 자주 묻는 질문과 답변 */
@@ -411,3 +397,6 @@ create sequence review_reply_no_seq;
 -- 리뷰신고게시물에서 사용하는 시퀀스
 drop sequence reported_no_seq;
 create sequence reported_no_seq;
+-- 리뷰신고댓글에서 사용하는 시퀀스
+drop sequence reportedreply_no_seq;
+create sequence reportedreply_no_seq;
