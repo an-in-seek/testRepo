@@ -1,6 +1,7 @@
 package com.ymz.review.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ymz.common.category.service.CategoryService;
+import com.ymz.common.category.vo.Category;
 import com.ymz.common.validator.ReviewReplyValidator;
 import com.ymz.common.validator.ReviewValidator;
 import com.ymz.member.exception.ReviewRecommendException;
 import com.ymz.member.vo.Member;
-import com.ymz.reportedbbs.controller.ReportedBBSController;
 import com.ymz.reportedbbs.service.ReportedBBSService;
 import com.ymz.reportedbbs.vo.ReportedBBS;
 import com.ymz.review.service.ReviewService;
@@ -33,6 +35,9 @@ import com.ymz.reviewreply.vo.ReviewReply;
 public class ReviewController {
 	
 	@Autowired
+	private CategoryService categoryService;
+	
+	@Autowired 
 	private ReviewService service;
 	
 	@Autowired
@@ -61,10 +66,9 @@ public class ReviewController {
 		@RequestMapping("reviewList.do")
 		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo, 
 													@RequestParam (defaultValue="") String searchType,@RequestParam (defaultValue="") String query){
-			
+			List<Category> list = categoryService.getCategoryByFirstId("F-5"); // 검색 카테고리 가져오기
 			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType, searchType, query);
-			/////////////////////////////////
-			//Map<String, Object> map = service.getReviewListPaging(pageNo);
+			map.put("searchCategoryList", list);
 			return new ModelAndView("review/review_list.tiles", map);
 		}
 
@@ -79,10 +83,12 @@ public class ReviewController {
 	//게시물 번호로 정보조회
 	@RequestMapping("reviewView.do")
 	public ModelAndView ReviewView(@ModelAttribute Review review){ 
-		Map<String, Object> map =replyService.getReplyList(review.getReviewNo()); //DB로 reviewNo을 보내서 해당 댓글들 가져오기
-		Review rev = service.getReviewByNo(review.getReviewNo()); 				  // 리뷰글 가져오기
+		List<Category> list = categoryService.getCategoryByFirstId("F-2"); 		  	// 신고 카테고리 가져오기
+		Map<String, Object> map =replyService.getReplyList(review.getReviewNo()); 	//DB로 reviewNo을 보내서 해당 댓글들 가져오기
+		Review rev = service.getReviewByNo(review.getReviewNo()); 				  	// 리뷰글 가져오기
 		map.put("pageNo", review.getPageNo());
 		map.put("review", rev);
+		map.put("categoryList", list);
 		return new ModelAndView("review/review_view.tiles", map);
 	}
 	
@@ -242,5 +248,7 @@ public class ReviewController {
 			map.addAttribute("reply", reply);
 			return new ModelAndView("redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo() + "&pageNo="+reply.getPageNo(), map);
 		}
-
+		
+		//댓글 신고
+		
 }
