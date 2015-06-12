@@ -1,4 +1,4 @@
-package com.ymz.reportedbbs.service;
+package com.ymz.reportedreply.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,19 +10,19 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ymz.common.util.PagingBean;
-import com.ymz.reportedbbs.dao.ReportedBBSDAO;
-import com.ymz.reportedbbs.vo.ReportedBBS;
+import com.ymz.reportedreply.dao.ReportedReplyDAO;
+import com.ymz.reportedreply.vo.ReportedReply;
 
 @Service
-public class ReportedBBSServiceImpl implements ReportedBBSService {
+public class ReportedReplyServiceImpl implements ReportedReplyService {
 
 	@Autowired
-	private ReportedBBSDAO dao;
+	private ReportedReplyDAO dao;
 	
 	@Override
-	public Map<String, Object> getReportedBBSList(int pageNo){
-		List<ReportedBBS> list = dao.selectAllReportedBBS(pageNo);
-		int totalContent = dao.selectTotalReportedBBSCount();
+	public Map<String, Object> getReportedReplyList(int pageNo){
+		List<ReportedReply> list = dao.selectAllReportedReply(pageNo);
+		int totalContent = dao.selectTotalReportedReplyCount();
 		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
 		HashMap map = new HashMap();
 		map.put("reported_list", list);
@@ -34,8 +34,7 @@ public class ReportedBBSServiceImpl implements ReportedBBSService {
 	//신고된 게시물 등록
 	@Override
 	@Transactional(rollbackFor={Exception.class}, propagation=Propagation.REQUIRED)
-	public void registerReportedBBS(ReportedBBS reportedBBS) {
-		dao.insertReportedBBS(reportedBBS);
+	public void registerReportedReply(ReportedReply reportedReply) {
+		dao.insertReportedReply(reportedReply);
 	}
-
 }

@@ -16,8 +16,6 @@
 	width:700px;
 	height:auto;
 	font-family: 'Hanna', sans-serif;
-	background-color: lightgray;
-	border: solid 1px #b70000;   
 	line-height:20px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	text-align:center;
 	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
@@ -40,10 +38,73 @@
   cursor: pointer;
   font-family: 'Hanna', sans-serif;
 }
+.bestMonthTB, .todayBestTB{
+	width: 250px;
+  	margin-left: auto;
+  	margin-right: auto;
+  	  
+}
+.bestMonthTB thead, .todayBestTB thead{
+	border-bottom: solid 1px #b70000;
+}
+.bestMonthTB tbody th, .todayBestTB tbody th{
+	border-right: solid 1px #b70000;
+}
+#totalTB{
+ 	margin-left: auto;
+  	margin-right: auto;
+}
 </style>
 
 <div id="main2">
-	<table class="bestMonthTB" style="width:500px">
+	<table id="totalTB">
+			<tr>
+				<td>
+				<table class="todayBestTB">
+						<thead>
+							<tr>
+								<td colspan="2" align="center">
+								오늘의 조회수 Best 5
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.todayBest }" var="review" varStatus="status">
+								<tr>
+									<c:choose>
+										<c:when test="${status.index+1 == 1}">
+											<th align="center" width="50px"><font color="#B70000">${status.index+1}위</font></th>
+											<td align="left" id="title">
+										<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+										<font color="#B70000">${review.title}</font>
+										</a>
+										</td>
+										</c:when>
+										<c:otherwise>
+											<th align="center" width="50px">${status.index+1}위</th>
+											<td align="left" id="title">
+											<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+											${review.title}
+											</a>
+										</td>
+										</c:otherwise>
+									</c:choose>
+								
+								</tr> 
+							</c:forEach>
+							<c:forEach begin="${fn:length(requestScope.todayBest)}" end="4" varStatus="status"> <!-- 5개 이하일 경우 빈공간을 만들어준다. -->
+								<tr>
+									<th align="center"  width=50px">${status.index+1}위</th>
+									<td align="left" id="title">
+									&nbsp;
+									</td>
+								</tr> 
+							</c:forEach>
+						</tbody>
+					</table>
+			</td>
+			<td>
+				<table class="bestMonthTB">
 					<thead>
 						<tr>
 							<td colspan="2" align="center">
@@ -56,17 +117,17 @@
 						<tr>
 							<c:choose>
 							<c:when test="${status.index+1 == 1}">
-								<th align="center" width="100px"><font color="#B70000">${status.index+1}위</font></th>
+								<th align="center" width="50px"><font color="#B70000">${status.index+1}위</font></th>
 								<td align="left" id="title">
-								<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+								<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}" class="list">
 								<font color="#B70000">${review.title}</font>
 								</a>
 								</td>
 							</c:when>
 							<c:otherwise>
-								<th align="center" width="100px">${status.index+1}위</th>
+								<th align="center" width="50px">${status.index+1}위</th>
 								<td align="left" id="title">
-								<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+								<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}" class="list">
 								${review.title}
 								</a>
 								</td>
@@ -76,10 +137,13 @@
 						</c:forEach>
 						<c:forEach begin="${fn:length(requestScope.monthBest)}" end="4" varStatus="status">
 								<tr>
-									<td align="center">${status.index+1}위</td>
+									<td align="center" width="50px">${status.index+1}위</td>
 									<td align="left" id="title">&nbsp;</td>
 								</tr> 
 						</c:forEach>
 					</tbody>
 				</table>
+			</td>
+		</tr>
+	</table>
 </div>

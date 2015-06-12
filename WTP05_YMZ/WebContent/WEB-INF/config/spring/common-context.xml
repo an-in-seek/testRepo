@@ -20,11 +20,8 @@
 	<context:component-scan base-package="com.ymz.reviewreply.dao, com.ymz.reviewreply.service, com.ymz.reviewreply.controller"/>
 	<context:component-scan base-package="com.ymz.restaurantreply.dao, com.ymz.restaurantreply.service"/>
 	<context:component-scan base-package="com.ymz.reportedbbs.dao, com.ymz.reportedbbs.service, com.ymz.reportedbbs.controller"/>
+	<context:component-scan base-package="com.ymz.reportedreply.dao, com.ymz.reportedreply.service"/>
 	<context:component-scan base-package="com.ymz.main.controller"/>
-	
-	<!--  
-	<context:component-scan base-package="com.ymz.reportedreply.dao, com.ymz.reportedreply.service, com.ymz.reportedreply.controller"/>
-	-->
 	
 	<mvc:annotation-driven/>
 	<mvc:interceptors>
@@ -49,7 +46,6 @@
 	<!-- 로그인 후 요청하는 페이지중 로그인 체크 부분이 interceptor로 빠지면 단순 링크로 바뀌는 것들 view-controller로 처리 -->
 	<!-- 자기정보 조회 -->
 	<mvc:view-controller path="/member/login/getMemberInfo.do" view-name="member/info/member_info.tiles"/>
-	
 	<!-- 회원정보 수정 폼 -->
 	<mvc:view-controller path="/member/login/modifyForm.do" view-name="member/info/modify_info.tiles"/>
 	<!-- 비밀번호수정 폼 -->
@@ -57,7 +53,7 @@
 	<!-- 쿠폰교환 폼 -->
 	<mvc:view-controller path="/member/mypage/tradeCoupon.do" view-name="member/info/trade_coupon.tiles"/>
 	<!-- 마이페이지 폼-->
-	<mvc:view-controller path="/member/mypage.do" view-name="member/main/mypage_body.tiles"/>
+	<!-- <mvc:view-controller path="/member/mypage.do" view-name="member/main/mypage_body.tiles"/> -->
 	
 	
 	<!-- gmail -->

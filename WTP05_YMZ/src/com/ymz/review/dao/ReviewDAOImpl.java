@@ -146,6 +146,17 @@ public class ReviewDAOImpl implements ReviewDAO{
 	}
 
 	
+	/**
+	 * 메인 베스트 (월간)
+	 */
+	@Override
+	public List<Review> selectReviewTop5() {
+		SimpleDateFormat td = new SimpleDateFormat("yyyy-MM");
+		String month = td.format(new Date());
+		return session.selectList(namespace+"selectMonthBestHits", month);
+	}
+
+
 	
 	
 }

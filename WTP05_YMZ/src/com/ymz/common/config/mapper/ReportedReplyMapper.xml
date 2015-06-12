@@ -1,5 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="reported.dao.ReportedReplyMapper">
+
+	<sql id="report-select">
+		select	REPORT_NO,
+				CATEGORY,
+				BBS_NO,
+				REPLY_NO,
+				STATE,
+				REASON,
+				to_char(to_date(reported_date, 'yyyymmdd'), 'yyyy-mm-dd') reported_date, 
+				REPORTER_ID
+		from 	REPORTED_REPLY
+	</sql>
+	
+	<resultMap type="ReportedReply" id="report-resultmap">
+		<id column="report_no" property="reportNo"/>
+		<result column="category" property="category"/>
+		<result column="bbs_no" property="reviewNo"/>
+		<result column="reply_no" property="replyNo"/>
+		<result column="state" property="state"/>
+		<result column="reason" property="reason"/>
+		<result column="reported_date" property="reportedDate"/>
+		<result column="reporter_id" property="reporterId"/>
+	</resultMap>
+	
+	<!-- 전체 정보 조회 -->
+	<select id="selectAllReportedReply" parameterType="map" resultMap="report-resultmap">
+	select REPORT_NO, CATEGORY, BBS_NO, REPLY_NO, STATE, REASON, reported_date, REPORTER_ID
+	from (
+	select ceil(rownum/#{contentsPerPage}) page, REPORT_NO, CATEGORY, BBS_NO, REPLY_NO, STATE, REASON, reported_date, REPORTER_ID
+	from (
+					<include refid="report-select"/>
+					order by REPORT_NO
+			)
+		) 
+		where page = #{pageNo}
+	</select>
+	
+		<!-- DB 데이터 총 개수 -->
+	<select id="selectTotalReportedReplyCount" resultType="_int">
+		select 	count(REPORT_NO) 
+		from 		REPORTED_REPLY
+	</select>
+	
+	
+	<!-- 신고된 게시물 삽입하기 -->
+	<insert id="insertReportedReply" parameterType="ReportedReply">
+		insert into REPORTED_REPLY
+		values (reportedreply_no_seq.nextval, '리뷰', #{reviewNo}, #{replyNo}, #{state}, #{reason}, to_char(sysdate, 'yyyymmdd'), #{reporterId})
+	</insert>
+	
 </mapper>

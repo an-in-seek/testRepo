@@ -1,5 +1,6 @@
 package com.ymz.review.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,6 +112,19 @@ public class ReviewServiceImpl implements ReviewService {
 		map.put("sortType", type);
 		map.put("searchType", searchType);
 		map.put("query", query);
+		return map;
+	}
+
+	/**
+	 * 메인 페이지 BEST 리뷰
+	 */
+	@Override
+	public Map<String, Object> getMainReview() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Review> list = dao.selectReviewTop5();		// 월간 베스트
+		List<Review> bestHits = dao.selectTodayBestHits(); // 오늘 최고 조회수 글 목록 가져오기
+		map.put("monthBest", list);
+		map.put("todayBest", bestHits);
 		return map;
 	}
 	

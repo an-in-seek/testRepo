@@ -477,9 +477,9 @@ ${requestScope.review.content }<br>
 		<option value="money">광고글</option>
 		<option value="guitar">기타</option>
 	</select>
-
 		<input type="submit" name="replyReport" value="신고" style="width:80px; margin-left: 16px;">
 		<input type="button" id="replyReportCancel" value="취소" style="width:80px">
+	</form>
 	</section>
 </div>
 	<!-- 댓글신고 dialog 끝 -->

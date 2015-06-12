@@ -137,8 +137,6 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 <section>
 	<div align="center">
 	<h4>맛집 리뷰</h4>
-
-	
 	<!-- 인기글 테이블 -->
 	<div id="famousText" align="center">
 	
@@ -357,10 +355,17 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 			<td>
 			<form id="searchForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
 			<select id="searchSort" style="width: 100px; height: 30px;">
-					<option value="title">제목</option>
-					<option value="id">아이디</option>
-					<option value="nickname">닉네임</option>
+				<c:forEach items="${requestScope.searchCategoryList}" var="category">
+					<option value="${category.categoryName}">
+						<c:choose>
+							<c:when test="${category.categoryName == 'title'}">제목</c:when>						
+							<c:when test="${category.categoryName == 'id'}">아이디</c:when>						
+							<c:when test="${category.categoryName == 'nickname'}">닉네임</c:when>						
+						</c:choose>
+					</option>
+				</c:forEach>
 			</select>
+			
 			
 			<input type="text" id="searchText" style="width: 190px; height: 30px;">
 			<input type="submit" id="searchBtn" value="검색" style="width: 100px; height: 30px;">

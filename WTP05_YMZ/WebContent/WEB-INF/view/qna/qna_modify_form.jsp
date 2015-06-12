@@ -66,7 +66,7 @@ table#tb thead tr{
 	<form id="write" method="post" action="${initParam.rootPath}/qna/login/modifyQna.do">
 		<input type="hidden" id="number" name="number" value="${requestScope.qna.number}" >
 		<!-- 테이블 -->
-		<table id="tb" align="center" style="border:solid 2px #050099">
+		<table id="tb" align="center" style="border: 2px solid #B70000">
 			<thead>
 				<tr style="text-align: center;">
 					<td colspan="4"><font size="4">수정하기</font></td>
