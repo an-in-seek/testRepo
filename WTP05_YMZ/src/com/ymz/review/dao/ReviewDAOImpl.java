@@ -117,6 +117,25 @@ public class ReviewDAOImpl implements ReviewDAO{
 		String month = td.format(new Date());
 		return session.selectList(namespace+"selectMonthReply", month);
 	}
+	
+	/**
+	 * 회원 아이디(ID)로 리뷰 게시물 리스트 조회하기
+	 */
+	@Override
+	public List<Review> selectReviewById(int pageNo, String memberId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		map.put("pageNo", pageNo);
+		map.put("memberId", memberId);
+		return session.selectList(namespace+"selectReviewById", map);
+	}
+	
+	@Override
+	public int selectReviewCountById(String memberId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);  
+		return session.selectOne(namespace+"selectReviewCountById", map);
+	}
 
 	/**
 	 * 리뷰 정렬 페이징 관련
@@ -165,6 +184,8 @@ public class ReviewDAOImpl implements ReviewDAO{
 		String month = td.format(new Date());
 		return session.selectList(namespace+"selectMonthBestHits", month);
 	}
+
+	
 
 
 	

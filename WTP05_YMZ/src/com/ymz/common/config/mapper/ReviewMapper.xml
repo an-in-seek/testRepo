@@ -66,6 +66,26 @@
 		where 1=1 and review_no=#{reviewNo} and r.member_id = m.member_id
 	</select>
 	
+	<!-- 아이디(ID)로 조회 -->
+	<select id="selectReviewById" resultMap="review-resultmap" parameterType="map">
+		select review_no, title, content, hits, recommend, reg_date, member_id, reply_count
+		from (
+				select ceil(rownum/#{contentsPerPage}) page, review_no, title, content, hits, recommend, reg_date, member_id, reply_count
+				from (
+						<include refid="review-select"/>
+						where member_id = #{memberId}
+						order by reg_date desc
+			)
+		) 
+		where	page = #{pageNo}
+	</select>
+	
+	<!-- 아이디(ID)와 일치하는 게시물 수  -->
+	<select id="selectReviewCountById" parameterType="map" resultType="_int">
+		select count(review_no) from review
+		where member_id = #{memberId}
+	</select>
+	
 	<!-- 조회수 증가 -->
 	<select id="updateHits" parameterType="int">
 		update review

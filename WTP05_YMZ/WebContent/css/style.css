@@ -84,13 +84,15 @@
 	clear: both;
 }
 .content {
+	color:black;
+	border-color:black;
     background: white;
 	position: relative;
     width: 100%;
 	height: 370px;
-	z-index: 5;
+	/* z-index: 5;
     box-shadow: 0 -2px 3px -2px rgba(0,0,0,0.2), 0 2px 2px rgba(0,0,0,0.1);
-    border-radius: 0 3px 3px 3px;
+    border-radius: 0 3px 3px 3px; */
 }
 .content div {
     position: absolute;
@@ -123,15 +125,4 @@
 .content div h2,
 .content div h3{
 	color: #ffe08c;
-}
-.content div p {
-	font-size: 14px;
-	line-height: 22px;
-	font-style: italic;
-	text-align: left;
-	margin: 0;
-	color: #777;
-	padding-left: 15px;
-	font-family: 'Hanna', sans-serif;
-	border-left: 8px solid rgba(63,148,148, 0.1);
 }

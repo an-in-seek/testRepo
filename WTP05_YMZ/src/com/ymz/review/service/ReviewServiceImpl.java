@@ -87,6 +87,18 @@ public class ReviewServiceImpl implements ReviewService {
 		dao.updateHitsReview(reviewNo);
 	}
 
+	@Override
+	public Map<String, Object> getReviewListPagingById(int pageNo, String memberId) {
+		List<Review> list = dao.selectReviewById(pageNo, memberId); // 오늘 최고 조회수 글 목록 가져오기
+		int totalContent = dao.selectReviewCountById(memberId); // 수정 : 매개변수 추가
+		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
+		// 두개의 값(List, PagingBean)을 Map에 넣어 return
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("pagingBean", pagingBean);
+		return map;
+	}
+	
 	/**
 	 * 리뷰 정렬 
 	 */

@@ -36,6 +36,9 @@ public interface ReviewService {
 
 	// 메인페이지 (월간 BEST)
 	public Map getMainReview();
+
+	// 아이디(ID)로 리뷰게시물 조회하기
+	Map<String, Object> getReviewListPagingById(int pageNo, String memberId);
 	
 	
 }

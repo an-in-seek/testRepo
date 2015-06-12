@@ -55,5 +55,11 @@ public interface ReviewDAO {
 	// 이번달 최다 리플글 가져오기
 	List<Review> selectMonthReply();
 
+	//회원 아이디(ID)로 리뷰 게시물 리스트 조회하기
+	List<Review> selectReviewById(int pageNo, String memberId);
+
+	//회원 아이디(ID)와 일치하는 리뷰 게시물 총 개수
+	public abstract int selectReviewCountById(String memberId);
+
 	
 }

@@ -25,20 +25,24 @@ import com.ymz.member.mail.Email;
 import com.ymz.member.mail.EmailSender;
 import com.ymz.member.service.MemberService;
 import com.ymz.member.vo.Member;
+import com.ymz.review.service.ReviewService;
 
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
 	
-   @Autowired
-   private EmailSender emailSender;
-   
-   @Autowired
-   private Email email;
-
-	
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private EmailSender emailSender;
+   
+	@Autowired
+	private Email email;
+
+	@Autowired
+	private ReviewService reviewService;
+   
 	
 	//회원가입 가기 전 category 뿌려주기
 	@RequestMapping("joinBefore.do")
@@ -200,21 +204,21 @@ public class MemberController {
 	// 전체 정보 조회1
 	@RequestMapping("login/admin/memberList.do")
 	public ModelAndView memberList(@RequestParam(defaultValue="1")int page){
-		Map map = service.getMemberListPaging(page);
+		Map<String, ?> map = service.getMemberListPaging(page);
 		return new ModelAndView("member/member_list.tiles",  map);
 	}
 	
 	// 전체 정보 조회2
 	@RequestMapping("login/admin/memberListPaging.do")
 	public ModelAndView memberListPaging(@RequestParam(defaultValue="1")int page){
-		Map map = service.getMemberListPaging(page);
+		Map<String, ?> map = service.getMemberListPaging(page);
 		return new ModelAndView("member/member_list_paging.tiles", map);
 	}
 	
 	//리스트에서 (ID,이름,닉네임,등급)으로 회원정보 조회
 	@RequestMapping("login/admin/findMemberByInfo.do")
 	public  ModelAndView findMemberByInfo(@RequestParam String info, @RequestParam String command, @RequestParam(defaultValue="1")int page){
-		Map map = service.getMemberByInfo(info, command, page);
+		Map<String, String> map = service.getMemberByInfo(info, command, page);
 		map.put("command", command);
 		map.put("info", info);
 		return new ModelAndView("member/member_list_paging.tiles", map);
@@ -564,8 +568,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping("mypage.do")
-	public ModelAndView moveMypage(HttpSession session, ModelMap map){
+	public ModelAndView moveMypage(HttpSession session,  @RequestParam(defaultValue="1") int pageNo){
 		Member member = (Member) session.getAttribute("login_info");
+		Map<String, Object> map = reviewService.getReviewListPagingById(pageNo, member.getId());
 		map.put("member", member);
 		return new ModelAndView("member/main/mypage_body.tiles", map);
 	}

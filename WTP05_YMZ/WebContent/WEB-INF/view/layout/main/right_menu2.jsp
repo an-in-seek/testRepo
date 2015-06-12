@@ -4,7 +4,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$("a").css("color","black")
+	$("#right_menu2 a").css("color","black")
 		.hover(function(){
 			$(this).css("text-decoration","underline");
 		},function(){

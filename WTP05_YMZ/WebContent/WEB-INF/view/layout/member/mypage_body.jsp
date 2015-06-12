@@ -47,7 +47,7 @@ $(document).ready(function(){
 	border: 1px solid lightgray;
 } 
 .contentTd{
-	width: 240px;
+	width: 250px;
 	border: 1px solid lightgray;
 }
 </style>
@@ -114,8 +114,8 @@ $(document).ready(function(){
 	        <div class="content">
 		        <div class="content-1">
 					<h2>About us</h2>
-	                <p>You think water moves fast?</p>
-			    </div>
+					<p><%@include file="mypage_bbs1.jsp" %></p>
+				</div>	
 		        <div class="content-2">
 					<h2>Services</h2>
 	                <p>Do you see</p>
