@@ -20,7 +20,7 @@
 	color:blue;
 }
 img{
-	/*이미지는 부모의 width에 리사이즈 처리*/
+/*이미지는 부모의 width에 리사이즈 처리*/
 	max-width: 100%; 
 	height: auto;
 }
@@ -69,7 +69,7 @@ header.main_template{
 }
 #body{
 	width:720px;
-	height:560px; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
+	height:auto; overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 	margin:10px;
 	padding:10px;
 	background-color: #f8f8f8;
@@ -105,10 +105,6 @@ footer.main_template{
 			<tiles:insertAttribute name="header" />
 			<tiles:insertAttribute name="menu" />
 		</header>
-		
-		<%-- <aside id="left" class="main_template">
-			<tiles:insertAttribute name="aside_menu" /><!-- 서브메뉴로 -->
-		</aside> --%>
 		
 		<section id="body" class="main_template">
 			<tiles:insertAttribute name="body1" />

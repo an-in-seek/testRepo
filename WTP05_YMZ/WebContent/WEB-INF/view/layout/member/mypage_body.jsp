@@ -29,72 +29,70 @@ $(document).ready(function(){
 	font-weight:normal;
 	background-color: #f8f8f8;
 	border: solid 1px #b70000;  
-	line-height:15px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
+	line-height:18px; /*줄 간격 - 메뉴이므로 줄간격을 넓게*/
 	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
 	-moz-border-radius: 10px;
 	border-radius: 10px;		 /* 둥근 모서리 끝 */
 	margin-left: auto;
 	margin-right: auto;
 }
-#memberTable tr td{
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
+#memberTable{
+	margin:10px;
+	margin-left: auto;
+	margin-right: auto;
 }
-#memberTable tr td:first-child{
-	text-align: left;
-	border-right: 1px solid black;
+.titleTd{
+	width: 80px;
+	text-align: right;
+	border: 1px solid lightgray;
+} 
+.contentTd{
+	width: 240px;
+	border: 1px solid lightgray;
 }
 </style>
 
 <div id="myMain">
-	<p align="center">&nbsp;▶ <font size="5">나의 정보</font></p>
 	<table id="memberTable" align="center" >
+		<thead style="background-color: #ffe08c">
+			<tr>
+				<td class="titleTd" colspan="4"><p align="center"><font size="4">나의 정보</font></p></td>
+			</tr>
+		</thead>
 		<tr>
-			<td>아이디(ID) : </td>
-			<td>${requestScope.member.id}</td>
+			<td class="titleTd">아이디(ID) : </td>
+			<td class="contentTd">${requestScope.member.id}</td>
+			<td class="titleTd">이름 : </td>
+			<td class="contentTd">${requestScope.member.name}</td>
 		<tr>
-			<td>이름 : </td>
-			<td>${requestScope.member.name}</td>
+			<td class="titleTd">닉네임 : </td>
+			<td class="contentTd">${requestScope.member.nickname}</td>
+			<td class="titleTd">생일 : </td>
+			<td class="contentTd">${requestScope.member.birth}</td>
 		</tr>
 		<tr>
-			<td>닉네임 : </td>
-			<td>${requestScope.member.nickname}</td>
+			<td class="titleTd">성별 : </td>
+			<td class="contentTd">${requestScope.member.sex}</td>
+			<td class="titleTd">주소 : </td>
+			<td class="contentTd">${requestScope.member.address} ${requestScope.member.detailAddress}</td>
 		</tr>
 		<tr>
-			<td>생일 : </td>
-			<td>${requestScope.member.birth}</td>
+			<td class="titleTd">Email : </td>
+			<td class="contentTd">${requestScope.member.email}</td>
+			<td class="titleTd">핸드폰 : </td>
+			<td class="contentTd">${requestScope.member.phoneNo}</td>
 		</tr>
 		<tr>
-			<td>성별 : </td>
-			<td>${requestScope.member.sex}</td>
+			<td class="titleTd">선호음식 : </td>
+			<td class="contentTd">${requestScope.member.favoriteFood}</td>
+			<td class="titleTd">마일리지 : </td>
+			<td class="contentTd">${requestScope.member.mileage}원</td>
 		</tr>
 		<tr>
-			<td>주소 : </td>
-			<td>${requestScope.member.address} ${requestScope.member.detailAddress}</td>
-		</tr>
-		<tr>
-			<td>이메일(Email) : </td>
-			<td>${requestScope.member.email}</td>
-		</tr>
-		<tr>
-			<td>핸드폰 : </td>
-			<td>${requestScope.member.phoneNo}</td>
-		</tr>
-		<tr>
-			<td>선호음식 : </td>
-			<td>${requestScope.member.favoriteFood}</td>
-		</tr>
-		<tr>
-			<td>마일리지 : </td>
-			<td>${requestScope.member.mileage}원</td>
-		</tr>
-		<tr>
-			<td>등급 : </td>
-			<td>${requestScope.member.grade}</td>
-		</tr>
-		<tr>
-			<td>가입날짜 : </td>
-			<td>${requestScope.member.joinDate}</td>
+			<td class="titleTd">등급 : </td>
+			<td class="contentTd">${requestScope.member.grade}</td>
+			<td class="titleTd">가입날짜 : </td>
+			<td class="contentTd">${requestScope.member.joinDate}</td>
 		</tr>
 	</table>
 	
