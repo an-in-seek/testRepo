@@ -66,10 +66,9 @@ public class ReviewController {
 		@RequestMapping("reviewList.do")
 		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo, 
 													@RequestParam (defaultValue="") String searchType,@RequestParam (defaultValue="") String query){
-			
+			List<Category> list = categoryService.getCategoryByFirstId("F-5"); // 검색 카테고리 가져오기
 			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType, searchType, query);
-			/////////////////////////////////
-			//Map<String, Object> map = service.getReviewListPaging(pageNo);
+			map.put("searchCategoryList", list);
 			return new ModelAndView("review/review_list.tiles", map);
 		}
 
@@ -84,9 +83,9 @@ public class ReviewController {
 	//게시물 번호로 정보조회
 	@RequestMapping("reviewView.do")
 	public ModelAndView ReviewView(@ModelAttribute Review review){ 
-		List<Category> list = categoryService.getCategoryByFirstId("F-2");
-		Map<String, Object> map =replyService.getReplyList(review.getReviewNo()); //DB로 reviewNo을 보내서 해당 댓글들 가져오기
-		Review rev = service.getReviewByNo(review.getReviewNo()); 				  // 리뷰글 가져오기
+		List<Category> list = categoryService.getCategoryByFirstId("F-2"); 		  	// 신고 카테고리 가져오기
+		Map<String, Object> map =replyService.getReplyList(review.getReviewNo()); 	//DB로 reviewNo을 보내서 해당 댓글들 가져오기
+		Review rev = service.getReviewByNo(review.getReviewNo()); 				  	// 리뷰글 가져오기
 		System.out.println("카테고리 : "  + list);
 		map.put("pageNo", review.getPageNo());
 		map.put("review", rev);
