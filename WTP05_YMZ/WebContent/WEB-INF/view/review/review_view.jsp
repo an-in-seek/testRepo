@@ -133,11 +133,15 @@ $(document).ready(function(){
 			return;
 		}
 	});
-	
 	// 신고 다이어로그 취소 버튼
 	$("#reviewReportCancel").on("click", function(){
 		$("#reportReview_dialog").dialog("close");
 	});
+	
+	$("#replyReportCancel").on("click", function(){
+		$("#reportReply_dialog").dialog("close");
+	});
+	
 	
 	// 댓글 등록 버튼
 	$("#reply_registerBtn").click(function() {
@@ -254,7 +258,7 @@ div#reportReview_dialog{
 	border: 2px solid lavenderblush;
 }
 #reviewContent{
-  	margin-top: -20px;
+  	margin-top: -10px;
   	margin-bottom: 10px;
 	border: 1px solid #B70000;
 }
@@ -465,6 +469,9 @@ ${requestScope.review.content }<br>
 		<option value="money">광고글</option>
 		<option value="guitar">기타</option>
 	</select>
+	
+		<input type="submit" name="replyReport" value="신고" style="width:80px; margin-left: 16px;">
+		<input type="button" id="replyReportCancel" value="취소" style="width:80px">
 	</section>
 </div>
 	<!-- 댓글신고 dialog 끝 -->

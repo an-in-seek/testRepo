@@ -121,8 +121,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public Map<String, Object> getMainReview() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Review> list = dao.selectReviewTop5();
+		List<Review> list = dao.selectReviewTop5();		// 월간 베스트
+		List<Review> bestHits = dao.selectTodayBestHits(); // 오늘 최고 조회수 글 목록 가져오기
 		map.put("monthBest", list);
+		map.put("todayBest", bestHits);
 		return map;
 	}
 	
