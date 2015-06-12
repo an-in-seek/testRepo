@@ -173,8 +173,9 @@ table#replyTB tbody tr:nth-child(odd) {
 }
 
 table#replyTB thead tr{
-	font-weight: bold;
-	background: mistyrose;
+	font-family: 'Hanna', sans-serif;
+	color: #545c72;
+	background: #eaeaea;
 	text-align: center;
 }
 table#replyTB tbody tr{
@@ -254,6 +255,7 @@ div#reportReview_dialog{
 }
 #reviewContent{
   	margin-top: -20px;
+  	margin-bottom: 10px;
 	border: 1px solid #B70000;
 }
 #reportReviewArea{
@@ -302,7 +304,7 @@ ${requestScope.review.content }<br>
 
 
 
-		<div id="reply" align="right">
+		<div id="reply" align="right" style=" margin-right: 5px;">
 			<!-- 버튼 -->
 			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${requestScope.pageNo}"><button>목록</button></a>
 			<a href="${initParam.rootPath }/review/login/modifyForm.do?reviewNo=${requestScope.review.reviewNo}">
@@ -321,7 +323,7 @@ ${requestScope.review.content }<br>
 <table id="replyTB" style="width:1020px;">
 		<thead>
 			<tr>
-				<td colspan="3">댓글</td>
+				<td colspan="3"><font size="5" color="blue">${requestScope.review.replyCount}</font>개의 댓글이 있습니다.</td>
 			</tr>
 		</thead>
 		<tbody> 

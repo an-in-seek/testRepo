@@ -60,7 +60,8 @@
 				nickname,
 				recommend, 
 				reg_date, 
-				r.member_id
+				r.member_id,
+				(select count(*) from REVIEW_REPLY where review_reply.review_no = r.review_no) reply_count
 		from review r, member m
 		where 1=1 and review_no=#{reviewNo} and r.member_id = m.member_id
 	</select>
