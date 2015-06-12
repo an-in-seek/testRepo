@@ -246,4 +246,9 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 	public List<Restaurant> selectRestaurantsTop5() {
 		return session.selectList(namespace+"selectRestaurantsTop5");
 	}
+
+	@Override
+	public Restaurant selectRestaurantByRownum(int rownum) {
+		return session.selectOne(namespace+"selectRestaurantByRownum", rownum);
+	}
 }

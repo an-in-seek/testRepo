@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ymz.common.validator.RestaurantReplyValidator;
+import com.ymz.common.validator.RestaurantValidator;
 import com.ymz.member.vo.Member;
 import com.ymz.restaurant.service.RestaurantService;
 import com.ymz.restaurant.vo.Food;
@@ -196,7 +197,12 @@ public class RestaurantController {
 	
 	@RequestMapping("/login/admin/addNewRestaurant.do")
 	public String addNewRestaurant(Restaurant restaurant, String addedPicture, String building, String floor, 
-			String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request) throws Exception {
+			String[] foodName, String[] foodPrice, String[] foodDescription, HttpServletRequest request, Errors errors) throws Exception {
+		new RestaurantValidator().validate(restaurant, errors);
+		if(errors.hasErrors()) {
+			return "/restaurant/login/admin/addNewRestaurantForm.do";
+		}
+		
 		restaurant.setPictureName(addedPicture);
 		
 		int locationNo = service.getLocationNo(building, floor);
@@ -239,11 +245,9 @@ public class RestaurantController {
 			session.setAttribute("backURL", backURL);
 		}
 		
-//		// 조회수 1증가
-//		if(member!=prevMember){
-//			prevMember = member;
-//			service.increaseHits(restaurantNo);
-//		}
+		// 조회수 1증가
+		service.increaseHits(restaurantNo);
+
 		
 		//송이꺼-----------------------------------------------------------------------------
 	

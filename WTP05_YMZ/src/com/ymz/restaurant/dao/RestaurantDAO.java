@@ -31,4 +31,5 @@ public interface RestaurantDAO {
 	public int updateRestaurant(Restaurant restaurant);
 	public int deleteFoods(int restaurantNo);
 	public List<Restaurant> selectRestaurantsTop5();
+	public Restaurant selectRestaurantByRownum(int rownum);
 }

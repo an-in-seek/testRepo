@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script type="text/javascript">
 var pictureCount = 0;
 
@@ -280,6 +281,7 @@ $(document).ready(function(){
 	});
 });
 </script>
+
 </head>
 <body><div style="padding:20px;">
 <form id="regForm" action="${initParam.rootPath }/restaurant/login/admin/addNewRestaurant.do" method="post" enctype="multipart/form-data">
