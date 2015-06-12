@@ -37,7 +37,7 @@ function removeConfirm(){
 <div id="leftMenu" >
 	<table align="center"  cellspacing="0" cellpadding="0">
 		<tr>
-			<td><a href='${initParam.rootPath }/member/mypage.do' class="menu"><font color="black" size="3">메인(활동내역)</font></a></td>
+			<td><a href='${initParam.rootPath }/member/login/mypage.do' class="menu"><font color="black" size="3">메인(활동내역)</font></a></td>
 		</tr>
 		<tr>
 			<td><a href="${initParam.rootPath }/member/login/modifyForm.do"  class="menu"><font color="black" size="3">회원기본수정</font></a></td>
