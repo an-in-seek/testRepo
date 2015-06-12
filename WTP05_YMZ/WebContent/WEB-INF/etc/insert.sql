@@ -28,11 +28,8 @@ insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100
 update member set grade='master' where member_id='master'
 update member set grade='master' 	where member_id='2';
 update member set mileage=11111 	where member_id='2';
-select * from Member;
-select SECOND_CATEGORY_NAME from SECOND_CATEGORY where FIRST_CATEGORY_ID='F-1';
-select SECOND_CATEGORY_ID, SECOND_CATEGORY_NAME from SECOND_CATEGORY where FIRST_CATEGORY_ID='F-1';
-select SECOND_CATEGORY_NAME from SECOND_CATEGORY where FIRST_CATEGORY_ID='F-1';
-select * from SECOND_CATEGORY where FIRST_CATEGORY_ID='F-1';
+
+
 delete member where member_id='1';
 
 INSERT INTO FIRST_CATEGORY (FIRST_CATEGORY_ID, FIRST_CATEGORY_NAME, FIRST_CATEGORY_INFO) VALUES('F-1',  '유형', '유형 카테고리');
