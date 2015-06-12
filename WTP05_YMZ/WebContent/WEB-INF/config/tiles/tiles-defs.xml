@@ -52,6 +52,7 @@
 	</definition>
 	<definition name="*.tiles" extends="main_template">
 		<put-attribute name="body1" value="/WEB-INF/view/layout/main/{1}.jsp"/>
+		<put-attribute name="body2" value="/WEB-INF/view/layout/main/main2.jsp"/>
 	</definition>
 	
 	<!-- 메인페이지:끝 -->

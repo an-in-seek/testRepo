@@ -256,6 +256,10 @@ div#reportReview_dialog{
   	margin-top: -20px;
 	border: 1px solid #B70000;
 }
+#reportReviewArea{
+	width: 200px;
+	margin: 0 auto;
+}
 </style>
 <!-- css 끝 -->
 </head>
@@ -419,6 +423,7 @@ ${requestScope.review.content }<br>
 	</form>
 	</section>
 </div>
+
 	<!-- 리뷰신고 dialog -->
 <div id="reportReview_dialog" title="리뷰 신고" align="left" >
 	<figure id="pic"></figure>
@@ -431,18 +436,22 @@ ${requestScope.review.content }<br>
 	<input type="hidden" name="state" value="미처리"> <!-- 처리상태 : 미처리 -->
 	<input type="hidden" name="category" value="review"> <!-- 카테고리 : 리뷰 -->
 	<input type="hidden" name="pageNo" value="${requestScope.pageNo}"> <!-- 페이지 번호 -->
-
-	<select name="reason">
-	<c:forEach items="${requestScope.categoryList }" var="category">
-		<option value="${category.categoryName}">${category.categoryName}</option>
-	</c:forEach>
-	</select>
-	
-	<input type="submit" name="reviewReport" value="신고">
-	<input type="button" id="reviewReportCancel" value="취소">
+	<br>
+	<div id="reportReviewArea">
+		<select name="reason" style="width: 200px">
+			<c:forEach items="${requestScope.categoryList }" var="category">
+				<option value="${category.categoryName}">${category.categoryName}</option>
+			</c:forEach>
+		</select>
+		<br><br>
+		<input type="submit" name="reviewReport" value="신고" style="width:80px; margin-left: 16px;">
+		<input type="button" id="reviewReportCancel" value="취소" style="width:80px">
+	</div>
 	</form>
 	</section>
 </div>
+	
+	
 	<!-- 댓글신고 dialog -->
 <div id="reportReply_dialog" title="댓글 신고" align="left" >
 	<figure id="pic"></figure>

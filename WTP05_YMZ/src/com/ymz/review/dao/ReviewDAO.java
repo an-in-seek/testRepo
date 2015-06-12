@@ -49,5 +49,8 @@ public interface ReviewDAO {
 	// 공지글 가져오기
 	public abstract List<Review> selectNotice();
 
+	// 메인 베스트 리뷰
+	public abstract List<Review> selectReviewTop5();
+
 	
 }
