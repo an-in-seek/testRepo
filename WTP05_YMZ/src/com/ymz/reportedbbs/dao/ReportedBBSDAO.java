@@ -12,4 +12,8 @@ public interface ReportedBBSDAO {
 
 	public abstract int insertReportedBBS(ReportedBBS reportedBBS);
 
+	int selectTotalReportedBBSCountById(String memberId);
+
+	List<ReportedBBS> selectAllReportedBBSById(int pageNo, String memberId);
+
 }

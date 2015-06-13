@@ -25,6 +25,7 @@ import com.ymz.member.mail.Email;
 import com.ymz.member.mail.EmailSender;
 import com.ymz.member.service.MemberService;
 import com.ymz.member.vo.Member;
+import com.ymz.reportedbbs.service.ReportedBBSService;
 import com.ymz.review.service.ReviewService;
 import com.ymz.reviewreply.service.ReviewReplyService;
 
@@ -46,6 +47,9 @@ public class MemberController {
 	
 	@Autowired
 	private ReviewReplyService reviewReplyService;
+	
+	@Autowired
+	private ReportedBBSService reportedBBSService;
    
 	
 	//회원가입 가기 전 category 뿌려주기
@@ -291,7 +295,7 @@ public class MemberController {
 			loginInfo.setEmail(email);
 			loginInfo.setPhoneNo(phoneNo);
 			service.modifyMember(loginInfo);
-			return new ModelAndView("member/mypage/mypage.tiles");
+			return new ModelAndView("/member/login/mypage.do");
 			
 		}
 	
@@ -395,7 +399,7 @@ public class MemberController {
 		Member m = service.getMemberById(id);
 		m.setPassword(password);
 		service.modifyPassword(m);
-		return new ModelAndView("member/mypage/mypage.tiles");
+		return new ModelAndView("/member/login/mypage.do");
 		}
 	
 	/********************** 회원 마일리지 값 요청 ********************/
@@ -573,14 +577,16 @@ public class MemberController {
 	
 	//마이페이지 메인화면 
 	@RequestMapping("login/mypage.do")
-	public ModelAndView moveMypage(HttpSession session,  ModelMap map, @RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="1") int pageNo2){
+	public ModelAndView moveMypage(HttpSession session,  ModelMap map, @RequestParam(defaultValue="bbs") String state,
+			@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="1") int pageNo2, @RequestParam(defaultValue="1") int pageNo3){
 		Member member = (Member) session.getAttribute("login_info");
 		map.put("myBBS", reviewService.getReviewListPagingById(pageNo, member.getId()));
 		map.put("myReply", reviewReplyService.getReviewReplyListPagingById(pageNo2, member.getId()));
+		map.put("myReport", reportedBBSService.getReportedBBSListById(pageNo3, member.getId()));
 		map.put("member", member);
+		map.put("state", state);
 		return new ModelAndView("member/main/mypage_body.tiles", map);
 	}
-	    	
 }
 
 

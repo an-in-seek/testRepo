@@ -5,14 +5,14 @@
 
 <c:choose>
 	<c:when test="${fn:length(requestScope.myReply.replyList) != 0 }">
-	<table width="680px" border="1">
+	<table width="680px" border="1" class="listTB">
 		<thead class="tableHead">
 			<tr align="center" style="border-color:#ccc;">
 				<td width="70px">게시물 NO</td>
 				<td width="70px">댓글 NO</td>
-				<td width="320px">내용</td>
+				<td>내용</td>
+				<td width="100px">날짜</td>
 				<td width="80px">작성자</td>
-				<td width="80px">날짜</td>
 			</tr>
 		</thead>
 		<tbody style="border-color:#ccc;">
@@ -30,8 +30,8 @@
 							</c:otherwise>
 						</c:choose>
 					</td>
-					<td>${reply.memberId}</td>
 					<td>${reply.regDate.substring(0,10)}</td>
+					<td>${reply.memberId}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -45,7 +45,7 @@
 					<!-- 이전 페이지 그룹 -->
 					<c:choose>
 						<c:when test="${myReply.pagingBean.previousPageGroup }">
-							<a href="${initParam.rootPath }/member/login/mypage.do?pageNo2=${myReply.pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
+							<a href="${initParam.rootPath }/member/login/mypage.do?pageNo2=${myReply.pagingBean.startPageOfPageGroup-1}&state=reply">◀&nbsp;</a>
 						</c:when>
 						<c:otherwise>◀&nbsp;</c:otherwise>
 					</c:choose>
@@ -56,14 +56,14 @@
 								&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
 							</c:when>
 							<c:otherwise>
-								<a href="${initParam.rootPath }/member/login/mypage.do?pageNo2=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
+								<a href="${initParam.rootPath }/member/login/mypage.do?pageNo2=${pageNum}&state=reply">&nbsp;${pageNum}&nbsp;</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					<!-- 다음 페이지 그룹 -->
 					<c:choose>
 						<c:when test="${myReply.pagingBean.nextPageGroup }">
-							<a href="${initParam.rootPath }/member/login/mypage.do?pageNo2=${myReply.pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
+							<a href="${initParam.rootPath }/member/login/mypage.do?pageNo2=${myReply.pagingBean.endPageOfPageGroup+1}&state=reply">&nbsp;▶</a>
 						</c:when>
 						<c:otherwise>&nbsp;▶</c:otherwise>
 					</c:choose>
@@ -73,14 +73,14 @@
 	</table>
 	</c:when>
 	<c:otherwise>
-	<table width="680px" border="1" class="listTB">
+	<table width="680px" border="1" >
 		<thead class="tableHead">
 			<tr align="center">
-				<td width="70px">게시물NO</td>
-				<td width="70px">댓글NO</td>
-				<td width="320px">내용</td>
+				<td width="70px">게시물 NO</td>
+				<td width="70px">댓글 NO</td>
+				<td>내용</td>
+				<td width="100px">날짜</td>
 				<td width="80px">작성자</td>
-				<td width="80px">날짜</td>
 			</tr>
 		</thead>
 		<tbody>
