@@ -36,7 +36,7 @@
 					<!-- 이전 페이지 그룹 -->
 					<c:choose>
 						<c:when test="${pagingBean.previousPageGroup }">
-							<a href="${initParam.rootPath }/member/mypage.do?pageNo=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
+							<a href="${initParam.rootPath }/member/login/mypage.do?pageNo=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
 						</c:when>
 						<c:otherwise>◀&nbsp;</c:otherwise>
 					</c:choose>
@@ -47,14 +47,14 @@
 								&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
 							</c:when>
 							<c:otherwise>
-								<a href="${initParam.rootPath }/member/mypage.do?pageNo=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
+								<a href="${initParam.rootPath }/member/login/mypage.do?pageNo=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					<!-- 다음 페이지 그룹 -->
 					<c:choose>
 						<c:when test="${pagingBean.nextPageGroup }">
-							<a href="${initParam.rootPath }/member/mypage.do?pageNo=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
+							<a href="${initParam.rootPath }/member/login/mypage.do?pageNo=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
 						</c:when>
 						<c:otherwise>&nbsp;▶</c:otherwise>
 					</c:choose>
