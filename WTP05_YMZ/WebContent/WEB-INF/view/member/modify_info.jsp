@@ -276,7 +276,133 @@ var emailAddressVal = true;
 })
 
 </script>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+div#table{
+	padding: 20px;
+	font-weight:bold;
+	text-align:left;
+	float:center;   /*왼쪽으로 띄움 */
+}	
+table{
+	font-family: 'Hanna', sans-serif;
+	margin-left: auto;
+	margin-right: auto;
+}
 
+#col{
+	font-family: 'Hanna', sans-serif;	
+	font-size : 15px;
+	width:150px;
+	background:#f0f0f0;
+	font-color:#756C6C;
+}
+#col2{
+	width:50px;
+}
+.id_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:55px;
+	text-decoration:none;
+	text-align:center;
+}
+
+.nick_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:55px;
+	text-decoration:none;
+	text-align:center;
+}
+
+.zip_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+}
+	
+</style>
 <h2>회원정보 수정 폼</h2>
 <c:if test="${requestScope.error_message != null}">
 	<font color="red" size="2">${requestScope.error_message}</font>
@@ -286,38 +412,44 @@ var emailAddressVal = true;
 	<input type="hidden" name="id" value="${sessionScope.login_info.id }">
 	<table style="width:700px">
 		<tr>
-			<td align="center">ID</td>
+			<td id="col" align="center">ID</td>
+			<td id="col2"></td>
 			<td>${sessionScope.login_info.id }</td>
 		</tr>
 		<tr>
-			<td align="center">닉네임</td>
+			<td id="col" align="center">닉네임</td>
+			<td id="col2"></td>
 			<td>
 				<input type="text" id="nickname" name="nickname" maxlength='8' value="${sessionScope.login_info.nickname }">
-				<input type="button" id="exNick" name="exNick" value="중복체크">
+				<input type="button" class="nick_btn" id="exNick" name="exNick" value="중복체크">
 				<font color="red" size="1"><span id="nickMessage"></span></font><span class="errorMessage"></span>
 				<font color="blue" size="1"><span  id="nicksMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
-			<td align="center">우편번호</td>
+			<td id="col" align="center">우편번호</td>
+			<td id="col2"></td>
 			<td>
 				<input type="text" id="postcode1" name="postcode1" value="${sessionScope.login_info.zipcode.substring(0,3) }" style="width:50px;" readonly>
 				<input type="text" id="postcode2" name="postcode2" value="${sessionScope.login_info.zipcode.substring(4,7) }" style="width:50px;" readonly>
-				<input type="button" onclick="openDaumPostcode()" value="우편번호 찾기">
+				<input type="button" class="zip_btn" onclick="openDaumPostcode()" value="우편번호 찾기">
 			</td>
 		</tr>
 		<tr>
-			<td align="center">주소</td>
+			<td id="col" align="center">주소</td>
+			<td id="col2"></td>
 			<td><input type="text" id="address" name="address" style="width:400px;" value="${sessionScope.login_info.address }" readonly><span class="errorMessage"><form:errors path="member.address"></form:errors></span>
 			</td>
 		</tr>
 		<tr>
-			<td align="center">상세주소</td>
+			<td id="col" align="center">상세주소</td>
+			<td id="col2"></td>
 			<td><input type="text" id="detailAddress" maxlength='20' name="detailAddress" style="width:400px;" value="${sessionScope.login_info.detailAddress }"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
 			</td>
 		</tr>	
 		<tr>
-			<td align="center">이메일</td>
+			<td id="col" align="center">이메일</td>
+			<td id="col2"></td>
 			<td>
 				<input type="hidden" id="email" value="${sessionScope.login_info.email }">
 				<input type="text" id="emailName" name="emailName" maxlength='11'>@<input type="text" id="emailAddress" name="emailAddress" maxlength='11'>
@@ -328,7 +460,8 @@ var emailAddressVal = true;
 			</td>
 		</tr>
 		<tr>
-			<td align="center">전화번호</td>
+			<td id="col" align="center">전화번호</td>
+			<td id="col2"></td>
 			<td>
 				<input type="hidden" id="phoneNo" value="${sessionScope.login_info.phoneNo }">
 				<select name="phoneCP" id="phoneCP" class="input_text w60" style="vertical-align:middle">
@@ -339,9 +472,9 @@ var emailAddressVal = true;
 			</td>
 		</tr>
 		<tr> 
-			<td colspan="2" >
-				<input type="submit" value="수정">
-				<input type="reset" value="다시작성">
+			<td colspan="4" align="center">
+				<input type="submit" class="nick_btn" value="수정">
+				<input type="reset" class="nick_btn" value="다시작성">
 			</td>
 		</tr>
 	</table>
