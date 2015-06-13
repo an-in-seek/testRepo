@@ -25,11 +25,10 @@ $(document).ready(function(){
 	
 	$("#selectedPicture").prop("src",$("#selectPicture img:first").prop("src"));
 	
-	$(".isUpload").hover(function(){
+	$(".isUpload").on("mouseover",function(){
 		$("#selectedPicture").prop("src",$(this).prop("src"));
-		$(this).parent().css("background-color","red");
-	},function(){
-		$(this).parent().css("background","none");
+		$(".isUpload").css("border-color","white");
+		$(this).css("border-color","red");
 	});
 	
 	//메뉴판 체크박스 클릭이벤트
@@ -258,53 +257,59 @@ display:none;
 <tr>
 
 <td style="width:50%">
-<table style="width:100%">
+<table style="width:100%;">
 <tr align="center">
-<td colspan="5" style="padding:0px;"><img id="selectedPicture" style="width:450px;height:330px;border-style:solid;border-width:5px;border-color:lightgray;"></td>
+<td colspan="7" style="padding:0px;"><img id="selectedPicture" style="width:490px;height:350px;border-style:solid;border-width:5px;border-color:lightgray;"></td>
 </tr>
-<tr id="selectPicture" align="center" style="border-style:solid;border-color:lightgray;">
-<td style="width:20%;padding:5px;padding-bottom:1px;">
-	<c:if test="${!empty requestScope.pic1 }"><img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic1}"></c:if>
+<tr id="selectPicture" align="center">
+<td style="width:5%;padding:0px;">
+<button disabled="disabled" style="color:white;background-color:lightgray;border-width:0px;width:20px;height:60px;padding:0px;">◀</button>
 </td>
-<td style="width:20%;padding:5px;padding-bottom:1px;">
+<td style="width:18%;padding:0px;padding-top:3px;">
+	<c:if test="${!empty requestScope.pic1 }"><img style="width:84px;height:60px;border-style:solid;border-color:red;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic1}"></c:if>
+</td>
+<td style="width:18%;padding:0px;padding-top:3px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic2 }">
-			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic2}">
+			<img style="width:84px;height:60px;border-style:solid;border-color:white;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic2}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:84px;height:60px;border-style:solid;border-color:white;" src="${initParam.rootPath }/uploadPhoto/noimage.jpg">
 		</c:otherwise>
 	</c:choose>
 </td>
-<td style="width:20%;padding:5px;padding-bottom:1px;">
+<td style="width:18%;padding:0px;padding-top:3px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic3 }">
-			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic3}">
+			<img style="width:84px;height:60px;border-style:solid;border-color:white;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic3}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:84px;height:60px;border-style:solid;border-color:white;" src="${initParam.rootPath }/uploadPhoto/noimage.jpg">
 		</c:otherwise>
 	</c:choose>
 </td>
-<td style="width:20%;padding:5px;padding-bottom:1px;">
+<td style="width:18%;padding:0px;padding-top:3px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic4 }">
-			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic4}">
+			<img style="width:84px;height:60px;border-style:solid;border-color:white;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic4}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:84px;height:60px;border-style:solid;border-color:white;" src="${initParam.rootPath }/uploadPhoto/noimage.jpg">
 		</c:otherwise>
 	</c:choose>
 </td>
-<td style="width:20%;padding:5px;padding-bottom:1px;">
+<td style="width:18%;padding:0px;padding-top:3px;">
 	<c:choose>
 		<c:when test="${!empty requestScope.pic5 }">
-			<img style="width:85px;height:60px;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic5}">
+			<img style="width:84px;height:60px;border-style:solid;border-color:white;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic5}">
 		</c:when>
 		<c:otherwise>
-			<img style="width:85px;height:60px;" src="${initParam.rootPath }/uploadPhoto/no-image.png">
+			<img style="width:84px;height:60px;border-style:solid;border-color:white;" src="${initParam.rootPath }/uploadPhoto/noimage.jpg">
 		</c:otherwise>
 	</c:choose>
+</td>
+<td style="width:5%;padding:0px;">
+<button disabled="disabled" style="color:white;background-color:lightgray;border-width:0px;width:20px;height:60px;padding:0px;">▶</button>
 </td>
 </tr>
 </table>
