@@ -6,11 +6,15 @@
 	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 
+	
+	
 	<context:component-scan base-package="com.ymz.common.category.dao, com.ymz.common.category.service, com.ymz.common.category.controller"/>
 	<context:component-scan base-package="com.ymz.faq.dao, com.ymz.faq.service, com.ymz.faq.controller"/>
 	<context:component-scan base-package="com.ymz.member.dao, com.ymz.member.service, com.ymz.member.controller"/>
@@ -29,11 +33,35 @@
 			<mvc:mapping path="/**/login/**/*"/>
 			<bean class="com.ymz.common.interceptor.LoginCheckInterceptor"/>
 		</mvc:interceptor>
+		<!-- <mvc:interceptor>
+			<mvc:mapping path="/**/login/**/*"/>
+			<bean name="logger" class="com.ymz.common.aop.LoggerAspect"/>
+		</mvc:interceptor> -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**/admin/**/*"/>
 			<bean class="com.ymz.common.interceptor.AdminCheckInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	
+	<!--  
+			AOP설정 - aop 스키마 추가 aop 설정의 root태그 - aop:config
+			aop:aspect - Aspect들(advice+pointcut)들 설정하기 위한 태그
+			-config태그의 하위 태그이고 여러개 올 수 있다.
+			->공통로직을 가진 bean당 하나씩 만든다.
+			속성 : ref- 공통로직 처리 bean을 지정.
+	-->	
+<!-- 	<aop:config>
+		<aop:aspect ref="logger">
+			pointcut : 공통사항을 적용할 핵심로직(메소드)을 지정
+			<aop:pointcut expression="execution(public * com.ymz..*ServiceImpl.*joinMember(..))" id="before-pc"/>
+			<aop:before pointcut-ref="before-pc" method="beforeLogger"/>
+			<aop:after-returning method="afterReturn" pointcut="execution(public * com.ymz..*ServiceImpl.*MemberList*(..))" returning="returnValue"/>
+			<aop:after-throwing method="afterThrow" pointcut="within(com.ymz.common..*)" throwing="ex"/>
+			<aop:around method="timeCheckAround" pointcut="within(com.ymz..*)"/>
+		</aop:aspect>
+	</aop:config> -->
+	
 	
 	<!-- Link controller들 설정 -->
 	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>

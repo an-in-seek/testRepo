@@ -7,6 +7,7 @@
 				CATEGORY,
 				BBS_NO,
 				REPLY_NO,
+				content,
 				STATE,
 				REASON,
 				to_char(to_date(reported_date, 'yyyymmdd'), 'yyyy-mm-dd') reported_date, 
@@ -19,6 +20,7 @@
 		<result column="category" property="category"/>
 		<result column="bbs_no" property="reviewNo"/>
 		<result column="reply_no" property="replyNo"/>
+		<result column="content" property="content"/>
 		<result column="state" property="state"/>
 		<result column="reason" property="reason"/>
 		<result column="reported_date" property="reportedDate"/>
@@ -27,9 +29,9 @@
 	
 	<!-- 전체 정보 조회 -->
 	<select id="selectAllReportedReply" parameterType="map" resultMap="report-resultmap">
-	select REPORT_NO, CATEGORY, BBS_NO, REPLY_NO, STATE, REASON, reported_date, REPORTER_ID
+	select REPORT_NO, CATEGORY, BBS_NO, REPLY_NO, content, STATE, REASON, reported_date, REPORTER_ID
 	from (
-	select ceil(rownum/#{contentsPerPage}) page, REPORT_NO, CATEGORY, BBS_NO, REPLY_NO, STATE, REASON, reported_date, REPORTER_ID
+	select ceil(rownum/#{contentsPerPage}) page, REPORT_NO, CATEGORY, BBS_NO, REPLY_NO, content, STATE, REASON, reported_date, REPORTER_ID
 	from (
 					<include refid="report-select"/>
 					order by REPORT_NO
@@ -48,7 +50,7 @@
 	<!-- 신고된 게시물 삽입하기 -->
 	<insert id="insertReportedReply" parameterType="ReportedReply">
 		insert into REPORTED_REPLY
-		values (reportedreply_no_seq.nextval, '리뷰', #{reviewNo}, #{replyNo}, #{state}, #{reason}, to_char(sysdate, 'yyyymmdd'), #{reporterId})
+		values (reportedreply_no_seq.nextval, '리뷰', #{reviewNo}, #{replyNo}, #{content}, #{state}, #{reason}, to_char(sysdate, 'yyyymmdd'), #{reporterId})
 	</insert>
 	
 </mapper>
