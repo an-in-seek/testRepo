@@ -97,8 +97,9 @@ insert into location values(location_no_seq.nextval, '삼환하이펙스 B동', 
 insert into location values(location_no_seq.nextval, '삼환하이펙스 B동', 'B1');
 
 --유스페이스2동2층
-insert into restaurant values(restaurant_no_seq.nextval, '새마을식당', 'S-4', '031-628-6694', '백주부의 새마을식당이쥬', '11111111111111,11111111111112,11111111111113,11111111111114', 0, 153, 'S-8,S-9,S-10,S-11', '20150530', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '새마을식당', 'S-4', '031-628-6694', '백주부의 새마을식당이쥬', '1111111111111,1111111111112,1111111111113,1111111111114,1111111111115', 0, 222, 'S-8,S-9,S-10,S-11', '20150530', 0, 5);
 insert into food values(food_no_seq.nextval, '열탄불고기', 8000, '5330원/100g', 1);
+insert into food values(food_no_seq.nextval, '새마을불고기', 8000, '5330원/100g', 1);
 insert into food values(food_no_seq.nextval, '소금구이', 9000, '6000원/100g', 1);
 insert into food values(food_no_seq.nextval, '만신창삼겹살', 9000, '(오리지날/마늘/간장) 6000원/100g', 1);
 insert into food values(food_no_seq.nextval, '차돌박이', 13000, '8670원/100g', 1);
@@ -172,14 +173,20 @@ insert into restaurant values(restaurant_no_seq.nextval, '됐소', 'S-4', '031-6
 --H스퀘어S동 B1층
 insert into restaurant values(restaurant_no_seq.nextval, '재크와콩나물', 'S-4', '031-789-3799', '재크와콩나물', '1111111111181', 0, 85, 'S-8,S-9,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '하코야', 'S-7', '031-789-3800', '하코야', '1111111111191', 0, 55, 'S-8,S-9,S-10', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '미정국수0410', 'S-4', '031-789-3669', '미정국수0410', '1111111111201', 0, 136, 'S-8,S-9,S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '미정국수0410', 'S-4', '031-789-3669', '미정국수0410', '1111111111201,1111111111202,1111111111203,1111111111204,1111111111205', 0, 187, 'S-8,S-9,S-10', '20150530', 0, 12);
+insert into food values(food_no_seq.nextval, '멸치국수', 3000, '국내산 멸치로 36시간 우려낸 멸치국수의 지존', 31);
+insert into food values(food_no_seq.nextval, '간비국수', 4000, '푸짐한 고명과 따뜻한 면을 간장양념에 비벼 드시는 담백한 간비국수', 31);
+insert into food values(food_no_seq.nextval, '(계절)미정냉국수', 4000, '정성스레 우려낸 진한 육수를 시원하게 드시는 냉국수', 31);
+insert into food values(food_no_seq.nextval, '비빔국수', 4000, '매콤달콤한 김치소스에 버무린 환상의 비빔국수', 31);
+insert into food values(food_no_seq.nextval, '(계절)냉콩국수', 4000, '즉석에서 갈아 만들어 주는 영양덩어리 콩국수', 31);
+insert into food values(food_no_seq.nextval, '고추기름물만두', 4000, '한입에 쏙쏙 매콤하고 부드러운 고추기름물만두', 31);
 insert into restaurant values(restaurant_no_seq.nextval, '판교토종순대국', 'S-4', '031-789-3670', '판교토종순대국', '1111111111211', 0, 64, 'S-8,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '와플반트', 'S-5', '031-789-3671', '와플', '1111111111221', 0, 32, 'S-9,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '다온', 'S-4', '031-8018-4800', '다온', '1111111111231', 0, 22, 'S-8,S-10,S-11', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '별별치킨', 'S-5', '031-789-3672', '별별치킨', '1111111111241', 0, 15, 'S-9,S-10,S-11', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '김밥천국', 'S-4', '031-789-3673', '김밥', '1111111111251', 0, 74, 'S-9,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '죠샌드위치', 'S-5', '031-789-3939', '샌드위치', '1111111111261', 0, 52, 'S-9,S-10', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '스마일쿡', 'S-4', '031-789-3940', '안녕하세요 스마일쿡입니다.<br>저희 집은 단돈 5천원으로 날마다 다른 메뉴를 먹을수 있답니다.<br>H스퀘어 S동 지하1층 제일 구석땡이에 있어요^^', '1111111111271', 0, 777, 'S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '스마일쿡', 'S-4', '031-789-3940', '안녕하세요 스마일쿡입니다.<br>저희 집은 단돈 5천원으로 날마다 다른 메뉴를 먹을수 있답니다.<br>H스퀘어 S동 지하1층 제일 구석땡이에 있어요^^', '1111111112171,1111111112172,1111111112173,1111111112174,1111111112175', 0, 777, 'S-10', '20150530', 0, 12);
 insert into food values(food_no_seq.nextval, '정식', 5000, null, 38);
 insert into restaurant values(restaurant_no_seq.nextval, '명동칼국수', 'S-4', '031-696-7499', '명동칼국수', '1111111111281', 0, 42, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '신기소', 'S-7', '031-696-7500', '신기소', '1111111111291', 0, 137, 'S-8,S-9,S-10', '20150530', 0, 12);
@@ -246,7 +253,11 @@ insert into restaurant values(restaurant_no_seq.nextval, '통통낙지마을', '
 insert into restaurant values(restaurant_no_seq.nextval, '오늘한점', 'S-4', '031-709-1852', '오늘한점', '1111111111741', 0, 63, 'S-8,S-9,S-10', '20150530', 0, 16);
 
 --삼환하이펙스B동 1층
-insert into restaurant values(restaurant_no_seq.nextval, '슈퍼스테이크', 'S-5', '031-698-4443', '슈퍼스테이크', '1111111111751', 0, 192, 'S-11', '20150530', 0, 17);
+insert into restaurant values(restaurant_no_seq.nextval, '슈퍼스테이크', 'S-5', '031-698-4443', '슈퍼스테이크', '1111111111751,1111111111752,1111111111753,1111111111754,1111111111755', 0, 192, 'S-9', '20150530', 0, 17);
+insert into food values(food_no_seq.nextval, '슈퍼스테이크', 9900, '호주산 청정우 / 250g', 86);
+insert into food values(food_no_seq.nextval, '버크셔K스테이크', 8900, '지리산 순종 흰코흑돼지 / 250g', 86);
+insert into food values(food_no_seq.nextval, '함박스테이크', 7900, '국내산 돼지고기 / 100% 수제 / 300g', 86);
+insert into food values(food_no_seq.nextval, '연어스테이크', 8900, '노르웨이산 / 200g', 86);
 insert into restaurant values(restaurant_no_seq.nextval, '한국인의팥집', 'S-5', '031-698-4444', '한국인의팥집', '1111111111761', 0, 48, 'S-9', '20150530', 0, 17);
 insert into restaurant values(restaurant_no_seq.nextval, '베이징스토리', 'S-6', '031-696-0306', '베이징스토리', '1111111111771', 0, 52, 'S-8,S-11', '20150530', 0, 17);
 insert into restaurant values(restaurant_no_seq.nextval, '한그릇한사발', 'S-4', '031-696-0307', '한그릇한사발', '1111111111781', 0, 32, 'S-8,S-11', '20150530', 0, 17);
@@ -275,6 +286,19 @@ insert into restaurant values(restaurant_no_seq.nextval, '소담애', 'S-4', '03
 insert into restaurant values(restaurant_no_seq.nextval, '찌개애감동', 'S-4', '031-628-1479', '찌개애감동', '1111111112031', 0, 113, 'S-8,S-10,S-11', '20150530', 0, 2);
 insert into restaurant values(restaurant_no_seq.nextval, '참치지기', 'S-7', '031-628-1480', '참치지기', '1111111112041', 0, 36, 'S-9', '20150530', 0, 2);
 insert into restaurant values(restaurant_no_seq.nextval, '청구칼국수', 'S-4', '031-628-1481', '청구칼국수', '1111111112051', 0, 63, 'S-11', '20150530', 0, 2);
+insert into restaurant values(restaurant_no_seq.nextval, '육전면사무소', 'S-4', '031-628-1002', '육전면사무소', '1111111112181,1111111112182,1111111112183,1111111112184,1111111112185', 0, 200, 'S-8,S-9', '20150530', 0, 2);
+insert into food values(food_no_seq.nextval, '소고기생면', 6000, '소뼈를 우려만든 육수로 싱싱한 야채와 소고기를 넣어 담백한맛', 109);
+insert into food values(food_no_seq.nextval, '해물생면', 6000, '소뼈를 우려만든 육수로 싱싱한 야채와 해산물을 넣어 담백한맛', 109);
+insert into food values(food_no_seq.nextval, '불짬뽕생면', 6000, '각종 해산물과 싱싱한 야채가 얼큰하게 어우러진 정통 짬뽕', 109);
+insert into food values(food_no_seq.nextval, '육전', 11000, '청정 호주산 소고기를 얇게 썰어 담백하고 고소한 맛', 109);
+insert into food values(food_no_seq.nextval, '육전번', 11000, '완자와 특제소스를 섞어 직화로 구운 요리', 109);
+insert into food values(food_no_seq.nextval, '섞어전', 20000, '다양한 전을 고루담은 모듬전 스페셜', 109);
+insert into food values(food_no_seq.nextval, '소고기고추전', 6000, '(소고기:호주산/돼지고기:국내산)', 109);
+insert into food values(food_no_seq.nextval, '소고기완자전', 6000, '(소고기:호주산/돼지고기:국내산)', 109);
+insert into food values(food_no_seq.nextval, '젤라틴대왕닭발', 13000, '(매콤한맛/아주매운맛)', 109);
+insert into food values(food_no_seq.nextval, '미니족발', 16000, '(매콤한맛/아주매운맛)', 109);
+
+
 
 -- 유스페이스1동 1층
 insert into restaurant values(restaurant_no_seq.nextval, 'THE MORE', 'S-5', '031-628-1177', '더모어', '1111111112061', 0, 35, 'S-10,S-11', '20150530', 0, 3);

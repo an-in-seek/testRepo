@@ -24,6 +24,7 @@ $(document).ready(function(){
 	var calcListCount=0;
 	
 	$("#selectedPicture").prop("src",$("#selectPicture img:first").prop("src"));
+	$("#selectPicture img:first").css("border-color","red");
 	
 	$(".isUpload").on("mouseover",function(){
 		$("#selectedPicture").prop("src",$(this).prop("src"));
@@ -254,64 +255,33 @@ display:none;
 
 <body>
 <table style="width:100%;">
-<tr>
 
+<tr>
 <td style="width:50%">
 <table style="width:100%;">
 <tr align="center">
 <td colspan="7" style="padding:0px;"><img id="selectedPicture" style="width:490px;height:350px;border-style:solid;border-width:5px;border-color:lightgray;"></td>
 </tr>
+
 <tr id="selectPicture" align="center">
 <td style="width:5%;padding:0px;">
 <button disabled="disabled" style="color:white;background-color:lightgray;border-width:0px;width:20px;height:60px;padding:0px;">◀</button>
 </td>
-<td style="width:18%;padding:0px;padding-top:3px;">
-	<c:if test="${!empty requestScope.pic1 }"><img style="width:84px;height:60px;border-style:solid;border-color:red;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic1}"></c:if>
-</td>
-<td style="width:18%;padding:0px;padding-top:3px;">
-	<c:choose>
-		<c:when test="${!empty requestScope.pic2 }">
-			<img style="width:84px;height:60px;border-style:solid;border-color:white;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic2}">
-		</c:when>
-		<c:otherwise>
-			<img style="width:84px;height:60px;border-style:solid;border-color:white;" src="${initParam.rootPath }/uploadPhoto/noimage.jpg">
-		</c:otherwise>
-	</c:choose>
-</td>
-<td style="width:18%;padding:0px;padding-top:3px;">
-	<c:choose>
-		<c:when test="${!empty requestScope.pic3 }">
-			<img style="width:84px;height:60px;border-style:solid;border-color:white;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic3}">
-		</c:when>
-		<c:otherwise>
-			<img style="width:84px;height:60px;border-style:solid;border-color:white;" src="${initParam.rootPath }/uploadPhoto/noimage.jpg">
-		</c:otherwise>
-	</c:choose>
-</td>
-<td style="width:18%;padding:0px;padding-top:3px;">
-	<c:choose>
-		<c:when test="${!empty requestScope.pic4 }">
-			<img style="width:84px;height:60px;border-style:solid;border-color:white;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic4}">
-		</c:when>
-		<c:otherwise>
-			<img style="width:84px;height:60px;border-style:solid;border-color:white;" src="${initParam.rootPath }/uploadPhoto/noimage.jpg">
-		</c:otherwise>
-	</c:choose>
-</td>
-<td style="width:18%;padding:0px;padding-top:3px;">
-	<c:choose>
-		<c:when test="${!empty requestScope.pic5 }">
-			<img style="width:84px;height:60px;border-style:solid;border-color:white;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${requestScope.pic5}">
-		</c:when>
-		<c:otherwise>
-			<img style="width:84px;height:60px;border-style:solid;border-color:white;" src="${initParam.rootPath }/uploadPhoto/noimage.jpg">
-		</c:otherwise>
-	</c:choose>
-</td>
+<c:forEach items="${requestScope.pictures }" var="picture">
+	<td style="width:18%;padding:0px;padding-top:3px;">
+		<img style="width:84px;height:60px;border-style:solid;border-color:white;" class="isUpload" src="${initParam.rootPath }/uploadPhoto/${picture}">
+	</td>
+</c:forEach>
+<c:forEach begin="${fn:length(requestScope.pictures)+1 }" end="5">
+	<td style="width:18%;padding:0px;padding-top:3px;">
+		<img style="width:84px;height:60px;border-style:solid;border-color:white;" src="${initParam.rootPath }/uploadPhoto/noimage.jpg">
+	</td>
+</c:forEach>
 <td style="width:5%;padding:0px;">
 <button disabled="disabled" style="color:white;background-color:lightgray;border-width:0px;width:20px;height:60px;padding:0px;">▶</button>
 </td>
 </tr>
+
 </table>
 </td>
 
