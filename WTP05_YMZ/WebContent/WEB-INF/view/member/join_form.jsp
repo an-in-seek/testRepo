@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script type="text/javascript">
 
@@ -478,6 +479,8 @@ var emailAddressVal = true;
 
 </script>
 <style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
 div#table{
 	padding: 20px;
 	font-weight:bold;
@@ -485,8 +488,120 @@ div#table{
 	float:center;   /*왼쪽으로 띄움 */
 }	
 table{
+	font-family: 'Jeju Myeongjo', serif;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#col{
+	font-family: 'Jeju Myeongjo', serif;	
+	font-size : 15px;
+	width:150px;
+	background:#f0f0f0;
+}
+#col2{
+	width:50px;
+}
+.id_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:55px;
+	text-decoration:none;
+	text-align:center;
+}
+
+.nick_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:55px;
+	text-decoration:none;
+	text-align:center;
+}
+
+.zip_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
 }
 	
 </style>
@@ -496,47 +611,53 @@ table{
 	<font color="red" size="2">${requestScope.error_message}</font>
 </c:if>
 <form method="post" action="${initParam.rootPath }/member/join.do"  id="registerForm" enctype="multipart/form-data" >
-	<table border="1" >
+	<table>
 		<tr>
-			<td align="center">ID</td>
-			<td>
+			<td id="col" align="center">ID</td>
+			<td id="col2"></td>
+			<td id="col3">
 				<input type="text" name="id" id='id' maxlength='11'> <span id="dupMessageLayer"> </span><span class="errorMessage"><form:errors path="member.id"/></span>
-				<input type="button" name="idDup" id="idDup" value="중복체크"><font color="red" size="1"><span  id="idMessage"> </span></font>
+				<input type="button" class="id_btn" name="idDup" id="idDup" value="중복체크"><font color="red" size="1"><span  id="idMessage"> </span></font>
 				<font color="blue" size="1"><span  id="idsMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
-			<td align="center">비밀번호</td>
-			<td>
+			<td id="col" align="center">비밀번호</td>
+			<td id="col2"></td>
+			<td id="col3">
 				<input type="password" id="password" name="password" maxlength='24'><font color="red" size="1"><span id="pwMessage"> </span></font>
 				<font color="blue" size="1"><span  id="pwsMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
-			<td align="center">비밀번호확인</td>
-			<td>
+			<td id="col" align="center">비밀번호확인</td>
+			<td id="col2"></td>
+			<td id="col3">
 				<input type="password" id="passwordCheck" name="passwordCheck" maxlength='24'><font color="red" size="1"><span id="pwMessageLayer"> </span></font><span class="errorMessage"><form:errors path="member.password"/></span>
 			</td>
 		</tr>
 		<tr>
-			<td align="center">이름</td>
-			<td>
+			<td id="col" align="center">이름</td>
+			<td id="col2"></td>
+			<td id="col3">
 				<input type="text" id="name" name="name" maxlength='10'><font color="red" size="1"><span id="nameMessage"></span></font>
 				<font color="blue" size="1"><span  id="namesMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
-			<td align="center">닉네임</td>
-			<td>
+			<td id="col" align="center">닉네임</td>
+			<td id="col2"></td>
+			<td id="col3">
 				<input type="text" id="nickname" name="nickname"  maxlength='8'>
-				<input type="button" id="exNick" name="exNick" value="중복체크">
+				<input type="button" class="nick_btn" id="exNick" name="exNick" value="중복체크">
 				<font color="red" size="1"><span id="nickMessage"></span></font><span class="errorMessage"></span>
 				<font color="blue" size="1"><span  id="nicksMessage"></span></font>
 			</td>	
 		</tr>
 			<tr>
-			<td align="center">생년월일</td>
-			<td>
+			<td id="col" align="center">생년월일</td>
+			<td id="col2"></td>
+			<td id="col3">
 				<select name="year" id="year" class="input_text w76" style="vertical-align:middle">
 			<option value="1930" >1930</option><option value="1931" >1931</option><option value="1932" >1932</option><option value=1933 >1933</option><option value=1934 >1934</option><option value=1935 >1935</option><option value=1936 >1936</option><option value=1937 >1937</option><option value=1938 >1938</option><option value=1939 >1939</option><option value=1940 >1940</option><option value=1941 >1941</option><option value=1942 >1942</option><option value=1943 >1943</option><option value=1944 >1944</option><option value=1945 >1945</option><option value=1946 >1946</option><option value=1947 >1947</option><option value=1948 >1948</option><option value=1949 >1949</option><option value=1950 >1950</option><option value=1951 >1951</option><option value=1952 >1952</option><option value=1953 >1953</option><option value=1954 >1954</option><option value=1955 >1955</option><option value=1956 >1956</option><option value=1957 >1957</option><option value=1958 >1958</option><option value=1959 >1959</option><option value=1960 >1960</option><option value=1961 >1961</option><option value=1962 >1962</option><option value=1963 >1963</option><option value=1964 >1964</option><option value=1965 >1965</option><option value=1966 >1966</option><option value=1967 >1967</option><option value=1968 >1968</option><option value=1969 >1969</option><option value=1970 >1970</option><option value=1971 >1971</option><option value=1972 >1972</option><option value=1973 >1973</option><option value=1974 >1974</option><option value=1975 >1975</option><option value=1976 >1976</option><option value=1977 >1977</option><option value=1978 >1978</option><option value=1979 >1979</option><option value=1980 selected>1980</option><option value=1981 >1981</option><option value=1982 >1982</option><option value=1983 >1983</option><option value=1984 >1984</option><option value=1985 >1985</option><option value=1986 >1986</option><option value=1987 >1987</option><option value=1988 >1988</option><option value=1989 >1989</option><option value=1990 >1990</option><option value=1991 >1991</option><option value=1992 >1992</option><option value=1993 >1993</option><option value=1994 >1994</option><option value=1995 >1995</option><option value=1996 >1996</option><option value=1997 >1997</option><option value=1998 >1998</option><option value=1999 >1999</option><option value=2000 >2000</option><option value=2001 >2001</option><option value=2002 >2002</option><option value=2003 >2003</option><option value=2004 >2004</option><option value=2005 >2005</option><option value=2006 >2006</option><option value=2007 >2007</option><option value=2008 >2008</option><option value=2009 >2009</option><option value=2010 >2010</option><option value=2011 >2011</option><option value=2012 >2012</option><option value=2013 >2013</option><option value=2014 >2014</option></select>
 			년 
@@ -549,8 +670,9 @@ table{
 			</td>	
 		</tr>
 			<tr>
-			<td align="center">성별</td>
-			<td>
+			<td id="col" align="center">성별</td>
+			<td id="col2"></td>
+			<td id="col3">
 			
 	<!-- for='m':id가 m인 입력 태그에 대한 라벨, id속성-태그의 식별값을 지정 체크박스는 선택하지 않으면 전송하지 않는다. -->
 				<label for="m"> 남성</label> <input type="radio" name="sex" value="b" id="m"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>	
@@ -558,26 +680,30 @@ table{
 			</td>	
 		</tr>
 		<tr>
-			<td align="center">우편번호</td>
-			<td>
+			<td id="col" align="center">우편번호</td>
+			<td id="col2"></td>
+			<td id="col3">
 				<input type="text" id="postcode1" name="postcode1"  style="width:50px;"  readonly>
 				<input type="text" id="postcode2" name="postcode2"  style="width:50px;"  readonly>
-				<input type="button" onclick="openDaumPostcode()" value="우편번호 찾기">
+				<input type="button" class="zip_btn" onclick="openDaumPostcode()" value="우편번호 찾기">
 			</td>
 		</tr>
 		<tr>
-			<td align="center">주소</td>
-			<td><input type="text" id="address" name="address"  style="width:400px;" readonly><span class="errorMessage"><form:errors path="member.address"></form:errors></span>
+			<td id="col" align="center">주소</td>
+			<td id="col2"></td>
+			<td id="col3"><input type="text" id="address" name="address"  style="width:400px;" readonly><span class="errorMessage"><form:errors path="member.address"></form:errors></span>
 			</td>
 		</tr>		
 		<tr>
-			<td align="center">상세주소</td>
-			<td><input type="text" id="detailAddress" name="detailAddress" maxlength='20' value="${requestScope.detailAddress }" style="width:400px;"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
+			<td id="col" align="center">상세주소</td>
+			<td id="col2"></td>
+			<td id="col3"><input type="text" id="detailAddress" name="detailAddress" maxlength='20' value="${requestScope.detailAddress }" style="width:400px;"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
 			</td>
 		</tr>
 		<tr>
-			<td align="center">이메일</td>
-			<td>
+			<td id="col" align="center">이메일</td>
+			<td id="col2"></td>
+			<td id="col3">
 				<input type="text" id="emailName" name="emailName" maxlength='11'>@<input type="text" id="emailAddress" name="emailAddress"  maxlength="11">
 				<select name="selectEmail"  style="vertical-align:middle" id="selectEmail">
 				<option>직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
@@ -586,8 +712,9 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td align="center">전화번호</td>
-			<td>
+			<td id="col" align="center">전화번호</td>
+			<td id="col2"></td>
+			<td id="col3">
 				<select name="phoneCP" id="phoneCP" class="input_text w60" style="vertical-align:middle">
 			<option value="010" >010</option><option value="011" >011</option><option value="017" >017</option><option value="018" >018</option><option value="019" >019</option></select>
 			&nbsp;-&nbsp;<input type="text" id="num1" name="num1" maxlength='4' size="2" style="vertical-align:middle">&nbsp;&nbsp;<input type="text" id="num2" name="num2" size="2" maxlength='4'class="input_text w60" style="vertical-align:middle"> 
@@ -596,8 +723,9 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td align="center">좋아하는음식</td>
-			<td>
+			<td id="col" align="center">좋아하는음식</td>
+			<td id="col2"></td>
+			<td id="col3">
 				<c:forEach var="category" items="${map}"> 
 					<label><input type="checkbox" name="favoriteFood" value="${category.key}">${category.value}</label>
 				</c:forEach>
@@ -605,15 +733,16 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td align="center">추천인</td>
-			<td>
+			<td id="col" align="center">추천인</td>
+			<td id="col2"></td>
+			<td id="col3">
 				<input type="text" name="recommend" id="recommend" maxlength='20' value="${requestScope.recommend }">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center">
-				<input type="submit" value="가입">
-				<input type="reset" value="다시작성">
+			<td colspan="4" align="right">
+				<input type="submit" class="nick_btn" value="가입">
+				<input type="reset" class="nick_btn" value="다시작성">
 			</td>
 		</tr>
 	</table>

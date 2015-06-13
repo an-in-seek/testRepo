@@ -309,7 +309,7 @@ public class MemberController {
 		service.removeMemberById(loginInfo.getId());
 		//session 제거
 		session.invalidate();
-		return "main.tiles";//삭제후 메인페이지로 이동
+		return "/index.do";//삭제후 메인페이지로 이동
 	}
 	
 	// 정보 제거하기(관리자 전용)

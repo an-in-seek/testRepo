@@ -1,54 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+function goLogin() {
 
-<h2>가입 환영합니다.</h2>
-<h3>가입 시 입력하신 정보입니다.</h3>
-<table style="width:500px"> 
-	<tr>
-		<th width="100px" align="left">ID</th>
-		<td>${requestScope.member.id }</td>
-	</tr>
-	<tr>
-		<th  align="left">패스워드</th>
-		<td>${requestScope.member.password}</td>
-	</tr>
-	<tr>
-		<th align="left">이름</th>
-		<td>${requestScope.member.name}</td>
-	</tr>
-		<tr>
-		<th align="left">닉네임</th>
-		<td>${requestScope.member.nickname}</td>
-	</tr>
-		<tr>
-		<th align="left">생년월일</th>
-		<td>${requestScope.member.birth}</td>
-	</tr>
-		<tr>
-		<th align="left">성별</th>
-		<td>${requestScope.member.sex}</td>
-	</tr>
-	<tr>
-		<th align="left">주소</th>
-		<td>${requestScope.member.zipcode}<br>
-			${requestScope.member.address}<br>
-			${requestScope.member.detailAddress}
-		</td>
-	</tr>
-	<tr>
-		<th align="left">이메일</th>
-		<td>${requestScope.member.email}</td>
-	</tr>
-	<tr>
-		<th align="left">전화번호</th>
-		<td>${requestScope.member.phoneNo}</td>
-	</tr>
-	<tr>
-		<th align="left">가입일</th>
-		<td>${requestScope.member.joinDate}</td>
-	</tr>
+	location.href="${initParam.rootPath }/member/loginForm.do";
+}
+function goMain() {
 
+	location.href="${initParam.rootPath }/index.do";
+}
+</script>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+#table{
+	margin:50px 50px 50px 50px;
+	padding: 30px;
+	font-weight:bold;
+	font-family: 'Nanum Gothic Coding', serif;
+	font-size:30px
+}
+.s{
+	font-size:20px;
+	color:#C8C2C2;
+	font-family: 'Jeju Myeongjo', serif;
+}
+
+
+.main {
+	-moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
+	box-shadow:inset 0px 1px 0px 0px #f5978e;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f) );
+	background:-moz-linear-gradient( center top, #f24537 5%, #c62d1f 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f');
+	background-color:#f24537;
+	-webkit-border-top-left-radius:10px;
+	-moz-border-radius-topleft:10px;
+	border-top-left-radius:10px;
+	-webkit-border-top-right-radius:10px;
+	-moz-border-radius-topright:10px;
+	border-top-right-radius:10px;
+	-webkit-border-bottom-right-radius:10px;
+	-moz-border-radius-bottomright:10px;
+	border-bottom-right-radius:10px;
+	-webkit-border-bottom-left-radius:10px;
+	-moz-border-radius-bottomleft:10px;
+	border-bottom-left-radius:10px;
+	text-indent:0;
+	border:1px solid #d02718;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:40px;
+	width:120px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #810e05;
+}
+
+</style>
+<img src="${initParam.rootPath }/memberImage/joinSu.png" id="header">
+<div id="table" align="center">
+<table>
+	<tr>
+		<td><font size="30" style="bold">"회원가입</font><font size="30" color="grey">을 축하드립니다"</font></td>
+	</tr>
+	<tr>
+		<td class="s">야먹자에 회원가입을 해주셔서 감사합니다.</td>
+	</tr>
+	<tr>
+		<td class="s">야먹자는 알찬 정보와 서비스를 제공해줄것을 약속드립니다.</td>
+	</tr>
+	<tr>
+		<td><input type="button" class="main" onclick="location.href='javascript:goMain();'" value="메인으로가기">&nbsp;&nbsp;&nbsp;
+		<input type="button" class="main" onclick="location.href='javascript:goLogin()';" value="로그인"></td>
+	</tr>
 </table>
+</div>	
+	<img src="${initParam.rootPath }/memberImage/join.png" width="1024" height="100">
+	
+
+
 
 
 

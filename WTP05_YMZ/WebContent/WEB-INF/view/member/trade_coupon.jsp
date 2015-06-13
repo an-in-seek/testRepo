@@ -86,6 +86,134 @@ $(document).ready(function(){
 });
 
 </script>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+div#table{
+	padding: 20px;
+	text-align:left;
+	float:center;   /*왼쪽으로 띄움 */
+	font-family: 'Jeju Myeongjo', serif;
+}	
+table{
+	font-family: 'Jeju Myeongjo', serif;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#col{
+	font-family: 'Jeju Myeongjo', serif;
+	font-size : 15px;
+	width:150px;
+	background:#f0f0f0;
+	font-color:#756C6C;
+}
+#col2{
+	width:50px;
+}
+.id_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:55px;
+	text-decoration:none;
+	text-align:center;
+}
+
+.nick_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:55px;
+	text-decoration:none;
+	text-align:center;
+}
+
+.zip_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+}
+</style>
+
 </head>
 <body>
 
@@ -93,7 +221,7 @@ $(document).ready(function(){
 <form method="post" action="${initParam.rootPath }/member/updateMileage.do" id="modifyMileage"> 
 	<table width="800" align="center">
 		<tr>
-			<td  width="center">
+			<td  width="center" id="col">
 				현재마일리지 
 			</td>
 			<td>
@@ -101,14 +229,14 @@ $(document).ready(function(){
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td id="col">
 				쿠폰금액 :
 			</td>
 			<td>
 				<input type="text" name="price" id="price" value="0" readonly>
 			</td>
 			<c:if test="${requestScope.mileage>=1000 }">
-					<td><input type="button" value="+" id="plus"></td>
+					<td><input class="nick_btn" type="button" value="+" id="plus"></td>
 					
 			</c:if>
 			<c:if test="${requestScope.mileage<1000 }">
@@ -122,7 +250,7 @@ $(document).ready(function(){
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td id="col">
 				차액
 			</td>
 			<td colspan="4">
@@ -130,7 +258,7 @@ $(document).ready(function(){
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td id="col">
 				남은 마일리지
 			</td>
 			<td>
@@ -139,10 +267,10 @@ $(document).ready(function(){
 		</tr>
 		<tr>
 			<td>
-				<input type="submit" onclick="javascript:issueConfirm();" id ="submit" value="발급">
+				<input type="submit" class="nick_btn" onclick="javascript:issueConfirm();" id ="submit" value="발급">
 			</td>
 			<td>
-				<input type="reset" id="reset" value="초기화">			
+				<input type="reset" class="nick_btn" id="reset" value="초기화">			
 			</td>
 		</tr>
 	</table>
