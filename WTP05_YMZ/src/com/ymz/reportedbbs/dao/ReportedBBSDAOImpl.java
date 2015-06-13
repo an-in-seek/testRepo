@@ -34,6 +34,20 @@ public class ReportedBBSDAOImpl implements ReportedBBSDAO {
 	}
 	
 	@Override
+	public List<ReportedBBS> selectAllReportedBBSById(int pageNo, String memberId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		map.put("pageNo", pageNo);
+		map.put("memberId", memberId);
+		return session.selectList(namespace+"selectAllReportedBBSById", map);
+	}
+	
+	@Override
+	public int selectTotalReportedBBSCountById(String memberId){
+		return session.selectOne(namespace+"selectTotalReportedBBSCountById", memberId);
+	}
+	
+	@Override
 	public int insertReportedBBS(ReportedBBS reportedBBS) {
 		return session.insert(namespace+"insertReportedBBS", reportedBBS);
 	}

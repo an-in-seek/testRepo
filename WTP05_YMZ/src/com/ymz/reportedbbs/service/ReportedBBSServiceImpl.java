@@ -30,6 +30,17 @@ public class ReportedBBSServiceImpl implements ReportedBBSService {
 		return map;
 	}
 	
+	@Override
+	public Map<String, Object> getReportedBBSListById(int pageNo, String memberId){
+		List<ReportedBBS> list = dao.selectAllReportedBBSById(pageNo, memberId);
+		int totalContent = dao.selectTotalReportedBBSCountById(memberId);
+		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
+		HashMap map = new HashMap();
+		map.put("reportList", list);
+		map.put("pagingBean", pagingBean); //5개
+		return map;
+	}
+	
 	/*public insert()*/
 	//신고된 게시물 등록
 	@Override

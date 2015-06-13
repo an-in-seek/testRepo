@@ -231,10 +231,7 @@ public class RestaurantController {
 		model.addAttribute("restaurant_location", location);
 		
 		// 그림들을 request scope에 올린다
-		String[] pictures = restaurant.getPictureName().split(",");
-		for(int i=0; i<pictures.length; i++) {
-			model.addAttribute("pic"+(i+1), pictures[i]);
-		}
+		model.addAttribute("pictures", restaurant.getPictureName().split(","));
 		
 		// 선택된 가게의 음식들을 request scope에 올린다
 		List<Food> foods = service.getFoodsByRestaurantNo(restaurant.getRestaurantNo());

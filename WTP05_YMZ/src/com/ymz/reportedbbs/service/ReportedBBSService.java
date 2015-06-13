@@ -10,4 +10,6 @@ public interface ReportedBBSService {
 
 	public abstract void registerReportedBBS(ReportedBBS reportedBBS);
 
+	Map<String, Object> getReportedBBSListById(int pageNo, String memberId);
+
 }
