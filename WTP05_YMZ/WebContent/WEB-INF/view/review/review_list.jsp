@@ -56,7 +56,7 @@ $(document).ready(function(){
 		document.location.href="${initParam.rootPath }/review/reviewList.do?sortType="+txt;
 	});
 	
-	// 리뷰 제목 클릭 이벤트
+	// 리뷰 제목 색상 이벤트
 	$(".listTable tbody tr").hover(function(){
 		 $(this).css("background-color", "lightcyan");
 	}, function(){
@@ -251,18 +251,18 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 		<tbody>
 			<!-- 공지 먼저 출력 -->
 			<c:forEach items="${requestScope.notices }" var="notices">
-					<tr>
-						<th>공지</th>
-						<td align="left" id="title">
-							<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${notices.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-							<font color="blue">${notices.title}</font>
-							</a>
-						</td>
-						<td align="center"><font color="blue">${notices.nickname}</font></td>
-						<td id="regDate" align="center">${notices.regDate.substring(0,10)}</td>
-						<td align="center" style="width:50px">${notices.recommend}</td>
-						<td align="center">${notices.hits}</td>
-					</tr>
+				<tr>
+					<th><font color="#8761f8">공지</font></th>
+					<td align="left" id="title">
+						<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${notices.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+						<font color="#8761f8">${notices.title}</font>
+						</a>
+					</td>
+					<td align="center"><font color="#8761f8">${notices.nickname}</font></td>
+					<td id="regDate" align="center"><font color="#8761f8">${notices.regDate.substring(0,10)}</font></td>
+					<td align="center" style="width:50px"><font color="#8761f8">${notices.recommend}</font></td>
+					<td align="center"><font color="#8761f8">${notices.hits}</font></td>
+				</tr>
 			</c:forEach>
 			<!-- 일반 게시물 출력 -->
 			<c:forEach items="${requestScope.reviewList }" var="review" varStatus="status">
