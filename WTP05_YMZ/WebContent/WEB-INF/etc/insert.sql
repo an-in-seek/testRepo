@@ -176,9 +176,9 @@ insert into restaurant values(restaurant_no_seq.nextval, '하코야', 'S-7', '03
 insert into restaurant values(restaurant_no_seq.nextval, '미정국수0410', 'S-4', '031-789-3669', '미정국수0410', '1111111111201,1111111111202,1111111111203,1111111111204,1111111111205', 0, 187, 'S-8,S-9,S-10', '20150530', 0, 12);
 insert into food values(food_no_seq.nextval, '멸치국수', 3000, '국내산 멸치로 36시간 우려낸 멸치국수의 지존', 31);
 insert into food values(food_no_seq.nextval, '간비국수', 4000, '푸짐한 고명과 따뜻한 면을 간장양념에 비벼 드시는 담백한 간비국수', 31);
-insert into food values(food_no_seq.nextval, '(계절)미정냉국수', 4000, '정성스레 우려낸 진한 육수를 시원하게 드시는 냉국수', 31);
+insert into food values(food_no_seq.nextval, '(계절) 미정냉국수', 4000, '정성스레 우려낸 진한 육수를 시원하게 드시는 냉국수', 31);
 insert into food values(food_no_seq.nextval, '비빔국수', 4000, '매콤달콤한 김치소스에 버무린 환상의 비빔국수', 31);
-insert into food values(food_no_seq.nextval, '(계절)냉콩국수', 4000, '즉석에서 갈아 만들어 주는 영양덩어리 콩국수', 31);
+insert into food values(food_no_seq.nextval, '(계절) 냉콩국수', 4000, '즉석에서 갈아 만들어 주는 영양덩어리 콩국수', 31);
 insert into food values(food_no_seq.nextval, '고추기름물만두', 4000, '한입에 쏙쏙 매콤하고 부드러운 고추기름물만두', 31);
 insert into restaurant values(restaurant_no_seq.nextval, '판교토종순대국', 'S-4', '031-789-3670', '판교토종순대국', '1111111111211', 0, 64, 'S-8,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '와플반트', 'S-5', '031-789-3671', '와플', '1111111111221', 0, 32, 'S-9,S-10', '20150530', 0, 12);
@@ -254,10 +254,10 @@ insert into restaurant values(restaurant_no_seq.nextval, '오늘한점', 'S-4', 
 
 --삼환하이펙스B동 1층
 insert into restaurant values(restaurant_no_seq.nextval, '슈퍼스테이크', 'S-5', '031-698-4443', '슈퍼스테이크', '1111111111751,1111111111752,1111111111753,1111111111754,1111111111755', 0, 192, 'S-9', '20150530', 0, 17);
-insert into food values(food_no_seq.nextval, '슈퍼스테이크', 9900, '호주산 청정우 / 250g', 86);
-insert into food values(food_no_seq.nextval, '버크셔K스테이크', 8900, '지리산 순종 흰코흑돼지 / 250g', 86);
-insert into food values(food_no_seq.nextval, '함박스테이크', 7900, '국내산 돼지고기 / 100% 수제 / 300g', 86);
-insert into food values(food_no_seq.nextval, '연어스테이크', 8900, '노르웨이산 / 200g', 86);
+insert into food values(food_no_seq.nextval, '슈퍼 스테이크', 9900, '호주산 청정우 / 250g', 86);
+insert into food values(food_no_seq.nextval, '버크셔K 스테이크', 8900, '지리산 순종 흰코흑돼지 / 250g', 86);
+insert into food values(food_no_seq.nextval, '함박 스테이크', 7900, '국내산 돼지고기 / 100% 수제 / 300g', 86);
+insert into food values(food_no_seq.nextval, '연어 스테이크', 8900, '노르웨이산 / 200g', 86);
 insert into restaurant values(restaurant_no_seq.nextval, '한국인의팥집', 'S-5', '031-698-4444', '한국인의팥집', '1111111111761', 0, 48, 'S-9', '20150530', 0, 17);
 insert into restaurant values(restaurant_no_seq.nextval, '베이징스토리', 'S-6', '031-696-0306', '베이징스토리', '1111111111771', 0, 52, 'S-8,S-11', '20150530', 0, 17);
 insert into restaurant values(restaurant_no_seq.nextval, '한그릇한사발', 'S-4', '031-696-0307', '한그릇한사발', '1111111111781', 0, 32, 'S-8,S-11', '20150530', 0, 17);

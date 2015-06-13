@@ -34,15 +34,15 @@ $(document).ready(function(){
 	
 	//메뉴판 체크박스 클릭이벤트
 	$("input[type=checkbox]").on("click",function(){
-		if($(this).is(":checked")){
-			if(calcListCount==0){
+		if($(this).is(":checked")){ // 체크될때
+			if(calcListCount==0){ // 체크할때 메뉴가하나도없었을때
 				$("#calcList").html("<tr class='"+$(this).prop("id")+"'><td align='left' style='padding-left:20px;border-left-style:hidden;border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td></tr>");
 				$("#calcList tr td:first-child").html($("#menus ."+$(this).prop("id")+" td:first-child").html());
 				$("#calcList tr td:nth-child(2)").html("<span class='foodPrice'>"+$("#menus ."+$(this).prop("id")+" td:nth-child(2) .foodPrice").html()+"</span>원");
 				$("#calcList tr td:nth-child(3)").html($("#menus ."+$(this).prop("id")+" td:nth-child(4) input").val());
 				$("#calcList tr td:nth-child(4)").html("<span class='subTotal'>"+$("#calcList tr td:nth-child(2) .foodPrice").text()*$("#calcList tr td:nth-child(3)").text()+"</span>원");
 				calcListCount++;
-			}else{
+			}else{ // 체크할때 예산에 추가된 메뉴가 이미 하나이상 있을때
 				$("#calcList").append("<tr class='"+$(this).prop("id")+"'><td align='left' style='padding-left:20px;border-left-style:hidden;border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td><td style='border-right-style:hidden;'></td></tr>");
 				$("#calcList tr:last-child td:first-child").html($("#menus ."+$(this).prop("id")+" td:first-child").html());
 				$("#calcList tr:last-child td:nth-child(2)").html("<span class='foodPrice'>"+$("#menus ."+$(this).prop("id")+" td:nth-child(2) .foodPrice").html()+"</span>원");
@@ -50,8 +50,8 @@ $(document).ready(function(){
 				$("#calcList tr:last-child td:nth-child(4)").html("<span class='subTotal'>"+$("#calcList tr:last-child td:nth-child(2) .foodPrice").text()*$("#calcList tr:last-child td:nth-child(3)").text()+"</span>원");
 				calcListCount++;
 			}
-		}else{
-			if(calcListCount==1){
+		}else{ // 체크가 해제될때
+			if(calcListCount==1){ // 하나만 있었을경우 메시지를 뿌려줌
 				$("#calcList").html("<tr><td colspan='4' height='50px' style='border-left-style:hidden;border-right-style:hidden;'>위 메뉴판에서 메뉴와 수량을 선택하면 편리하게 예산을 짜실 수 있습니다</td></tr>");
 				calcListCount--;
 			}else{
@@ -330,17 +330,17 @@ border-right: 1px solid pink;
 </c:when>
 <c:otherwise>
 <c:forEach items="${requestScope.foods }" var="food">
-	<tr class="${food.foodName }">
+	<tr class="${food.foodNo }">
 		<td style="padding-left:20px;border-left-style:hidden;border-right-style:hidden;">${food.foodName }&nbsp;&nbsp;<font color="gray" size="2">${food.foodDescription }</font></td>
 		<td style="border-right-style:hidden;" align="center"><span class="foodPrice">${food.foodPrice }</span>원</td>
-		<td style="border-right-style:hidden;" align="center"><input type="checkbox" id="${food.foodName }"></td>
+		<td style="border-right-style:hidden;" align="center"><input type="checkbox" id="${food.foodNo }"></td>
 		<td style="border-right-style:hidden;" align="center">
 			<table>
 			<tr>
 			<td style="padding:0px;padding-right:3px;"><input type="number" min="1" max="10" value="1" readonly="readonly" style="width:80px;height:20px;"></td>
 			<td style="padding:0px;line-height:13px;">
-			<img class="${food.foodName }" src="${initParam.rootPath }/uploadPhoto/up.png"><br>
-			<img class="${food.foodName }" src="${initParam.rootPath }/uploadPhoto/down.png"></td>
+			<img class="${food.foodNo }" src="${initParam.rootPath }/uploadPhoto/up.png"><br>
+			<img class="${food.foodNo }" src="${initParam.rootPath }/uploadPhoto/down.png"></td>
 			</tr>
 			</table>
 		</td>
