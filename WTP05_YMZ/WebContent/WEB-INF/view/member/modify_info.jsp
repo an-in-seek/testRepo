@@ -6,13 +6,14 @@
 <script type="text/javascript">
 /*
  * 이메일주소 select 값 선택
- */
+ 
 function mailCheck(selectObj){ 
 	document.getElementById('emailAddress').value=selectObj.value;
 	if(selectObj.value==""){
 		$("#emailAddress").focus();	
 	}
 }
+*/
 
 function openDaumPostcode(){
 	new daum.Postcode({
@@ -84,19 +85,57 @@ var emailAddressVal = true;
 		}
 	});
 	
+	$("#selectEmail").on("change",function(){
+		var selectEmail = document.getElementById('selectEmail').value;
+		document.getElementById('emailAddress').value = selectEmail;
+		var emailAddress = document.getElementById("#emailAddress");
+		if(selectEmail=="naver.com"){
+			$("input[name=emailAddress]").attr("readOnly",true);
+			$("#emailMessage").text("");	
+			emailAddressVal = true;
+		}	
+		if(selectEmail=="daum.net"){
+			$("input[name=emailAddress]").attr("readOnly",true);
+			$("#emailMessage").text("");	
+			emailAddressVal = true;	
+		}
+		if(selectEmail=="google.com"){
+			$("input[name=emailAddress]").attr("readOnly",true);
+			$("#emailMessage").text("");	
+			emailAddressVal = true;
+		}
+		if(selectEmail=="nate.com"){
+			$("input[name=emailAddress]").attr("readOnly",true);
+			$("#emailMessage").text("");	
+			emailAddressVal = true;
+		}
+		if(selectEmail=="yahoo.com"){
+			$("input[name=emailAddress]").attr("readOnly",true);
+			$("#emailMessage").text("");	
+			emailAddressVal = true;
+		}
+		
+		if(selectEmail=="직접입력"){
+			document.getElementById('emailAddress').value = "";
+			$("input[name=emailAddress]").attr("readOnly",false);
+			emailAddressVal = false;
+		}
+	});
+	
 	$("#emailAddress").on("change",function(){
+		var selectEmail = document.getElementById('selectEmail').value;
 		var emailAddress = $("#emailAddress").val();
-		alert(emailAddress);
 		var addressSize = emailAddress.length;
 		if(addressSize<1||!/^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(emailAddress)){
 			$("#emailsMessage").text("");
 			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
 			emailAddressVal = false;
 		}else{
-		$("#emailMessage").text("");	
-		emailAddressVal = true;
+			$("#emailMessage").text("");
+			emailAddressVal = true;
 		}
-	});
+		
+	})
 	
 	$("#num1").on("change",function(){
 		var num1 = $("#num1").val();
@@ -132,7 +171,6 @@ var emailAddressVal = true;
 	$("#exNick").on("click",function(){
 		check = true;
 		var nickname = $("#nickname").val();
-		alert("asfasdfasdf");
 		$.ajax({
 			url:"${initParam.rootPath}/member/nickDuplicateCheck.do",
 			data:{"nickname":nickname},
@@ -283,8 +321,8 @@ var emailAddressVal = true;
 			<td>
 				<input type="hidden" id="email" value="${sessionScope.login_info.email }">
 				<input type="text" id="emailName" name="emailName" maxlength='11'>@<input type="text" id="emailAddress" name="emailAddress" maxlength='11'>
-				<select name="selectEmail"  style="vertical-align:middle" onChange="javascript:mailCheck(this)">
-				<option value="">직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
+				<select name="selectEmail"  style="vertical-align:middle" id="selectEmail">
+				<option>직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
 				<font color="red" size="1"><span id="emailMessage"></span></font>
 				<font color="blue" size="1"><span id="emailsMessage"></span></font>
 			</td>

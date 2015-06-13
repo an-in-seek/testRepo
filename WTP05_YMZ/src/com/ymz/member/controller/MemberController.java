@@ -287,7 +287,7 @@ public class MemberController {
 			loginInfo.setEmail(email);
 			loginInfo.setPhoneNo(phoneNo);
 			service.modifyMember(loginInfo);
-			return new ModelAndView("member/mypage/mypage.tiles");
+			return new ModelAndView("/member/login/mypage.do");
 			
 		}
 	
@@ -391,7 +391,7 @@ public class MemberController {
 		Member m = service.getMemberById(id);
 		m.setPassword(password);
 		service.modifyPassword(m);
-		return new ModelAndView("member/mypage/mypage.tiles");
+		return new ModelAndView("/member/login/mypage.do");
 		}
 	
 	/********************** 회원 마일리지 값 요청 ********************/
