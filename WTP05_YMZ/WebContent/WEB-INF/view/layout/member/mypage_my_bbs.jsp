@@ -4,24 +4,24 @@
 
 
 <c:choose>
-	<c:when test="${fn:length(requestScope.list) != 0 }">
-	<table width="680px" border="1">
-		<thead>
+	<c:when test="${fn:length(requestScope.myBBS.list) != 0 }">
+	<table width="680px" border="1" class="listTB">
+		<thead class="tableHead">
 			<tr align="center" style="border-color:#ccc;">
-				<td width="40px">NO</td>
-				<td width="320px">제목</td>
-				<td width="90px">날짜</td>
-				<td width="90px">추천</td>
-				<td width="90px">작성자</td>
+				<td width="70px">게시물NO</td>
+				<td>제목</td>
+				<td width="100px">날짜</td>
+				<td width="80px">추천</td>
+				<td width="80px">작성자</td>
 			</tr>
 		</thead>
 		<tbody style="border-color:#ccc;">
-			<c:forEach items="${requestScope.list}" var="review">
+			<c:forEach items="${requestScope.myBBS.list}" var="review">
 				<tr align="center">
 					<td>${review.reviewNo}</td>
 					<td>${review.title}</td>
 					<td>${review.regDate.substring(0,10)}</td>
-					<td>${review.hits}</td>
+					<td>${review.recommend}</td>
 					<td>${review.memberId}</td>
 				</tr>
 			</c:forEach>
@@ -35,26 +35,26 @@
 					<!-- 페이징 처리 -->
 					<!-- 이전 페이지 그룹 -->
 					<c:choose>
-						<c:when test="${pagingBean.previousPageGroup }">
-							<a href="${initParam.rootPath }/member/login/mypage.do?pageNo=${pagingBean.startPageOfPageGroup-1}">◀&nbsp;</a>
+						<c:when test="${myBBS.pagingBean.previousPageGroup }">
+							<a href="${initParam.rootPath }/member/login/mypage.do?pageNo=${myBBS.pagingBean.startPageOfPageGroup-1}&state=bbs">◀&nbsp;</a>
 						</c:when>
 						<c:otherwise>◀&nbsp;</c:otherwise>
 					</c:choose>
 					<!-- 페이지 번호 -->
-					<c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
+					<c:forEach begin="${myBBS.pagingBean.startPageOfPageGroup }" end="${myBBS.pagingBean.endPageOfPageGroup}" var="pageNum">
 						<c:choose>
-							<c:when test="${pageNum == pagingBean.currentPage }">
+							<c:when test="${pageNum == myBBS.pagingBean.currentPage }">
 								&nbsp;<font color="blue" style="font-weight: bold; text-decoration: underline">${pageNum}</font>&nbsp;
 							</c:when>
 							<c:otherwise>
-								<a href="${initParam.rootPath }/member/login/mypage.do?pageNo=${pageNum}">&nbsp;${pageNum}&nbsp;</a>
+								<a href="${initParam.rootPath }/member/login/mypage.do?pageNo=${pageNum}&state=bbs">&nbsp;${pageNum}&nbsp;</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					<!-- 다음 페이지 그룹 -->
 					<c:choose>
-						<c:when test="${pagingBean.nextPageGroup }">
-							<a href="${initParam.rootPath }/member/login/mypage.do?pageNo=${pagingBean.endPageOfPageGroup+1}">&nbsp;▶</a>
+						<c:when test="${myBBS.pagingBean.nextPageGroup }">
+							<a href="${initParam.rootPath }/member/login/mypage.do?pageNo=${myBBS.pagingBean.endPageOfPageGroup+1}&state=bbs">&nbsp;▶</a>
 						</c:when>
 						<c:otherwise>&nbsp;▶</c:otherwise>
 					</c:choose>
@@ -64,14 +64,14 @@
 	</table>
 	</c:when>
 	<c:otherwise>
-	<table style="width: 400px" border="1" class="listTB">
-		<thead>
+	<table width="680px" border="1" >
+		<thead class="tableHead">
 			<tr align="center">
-				<td width="40px">NO</td>
-				<td width="320px">제목</td>
-				<td width="90px">날짜</td>
-				<td width="90px">추천</td>
-				<td width="90px">작성자</td>
+				<td width="70px">게시물NO</td>
+				<td >제목</td>
+				<td width="100px">날짜</td>
+				<td width="80px">추천</td>
+				<td width="80px">작성자</td>
 			</tr>
 		</thead>
 		<tbody>

@@ -11,6 +11,24 @@ $(document).ready(function(){
 		},function(){
 			$(this).css("text-decoration","none");
 		});
+	
+	if("${requestScope.state}" == 'bbs'){
+		$("#tab-1").prop('checked', 'checked');
+	}else if("${requestScope.state}"=='reply'){
+		$("#tab-2").prop('checked', 'checked');
+	}else if("${requestScope.state}"=='report'){
+		$("#tab-3").prop('checked', 'checked');
+	}
+	
+	$(".listTB tbody tr").on("mouseover", function() {
+		$(".listTB tbody tr").css("background-color", "white");
+		$(this).css("background-color", "lightcyan");
+	});
+	
+	$(".listTB tbody tr").on("click", function(){
+		var reviewNo = $(this).find(":nth-child(1)").text();
+		document.location.href="${initParam.rootPath }/review/reviewView.do?reviewNo="+reviewNo;
+	});
 });
 </script>
 
@@ -40,6 +58,12 @@ $(document).ready(function(){
 	margin:10px;
 	margin-left: auto;
 	margin-right: auto;
+}
+.tableHead tr{
+	background-color: #f8f8f8;
+}
+.listTB tbody tr{
+	cursor: pointer;
 }
 .titleTd{
 	width: 85px;
@@ -100,7 +124,7 @@ $(document).ready(function(){
 
 	<div class="container">
 		<section class="tabs">
-	        <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
+	        <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1"/>
 	        <label for="tab-1" class="tab-label-1">My게시물</label>
 	
 	        <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" />
@@ -113,16 +137,16 @@ $(document).ready(function(){
 			
 	        <div class="content">
 		        <div class="content-1">
-					<h2>내가 작성한 글</h2>
-					<p><%@include file="mypage_bbs1.jsp" %></p>
+					<h2>내가 작성한 리뷰 게시물</h2>
+					<p><%@include file="mypage_my_bbs.jsp" %></p>
 				</div>	
 		        <div class="content-2">
-					<h2>내가 작성한 댓글</h2>
-	                <p><%@include file="mypage_bbs1.jsp" %></p>
+					<h2>내가 작성한 리뷰 댓글</h2>
+	                <p><%@include file="mypage_my_reply.jsp" %></p>
 			    </div>
 		        <div class="content-3">
-					<h2>내가 신고한 글</h2>
-	                <p><%@include file="mypage_bbs1.jsp" %></p>
+					<h2>내가 신고한 리뷰 게시물</h2>
+	                <p><%@include file="mypage_my_report.jsp" %></p>
 			    </div>
 	        </div>
 		</section>

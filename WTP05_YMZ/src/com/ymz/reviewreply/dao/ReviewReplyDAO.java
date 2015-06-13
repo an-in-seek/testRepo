@@ -20,6 +20,12 @@ public interface ReviewReplyDAO {
 	
 	//댓글 내용 갖고오기
 	public abstract ReviewReply getReviewReplyContent(int replyNo);
+
+	//아이디(ID)로 댓글 목록 조회
+	List<ReviewReply> selectReviewReplyById(int pageNo, String memberId);
+
+	//아이디(ID)와 일치하는 데이터들의 총 개수
+	int selectReviewReplyCountById(String memberId);
 	
 	
 }

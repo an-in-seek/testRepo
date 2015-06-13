@@ -131,88 +131,64 @@ $(document).ready(function(){
 	
 
 
-$("#star1").on("click", function(){
-	
-	$("#star").html("<span class='star_rating'><span style='width:20%'></span></span>");
-});
-
-$("#star2").on("click", function(){
-	
-	$("#star").html("<span class='star_rating'><span style='width:40%'></span></span>");	
-});
-
-$("#star3").on("click", function(){
-
-	$("#star").html("<span class='star_rating'><span style='width:60%'></span></span>");
-});
-
-$("#star4").on("click", function(){
-	$("#star").html("<span class='star_rating'><span style='width:80%'></span></span>");
-});
-$("#star5").on("click", function(){
-$("#star").html("<span class='star_rating'><span style='width:100%'></span></span>");
-});
-
-
-
-//내용 공백일때 경고창
-	/* $("#registerBtn").click( function() {
-		if (!$("#content").val()) {
-			$("#content").focus();
-			alert("내용을 입력하세요");
-			return false;
-			}
-		//평점 선택 안했을 때 경고창
-		else if($("input[type=radio][name=score]:checked").length<1){
-				alert("평점을 선택해");
-			return false;
-		}
-	});  */
-	
-		//댓글 수정할 때 
-		//내용 빈칸일 때 경고창
-/* 	$("#replyModifyBtn").click(function(){
-		if (!$("#ModifyContent").val()) {
-			$("#ModifyContent").focus();
-			alert("내용을 써주세욤");
-			return false;
-			//평점 선택 안했을 때 경고창
-		}else if($("input[type=radio][name=score]:checked").length<1){
-			alert("평점을 선택해");
-			return false;
-		}
-	}); */
-
-	
-	$("#reply_reportButton").on("click", function() {
-		alert("로그인을 해야합니다.미구현");
-	});
-	
-});
- 	
-function modifyReply(number, restaurantNo){
-	var isUp=confirm("수정하시겠습니까?")
-	if(isUp){
-			var con = $("#replyContent"+number).text();
-				$("#updateReplyForm").append("<input type='hidden'  name='number' value='"+number+"'>");
-				$("#updateReplyForm").append("<input type='hidden'  name='restaurantNo' value='"+restaurantNo+"'>");
-				$("#ModifyContent").val(con);	
-				$("#dialog").dialog({modal:true, width:650});
-		}else{
+	//내용 공백일때 경고창
+	 $("#registerBtn").click( function() {
+			if (!$("#content").val()) {
+				$("#content").focus();
+				alert("내용을 입력하세요");
 				return false;
-		}
-}
+				}
+			//평점 선택 안했을 때 경고창
+			else if($("input[type=radio][name=score]:checked").length<1){
+					alert("평점을 선택해");
+				return false;
+			}
+		});  
+		
+			//댓글 수정할 때 
+			//내용 빈칸일 때 경고창
+		$("#replyModifyBtn").click(function(){
+			if (!$("#ModifyContent").val()) {
+				$("#ModifyContent").focus();
+				alert("내용을 써주세욤");
+				return false;
+				//평점 선택 안했을 때 경고창
+			}else if(!$("#score")){
+				alert("평점을 선택해");
+				return false;
+			}
+		}); 
 
-
-//송이꺼
-function removeReply(number,score, restaurantNo){
-	var isDel=confirm("삭제할까요?");
-	if(isDel){
-		document.location.href="${initParam.rootPath}/restaurant/login/removeReply.do?number=" +number+"&score="+score+"&restaurantNo="+restaurantNo;
-	}else{
-		return;
+		
+		$("#reply_reportButton").on("click", function() {
+			alert("로그인을 해야합니다.미구현");
+		});
+		
+	});
+	 	
+	function modifyReply(number, restaurantNo){
+		var isUp=confirm("수정하시겠습니까?")
+		if(isUp){
+				var con = $("#replyContent"+number).text();
+					$("#updateReplyForm").append("<input type='hidden'  name='number' value='"+number+"'>");
+					$("#updateReplyForm").append("<input type='hidden'  name='restaurantNo' value='"+restaurantNo+"'>");
+					$("#ModifyContent").val(con);	
+					$("#dialog").dialog({modal:true, width:650});
+			}else{
+					return false;
+			}
 	}
-}
+
+
+	//송이꺼 삭제팝업창
+	function removeReply(number,score, restaurantNo){
+		var isDel=confirm("삭제할까요?");
+		if(isDel){
+			document.location.href="${initParam.rootPath}/restaurant/login/removeReply.do?number=" +number+"&score="+score+"&restaurantNo="+restaurantNo;
+		}else{
+			return;
+		}
+	}
 </script>
 
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet"/>
@@ -224,29 +200,28 @@ display:none;
 }
 
 /* UI Object  빨간별*/
-
 .star_rating,
 .star_rating span{display:inline-block;overflow:hidden;height:14px;background:transparent url(${initParam.rootPath }/css/images/ico_star.gif) no-repeat}
 .star_rating{width:79px;vertical-align:-1px;}
 .star_rating span{background-position:0 -14px;font-size:0;line-height:0;text-indent:-100px;*text-indent:0;vertical-align:top}
 
-/* //UI Object */
-
-
-
-/* UI Object 노란별
-
-.star_rating{width:67px;height:10px;background:url(${initParam.rootPath }/css/images/bg_starpoint_off.gif) 0 0 no-repeat}
-.star_rating span{display:block;height:10px;background:url(${initParam.rootPath }/css/images/bg_starpoint_on.gif) 0 0 no-repeat}
-.star_rating .point{display:none}
-@media print {
-.star_rating span{display:none}
-.star_rating .point{display:block}
+#replyTable tr {
+	border-right: 1px solid pink;
+	border-left: 1px solid pink;
+	background-color: lavenderblush;
 }
-
-/* //UI Object */
-
-
+.blankTd{
+	border-right: 1px solid white;
+	border-left: 1px solid white;
+	background-color: white;
+}
+#replyTable tr td{
+	border-top: 1px solid pink;
+	border-bottom: 1px solid pink;
+}
+.nicknameTd{
+border-right: 1px solid pink;
+}
 </style>
 
 </head>
@@ -416,103 +391,98 @@ display:none;
 	<p>
 		<font size="5"><b>댓글</b></font>
 	</p>
-	<hr>
-	<table align="center" style="width: 700px;" "background-color: blue;" border='1'>
+<hr>
+	<table id="replyTable" style=" text-align:'center';width:100%;">
 		<c:forEach items="${requestScope.replyList}" var="reply">
-				<tr>
+			<tr>	
+				<td class="nicknameTd" style="width:10%">${reply.nickname}</td>
+				<td id="replyContent${reply.number}" style="width: 800px;">${reply.content }</td>
+				<td  align="left" style="width:15%">${reply.regDate }<br>
+						 평점 : ${reply.score }점<br>
+					<c:choose>
+						<c:when test="${reply.score==1}"><span class="star_rating"><span style="width:20%">1점</span></span></c:when>
+						<c:when test="${reply.score==2}"><span class="star_rating"><span style="width:40%">2점</span></span></c:when>
+						<c:when test="${reply.score==3}"><span class="star_rating"><span style="width:60%">3점</span></span></c:when>
+						<c:when test="${reply.score==4}"><span class="star_rating"><span style="width:80%">4점</span></span></c:when>
+						<c:when test="${reply.score==5}"><span class="star_rating"><span style="width:100%">5점</span></span></c:when>
+					</c:choose>
+					<p>
+					<input type="button" id="replyModifyButton${reply.number}" onclick="modifyReply(${reply.number},${requestScope.restaurant.restaurantNo})" value="수정">
+					<input type="button" id="replyRemoveButton${reply.number }" onclick="removeReply(${reply.number},${reply.score },${requestScope.restaurant.restaurantNo})" value="삭제">
 					
-					<td><font color="#80000">작성일 : ${reply.regDate }</td>
-					<td><font color="#80000">작성자 : ${reply.nickname}</td>
-					<td><font color="#80000">평점 : ${reply.score }
-							<c:choose>
-								<c:when test="${reply.score==1}"><span class="star_rating"><span style="width:20%">1점</span></span></c:when>
-								<c:when test="${reply.score==2}"><span class="star_rating"><span style="width:40%">2점</span></span></c:when>
-								<c:when test="${reply.score==3}"><span class="star_rating"><span style="width:60%">3점</span></span></c:when>
-								<c:when test="${reply.score==4}"><span class="star_rating"><span style="width:80%">4점</span></span></c:when>
-								<c:when test="${reply.score==5}"><span class="star_rating"><span style="width:100%">5점</span></span></c:when>
-							</c:choose>
-					</td>
-				</tr>
-				<tr>
-			
-					<td id="replyContent${reply.number}" colspan="3" height="30px"><font color="#FF7F50">${reply.content }</td>
-				</tr>
-				<td align="right" colspan="3">
-				<input type="button" id="replyModifyButton${reply.number}" onclick="modifyReply(${reply.number},${requestScope.restaurant.restaurantNo})" value="수정">
-				<input type="button" id="replyRemoveButton${reply.number }" onclick="removeReply(${reply.number},${reply.score },${requestScope.restaurant.restaurantNo})" value="삭제">
-				<button id="reply_reportButton" style="width: 80px; heigth: 20px;">신고</button>
 				</td>
-				<tr>
-					<td colspan="3"></td>
-				</tr>
-			</c:forEach>
+			</tr>
+		
+			<tr>
+				<td class="blankTd" colspan="4"></td>
+			</tr>
+		</c:forEach>
 	</table>
-
-	<hr>
 	<p>
 		<font size="5"><b>댓글쓰기</b></font>
 	</p>
 	<form method="post" action="${initParam.rootPath}/restaurant/login/registerReply.do" id="registerReplyForm">
-		<table align="center" style="width: 700px;" border='1' >
-			<tr >
-				<td>	
-				
-					<input type="text" id="content" name="content" style="width: 600px; height: 80px"> 
+		<table  style="text-align:'center' border='1' width:700px;">
+		<c:choose>
+			<c:when test="${not empty sessionScope.login_info}">
+				<td>
+				<textarea name="content" id="content"  onfocus="focusReply(this)" style="width: 600px; height: 80px"> 댓글기본내용</textarea>
 					<input type="hidden"	id="restaurantNo" name="restaurantNo" value="${requestScope.restaurant.restaurantNo }">
- 	
-
-		
-				<p>
-					평점주기
-					<label for="1"></label><input type="radio" name="score" value="1" id="1"><span class="star_rating"><span style="width:20%"></span></span>
+				<p>평점주기
+				 	<label for="1"></label><input type="radio" name="score" value="1" id="1"><span class="star_rating"><span style="width:20%"></span></span>
 					<label for="2"></label><input type="radio" name="score" value="2" id="2"><span class="star_rating"><span style="width:40%"></span></span>
 					<label for="3"></label><input type="radio" name="score" value="3" id="3"><span class="star_rating"><span style="width:60%"></span></span>
 					<label for="4"></label><input type="radio" name="score" value="4" id="4"><span class="star_rating"><span style="width:80%"></span></span>
 					<label for="5"></label><input type="radio" name="score" value="5" id="5"><span class="star_rating"><span style="width:100%"></span></span>
-					
-					
-					<table id="star" border='1' style="background-image:url('${initParam.rootPath }/css/images/ico_star.gif');width:80px;height:15px;">
-					<tr>
-					<td id="star1" name="score" value="1"></td>
-					<td id="star2" name="score" value="2"></td>
-					<td id="star3" name="score" value="3"></td>
-					<td id="star4" name="score" value="4"></td>
-					<td id="star5" name="score" value="5"></td>
-					</tr>
-					</table>
-				</p>
-						
-						<td>
-				<input type="image" src="${initParam.rootPath}/css/images/btn_registry.gif" id="registerBtn" value="등록" >
-
+					</p>
+				</td>
+				<td>
+					<input type="image" src="${initParam.rootPath}/css/images/btn_registry.gif" id="registerBtn" value="등록" onclick="replySubmit()" >
+				</td>
+		</c:when>
+			<c:otherwise>
+			<tr>
+				<td disabled="disabled">	
+					<textarea name="content" id="content" name="content" disabled="disabled" onfocus="focusReply(this)" style="width: 600px; height: 80px">로그인을 하시오
+					</textarea>
+						<input type="hidden"	id="restaurantNo" name="restaurantNo" value="${requestScope.restaurant.restaurantNo }">
+				<p>평점주기
+				 	<label for="1"></label><input type="radio" name="score"  value="1" id="1"><span class="star_rating"><span style="width:20%"></span></span>
+					<label for="2"></label><input type="radio" name="score" value="2" id="2"><span class="star_rating"><span style="width:40%"></span></span>
+					<label for="3"></label><input type="radio" name="score" value="3" id="3"><span class="star_rating"><span style="width:60%"></span></span>
+					<label for="4"></label><input type="radio" name="score" value="4" id="4"><span class="star_rating"><span style="width:80%"></span></span>
+					<label for="5"></label><input type="radio" name="score" value="5" id="5"><span class="star_rating"><span style="width:100%"></span></span></p>
+				</td>
+				<td>
+					<input type="image" src="${initParam.rootPath}/css/images/btn_registry.gif" id="registerBtn" disabled="disabled" value="등록" >
 				</td>
 			</tr>
+			</c:otherwise>
+		</c:choose>
 		</table>
 	</form>
-
 <div id="dialog" title="댓글 수정">
 		<section>
 			<header style="text-align: center; font-weight: bolder; font-size: 1.3em; border-bottom: 2px solid black; padding: 5px">댓글을 수정하세요</header>
 				<form id="updateReplyForm" method="post" action="${initParam.rootPath}/restaurant/login/updateReply.do"  >
 					<p>
-					<article>내용</article>
-						</p>
+						<article>내용</article>
+					</p>
 						<input type="text" id="ModifyContent" name="content" style="width: 600px; height: 40px" autofocus="autofocus">
-						<p>
-					평점주기
-					<label for="1"></label><input type="radio" name="score" value="1" id="1"><span class="star_rating"><span style="width:20%"></span></span>
-					<label for="2"></label><input type="radio" name="score" value="2" id="2"><span class="star_rating"><span style="width:40%"></span></span>
-					<label for="3"></label><input type="radio" name="score" value="3" id="3"><span class="star_rating"><span style="width:60%"></span></span>
-					<label for="4"></label><input type="radio" name="score" value="4" id="4"><span class="star_rating"><span style="width:80%"></span></span>
-					<label for="5"></label><input type="radio" name="score" value="5" id="5"><span class="star_rating"><span style="width:100%"></span></span>
-				</p>
+					<p>
+						평점주기
+						<label for="1"></label><input type="radio" name="score" value="1" id="1"><span class="star_rating"><span style="width:20%"></span></span>
+						<label for="2"></label><input type="radio" name="score" value="2" id="2"><span class="star_rating"><span style="width:40%"></span></span>
+						<label for="3"></label><input type="radio" name="score" value="3" id="3"><span class="star_rating"><span style="width:60%"></span></span>
+						<label for="4"></label><input type="radio" name="score" value="4" id="4"><span class="star_rating"><span style="width:80%"></span></span>
+						<label for="5"></label><input type="radio" name="score" value="5" id="5"><span class="star_rating"><span style="width:100%"></span></span>
+					</p>
 				<input id="replyModifyBtn" type="submit" value="등록">
-				
-		</form>
+			</form>
 		</section>
 	</div>
+	<p/>
 	
-<p/>
 <hr>
 <p align="center"><a href="${sessionScope.backURL }"><button style="width:200px;height:50px;background-color:#FF5E00;border-color:#FF5E00;color:white;"><b>목록으로 돌아가기</b></button></a></p>
 </body>

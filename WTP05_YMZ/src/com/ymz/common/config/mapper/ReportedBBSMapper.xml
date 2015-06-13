@@ -42,6 +42,27 @@
 		from 		REPORTED_REVIEW
 	</select>
 	
+	<!-- 아이디로 정보 조회 -->
+	<select id="selectAllReportedBBSById" parameterType="map" resultMap="report-resultmap">
+		select  REPORTED_REVIEW_NO, CATEGORY, BBS_NO, STATE, REASON, reported_date, REPORTER_ID
+		from (
+			select ceil(rownum/#{contentsPerPage}) page, REPORTED_REVIEW_NO, CATEGORY, BBS_NO, STATE, REASON, reported_date, REPORTER_ID
+			from (
+					<include refid="report-select"/>
+					where reporter_id = #{memberId}
+					order by REPORTED_REVIEW_NO
+			)
+		) 
+		where page = #{pageNo}
+	</select>
+	
+	<!-- 아디와 일치하는 DB 데이터 총 개수 -->
+	<select id="selectTotalReportedBBSCountById" resultType="_int" parameterType="String">
+		select 	count(REPORTED_REVIEW_NO) 
+		from 		REPORTED_REVIEW
+		where reporter_id = #{memberId}
+	</select>
+	
 	
 	<!-- 신고된 게시물 삽입하기 -->
 	<insert id="insertReportedBBS" parameterType="ReportedBBS">
