@@ -64,4 +64,24 @@
 		where review_reply_no=#{replyNo}
 	</select>
 
+	<!-- 아이디(ID)로 조회 -->
+	<select id="selectReviewReplyById" resultMap="reviewreply-resultmap" parameterType="map">
+		select review_reply_no, reg_date, content, review_no, member_id
+		from (
+				select ceil(rownum/#{contentsPerPage}) page, review_reply_no, reg_date, content, review_no, member_id
+				from (
+						<include refid="reply-select"/>
+						where member_id = #{memberId}
+						order by reg_date desc
+			)
+		) 
+		where page = #{pageNo}
+	</select>
+	
+	<!-- 아이디(ID)와 일치하는 게시물 수  -->
+	<select id="selectReviewReplyCountById" parameterType="map" resultType="_int">
+		select count(review_reply_no) 
+		from review_reply
+		where member_id = #{memberId}
+	</select>
 </mapper>

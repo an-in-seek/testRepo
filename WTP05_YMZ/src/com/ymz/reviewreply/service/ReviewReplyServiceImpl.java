@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ymz.common.util.PagingBean;
+import com.ymz.review.vo.Review;
 import com.ymz.reviewreply.dao.ReviewReplyDAO;
 import com.ymz.reviewreply.vo.ReviewReply;
 
@@ -46,10 +48,20 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 	//댓글 내용 갖고오기
 	@Override
 	public ReviewReply getReviewReplyContent(int replyNo) {
-
 		return dao.getReviewReplyContent(replyNo);
 	}
 	
+	//아이디(ID)로 댓글 목록 조회
+	@Override
+	public Map<String, Object> getReviewReplyListPagingById(int pageNo, String memberId) {
+		List<ReviewReply> list = dao.selectReviewReplyById(pageNo, memberId); // 오늘 최고 조회수 글 목록 가져오기
+		int totalContent = dao.selectReviewReplyCountById(memberId); // 수정 : 매개변수 추가
+		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("replyList", list);
+		map.put("pagingBean", pagingBean);
+		return map;
+	}
 	
 
 }

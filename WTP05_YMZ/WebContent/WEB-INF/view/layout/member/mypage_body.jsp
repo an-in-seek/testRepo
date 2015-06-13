@@ -41,6 +41,9 @@ $(document).ready(function(){
 	margin-left: auto;
 	margin-right: auto;
 }
+.tableHead tr{
+	background-color: #f8f8f8;
+}
 .titleTd{
 	width: 85px;
 	text-align: right;
@@ -113,16 +116,16 @@ $(document).ready(function(){
 			
 	        <div class="content">
 		        <div class="content-1">
-					<h2>내가 작성한 글</h2>
-					<p><%@include file="mypage_bbs1.jsp" %></p>
+					<h2>내가 작성한 리뷰 게시물</h2>
+					<p><%@include file="mypage_my_bbs.jsp" %></p>
 				</div>	
 		        <div class="content-2">
-					<h2>내가 작성한 댓글</h2>
-	                <p><%@include file="mypage_bbs1.jsp" %></p>
+					<h2>내가 작성한 리뷰 댓글</h2>
+	                <p><%@include file="mypage_my_reply.jsp" %></p>
 			    </div>
 		        <div class="content-3">
-					<h2>내가 신고한 글</h2>
-	                <p><%@include file="mypage_bbs1.jsp" %></p>
+					<h2>내가 신고한 리뷰 게시물</h2>
+	                <p><%@include file="mypage_my_bbs.jsp" %></p>
 			    </div>
 	        </div>
 		</section>
