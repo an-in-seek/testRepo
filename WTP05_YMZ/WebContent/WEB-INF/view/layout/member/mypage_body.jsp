@@ -113,15 +113,15 @@ $(document).ready(function(){
 			
 	        <div class="content">
 		        <div class="content-1">
-					<h2>About us</h2>
+					<h2>내가 작성한 글</h2>
 					<p><%@include file="mypage_bbs1.jsp" %></p>
 				</div>	
 		        <div class="content-2">
-					<h2>Services</h2>
+					<h2>내가 작성한 댓글</h2>
 	                <p><%@include file="mypage_bbs1.jsp" %></p>
 			    </div>
 		        <div class="content-3">
-					<h2>Portfolio</h2>
+					<h2>내가 신고한 글</h2>
 	                <p><%@include file="mypage_bbs1.jsp" %></p>
 			    </div>
 	        </div>
