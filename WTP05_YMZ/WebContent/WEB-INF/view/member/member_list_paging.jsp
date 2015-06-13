@@ -10,7 +10,7 @@ $(document).ready(function(){
 	
 	$("#listTB tbody tr").on("mouseover", function(){
 		$("table#listTB tbody tr").css("background-color", "white");
-		$(this).css("background-color", "lightgray");
+		$(this).css("background-color", "lightcyan");
 	});
 	
 	$("#listTB tbody tr").on("click", function(){
@@ -118,13 +118,16 @@ $(document).ready(function(){
 	width:900px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
+	border: 1;
 }
 #listTB thead tr {
 	font-weight: bold;
-	background: silver;
+	background: lightgray;
+	border: 2px solid #B70000;
 }
 #listTB tbody tr{
 	cursor: pointer;
+	border-bottom: 1px solid black;
 }
 div#dialog{
 	width:400px;
@@ -141,7 +144,7 @@ article{
 <div align="center" id="table">	
 <c:choose>
 	<c:when test="${fn:length(requestScope.member_list) != 0 }">
-	<table id="listTB"  border="1">
+	<table id="listTB"  >
 		<thead>
 			<tr align="center">
 				<td>번호</td>
@@ -220,7 +223,7 @@ article{
 	</p>
 	</c:when>
 	<c:otherwise>
-	<table align="center" id="listTB" border="1">
+	<table align="center" id="listTB" >
 		<thead>
 			<tr align="center">
 				<td>번호</td>
