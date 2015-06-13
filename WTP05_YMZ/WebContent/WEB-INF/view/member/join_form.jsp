@@ -502,6 +502,7 @@ table{
 #col2{
 	width:50px;
 }
+
 .id_btn{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;

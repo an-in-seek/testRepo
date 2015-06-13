@@ -394,11 +394,12 @@ public class MemberController {
 	@RequestMapping(value="modify_password.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView modifyPassword(@RequestParam String password,HttpSession session){
-		Member loginInfo = (Member)session.getAttribute("login_info");
-		String id = loginInfo.getId();
+		Member login_Info = (Member)session.getAttribute("login_info");
+		String id = login_Info.getId();
 		Member m = service.getMemberById(id);
 		m.setPassword(password);
 		service.modifyPassword(m);
+		session.setAttribute("login_info", m);
 		return new ModelAndView("/member/login/mypage.do");
 		}
 	
