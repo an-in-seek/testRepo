@@ -166,12 +166,12 @@ var emailAddressVal = true;
 			if($(this).val()==""){
 				$("#emailAddress").val("");
 				$("#emailAddress").attr("disabled",false);
+				$("#emailAddress").focus();
 				if(addressSize<1||!/^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(emailAddress)){
 					$("#emailsMessage").text("");
 					$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
 					emailAddressVal = false;
 				}else{
-				$("#emailMessage").text("");	
 				emailAddressVal = true;
 				}
 			}else{
