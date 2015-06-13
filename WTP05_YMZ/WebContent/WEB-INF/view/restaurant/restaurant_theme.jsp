@@ -14,7 +14,7 @@ a{
 <script type="text/javascript">
 $(document).ready(function(){
 	if("${requestScope.isAdmin}"){
-		$("#newRestaurantTd").append("<a href='${initParam.rootPath }/restaurant/login/admin/addNewRestaurantForm.do'><button style='width:100px;height:30px;'>맛집등록</button>");
+		$("#newRestaurantTd").append("<a href='${initParam.rootPath }/restaurant/login/admin/addNewRestaurantForm.do'><button style='background-color:gray;border-color:gray;color:white;width:100px;height:30px;'><b>맛집등록</b></button>");
 	}
 	
 	$("a").hover(function(){
@@ -24,7 +24,6 @@ $(document).ready(function(){
 	});
 	
 	$("#align").on("change",function(){
-		$("#alignForm").append("<input type='hidden' name='theme' value='${requestScope.theme}'>");
 		alignForm.submit();
 	});
 	
@@ -49,20 +48,27 @@ $(document).ready(function(){
 	},function(){
 		$(this).css("background","none");
 	});
+	
+	$("#theme option[value=${requestScope.theme}]").prop("selected","selected");
+	$("#theme").on("change",function(){
+		$("#alignForm").submit();
+	});
 });
 </script>
 </head>
 <body><div align="center" style="margin-bottom:20px;">
-<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=전체&align=${requestScope.align}">전체보기</a>
-<c:forEach items="${requestScope.themes }" var="theme">
-	<a href="${initParam.rootPath }/restaurant/showListByTheme.do?theme=${theme.categoryId }&align=${requestScope.align}">${theme.categoryName }</a>
-</c:forEach>
-<p/>
 <table border="1" style="width:100%;">
 	<thead>
 		<tr height="50px">
 			<td style="border-left-style:hidden;border-top-style:hidden;border-right-style:hidden;" colspan="4">
 				<form id="alignForm" action="${initParam.rootPath }/restaurant/showListByTheme.do" method="post">
+				테마:
+				<select id="theme" name="theme">
+					<option value="전체">전체보기</option>
+					<c:forEach items="${requestScope.themes }" var="theme">
+						<option value="${theme.categoryId }">${theme.categoryName }</option>
+					</c:forEach>
+				</select>
 				정렬:
 				<select id="align" name="align">
 					<option value="date">최근 등록일순</option>

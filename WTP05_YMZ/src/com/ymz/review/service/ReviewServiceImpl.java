@@ -87,6 +87,9 @@ public class ReviewServiceImpl implements ReviewService {
 		dao.updateHitsReview(reviewNo);
 	}
 
+	/**
+	 * 회원 아이디(ID)로 리뷰게시물 조회하기
+	 */
 	@Override
 	public Map<String, Object> getReviewListPagingById(int pageNo, String memberId) {
 		List<Review> list = dao.selectReviewById(pageNo, memberId); // 오늘 최고 조회수 글 목록 가져오기

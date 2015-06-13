@@ -1,11 +1,14 @@
 package com.ymz.reviewreply.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ymz.common.util.PagingBean;
 import com.ymz.reviewreply.vo.ReviewReply;
 
 @Repository
@@ -46,5 +49,21 @@ public class ReviewReplyDAOImpl implements ReviewReplyDAO {
 		return session.selectOne(namespace + "selectReviewReplyByNo", replyNo);
 	}
 	
+	//회원 아이디(ID)로 리뷰 댓글 리스트 조회하기
+	@Override
+	public List<ReviewReply> selectReviewReplyById(int pageNo, String memberId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		map.put("pageNo", pageNo);
+		map.put("memberId", memberId);
+		return session.selectList(namespace+"selectReviewReplyById", map);
+	}
 	
+	//회원 아이디(ID)와 일치하는 정보들의 총 개수
+	@Override
+	public int selectReviewReplyCountById(String memberId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);  
+		return session.selectOne(namespace+"selectReviewReplyCountById", map);
+	}
 }

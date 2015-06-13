@@ -26,6 +26,7 @@ import com.ymz.member.mail.EmailSender;
 import com.ymz.member.service.MemberService;
 import com.ymz.member.vo.Member;
 import com.ymz.review.service.ReviewService;
+import com.ymz.reviewreply.service.ReviewReplyService;
 
 @Controller
 @RequestMapping("/member/")
@@ -42,6 +43,9 @@ public class MemberController {
 
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	private ReviewReplyService reviewReplyService;
    
 	
 	//회원가입 가기 전 category 뿌려주기
@@ -567,22 +571,19 @@ public class MemberController {
 	    	
 	}
 	
+	//마이페이지 메인화면 
 	@RequestMapping("login/mypage.do")
-	public ModelAndView moveMypage(HttpSession session,  @RequestParam(defaultValue="1") int pageNo){
+	public ModelAndView moveMypage(HttpSession session,  ModelMap map, @RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="1") int pageNo2){
 		Member member = (Member) session.getAttribute("login_info");
-		Map<String, Object> map = reviewService.getReviewListPagingById(pageNo, member.getId());
+		map.put("myBBS", reviewService.getReviewListPagingById(pageNo, member.getId()));
+		map.put("myReply", reviewReplyService.getReviewReplyListPagingById(pageNo2, member.getId()));
 		map.put("member", member);
 		return new ModelAndView("member/main/mypage_body.tiles", map);
 	}
 	    	
 }
 
-    
 
-	
-	
-	
-	
 	/**********************이메일 중복 체크********************/
 //	@RequestMapping("emailExistCheck.do")
 //	@ResponseBody
@@ -595,12 +596,5 @@ public class MemberController {
 //			result = "false";
 //			System.out.println(result);
 //		}
-//		
 //	}
 	
-	
-	
-	
-	
-	
-
