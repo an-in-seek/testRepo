@@ -475,12 +475,10 @@ var emailAddressVal = true;
 	})
 
 })
-
-
 </script>
+
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-@import url(http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
 div#table{
 	padding: 20px;
 	font-weight:bold;
@@ -488,21 +486,18 @@ div#table{
 	float:center;   /*왼쪽으로 띄움 */
 }	
 table{
-	font-family: 'Jeju Myeongjo', serif;
 	margin-left: auto;
 	margin-right: auto;
 }
-
 #col{
-	font-family: 'Jeju Myeongjo', serif;	
+	font-family:'Malgun Gothic', dotum;	
 	font-size : 15px;
 	width:150px;
 	background:#f0f0f0;
 }
 #col2{
-	width:50px;
+	width:10px;
 }
-
 .id_btn{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -527,7 +522,7 @@ table{
 	border:1px solid #dcdcdc;
 	display:inline-block;
 	color:#777777;
-	font-family:arial;
+	font-family:'Malgun Gothic', dotum;
 	font-size:9px;
 	font-weight:bold;
 	font-style:normal;
@@ -536,7 +531,6 @@ table{
 	text-decoration:none;
 	text-align:center;
 }
-
 .nick_btn{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -561,7 +555,7 @@ table{
 	border:1px solid #dcdcdc;
 	display:inline-block;
 	color:#777777;
-	font-family:arial;
+	font-family:'Malgun Gothic', dotum;
 	font-size:9px;
 	font-weight:bold;
 	font-style:normal;
@@ -570,7 +564,6 @@ table{
 	text-decoration:none;
 	text-align:center;
 }
-
 .zip_btn{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -595,7 +588,7 @@ table{
 	border:1px solid #dcdcdc;
 	display:inline-block;
 	color:#777777;
-	font-family:arial;
+	font-family:'Malgun Gothic', dotum;
 	font-size:9px;
 	font-weight:bold;
 	font-style:normal;
@@ -604,9 +597,10 @@ table{
 	text-decoration:none;
 	text-align:center;
 }
-	
 </style>
+
 <img src="${initParam.rootPath }/memberImage/header.png" id="header">
+
 <div id="table" align="center">
 <c:if test="${requestScope.error_message != null}">
 	<font color="red" size="2">${requestScope.error_message}</font>
