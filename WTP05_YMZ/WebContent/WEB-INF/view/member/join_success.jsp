@@ -25,8 +25,6 @@ function goMain() {
 	color:#C8C2C2;
 	font-family: 'Jeju Myeongjo', serif;
 }
-
-
 .main {
 	-moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
@@ -60,24 +58,30 @@ function goMain() {
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #810e05;
+	cursor: pointer;
 }
 
 </style>
 <img src="${initParam.rootPath }/memberImage/joinSu.png" id="header">
 <div id="table" align="center">
-<table>
+<table >
 	<tr>
-		<td><font size="30" style="bold">"회원가입</font><font size="30" color="grey">을 축하드립니다"</font></td>
+		<td align="center">
+		[${requestScope.member.id}]
+		<font size="30" style="bold">'${requestScope.member.name}'님</font><br>
+		<font size="30" color="grey">회원가입을 축하드립니다.</font></td>
 	</tr>
 	<tr>
-		<td class="s">야먹자에 회원가입을 해주셔서 감사합니다.</td>
+		<td class="s" align="center">야먹자에 회원가입을 해주셔서 감사합니다.</td>
 	</tr>
 	<tr>
-		<td class="s">야먹자는 알찬 정보와 서비스를 제공해줄것을 약속드립니다.</td>
+		<td class="s" align="center">야먹자는 알찬 정보와 서비스를 제공해줄것을 약속드립니다.</td>
 	</tr>
-	<tr>
-		<td><input type="button" class="main" onclick="location.href='javascript:goMain();'" value="메인으로가기">&nbsp;&nbsp;&nbsp;
-		<input type="button" class="main" onclick="location.href='javascript:goLogin()';" value="로그인"></td>
+	<tr >
+		<td align="center">
+			<input type="button" class="main" onclick="location.href='javascript:goMain();'" value="메인으로가기">&nbsp;
+			<input type="button" class="main" onclick="location.href='javascript:goLogin()';" value="로그인">
+		</td>
 	</tr>
 </table>
 </div>	

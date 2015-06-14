@@ -38,10 +38,7 @@ var numVal = true;
 var emailNameVal = true;
 var emailAddressVal = true;
 	
-	
-
 	//ID 유효성 체크
-	
 	$("#id").on("change",function(){
 		idChe = false;
 		var id = $("#id").val();
@@ -49,22 +46,27 @@ var emailAddressVal = true;
 		idDup = false;
 		 // 아이디 검사
 		if(idSize<5){
-			$("#idsMessage").text("");
+			$("#idMessage").text("");
+			$("#idMessage").removeClass("normalMessage");
+			$("#idMessage").addClass("errorMessage");
 			$("#idMessage").text("ID는 5자리이상 입력하세요.");
 			idVal = false;
 			return false;
 		}
 		if(!/^[a-zA-Z0-9]{5,12}$/.test(id)){
-			$("#idsMessage").text("");
+			$("#idMessage").text("");
+			$("#idMessage").removeClass("normalMessage");
+			$("#idMessage").addClass("errorMessage");
 			$("#idMessage").text("ID는 영문과 숫자로 입력해 주세요.");
 			idVal = false;
 			return false;
 		}
-		$('#idMessage').text("");	
-		/* $("#idsMessage").text("사용가능한 ID입니다"); */
+		$('#idMessage').text("");
+		$('#idMessage').removeClass("normalMessage");
+		$('#idMessage').addClass("errorMessage");
+		$('#idMessage').text("중복검사 버튼을 눌러주세요");
 		idVal = true;
 	});
-	
 	
 	//password 유효성검사
 	$("#password").on("change",function(){
@@ -72,19 +74,25 @@ var emailAddressVal = true;
 		var pwSize = password.length;
 		 // 아이디 검사
 		if(pwSize<4){
-			$("#pwsMessage").text("");
+			$("#pwMessage").text("");
+			$("#pwMessage").removeClass("normalMessage");
+			$("#pwMessage").addClass("errorMessage");
 			$("#pwMessage").text("password는 4자리이상 입력하세요.");
 			pwVal = false;
 			return false;
 		}
 		if(!/^[a-zA-Z0-9]{4,24}$/.test(password)){
-			$("#pwsMessage").text("");
+			$("#pwMessage").text("");
+			$("#pwMessage").removeClass("normalMessage");
+			$("#pwMessage").addClass("errorMessage");
 			$("#pwMessage").text("password는 영문,숫자를 혼합하여 주세요.");
 			pwVal = false;
 			return false;
 		}
 		$('#pwMessage').text("");	
-		$("#pwsMessage").text("사용가능한 password입니다");
+		$("#pwMessage").removeClass("errorMessage");
+		$("#pwMessage").addClass("normalMessage");
+		$("#pwMessage").text("사용가능한 password입니다");
 		pwVal = true;
 	});
 	
@@ -93,19 +101,25 @@ var emailAddressVal = true;
 		var name = $("#name").val();
 		var nameSize = name.length;
 		if(nameSize<2){
-			$("#namesMessage").text("");
+			$("#nameMessage").text("");
+			$("#nameMessage").removeClass("normalMessage");
+			$("#nameMessage").addClass("errorMessage");
 			$("#nameMessage").text("이름은 두자리이상 입력하세요.");
 			nameVal = false;
 			return false;
 		}
 		if(!/^[가-힣]{2,10}|^[a-zA-Z]{2,10}$/.test(name)){
-			$("#namesMessage").text("");
-			$("#nameMessage").text(" 이름은 영문또는 한글로 입력해 주세요.");
+			$("#nameMessage").text("");
+			$("#nameMessage").removeClass("normalMessage");
+			$("#nameMessage").addClass("errorMessage");
+			$("#nameMessage").text("이름은 영문또는 한글로 입력해 주세요.");
 			nameVal = false;
 			return false;
 		}
 		$('#nameMessage').text("");	
-		$("#namesMessage").text(" 사용가능한 이름입니다");
+		$("#nameMessage").removeClass("errorMessage");
+		$("#nameMessage").addClass("normalMessage");
+		$("#nameMessage").text("사용가능한 이름입니다");
 		nameVal = true;
 	});
 	
@@ -115,19 +129,25 @@ var emailAddressVal = true;
 		nickChe = false;
 		var nickSize = nickname.length;
 		if(nickSize<2){
-			$("#nicksMessage").text("");
+			$("#nickMessage").text("");
+			$("#nickMessage").removeClass("normalMessage");
+			$("#nickMessage").addClass("errorMessage");
 			$("#nickMessage").text("닉네임은 두자리이상 입력하세요.");
 			nickVal = false;
 			return false;
 		}
 		if(!/^[가-힣a-zA-Z0-9]{2,8}$/.test(nickname)){
-			$("#nicksMessage").text("");
+			$("#nickMessage").text("");
+			$("#nickMessage").removeClass("normalMessage");
+			$("#nickMessage").addClass("errorMessage");
 			$("#nickMessage").text("닉네임은 영문과 한글로 입력해 주세요.");
 			nickVal = false;
 			return false;
 		}
 		$("#nickMessage").text("");	
-		/* $("#nicksMessage").text("사용가능한 닉네임입니다"); */
+		$("#nickMessage").removeClass("normalMessage");
+		$("#nickMessage").addClass("errorMessage");
+		$("#nickMessage").text("중복검사 버튼을 눌러주세요."); 
 		nickVal = true;
 	});
 	
@@ -137,7 +157,9 @@ var emailAddressVal = true;
 		var emailName = $("#emailName").val();
 		var emailSize = emailName.length;
 		if(emailSize<2||!/^[a-zA-Z0-9]{1,11}$/.test(emailName)){
-			$("#emailsMessage").text("");
+			$("#emailMessage").text("");
+			$("#emailMessage").removeClass("normalMessage");
+			$("#emailMessage").addClass("errorMessage");
 			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
 			emailNameVal = false;
 		}else{
@@ -189,28 +211,29 @@ var emailAddressVal = true;
 		var addressSize = emailAddress.length;
 		alert(emailAddress);
 		if(addressSize<1||!/^([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(emailAddress)){
-			$("#emailsMessage").text("");
+			$("#emailMessage").text("");
+			$("#emailMessage").removeClass("normalMessage");
+			$("#emailMessage").addClass("errorMessage");
 			$("#emailMessage").text("올바른 이메일 이름이 아닙니다");
 			emailAddressVal = false;
 		}else{
 			$("#emailMessage").text("");
 			emailAddressVal = true;
 		}
-		
-		
 	})
 	
 	$("#num1").on("change",function(){
 		var num1 = $("#num1").val();
 		var num1Size = num1.length;
 		if(!/^[0-9]{3,4}$/.test(num1)){
-			$("#numsMessage").text("");
+			$("#numMessage").text("");
+			$("#numMessage").removeClass("normalMessage");
+			$("#numMessage").addClass("errorMessage");
 			$("#numMessage").text("잘못된 전화번호입니다");
 			numVal = false;
 			return false;
 		}
 		$('#numMessage').text("");	
-		$("#numsMessage").text("");
 		numVal = true;
 	});
 	
@@ -218,13 +241,14 @@ var emailAddressVal = true;
 		var num2 = $("#num2").val();
 		var num2Size = num2.length;
 		if(!/^[0-9]{3,4}$/.test(num2)){
-			$("#numsMessage").text("");
+			$("#numMessage").text("");
+			$("#numMessage").removeClass("normalMessage");
+			$("#numMessage").addClass("errorMessage");
 			$("#numMessage").text("잘못된 전화번호입니다");
 			numVal = false;
 			return false;
 		}
 		$('#numMessage').text("");	
-		$("#numsMessage").text("");
 		numVal = true;
 	});
 	
@@ -245,17 +269,20 @@ var emailAddressVal = true;
 				if(ret=="false"){
 					alert("중복된 아이디입니다.");
 					document.getElementById('id').value= "";
-					$("#idsMessage").text("");
+					$("#idMessage").text("");
+					$("#idMessage").removeClass("normalMessage");
+					$("#idMessage").addClass("errorMessage");
 					$("#idMessage").text("중복된 아이디입니다.");
 					idChe = false;
 				}else{
 					alert("사용가능한 아이디입니다.");
 					$("#idMessage").text("");
-					$("#idsMessage").text("사용가능한 아이디입니다");
+					$("#idMessage").removeClass("errorMessage");
+					$("#idMessage").addClass("normalMessage");
+					$("#idMessage").text("사용가능한 아이디입니다");
 					idChe = true;
 				}
 			}
-			
 		})
 	});
 	
@@ -278,16 +305,22 @@ var emailAddressVal = true;
 			success:function(ret){
 				if(ret=="false"){
 					alert("중복된 닉네임입니다.")
+					$("#nickMessage").text("");
+					$("#nickMessage").removeClass("normalMessage");
+					$("#nickMessage").addClass("errorMessage");
+					$("#nickMessage").text("중복된 닉네임입니다.");
 					document.getElementById('nickname').value= "";
 					nickChe = false;
 				}else{
-					alert("사용가능한 닉네임입니다.")
+					alert("사용가능한 닉네임입니다.");
+					$("#nickMessage").text("");
+					$("#nickMessage").removeClass("errorMessage");
+					$("#nickMessage").addClass("normalMessage");
+					$("#nickMessage").text("사용가능한 닉네임입니다.");
 					nickChe = true;
 				}
 			}
-			
 		})
-	
 	});
 	
 	//ID 존재 유무 체크
@@ -305,7 +338,6 @@ var emailAddressVal = true;
 				}
 			}
 		})
-		
 	});
 	
 	//비밀번호 일치 확인
@@ -313,12 +345,14 @@ var emailAddressVal = true;
 		var passwordCh = $("#passwordCheck").val();
 		var password = $("#password").val();
 				if(passwordCh!=password){
-					$("#pwMessageLayer").text(" 비밀번호가 일치하지 않습니다.");
+					$("#pwMessageLayer").removeClass("normalMessage");
 					$("#pwMessageLayer").addClass("errorMessage");
+					$("#pwMessageLayer").text("비밀번호가 일치하지 않습니다.");
 					pwChe=false;
 				}else{
-					$("#pwMessageLayer").text(" 비밀번호가 일치합니다.");
+					$("#pwMessageLayer").removeClass("errorMessage");
 					$("#pwMessageLayer").addClass("normalMessage");
+					$("#pwMessageLayer").text("비밀번호가 일치합니다.");
 					pwChe=true;
 			}
 	});
@@ -337,7 +371,7 @@ var emailAddressVal = true;
 		}else{
 			pwChe=true;
 		}
-	
+		
 		if(!pwVal){
 			alert("비밀번호 양식이 맞지 않습니다");
 			$("#password").focus();
@@ -471,9 +505,7 @@ var emailAddressVal = true;
 			$("#passwordCheck").focus();
 			return false;
 		}
-		
 	})
-
 })
 </script>
 
@@ -530,6 +562,7 @@ table{
 	width:55px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
 .nick_btn{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -563,6 +596,7 @@ table{
 	width:55px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
 .zip_btn{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -596,6 +630,7 @@ table{
 	width:100px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
 </style>
 
@@ -612,31 +647,33 @@ table{
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" name="id" id='id' maxlength='11'> <span id="dupMessageLayer"> </span><span class="errorMessage"><form:errors path="member.id"/></span>
-				<input type="button" class="id_btn" name="idDup" id="idDup" value="중복체크"><font color="red" size="1"><span  id="idMessage"> </span></font>
-				<font color="blue" size="1"><span  id="idsMessage"></span></font>
+				<input type="button" class="id_btn" name="idDup" id="idDup" value="중복체크">
+				<font size="1">&nbsp;<span id="idMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
 			<td id="col" align="center">비밀번호</td>
 			<td id="col2"></td>
 			<td id="col3">
-				<input type="password" id="password" name="password" maxlength='24'><font color="red" size="1"><span id="pwMessage"> </span></font>
-				<font color="blue" size="1"><span  id="pwsMessage"></span></font>
+				<input type="password" id="password" name="password" maxlength='24'>
+				<font size="1">&nbsp;<span id="pwMessage"> </span></font>
 			</td>
 		</tr>
 		<tr>
 			<td id="col" align="center">비밀번호확인</td>
 			<td id="col2"></td>
 			<td id="col3">
-				<input type="password" id="passwordCheck" name="passwordCheck" maxlength='24'><font color="red" size="1"><span id="pwMessageLayer"> </span></font><span class="errorMessage"><form:errors path="member.password"/></span>
+				<input type="password" id="passwordCheck" name="passwordCheck" maxlength='24'>
+				<font size="1">&nbsp;<span  id="pwMessageLayer" ></span></font>
+				<form:errors path="member.password"/>
 			</td>
 		</tr>
 		<tr>
 			<td id="col" align="center">이름</td>
 			<td id="col2"></td>
 			<td id="col3">
-				<input type="text" id="name" name="name" maxlength='10'><font color="red" size="1"><span id="nameMessage"></span></font>
-				<font color="blue" size="1"><span  id="namesMessage"></span></font>
+				<input type="text" id="name" name="name" maxlength='10'>
+				<font size="1">&nbsp;<span id="nameMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
@@ -645,8 +682,7 @@ table{
 			<td id="col3">
 				<input type="text" id="nickname" name="nickname"  maxlength='8'>
 				<input type="button" class="nick_btn" id="exNick" name="exNick" value="중복체크">
-				<font color="red" size="1"><span id="nickMessage"></span></font><span class="errorMessage"></span>
-				<font color="blue" size="1"><span  id="nicksMessage"></span></font>
+				<font size="1">&nbsp;<span id="nickMessage"></span></font>
 			</td>	
 		</tr>
 			<tr>
@@ -702,8 +738,7 @@ table{
 				<input type="text" id="emailName" name="emailName" maxlength='11'>@<input type="text" id="emailAddress" name="emailAddress"  maxlength="11">
 				<select name="selectEmail"  style="vertical-align:middle" id="selectEmail">
 				<option>직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
-				<font color="red" size="1"><span id="emailMessage"></span></font>
-				<font color="blue" size="1"><span id="emailsMessage"></span></font>
+				<font size="1">&nbsp;<span id="emailMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
@@ -713,8 +748,7 @@ table{
 				<select name="phoneCP" id="phoneCP" class="input_text w60" style="vertical-align:middle">
 			<option value="010" >010</option><option value="011" >011</option><option value="017" >017</option><option value="018" >018</option><option value="019" >019</option></select>
 			&nbsp;-&nbsp;<input type="text" id="num1" name="num1" maxlength='4' size="2" style="vertical-align:middle">&nbsp;&nbsp;<input type="text" id="num2" name="num2" size="2" maxlength='4'class="input_text w60" style="vertical-align:middle"> 
-			<font color="red" size="1"><span id="numMessage"></span></font>
-			<font color="blue" size="1"><span id="numsMessage"></span></font>
+			<font size="1">&nbsp;<span id="numMessage"></span></font>
 			</td>
 		</tr>
 		<tr>

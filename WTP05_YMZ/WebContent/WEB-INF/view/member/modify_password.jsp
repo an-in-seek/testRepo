@@ -95,14 +95,7 @@ var pwCheck = false;
 </script>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-div#table{
-	padding: 20px;
-	font-weight:bold;
-	text-align:left;
-	float:center;   /*왼쪽으로 띄움 */
-}	
 table{
-	font-family: 'Hanna', sans-serif;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -149,8 +142,8 @@ table{
 	width:55px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
-
 .nick_btn{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -183,8 +176,8 @@ table{
 	width:55px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
-
 .zip_btn{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -217,14 +210,13 @@ table{
 	width:100px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
 </style>
-<hr noshade="noshade" width="30%" align="left">
-
-<h2>비밀번호 수정 폼</h2>
 
 <form method="post" action="${initParam.rootPath }/member/modify_password.do" id="modifyPassword" enctype="multipart/form-data">
-		<table style="width:500px" >
+<h2 align="center">비밀번호 수정 폼</h2>
+		<table style="width:500px; border: 1px solid lightgray">
 			<tr>
 				<td id="col" align="center">기존비밀번호</td>
 				<td id="col2"></td>
@@ -243,8 +235,10 @@ table{
 				<td id="col2"></td>
 				<td><input type="password" name="password_check" id="password_check" maxlength='24'></td>
 			</tr>
+		</table>
+		<table>
 			<tr>
-				<td colspan="2">
+				<td width="500px" align="center">
 					<input type="submit" class="nick_btn" value="변경" id="submit">
 					<input type="reset" class="nick_btn" value="초기화">
 				</td>	

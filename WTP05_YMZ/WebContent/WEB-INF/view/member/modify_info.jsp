@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script type="text/javascript">
 /*
@@ -278,18 +279,10 @@ var emailAddressVal = true;
 </script>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-div#table{
-	padding: 20px;
-	font-weight:bold;
-	text-align:left;
-	float:center;   /*왼쪽으로 띄움 */
-}	
 table{
-	font-family: 'Hanna', sans-serif;
 	margin-left: auto;
 	margin-right: auto;
 }
-
 #col{
 	font-family: 'Hanna', sans-serif;	
 	font-size : 15px;
@@ -332,8 +325,8 @@ table{
 	width:55px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
-
 .nick_btn{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -366,8 +359,8 @@ table{
 	width:55px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
-
 .zip_btn{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -400,21 +393,25 @@ table{
 	width:100px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
-	
 </style>
-<h2>회원정보 수정 폼</h2>
+
+
+
 <c:if test="${requestScope.error_message != null}">
 	<font color="red" size="2">${requestScope.error_message}</font>
 </c:if>
-<form method="post" action="${initParam.rootPath }/member/modifyMemberInfo.do" id="modifyForm" 
-	      enctype="multipart/form-data">
+
+<form method="post" action="${initParam.rootPath }/member/modifyMemberInfo.do" id="modifyForm"  enctype="multipart/form-data">
+	<h2 align="center">회원정보 수정 폼</h2>
 	<input type="hidden" name="id" value="${sessionScope.login_info.id }">
-	<table style="width:700px">
+	<table style="width:700px; border: 1px solid lightgray;">
 		<tr>
 			<td id="col" align="center">ID</td>
 			<td id="col2"></td>
 			<td>${sessionScope.login_info.id }</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td id="col" align="center">닉네임</td>
@@ -425,6 +422,7 @@ table{
 				<font color="red" size="1"><span id="nickMessage"></span></font><span class="errorMessage"></span>
 				<font color="blue" size="1"><span  id="nicksMessage"></span></font>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td id="col" align="center">우편번호</td>
@@ -434,18 +432,21 @@ table{
 				<input type="text" id="postcode2" name="postcode2" value="${sessionScope.login_info.zipcode.substring(4,7) }" style="width:50px;" readonly>
 				<input type="button" class="zip_btn" onclick="openDaumPostcode()" value="우편번호 찾기">
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td id="col" align="center">주소</td>
 			<td id="col2"></td>
 			<td><input type="text" id="address" name="address" style="width:400px;" value="${sessionScope.login_info.address }" readonly><span class="errorMessage"><form:errors path="member.address"></form:errors></span>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td id="col" align="center">상세주소</td>
 			<td id="col2"></td>
 			<td><input type="text" id="detailAddress" maxlength='20' name="detailAddress" style="width:400px;" value="${sessionScope.login_info.detailAddress }"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
 			</td>
+			<td></td>
 		</tr>	
 		<tr>
 			<td id="col" align="center">이메일</td>
@@ -458,6 +459,7 @@ table{
 				<font color="red" size="1"><span id="emailMessage"></span></font>
 				<font color="blue" size="1"><span id="emailsMessage"></span></font>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td id="col" align="center">전화번호</td>
@@ -470,9 +472,12 @@ table{
 			<font color="red" size="1"><span id="numMessage"></span></font>
 			<font color="blue" size="1"><span id="numsMessage"></span></font>
 			</td>
+			<td></td>
 		</tr>
+	</table>
+	<table style="width:700px;">
 		<tr> 
-			<td colspan="4" align="center">
+			<td align="center">
 				<input type="submit" class="nick_btn" value="수정">
 				<input type="reset" class="nick_btn" value="다시작성">
 			</td>

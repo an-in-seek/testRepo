@@ -88,21 +88,12 @@ $(document).ready(function(){
 </script>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-@import url(http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
-div#table{
-	padding: 20px;
-	text-align:left;
-	float:center;   /*왼쪽으로 띄움 */
-	font-family: 'Jeju Myeongjo', serif;
-}	
 table{
-	font-family: 'Jeju Myeongjo', serif;
 	margin-left: auto;
 	margin-right: auto;
 }
-
 #col{
-	font-family: 'Jeju Myeongjo', serif;
+	font-family: 'Hanna', sans-serif;	
 	font-size : 15px;
 	width:150px;
 	background:#f0f0f0;
@@ -143,6 +134,7 @@ table{
 	width:55px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
 
 .nick_btn{
@@ -177,6 +169,7 @@ table{
 	width:55px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
 
 .zip_btn{
@@ -211,6 +204,7 @@ table{
 	width:100px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
 </style>
 
@@ -219,58 +213,41 @@ table{
 
 <h2 align="center">쿠폰교환</h2>
 <form method="post" action="${initParam.rootPath }/member/updateMileage.do" id="modifyMileage"> 
-	<table width="800" align="center">
+	<table width="600" align="center" style="border: 1px solid lightgray">
 		<tr>
-			<td  width="center" id="col">
-				현재마일리지 
-			</td>
+			<td id="col" align="center">현재마일리지 </td>
+			<td><input type="text" value="${requestScope.mileage }" id="currentMileage" readonly></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td id="col" align="center">쿠폰금액 </td>
+			<td><input type="text" name="price" id="price" value="0" readonly></td>
 			<td>
-				<input type="text" value="${requestScope.mileage }" id="currentMileage" readonly>
+				<c:if test="${requestScope.mileage>=1000 }">
+					<input class="nick_btn" type="button" value="+" id="plus">		
+				</c:if>
+				<c:if test="${requestScope.mileage<1000 }">
+					<input type="button" value="+" id="exBtn">
+				</c:if>
+				<input type="text" name="count" id="count" value="0" size="12">장
 			</td>
 		</tr>
 		<tr>
-			<td id="col">
-				쿠폰금액 :
-			</td>
-			<td>
-				<input type="text" name="price" id="price" value="0" readonly>
-			</td>
-			<c:if test="${requestScope.mileage>=1000 }">
-					<td><input class="nick_btn" type="button" value="+" id="plus"></td>
-					
-			</c:if>
-			<c:if test="${requestScope.mileage<1000 }">
-					<td><input type="button" value="+" id="exBtn"></td>
-			</c:if>
-			<td width="100">
-				<input type="text" name="count" id="count" value="0" readonly>
-			</td>
-			<td width="100">
-			장
-			</td>
+			<td id="col" align="center">차액</td>
+			<td><div id="difference"></div></td>
+			<td></td>
 		</tr>
 		<tr>
-			<td id="col">
-				차액
-			</td>
-			<td colspan="4">
-				<div id="difference"></div>
-			</td>
+			<td id="col" align="center">남은 마일리지</td>
+			<td><input type="text" id="result" name="result" value="${requestScope.mileage }" readonly></td>
+			<td></td>
 		</tr>
+	</table>
+	<table width="600" align="center">
 		<tr>
-			<td id="col">
-				남은 마일리지
-			</td>
-			<td>
-				<input type="text" id="result" name="result" value="${requestScope.mileage }" readonly>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="submit" class="nick_btn" onclick="javascript:issueConfirm();" id ="submit" value="발급">
-			</td>
-			<td>
-				<input type="reset" class="nick_btn" id="reset" value="초기화">			
+			<td align="center">
+				<input type="submit" class="nick_btn" onclick="javascript:issueConfirm();" id ="submit" value="발급"> &nbsp;&nbsp;
+				<input type="reset" class="nick_btn" id="reset" value="초기화">
 			</td>
 		</tr>
 	</table>
