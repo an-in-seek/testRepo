@@ -41,7 +41,7 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 
 //댓글 신고
 function reportReply(reviewNo, replyNum, pNo, idx){
-	var isCom=confirm("신고할랭???")
+	var isCom=confirm("이 댓글을 신고 하시겠습니까?")
 	
 	if(isCom){
 		var content = $("#rContent" + idx).text(); //리플내용
@@ -97,7 +97,7 @@ $(document).ready(function(){
 	
 	
 	////////////////////////////////////////////////////// 리뷰 본문
-	// 추천
+	// 리뷰 추천
 	$(".recommendBtn").on("click", function(){		
 		var id = "${empty sessionScope.login_info}";
 		if(id=="true"){
@@ -118,9 +118,9 @@ $(document).ready(function(){
 		});
 		
 	});
-	// 삭제
+	// 리뷰 삭제
 	$("#deleteBtn").on("click", function(){
-		var isDel = confirm("정말로 삭제하시겠습니까?");
+		var isDel = confirm("정말로 삭제 하시겠습니까?");
 		if (isDel) {
 			document.location.href="${initParam.rootPath }/review/login/removeReview.do?reviewNo="+${requestScope.review.reviewNo};
 		} else {
@@ -128,9 +128,9 @@ $(document).ready(function(){
 		}
 	});
 	
-	// 신고버튼
+	// 리뷰 신고버튼
 	$("#reportBtn").on("click", function(){
-		var isCom=confirm("리뷰 신고?? ㅇㅋ??")
+		var isCom=confirm("이 글을 신고 하시겠습니까?")
 		if(isCom){
 			$("#reportReview_dialog").dialog({modal:true, resizable: false
 			});
@@ -138,12 +138,13 @@ $(document).ready(function(){
 			return;
 		}
 	});
-	// 신고 다이어로그 취소 버튼
+	// 리뷰 신고 다이어로그 취소 버튼
 	$("#reviewReportCancel").on("click", function(){
 		$("#reportReview_dialog").dialog("close");
 	});
 	
-	$("#replyReplyCancel").on("click", function(){
+	// 리플 신고 다이어로그 취소 버튼
+	$("#reviewReplyReportCancel").on("click", function(){
 		$("#reportReply_dialog").dialog("close");
 	});
 	
@@ -152,7 +153,7 @@ $(document).ready(function(){
 	$("#reply_registerBtn").click(function() {
 		//내용 입력안했을시 경고창
  		if($("#reply_content").val().trim()==""){
-			alert("내용을 입력하세요");
+			alert("내용을 입력하세요!");
 			$("#reply_content").focus();
 			return false;
 		} 
@@ -162,18 +163,16 @@ $(document).ready(function(){
 		alert("로그인부터 하세욥!!!");
 	});
 	
-	
-	
-	
 });
 </script>	
 <!-- css -->
 <style type="text/css">
 
-
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
 
+
+/* 댓글 꾸미기 */
 table#replyTB tbody tr:nth-child(even) {
     background-color: lavenderblush;
 }
@@ -192,11 +191,13 @@ table#replyTB tbody tr{
 	font-size: 25px;
 	height: 140px;
 }
-button{
+
+/* 버튼 꾸미기 */
+button,#reviewReportCancel,#reviewReplyReport,#reviewReport,#reviewReplyReportCancel{
 	font-family: 'Hanna', sans-serif;
 	font-size: 16px;
-	background: #808080;
-	color: #fffff7;
+	color: #808080;
+	background: #fffff7;
 	width:70px;
 	height:40px;
 	cursor: pointer;
@@ -205,6 +206,7 @@ button{
 	border-radius: 10px;		 /* 둥근 모서리 끝 */
 }
 
+/* 다이어로그 */
 div#dialog{
 	width:800px;
 	display: none;
@@ -217,12 +219,26 @@ div#reportReview_dialog{
 	width:800px;
 	display: none;
 }
+
+/* 신고 다이어로그 버튼 정렬 */
+#reportReviewArea{
+	width: 200px;
+	margin: 0 auto;
+}
+#reportReviewReplyArea{
+	width: 200px;
+	margin: 0 auto;
+}
+
+/* 추천 버튼 관련 */
 .recommendBtn{		
 	cursor: pointer;
 }
 #recommendCountBtn{
 	ffont-family: 'Nanum Brush Script', cursive;
 }
+
+/* 리뷰 목록 관련 */
 .listTable{
 	font-family: 'Hanna', sans-serif;
 	color: #545c72;
@@ -247,6 +263,8 @@ div#reportReview_dialog{
 .listTable tbody tr:first-child th, .listTable tbody tr:first-child td{
     border-top: none;
 }
+
+/* 댓글 쓰기 영역 */
 #writeReplyArea{
 	background: #eaeaea;
 	height: 105px;
@@ -263,21 +281,19 @@ div#reportReview_dialog{
 	border: 2px solid lavenderblush;
 }
 #reviewContent{
+	padding-left: 10px;
+	padding-right: 10px;
   	margin-top: -10px;
   	margin-bottom: 10px;
 	border: 1px solid #B70000;
 }
-#reportReviewArea{
-	width: 200px;
-	margin: 0 auto;
-}
+
 </style>
 <!-- css 끝 -->
 </head>
 <body>
 
 <h4>리뷰</h4>
-
 	
 <!-- ************************************** 리뷰 정보 ************************************* -->
 <table class="listTable">
@@ -301,17 +317,13 @@ div#reportReview_dialog{
 <div id="reviewContent">
 ${requestScope.review.content }<br>
 
-
-
 	
-		<div align="center" id="recommend"> <!-- 추천 버튼 -->
+		<div align="center" id="recommend" style="margin-bottom: -50px;"> <!-- 추천 버튼 -->
 			<img src="${initParam.rootPath}/uploadPhoto/recommend.jpg" class="recommendBtn"> <br>
 			<span id="recommendCountBtn"><font color="red" size="5">${requestScope.review.recommend}</font></span>
 		</div><br><br>
 	
 <!-- ******************************* 리뷰 내용이 들어가는 공간 끝 ************************************** -->
-
-
 
 		<div id="reply" align="right" style=" margin-right: 5px;">
 			<!-- 버튼 -->
@@ -455,7 +467,7 @@ ${requestScope.review.content }<br>
 			</c:forEach>
 		</select>
 		<br><br>
-		<input type="submit" name="reviewReport" value="신고" style="width:80px; margin-left: 16px;">
+		<input type="submit" name="reviewReport" id="reviewReport" value="신고" style="width:80px; margin-left: 16px;">
 		<input type="button" id="reviewReportCancel" value="취소" style="width:80px">
 	</div>
 	</form>
@@ -483,7 +495,7 @@ ${requestScope.review.content }<br>
 			</c:forEach>
 		</select>
 		<br><br>
-		<input type="submit" name="reviewReplyReport" value="신고" style="width:80px; margin-left: 16px;">
+		<input type="submit" name="reviewReplyReport" id="reviewReplyReport" value="신고" style="width:80px; margin-left: 16px;">
 		<input type="button" id="reviewReplyReportCancel" value="취소" style="width:80px">
 		</div>
 	</form>

@@ -204,7 +204,7 @@
 	<!-- 검색된 전체 게시물 수  -->
 	<select id="selectSearchReviewCount" parameterType="map" resultType="_int">
 		select count(review_no) from review r, member m
-		where 1=1 and r.member_id = m.member_id
+		where 1=1 and r.member_id = m.member_id and m.grade != 'master'
 		<choose>
 						<when test="category!='전체'">
 								and category=#{category}

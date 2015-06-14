@@ -92,7 +92,7 @@ table#t1 thead tr{
 	<form id="write" method="post" action="${initParam.rootPath }/review/login/write.do">
 	
 	<!-- 테이블 -->
-	<table id="t1" align="center" style="border:solid 2px #050099">
+	<table id="t1" align="center" style="border:solid 2px #B70000">
 		<thead>
 			<tr style="text-align: center;">
 				<td colspan="4"><font size="4">리뷰(Review)</font></td>
@@ -101,7 +101,7 @@ table#t1 thead tr{
 		<c:if test="${sessionScope.login_info.grade != 'master' }">
 		<tr>
 			<td>&nbsp;</td>
-			<td align="center" width="40px">분류</td>
+			<td align="center" width="60px">분류</td>
 			<td>
 				<select id="category" name="category">
 					<option>분류</option>
@@ -115,8 +115,8 @@ table#t1 thead tr{
 		</c:if>
 		<tr>
 			<td>&nbsp;</td>
-			<td align="center" width="50px">제목</td>
-			<td><input type="text" id="title" name="title" style="width:800px" required="required"></td>
+			<td align="center" width="60px">제목</td>
+			<td><input type="text" id="title" name="title" maxlength="20" style="width:800px" required="required"></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">
