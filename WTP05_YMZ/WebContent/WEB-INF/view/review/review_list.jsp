@@ -136,6 +136,18 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 .listTable thead tr td#latestSort{
 	cursor: pointer;
 }
+button, #searchBtn{
+	font-family: 'Hanna', sans-serif;
+	font-size: 16px;
+	color: #808080;
+	background: #fffff7;
+	width:70px;
+	height:40px;
+	cursor: pointer;
+	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
+	-moz-border-radius: 10px;
+	border-radius: 10px;		 /* 둥근 모서리 끝 */
+}
 </style>
 </head>
 
@@ -386,11 +398,11 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 					</c:forEach>
 				</select>
 			<input type="text" id="searchText" style="width: 190px; height: 30px;">
-			<input type="submit" id="searchBtn" value="검색" style="width: 100px; height: 36px;">
+			<input type="submit" id="searchBtn" value="검색">
 			</form>
 			</td>
 			<td>
-			<a href="${initParam.rootPath }/review/login/review_write_form.do"><button style="width: 100px; height: 36px;">글쓰기</button></a>
+			<a href="${initParam.rootPath }/review/login/review_write_form.do"><button>글쓰기</button></a>
 			</td>
 		</tr>
 	</table>

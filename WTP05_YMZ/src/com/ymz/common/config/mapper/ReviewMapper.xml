@@ -72,9 +72,9 @@
 	
 	<!-- 아이디(ID)로 조회 -->
 	<select id="selectReviewById" resultMap="review-resultmap" parameterType="map">
-		select review_no, category, title, content, hits, recommend, reg_date, member_id, reply_count
+		select review_no, title, content, hits, recommend, reg_date, member_id, reply_count
 		from (
-				select ceil(rownum/#{contentsPerPage}) page, review_no, category, title, content, hits, recommend, reg_date, member_id, reply_count
+				select ceil(rownum/#{contentsPerPage}) page, review_no, title, content, hits, recommend, reg_date, member_id, reply_count
 				from (
 						<include refid="review-select"/>
 						where member_id = #{memberId}
