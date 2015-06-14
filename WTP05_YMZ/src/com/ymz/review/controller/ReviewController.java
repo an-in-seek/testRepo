@@ -68,9 +68,9 @@ public class ReviewController {
 	}
 
 	// 리뷰 목록 - 페이징 처리 + 인기글 가져오기 + 검색
-		@RequestMapping("reviewList.do")
+		@RequestMapping(value="reviewList.do")
 		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo, 
-													@RequestParam (defaultValue="") String searchType,@RequestParam (defaultValue="") String query,
+													@RequestParam (defaultValue="title") String searchType,@RequestParam (defaultValue="") String query,
 													@RequestParam (defaultValue="전체") String category){
 			List<Category> list = categoryService.getCategoryByFirstId("F-5"); 						// 검색 카테고리 가져오기
 			List<Category> categoryList = categoryService.getCategoryByFirstId("F-1"); 				//리뷰 카테고리 정보

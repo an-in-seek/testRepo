@@ -32,12 +32,6 @@ $(document).ready(function(){
 	
 	var txt = "";
 	
-	// 검색 방식 셀렉터 이벤트
-	$("#searchSort").on("change", function(){
-		txt = $(this).val(); // $(select객체).val() - 선택된 option의 value가 리턴
-		// alert("검색방식 : "+txt);
-	});
-	
 	// 조회수 정렬
 	$("#latestSort").on("click", function(){
 		var txt = "latest";
@@ -56,8 +50,12 @@ $(document).ready(function(){
 		document.location.href="${initParam.rootPath }/review/reviewList.do?sortType="+txt;
 	});
 	
+	
 	// 분류별 정렬
+	$("#category option[value=${requestScope.category}]").prop("selected","selected"); // 분류 셀렉터 초기화 막기
+	
 	$("#category").on("change", function() {
+		var idx = this.selectedIndex;
 		var category = this.value; //카테고리 값(한식, 양식, 일식, 중식..)
 		$("#searchForm").append("<input type='hidden' name='category' value='"+category+"'>");
 		searchForm.submit();
@@ -71,6 +69,8 @@ $(document).ready(function(){
 	});
 	
 	// 검색 전송 이벤트
+	$("#searchSort option[value=${requestScope.searchType}]").prop("selected","selected"); // 분류 셀렉터 초기화 막기
+	
 	$("#searchForm").on("submit",function(){
 		if($("#searchText").val().trim()==""){  // 검색어를 입력하지 않았을 경우에 경고창
 			alert("검색어를 입력하세요!!");
@@ -374,17 +374,17 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 			</td>
 			<td>
 			<form id="searchForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
-			<select id="searchSort" style="width: 100px; height: 36px;">
-				<c:forEach items="${requestScope.searchCategoryList}" var="category">
-					<option value="${category.categoryName}">
+				<select id="searchSort" name="searchSort" style="width: 100px; height: 36px;">
+					<c:forEach items="${requestScope.searchCategoryList}" var="category">
+						<option value="${category.categoryName}">
 						<c:choose>
 							<c:when test="${category.categoryName == 'title'}">제목</c:when>						
 							<c:when test="${category.categoryName == 'id'}">아이디</c:when>						
 							<c:when test="${category.categoryName == 'nickname'}">닉네임</c:when>						
 						</c:choose>
-					</option>
-				</c:forEach>
-			</select>
+						</option>
+					</c:forEach>
+				</select>
 			<input type="text" id="searchText" style="width: 190px; height: 30px;">
 			<input type="submit" id="searchBtn" value="검색" style="width: 100px; height: 36px;">
 			</form>
