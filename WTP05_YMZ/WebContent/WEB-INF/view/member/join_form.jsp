@@ -61,7 +61,7 @@ var emailAddressVal = true;
 			return false;
 		}
 		$('#idMessage').text("");	
-		$("#idsMessage").text("사용가능한 ID입니다");
+		/* $("#idsMessage").text("사용가능한 ID입니다"); */
 		idVal = true;
 	});
 	
@@ -100,12 +100,12 @@ var emailAddressVal = true;
 		}
 		if(!/^[가-힣]{2,10}|^[a-zA-Z]{2,10}$/.test(name)){
 			$("#namesMessage").text("");
-			$("#nameMessage").text("이름은 영문또는 한글로 입력해 주세요.");
+			$("#nameMessage").text(" 이름은 영문또는 한글로 입력해 주세요.");
 			nameVal = false;
 			return false;
 		}
 		$('#nameMessage').text("");	
-		$("#namesMessage").text("사용가능한 이름입니다");
+		$("#namesMessage").text(" 사용가능한 이름입니다");
 		nameVal = true;
 	});
 	
@@ -127,7 +127,7 @@ var emailAddressVal = true;
 			return false;
 		}
 		$("#nickMessage").text("");	
-		$("#nicksMessage").text("사용가능한 닉네임입니다");
+		/* $("#nicksMessage").text("사용가능한 닉네임입니다"); */
 		nickVal = true;
 	});
 	
@@ -313,11 +313,11 @@ var emailAddressVal = true;
 		var passwordCh = $("#passwordCheck").val();
 		var password = $("#password").val();
 				if(passwordCh!=password){
-					$("#pwMessageLayer").text("비밀번호가 일치하지 않습니다.");
+					$("#pwMessageLayer").text(" 비밀번호가 일치하지 않습니다.");
 					$("#pwMessageLayer").addClass("errorMessage");
 					pwChe=false;
 				}else{
-					$("#pwMessageLayer").text("비밀번호가 일치합니다.");
+					$("#pwMessageLayer").text(" 비밀번호가 일치합니다.");
 					$("#pwMessageLayer").addClass("normalMessage");
 					pwChe=true;
 			}
