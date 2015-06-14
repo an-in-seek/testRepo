@@ -6,6 +6,7 @@ import java.util.List;
 public class Review implements Serializable{
 	
 	private int reviewNo;
+	private String category;
 	private String title;
 	private String regDate;
 	private int hits;
@@ -23,11 +24,13 @@ public class Review implements Serializable{
 		
 	}
 
-	public Review(int reviewNo, String title, String regDate, int hits,
-			String content, int recommend, int report, String memberId,
-			String nickname, int replyCount, int pageNo, String sortType) {
+	public Review(int reviewNo, String category, String title, String regDate,
+			int hits, String content, int recommend, int report,
+			String memberId, String nickname, int replyCount, int pageNo,
+			String sortType) {
 		super();
 		this.reviewNo = reviewNo;
+		this.category = category;
 		this.title = title;
 		this.regDate = regDate;
 		this.hits = hits;
@@ -47,6 +50,14 @@ public class Review implements Serializable{
 
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getTitle() {
@@ -141,6 +152,8 @@ public class Review implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + hits;
 		result = prime * result
@@ -168,6 +181,11 @@ public class Review implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Review other = (Review) obj;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
+			return false;
 		if (content == null) {
 			if (other.content != null)
 				return false;
@@ -215,15 +233,12 @@ public class Review implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", title=" + title
-				+ ", regDate=" + regDate + ", hits=" + hits + ", content="
-				+ content + ", recommend=" + recommend + ", report=" + report
-				+ ", memberId=" + memberId + ", nickname=" + nickname
-				+ ", replyCount=" + replyCount + ", pageNo=" + pageNo
-				+ ", sortType=" + sortType + "]";
+		return "Review [reviewNo=" + reviewNo + ", category=" + category
+				+ ", title=" + title + ", regDate=" + regDate + ", hits="
+				+ hits + ", content=" + content + ", recommend=" + recommend
+				+ ", report=" + report + ", memberId=" + memberId
+				+ ", nickname=" + nickname + ", replyCount=" + replyCount
+				+ ", pageNo=" + pageNo + ", sortType=" + sortType + "]";
 	}
-
-	
-	
 	
 }

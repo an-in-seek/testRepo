@@ -67,23 +67,18 @@ public class ReviewController {
 		return "redirect:/review/reviewList.do"; 
 	}
 
-	//리뷰 목록 - 페이징 처리 + 인기글 가져오기 + 검색
+	// 리뷰 목록 - 페이징 처리 + 인기글 가져오기 + 검색
 		@RequestMapping("reviewList.do")
 		public ModelAndView reviewList(@RequestParam (defaultValue="latest") String sortType, @RequestParam (defaultValue="1") int pageNo, 
-													@RequestParam (defaultValue="") String searchType,@RequestParam (defaultValue="") String query){
-			List<Category> list = categoryService.getCategoryByFirstId("F-5"); // 검색 카테고리 가져오기
-			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType, searchType, query);
+													@RequestParam (defaultValue="") String searchType,@RequestParam (defaultValue="") String query,
+													@RequestParam (defaultValue="전체") String category){
+			List<Category> list = categoryService.getCategoryByFirstId("F-5"); 						// 검색 카테고리 가져오기
+			List<Category> categoryList = categoryService.getCategoryByFirstId("F-1"); 				//리뷰 카테고리 정보
+			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType, searchType, query, category);
 			map.put("searchCategoryList", list);
+			map.put("categoryList", categoryList);
 			return new ModelAndView("review/review_list.tiles", map);
 		}
-
-		
-//	//리뷰 목록 - 페이징 처리 + 인기글 가져오기
-//	@RequestMapping("reviewList.do")
-//	public ModelAndView reviewList(@RequestParam (defaultValue="1") int pageNo){
-//		Map<String, Object> map = service.getReviewListPaging(pageNo);
-//		return new ModelAndView("review/review_list.tiles", map);
-//	}
 	
 	//게시물 번호로 정보조회
 	@RequestMapping("reviewView.do")
@@ -97,11 +92,21 @@ public class ReviewController {
 		return new ModelAndView("review/review_view.tiles", map);
 	}
 	
+	// 게시물 등록 폼으로 이동
+	@RequestMapping("login/review_write_form.do")								   //로그인 체크 - interceptor가 처리
+	public String moveQNAWriteForm(ModelMap map)throws Exception{
+		List<Category> categoryList = categoryService.getCategoryByFirstId("F-1"); //리뷰 카테고리 정보
+		map.put("categoryList", categoryList);
+		return "review/review_write_form.tiles";
+	}
 	
-	//리뷰 수정 폼으로 가기
+	
+	//리뷰 수정 폼으로 이동
 	@RequestMapping(value="login/modifyForm.do")
-	public ModelAndView modifyFormReview(@RequestParam int reviewNo){
+	public ModelAndView modifyFormReview(@RequestParam int reviewNo, ModelMap map){
 		Review review = service.getReviewByNo(reviewNo);
+		List<Category> categoryList = categoryService.getCategoryByFirstId("F-1"); //리뷰 카테고리 정보
+		map.put("categoryList", categoryList);
 		return new ModelAndView("review/review_modify_form.tiles", "review", review);
 	}
 	

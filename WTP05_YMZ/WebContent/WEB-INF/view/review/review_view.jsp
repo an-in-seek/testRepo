@@ -81,7 +81,9 @@ $(document).ready(function(){
 		},
 		success:function(member){
 			if(member.grade == 'master'){								// 관리자
-				$("#modifyBtn").show();
+				if(member.id == '${requestScope.review.memberId}' && member.grade == 'master'){
+					$("#modifyBtn").show();
+				}
 				$("#deleteBtn").show();
 			}else if(member.id == '${requestScope.review.memberId}'){	// 글쓴이와 로그인한 회원이 같을 경우
 				$("#modifyBtn").show();
@@ -281,7 +283,7 @@ div#reportReview_dialog{
 <table class="listTable">
 		<thead>
 			<tr>
-				<th style="height:80px" colspan="5"><font size="5">${requestScope.review.title}</font></th>
+				<th style="height:80px" colspan="5">[${requestScope.review.category}] <font size="5">${requestScope.review.title}</font></th>
 			</tr>
 		</thead>
 		<tbody>

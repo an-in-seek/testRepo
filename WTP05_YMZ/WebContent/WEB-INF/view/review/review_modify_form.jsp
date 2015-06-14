@@ -29,7 +29,7 @@ $(document).ready(function(){
 		},
 		fOnAppLoad : function(){
 			// 기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할 때 사용
-			oEditors.getById["content"].exec("PASTE_HTML", ["${requestScope.review.content}"]);
+			oEditors.getById["content"].exec("PASTE_HTML" [""]);
 		},
 		fCreator: "createSEditor2"
 	});
@@ -37,6 +37,13 @@ $(document).ready(function(){
 	// 등록버튼 클릭시 form 전송
 	$("#save").click(function(){
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		
+		if($("#category").val() == '분류'){
+			alert("분류항목을 선택하세요.");
+			$("#category").focus();
+			return false;
+		}
+		
 		if (!$("#title").val()) {
 			alert("제목을 입력하세요");
 			$("#title").focus();
@@ -85,6 +92,21 @@ table#t1 thead tr{
 				<td colspan="4"><font size="4">리뷰 게시물 수정</font></td>
 			</tr>
 		</thead>
+		<c:if test="${sessionScope.login_info.grade != 'master' }">
+		<tr>
+			<td>&nbsp;</td>
+			<td align="center" width="40px">분류</td>
+			<td>
+				<select id="category" name="category">
+					<option>분류</option>
+						<c:forEach items="${requestScope.categoryList}" var="c">
+							<option value="${c.categoryName}">${c.categoryName}</option>
+						</c:forEach>
+					</select>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		</c:if>
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center" width="50px">제목</td>
@@ -98,7 +120,7 @@ table#t1 thead tr{
 			<td>&nbsp;</td>
 			<td align="center">내용</td>
 			<td>
-				<textarea name="content" id="content" rows="10" cols="100" style="width:800px; height:420px;"></textarea><br>
+				<textarea name="content" id="content" rows="10" cols="100" style="width:800px; height:420px;">${requestScope.review.content}</textarea><br>
 			</td>
 			<td>&nbsp;</td>
 		</tr>
@@ -108,6 +130,9 @@ table#t1 thead tr{
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center" colspan="2">
+			<c:if test="${sessionScope.login_info.grade == 'master' }">
+				<input type="hidden" name="category" value="공지">
+			</c:if>
 				<input type="submit" id="save" value="수정">
 				<input type="button" value="취소" onclick="javascript:history.back(-1);">
 			</td>

@@ -42,6 +42,14 @@ $(document).ready(function(){
 		
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD");
 		
+		
+		
+		if($("#category").val() == '분류'){
+			alert("분류항목을 선택하세요.");
+			$("#category").focus();
+			return false;
+		}
+		
 		if (!$("#title").val()) {
 			alert("제목을 입력하세요!!");
 			$("#title").focus();
@@ -90,6 +98,21 @@ table#t1 thead tr{
 				<td colspan="4"><font size="4">리뷰(Review)</font></td>
 			</tr>
 		</thead>
+		<c:if test="${sessionScope.login_info.grade != 'master' }">
+		<tr>
+			<td>&nbsp;</td>
+			<td align="center" width="40px">분류</td>
+			<td>
+				<select id="category" name="category">
+					<option>분류</option>
+						<c:forEach items="${requestScope.categoryList}" var="c">
+							<option value="${c.categoryName}">${c.categoryName}</option>
+						</c:forEach>
+					</select>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		</c:if>
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center" width="50px">제목</td>
@@ -111,6 +134,9 @@ table#t1 thead tr{
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center" colspan="2">
+			<c:if test="${sessionScope.login_info.grade == 'master' }">
+				<input type="hidden" name="category" value="공지">
+			</c:if>
 				<input type="submit" id="save" value="등록">
 				<input type="button" value="취소" onclick="javascript:history.back(-1);">
 			</td>
