@@ -65,6 +65,7 @@ table#tb thead tr{
 	<!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
 	<form id="write" method="post" action="${initParam.rootPath}/qna/login/modifyQna.do">
 		<input type="hidden" id="number" name="number" value="${requestScope.qna.number}" >
+		<input type="hidden" id="memberId" name="memberId" value="${requestScope.qna.memberId}" >
 		<!-- 테이블 -->
 		<table id="tb" align="center" style="border: 2px solid #B70000">
 			<thead>

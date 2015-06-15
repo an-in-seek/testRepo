@@ -23,7 +23,7 @@ public interface ReviewDAO {
 	public abstract Review selectReviewByNo(int reviewNo);
 	
 	// 리뷰 전체 페이지 수
-	public abstract int selectTotalReviewCount(String searchType, String query);
+	public abstract int selectTotalReviewCount(String searchType, String query, String category);
 
 	// 리뷰 추천테이블에서 값 조회
 	public abstract int getRecommendCount(Map rmap);
@@ -44,7 +44,7 @@ public interface ReviewDAO {
 	public abstract List<Review> selectMonthBestHits();
 
 	// 정렬
-	public abstract List<Review> selectSortReviewPaging(int pageNo, String type, String searchType, String query);
+	public abstract List<Review> selectSortReviewPaging(int pageNo, String type, String searchType, String query, String category);
 
 	// 공지글 가져오기
 	public abstract List<Review> selectNotice();
@@ -60,6 +60,7 @@ public interface ReviewDAO {
 
 	//회원 아이디(ID)와 일치하는 리뷰 게시물 총 개수
 	public abstract int selectReviewCountById(String memberId);
+
 
 	
 }

@@ -29,7 +29,7 @@ $(document).ready(function(){
 		},
 		fOnAppLoad : function(){
 			// 기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할 때 사용
-			oEditors.getById["content"].exec("PASTE_HTML", ["${requestScope.review.content}"]);
+			oEditors.getById["content"].exec("PASTE_HTML" [""]);
 		},
 		fCreator: "createSEditor2"
 	});
@@ -37,6 +37,13 @@ $(document).ready(function(){
 	// 등록버튼 클릭시 form 전송
 	$("#save").click(function(){
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		
+		if($("#category").val() == '분류'){
+			alert("분류항목을 선택하세요.");
+			$("#category").focus();
+			return false;
+		}
+		
 		if (!$("#title").val()) {
 			alert("제목을 입력하세요");
 			$("#title").focus();
@@ -79,16 +86,31 @@ table#t1 thead tr{
 <!-- <form id="write" method="post" action="${initParam.rootPath }/review/register.do">  -->
 	<form id="write" method="post" action="${initParam.rootPath }/review/login/modifyReview.do?reviewNo=${review.reviewNo}">
 	<!-- 테이블 -->
-	<table id="t1" align="center" style="border:solid 2px #050099">
+	<table id="t1" align="center" style="border:solid 2px #B70000">
 		<thead>
 			<tr style="text-align: center;">
 				<td colspan="4"><font size="4">리뷰 게시물 수정</font></td>
 			</tr>
 		</thead>
+		<c:if test="${sessionScope.login_info.grade != 'master' }">
 		<tr>
 			<td>&nbsp;</td>
-			<td align="center" width="50px">제목</td>
-			<td><input type="text" id="title" name="title" style="width:800px" required="required" value="${requestScope.review.title}"></td>
+			<td align="center" width="60px">분류</td>
+			<td>
+				<select id="category" name="category">
+					<option>분류</option>
+						<c:forEach items="${requestScope.categoryList}" var="c">
+							<option value="${c.categoryName}">${c.categoryName}</option>
+						</c:forEach>
+					</select>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		</c:if>
+		<tr>
+			<td>&nbsp;</td>
+			<td align="center" width="60px">제목</td>
+			<td><input type="text" id="title" name="title" maxlength="20" style="width:800px" required="required" value="${requestScope.review.title}"></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">
@@ -98,7 +120,7 @@ table#t1 thead tr{
 			<td>&nbsp;</td>
 			<td align="center">내용</td>
 			<td>
-				<textarea name="content" id="content" rows="10" cols="100" style="width:800px; height:420px;"></textarea><br>
+				<textarea name="content" id="content" rows="10" cols="100" style="width:800px; height:420px;">${requestScope.review.content}</textarea><br>
 			</td>
 			<td>&nbsp;</td>
 		</tr>
@@ -108,6 +130,9 @@ table#t1 thead tr{
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center" colspan="2">
+			<c:if test="${sessionScope.login_info.grade == 'master' }">
+				<input type="hidden" name="category" value="공지">
+			</c:if>
 				<input type="submit" id="save" value="수정">
 				<input type="button" value="취소" onclick="javascript:history.back(-1);">
 			</td>

@@ -97,8 +97,9 @@ insert into location values(location_no_seq.nextval, '삼환하이펙스 B동', 
 insert into location values(location_no_seq.nextval, '삼환하이펙스 B동', 'B1');
 
 --유스페이스2동2층
-insert into restaurant values(restaurant_no_seq.nextval, '새마을식당', 'S-4', '031-628-6694', '백주부의 새마을식당이쥬', '11111111111111,11111111111112,11111111111113,11111111111114', 0, 153, 'S-8,S-9,S-10,S-11', '20150530', 0, 5);
+insert into restaurant values(restaurant_no_seq.nextval, '새마을식당', 'S-4', '031-628-6694', '백주부의 새마을식당이쥬', '1111111111111,1111111111112,1111111111113,1111111111114,1111111111115', 0, 222, 'S-8,S-9,S-10,S-11', '20150530', 0, 5);
 insert into food values(food_no_seq.nextval, '열탄불고기', 8000, '5330원/100g', 1);
+insert into food values(food_no_seq.nextval, '새마을불고기', 8000, '5330원/100g', 1);
 insert into food values(food_no_seq.nextval, '소금구이', 9000, '6000원/100g', 1);
 insert into food values(food_no_seq.nextval, '만신창삼겹살', 9000, '(오리지날/마늘/간장) 6000원/100g', 1);
 insert into food values(food_no_seq.nextval, '차돌박이', 13000, '8670원/100g', 1);
@@ -172,14 +173,20 @@ insert into restaurant values(restaurant_no_seq.nextval, '됐소', 'S-4', '031-6
 --H스퀘어S동 B1층
 insert into restaurant values(restaurant_no_seq.nextval, '재크와콩나물', 'S-4', '031-789-3799', '재크와콩나물', '1111111111181', 0, 85, 'S-8,S-9,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '하코야', 'S-7', '031-789-3800', '하코야', '1111111111191', 0, 55, 'S-8,S-9,S-10', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '미정국수0410', 'S-4', '031-789-3669', '미정국수0410', '1111111111201', 0, 136, 'S-8,S-9,S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '미정국수0410', 'S-4', '031-789-3669', '미정국수0410', '1111111111201,1111111111202,1111111111203,1111111111204,1111111111205', 0, 187, 'S-8,S-9,S-10', '20150530', 0, 12);
+insert into food values(food_no_seq.nextval, '멸치국수', 3000, '국내산 멸치로 36시간 우려낸 멸치국수의 지존', 31);
+insert into food values(food_no_seq.nextval, '간비국수', 4000, '푸짐한 고명과 따뜻한 면을 간장양념에 비벼 드시는 담백한 간비국수', 31);
+insert into food values(food_no_seq.nextval, '(계절) 미정냉국수', 4000, '정성스레 우려낸 진한 육수를 시원하게 드시는 냉국수', 31);
+insert into food values(food_no_seq.nextval, '비빔국수', 4000, '매콤달콤한 김치소스에 버무린 환상의 비빔국수', 31);
+insert into food values(food_no_seq.nextval, '(계절) 냉콩국수', 4000, '즉석에서 갈아 만들어 주는 영양덩어리 콩국수', 31);
+insert into food values(food_no_seq.nextval, '고추기름물만두', 4000, '한입에 쏙쏙 매콤하고 부드러운 고추기름물만두', 31);
 insert into restaurant values(restaurant_no_seq.nextval, '판교토종순대국', 'S-4', '031-789-3670', '판교토종순대국', '1111111111211', 0, 64, 'S-8,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '와플반트', 'S-5', '031-789-3671', '와플', '1111111111221', 0, 32, 'S-9,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '다온', 'S-4', '031-8018-4800', '다온', '1111111111231', 0, 22, 'S-8,S-10,S-11', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '별별치킨', 'S-5', '031-789-3672', '별별치킨', '1111111111241', 0, 15, 'S-9,S-10,S-11', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '김밥천국', 'S-4', '031-789-3673', '김밥', '1111111111251', 0, 74, 'S-9,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '죠샌드위치', 'S-5', '031-789-3939', '샌드위치', '1111111111261', 0, 52, 'S-9,S-10', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '스마일쿡', 'S-4', '031-789-3940', '안녕하세요 스마일쿡입니다.<br>저희 집은 단돈 5천원으로 날마다 다른 메뉴를 먹을수 있답니다.<br>H스퀘어 S동 지하1층 제일 구석땡이에 있어요^^', '1111111111271', 0, 777, 'S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '스마일쿡', 'S-4', '031-789-3940', '안녕하세요 스마일쿡입니다.<br>저희 집은 단돈 5천원으로 날마다 다른 메뉴를 먹을수 있답니다.<br>H스퀘어 S동 지하1층 제일 구석땡이에 있어요^^', '1111111112171,1111111112172,1111111112173,1111111112174,1111111112175', 0, 777, 'S-10', '20150530', 0, 12);
 insert into food values(food_no_seq.nextval, '정식', 5000, null, 38);
 insert into restaurant values(restaurant_no_seq.nextval, '명동칼국수', 'S-4', '031-696-7499', '명동칼국수', '1111111111281', 0, 42, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '신기소', 'S-7', '031-696-7500', '신기소', '1111111111291', 0, 137, 'S-8,S-9,S-10', '20150530', 0, 12);
@@ -246,7 +253,11 @@ insert into restaurant values(restaurant_no_seq.nextval, '통통낙지마을', '
 insert into restaurant values(restaurant_no_seq.nextval, '오늘한점', 'S-4', '031-709-1852', '오늘한점', '1111111111741', 0, 63, 'S-8,S-9,S-10', '20150530', 0, 16);
 
 --삼환하이펙스B동 1층
-insert into restaurant values(restaurant_no_seq.nextval, '슈퍼스테이크', 'S-5', '031-698-4443', '슈퍼스테이크', '1111111111751', 0, 192, 'S-11', '20150530', 0, 17);
+insert into restaurant values(restaurant_no_seq.nextval, '슈퍼스테이크', 'S-5', '031-698-4443', '슈퍼스테이크', '1111111111751,1111111111752,1111111111753,1111111111754,1111111111755', 0, 192, 'S-9', '20150530', 0, 17);
+insert into food values(food_no_seq.nextval, '슈퍼 스테이크', 9900, '호주산 청정우 / 250g', 86);
+insert into food values(food_no_seq.nextval, '버크셔K 스테이크', 8900, '지리산 순종 흰코흑돼지 / 250g', 86);
+insert into food values(food_no_seq.nextval, '함박 스테이크', 7900, '국내산 돼지고기 / 100% 수제 / 300g', 86);
+insert into food values(food_no_seq.nextval, '연어 스테이크', 8900, '노르웨이산 / 200g', 86);
 insert into restaurant values(restaurant_no_seq.nextval, '한국인의팥집', 'S-5', '031-698-4444', '한국인의팥집', '1111111111761', 0, 48, 'S-9', '20150530', 0, 17);
 insert into restaurant values(restaurant_no_seq.nextval, '베이징스토리', 'S-6', '031-696-0306', '베이징스토리', '1111111111771', 0, 52, 'S-8,S-11', '20150530', 0, 17);
 insert into restaurant values(restaurant_no_seq.nextval, '한그릇한사발', 'S-4', '031-696-0307', '한그릇한사발', '1111111111781', 0, 32, 'S-8,S-11', '20150530', 0, 17);
@@ -275,6 +286,19 @@ insert into restaurant values(restaurant_no_seq.nextval, '소담애', 'S-4', '03
 insert into restaurant values(restaurant_no_seq.nextval, '찌개애감동', 'S-4', '031-628-1479', '찌개애감동', '1111111112031', 0, 113, 'S-8,S-10,S-11', '20150530', 0, 2);
 insert into restaurant values(restaurant_no_seq.nextval, '참치지기', 'S-7', '031-628-1480', '참치지기', '1111111112041', 0, 36, 'S-9', '20150530', 0, 2);
 insert into restaurant values(restaurant_no_seq.nextval, '청구칼국수', 'S-4', '031-628-1481', '청구칼국수', '1111111112051', 0, 63, 'S-11', '20150530', 0, 2);
+insert into restaurant values(restaurant_no_seq.nextval, '육전면사무소', 'S-4', '031-628-1002', '육전면사무소', '1111111112181,1111111112182,1111111112183,1111111112184,1111111112185', 0, 200, 'S-8,S-9', '20150530', 0, 2);
+insert into food values(food_no_seq.nextval, '소고기생면', 6000, '소뼈를 우려만든 육수로 싱싱한 야채와 소고기를 넣어 담백한맛', 109);
+insert into food values(food_no_seq.nextval, '해물생면', 6000, '소뼈를 우려만든 육수로 싱싱한 야채와 해산물을 넣어 담백한맛', 109);
+insert into food values(food_no_seq.nextval, '불짬뽕생면', 6000, '각종 해산물과 싱싱한 야채가 얼큰하게 어우러진 정통 짬뽕', 109);
+insert into food values(food_no_seq.nextval, '육전', 11000, '청정 호주산 소고기를 얇게 썰어 담백하고 고소한 맛', 109);
+insert into food values(food_no_seq.nextval, '육전번', 11000, '완자와 특제소스를 섞어 직화로 구운 요리', 109);
+insert into food values(food_no_seq.nextval, '섞어전', 20000, '다양한 전을 고루담은 모듬전 스페셜', 109);
+insert into food values(food_no_seq.nextval, '소고기고추전', 6000, '(소고기:호주산/돼지고기:국내산)', 109);
+insert into food values(food_no_seq.nextval, '소고기완자전', 6000, '(소고기:호주산/돼지고기:국내산)', 109);
+insert into food values(food_no_seq.nextval, '젤라틴대왕닭발', 13000, '(매콤한맛/아주매운맛)', 109);
+insert into food values(food_no_seq.nextval, '미니족발', 16000, '(매콤한맛/아주매운맛)', 109);
+
+
 
 -- 유스페이스1동 1층
 insert into restaurant values(restaurant_no_seq.nextval, 'THE MORE', 'S-5', '031-628-1177', '더모어', '1111111112061', 0, 35, 'S-10,S-11', '20150530', 0, 3);
@@ -293,88 +317,88 @@ insert into restaurant values(restaurant_no_seq.nextval, '하누랑돈이랑', '
 
 
 
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 불고기','1','299','34','1972-02-04 11:00:00','user13');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 순대국','1','19','643','1972-02-04 11:00:01','user04');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 순대국','1','19','643','1972-02-04 11:00:02','user08');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 순대국','1','19','643','1972-02-04 11:00:11','user10');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 순대국','1','19','643','1972-02-04 11:00:12','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 순대국','1','19','643','1972-02-04 11:00:13','user07');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 순대국','1','29','744','1972-03-04 11:00:11','user07');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 순대국','1','29','744','1972-03-04 11:00:12','user06');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 치킨','1','29','744','1972-03-04 11:00:13','user03');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 치킨','1','29','744','1972-03-04 11:00:14','user09');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 치킨','1','29','744','1972-03-04 11:00:15','user15');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 치킨','1','39','644','1972-04-04 11:00:10','user06');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 치킨','1','39','644','1972-04-04 11:00:11','user02');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 치킨','1','39','644','1972-04-04 11:00:12','user08');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 치킨','1','39','644','1972-04-04 11:00:13','user05');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 치킨','1','100','52','1972-04-04 11:00:14','user06');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 치킨','1','39','644','1972-04-04 11:00:15','user14');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 피자','1','49','544','1972-05-04 11:00:10','user05');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 피자','1','49','544','1972-05-04 11:00:11','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 피자','1','49','544','1972-05-04 11:00:12','user13');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 피자','1','49','544','1972-05-04 11:00:13','user07');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 피자','1','49','544','1972-05-04 11:00:14','user04');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 피자','1','59','444','1972-06-04 11:00:10','user04');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 피자','1','59','444','1972-06-04 11:00:11','user06');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 피자','1','59','444','1972-06-04 11:00:12','user10');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 족발','1','59','444','1972-06-04 11:00:13','user12');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 족발','1','59','444','1972-06-04 11:00:14','user03');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 족발','1','69','344','1972-07-04 11:00:10','user02');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 족발','1','69','344','1972-07-04 11:00:11','user05');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 족발','1','69','344','1972-07-04 11:00:12','user03');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 족발','1','69','344','1972-07-04 11:00:13','user11');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 족발','1','69','344','1972-07-04 11:00:14','user09');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 족발','1','79','244','1972-08-04 11:00:10','user02');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 횟집','1','89','144','1972-09-04 11:00:10','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 횟집','1','99','14','1972-10-04 11:00:10','user15');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 횟집','1','199','24','1972-11-04 11:00:10','user14');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 횟집','1','399','44','1973-04-04 11:00:10','user12');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 횟집','1','499','54','1974-04-04 11:00:10','user11');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 횟집','1','599','64','1975-04-04 11:00:10','user10');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 횟집','1','699','74','1976-04-04 11:00:10','user09');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 횟집','1','799','84','1977-04-04 11:00:10','user08');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 곱창','1','899','94','1978-04-04 11:00:10','user07');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 곱창','1','99','221','1979-04-04 11:00:10','user06');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 곱창','1','99','233','1980-04-04 11:00:10','user05');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 곱창','1','99','321','1981-04-04 11:00:10','user04');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 곱창','1','99','194','1982-04-04 11:00:10','user03');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 곱창','1','90','111','1983-04-04 11:00:10','user02');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 곱창','1','91','121','1984-04-04 11:00:10','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 곱창','1','92','142','1985-04-04 11:00:10','user15');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 분식','1','93','123','1986-04-04 11:00:10','user14');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 분식','1','94','92','1987-04-04 11:00:10','user13');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 분식','1','95','88','1988-04-04 11:00:10','user12');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 분식','1','96','63','1989-04-04 11:00:10','user11');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 분식','1','96','36','1990-04-04 11:00:10','user10');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 분식','1','97','44','1991-04-04 11:00:10','user09');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 랍스타','1','98','32','1992-04-04 11:00:10','user08');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 랍스타','1','99','31','1993-04-04 11:00:10','user07');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 랍스타','1','440','24','1995-04-04 11:00:10','user05');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 랍스타','1','441','22','1996-04-04 11:00:10','user04');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 랍스타','1','442','13','1997-04-04 11:00:10','user03');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 죽집','1','443','12','1998-04-04 11:00:10','user02');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타 죽집','1','444','11','1999-04-04 11:00:10','user01');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 불고기','1','299','34','1972-02-04 11:00:00','user13');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 순대국','1','19','643','1972-02-04 11:00:01','user04');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 순대국','1','19','643','1972-02-04 11:00:02','user08');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 순대국','1','19','643','1972-02-04 11:00:11','user10');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 순대국','1','19','643','1972-02-04 11:00:12','user01');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 순대국','1','19','643','1972-02-04 11:00:13','user07');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 순대국','1','29','744','1972-03-04 11:00:11','user07');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 순대국','1','29','744','1972-03-04 11:00:12','user06');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 치킨','1','29','744','1972-03-04 11:00:13','user03');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 치킨','1','29','744','1972-03-04 11:00:14','user09');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 치킨','1','29','744','1972-03-04 11:00:15','user15');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 치킨','1','39','644','1972-04-04 11:00:10','user06');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 치킨','1','39','644','1972-04-04 11:00:11','user02');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 치킨','1','39','644','1972-04-04 11:00:12','user08');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 치킨','1','39','644','1972-04-04 11:00:13','user05');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 치킨','1','100','52','1972-04-04 11:00:14','user06');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 치킨','1','39','644','1972-04-04 11:00:15','user14');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 피자','1','49','544','1972-05-04 11:00:10','user05');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 피자','1','49','544','1972-05-04 11:00:11','user01');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 피자','1','49','544','1972-05-04 11:00:12','user13');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 피자','1','49','544','1972-05-04 11:00:13','user07');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 피자','1','49','544','1972-05-04 11:00:14','user04');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 피자','1','59','444','1972-06-04 11:00:10','user04');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 피자','1','59','444','1972-06-04 11:00:11','user06');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 피자','1','59','444','1972-06-04 11:00:12','user10');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 족발','1','59','444','1972-06-04 11:00:13','user12');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 족발','1','59','444','1972-06-04 11:00:14','user03');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 족발','1','69','344','1972-07-04 11:00:10','user02');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 족발','1','69','344','1972-07-04 11:00:11','user05');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 족발','1','69','344','1972-07-04 11:00:12','user03');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 족발','1','69','344','1972-07-04 11:00:13','user11');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 족발','1','69','344','1972-07-04 11:00:14','user09');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 족발','1','79','244','1972-08-04 11:00:10','user02');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 횟집','1','89','144','1972-09-04 11:00:10','user01');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 횟집','1','99','14','1972-10-04 11:00:10','user15');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 횟집','1','199','24','1972-11-04 11:00:10','user14');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 횟집','1','399','44','1973-04-04 11:00:10','user12');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 횟집','1','499','54','1974-04-04 11:00:10','user11');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 횟집','1','599','64','1975-04-04 11:00:10','user10');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 횟집','1','699','74','1976-04-04 11:00:10','user09');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 횟집','1','799','84','1977-04-04 11:00:10','user08');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 곱창','1','899','94','1978-04-04 11:00:10','user07');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 곱창','1','99','221','1979-04-04 11:00:10','user06');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 곱창','1','99','233','1980-04-04 11:00:10','user05');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 곱창','1','99','321','1981-04-04 11:00:10','user04');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 곱창','1','99','194','1982-04-04 11:00:10','user03');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 곱창','1','90','111','1983-04-04 11:00:10','user02');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 곱창','1','91','121','1984-04-04 11:00:10','user01');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 곱창','1','92','142','1985-04-04 11:00:10','user15');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 분식','1','93','123','1986-04-04 11:00:10','user14');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 분식','1','94','92','1987-04-04 11:00:10','user13');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 분식','1','95','88','1988-04-04 11:00:10','user12');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 분식','1','96','63','1989-04-04 11:00:10','user11');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 분식','1','96','36','1990-04-04 11:00:10','user10');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한식','코스타 분식','1','97','44','1991-04-04 11:00:10','user09');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타 랍스타','1','98','32','1992-04-04 11:00:10','user08');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타 랍스타','1','99','31','1993-04-04 11:00:10','user07');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타 랍스타','1','440','24','1995-04-04 11:00:10','user05');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타 랍스타','1','441','22','1996-04-04 11:00:10','user04');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타 랍스타','1','442','13','1997-04-04 11:00:10','user03');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타 죽집','1','443','12','1998-04-04 11:00:10','user02');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타 죽집','1','444','11','1999-04-04 11:00:10','user01');
 
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'미스터피자','1','831','84','2004-12-25 11:12:20','user02');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'파파존스','1','97','34','2008-02-11 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'도미노피자','1','774','66','2009-12-31 11:12:20','user15');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'차지치킨','1','444','6','2010-11-11 11:12:20','user14');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'중국성','1','454','14','2010-12-12 11:12:20','user13');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'면사무소','1','311','38','2011-11-14 11:12:20','user12');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'대게나라','1','245','44','2012-09-28 11:12:20','user11');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'파리바게트','1','111','4','2013-01-01 11:12:20','user10');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'코스타국밥','1','53','0','2013-02-03 11:12:20','user09');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'한솥도시락','1','12','2','2013-12-08 11:12:20','user08');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'재스기네치킨','1','333','31','2014-11-27 11:12:20','user07');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'차지족발','1','412','6','2015-06-01 01:12:20','user06');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'롯데리아','1','542','22','2015-06-01 03:12:20','user05');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'맥도날드','1','15','11','2015-06-01 05:12:20','user04');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'버거킹','1','221','0','2015-06-02 07:12:20','user03');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'새마을식당','1','1','1','2015-06-02 09:12:20','user02');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','2015-06-08 11:12:20','user01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'광고글 올리면 강퇴처리 됩니다!!','1','1','1','2015-06-02 01:11:12','master01');
-insert into review(review_no, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'사진이 없는 글은 삭제됩니다.','1','1','1','2015-06-02 09:10:20','master02');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','미스터피자','1','831','84','2004-12-25 11:12:20','user02');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','파파존스','1','97','34','2008-02-11 11:12:20','user01');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','도미노피자','1','774','66','2009-12-31 11:12:20','user15');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','차지치킨','1','444','6','2010-11-11 11:12:20','user14');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','중국성','1','454','14','2010-12-12 11:12:20','user13');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','면사무소','1','311','38','2011-11-14 11:12:20','user12');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','대게나라','1','245','44','2012-09-28 11:12:20','user11');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','파리바게트','1','111','4','2013-01-01 11:12:20','user10');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타국밥','1','53','0','2013-02-03 11:12:20','user09');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','한솥도시락','1','12','2','2013-12-08 11:12:20','user08');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','재스기네치킨','1','333','31','2014-11-27 11:12:20','user07');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','차지족발','1','412','6','2015-06-01 01:12:20','user06');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','롯데리아','1','542','22','2015-06-01 03:12:20','user05');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','맥도날드','1','15','11','2015-06-01 05:12:20','user04');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','버거킹','1','221','0','2015-06-02 07:12:20','user03');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','새마을식당','1','1','1','2015-06-02 09:12:20','user02');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','수지의 맛있는 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','2015-06-08 11:12:20','user01');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','광고글 올리면 강퇴처리 됩니다!!','1','1','1','2015-06-02 01:11:12','master01');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','사진이 없는 글은 삭제됩니다.','1','1','1','2015-06-02 09:10:20','master02');
 
 
 insert into review_reply values(review_reply_no_seq.nextval, '2015-05-28 01:10:20', '노맛', 'user01', 79);
@@ -496,7 +520,7 @@ values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '정보수정 어떻게 해
 insert into QNA (qna_no, qna_refamily, qna_restep, qna_relevel, qna_title, qna_category, qna_registration_date, qna_hits, qna_content, member_id) 
 values(qna_no_seq.nextval, qna_no_seq.currval, 0, 0, '정보수정 어떻게 해요?', '회원관련', '20150418', 2, '2안녕하세요! 관리자님 제가 회원탈퇴를 하려고 하는데 어떻게 해야되나요?', 'user03');
 
-insert into reported_review values(reported_no_seq.nextval, '리뷰', 1, '처리중', '음담패설', '20150505', 'user01');
+insert into reported_review values(reported_no_seq.nextval, '리뷰', 1, '안녕하세요1','처리중', '음담패설', '20150505', 'user01');
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 2, '미처리', '음담패설', '20150505', 'user03');
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '미처리', '폭언욕설', '20150505', 'user04');
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 4, '처리중', '폭언욕설', '20150505', 'user06');
@@ -513,5 +537,5 @@ insert into reported_review values(reported_no_seq.nextval, '리뷰', 4, '처리
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 5, '미처리', '도배글', '20150505', 'user01');
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 6, '처리중', '도배글', '20150505', 'user02');
 
-insert into reported_reply values(reportedreply_no_seq.nextval, '리뷰', 1, 2, '처리중', '도배글', '20150505', 'user02');
-insert into reported_reply values(reportedreply_no_seq.nextval, '리뷰', 1, 2, '처리중', '도배글', '20150505', 'user02');
+insert into reported_reply values(reportedreply_no_seq.nextval, '리뷰', 1, 2,  '안녕하세요1', '처리중', '도배글', '20150505', 'user02');
+insert into reported_reply values(reportedreply_no_seq.nextval, '리뷰', 1, 3,  '안녕하세요2', '처리중', '도배글', '20150505', 'user02');

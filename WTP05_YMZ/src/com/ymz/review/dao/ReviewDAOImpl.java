@@ -141,13 +141,14 @@ public class ReviewDAOImpl implements ReviewDAO{
 	 * 리뷰 정렬 페이징 관련
 	 */
 	@Override
-	public List<Review> selectSortReviewPaging(int pageNo, String type, String searchType, String query) {
+	public List<Review> selectSortReviewPaging(int pageNo, String type, String searchType, String query, String category) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
 		map.put("pageNo", pageNo);
 		map.put("sortType", type);  
 		map.put("searchType", searchType);  
 		map.put("query", query);  
+		map.put("category", category);
 		return session.selectList(namespace+"ReviewSortPaging", map);
 	}
 	
@@ -155,11 +156,12 @@ public class ReviewDAOImpl implements ReviewDAO{
 	 * 리뷰 전체 페이지 수
 	 */
 	@Override
-	public int selectTotalReviewCount(String searchType, String query) {
+	public int selectTotalReviewCount(String searchType, String query, String category) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchType", searchType);  
-		map.put("query", query);  
-		if(searchType.equals("")&&query.equals("")){
+		map.put("query", query); 
+		map.put("category", category);
+		if(searchType.equals("")&&query.equals("")&&category.equals("")){
 			return session.selectOne(namespace+"selectTotalReviewCount");
 		}
 		return session.selectOne(namespace+"selectSearchReviewCount", map);

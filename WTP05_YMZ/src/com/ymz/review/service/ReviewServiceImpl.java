@@ -106,15 +106,15 @@ public class ReviewServiceImpl implements ReviewService {
 	 * 리뷰 정렬 
 	 */
 	@Override
-	public Map<String, Object> ReviewSortListPaging(int pageNo, String type, String searchType, String query) {
+	public Map<String, Object> ReviewSortListPaging(int pageNo, String type, String searchType, String query, String category) {
 		List<Review> bestHits = dao.selectTodayBestHits(); // 오늘 최고 조회수 글 목록 가져오기
 		List<Review> bestMonthHits = dao.selectMonthBestHits(); // 오늘 최고 조회수 글 목록 가져오기
 		List<Review> bestMonthReplys = dao.selectMonthReply(); // 이번달 최다 리플글 가져오기.
 		List<Review> notices = dao.selectNotice(); // 공지글 가져오기
 		// 목록에 뿌려질 List<Review> 조회
-		List<Review> sortlist = dao.selectSortReviewPaging(pageNo, type, searchType, query); // 수정 매개변수 추가
+		List<Review> sortlist = dao.selectSortReviewPaging(pageNo, type, searchType, query, category); // 수정 매개변수 추가
 		// PagingBean 생성
-		int totalContent = dao.selectTotalReviewCount(searchType, query); // 수정 : 매개변수 추가
+		int totalContent = dao.selectTotalReviewCount(searchType, query, category); // 수정 : 매개변수 추가
 		PagingBean pagingBean = new PagingBean(totalContent, pageNo);
 		// 두개의 값(List, PagingBean)을 Map에 넣어 return
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -127,9 +127,11 @@ public class ReviewServiceImpl implements ReviewService {
 		map.put("sortType", type);
 		map.put("searchType", searchType);
 		map.put("query", query);
+		map.put("category", category);
 		return map;
 	}
-
+	
+	
 	/**
 	 * 메인 페이지 BEST 리뷰
 	 */
@@ -142,7 +144,7 @@ public class ReviewServiceImpl implements ReviewService {
 		map.put("todayBest", bestHits);
 		return map;
 	}
-	
-	
+
+
 
 }

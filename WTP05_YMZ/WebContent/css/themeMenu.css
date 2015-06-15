@@ -95,7 +95,7 @@
 	text-transform: uppercase;
 	font-size: 9px;
 	letter-spacing: 1px;
-	padding-top: 4px;
+	padding-top: 55px;								/* 글씨 뜨는 위치 */
 	font-family: 'Open Sans', Arial, sans-serif;
 }
 

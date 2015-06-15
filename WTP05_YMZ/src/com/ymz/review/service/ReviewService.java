@@ -32,13 +32,13 @@ public interface ReviewService {
 	public abstract void inputRecommend(Map rmap);
 
 	// 리뷰 정렬 관련
-	public abstract Map<String, Object> ReviewSortListPaging(int pageNo, String type, String searchType, String query);
+	public abstract Map<String, Object> ReviewSortListPaging(int pageNo, String type, String searchType, String query, String category);
 
 	// 메인페이지 (월간 BEST)
 	public Map getMainReview();
 
 	// 아이디(ID)로 리뷰게시물 조회하기
 	Map<String, Object> getReviewListPagingById(int pageNo, String memberId);
-	
+
 	
 }

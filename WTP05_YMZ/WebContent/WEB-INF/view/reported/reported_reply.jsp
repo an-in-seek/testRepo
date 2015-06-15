@@ -6,17 +6,17 @@
 	<h2 align="center">댓글 신고 목록</h2>
 			<c:choose>
 				<c:when test="${fn:length(requestScope.replyMap.reported_list) != 0 }">
-				<table id="listTB" class="listTB" border="1" >
+				<table id="listTB" class="listTB">
 					<thead>
 						<tr align="center">
-							<td>NO</td>
-							<td>분류</td>
-							<td>신고된 댓글의 게시물 번호</td>
-							<td>신고된 댓글 번호</td>
-							<td>신고사유</td>
-							<td>신고날짜</td>
-							<td>처리상태</td>
-							<td>신고자</td>
+							<td width="40">NO</td>
+							<td width="40">분류</td>
+							<td width="80">게시물NO</td>
+							<td>댓글내용</td>
+							<td width="90">신고사유</td>
+							<td width="90">신고날짜</td>
+							<td width="80">처리상태</td>
+							<td width="80">신고자</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -25,7 +25,16 @@
 									<td>${reported.reportNo }</td>
 									<td>${reported.category}</td>
 									<td>${reported.reviewNo}</td>
-									<td>${reported.replyNo}</td>
+									<td>
+									<c:choose>
+										<c:when test="${fn:length(reported.content) <= 20}">
+											${reported.content}
+										</c:when>
+										<c:otherwise>
+											${reported.content.substring(0,19)}...
+										</c:otherwise>
+									</c:choose>
+									</td>
 									<td>${reported.reason}</td>
 									<td>${reported.reportedDate}</td>
 									<td>${reported.state}</td>

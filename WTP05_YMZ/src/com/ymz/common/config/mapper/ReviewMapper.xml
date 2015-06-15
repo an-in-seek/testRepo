@@ -3,7 +3,8 @@
 <mapper namespace="review.dao.ReviewMapper">
 
 	<sql id="review-select">
-		select  review_no, 
+		select  review_no,
+				category 
 				title, 
 				content, 
 				hits, 
@@ -16,6 +17,7 @@
 	
 	<resultMap type="review" id="review-resultmap">
 		<id column="review_no" property="reviewNo"/>
+		<result column="category" property="category"/>
 		<result column="title" property="title"/>
 		<result column="content" property="content"/>
 		<result column="hits" property="hits"/>
@@ -31,14 +33,15 @@
 		<selectKey keyProperty="reviewNo" resultType="_int" order="BEFORE">
 			select review_no_seq.nextval from dual
 		</selectKey>
-		insert into review (review_no, title, content, hits, recommend, reg_date, member_id)
-		values (#{reviewNo}, #{title}, #{content}, #{hits}, #{recommend}, to_char(sysdate, 'yyyy-mm-dd HH24:MI:SS'), #{memberId})
+		insert into review (review_no, category, title, content, hits, recommend, reg_date, member_id)
+		values (#{reviewNo}, #{category}, #{title}, #{content}, #{hits}, #{recommend}, to_char(sysdate, 'yyyy-mm-dd HH24:MI:SS'), #{memberId})
 	</insert>
 
 	<!-- 수정 -->
 	<update id="updateReview" parameterType="review">
 		update  review
 		set		title=#{title},
+				category=#{category},
 				content=#{content}
 		where	review_no=#{reviewNo} and member_id=#{memberId}
 	</update>
@@ -53,7 +56,8 @@
 	
 	<!-- 조회 -->
 	<select id="selectReviewByNo" resultMap="review-resultmap" parameterType="int">
-		select  review_no, 
+		select  review_no,
+				category, 
 				title, 
 				content, 
 				hits, 
@@ -122,10 +126,10 @@
 	
 	<!-- 리뷰 목록 페이징 -->
 	<select id="selectAllReviewPaging" parameterType="map" resultMap="review-resultmap">
-		select review_no, title, content, hits, recommend, reg_date, member_id, reply_count
+		select review_no, category, title, content, hits, recommend, reg_date, member_id, reply_count
 		from (
 				select ceil(rownum/#{contentsPerPage}) page, 
-					   review_no, title, content, hits, 
+					   review_no, category, title, content, hits, 
 					   recommend, reg_date, member_id, reply_count
 				from (
 						<include refid="review-select"/>
@@ -137,15 +141,16 @@
 	
 	<!-- 리뷰 정렬 페이징 -->
 		<select id="ReviewSortPaging" parameterType="map" resultMap="review-resultmap">
-		select review_no, title, content, hits, recommend, 
+		select review_no, category, title, content, hits, recommend, 
 			   reg_date, nickname,
 		 	   member_id, reply_count
 		from (
 				select ceil(rownum/#{contentsPerPage}) page, 
-					   review_no, title, content, hits, nickname,
+					   review_no, category, title, content, hits, nickname,
 					   recommend, reg_date, member_id, reply_count
 				from (
 						select  review_no, 
+								category,
 								title, 
 								content, 
 								hits, 
@@ -157,6 +162,11 @@
 						from 	review, member m
 						where 1=1
 						and review.member_id = m.member_id and m.grade != 'master'
+						<choose>
+							<when test="category!='전체'">
+								and category=#{category}
+							</when>
+						</choose>
 						<choose>
 							<when test="searchType=='title'">
 								and title like '%'||#{query}||'%'
@@ -186,13 +196,20 @@
 	
 	<!-- 전체 게시물 수  -->
 	<select id="selectTotalReviewCount" resultType="_int">
-		select count(review_no) from review
+		select count(review_no) 
+		from review, member
+		where review.member_id = member.member_id and member.grade != 'master'
 	</select>
 	
 	<!-- 검색된 전체 게시물 수  -->
 	<select id="selectSearchReviewCount" parameterType="map" resultType="_int">
 		select count(review_no) from review r, member m
-		where 1=1 and r.member_id = m.member_id
+		where 1=1 and r.member_id = m.member_id and m.grade != 'master'
+		<choose>
+						<when test="category!='전체'">
+								and category=#{category}
+						</when>
+		</choose>
 		<choose>
 						<when test="searchType=='title'">
 							and title like '%'||#{query}||'%'
@@ -210,7 +227,7 @@
 	<select id="selectTodayBestHits" resultMap="review-resultmap" parameterType="String">
 		select review_no, title, hits
 		from(
-			select review_no, title, hits
+			select review_no, category, title, hits
 			from review
 			where substr(reg_date, 1,10) = #{today}
 			ORDER BY HITS desc   
@@ -222,7 +239,7 @@
 	<select id="selectMonthBestHits" resultMap="review-resultmap" parameterType="String">
 		select review_no, title
 		from(
-			select review_no, title, recommend
+			select review_no, category, title, recommend
 			from review
 			where substr(reg_date, 1,7) = #{month}
 			ORDER BY recommend desc
@@ -234,7 +251,7 @@
 	<select id="selectMonthReply" resultMap="review-resultmap" parameterType="String">
 		select review_no, title, reply_count
 		from(
-			select review_no, title, (select count(*) from REVIEW_REPLY where review_reply.review_no = r.review_no) reply_count
+			select review_no, category, title, (select count(*) from REVIEW_REPLY where review_reply.review_no = r.review_no) reply_count
 			from review r
 			where substr(reg_date, 1,7) = #{month}
 			ORDER BY reply_count desc

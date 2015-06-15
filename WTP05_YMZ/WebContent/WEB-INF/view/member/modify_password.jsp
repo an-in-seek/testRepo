@@ -93,31 +93,154 @@ var pwCheck = false;
 })
 
 </script>
-<hr noshade="noshade" width="30%" align="left">
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+table{
+	margin-left: auto;
+	margin-right: auto;
+}
 
-<h2>비밀번호 수정 폼</h2>
+#col{
+	font-family: 'Hanna', sans-serif;	
+	font-size : 15px;
+	width:150px;
+	background:#f0f0f0;
+	font-color:#756C6C;
+}
+#col2{
+	width:50px;
+}
+.id_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:55px;
+	text-decoration:none;
+	text-align:center;
+	cursor: pointer;
+}
+.nick_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:55px;
+	text-decoration:none;
+	text-align:center;
+	cursor: pointer;
+}
+.zip_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+	cursor: pointer;
+}
+</style>
 
 <form method="post" action="${initParam.rootPath }/member/modify_password.do" id="modifyPassword" enctype="multipart/form-data">
-		<table style="width:500px" >
+<h2 align="center">비밀번호 수정 폼</h2>
+		<table style="width:500px; border: 1px solid lightgray">
 			<tr>
-				<td>기존비밀번호</td>
+				<td id="col" align="center">기존비밀번호</td>
+				<td id="col2"></td>
 				<td><input type="password" name="current_password" id="current_password" maxlength='24'></td>
 			</tr>
 			<tr>
-				<td>변경할비밀번호</td>
+				<td id="col" align="center">변경할비밀번호</td>
+				<td id="col2"></td>
 				<td><input type="password" name="password" id="password" maxlength='24'>
 				<font color="red" size="1"><span  id="pwMessage"></span></font>
 				<font color="blue" size="1"><span  id="pwsMessage"></span></font>
 				</td>
 			</tr>
 			<tr>
-				<td>비밀번호확인</td>
+				<td id="col" align="center">비밀번호확인</td>
+				<td id="col2"></td>
 				<td><input type="password" name="password_check" id="password_check" maxlength='24'></td>
 			</tr>
+		</table>
+		<table>
 			<tr>
-				<td colspan="2">
-					<input type="submit" value="변경" id="submit">
-					<input type="reset" value="초기화">
+				<td width="500px" align="center">
+					<input type="submit" class="nick_btn" value="변경" id="submit">
+					<input type="reset" class="nick_btn" value="초기화">
 				</td>	
 			</tr>
 		</table>	

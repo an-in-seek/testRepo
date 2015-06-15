@@ -59,8 +59,8 @@
 	<!-- 아디와 일치하는 DB 데이터 총 개수 -->
 	<select id="selectTotalReportedBBSCountById" resultType="_int" parameterType="String">
 		select 	count(REPORTED_REVIEW_NO) 
-		from 		REPORTED_REVIEW
-		where reporter_id = #{memberId}
+		from 	REPORTED_REVIEW
+		where 	reporter_id = #{memberId}
 	</select>
 	
 	

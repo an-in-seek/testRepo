@@ -86,63 +86,168 @@ $(document).ready(function(){
 });
 
 </script>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+table{
+	margin-left: auto;
+	margin-right: auto;
+}
+#col{
+	font-family: 'Hanna', sans-serif;	
+	font-size : 15px;
+	width:150px;
+	background:#f0f0f0;
+	font-color:#756C6C;
+}
+#col2{
+	width:50px;
+}
+.id_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:55px;
+	text-decoration:none;
+	text-align:center;
+	cursor: pointer;
+}
+
+.nick_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:55px;
+	text-decoration:none;
+	text-align:center;
+	cursor: pointer;
+}
+
+.zip_btn{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:9px;
+	font-weight:bold;
+	font-style:normal;
+	height:20px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+	cursor: pointer;
+}
+</style>
+
 </head>
 <body>
 
 <h2 align="center">쿠폰교환</h2>
 <form method="post" action="${initParam.rootPath }/member/updateMileage.do" id="modifyMileage"> 
-	<table width="800" align="center">
+	<table width="600" align="center" style="border: 1px solid lightgray">
 		<tr>
-			<td  width="center">
-				현재마일리지 
-			</td>
+			<td id="col" align="center">현재마일리지 </td>
+			<td><input type="text" value="${requestScope.mileage }" id="currentMileage" readonly></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td id="col" align="center">쿠폰금액 </td>
+			<td><input type="text" name="price" id="price" value="0" readonly></td>
 			<td>
-				<input type="text" value="${requestScope.mileage }" id="currentMileage" readonly>
+				<c:if test="${requestScope.mileage>=1000 }">
+					<input class="nick_btn" type="button" value="+" id="plus">		
+				</c:if>
+				<c:if test="${requestScope.mileage<1000 }">
+					<input type="button" value="+" id="exBtn">
+				</c:if>
+				<input type="text" name="count" id="count" value="0" size="12">장
 			</td>
 		</tr>
 		<tr>
-			<td>
-				쿠폰금액 :
-			</td>
-			<td>
-				<input type="text" name="price" id="price" value="0" readonly>
-			</td>
-			<c:if test="${requestScope.mileage>=1000 }">
-					<td><input type="button" value="+" id="plus"></td>
-					
-			</c:if>
-			<c:if test="${requestScope.mileage<1000 }">
-					<td><input type="button" value="+" id="exBtn"></td>
-			</c:if>
-			<td width="100">
-				<input type="text" name="count" id="count" value="0" readonly>
-			</td>
-			<td width="100">
-			장
-			</td>
+			<td id="col" align="center">차액</td>
+			<td><div id="difference"></div></td>
+			<td></td>
 		</tr>
 		<tr>
-			<td>
-				차액
-			</td>
-			<td colspan="4">
-				<div id="difference"></div>
-			</td>
+			<td id="col" align="center">남은 마일리지</td>
+			<td><input type="text" id="result" name="result" value="${requestScope.mileage }" readonly></td>
+			<td></td>
 		</tr>
+	</table>
+	<table width="600" align="center">
 		<tr>
-			<td>
-				남은 마일리지
-			</td>
-			<td>
-				<input type="text" id="result" name="result" value="${requestScope.mileage }" readonly>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="submit" onclick="javascript:issueConfirm();" id ="submit" value="발급">
-			</td>
-			<td>
-				<input type="reset" id="reset" value="초기화">			
+			<td align="center">
+				<input type="submit" class="nick_btn" onclick="javascript:issueConfirm();" id ="submit" value="발급"> &nbsp;&nbsp;
+				<input type="reset" class="nick_btn" id="reset" value="초기화">
 			</td>
 		</tr>
 	</table>

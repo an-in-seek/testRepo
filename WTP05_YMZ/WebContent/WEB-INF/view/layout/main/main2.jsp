@@ -39,7 +39,7 @@
   font-family: 'Hanna', sans-serif;
 }
 .bestMonthTB, .todayBestTB{
-	width: 250px;
+	width: 260px;
   	margin-left: auto;
   	margin-right: auto;
   	  
@@ -94,7 +94,7 @@
 							</c:forEach>
 							<c:forEach begin="${fn:length(requestScope.todayBest)}" end="4" varStatus="status"> <!-- 5개 이하일 경우 빈공간을 만들어준다. -->
 								<tr>
-									<th align="center"  width=50px">${status.index+1}위</th>
+									<th align="center"  width="50px">${status.index+1}위</th>
 									<td align="left" id="title">
 									&nbsp;
 									</td>
@@ -108,7 +108,7 @@
 					<thead>
 						<tr>
 							<td colspan="2" align="center">
-							이달의 추천 Best 5
+							이달의 추천수 Best 5
 							</td>
 						</tr>
 					</thead>

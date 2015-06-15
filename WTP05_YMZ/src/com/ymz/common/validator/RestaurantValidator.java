@@ -19,8 +19,6 @@ public class RestaurantValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "category", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNo", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "pictureName", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "theme", "required");
 	}
-
 }

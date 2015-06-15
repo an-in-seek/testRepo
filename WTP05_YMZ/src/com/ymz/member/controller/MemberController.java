@@ -194,7 +194,7 @@ public class MemberController {
 		if(m!=null&&!state.equals("탈퇴")){
 			if(password.equals(m.getPassword())){
 				session.setAttribute("login_info", m);
-				url = "/index.do";
+				url = "redirect:/index.do";
 			}else{
 				url = "member/login_form.tiles";
 				map.addAttribute("error_message", "Password를 확인하세요");
@@ -309,7 +309,7 @@ public class MemberController {
 		service.removeMemberById(loginInfo.getId());
 		//session 제거
 		session.invalidate();
-		return "main.tiles";//삭제후 메인페이지로 이동
+		return "redirect:/index.do";//삭제후 메인페이지로 이동
 	}
 	
 	// 정보 제거하기(관리자 전용)
@@ -394,11 +394,12 @@ public class MemberController {
 	@RequestMapping(value="modify_password.do",method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView modifyPassword(@RequestParam String password,HttpSession session){
-		Member loginInfo = (Member)session.getAttribute("login_info");
-		String id = loginInfo.getId();
+		Member login_Info = (Member)session.getAttribute("login_info");
+		String id = login_Info.getId();
 		Member m = service.getMemberById(id);
 		m.setPassword(password);
 		service.modifyPassword(m);
+		session.setAttribute("login_info", m);
 		return new ModelAndView("/member/login/mypage.do");
 		}
 	

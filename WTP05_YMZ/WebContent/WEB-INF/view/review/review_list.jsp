@@ -32,12 +32,6 @@ $(document).ready(function(){
 	
 	var txt = "";
 	
-	// 검색 방식 셀렉터 이벤트
-	$("#searchSort").on("change", function(){
-		txt = $(this).val(); // $(select객체).val() - 선택된 option의 value가 리턴
-		// alert("검색방식 : "+txt);
-	});
-	
 	// 조회수 정렬
 	$("#latestSort").on("click", function(){
 		var txt = "latest";
@@ -56,7 +50,18 @@ $(document).ready(function(){
 		document.location.href="${initParam.rootPath }/review/reviewList.do?sortType="+txt;
 	});
 	
-	// 리뷰 제목 클릭 이벤트
+	
+	// 분류별 정렬
+	$("#category option[value=${requestScope.category}]").prop("selected","selected"); // 분류 셀렉터 초기화 막기
+	
+	$("#category").on("change", function() {
+		var idx = this.selectedIndex;
+		var category = this.value; //카테고리 값(한식, 양식, 일식, 중식..)
+		$("#searchForm").append("<input type='hidden' name='category' value='"+category+"'>");
+		searchForm.submit();
+	});
+	
+	// 리뷰 제목 색상 이벤트
 	$(".listTable tbody tr").hover(function(){
 		 $(this).css("background-color", "lightcyan");
 	}, function(){
@@ -64,6 +69,8 @@ $(document).ready(function(){
 	});
 	
 	// 검색 전송 이벤트
+	$("#searchSort option[value=${requestScope.searchType}]").prop("selected","selected"); // 분류 셀렉터 초기화 막기
+	
 	$("#searchForm").on("submit",function(){
 		if($("#searchText").val().trim()==""){  // 검색어를 입력하지 않았을 경우에 경고창
 			alert("검색어를 입력하세요!!");
@@ -128,6 +135,18 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 }
 .listTable thead tr td#latestSort{
 	cursor: pointer;
+}
+button, #searchBtn{
+	font-family: 'Hanna', sans-serif;
+	font-size: 16px;
+	color: #808080;
+	background: #fffff7;
+	width:70px;
+	height:40px;
+	cursor: pointer;
+	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
+	-moz-border-radius: 10px;
+	border-radius: 10px;		 /* 둥근 모서리 끝 */
 }
 </style>
 </head>
@@ -241,33 +260,36 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 		<thead>
 			<tr>
 				<td style="width:50px">번호</td>
-				<td style="width:400px">제목</td>
+				<td style="width:50px">분류</td>
+				<td style="width:350px">제목</td>
 				<td style="width:100px">작성자</td>
-				<td id="latestSort" style="width:100px">작성일<font size="3" color="red"> &#9662;</font></td>
-				<td id="recommendSort" style="width:70px">추천<font size="3" color="red"> &#9662;</font></td>
-				<td id="hitsSort" style="width:70px">조회<font size="3" color="red"> &#9662;</font></td>
+				<td id="latestSort" style="width:120px">작성일<font size="2" color="red"> &#9662;</font></td>
+				<td id="recommendSort" style="width:60px">추천<font size="2" color="red"> &#9662;</font></td>
+				<td id="hitsSort" style="width:60px">조회<font size="2" color="red"> &#9662;</font></td>
 			</tr>
 		</thead>
 		<tbody>
 			<!-- 공지 먼저 출력 -->
 			<c:forEach items="${requestScope.notices }" var="notices">
-					<tr>
-						<th>공지</th>
-						<td align="left" id="title">
-							<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${notices.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
-							<font color="blue">${notices.title}</font>
-							</a>
-						</td>
-						<td align="center"><font color="blue">${notices.nickname}</font></td>
-						<td id="regDate" align="center">${notices.regDate.substring(0,10)}</td>
-						<td align="center" style="width:50px">${notices.recommend}</td>
-						<td align="center">${notices.hits}</td>
-					</tr>
+				<tr>
+					<th><font color="#8761f8">공지</font></th>
+					<td>&nbsp;</td>
+					<td align="left" id="title">
+						<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${notices.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+						<font color="#8761f8">${notices.title}</font>
+						</a>
+					</td>
+					<td align="center"><font color="#8761f8">${notices.nickname}</font></td>
+					<td id="regDate" align="center"><font color="#8761f8">${notices.regDate.substring(0,10)}</font></td>
+					<td align="center" style="width:50px"><font color="#8761f8">${notices.recommend}</font></td>
+					<td align="center"><font color="#8761f8">${notices.hits}</font></td>
+				</tr>
 			</c:forEach>
 			<!-- 일반 게시물 출력 -->
 			<c:forEach items="${requestScope.reviewList }" var="review" varStatus="status">
 				<tr>
 					<th align="center">${review.reviewNo }</th>
+					<td align="center">${review.category }</td>
 					<td align="left" id="title">
 					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
 					${review.title}
@@ -322,7 +344,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 	<c:choose>
 		<c:when test="${pagingBean.previousPageGroup }">
 			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.startPageOfPageGroup-1}&sortType=${requestScope.sortType}
-										&searchType=${requestScope.searchType}&query=${requestScope.query}">◀</a>
+										&searchType=${requestScope.searchType}&category=${requestScope.category}&query=${requestScope.query}">◀</a>
 		</c:when>
 		<c:otherwise>◁</c:otherwise>
 	</c:choose>
@@ -334,7 +356,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 			</c:when>
 			<c:otherwise>
 				<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pageNum}&sortType=${requestScope.sortType}
-										&searchType=${requestScope.searchType}&query=${requestScope.query}">${pageNum} </a>
+										&searchType=${requestScope.searchType}&category=${requestScope.category}&query=${requestScope.query}">${pageNum} </a>
 			</c:otherwise>
 		</c:choose>
 	&nbsp;&nbsp;
@@ -343,7 +365,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 	<c:choose>
 		<c:when test="${pagingBean.nextPageGroup }">
 			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.endPageOfPageGroup+1}&sortType=${requestScope.sortType}
-										&searchType=${requestScope.searchType}&query=${requestScope.query}">▶</a>
+										&searchType=${requestScope.searchType}&category=${requestScope.category}&query=${requestScope.query}">▶</a>
 		</c:when>
 		<c:otherwise>▷</c:otherwise>
 	</c:choose>
@@ -353,28 +375,34 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 	<table>
 		<tr>
 			<td>
+			<form id="categoryForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
+				<select id="category" name="category" style="width: 100px; height: 36px;">
+						<option value="전체">전체</option>
+						<c:forEach items="${requestScope.categoryList}" var="c">
+							<option value="${c.categoryName}">${c.categoryName}</option>
+						</c:forEach>
+				</select>
+			</form>
+			</td>
+			<td>
 			<form id="searchForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
-			<select id="searchSort" style="width: 100px; height: 30px;">
-				<c:forEach items="${requestScope.searchCategoryList}" var="category">
-					<option value="${category.categoryName}">
+				<select id="searchSort" name="searchSort" style="width: 100px; height: 36px;">
+					<c:forEach items="${requestScope.searchCategoryList}" var="category">
+						<option value="${category.categoryName}">
 						<c:choose>
 							<c:when test="${category.categoryName == 'title'}">제목</c:when>						
 							<c:when test="${category.categoryName == 'id'}">아이디</c:when>						
 							<c:when test="${category.categoryName == 'nickname'}">닉네임</c:when>						
 						</c:choose>
-					</option>
-				</c:forEach>
-			</select>
-			
-			
+						</option>
+					</c:forEach>
+				</select>
 			<input type="text" id="searchText" style="width: 190px; height: 30px;">
-			<input type="submit" id="searchBtn" value="검색" style="width: 100px; height: 30px;">
+			<input type="submit" id="searchBtn" value="검색">
 			</form>
 			</td>
 			<td>
-			<form id="writeForm" action="${initParam.rootPath }/review/login/review_write_form.do">
-				<input type="submit" value="글쓰기" style="width: 100px; height: 30px;">
-			</form>
+			<a href="${initParam.rootPath }/review/login/review_write_form.do"><button>글쓰기</button></a>
 			</td>
 		</tr>
 	</table>
