@@ -64,7 +64,7 @@ public class ReviewController {
 		review.setMemberId(member.getId());
 		review.setNickname(member.getName());
 		service.registerReview(review);
-		return "redirect:/review/reviewList.do"; 
+		return "redirect:/review/reviewView.do?reviewNo="+review.getReviewNo()+"&pageNo="+review.getPageNo();
 	}
 
 	// 리뷰 목록 - 페이징 처리 + 인기글 가져오기 + 검색
@@ -93,7 +93,7 @@ public class ReviewController {
 	}
 	
 	// 게시물 등록 폼으로 이동
-	@RequestMapping("login/review_write_form.do")								   //로그인 체크 - interceptor가 처리
+	@RequestMapping(value="login/review_write_form.do")					//로그인 체크 - interceptor가 처리
 	public String moveQNAWriteForm(ModelMap map)throws Exception{
 		List<Category> categoryList = categoryService.getCategoryByFirstId("F-1"); //리뷰 카테고리 정보
 		map.put("categoryList", categoryList);
@@ -101,7 +101,7 @@ public class ReviewController {
 	}
 	
 	
-	//리뷰 수정 폼으로 이동
+	//리뷰 수정 폼으로 이동 
 	@RequestMapping(value="login/modifyForm.do")
 	public ModelAndView modifyFormReview(@RequestParam int reviewNo, ModelMap map){
 		Review review = service.getReviewByNo(reviewNo);
