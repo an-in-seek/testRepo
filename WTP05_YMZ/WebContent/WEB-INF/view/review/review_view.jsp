@@ -88,7 +88,6 @@ $(document).ready(function(){
 			}else if(member.id == '${requestScope.review.memberId}'){	// 글쓴이와 로그인한 회원이 같을 경우
 				$("#modifyBtn").show();
 				$("#deleteBtn").show();
-				$("#reportBtn").show();
 			}else if("${not empty sessionScope.login_info}"){			// 로그인한 사람만 신고버튼이 보인다.
 				$("#reportBtn").show();
 			}
