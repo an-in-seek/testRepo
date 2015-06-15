@@ -69,7 +69,7 @@ $(document).ready(function(){
 	});
 	
 	// 소개 textarea 줄바꿈 변환
-	$("#description").html("${requestScope.restaurant.description }".replace('<br>', '\n'));
+	$("#description").html("${requestScope.restaurant.description }".replace(/<br>/g,'\n'));
 	
 	// 사진첨부버튼 클릭 이벤트
 	$("#addPicture").on("click",function(){
@@ -103,7 +103,7 @@ $(document).ready(function(){
 	});
 	
 	// 기존에 들어있는 사진갯수를 pictureCount에 저장한다
-	pictureCount = ${fn:length(fn:split(requestScope.restaurant.pictureName,',')) };
+	pictureCount = "${fn:length(fn:split(requestScope.restaurant.pictureName,',')) }";
 	
 	// 그림 클릭시 이벤트(클릭시 삭제)
 	$("#pictureTemp").on("click","img.uploaded",function(){
@@ -373,7 +373,7 @@ $(document).ready(function(){
 <tr>
 	<td>소개</td>
 	<td>
-		<textarea id="description" name="description" style="width:500px;height:100px"></textarea>
+		<textarea id="description" name="description" style="width:500px;height:100px" maxlength="300"></textarea>
 		<font color="red"><span id="infoMessage"></span></font>
 	</td>
 </tr>
