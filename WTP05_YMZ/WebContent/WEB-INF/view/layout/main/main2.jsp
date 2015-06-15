@@ -75,7 +75,7 @@
 										<c:when test="${status.index+1 == 1}">
 											<th align="center" width="50px"><font color="#B70000">${status.index+1}위</font></th>
 											<td align="left" id="title">
-										<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+										<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}" class="list">
 										<font color="#B70000">${review.title}</font>
 										</a>
 										</td>
@@ -83,7 +83,7 @@
 										<c:otherwise>
 											<th align="center" width="50px">${status.index+1}위</th>
 											<td align="left" id="title">
-											<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+											<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}" class="list">
 											${review.title}
 											</a>
 										</td>
