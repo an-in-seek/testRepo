@@ -392,8 +392,8 @@ ${requestScope.review.content }<br>
 				<c:when test="${empty sessionScope.login_info }">
 				<tr>
 					<td>
-					<!-- 댓글 작성 영역 -->
-					<textarea name="content" disabled="disabled" id="reply_content" onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">로그인부터 하세요!
+					<!-- 댓글 작성 영역(로그인x) -->
+					<textarea name="content"  disabled="disabled" id="reply_content" onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">로그인부터 하세요!
 					</textarea><br>
 					</td>	
 					<td>
@@ -406,7 +406,7 @@ ${requestScope.review.content }<br>
 				<tr>
 					<td>
 					<!-- 댓글 작성 영역 -->
-					<textarea name="content" id="reply_content" onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">타인을 배려 하는 마음을 담아 댓글을 달아주세요.
+					<textarea name="content" id="reply_content" maxlength="80"  onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">타인을 배려 하는 마음을 담아 댓글을 달아주세요.
 내용에 따라 이용약관 및 관련 법률에 의해 임의 조치를 수행 할 수 있습니다.
 					</textarea><br>
 					</td>	
