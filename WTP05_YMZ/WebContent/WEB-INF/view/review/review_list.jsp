@@ -136,7 +136,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 .listTable thead tr td#latestSort{
 	cursor: pointer;
 }
-button, #searchBtn{
+button, #searchBtn, #writeBtn{
 	font-family: 'Hanna', sans-serif;
 	font-size: 16px;
 	color: #808080;
@@ -402,7 +402,9 @@ button, #searchBtn{
 			</form>
 			</td>
 			<td>
-			<a href="${initParam.rootPath }/review/login/review_write_form.do"><button>글쓰기</button></a>
+				<form method="post" action="${initParam.rootPath }/review/login/review_write_form.do">
+					<input type="submit" id="writeBtn" value="글쓰기">
+				</form>
 			</td>
 		</tr>
 	</table>

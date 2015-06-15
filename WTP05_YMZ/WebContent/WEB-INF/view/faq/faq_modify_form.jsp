@@ -47,7 +47,7 @@ article{
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center" width="40px">제목</td>
-			<td><input type="text" id="title" name="title" maxlength="50" style="width:580px; height:20px;" value="${requestScope.faq.title}"></td>
+			<td><input type="text" id="title" name="title" maxlength="50" style="width:580px; height:20px;" value="${requestScope.faq.title}" maxlength="30"></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">

@@ -42,7 +42,6 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 //댓글 신고
 function reportReply(reviewNo, replyNum, pNo, idx){
 	var isCom=confirm("이 댓글을 신고 하시겠습니까?")
-	
 	if(isCom){
 		var content = $("#rContent" + idx).text(); //리플내용
 		$("#reportReviewReplyForm").append("<input type='hidden' name='content' value='"+content+"'>"); // 댓글 내용을 다이얼로그 폼으로 보낸다.
@@ -84,6 +83,7 @@ $(document).ready(function(){
 				if(member.id == '${requestScope.review.memberId}' && member.grade == 'master'){
 					$("#modifyBtn").show();
 				}
+				$("#reportBtn").show();
 				$("#deleteBtn").show();
 			}else if(member.id == '${requestScope.review.memberId}'){	// 글쓴이와 로그인한 회원이 같을 경우
 				$("#modifyBtn").show();

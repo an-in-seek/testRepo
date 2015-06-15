@@ -57,14 +57,13 @@ public class ReviewController {
 		new ReviewValidator().validate(review, errors);
 		// 제목과 내용 미입력시 등록 실패
 		if(errors.hasErrors()){
-			System.out.println("모두 입력하지 않아 등록 실패");
 			return "review/review_write_form.tiles";
 		}
 		Member member = (Member)session.getAttribute("login_info");
 		review.setMemberId(member.getId());
 		review.setNickname(member.getName());
 		service.registerReview(review);
-		return "redirect:/review/reviewList.do"; 
+		return "redirect:/review/reviewView.do?reviewNo="+review.getReviewNo()+"&pageNo="+review.getPageNo();
 	}
 
 	// 리뷰 목록 - 페이징 처리 + 인기글 가져오기 + 검색
@@ -93,7 +92,7 @@ public class ReviewController {
 	}
 	
 	// 게시물 등록 폼으로 이동
-	@RequestMapping("login/review_write_form.do")								   //로그인 체크 - interceptor가 처리
+	@RequestMapping(value="login/review_write_form.do")					//로그인 체크 - interceptor가 처리
 	public String moveQNAWriteForm(ModelMap map)throws Exception{
 		List<Category> categoryList = categoryService.getCategoryByFirstId("F-1"); //리뷰 카테고리 정보
 		map.put("categoryList", categoryList);
@@ -101,7 +100,7 @@ public class ReviewController {
 	}
 	
 	
-	//리뷰 수정 폼으로 이동
+	//리뷰 수정 폼으로 이동 
 	@RequestMapping(value="login/modifyForm.do")
 	public ModelAndView modifyFormReview(@RequestParam int reviewNo, ModelMap map){
 		Review review = service.getReviewByNo(reviewNo);
@@ -116,7 +115,6 @@ public class ReviewController {
 		new ReviewValidator().validate(review, errors);
 		// 제목과 내용 미입력시 수정 실패
 		if(errors.hasErrors()){
-			System.out.println("모두 입력하지 않아 수정 실패");
 			return "review/review_modify_form.tiles";
 		}
 		
@@ -206,8 +204,6 @@ public class ReviewController {
 	@RequestMapping(value="login/reportReview.do", method=RequestMethod.POST)
 	public String reportReview(@ModelAttribute ReportedBBS bbs, HttpSession session){
 		Member member = (Member)session.getAttribute("login_info");
-		System.out.println("로그인한 회원 : " + member.getId());
-		System.out.println("신고리뷰 정보 : "+ bbs);
 		// 등록 메소드 추가
 		reportBBSService.registerReportedBBS(bbs);
 		return "redirect:/review/reviewView.do?reviewNo="+bbs.getReviewNo()+"&pageNo="+bbs.getPageNo();
@@ -222,7 +218,6 @@ public class ReviewController {
 			new ReviewReplyValidator().validate(reply, errors);
 			// 제목과 내용 미입력시 등록 실패
 			if(errors.hasErrors()){
-				System.out.println("에러 있엉");
 				return "redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo();
 			}
 			Member member = (Member)session.getAttribute("login_info");
@@ -248,7 +243,6 @@ public class ReviewController {
 			new ReviewReplyValidator().validate(reply, errors);
 			// 제목과 내용 미입력시 등록 실패
 			if(errors.hasErrors()){
-				System.out.println("에러 있엉");
 				return new ModelAndView("redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo());
 			}
 			Member member = (Member)session.getAttribute("login_info");
@@ -264,7 +258,7 @@ public class ReviewController {
 		public String reportReviewReply(@ModelAttribute ReportedReply reply, HttpSession session){
 			Member member = (Member)session.getAttribute("login_info");
 			System.out.println("로긴한 회원 : " + member.getId());
-			System.out.println("신고리뷰정보 : " + reply);
+
 			//등록메소드추가
 			reportReplyService.registerReportedReply(reply);
 			return "redirect:/review/reviewView.do?reviewNo="+reply.getReviewNo()+"&pageNo="+reply.getPageNo();

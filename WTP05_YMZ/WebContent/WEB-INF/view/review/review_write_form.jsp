@@ -89,7 +89,7 @@ table#t1 thead tr{
 
 <h2>리뷰 글쓰기 폼</h2>
 <div align="center" style="padding:20px">
-	<form id="write" method="post" action="${initParam.rootPath }/review/login/write.do">
+	<form id="write" method="POST" action="${initParam.rootPath }/review/login/write.do">
 	
 	<!-- 테이블 -->
 	<table id="t1" align="center" style="border:solid 2px #B70000">
@@ -138,7 +138,7 @@ table#t1 thead tr{
 				<input type="hidden" name="category" value="공지">
 			</c:if>
 				<input type="submit" id="save" value="등록">
-				<input type="button" value="취소" onclick="javascript:history.back(-1);">
+				<input type="button" value="취소" onclick="location='${initParam.rootPath }/review/reviewList.do'">
 			</td>
 			<td>&nbsp;</td>
 		</tr>	

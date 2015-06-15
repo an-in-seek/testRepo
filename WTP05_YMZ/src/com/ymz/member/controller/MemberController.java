@@ -408,9 +408,12 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView couponTrade(HttpSession session,HttpServletRequest request){
 		Member m = (Member)session.getAttribute("login_info");
+		if(m!=null){
 		int mileage = m.getMileage();
 		request.setAttribute("mileage", mileage);
 		return new ModelAndView("member/info/trade_coupon.tiles");
+		}
+		return new ModelAndView("redirect:index.do");
 	}
 	
 	/********************** 쿠폰 값 요청 ********************/
@@ -444,9 +447,11 @@ public class MemberController {
 		Member m = service.getMemberById(id);
 		m.setMileage(exMileage);
 		service.modifyMileage(m);
-		int mileage = m.getMileage();
+		session.setAttribute("login_info", m);
+		Member m2 = service.getMemberById(id);
+		int mileage = m2.getMileage();
 		request.setAttribute("mileage", mileage);
-		return new ModelAndView("member/info/trade_coupon.tiles");
+		return new ModelAndView("redirect:/member/login/mypage.do");
 	}
 	
 	/**********************닉네임 중복 체크********************/

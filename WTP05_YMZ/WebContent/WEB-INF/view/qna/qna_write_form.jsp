@@ -90,7 +90,7 @@ table#tb thead tr{
 			<tr>
 				<td>&nbsp;</td>
 				<td align="center" >제목</td>
-				<td><input type="text" id="title" name="title" style="width: 700px" placeholder="제목을 입력하세요."></td>
+				<td><input type="text" id="title" name="title" style="width: 700px" placeholder="제목을 입력하세요." maxlength="30"></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr height="1" bgcolor="#dddddd">
