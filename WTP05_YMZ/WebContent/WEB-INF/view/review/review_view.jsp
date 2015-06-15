@@ -188,7 +188,7 @@ table#replyTB thead tr{
 table#replyTB tbody tr{
 	font-family: 'Hanna', sans-serif;
 	font-size: 25px;
-	height: 140px;
+	height: 100px;
 }
 
 /* 버튼 꾸미기 */
@@ -266,21 +266,22 @@ div#reportReview_dialog{
 /* 댓글 쓰기 영역 */
 #writeReplyArea{
 	background: #eaeaea;
-	height: 105px;
+	height: 100px;
   	margin-top: 15px;
-  	padding-top: 30px;
+  	padding-top: 10px;
   	border: 1px solid #bfbfbf;
 }
 #writeReplyTB{
 	margin-right : auto; /*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left : auto; /*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
-	margin-top: -10px;
+	margin-top: -2px;
 }
 #repTable{
 	border: 2px solid lavenderblush;
 }
 #reviewContent{
 	padding-left: 10px;
+	padding-top: 10px;
 	padding-right: 10px;
   	margin-top: -10px;
   	margin-bottom: 10px;
