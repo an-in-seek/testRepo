@@ -14,7 +14,7 @@ a{
 <script type="text/javascript">
 $(document).ready(function(){
 	if("${requestScope.isAdmin}"){
-		$("#newRestaurantTd").append("<a href='${initParam.rootPath }/restaurant/login/admin/addNewRestaurantForm.do'><button style='background-color:gray;border-color:gray;color:white;width:100px;height:30px;'><b>맛집등록</b></button>");
+		$("#newRestaurantTd").append("<form method='post' action='${initParam.rootPath }/restaurant/login/admin/addNewRestaurantForm.do'><input type='submit' value='맛집등록' style='background-color:gray;border-color:gray;color:white;font-weight:bold;width:100px;height:30px;'></form>");
 	}
 	
 	$("a").hover(function(){
