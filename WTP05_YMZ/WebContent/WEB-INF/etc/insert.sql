@@ -24,6 +24,7 @@ insert into member values('user12', 5555, '거북왕', '거북왕', '20100505', 
 insert into member values('user13', 5555, '아상해씨', '이상해씨', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user13@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140511', '가입');
 insert into member values('user14', 5555, '이상해풀', '이상해풀', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user14@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140510', '가입');
 insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user15@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140501', '가입');
+insert into member values('chagee01', 1234, '차지훈', '차지훈', '19900702', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'chagee01@naver.com', '010-4062-4127', '한식', 0, 'user', '20150601', '가입');
 
 update member set grade='master' where member_id='master'
 update member set grade='master' 	where member_id='2';
@@ -186,8 +187,9 @@ insert into restaurant values(restaurant_no_seq.nextval, '다온', 'S-4', '031-8
 insert into restaurant values(restaurant_no_seq.nextval, '별별치킨', 'S-5', '031-789-3672', '별별치킨', '1111111111241', 0, 15, 'S-9,S-10,S-11', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '김밥천국', 'S-4', '031-789-3673', '김밥', '1111111111251', 0, 74, 'S-9,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '죠샌드위치', 'S-5', '031-789-3939', '샌드위치', '1111111111261', 0, 52, 'S-9,S-10', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '스마일쿡', 'S-4', '031-789-3940', '안녕하세요 스마일쿡입니다.<br>저희 집은 단돈 5천원으로 날마다 다른 메뉴를 먹을수 있답니다.<br>H스퀘어 S동 지하1층 제일 구석땡이에 있어요^^', '1111111112171,1111111112172,1111111112173,1111111112174,1111111112175', 0, 777, 'S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '스마일쿡', 'S-4', '031-789-3940', '안녕하세요 스마일쿡입니다.<br>저희 집은 단돈 5천원으로 날마다 다른 메뉴를 먹을수 있답니다.<br>H스퀘어 S동 지하1층 제일 구석땡이에 있어요^^', '1111111112171,1111111112172,1111111112173,1111111112174,1111111112175', 5, 777, 'S-10', '20150530', 1, 12);
 insert into food values(food_no_seq.nextval, '정식', 5000, null, 38);
+insert into restaurant_reply values(restaurant_reply_no_seq.nextval, '20150530', '좋아요', 5, 'chagee01', 38);
 insert into restaurant values(restaurant_no_seq.nextval, '명동칼국수', 'S-4', '031-696-7499', '명동칼국수', '1111111111281', 0, 42, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '신기소', 'S-7', '031-696-7500', '신기소', '1111111111291', 0, 137, 'S-8,S-9,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '백만불', 'S-4', '031-696-7501', '백만불', '1111111111301', 0, 52, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
