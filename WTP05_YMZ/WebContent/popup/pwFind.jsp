@@ -54,22 +54,25 @@ $(document).ready(function(){
 			<td>
 				ID
 			</td>
+			<td></td>
 			<td>
-				<input type="text" id="id" name="id">
+				<input type="text" id="id" name="id" maxlength='11'>
 			</td>
 		</tr>
 		<tr>
 			<td>
 				이름
 			</td>
+			<td></td>
 			<td>
-				<input type="text" id="name" name="name">
+				<input type="text" id="name" name="name" maxlength='10'>
 			</td>
 		</tr>
 		<tr>
 			<td>이메일</td>
+			<td></td>
 			<td>
-				<input type="text" id="emailName" name="emailName">@<input type="text" id="emailAddress" name="emailAddress">
+				<input type="text" id="emailName" maxlength='11' name="emailName">@<input type="text" id="emailAddress" name="emailAddress" maxlength="11">
 				<select name="selectEmail"  style="vertical-align:middle" onChange="javascript:mailCheck(this)">
 				<option value="">직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
 			</td>

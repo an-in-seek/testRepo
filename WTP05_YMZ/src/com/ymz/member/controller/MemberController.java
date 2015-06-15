@@ -104,7 +104,7 @@ public class MemberController {
 		String year = (String)request.getParameter("year");
 		String month = (String)request.getParameter("month");
 		String day = (String)request.getParameter("day");
-		String exbirth = year+"-"+month+"-"+day;
+		String exbirth = year+""+month+""+day;
 		member.setBirth(exbirth);
 		String[] favoriteFood = request.getParameterValues("favoriteFood");
 		String food = "";
@@ -112,7 +112,7 @@ public class MemberController {
 			food ="없음";
 		}else{
 			for(String s :favoriteFood ){
-				food += s+", ";
+				food += s+",";
 			}
 		}	
 			String emailName = (String)request.getParameter("emailName");
