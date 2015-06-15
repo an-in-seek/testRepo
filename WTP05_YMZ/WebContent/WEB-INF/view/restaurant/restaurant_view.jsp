@@ -127,8 +127,6 @@ $(document).ready(function(){
 		$(this).css("cursor","pointer");
 	});
 //송이꺼-----------------------------------------------------------
-	
-
 
 	//내용 공백일때 경고창
 	 $("#registerBtn").click( function() {
@@ -142,7 +140,15 @@ $(document).ready(function(){
 					alert("평점을 선택해");
 				return false;
 			}
+			if(restaurantNo.getMemberId()==memeber){
+				alert("한개의 계정에는 한개의 댓글만 쓸 수 있습니다.")
+			}
 		});  
+	 /* if(RestaurantNo()의 reply이 
+				member.getId() 가 중복){
+				댓글은 계정당 1개씩만 등록가능합니다.
+				}else if{
+				"/login/registerReply.do"}*/
 		
 			//댓글 수정할 때 
 			//내용 빈칸일 때 경고창
@@ -158,13 +164,17 @@ $(document).ready(function(){
 			}
 		}); 
 
-		
 		$("#reply_reportButton").on("click", function() {
 			alert("로그인을 해야합니다.미구현");
 		});
-		
 	});
 	 	
+//댓글 기본 안내문
+
+	function focusReply(){
+	$("#content").html("");
+}
+
 	function modifyReply(number, restaurantNo){
 		var isUp=confirm("수정하시겠습니까?")
 		if(isUp){
@@ -207,16 +217,33 @@ display:none;
 #replyTable tr {
 	border-right: 1px solid pink;
 	border-left: 1px solid pink;
-	background-color: lavenderblush;
+}
+table#replyTable tbody tr:nth-child(2n){
+background-color: #fff;
+}
+table#replyTable tbody tr:nth-child(odd) {
+  	background-color:#ffe4c4;
+}
+table#replyTable thead tr{
+	font-family: 'Hanna', sans-serif;
+	color: #545c72;
+	background: #87cefa;
+	text-align: center;
+}
+table#replyTable tbody tr{
+	font-family: 'Hanna', sans-serif;
+	font-size: 20px;
+	height:10px;
+}
+
+#replyTable tr td{
+	border-top: 1px solid pink;
+	border-bottom: 1px solid pink;
 }
 .blankTd{
 	border-right: 1px solid white;
 	border-left: 1px solid white;
 	background-color: white;
-}
-#replyTable tr td{
-	border-top: 1px solid pink;
-	border-bottom: 1px solid pink;
 }
 .nicknameTd{
 border-right: 1px solid pink;
@@ -423,6 +450,11 @@ border-right: 1px solid pink;
 	</p>
 <hr>
 	<table id="replyTable" style=" text-align:'center';width:100%;">
+	<thead>
+	<tr>
+		<td colspan="4"><font size="5" color="blue">${requestScope.restaurant.replyCount}</font>개의 댓글이 달렸습니다.</td>
+	</tr>
+	</thead>
 		<c:forEach items="${requestScope.replyList}" var="reply">
 			<tr>	
 				<td class="nicknameTd" style="width:10%">${reply.nickname}</td>
@@ -456,7 +488,7 @@ border-right: 1px solid pink;
 		<c:choose>
 			<c:when test="${not empty sessionScope.login_info}">
 				<td>
-				<textarea name="content" id="content"  onfocus="focusReply(this)" style="width: 600px; height: 80px"> 댓글기본내용</textarea>
+				<textarea name="content" id="content"  onfocus="focusReply()" style="width: 600px; height: 80px" >맛있어요~♥</textarea>
 					<input type="hidden"	id="restaurantNo" name="restaurantNo" value="${requestScope.restaurant.restaurantNo }">
 				<p>평점주기
 				 	<label for="1"></label><input type="radio" name="score" value="1" id="1"><span class="star_rating"><span style="width:20%"></span></span>

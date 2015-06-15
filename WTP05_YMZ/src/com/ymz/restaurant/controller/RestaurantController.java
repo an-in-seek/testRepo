@@ -278,7 +278,16 @@ public class RestaurantController {
 		Member member = (Member)session.getAttribute("login_info");
 		restaurantReply.setMemberId(member.getId());
 		restaurantReply.setNickname(member.getNickname());
-		 replyService.registerRestaurantReply(restaurantReply);
+		/*댓글 게시판에는 계정당 1개의 댓글만 달 수 있다.
+		 * if(RestaurantNo()의 reply이 
+				member.getId() 가 중복){
+				댓글은 계정당 1개씩만 등록가능합니다.
+				}else if{
+				"/login/registerReply.do"}*/
+		
+
+		replyService.registerRestaurantReply(restaurantReply);
+			
 		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getRestaurantNo();
 	}
 	//댓글 삭제
