@@ -255,7 +255,9 @@ table{
 		<tr>
 			<td align="center">
 				<input type="submit" class="nick_btn" onclick="javascript:issueConfirm();" id ="submit" value="발급"> &nbsp;&nbsp;
-				<input type="reset" class="nick_btn" id="reset" value="초기화">
+				<br>
+				<br>
+				<font color="red" size="2">※발급을 받은후에 새로고침(F5)을 해주시기 바랍니다.</font>
 			</td>
 		</tr>
 	</table>
