@@ -6,6 +6,7 @@ delete from faq CASCADE CONSTRAINTS;
 delete from qna CASCADE CONSTRAINTS;
 
 insert into member values('master01', 1111, '관리자1', '관리자1', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master1@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140514', '가입');
+<<<<<<< HEAD
 insert into member values('master02', 2222, '관리자2', '관리자2', '20100504', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master2@naver.com', '010-2222-2222', '한식', 99999, 'master', '20140515', '가입');
 insert into member values('master03', 3333, '관리자3', '관리자3', '20100503', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master3@naver.com', '010-3333-3333', '한식', 99999, 'master', '20140516', '가입');
 insert into member values('master04', 3333, '관리자4', '관리자4', '20100502', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master4@naver.com', '010-5555-5555', '한식', 99999, 'master', '20140517', '가입');
@@ -24,6 +25,27 @@ insert into member values('user12', 5555, '거북왕', '거북왕', '20100505', 
 insert into member values('user13', 5555, '아상해씨', '이상해씨', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user13@naver.com', '010-8080-8080', '한식', 100000, 'user', '20140511', '가입');
 insert into member values('user14', 5555, '이상해풀', '이상해풀', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user14@naver.com', '010-9090-9090', '한식', 100000, 'user', '20140510', '가입');
 insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user15@naver.com', '010-1122-2211', '한식', 100000, 'user', '20140501', '가입');
+=======
+insert into member values('master02', 2222, '관리자2', '관리자2', '20100504', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master2@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140515', '가입');
+insert into member values('master03', 3333, '관리자3', '관리자3', '20100503', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master3@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140516', '가입');
+insert into member values('master04', 3333, '관리자4', '관리자4', '20100502', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master4@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140517', '가입');
+insert into member values('user01', 1111, '피카츄', '피카츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user01@naver.com', '010-1111-1111', '양식', 10, 'user', '20140513', '탈퇴');
+insert into member values('user02', 5555, '라이츄', '라이츄', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user02@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140512', '가입');
+insert into member values('user03', 5555, '파이리', '파이리', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user03@naver.com', '010-1111-1111', '일식', 100000, 'user', '20140511', '가입');
+insert into member values('user04', 5555, '꼬부기', '꼬부기', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user04@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140510', '가입');
+insert into member values('user05', 5555, '버터플', '버터플', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user05@naver.com', '010-1111-1111', '양식', 100000, 'user', '20140519', '가입');
+insert into member values('user06', 5555, '야도란', '야도란', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user06@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140518', '가입');
+insert into member values('user07', 5555, '피존투', '피존투', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user07@naver.com', '010-1111-1111', '중식', 100000, 'user', '20140517', '가입');
+insert into member values('user08', 5555, '또가스', '또가스', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user08@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140516', '가입');
+insert into member values('user09', 5555, '리자드', '리자드', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user09@naver.com', '010-1111-1111', '중식', 100000, 'user', '20140515', '가입');
+insert into member values('user10', 5555, '리자몽', '리자몽', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user10@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140514', '가입');
+insert into member values('user11', 5555, '어니부기', '어니부기', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user11@naver.com', '010-1111-1111', '일식', 100000, 'user', '20140513', '가입');
+insert into member values('user12', 5555, '거북왕', '거북왕', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user12@naver.com', '010-1111-1111', '양식', 100000, 'user', '20140512', '가입');
+insert into member values('user13', 5555, '아상해씨', '이상해씨', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user13@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140511', '가입');
+insert into member values('user14', 5555, '이상해풀', '이상해풀', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user14@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140510', '가입');
+insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user15@naver.com', '010-1111-1111', '한식', 100000, 'user', '20140501', '가입');
+insert into member values('chagee01', 1234, '차지훈', '차지훈', '19900702', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'chagee01@naver.com', '010-4062-4127', '한식', 0, 'user', '20150601', '가입');
+>>>>>>> branch 'master' of https://github.com/an-in-seek/testRepo.git
 
 update member set grade='master' where member_id='master'
 update member set grade='master' 	where member_id='2';
@@ -186,8 +208,9 @@ insert into restaurant values(restaurant_no_seq.nextval, '다온', 'S-4', '031-8
 insert into restaurant values(restaurant_no_seq.nextval, '별별치킨', 'S-5', '031-789-3672', '별별치킨', '1111111111241', 0, 15, 'S-9,S-10,S-11', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '김밥천국', 'S-4', '031-789-3673', '김밥', '1111111111251', 0, 74, 'S-9,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '죠샌드위치', 'S-5', '031-789-3939', '샌드위치', '1111111111261', 0, 52, 'S-9,S-10', '20150530', 0, 12);
-insert into restaurant values(restaurant_no_seq.nextval, '스마일쿡', 'S-4', '031-789-3940', '안녕하세요 스마일쿡입니다.<br>저희 집은 단돈 5천원으로 날마다 다른 메뉴를 먹을수 있답니다.<br>H스퀘어 S동 지하1층 제일 구석땡이에 있어요^^', '1111111112171,1111111112172,1111111112173,1111111112174,1111111112175', 0, 777, 'S-10', '20150530', 0, 12);
+insert into restaurant values(restaurant_no_seq.nextval, '스마일쿡', 'S-4', '031-789-3940', '안녕하세요 스마일쿡입니다.<br>저희 집은 단돈 5천원으로 날마다 다른 메뉴를 먹을수 있답니다.<br>H스퀘어 S동 지하1층 제일 구석땡이에 있어요^^', '1111111112171,1111111112172,1111111112173,1111111112174,1111111112175', 5, 777, 'S-10', '20150530', 1, 12);
 insert into food values(food_no_seq.nextval, '정식', 5000, null, 38);
+insert into restaurant_reply values(restaurant_reply_no_seq.nextval, '20150530', '좋아요', 5, 'chagee01', 38);
 insert into restaurant values(restaurant_no_seq.nextval, '명동칼국수', 'S-4', '031-696-7499', '명동칼국수', '1111111111281', 0, 42, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '신기소', 'S-7', '031-696-7500', '신기소', '1111111111291', 0, 137, 'S-8,S-9,S-10', '20150530', 0, 12);
 insert into restaurant values(restaurant_no_seq.nextval, '백만불', 'S-4', '031-696-7501', '백만불', '1111111111301', 0, 52, 'S-8,S-9,S-10,S-11', '20150530', 0, 12);

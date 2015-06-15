@@ -342,7 +342,7 @@ $(document).ready(function(){
 <tr>
 	<td>소개</td>
 	<td>
-		<textarea id="description" name="description" style="width:500px;height:100px"></textarea>
+		<textarea id="description" name="description" style="width:500px;height:100px" maxlength="300"></textarea>
 		<font color="red"><span id="infoMessage"></span></font>
 	</td>
 </tr>

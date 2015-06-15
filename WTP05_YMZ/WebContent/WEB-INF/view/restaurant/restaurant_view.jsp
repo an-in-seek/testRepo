@@ -10,13 +10,16 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	if("${requestScope.isAdmin}"){
-		$("#modifyAndDelete").append("<a href='${initParam.rootPath}/restaurant/login/admin/modifyRestaurantForm.do?restaurantNo=${requestScope.restaurant.restaurantNo}'><button style='width:60px;height:40px;background-color:#FF5E00;border-color:#FF5E00;color:white;'><b>수정</b></button></a> <button id='btn_delete' style='width:60px;height:40px;background-color:#FF5E00;border-color:#FF5E00;color:white;'><b>삭제</b></button>");
+		$("#modifyAndDelete").append("<form method='post' action='${initParam.rootPath}/restaurant/login/admin/modifyRestaurantForm.do?restaurantNo=${requestScope.restaurant.restaurantNo}'><input type='submit' value='수정' style='width:60px;height:40px;background-color:#FF5E00;border-color:#FF5E00;color:white;font-weight:bold;'> <button id='btn_delete' style='width:60px;height:40px;background-color:#FF5E00;border-color:#FF5E00;color:white;'><b>삭제</b></button></form>");
 		
 		$("#btn_delete").on("click",function(){
 			if(confirm("삭제하시겠습니까?")){
 				$("body").append("<form id='deleteForm' action='${initParam.rootPath}/restaurant/login/admin/removeRestaurant.do' method='post'></form>")
 				$("#deleteForm").append("<input type='hidden' name='restaurantNo' value='${requestScope.restaurant.restaurantNo}'>")
 				$("#deleteForm").submit();
+				return false;
+			}else{
+				return false;
 			}
 		});
 	}
