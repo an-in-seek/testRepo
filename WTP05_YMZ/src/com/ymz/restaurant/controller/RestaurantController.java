@@ -268,7 +268,6 @@ public class RestaurantController {
 		//클래스단에서 에러잡기
 		new RestaurantReplyValidator().validate(restaurantReply, errors);
 		if(errors.hasErrors()){
-			System.out.println("댓글 정보를 입력하지 않아 등록 실패");
 			return "/restaurant/restaurantView.do";
 		}
 		//등록
@@ -283,7 +282,6 @@ public class RestaurantController {
 	public String removeRestaurantReply(@ModelAttribute RestaurantReply restaurantReply,@RequestParam int number, @RequestParam int restaurantNo ,HttpSession session) throws Exception {
 		Member member = (Member)session.getAttribute("login_info");
 		String userId = member.getId();
-		System.out.println(number);
 		replyService.removeRestaurantReply(restaurantReply,number, userId);
 		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantNo;
 
@@ -294,17 +292,12 @@ public class RestaurantController {
 		//클래스단에서 에러잡기
 		new RestaurantReplyValidator().validate(restaurantReply, errors);
 		if(errors.hasErrors()){
-			System.out.println("댓글 수정 정보를 입력하지 않아 등록 실패");
 			return "/restaurant/restaurantView.do";
 		}
 		
 		Member member = (Member)session.getAttribute("login_info");
 		String userId = member.getId();
 		restaurantReply.setMemberId(userId);
-		System.out.println("수정할 댓글 : "+restaurantReply.getContent());
-		System.out.println("로그인한 아이디 : "+userId);
-		System.out.println("맛집정보 번호 : "+restaurantReply.getRestaurantNo());
-		System.out.println("댓글번호 : "+restaurantReply.getNumber());
 //		System.out.println("페이지번호 : "+restaurantReply.get);
 		replyService.modifyRestaurantReply(restaurantReply);
 		int restaurantNo = restaurantReply.getRestaurantNo();

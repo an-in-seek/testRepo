@@ -46,7 +46,7 @@ article{
 		<tr>
 			<td>&nbsp;</td>
 			<td align="center" width="40px">제목</td>
-			<td><input type="text" id="title" name="title" style="width: 580px" maxlength="50" style="height:20px;" placeholder="제목을 입력하세요."></td>
+			<td><input type="text" id="title" name="title" style="width: 580px" maxlength="50" style="height:20px;" placeholder="제목을 입력하세요." maxlength="30"></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr height="1" bgcolor="#dddddd">
