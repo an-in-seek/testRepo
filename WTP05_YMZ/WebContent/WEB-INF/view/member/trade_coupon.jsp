@@ -16,12 +16,20 @@
  * 버튼 클릭시 쿠폰장수1개를 더하고 금액도 1000씩 더한다.
  * 현재마일리지와 쿠폰금액을 차감한 나머지 마일리지를 보여준다.
  */
-
+$(document).load(function(){
+	window.location.reload(true);
+})
 $(document).ready(function(){
+
+var exMileage = $("#exMileage").val();	
+document.getElementById('currentMileage').value=exMileage;
+document.getElementById('count').value=0;
+document.getElementById('result').value=exMileage
 	var cnt = 0;
 	var num1 = 0;
 	var num2 = 0;
 	var check = false;
+	
 	$("#reset").on("click",function(){
 		if(cnt!=0){
 			return cnt=0;
@@ -217,7 +225,7 @@ table{
 		<tr>
 			<td id="col" align="center">현재마일리지 </td>
 			<td><input type="text" value="${requestScope.mileage }" id="currentMileage" readonly></td>
-			<td></td>
+			<td><input type="hidden"  id="exMileage" value="${sessionScope.login_info.mileage }"></td>
 		</tr>
 		<tr>
 			<td id="col" align="center">쿠폰금액 </td>
@@ -239,7 +247,7 @@ table{
 		</tr>
 		<tr>
 			<td id="col" align="center">남은 마일리지</td>
-			<td><input type="text" id="result" name="result" value="${requestScope.mileage }" readonly></td>
+			<td><input type="text" id="result" name="result"  readonly></td>
 			<td></td>
 		</tr>
 	</table>
@@ -247,7 +255,9 @@ table{
 		<tr>
 			<td align="center">
 				<input type="submit" class="nick_btn" onclick="javascript:issueConfirm();" id ="submit" value="발급"> &nbsp;&nbsp;
-				<input type="reset" class="nick_btn" id="reset" value="초기화">
+				<br>
+				<br>
+				<font color="red" size="2">※발급을 받은후에 새로고침(F5)을 해주시기 바랍니다.</font>
 			</td>
 		</tr>
 	</table>

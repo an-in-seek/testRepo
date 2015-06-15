@@ -50,11 +50,11 @@ function pw_pop(){
 			<table align="center" style="border:solid 1px #050099; margin-top:5%">
 				<tr align="center" >
 					<td><font size="3" style="font-weight: bold">아이디</font></td>
-					<td><input type="text" name="id" autofocus="autofocus" placeholder="ID" class="int" required="required"></td>
+					<td><input type="text" name="id" autofocus="autofocus" placeholder="ID" class="int" maxlength='11' required="required"></td>
 				</tr>
 				<tr align="center" >
 					<td><font size="3" style="font-weight: bold">패스워드</font></td>
-					<td><input type="password" name="password"  placeholder="Password" class="int" required="required" maxlength="16"></td>
+					<td><input type="password" name="password"  placeholder="Password" class="int" required="required" maxlength="24"></td>
 				</tr>
 			</table>
 			<table align="center" style="margin-top:1%">

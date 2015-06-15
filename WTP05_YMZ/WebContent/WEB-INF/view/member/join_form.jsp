@@ -23,7 +23,32 @@ function openDaumPostcode(){
 		}
 	}).open();
 }
+$(document).load(function(){
+	document.registerForm.reset(); 
+})
 $(document).ready(function(){
+	
+document.getElementById('id').value="";
+document.getElementById('name').value="";
+document.getElementById('nickname').value="";
+document.getElementById('postcode1').value="";
+document.getElementById('postcode2').value="";
+document.getElementById('address').value="";
+document.getElementById('detailAddress').value="";
+document.getElementById('emailName').value="";
+document.getElementById('emailAddress').value="";
+document.getElementById('selectEmail').selected
+$("#phoneCP option:eq(0)").attr("selected", "selected");
+document.getElementById('num1').value="";
+document.getElementById('num2').value="";
+document.getElementById('recommend').value="";
+$("#selectEmail option:eq(0)").attr("selected","selected");
+$("#year option:eq(0)").attr("selected","selected");
+$("#month option:eq(0)").attr("selected","selected");
+$("#day option:eq(0)").attr("selected","selected");
+$("input:checkbox[name='favoriteFood']").attr("checked", false); /* by NAME */
+$("input:radio[name='sex']").removeAttr("checked");
+
 var idDup = false;//ID 중복여부 체크 - true : 사용할 수 있다(중복아님), false : 사용할 수 없다(중복아님)
 var idExi = true;
 var pwChe = false;
@@ -633,6 +658,9 @@ table{
 	cursor: pointer;
 }
 </style>
+<script type="text/javascript">
+           
+</script>
 
 <img src="${initParam.rootPath }/memberImage/header.png" id="header">
 
@@ -706,8 +734,8 @@ table{
 			<td id="col3">
 			
 	<!-- for='m':id가 m인 입력 태그에 대한 라벨, id속성-태그의 식별값을 지정 체크박스는 선택하지 않으면 전송하지 않는다. -->
-				<label for="m"> 남성</label> <input type="radio" name="sex" value="b" id="m"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>	
-				<label for="f"> 여성</label> <input type="radio" name="sex" value="g" id="f"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>
+				<label for="m"> 남성</label> <input type="radio" id="sex" name="sex" value="b" id="m"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>	
+				<label for="f"> 여성</label> <input type="radio" id="sex" name="sex" value="g" id="f"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>
 			</td>	
 		</tr>
 		<tr>
@@ -728,7 +756,7 @@ table{
 		<tr>
 			<td id="col" align="center">상세주소</td>
 			<td id="col2"></td>
-			<td id="col3"><input type="text" id="detailAddress" name="detailAddress" maxlength='20' value="${requestScope.detailAddress }" style="width:400px;"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
+			<td id="col3"><input type="text" id="detailAddress" name="detailAddress" maxlength='20' style="width:400px;"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
 			</td>
 		</tr>
 		<tr>
@@ -736,7 +764,7 @@ table{
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" id="emailName" name="emailName" maxlength='11'>@<input type="text" id="emailAddress" name="emailAddress"  maxlength="11">
-				<select name="selectEmail"  style="vertical-align:middle" id="selectEmail">
+				<select class="test" name="selectEmail"  style="vertical-align:middle" id="selectEmail" >
 				<option>직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
 				<font size="1">&nbsp;<span id="emailMessage"></span></font>
 			</td>
@@ -756,7 +784,7 @@ table{
 			<td id="col2"></td>
 			<td id="col3">
 				<c:forEach var="category" items="${map}"> 
-					<label><input type="checkbox" name="favoriteFood" value="${category.key}">${category.value}</label>
+					<label><input type="checkbox" id="favoriteFood" name="favoriteFood" value="${category.key}">${category.value}</label>
 				</c:forEach>
 
 			</td>
@@ -765,7 +793,7 @@ table{
 			<td id="col" align="center">추천인</td>
 			<td id="col2"></td>
 			<td id="col3">
-				<input type="text" name="recommend" id="recommend" maxlength='20' value="${requestScope.recommend }">
+				<input type="text" name="recommend" id="recommend" maxlength='20'>
 			</td>
 		</tr>
 		<tr>
