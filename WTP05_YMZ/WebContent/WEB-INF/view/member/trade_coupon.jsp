@@ -17,9 +17,10 @@
  * 현재마일리지와 쿠폰금액을 차감한 나머지 마일리지를 보여준다.
  */
 $(document).load(function(){
-		document.registerForm.reset(); 
+	window.location.reload(true);
 })
 $(document).ready(function(){
+
 var exMileage = $("#exMileage").val();	
 document.getElementById('currentMileage').value=exMileage;
 document.getElementById('count').value=0;

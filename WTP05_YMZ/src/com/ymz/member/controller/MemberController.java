@@ -408,9 +408,12 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView couponTrade(HttpSession session,HttpServletRequest request){
 		Member m = (Member)session.getAttribute("login_info");
+		if(m!=null){
 		int mileage = m.getMileage();
 		request.setAttribute("mileage", mileage);
 		return new ModelAndView("member/info/trade_coupon.tiles");
+		}
+		return new ModelAndView("redirect:index.do");
 	}
 	
 	/********************** 쿠폰 값 요청 ********************/
