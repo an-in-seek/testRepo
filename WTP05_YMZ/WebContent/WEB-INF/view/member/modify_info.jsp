@@ -43,8 +43,10 @@ var emailAddressVal = true;
 	document.getElementById('emailAddress').value=emailAddress;
 	
 	var phoneNo = $("#phoneNo").val();
+	var phoneCp = phoneNo.substring(0,3);
 	var num1 = phoneNo.substring(4,8);
 	var num2 = phoneNo.substring(9,13);
+	$("#phoneCP").val(phoneCp).attr("selected", "selected");
 	document.getElementById('num1').value = num1;
 	document.getElementById('num2').value = num2;
 	

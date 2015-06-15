@@ -444,9 +444,11 @@ public class MemberController {
 		Member m = service.getMemberById(id);
 		m.setMileage(exMileage);
 		service.modifyMileage(m);
-		int mileage = m.getMileage();
+		session.setAttribute("login_info", m);
+		Member m2 = service.getMemberById(id);
+		int mileage = m2.getMileage();
 		request.setAttribute("mileage", mileage);
-		return new ModelAndView("member/info/trade_coupon.tiles");
+		return new ModelAndView("redirect:/member/login/mypage.do");
 	}
 	
 	/**********************닉네임 중복 체크********************/

@@ -38,6 +38,7 @@ document.getElementById('detailAddress').value="";
 document.getElementById('emailName').value="";
 document.getElementById('emailAddress').value="";
 document.getElementById('selectEmail').selected
+$("#phoneCP option:eq(0)").attr("selected", "selected");
 document.getElementById('num1').value="";
 document.getElementById('num2').value="";
 document.getElementById('recommend').value="";
