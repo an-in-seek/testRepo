@@ -79,7 +79,10 @@ $(document).ready(function(){
 	});
 	
 	$("#selectSort").on("change",function(){
-		 document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#selectSort").val()+"&command=sort";
+		 var sort = $("#selectSort").val();
+		 if(sort != 'default'){
+			 document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#selectSort").val()+"&command=sort";
+		 }
 	});
 	
 	$("#dateCategory").on("change",function(){
