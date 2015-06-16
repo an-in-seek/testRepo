@@ -86,6 +86,10 @@ public class ReviewController {
 		Map<String, Object> map =replyService.getReplyList(review.getReviewNo()); 	//DB로 reviewNo을 보내서 해당 댓글들 가져오기
 		Review rev = service.getReviewByNo(review.getReviewNo()); 				  	// 리뷰글 가져오기
 		map.put("pageNo", review.getPageNo());
+		map.put("sortType", review.getSortType());
+		map.put("searchType", review.getSearchType());
+		map.put("query", review.getQuery());
+		map.put("category", review.getCategory());
 		map.put("review", rev);
 		map.put("categoryList", list);
 		return new ModelAndView("review/review_view.tiles", map);

@@ -19,6 +19,8 @@ public class Review implements Serializable{
 	private int replyCount;			// 댓글 개수
 	private int pageNo = 1;				// 페이지 번호
 	private String sortType;		// 정렬 방식
+	private String searchType;		// 검색 방식
+	private String query;			// 검색어
 	
 	public Review(){
 		
@@ -27,7 +29,7 @@ public class Review implements Serializable{
 	public Review(int reviewNo, String category, String title, String regDate,
 			int hits, String content, int recommend, int report,
 			String memberId, String nickname, int replyCount, int pageNo,
-			String sortType) {
+			String sortType, String searchType, String query) {
 		super();
 		this.reviewNo = reviewNo;
 		this.category = category;
@@ -42,6 +44,8 @@ public class Review implements Serializable{
 		this.replyCount = replyCount;
 		this.pageNo = pageNo;
 		this.sortType = sortType;
+		this.searchType = searchType;
+		this.query = query;
 	}
 
 	public int getReviewNo() {
@@ -148,6 +152,22 @@ public class Review implements Serializable{
 		this.sortType = sortType;
 	}
 
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getQuery() {
+		return query;
+	}
+
+	public void setQuery(String query) {
+		this.query = query;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -161,11 +181,14 @@ public class Review implements Serializable{
 		result = prime * result
 				+ ((nickname == null) ? 0 : nickname.hashCode());
 		result = prime * result + pageNo;
+		result = prime * result + ((query == null) ? 0 : query.hashCode());
 		result = prime * result + recommend;
 		result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
 		result = prime * result + replyCount;
 		result = prime * result + report;
 		result = prime * result + reviewNo;
+		result = prime * result
+				+ ((searchType == null) ? 0 : searchType.hashCode());
 		result = prime * result
 				+ ((sortType == null) ? 0 : sortType.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -205,6 +228,11 @@ public class Review implements Serializable{
 			return false;
 		if (pageNo != other.pageNo)
 			return false;
+		if (query == null) {
+			if (other.query != null)
+				return false;
+		} else if (!query.equals(other.query))
+			return false;
 		if (recommend != other.recommend)
 			return false;
 		if (regDate == null) {
@@ -217,6 +245,11 @@ public class Review implements Serializable{
 		if (report != other.report)
 			return false;
 		if (reviewNo != other.reviewNo)
+			return false;
+		if (searchType == null) {
+			if (other.searchType != null)
+				return false;
+		} else if (!searchType.equals(other.searchType))
 			return false;
 		if (sortType == null) {
 			if (other.sortType != null)
@@ -238,7 +271,9 @@ public class Review implements Serializable{
 				+ hits + ", content=" + content + ", recommend=" + recommend
 				+ ", report=" + report + ", memberId=" + memberId
 				+ ", nickname=" + nickname + ", replyCount=" + replyCount
-				+ ", pageNo=" + pageNo + ", sortType=" + sortType + "]";
+				+ ", pageNo=" + pageNo + ", sortType=" + sortType
+				+ ", searchType=" + searchType + ", query=" + query + "]";
 	}
+
 	
 }

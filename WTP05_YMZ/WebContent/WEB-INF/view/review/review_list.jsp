@@ -291,7 +291,8 @@ button, #searchBtn, #writeBtn{
 					<th align="center">${review.reviewNo }</th>
 					<td align="center">${review.category }</td>
 					<td align="left" id="title">
-					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}" class="list">
+					<a href="${initParam.rootPath}/review/reviewView.do?reviewNo=${review.reviewNo}&pageNo=${pagingBean.currentPage}&sortType=${requestScope.sortType}
+										&searchType=${requestScope.searchType}&category=${requestScope.category}&query=${requestScope.query}" class="list">
 					${review.title}
 					<c:if test="${review.replyCount != 0}">
 					<font color="#B70000">[${review.replyCount}]</font>
