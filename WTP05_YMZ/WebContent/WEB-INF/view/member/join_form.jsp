@@ -573,6 +573,12 @@ table{
 	background:#f0f0f0;
 	padding-left:50px;
 }
+#col1{
+	font-size : 20px;
+	height :50px; 
+	padding-left:10px;
+	padding-top:10px;
+}
 #col2{
 	width:20px;
 }
@@ -680,7 +686,7 @@ table{
 	cursor: pointer;
 }
 #col5{
-	font-size:5px;
+	font-size:12px;
 	font-weight:bold;
 }
 </style>
@@ -806,6 +812,12 @@ table{
 			<option value="010" >010</option><option value="011" >011</option><option value="017" >017</option><option value="018" >018</option><option value="019" >019</option></select>
 			&nbsp;-&nbsp;<input type="text" id="num1" name="num1" maxlength='4' size="2" style="vertical-align:middle">&nbsp;&nbsp;<input type="text" id="num2" name="num2" size="2" maxlength='4'class="input_text w60" style="vertical-align:middle"> 
 			<font size="1">&nbsp;<span id="numMessage"></span></font>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5" id="col1">
+				기타정보입력<br>
+				<hr noshade="noshade" width="100%" align="center">
 			</td>
 		</tr>
 		<tr>

@@ -5,17 +5,6 @@
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script type="text/javascript">
-/*
- * 이메일주소 select 값 선택
- 
-function mailCheck(selectObj){ 
-	document.getElementById('emailAddress').value=selectObj.value;
-	if(selectObj.value==""){
-		$("#emailAddress").focus();	
-	}
-}
-*/
-
 function openDaumPostcode(){
 	new daum.Postcode({
 		oncomplete:function(data){

@@ -61,7 +61,7 @@ public class MemberController {
 		session.setAttribute("map", map);
 		return new ModelAndView("member/join_form.tiles");
 	}
-	
+
 	//회원 가입
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
 	public String joinMember(@ModelAttribute Member member, Errors errors, HttpServletRequest request,ModelMap map) throws Exception{
@@ -70,17 +70,17 @@ public class MemberController {
 			map.addAttribute("error_message", "ID의 양식에 맞지 않습니다");
 			return "member/join_form.tiles";
 		}
-		
+
 		if(!member.getPassword().matches("[a-zA-Z0-9]{4,24}$")){
 			map.addAttribute("error_message", "password의 양식에 맞지 않습니다");
 			return "member/join_form.tiles";
 		}
-		
+
 		if(!member.getName().matches("[가-힣]{2,10}|^[a-zA-Z]{2,10}$")){
 			map.addAttribute("error_message", "이름의 양식에 맞지 않습니다");
 			return "member/join_form.tiles";
 		}
-		
+
 		if(!member.getNickname().matches("[가-힣a-zA-Z0-9]{2,8}$")){
 			map.addAttribute("error_message", "닉네임의 양식에 맞지 않습니다");
 			return "member/join_form.tiles";
@@ -115,61 +115,50 @@ public class MemberController {
 				food += s+",";
 			}
 		}	
-			String emailName = (String)request.getParameter("emailName");
-			String emailAddress = (String)request.getParameter("emailAddress");
-			String exEmail = emailName+"@"+emailAddress;
-			if(!exEmail.matches("[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}")){
-				map.addAttribute("error_message", "이메일의 양식에 맞지 않습니다");
-				return "member/join_form.tiles";
-			}
-			if(service.getMemberByEmail(exEmail)!=null){
-				map.addAttribute("error_message", "이미 가입된 이메일입니다.");
-				request.setAttribute("postcode1", post1);
-				request.setAttribute("postcode2", post2);
-				request.setAttribute("address", member.getAddress());
-				request.setAttribute("detailAddress", member.getDetailAddress());
-				request.setAttribute("phoneCP", phoneCP);
-				request.setAttribute("num1", num1);
-				request.setAttribute("num2", num2);
-				request.setAttribute("recommend", recommend);
-				return "member/join_form.tiles";
-			}else if(service.getMemberByPhone(phoneNo)!=null){
-				map.addAttribute("error_message", "이미 가입된 전화번호입니다");
-				request.setAttribute("postcode1", post1);
-				request.setAttribute("postcode2", post2);
-				request.setAttribute("address", member.getAddress());
-				request.setAttribute("detailAddress", member.getDetailAddress());
-				request.setAttribute("recommend", recommend);
-				return "member/join_form.tiles";
+		String emailName = (String)request.getParameter("emailName");
+		String emailAddress = (String)request.getParameter("emailAddress");
+		String exEmail = emailName+"@"+emailAddress;
+		//이메일 유효성 검사
+		if(!exEmail.matches("[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}")){
+			map.addAttribute("error_message", "이메일의 양식에 맞지 않습니다");
+			return "member/join_form.tiles";
+		}
+		//이메일, 전화번호 중복검사
+		if(service.getMemberByEmail(exEmail)!=null){
+			map.addAttribute("error_message", "이미 가입된 이메일입니다.");
+			return "member/join_form.tiles";
+		}else if(service.getMemberByPhone(phoneNo)!=null){
+			map.addAttribute("error_message", "이미 가입된 전화번호입니다");
+			return "member/join_form.tiles";
 
+		}
+		member.setZipcode(zipcode);
+		member.setEmail(exEmail);
+		member.setPhoneNo(phoneNo);
+		member.setGrade("user");
+		member.setFavoriteFood(food);
+		if(service.getMemberById(recommend)!=null){
+			Member rm =service.getMemberById(recommend);
+			int mileage = rm.getMileage()+100;//추천인으로 추천받아 마일리지 100 추가
+			rm.setMileage(mileage);
+			service.modifyMember(rm);
+			member.setMileage(10);//추천한 고객에게 마일리지 10 추가
+			new MemberValidator().validate(member, errors);
+			if(errors.hasErrors()){
+				return "member/join_form.tiles";
 			}
-				member.setZipcode(zipcode);
-				member.setEmail(exEmail);
-				member.setPhoneNo(phoneNo);
-				member.setGrade("user");
-				member.setFavoriteFood(food);
-				if(service.getMemberById(recommend)!=null){
-					Member rm =service.getMemberById(recommend);
-					int mileage = rm.getMileage()+100;
-					rm.setMileage(mileage);
-					service.modifyMember(rm);
-					member.setMileage(10);
-					new MemberValidator().validate(member, errors);
-					if(errors.hasErrors()){
-						return "member/join_form.tiles";
-					}
-					service.joinMember(member);
-				}else{
-					member.setMileage(0);
-					new MemberValidator().validate(member, errors);
-					if(errors.hasErrors()){
-						return "member/join_form.tiles";
-					}
-					service.joinMember(member);
-				}
+			service.joinMember(member);
+		}else{
+			member.setMileage(0);
+			new MemberValidator().validate(member, errors);
+			if(errors.hasErrors()){
+				return "member/join_form.tiles";
+			}
+			service.joinMember(member);
+		}
 		return "redirect:/member/joinSuccess.do?id="+member.getId();
 	}
-	
+
 	// 등록 성공
 	@RequestMapping("joinSuccess.do")
 	public String joinSuccess(@RequestParam String id, ModelMap map) throws Exception{
@@ -177,7 +166,7 @@ public class MemberController {
 		map.addAttribute("member", member);
 		return "member/join_success.tiles";
 	}
-	
+
 	// 로그인
 	@RequestMapping(value="login.do",method=RequestMethod.POST)
 	public String login(String id, String password, HttpSession session, HttpServletRequest request, HttpServletResponse response, ModelMap map){
@@ -185,11 +174,11 @@ public class MemberController {
 		Member m = service.getMemberById(id);
 		if(m==null){
 			url = "member/login_form.tiles";
-			 map.addAttribute("error_message", "ID를 확인하세요");
+			map.addAttribute("error_message", "ID를 확인하세요");
 			return url;
 		}
 		String state = m.getState();
-		
+
 		if(m!=null&&!state.equals("탈퇴")){
 			if(password.equals(m.getPassword())){
 				session.setAttribute("login_info", m);
@@ -205,23 +194,23 @@ public class MemberController {
 		return url;
 	}
 	//회원정보수정
-	
 
-	
+
+
 	// 전체 정보 조회1
 	@RequestMapping("login/admin/memberList.do")
 	public ModelAndView memberList(@RequestParam(defaultValue="1")int page){
 		Map<String, ?> map = service.getMemberListPaging(page);
 		return new ModelAndView("member/member_list.tiles",  map);
 	}
-	
+
 	// 전체 정보 조회2
 	@RequestMapping("login/admin/memberListPaging.do")
 	public ModelAndView memberListPaging(@RequestParam(defaultValue="1")int page){
 		Map<String, ?> map = service.getMemberListPaging(page);
 		return new ModelAndView("member/member_list_paging.tiles", map);
 	}
-	
+
 	//리스트에서 (ID,이름,닉네임,등급)으로 회원정보 조회
 	@RequestMapping("login/admin/findMemberByInfo.do")
 	public  ModelAndView findMemberByInfo(@RequestParam String info, @RequestParam String command, @RequestParam(defaultValue="1")int page){
@@ -230,21 +219,14 @@ public class MemberController {
 		map.put("info", info);
 		return new ModelAndView("member/member_list_paging.tiles", map);
 	}
-	
-	
+
+
 	/*************로그인이 필요한 서비스 - interceptor에서 로그인 체크**********************/
 	@SuppressWarnings("unused")
 	@RequestMapping("modifyMemberInfo.do")
 	@ResponseBody
 	public ModelAndView modifyMemberInfo(@ModelAttribute Member member, Errors errors, HttpSession session,  HttpServletRequest request, ModelMap map ){
 		Member loginInfo = (Member)session.getAttribute("login_info");
-		//Validation check
-//		new MemberValidator().validate(member, errors);
-//		if(errors.hasErrors()){
-//			return new ModelAndView("member/info/modify_info.tiles");
-//		}
-		//session의 login_info 속성의 property들을  수정된 정보로 변경(id, joinDate는 변경 안한다.)
-		//로그인 체크 - interceptor가 처리
 		String exEmail = loginInfo.getEmail();
 		String exPhone = loginInfo.getPhoneNo();
 		String nickname = (String) request.getParameter("nickname");
@@ -252,7 +234,6 @@ public class MemberController {
 			map.addAttribute("error_message", "닉네임의 양식에 맞지 않습니다");
 			return new ModelAndView("member/info/modify_info.tiles",map);
 		}
-//		request.setAttribute("nickname", nickname);
 		String exNick = loginInfo.getNickname();
 		String post1 = (String) request.getParameter("postcode1");
 		String post2 = (String) request.getParameter("postcode2");
@@ -261,6 +242,7 @@ public class MemberController {
 		String emailName = (String) request.getParameter("emailName");
 		String emailAddress = (String) request.getParameter("emailAddress");
 		String email = emailName+"@"+emailAddress;
+		//이메일 유효성검사
 		if(!email.matches("[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}")){
 			map.addAttribute("error_message", "이메일의 양식에 맞지 않습니다");
 			return new ModelAndView("member/info/modify_info.tiles",map);
@@ -268,6 +250,7 @@ public class MemberController {
 		String phoneCP = (String) request.getParameter("phoneCP");
 		String num1 = (String) request.getParameter("num1");
 		String num2 = (String) request.getParameter("num2");
+		//전화번호 유효성검사
 		if(!num1.matches("[0-9]{3,4}$")||!num2.matches("[0-9]{3,4}$")){
 			map.addAttribute("error_message", "전화번호의 양식에 맞지 않습니다");
 			return new ModelAndView("member/info/modify_info.tiles",map);
@@ -278,26 +261,28 @@ public class MemberController {
 		}
 		String phoneNo = phoneCP+"-"+num1+"-"+num2;
 		String zipcode = post1+"-"+post2;
+		//이메일 중복검사
 		if(service.getMemberByEmail(email)!=null&&!email.equals(exEmail)){
 			map.addAttribute("error_message", "이미 가입된 이메일입니다.");
 			return new ModelAndView("member/info/modify_info.tiles",map);
 		}
+		//전화번호 중복검사
 		if(service.getMemberByPhone(phoneNo)!=null&&!phoneNo.equals(exPhone)){
 			map.addAttribute("error_message", "이미 가입된 전화번호입니다.");
 			return new ModelAndView("member/info/modify_info.tiles",map);
 		}
-			loginInfo.setNickname(nickname);
-			loginInfo.setZipcode(zipcode);
-			loginInfo.setAddress(address);
-			loginInfo.setDetailAddress(detailAddress);
-			loginInfo.setEmail(email);
-			loginInfo.setPhoneNo(phoneNo);
-			service.modifyMember(loginInfo);
-			return new ModelAndView("/member/login/mypage.do");
-			
-		}
-	
-	
+		loginInfo.setNickname(nickname);
+		loginInfo.setZipcode(zipcode);
+		loginInfo.setAddress(address);
+		loginInfo.setDetailAddress(detailAddress);
+		loginInfo.setEmail(email);
+		loginInfo.setPhoneNo(phoneNo);
+		service.modifyMember(loginInfo);
+		return new ModelAndView("/member/login/mypage.do");
+
+	}
+
+
 	
 	// 정보 제거하기
 	@RequestMapping("login/removeMember.do")
@@ -495,6 +480,7 @@ public class MemberController {
 	}
 	
 	/**********************이메일 인증 체크********************/
+	@SuppressWarnings("resource")
 	@RequestMapping("sendpw.do")
 	@ResponseBody
 	public ModelAndView sendpw(String id, String nickname, String emailName,String emailAddress, ModelMap map){

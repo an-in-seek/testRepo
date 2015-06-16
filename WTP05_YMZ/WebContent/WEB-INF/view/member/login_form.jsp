@@ -17,7 +17,7 @@ $(document).ready(function(){
     var imgPath=('/WTP05_YMZ/memberImage/'+imageNum+'.png'); 
     $('#mainbgs').css('background-image', ('url("'+imgPath+'")')); 
       
-    }); 	 
+    }) 	 
 </script>
 
 <style type="text/css">
@@ -69,7 +69,7 @@ td{
 }
 
 #mainbgs{
-	margin-top : 20px;
+	margin-top : 50px;
 	float:right;
 	width:300px;
 	height:200px;
