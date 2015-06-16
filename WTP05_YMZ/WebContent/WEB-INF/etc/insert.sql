@@ -55,8 +55,9 @@ INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_C
 INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-11', '회식', null, 'F-4' );
 
 INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-20', 'title', null, 'F-5' );
-INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-21', 'nickname', null, 'F-5' );
-INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-22', 'id', null, 'F-5' );
+INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-21', 'content', null, 'F-5' );
+INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-22', 'nickname', null, 'F-5' );
+INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-23', 'id', null, 'F-5' );
 
 
 insert into location values(location_no_seq.nextval, '유스페이스 1동', '3');
@@ -363,29 +364,29 @@ insert into review(review_no, category, title, content, hits, recommend, reg_dat
 insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타 죽집','1','443','12','1998-04-04 11:00:10','user02');
 insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타 죽집','1','444','11','1999-04-04 11:00:10','user01');
 
-insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','미스터피자 후기!!','1','831','84','2004-12-25 11:12:20','user02');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','파파존스 맛있어영','1','97','34','2008-02-11 11:12:20','user01');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','도미노피자 실망이네요...','1','774','66','2009-12-31 11:12:20','user15');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','차지치킨 별로네요 ㅠㅠ','1','444','6','2010-11-11 11:12:20','user14');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','중국성에서 점심 어떠세용??','1','454','14','2010-12-12 11:12:20','user13');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','육전면사무소 괜찮네요~~','1','311','38','2011-11-14 11:12:20','user12');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','맛이 살아있네 대게나라!!','1','245','44','2012-09-28 11:12:20','user11');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','빵은 파리바게트죠','1','111','4','2013-01-01 11:12:20','user10');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타국밥 서비스 최악 ㅡㅡ','1','53','0','2013-02-03 11:12:20','user09');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','한솥도시락 무난하네요','1','12','2','2013-12-08 11:12:20','user08');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','재스기네치킨 맛 최악....','1','333','31','2014-11-27 11:12:20','user07');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','차지족발 그냥 그러네요','1','412','6','2015-06-01 01:12:20','user06');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','롯데리아 왜케 맛없죠???','1','542','22','2015-06-01 03:12:20','user05');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','맥도날드 왜이래','1','15','11','2015-06-01 05:12:20','user04');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','버거킹 레알 버거킹!!','1','221','0','2015-06-02 07:12:20','user03');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','새마을식당 50%세일 후기','1','1','1','2015-06-02 09:12:20','user02');
+insert into review(review_no, category, title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','미스터피자 후기!!','맛있어요.','831','84','2004-12-25 11:12:20','user02');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','파파존스 맛있어영','맛있어요.','97','34','2008-02-11 11:12:20','user01');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','도미노피자 실망이네요...','맛있어요.','774','66','2009-12-31 11:12:20','user15');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','차지치킨 별로네요 ㅠㅠ','맛있어요.','444','6','2010-11-11 11:12:20','user14');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','중국성에서 점심 어떠세용??','맛있어요.','454','14','2010-12-12 11:12:20','user13');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','육전면사무소 괜찮네요~~','맛있어요.','311','38','2011-11-14 11:12:20','user12');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','맛이 살아있네 대게나라!!','맛없어','245','44','2012-09-28 11:12:20','user11');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','빵은 파리바게트죠','맛없어','111','4','2013-01-01 11:12:20','user10');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','코스타국밥 서비스 최악 ㅡㅡ','맛없어','53','0','2013-02-03 11:12:20','user09');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','한솥도시락 무난하네요','맛없어','12','2','2013-12-08 11:12:20','user08');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','재스기네치킨 맛 최악....','맛없어','333','31','2014-11-27 11:12:20','user07');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','차지족발 그냥 그러네요','맛없어','412','6','2015-06-01 01:12:20','user06');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','롯데리아 왜케 맛없죠???','최고','542','22','2015-06-01 03:12:20','user05');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','맥도날드 왜이래','최고','15','11','2015-06-01 05:12:20','user04');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','버거킹 레알 버거킹!!','최고','221','0','2015-06-02 07:12:20','user03');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','새마을식당 50%세일 후기','최고','1','1','2015-06-02 09:12:20','user02');
 insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','수지의 맛있는 슈퍼 스테이크','<img src="/WTP05_YMZ/se2/multiupload/20150531094326493d07d5-6040-49f7-8ddd-8f9bec730a4e.jpg" title="suzy.jpg"><br style="clear:both;">','1234','150','2015-06-08 11:12:20','user01');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','광고글 올리면 강퇴처리 됩니다!!','1','1','1','2015-06-02 01:11:12','master01');
-insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','사진이 없는 글은 삭제됩니다.','1','1','1','2015-06-02 09:10:20','master02');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','광고글 올리면 강퇴처리 됩니다!!','알겠어?','200','11','2015-06-12 01:11:12','master01');
+insert into review(review_no, category,title, content, hits, recommend, reg_date, member_id) values(review_no_seq.nextval,'양식','사진이 없는 글은 삭제됩니다.','알겠어?','100','14','2015-06-12 09:10:20','master02');
 
 
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-28 01:10:20', '노맛', 'user01', 79);
-insert into review_reply values(review_reply_no_seq.nextval, '2015-05-29 01:11:20', '짱짱', 'user02', 79);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-28 01:10:20', '노맛이네요', 'user01', 79);
+insert into review_reply values(review_reply_no_seq.nextval, '2015-05-29 01:11:20', '짱짱!!', 'user02', 79);
 insert into review_reply values(review_reply_no_seq.nextval, '2015-05-30 01:12:20', '구려', 'user03', 79);
 insert into review_reply values(review_reply_no_seq.nextval, '2015-06-01 01:13:20', '겁나 비싸넹', 'user04', 79);
 insert into review_reply values(review_reply_no_seq.nextval, '2015-06-02 01:14:20', '추추추추강추', 'user05', 79);

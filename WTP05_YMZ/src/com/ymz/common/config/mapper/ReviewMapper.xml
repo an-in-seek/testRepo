@@ -177,6 +177,9 @@
 							<when test="searchType=='nickname'">
 								and m.nickname = #{query}
 							</when>
+							<when test="searchType=='content'">
+								and content like '%'||#{query}||'%'
+							</when>
 						</choose>
 						<choose>
 							<when test="sortType=='latest'">
@@ -219,6 +222,9 @@
 						</when>
 						<when test="searchType=='nickname'">
 							and nickname = #{query}
+						</when>
+						<when test="searchType=='content'">
+							and content like '%'||#{query}||'%'
 						</when>
 		</choose>
 	</select>
