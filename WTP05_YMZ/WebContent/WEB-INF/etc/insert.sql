@@ -1,9 +1,3 @@
-delete from member CASCADE CONSTRAINTS;
-delete from restauran	 CASCADE CONSTRAINTS;
-delete from location CASCADE CONSTRAINTS;
-delete from review CASCADE CONSTRAINTS;
-delete from faq CASCADE CONSTRAINTS;
-delete from qna CASCADE CONSTRAINTS;
 
 insert into member values('master01', 1111, '관리자1', '관리자1', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master1@naver.com', '010-1111-1111', '한식', 99999, 'master', '20140514', '가입');
 insert into member values('master02', 2222, '관리자2', '관리자2', '20100504', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'master2@naver.com', '010-2222-2222', '한식', 99999, 'master', '20140515', '가입');
@@ -24,8 +18,6 @@ insert into member values('user12', 5555, '거북왕', '거북왕', '20100505', 
 insert into member values('user13', 5555, '아상해씨', '이상해씨', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user13@naver.com', '010-8080-8080', '한식', 100000, 'user', '20140511', '가입');
 insert into member values('user14', 5555, '이상해풀', '이상해풀', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user14@naver.com', '010-9090-9090', '한식', 100000, 'user', '20140510', '가입');
 insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user15@naver.com', '010-1122-2211', '한식', 100000, 'user', '20140501', '가입');
-
-
 
 update member set grade='master' where member_id='master'
 update member set grade='master' 	where member_id='2';

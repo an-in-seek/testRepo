@@ -79,19 +79,31 @@ $(document).ready(function(){
 	});
 	
 	$("#selectSort").on("change",function(){
-		 document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#selectSort").val()+"&command=sort";
+		 var sort = $("#selectSort").val();
+		 if(sort != 'default'){
+			 document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#selectSort").val()+"&command=sort";
+		 }
 	});
 	
 	$("#dateCategory").on("change",function(){
-		document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#dateCategory").val()+"&command=sort";
+		var date = $("#dateCategory").val();
+		if(date !="default"){
+			document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#dateCategory").val()+"&command=sort";
+		}
 	});
 	
 	$("#gradeCategory").on("change",function(){
-		document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#gradeCategory").val()+"&command=grade";
+		var grade = $("#gradeCategory").val();
+		if(grade !="default"){
+			document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#gradeCategory").val()+"&command=grade";
+		}
 	});
 	
 	$("#stateCategory").on("change",function(){
+		var state = $("#stateCategory").val();
+		if(state !="default"){
 		document.location.href="${initParam.rootPath }/member/login/admin/findMemberByInfo.do?info="+$("#stateCategory").val()+"&command=state";
+		}
 	});
 	
 	$("#deleteBtn").on("click",function(){
@@ -155,21 +167,21 @@ article{
 				<td>전화번호</td>
 				<td>
 					<select id="dateCategory">
-						<option>가입일</option>
+						<option value="default">가입일</option>
 						<option id="sortLatest" value="sortLatest">최신순</option>
 						<option id="sortLate" value="sortLate">늦은순</option>
 					</select>
 				</td>
 				<td>
 					<select id="gradeCategory">
-						<option>등급</option>
+						<option value="default">등급</option>
 						<option id="master" value="master">관리자</option>
 						<option id="user" value="user">사용자</option>
 					</select>
 				</td>
 				<td>
 					<select id="stateCategory">
-						<option>탈퇴여부</option>
+						<option value="default">탈퇴여부</option>
 						<option id="가입" value="가입">가입</option>
 						<option id="탈퇴" value="탈퇴">탈퇴</option>
 					</select>
