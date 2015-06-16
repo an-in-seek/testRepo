@@ -92,9 +92,7 @@ public class MemberServiceImpl implements MemberService {
 		for(int i=0;i<list.size();i++){
 			map2.put((String) list.get(i), list2.get(i));
 		}
-		for(Map.Entry<String,Object> entry : map2.entrySet()){
-			System.out.println(entry.getKey()+"-"+entry.getValue());
-		}
+		
 		return map2;
 	}
 
