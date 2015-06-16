@@ -10,18 +10,12 @@ public class FAQ implements Serializable{
 	private int relevel;
 	private String title;
 	private String content;
+	private String memberId;
 	
 	public FAQ() { }
 
-	public FAQ(int number, String title, String content) {
-		super();
-		this.number = number;
-		this.title = title;
-		this.content = content;
-	}
-
 	public FAQ(int number, int refamily, int restep, int relevel, String title,
-			String content) {
+			String content, String memberId) {
 		super();
 		this.number = number;
 		this.refamily = refamily;
@@ -29,6 +23,7 @@ public class FAQ implements Serializable{
 		this.relevel = relevel;
 		this.title = title;
 		this.content = content;
+		this.memberId = memberId;
 	}
 
 	public int getNumber() {
@@ -79,11 +74,19 @@ public class FAQ implements Serializable{
 		this.content = content;
 	}
 
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
 	@Override
 	public String toString() {
 		return "FAQ [number=" + number + ", refamily=" + refamily + ", restep="
 				+ restep + ", relevel=" + relevel + ", title=" + title
-				+ ", content=" + content + "]";
+				+ ", content=" + content + ", memberId=" + memberId + "]";
 	}
 
 	@Override
@@ -91,6 +94,8 @@ public class FAQ implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result
+				+ ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + number;
 		result = prime * result + refamily;
 		result = prime * result + relevel;
@@ -112,6 +117,11 @@ public class FAQ implements Serializable{
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
+			return false;
+		if (memberId == null) {
+			if (other.memberId != null)
+				return false;
+		} else if (!memberId.equals(other.memberId))
 			return false;
 		if (number != other.number)
 			return false;
