@@ -169,7 +169,7 @@ $(document).ready(function(){
 </table>
 <p/>
 <form id="searchForm" action="${initParam.rootPath }/restaurant/showListByTheme.do">
-<input style="width:200px;height:20px;" type="text" id="search" name="searchWord" value="${requestScope.searchWord }">
+<input style="width:200px;height:20px;" type="text" id="search" name="searchWord" value="${requestScope.searchWord }" placeholder="상호명으로 검색">
 <input style="width:50px;height:26px;background-color:gray;border-color:gray;color:white;font-weight:bold;" type="submit" value="검색">
 </form>
 
