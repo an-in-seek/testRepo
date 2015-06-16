@@ -30,26 +30,30 @@ public class FAQController {
 
 	// FAQ게시물 등록
 	@RequestMapping(value="login/write.do", method=RequestMethod.POST)
-	public String registerFAQ(@ModelAttribute FAQ faq, Errors errors, HttpServletRequest request) throws Exception{
+	public String registerFAQ(@ModelAttribute FAQ faq, Errors errors, HttpServletRequest request, HttpSession session) throws Exception{
 		new FAQValidator().validate(faq, errors);
 		//등록 실패
 		if(errors.hasErrors()){
 			return "faq/faq_write_form.tiles";
 		}
 		//등록 성공
+		Member member = (Member) session.getAttribute("login_info");
+		faq.setMemberId(member.getId());
 		service.registerFAQ(faq);
 		return "/faq/faqList.do";//등록후 원래페이지로 이동
 	}
 	
 	// 게시물 수정
 	@RequestMapping(value="login/modify.do", method=RequestMethod.POST)
-	public String modifyFAQ(@ModelAttribute FAQ faq, Errors errors) throws Exception{
+	public String modifyFAQ(@ModelAttribute FAQ faq, Errors errors, HttpSession session) throws Exception{
 		new FAQValidator().validate(faq, errors);
 		//등록 실패
 		if(errors.hasErrors()){
 			return "faq/faq_modify_form.tiles";
 		}
 		//등록 성공
+		Member member = (Member) session.getAttribute("login_info");
+		faq.setMemberId(member.getId());
 		service.modifyFAQ(faq);//수정 처리
 		return "/faq/faqList.do";
 	}
