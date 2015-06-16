@@ -173,7 +173,7 @@ $(document).ready(function(){
 				alert("내용을 써주세욤");
 				return false;
 				//평점 선택 안했을 때 경고창
-			}else if(!$("#score")){
+			}else if(!$("input[type=radio][name=score]:checked").val()){
 				alert("평점을 선택해");
 				return false;
 			}
@@ -457,9 +457,18 @@ background:#ffe4c4;
 						<c:when test="${reply.score==5}"><span class="star_rating"><span style="width:100%">5점</span></span></c:when>
 					</c:choose>
 					<p>
+					<c:choose>
+					<c:when test="${sessionScope.login_info.id == reply.memberId}">
+					<!-- 본인 아이디일 때만 수정 삭제 버튼 보이기 -->
 					<input type="button" id="replyModifyButton${reply.number}" onclick="modifyReply(${reply.number},${requestScope.restaurant.restaurantNo})" value="수정">
 					<input type="button" id="replyRemoveButton${reply.number }" onclick="removeReply(${reply.number},${reply.score },${requestScope.restaurant.restaurantNo})" value="삭제">
-					
+					</c:when>
+					<c:when test="${sessionScope.login_info.grade =='master'}">
+					<!--관리자일 때 삭제 버튼 보이기  -->
+					<input type="button" id="replyRemoveButton${reply.number }" onclick="removeReply(${reply.number},${reply.score },${requestScope.restaurant.restaurantNo})" value="삭제">					
+					</c:when>
+									
+					</c:choose>
 				</td>
 			</tr>
 		
@@ -474,7 +483,7 @@ background:#ffe4c4;
 		<c:choose>
 			<c:when test="${not empty sessionScope.login_info}">
 				<td>
-				<textarea name="content" id="content"  onfocus="focusReply()" style="width: 900px; height: 80px" >맛있어요~♥</textarea>
+				<textarea name="content" id="content" maxlength="80"  onfocus="focusReply()" style="width: 900px; height: 80px" >맛있어요~♥</textarea>
 					<input type="hidden"	id="restaurantNo" name="restaurantNo" value="${requestScope.restaurant.restaurantNo }">
 				<p>평점주기
 				 	<label for="1"></label><input type="radio" name="score" value="1" id="1"><span class="star_rating"><span style="width:20%"></span></span>

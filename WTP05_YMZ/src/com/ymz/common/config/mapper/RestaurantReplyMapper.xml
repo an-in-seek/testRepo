@@ -65,7 +65,7 @@
 	<!-- 삭제 -->
 	<delete id="deleteRestaurantReply" parameterType="map">
 		delete from restaurant_reply 
-		where restaurant_reply_no=#{number} and member_id=#{memberId}
+		where restaurant_reply_no=#{number} 
 	</delete>
 
 

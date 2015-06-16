@@ -54,6 +54,8 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 		}
 		
 		dao.updateScore(score, restaurantReply.getRestaurantNo());
+		System.out.println("확인된 댓글번호"+number);
+		System.out.println("확인된 ID"+ userId);
 		dao.deleteRestaurantReply(number,userId);
 
 	}
