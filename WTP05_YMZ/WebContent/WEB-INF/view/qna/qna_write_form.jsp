@@ -22,10 +22,11 @@ $(document).ready(function(){
 				},
 				fOnAppLoad : function() {
 					// 기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할 때 사용
-					oEditors.getById["content"].exec("PASTE_HTML", ["내용을 입력하세요."]);
+					oEditors.getById["content"].exec("PASTE_HTML", [""]);
 				},
 				fCreator : "createSEditor2"
 			});
+			
 			// 등록버튼 클릭시 form 전송
  		 	$("#save").click(function() {
  				oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD");

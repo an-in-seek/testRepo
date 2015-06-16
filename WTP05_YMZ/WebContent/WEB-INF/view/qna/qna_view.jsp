@@ -9,7 +9,6 @@
 		
 		var qnaNumber = ${requestScope.qna.number}; // 새로고침 조회수 증가 막기
 		var c = $.cookie('number'); // 쿠키 조회
-		
 		$.ajax({
 			url:"${initParam.rootPath}/qna/findLoginMember.do", //요청 url 설정
 			type:"post", //HTTP 요청 방식(method)
@@ -29,8 +28,7 @@
 				}
 			}
 		});
-		
-		$.cookie('number', '${requestScope.qna.number}'); // 쿠키 reviewNo를 셋팅
+		$.cookie('number', '${requestScope.qna.number}'); // 쿠키 qnaNumber를 셋팅
 		if(c!='${requestScope.qna.number}'){
 			$.ajax({
 				url:"${initParam.rootPath}/qna/ajax/updateHits.do", // 요청 url
