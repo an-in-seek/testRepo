@@ -220,6 +220,7 @@ table{
 <body>
 
 <h2 align="center">쿠폰교환</h2>
+<hr noshade="noshade" width="100%" align="center">
 <form method="post" action="${initParam.rootPath }/member/updateMileage.do" id="modifyMileage"> 
 	<table width="600" align="center" style="border: 1px solid lightgray">
 		<tr>

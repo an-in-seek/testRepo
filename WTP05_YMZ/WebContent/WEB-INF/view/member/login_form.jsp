@@ -28,13 +28,44 @@ $(document).ready(function(){
 	margin-right:auto;
 	padding-bottom:350px;
 	background-color:#FAFBFC;
+	width:1024px;
+	height:auto;
 }
 #table{
 	margin-top:2px;
 	 width:500px;
-	 height:auto;
+	 height:350px;
 	 float:left;
-	 margin-left:100px;
+	 background-color:#FAFBFC;
+}
+#table1{
+	 width:550px;
+	 height:150px;
+	 float:left;
+	 margin-left:20px;
+	 background-color:#FAFBFC;
+}
+#table2{
+	width:300px;
+	border-spacing:0px;
+	border-style:none;
+	padding:0px;
+	float:left;
+	margin-left:20px;
+}
+td{
+	border-spacing:0px;
+	border-style:none;
+	padding:5px;
+}
+
+#table3{
+	width:250px;
+	border-spacing:0px;
+	border-style:none;
+	padding:0px;
+	float:right;
+	margin-right : 30px;
 }
 
 #mainbgs{
@@ -118,46 +149,45 @@ $(document).ready(function(){
 	font-weight: bold;
 	color:#6B6666;
 	width:80px;
-	background:#ffffff;
+	background-color:#FAFBFC;
 	padding-left:2px;
 }
 
 #col3{
-	;
+	
 }
 
 </style>
  
 <div id="div">
-		<form action="${initParam.rootPath }/member/login.do" method="post" >
-			<table id="table">
+		<form action="${initParam.rootPath }/member/login.do" method="post" id="table">
+			<table id="table1">
 			<tr>
-				<td colspan="3"><font size="7">Login</font><font>&nbsp;로그인</font><br>
+				<td><font size="7">Login</font><font>&nbsp;로그인</font><br>
 				<p id="content"><font size="2" color="grey">로그인 하시면 더욱 다양한 야먹자의 서비스를 즐길실 수 있습니다.</font></p>
 				<hr noshade="noshade" width="100%" align="center"> 
 				<c:if test="${requestScope.error_message != null}">
 					<font color="red" size="3" style="font-weight: bold">${requestScope.error_message}</font>
 				</c:if>
 				</td>
-				
 			</tr>
-				<tr align="left" >
+			</table>
+			<table id="table2" >
+				<tr>
 					<td id="col">아이디</td>
 					<td><input type="text" name="id" autofocus="autofocus" placeholder="ID" class="int" maxlength='11' required="required"></td>
-					<td id="col2" rowspan="2"><input  class="btn" type="submit" value="로그인" style="font-size:16px; border:solid 1px #050099;"></td>
-				</tr>
-				<tr align="left" >
-					<td id="col">패스워드</td>
-					<td id="col2"><input type="password" name="password"  placeholder="Password" class="int" required="required" maxlength="24"></td>
-					<td></td>
 				</tr>
 				<tr>
+					<td id="col">패스워드</td>
+					<td id="col2"><input type="password" name="password"  placeholder="Password" class="int" required="required" maxlength="24"></td>
+				</tr>
+				<tr>	
 					<td colspan="3"><a style="text-decoration:none;" href="javascript:id_pop();"><font size="3">아이디 찾기 |</font></a>
 					<a style="text-decoration:none;" href="javascript:pw_pop();"><font size="3">비밀번호 찾기 |</font></a>
 					<a style="text-decoration:none;" href="${initParam.rootPath }/member/joinBefore.do"><font size="3"> 회원가입</font></a>
-					</td>
 				</tr>
-			</table>
+			</table >
+					<input  class="btn" type="submit" value="로그인" style="font-size:16px; border:solid 1px #050099;">
 		</form>
 			<p id="mainbgs"></p>
 </div>

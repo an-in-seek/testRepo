@@ -538,7 +538,7 @@ public class MemberController {
 	    	
 	}
 	
-	//마이페이지 메인화면 
+	/**********************마이페이지 메인화면********************/
 	@RequestMapping("login/mypage.do")
 	public ModelAndView moveMypage(HttpSession session,  ModelMap map, @RequestParam(defaultValue="bbs") String state,
 			@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="1") int pageNo2, @RequestParam(defaultValue="1") int pageNo3){

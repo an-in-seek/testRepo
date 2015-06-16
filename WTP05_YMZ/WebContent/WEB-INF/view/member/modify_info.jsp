@@ -419,7 +419,8 @@ table{
 </c:if>
 
 <form method="post" action="${initParam.rootPath }/member/modifyMemberInfo.do" id="modifyForm"  enctype="multipart/form-data">
-	<h2 align="center">회원정보 수정 폼</h2>
+	<h2 align="center">회원정보 수정</h2>
+	<hr noshade="noshade" width="100%" align="center">
 	<input type="hidden" name="id" value="${sessionScope.login_info.id }">
 	<table style="width:700px; border: 1px solid lightgray;">
 		<tr>
