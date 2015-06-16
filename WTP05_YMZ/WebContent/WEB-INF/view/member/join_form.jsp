@@ -571,9 +571,10 @@ table{
 	font-size : 15px;
 	width:150px;
 	background:#f0f0f0;
+	padding-left:50px;
 }
 #col2{
-	width:10px;
+	width:20px;
 }
 
 .id_btn{
@@ -678,6 +679,10 @@ table{
 	text-align:center;
 	cursor: pointer;
 }
+#col5{
+	font-size:5px;
+	font-weight:bold;
+}
 </style>
 <script type="text/javascript">
            
@@ -691,8 +696,11 @@ table{
 </c:if>
 <form method="post" action="${initParam.rootPath }/member/join.do"  id="registerForm" enctype="multipart/form-data" >
 	<table>
+		<tr>
+			<td colspan="4" id="col5" align="left">*는 필수입력사항입니다.</td>
+		</tr>
 		<tr >
-			<td id="col" align="center">ID</td>
+			<td id="col" align="left">*ID</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" name="id" id='id' maxlength='11'> <span id="dupMessageLayer"> </span><span class="errorMessage"><form:errors path="member.id"/></span>
@@ -701,7 +709,7 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">비밀번호</td>
+			<td id="col" align="left">*비밀번호</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="password" id="password" name="password" maxlength='24'>
@@ -709,7 +717,7 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">비밀번호확인</td>
+			<td id="col" align="left">*비밀번호확인</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="password" id="passwordCheck" name="passwordCheck" maxlength='24'>
@@ -718,7 +726,7 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">이름</td>
+			<td id="col"align="left">*이름</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" id="name" name="name" maxlength='10'>
@@ -726,7 +734,7 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">닉네임</td>
+			<td id="col" align="left">*닉네임</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" id="nickname" name="nickname"  maxlength='8'>
@@ -735,7 +743,7 @@ table{
 			</td>	
 		</tr>
 			<tr>
-			<td id="col" align="center">생년월일</td>
+			<td id="col" align="left">*생년월일</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<select name="year" id="year" class="input_text w76" style="vertical-align:middle">
@@ -750,17 +758,17 @@ table{
 			</td>	
 		</tr>
 			<tr>
-			<td id="col" align="center">성별</td>
+			<td id="col" align="left">*성별</td>
 			<td id="col2"></td>
 			<td id="col3">
 			
 	<!-- for='m':id가 m인 입력 태그에 대한 라벨, id속성-태그의 식별값을 지정 체크박스는 선택하지 않으면 전송하지 않는다. -->
-				<label for="m"> 남성</label> <input type="radio" id="sex" name="sex" value="b" id="m"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>	
-				<label for="f"> 여성</label> <input type="radio" id="sex" name="sex" value="g" id="f"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>
+				<label for="m"> 남성</label> <input type="radio" id="sex" name="sex" value="남" id="m"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>	
+				<label for="f"> 여성</label> <input type="radio" id="sex" name="sex" value="여" id="f"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>
 			</td>	
 		</tr>
 		<tr>
-			<td id="col" align="center">우편번호</td>
+			<td id="col" align="left">*우편번호</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" id="postcode1" name="postcode1"  style="width:50px;"  readonly>
@@ -769,19 +777,19 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">주소</td>
+			<td id="col" align="left">*주소</td>
 			<td id="col2"></td>
 			<td id="col3"><input type="text" id="address" name="address"  style="width:400px;" readonly><span class="errorMessage"><form:errors path="member.address"></form:errors></span>
 			</td>
 		</tr>		
 		<tr>
-			<td id="col" align="center">상세주소</td>
+			<td id="col" align="left">*상세주소</td>
 			<td id="col2"></td>
 			<td id="col3"><input type="text" id="detailAddress" name="detailAddress" maxlength='20' style="width:400px;"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">이메일</td>
+			<td id="col" align="left">*이메일</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" id="emailName" name="emailName" maxlength='11'>@<input type="text" id="emailAddress" name="emailAddress"  maxlength="11">
@@ -791,7 +799,7 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">전화번호</td>
+			<td id="col" align="left">*전화번호</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<select name="phoneCP" id="phoneCP" class="input_text w60" style="vertical-align:middle">
@@ -801,7 +809,7 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">좋아하는음식</td>
+			<td id="col" align="left">&nbsp;좋아하는음식</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<c:forEach var="category" items="${map}"> 
@@ -811,7 +819,7 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">추천인</td>
+			<td id="col" align="left">&nbsp;추천인</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" name="recommend" id="recommend" maxlength='20'>

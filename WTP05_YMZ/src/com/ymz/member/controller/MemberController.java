@@ -494,47 +494,6 @@ public class MemberController {
 		}
 	}
 	
-	/**********************핸드폰으로 비밀번호 찾기********************/
-//	@RequestMapping("loginPwFind.do")
-//	@ResponseBody
-//	public ModelAndView loginPwFind(String name, HttpServletRequest request,ModelMap map){
-//		String id = null;
-//		Member m = service.getMemberByName(name);
-//		if(m!=null){
-//		String phone = m.getPhoneNo();
-//		String phoneCP =request.getParameter("phoneCP");
-//		String num1 = request.getParameter("num1");
-//		String num2 = request.getParameter("num2");
-//		String exPhone = phoneCP+"-"+num1+"-"+num2;
-//			if(phone.equals(exPhone)){
-//				id = m.getId();
-//				request.setAttribute("id", id);
-//				return new ModelAndView("/WEB-INF/view/member/pwFind_success.jsp");
-//			}else{
-//				map.addAttribute("error_message","존재하지 않는 정보입니다");
-//				return new ModelAndView("/popup/pwFind.jsp",map);	
-//				}
-//		}else{
-//			map.addAttribute("error_message", "존재하지 않는 정보입니다.");
-//			return new ModelAndView("/popup/pwFind.jsp",map);
-//		}
-//	}
-	
-	/**********************비밀번호 분실시 변경 요청********************/
-//	@RequestMapping("passwordChange.do")
-//	@ResponseBody
-//	public void passwordChange(String password, String passwordCheck, HttpServletRequest request){
-//		if(password!=passwordCheck){
-//			
-//		}else{
-//		String id = request.getParameter("id");
-//		Member m = service.getMemberById(id);
-//		m.setPassword(password);
-//		service.modifyPassword(m);
-//		}
-//		
-//	}
-	
 	/**********************이메일 인증 체크********************/
 	@RequestMapping("sendpw.do")
 	@ResponseBody
@@ -594,17 +553,5 @@ public class MemberController {
 }
 
 
-	/**********************이메일 중복 체크********************/
-//	@RequestMapping("emailExistCheck.do")
-//	@ResponseBody
-//	public String emailExistCheck(@RequestParam String recommend2){
-//		String result = null;
-//		if(recommend2=="" || service.getMemberById(recommend2)!=null){
-//			result = "true";
-//			System.out.println(result);
-//		}else{
-//			result = "false";
-//			System.out.println(result);
-//		}
-//	}
+
 	
