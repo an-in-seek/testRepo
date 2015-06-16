@@ -3,7 +3,7 @@
 <mapper namespace="restaurant.dao.RestaurantMapper">
 	<sql id="restaurant-select">
 		select	restaurant_no, restaurant_name, category, phone_no, description,
-				picture_name, score, hits, theme, reg_date, reply_count, location_no
+				picture_name, score, hits, theme, reg_date, reply_count, location_no, member_id
 		from	restaurant
 	</sql>
 	
@@ -20,6 +20,7 @@
 		<result column="reg_date" property="regDate"/>
 		<result column="reply_count" property="replyCount"/>
 		<result column="location_no" property="locationNo"/>
+		<result column="member_id" property="memberId"/>
 	</resultMap>
 	
 	<resultMap type="food" id="food-resultmap">
@@ -32,10 +33,10 @@
 	
 	<select id="selectListByTypePaging" parameterType="Map" resultMap="restaurant-resultmap">
 		select	restaurant_no, restaurant_name, category, phone_no, description,
-				picture_name, score, hits, theme, reg_date, reply_count, location_no
+				picture_name, score, hits, theme, reg_date, reply_count, location_no, member_id
 		from	(
 					select	ceil(rownum/#{contentsPerPage}) page, restaurant_no, restaurant_name, category, phone_no,
-							description, picture_name, score, hits, theme, reg_date, reply_count, location_no
+							description, picture_name, score, hits, theme, reg_date, reply_count, location_no, member_id
 					from	(
 								<include refid="restaurant-select"/>
 								<where>
@@ -70,10 +71,10 @@
 	
 	<select id="selectListByThemePaging" parameterType="Map" resultMap="restaurant-resultmap">
 		select	restaurant_no, restaurant_name, category, phone_no, description,
-				picture_name, score, hits, theme, reg_date, reply_count, location_no
+				picture_name, score, hits, theme, reg_date, reply_count, location_no, member_id
 		from	(
 					select	ceil(rownum/#{contentsPerPage}) page, restaurant_no, restaurant_name, category, phone_no,
-							description, picture_name, score, hits, theme, reg_date, reply_count, location_no
+							description, picture_name, score, hits, theme, reg_date, reply_count, location_no, member_id
 					from	(
 								<include refid="restaurant-select"/>
 								<where>
@@ -132,7 +133,7 @@
 		<selectKey keyProperty="restaurantNo" resultType="_int" order="BEFORE">
 			select restaurant_no_seq.nextval from dual
 		</selectKey>
-		insert into restaurant values(#{restaurantNo},#{restaurantName},#{category},#{phoneNo},#{description},#{pictureName},0,0,#{theme},to_char(sysdate,'yyyymmdd'),0,#{locationNo})
+		insert into restaurant values(#{restaurantNo},#{restaurantName},#{category},#{phoneNo},#{description},#{pictureName},0,0,#{theme},to_char(sysdate,'yyyymmdd'),0,#{locationNo},#{memberId})
 	</insert>
 	
 	<insert id="insertFood" parameterType="food">
@@ -162,20 +163,20 @@
 	
 	<select id="selectRestaurantsByBuildingNameAndFloor" parameterType="Map" resultMap="restaurant-resultmap">
 		select	restaurant_no, restaurant_name, category, phone_no, description,
-				picture_name, score, hits, theme, reg_date, reply_count, r.location_no
+				picture_name, score, hits, theme, reg_date, reply_count, r.location_no, member_id
 		from	restaurant r, location l
 		where	l.building_name=#{buildingName} and l.floor=#{floor} and r.location_no=l.location_no 
 	</select>
 	
 	<select id="selectRestaurantsPaging" parameterType="Map" resultMap="restaurant-resultmap">
 		select	restaurant_no, restaurant_name, category, phone_no, description,
-				picture_name, score, hits, theme, reg_date, reply_count, location_no
+				picture_name, score, hits, theme, reg_date, reply_count, location_no, member_id
 		from	(
 					select	ceil(rownum/#{contentsPerPage}) page, restaurant_no, restaurant_name, category, phone_no,
-							description, picture_name, score, hits, theme, reg_date, reply_count, location_no
+							description, picture_name, score, hits, theme, reg_date, reply_count, location_no, member_id
 					from	(
 								select	restaurant_no, restaurant_name, category, phone_no, description,
-										picture_name, score, hits, theme, reg_date, reply_count, r.location_no
+										picture_name, score, hits, theme, reg_date, reply_count, r.location_no, member_id
 								from	restaurant r, location l
 								<where>
 									r.location_no=l.location_no
@@ -264,7 +265,7 @@
 	
 	<update id="updateRestaurant" parameterType="restaurant">
 		update restaurant set restaurant_name=#{restaurantName}, category=#{category}, phone_no=#{phoneNo},
-			description=#{description}, picture_name=#{pictureName}, theme=#{theme}, location_no=#{locationNo}
+			description=#{description}, picture_name=#{pictureName}, theme=#{theme}, location_no=#{locationNo}, member_id=#{memberId}
 		where restaurant_no=#{restaurantNo}
 	</update>
 	
@@ -274,10 +275,10 @@
 	
 	<select id="selectRestaurantsTop5" resultMap="restaurant-resultmap">
 		select	restaurant_no, restaurant_name, category, phone_no, description,
-				picture_name, score, hits, theme, reg_date, reply_count, location_no
+				picture_name, score, hits, theme, reg_date, reply_count, location_no, member_id
 		from	(
 			select	rownum, restaurant_no, restaurant_name, category, phone_no, description,
-					picture_name, score, hits, theme, reg_date, reply_count, location_no
+					picture_name, score, hits, theme, reg_date, reply_count, location_no, member_id
 			from	(
 				<include refid="restaurant-select"/>
 				order by hits desc
@@ -288,10 +289,10 @@
 	
 	<select id="selectRestaurantByRownum" parameterType="_int" resultMap="restaurant-resultmap">
 		select  restaurant_no, restaurant_name, category, phone_no, description,
-				picture_name, score, hits, theme, reg_date, reply_count, location_no
+				picture_name, score, hits, theme, reg_date, reply_count, location_no, member_id
 		from    (
 	        select  rownum r, restaurant_no, restaurant_name, category, phone_no, description,
-	                picture_name, score, hits, theme, reg_date, reply_count, location_no
+	                picture_name, score, hits, theme, reg_date, reply_count, location_no, member_id
 	        from    restaurant
 		)
 		where r=#{rownum}

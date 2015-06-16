@@ -1,70 +1,95 @@
 package com.ymz.restaurantreply.vo;
 
-public class RestaurantReply {
+import java.io.Serializable;
+
+public class RestaurantReply implements Serializable{
 
 	private int number;
 	private String regDate;
 	private String content;
 	private int score;
 	private String memberId;
-	private int restaurantNo;
 	private String nickname;
-	public RestaurantReply() {
-		super();
-	}
+	private int restaurantNo;
+	
+	public RestaurantReply() {}
+
 	public RestaurantReply(int number, String regDate, String content,
-			int score, String memberId, int restaurantNo, String nickname) {
+			int score, String memberId, String nickname, int restaurantNo) {
 		super();
 		this.number = number;
 		this.regDate = regDate;
 		this.content = content;
 		this.score = score;
 		this.memberId = memberId;
-		this.restaurantNo = restaurantNo;
 		this.nickname = nickname;
+		this.restaurantNo = restaurantNo;
 	}
+
 	public int getNumber() {
 		return number;
 	}
+
 	public void setNumber(int number) {
 		this.number = number;
 	}
+
 	public String getRegDate() {
 		return regDate;
 	}
+
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public int getScore() {
 		return score;
 	}
+
 	public void setScore(int score) {
 		this.score = score;
 	}
+
 	public String getMemberId() {
 		return memberId;
 	}
+
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public int getRestaurantNo() {
-		return restaurantNo;
-	}
-	public void setRestaurantNo(int restaurantNo) {
-		this.restaurantNo = restaurantNo;
-	}
+
 	public String getNickname() {
 		return nickname;
 	}
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
+	public int getRestaurantNo() {
+		return restaurantNo;
+	}
+
+	public void setRestaurantNo(int restaurantNo) {
+		this.restaurantNo = restaurantNo;
+	}
+
+	@Override
+	public String toString() {
+		return "RestaurantReply [number=" + number + ", regDate=" + regDate
+				+ ", content=" + content + ", score=" + score + ", memberId="
+				+ memberId + ", nickname=" + nickname + ", restaurantNo="
+				+ restaurantNo + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -80,6 +105,7 @@ public class RestaurantReply {
 		result = prime * result + score;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -117,17 +143,6 @@ public class RestaurantReply {
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "RestaurantReply [number=" + number + ", regDate=" + regDate
-				+ ", content=" + content + ", score=" + score + ", memberId="
-				+ memberId + ", restaurantNo=" + restaurantNo + ", nickname="
-				+ nickname + "]";
-	}
-	
-	
-	
-	
-	
+
 	
 }

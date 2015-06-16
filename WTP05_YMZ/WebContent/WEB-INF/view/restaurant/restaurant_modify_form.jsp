@@ -273,6 +273,7 @@ $(document).ready(function(){
 		var phone = $("#phoneNo1").val()+"-"+$("#phoneNo2").val()+"-"+$("#phoneNo3").val();
 		$("#modifyForm").append("<input type='hidden' name='phoneNo' value='"+phone+"'>");
 		$("#modifyForm").append("<input type='hidden' name='restaurantNo' value='${requestScope.restaurant.restaurantNo}'>");
+		$("#modifyForm").append("<input type='hidden' name='memberId' value='${sessionScope.login_info.id}'>")
 		$("#description").val($("#description").val().replace(/\n/g, '<br>'));
 	});
 	
