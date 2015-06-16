@@ -4,10 +4,26 @@
 
 <script type="text/javascript"src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <script type="text/javascript">
+	function regDate(time, number){
+		var nowdate = new Date();
+		var year = nowdate.getFullYear();
+		var month = nowdate.getMonth() + 1;
+		var day = nowdate.getDate();
+		var date_str = year + "-" + (month<=9? '0'+month:month) + "-" + (day<=9? '0'+day:day);
+		var regDate = time;
+		if(regDate == date_str){
+			$("#title"+number).append("<img src='${initParam.rootPath}/uploadPhoto/newIcon.jpg'/>");
+			$("#regDate"+number).html(regDate);
+		}else{
+			$("#regDate"+number).html(regDate);
+		}
+	}
+
 	$(document).ready(function() {
-		$("#listTB tbody tr").on("mouseover", function() {
-			$("#listTB tbody tr").css("background-color", "white");
+		$("#listTB tbody tr").hover(function() {
 			$(this).css("background-color", "lightcyan");
+		}, function(){
+			$(this).css("background-color", "white");
 		});
 
 		if("${requestScope.category}" != null){
@@ -92,7 +108,7 @@ article {
 			<c:forEach items="${requestScope.qna_list}" var="qna">
 				<tr align="center">
 					<td>${qna.number }</td>
-					<td align="left"><c:forEach begin="1" end="${qna.relevel}">
+					<td id="title${qna.number}" align="left"><c:forEach begin="1" end="${qna.relevel}">
 							&nbsp;&nbsp;
 						</c:forEach> <c:if test="${qna.relevel != 0}">
 							<img src="${initParam.rootPath}/se2/img/reply_icon.gif" />
@@ -100,7 +116,13 @@ article {
 					</td>
 					<td>${qna.category}</td>
 					<td>${qna.memberId}</td>
-					<td>${qna.registrationDate}</td>
+					<td id="regDate${qna.number}">
+					<script type="text/javascript">
+						var time = "${qna.registrationDate}";
+						var number = "${qna.number}";
+						regDate(time, number);
+					</script>
+					</td>
 					<td>${qna.hits}</td>
 				</tr>
 			</c:forEach>
