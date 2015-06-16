@@ -376,7 +376,7 @@ button, #searchBtn, #writeBtn{
 		<tr>
 			<td>
 			<form id="categoryForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
-				<select id="category" name="category" style="width: 70px; height: 36px;">
+				<select id="category" name="category" style="width: 80px; height: 36px;">
 						<option value="전체">전체</option>
 						<c:forEach items="${requestScope.categoryList}" var="c">
 							<option value="${c.categoryName}">${c.categoryName}</option>
@@ -386,12 +386,12 @@ button, #searchBtn, #writeBtn{
 			</td>
 			<td>
 			<form id="searchForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
-				<select id="searchSort" name="searchSort" style="width: 70px; height: 36px;">
+				<select id="searchSort" name="searchSort" style="width: 100px; height: 36px;">
 					<c:forEach items="${requestScope.searchCategoryList}" var="category">
 						<option value="${category.categoryName}">
 						<c:choose>
 							<c:when test="${category.categoryName == 'title'}">제목</c:when>						
-							<c:when test="${category.categoryName == 'content'}">내용</c:when>						
+							<c:when test="${category.categoryName == 'content'}">제목+내용</c:when>						
 							<c:when test="${category.categoryName == 'nickname'}">닉네임</c:when>						
 							<c:when test="${category.categoryName == 'id'}">아이디</c:when>						
 						</c:choose>

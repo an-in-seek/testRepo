@@ -179,6 +179,9 @@
 							</when>
 							<when test="searchType=='content'">
 								and content like '%'||#{query}||'%'
+								or(
+									review.member_id = m.member_id and m.grade != 'master' and title like '%'||#{query}||'%'
+								)
 							</when>
 						</choose>
 						<choose>
@@ -225,6 +228,9 @@
 						</when>
 						<when test="searchType=='content'">
 							and content like '%'||#{query}||'%'
+							or (
+								r.member_id = m.member_id and m.grade != 'master' and title like '%'||#{query}||'%'
+							)
 						</when>
 		</choose>
 	</select>

@@ -74,8 +74,6 @@ public class ReviewController {
 			List<Category> list = categoryService.getCategoryByFirstId("F-5"); 						// 검색 카테고리 가져오기
 			List<Category> categoryList = categoryService.getCategoryByFirstId("F-1"); 				//리뷰 카테고리 정보
 			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType, searchType, query, category);
-			System.out.println("검색분류 : " + searchType);
-			System.out.println("검색어 : " + query);
 			map.put("searchCategoryList", list);
 			map.put("categoryList", categoryList);
 			return new ModelAndView("review/review_list.tiles", map);

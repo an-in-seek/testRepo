@@ -327,7 +327,9 @@ ${requestScope.review.content }<br>
 
 		<div id="reply" align="right" style=" margin-right: 5px;">
 			<!-- 버튼 -->
-			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${requestScope.pageNo}"><button>목록</button></a>
+			<!--  <a href="${initParam.rootPath }/review/reviewList.do?pageNo=${requestScope.pageNo}"><button>목록</button></a> -->
+			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${requestScope.pageNo}&sortType=${requestScope.sortType}
+										&searchType=${requestScope.searchType}&category=${requestScope.category}&query=${requestScope.query}"><button>목록</button></a>
 			<a href="${initParam.rootPath }/review/login/modifyForm.do?reviewNo=${requestScope.review.reviewNo}">
 			<button id="modifyBtn">수정</button></a>
 			<button id="deleteBtn">삭제</button>
