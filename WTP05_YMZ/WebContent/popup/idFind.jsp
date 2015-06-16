@@ -41,7 +41,7 @@ $(document).ready(function(){
 
 		$("#findId").on("submit",function(){
 			
-			if(!$("#name").val()){
+			if(!$("#nickname").val()){
 				alert("이름을 입력하세요");
 				return false;
 			}
@@ -142,11 +142,11 @@ table{
 	<table align="center">
 		<tr>
 			<td id="col" align="center">
-				이름
+				닉네임
 			</td>
 			<td id="col2"></td>
 			<td id="col3" colspan="2">
-				<input type="text" id="name" name="name" maxlength='10'>
+				<input type="text" id="nickname" name="nickname" maxlength='10'>
 			</td>
 		</tr>
 		<tr>

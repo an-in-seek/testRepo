@@ -23,9 +23,11 @@ function openDaumPostcode(){
 		}
 	}).open();
 }
+
 $(document).load(function(){
 	document.registerForm.reset(); 
 })
+
 $(document).ready(function(){
 	
 document.getElementById('id').value="";
@@ -599,11 +601,11 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:'Malgun Gothic', dotum;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
-	width:55px;
+	width:65px;
 	text-decoration:none;
 	text-align:center;
 	cursor: pointer;
@@ -633,11 +635,11 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:'Malgun Gothic', dotum;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
-	width:55px;
+	width:65px;
 	text-decoration:none;
 	text-align:center;
 	cursor: pointer;
@@ -667,7 +669,7 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:'Malgun Gothic', dotum;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;

@@ -10,6 +10,7 @@
 		<config>src/com/ymz/member/mail/Spring_Mail.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>WebContent/WEB-INF/config/spring/common-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

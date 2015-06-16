@@ -333,11 +333,11 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:arial;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
-	width:55px;
+	width:65px;
 	text-decoration:none;
 	text-align:center;
 	cursor: pointer;
@@ -367,11 +367,11 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:arial;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
-	width:55px;
+	width:65px;
 	text-decoration:none;
 	text-align:center;
 	cursor: pointer;
@@ -401,7 +401,7 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:arial;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;

@@ -135,7 +135,7 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:arial;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
@@ -170,7 +170,7 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:arial;
-	font-size:9px;
+	font-size:15px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
