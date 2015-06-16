@@ -21,6 +21,7 @@ import com.ymz.common.category.service.CategoryService;
 import com.ymz.common.category.vo.Category;
 import com.ymz.common.validator.ReviewReplyValidator;
 import com.ymz.common.validator.ReviewValidator;
+import com.ymz.member.exception.DuplicatedReportBBSException;
 import com.ymz.member.exception.ReviewRecommendException;
 import com.ymz.member.vo.Member;
 import com.ymz.reportedbbs.service.ReportedBBSService;
@@ -72,7 +73,7 @@ public class ReviewController {
 													@RequestParam (defaultValue="title") String searchType,@RequestParam (defaultValue="") String query,
 													@RequestParam (defaultValue="전체") String category){
 			List<Category> list = categoryService.getCategoryByFirstId("F-5"); 						// 검색 카테고리 가져오기
-			List<Category> categoryList = categoryService.getCategoryByFirstId("F-1"); 				//리뷰 카테고리 정보
+			List<Category> categoryList = categoryService.getCategoryByFirstId("F-1"); 				// 리뷰 카테고리 정보
 			Map<String, Object> map = service.ReviewSortListPaging(pageNo, sortType, searchType, query, category);
 			map.put("searchCategoryList", list);
 			map.put("categoryList", categoryList);
@@ -121,19 +122,16 @@ public class ReviewController {
 		if(errors.hasErrors()){
 			return "review/review_modify_form.tiles";
 		}
-		
-		// 작성자만 글을 수정할 수 있다.
+		/* 작성자만 글을 수정할 수 있다. */
 		Review r = service.getReviewByNo(review.getReviewNo());			 // 글번호로 글내용을 가져온다.
-		Member member = (Member) session.getAttribute("login_info");    // 로그인한 회원의 정보를 가져온다.
+		Member member = (Member) session.getAttribute("login_info");     // 로그인한 회원의 정보를 가져온다.
 		if(r.getMemberId().equals(member.getId())){
-			// 수정
 			String userid = member.getId();
 			review.setMemberId(userid);
-			service.modifyReview(review); // 리뷰 수정
+			service.modifyReview(review);						 // 리뷰 수정 메소드
 			return "redirect:/review/reviewList.do";
 		}
-		
-		return "view/loginInfoCheck.tiles";	// 수정 실패 페이지
+		return "view/loginInfoCheck.tiles";						// 수정 실패 페이지
 	}
 	
 	
@@ -142,23 +140,25 @@ public class ReviewController {
 	public String removeReview(@ModelAttribute Review review, HttpSession session){
 		// 작성자와 관리자만 삭제할 수 있다.
 		Review r = service.getReviewByNo(review.getReviewNo());			 // 글번호로 글내용을 가져온다.
-		Member member = (Member) session.getAttribute("login_info");    // 로그인한 회원의 정보를 가져온다.
+		Member member = (Member) session.getAttribute("login_info");     // 로그인한 회원의 정보를 가져온다.
+		
+		/* 작성자와 관리자만 삭제 가능하다.*/
 		if(r.getMemberId().equals(member.getId()) || member.getGrade().equals("master")){
-			// 삭제
 			String userid = member.getId();
 			review.setMemberId(userid);
 			service.removeReview(review);
 			return "redirect:/review/reviewList.do";
 		}
-		return "view/loginInfoCheck.tiles";	// 삭제 실패 페이지
+		return "view/loginInfoCheck.tiles";								// 삭제 실패 페이지
 	}
 	
-	// 리뷰 추천(로그인시 가능)
-//	1. 추천 버튼을 누르면 추천 테이블에 값을 넣는다.
-//	2. 리뷰 테이블의 추천수를 +1 해준다.
-//	3. DB에서 있는지 조회한다. return type = _int , 리턴값이  0이면 업뎃하지말고 1이면 업뎃하고
-//	4. 다시 추천 버튼을 누르면 추천 테이블의 값을 가져와서 비교한 뒤 같으면 다시 뷰로 돌악나다.
-
+/*  
+  	리뷰 추천(로그인시 가능)
+	1. 추천 버튼을 누르면 추천 테이블에 값을 넣는다.
+	2. 리뷰 테이블의 추천수를 +1 해준다.
+	3. DB에서 있는지 조회한다. return type = _int , 리턴값이  0이면 업뎃하지말고 1이면 업뎃하고
+	4. 다시 추천 버튼을 누르면 추천 테이블의 값을 가져와서 비교한 뒤 같으면 다시 뷰로 돌악나다.
+*/
 	@RequestMapping("login/ajax/recommendReview.do")
 	@ResponseBody
 	public int recommendReview(@RequestParam int reviewNo, HttpSession session, ModelMap map) throws Exception{
@@ -178,8 +178,8 @@ public class ReviewController {
 		if(result == 0){									// 추천 테이블에 값이 없으면
 			service.inputRecommend(rmap);					// 추천 테이블에 값 입력
 			service.recommendReview(reviewNo); 				// 리뷰 테이블에 추천 수 증가
-		}else if(result ==1){
-			throw new ReviewRecommendException();
+		}else if(result ==1){								// 중복 추천일 경우 Exception 발생시켜 클라이언트에게 경고창을 띄어준다.
+			throw new ReviewRecommendException("추천은 1번만 가능합니다.");
 		}
 		Review review = service.getReviewByNo(reviewNo);
 		int recommendCount = review.getRecommend();
@@ -206,14 +206,29 @@ public class ReviewController {
 	
 	// 리뷰 신고
 	@RequestMapping(value="login/reportReview.do", method=RequestMethod.POST)
-	public String reportReview(@ModelAttribute ReportedBBS bbs, HttpSession session){
-		Member member = (Member)session.getAttribute("login_info");
-		// 등록 메소드 추가
-		reportBBSService.registerReportedBBS(bbs);
+	public String reportReview(@ModelAttribute ReportedBBS bbs){
+		reportBBSService.registerReportedBBS(bbs); // 리뷰글 신고
 		return "redirect:/review/reviewView.do?reviewNo="+bbs.getReviewNo()+"&pageNo="+bbs.getPageNo();
 	}
 	
+	// 리뷰 신고 중복 체크
+	@RequestMapping(value="login/ajax/reportDuplicated.do",method=RequestMethod.POST)
+	@ResponseBody
+	public int reportDuplicatedBBS(@ModelAttribute ReportedBBS bbs, @RequestParam String id, @RequestParam int number) throws Exception{
+		int count = 0;
+		bbs.setReviewNo(number);
+		bbs.setReporterId(id);
+		count = reportBBSService.duplicatedCheckReview(bbs);	// 중복 체크 메소드 : 게시물 신고 중복일 경우엔 0이 아닌 값이 Return
+		if(count!=0){											// 클라이언트에게 Alert 호출
+			throw new DuplicatedReportBBSException("동일 게시물에 신고가 불가능합니다.");
+		}
+		return count;
+	}
+	
+	
+	
 	/////////////////////////////////////////////////////////////////쭈욘////////////////////////////////////////////////////////////////
+	
 	
 	
 	//댓글 등록

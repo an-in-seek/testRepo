@@ -12,4 +12,6 @@ public interface ReportedBBSService {
 
 	Map<String, Object> getReportedBBSListById(int pageNo, String memberId);
 
+	public abstract int duplicatedCheckReview(ReportedBBS bbs); // 중복 체크 메소드
+
 }

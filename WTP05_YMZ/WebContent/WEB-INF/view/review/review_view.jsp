@@ -129,13 +129,29 @@ $(document).ready(function(){
 	
 	// 리뷰 신고버튼
 	$("#reportBtn").on("click", function(){
-		var isCom=confirm("이 글을 신고 하시겠습니까?")
-		if(isCom){
-			$("#reportReview_dialog").dialog({modal:true, resizable: false
-			});
-		}else{
-			return;
-		}
+		var reporterId = "${sessionScope.login_info.id}"; 
+		var bbsNo ="${requestScope.review.reviewNo}";
+		$.ajax({
+			url:"${initParam.rootPath }/review/login/ajax/reportDuplicated.do",
+			data:{id:reporterId, number:bbsNo},
+			type:"post",
+			dataType:"text",
+			beforeSend:function(){
+
+			},
+			success:function(ret){
+				var isCom=confirm("이 리뷰를 신고 하시겠습니까?")
+				if(isCom){
+					$("#reportReview_dialog").dialog({modal:true, resizable: false});
+				}else{
+					return;
+				}
+			},error:function(){
+				alert("이미 신고한 리뷰입니다.");
+				return false;
+			}
+		});
+		
 	});
 	// 리뷰 신고 다이어로그 취소 버튼
 	$("#reviewReportCancel").on("click", function(){

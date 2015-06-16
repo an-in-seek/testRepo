@@ -16,4 +16,6 @@ public interface ReportedBBSDAO {
 
 	List<ReportedBBS> selectAllReportedBBSById(int pageNo, String memberId);
 
+	public abstract int duplicatedCheck(ReportedBBS bbs);	// 중복 체크
+
 }

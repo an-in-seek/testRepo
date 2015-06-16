@@ -51,4 +51,17 @@ public class ReportedBBSDAOImpl implements ReportedBBSDAO {
 	public int insertReportedBBS(ReportedBBS reportedBBS) {
 		return session.insert(namespace+"insertReportedBBS", reportedBBS);
 	}
+
+	/**
+	 * 중복 체크
+	 */
+	@Override
+	public int duplicatedCheck(ReportedBBS bbs) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", bbs.getReporterId());			// 신고자 ID
+		map.put("reviewNo", bbs.getReviewNo());		// 신고 글번호
+		return session.selectOne(namespace+"duplicatedReportedBBS", map);
+	}
+	
+	
 }

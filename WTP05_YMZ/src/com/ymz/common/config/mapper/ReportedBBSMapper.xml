@@ -56,6 +56,13 @@
 		where page = #{pageNo}
 	</select>
 	
+	<!-- 게시물 신고 중복 체크 -->
+	<select id="duplicatedReportedBBS" parameterType="map" resultType="_int">
+		select count(REPORTED_REVIEW_NO)
+		from REPORTED_REVIEW
+		where BBS_NO = #{reviewNo} and REPORTER_ID = #{id}
+	</select>
+	
 	<!-- 아디와 일치하는 DB 데이터 총 개수 -->
 	<select id="selectTotalReportedBBSCountById" resultType="_int" parameterType="String">
 		select 	count(REPORTED_REVIEW_NO) 

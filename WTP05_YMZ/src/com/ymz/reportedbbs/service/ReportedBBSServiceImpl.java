@@ -49,4 +49,13 @@ public class ReportedBBSServiceImpl implements ReportedBBSService {
 		dao.insertReportedBBS(reportedBBS);
 	}
 
+	/**
+	 * 중복 체크
+	 */
+	@Override
+	public int duplicatedCheckReview(ReportedBBS bbs) {
+		return dao.duplicatedCheck(bbs);
+	}
+
+	
 }
