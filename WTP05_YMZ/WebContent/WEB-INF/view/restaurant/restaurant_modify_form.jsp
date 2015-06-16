@@ -69,7 +69,7 @@ $(document).ready(function(){
 	});
 	
 	// 소개 textarea 줄바꿈 변환
-	$("#description").html("${requestScope.restaurant.description }".replace('<br>', '\n'));
+	$("#description").html("${requestScope.restaurant.description }".replace(/<br>/g,'\n'));
 	
 	// 사진첨부버튼 클릭 이벤트
 	$("#addPicture").on("click",function(){
@@ -103,7 +103,7 @@ $(document).ready(function(){
 	});
 	
 	// 기존에 들어있는 사진갯수를 pictureCount에 저장한다
-	pictureCount = ${fn:length(fn:split(requestScope.restaurant.pictureName,',')) };
+	pictureCount = "${fn:length(fn:split(requestScope.restaurant.pictureName,',')) }";
 	
 	// 그림 클릭시 이벤트(클릭시 삭제)
 	$("#pictureTemp").on("click","img.uploaded",function(){
@@ -273,6 +273,7 @@ $(document).ready(function(){
 		var phone = $("#phoneNo1").val()+"-"+$("#phoneNo2").val()+"-"+$("#phoneNo3").val();
 		$("#modifyForm").append("<input type='hidden' name='phoneNo' value='"+phone+"'>");
 		$("#modifyForm").append("<input type='hidden' name='restaurantNo' value='${requestScope.restaurant.restaurantNo}'>");
+		$("#modifyForm").append("<input type='hidden' name='memberId' value='${sessionScope.login_info.id}'>")
 		$("#description").val($("#description").val().replace(/\n/g, '<br>'));
 	});
 	
@@ -373,7 +374,7 @@ $(document).ready(function(){
 <tr>
 	<td>소개</td>
 	<td>
-		<textarea id="description" name="description" style="width:500px;height:100px"></textarea>
+		<textarea id="description" name="description" style="width:500px;height:100px" maxlength="300"></textarea>
 		<font color="red"><span id="infoMessage"></span></font>
 	</td>
 </tr>
@@ -401,13 +402,12 @@ $(document).ready(function(){
 <hr>
 
 <p><font size="5"><b>메뉴</b></font>&nbsp;&nbsp;(최대 10개 등록 가능)</p>
-<table style="width:100%;">
+<table>
 <thead>
 <tr align="center">
-<td>메뉴명</td>
-<td>가격</td>
-<td>설명</td>
-<td></td>
+<td style="background-color:lightgray;border-style:solid;border-color:white;">메뉴명</td>
+<td style="background-color:lightgray;border-style:solid;border-color:white;">가격</td>
+<td style="background-color:lightgray;border-style:solid;border-color:white;">설명</td>
 </tr>
 </thead>
 <tbody id="menu_table">

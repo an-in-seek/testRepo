@@ -120,11 +120,11 @@ function pw_pop(){
 			<table id="mainLoginForm">
 				<tr align="center" >
 					<td><font size="3">아이디</font></td>
-					<td><input type="text" name="id"  placeholder="ID" class="int" required="required"></td>
+					<td><input type="text" name="id"  placeholder="ID" class="int" maxlength='11' required="required"></td>
 				</tr>
 				<tr align="center" >
 					<td><font size="3">비밀번호</font></td>
-					<td><input type="password" name="password"  placeholder="Password" class="int" required="required" maxlength="16"></td>
+					<td><input type="password" name="password"  placeholder="Password" class="int" required="required" maxlength="24"></td>
 				</tr>
 			</table>
 			<table id="mainLoginInput" style="margin-top:1%">

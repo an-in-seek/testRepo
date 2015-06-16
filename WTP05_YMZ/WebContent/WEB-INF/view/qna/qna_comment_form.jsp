@@ -85,7 +85,7 @@ table#tb thead tr{
 			<tr>
 				<td>&nbsp;</td>
 				<td align="center" >제목</td>
-				<td><input type="text" id="title" name="title" style="width: 700px" value="${requestScope.qna.title}" required="required" maxlength="20"></td>
+				<td><input type="text" id="title" name="title" style="width: 700px" value="${requestScope.qna.title}" required="required" maxlength="30"></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr height="1" bgcolor="#dddddd">

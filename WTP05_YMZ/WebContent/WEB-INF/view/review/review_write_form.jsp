@@ -68,12 +68,20 @@ $(document).ready(function(){
 });
 </script>
 <style type="text/css">
-h2{
+h3{
 	text-align: center;
 }
-button{
-	width:100px;
-	height:50px;
+#save, #cancel{
+	font-family: 'Hanna', sans-serif;
+	font-size: 16px;
+	color: #808080;
+	background: #fffff7;
+	width:70px;
+	height:40px;
+	cursor: pointer;
+	-webkit-border-radius: 10px; /* 둥근 모서리 시작 */
+	-moz-border-radius: 10px;
+	border-radius: 10px;		 /* 둥근 모서리 끝 */
 }
 table#t1{
 	width: 900px;
@@ -87,9 +95,10 @@ table#t1 thead tr{
 </head>
 <body>
 
-<h2>리뷰 글쓰기 폼</h2>
+<h3>리뷰 등록</h3>
+
 <div align="center" style="padding:20px">
-	<form id="write" method="post" action="${initParam.rootPath }/review/login/write.do">
+	<form id="write" method="POST" action="${initParam.rootPath }/review/login/write.do">
 	
 	<!-- 테이블 -->
 	<table id="t1" align="center" style="border:solid 2px #B70000">
@@ -138,7 +147,7 @@ table#t1 thead tr{
 				<input type="hidden" name="category" value="공지">
 			</c:if>
 				<input type="submit" id="save" value="등록">
-				<input type="button" value="취소" onclick="javascript:history.back(-1);">
+				<input type="button" id="cancel" value="취소" onclick="location='${initParam.rootPath }/review/reviewList.do'">
 			</td>
 			<td>&nbsp;</td>
 		</tr>	

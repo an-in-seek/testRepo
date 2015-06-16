@@ -136,7 +136,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 .listTable thead tr td#latestSort{
 	cursor: pointer;
 }
-button, #searchBtn{
+button, #searchBtn, #writeBtn{
 	font-family: 'Hanna', sans-serif;
 	font-size: 16px;
 	color: #808080;
@@ -344,9 +344,9 @@ button, #searchBtn{
 	<c:choose>
 		<c:when test="${pagingBean.previousPageGroup }">
 			<a href="${initParam.rootPath }/review/reviewList.do?pageNo=${pagingBean.startPageOfPageGroup-1}&sortType=${requestScope.sortType}
-										&searchType=${requestScope.searchType}&category=${requestScope.category}&query=${requestScope.query}">◀</a>
+										&searchType=${requestScope.searchType}&category=${requestScope.category}&query=${requestScope.query}">◀&nbsp;&nbsp;&nbsp;</a>
 		</c:when>
-		<c:otherwise>◁</c:otherwise>
+		<c:otherwise>◁&nbsp;&nbsp;&nbsp;</c:otherwise>
 	</c:choose>
 	<!-- 페이지 번호 -->
 	<c:forEach begin="${pagingBean.startPageOfPageGroup }" end="${pagingBean.endPageOfPageGroup}" var="pageNum">
@@ -376,7 +376,7 @@ button, #searchBtn{
 		<tr>
 			<td>
 			<form id="categoryForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
-				<select id="category" name="category" style="width: 100px; height: 36px;">
+				<select id="category" name="category" style="width: 70px; height: 36px;">
 						<option value="전체">전체</option>
 						<c:forEach items="${requestScope.categoryList}" var="c">
 							<option value="${c.categoryName}">${c.categoryName}</option>
@@ -386,13 +386,14 @@ button, #searchBtn{
 			</td>
 			<td>
 			<form id="searchForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
-				<select id="searchSort" name="searchSort" style="width: 100px; height: 36px;">
+				<select id="searchSort" name="searchSort" style="width: 70px; height: 36px;">
 					<c:forEach items="${requestScope.searchCategoryList}" var="category">
 						<option value="${category.categoryName}">
 						<c:choose>
 							<c:when test="${category.categoryName == 'title'}">제목</c:when>						
-							<c:when test="${category.categoryName == 'id'}">아이디</c:when>						
+							<c:when test="${category.categoryName == 'content'}">내용</c:when>						
 							<c:when test="${category.categoryName == 'nickname'}">닉네임</c:when>						
+							<c:when test="${category.categoryName == 'id'}">아이디</c:when>						
 						</c:choose>
 						</option>
 					</c:forEach>
@@ -402,7 +403,9 @@ button, #searchBtn{
 			</form>
 			</td>
 			<td>
-			<a href="${initParam.rootPath }/review/login/review_write_form.do"><button>글쓰기</button></a>
+				<form method="post" action="${initParam.rootPath }/review/login/review_write_form.do">
+					<input type="submit" id="writeBtn" value="글쓰기">
+				</form>
 			</td>
 		</tr>
 	</table>

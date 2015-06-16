@@ -4,7 +4,7 @@
 <mapper namespace="faq.dao.FAQMapper">
 
 	<sql id="faq-select">
-		select 	faq_no, faq_title, faq_content
+		select 	faq_no, faq_title, faq_content, member_id
 		from		faq			
 	</sql>
 	
@@ -12,16 +12,17 @@
 		<id column="faq_no" property="number"/>
 		<result column="faq_title" property="title"/>
 		<result column="faq_content" property="content"/>
+		<result column="member_id" property="memberId"/>
 	</resultMap>
 	
 	<insert id="insertFAQ" parameterType="FAQ">
-		insert into faq (faq_no, faq_title, faq_content)
-		values (faq_no_seq.nextval, #{title}, #{content})
+		insert into faq (faq_no, faq_title, faq_content, member_id)
+		values (faq_no_seq.nextval, #{title}, #{content}, #{memberId})
 	</insert>
 	
 	<update id="updateFAQ" parameterType="FAQ">
 		update 	faq
-		set			faq_title=#{title}, faq_content=#{content}
+		set			faq_title=#{title}, faq_content=#{content}, member_id=#{memberId}
 		where		faq_no=#{number}
 	</update>
 	

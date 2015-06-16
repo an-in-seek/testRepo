@@ -9,23 +9,21 @@ public class RestaurantReply implements Serializable{
 	private String content;
 	private int score;
 	private String memberId;
-	private int restaurantNo;
 	private String nickname;
+	private int restaurantNo;
 	
-	public RestaurantReply() {
-		super();
-	}
+	public RestaurantReply() {}
 
 	public RestaurantReply(int number, String regDate, String content,
-			int score, String memberId, int restaurantNo, String nickname) {
+			int score, String memberId, String nickname, int restaurantNo) {
 		super();
 		this.number = number;
 		this.regDate = regDate;
 		this.content = content;
 		this.score = score;
 		this.memberId = memberId;
-		this.restaurantNo = restaurantNo;
 		this.nickname = nickname;
+		this.restaurantNo = restaurantNo;
 	}
 
 	public int getNumber() {
@@ -68,20 +66,20 @@ public class RestaurantReply implements Serializable{
 		this.memberId = memberId;
 	}
 
-	public int getRestaurantNo() {
-		return restaurantNo;
-	}
-
-	public void setRestaurantNo(int restaurantNo) {
-		this.restaurantNo = restaurantNo;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public int getRestaurantNo() {
+		return restaurantNo;
+	}
+
+	public void setRestaurantNo(int restaurantNo) {
+		this.restaurantNo = restaurantNo;
 	}
 
 	@Override
@@ -142,12 +140,11 @@ public class RestaurantReply implements Serializable{
 	public String toString() {
 		return "RestaurantReply [number=" + number + ", regDate=" + regDate
 				+ ", content=" + content + ", score=" + score + ", memberId="
-				+ memberId + ", restaurantNo=" + restaurantNo + ", nickname="
-				+ nickname + "]";
+				+ memberId + ", nickname=" + nickname + ", restaurantNo="
+				+ restaurantNo + "]";
 	}
 	
 	
 	
-	
-	
 }
+

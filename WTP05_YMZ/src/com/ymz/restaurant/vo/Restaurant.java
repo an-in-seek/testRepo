@@ -16,12 +16,17 @@ public class Restaurant implements Serializable {
 	private String regDate;
 	private int replyCount;
 	private int locationNo;
+	private String memberId;
+	
 	
 	public Restaurant() {}
+
+
 	public Restaurant(int restaurantNo, String restaurantName, String category,
 			String phoneNo, String description, String pictureName,
 			float score, int hits, String theme, String regDate,
-			int replyCount, int locationNo) {
+			int replyCount, int locationNo, String memberId) {
+		super();
 		this.restaurantNo = restaurantNo;
 		this.restaurantName = restaurantName;
 		this.category = category;
@@ -34,103 +39,151 @@ public class Restaurant implements Serializable {
 		this.regDate = regDate;
 		this.replyCount = replyCount;
 		this.locationNo = locationNo;
+		this.memberId = memberId;
 	}
+
 
 	public int getRestaurantNo() {
 		return restaurantNo;
 	}
 
+
 	public void setRestaurantNo(int restaurantNo) {
 		this.restaurantNo = restaurantNo;
 	}
+
 
 	public String getRestaurantName() {
 		return restaurantName;
 	}
 
+
 	public void setRestaurantName(String restaurantName) {
 		this.restaurantName = restaurantName;
 	}
+
 
 	public String getCategory() {
 		return category;
 	}
 
+
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
 
 	public String getPhoneNo() {
 		return phoneNo;
 	}
 
+
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
+
 
 	public String getDescription() {
 		return description;
 	}
 
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 
 	public String getPictureName() {
 		return pictureName;
 	}
 
+
 	public void setPictureName(String pictureName) {
 		this.pictureName = pictureName;
 	}
+
 
 	public float getScore() {
 		return score;
 	}
 
+
 	public void setScore(float score) {
 		this.score = score;
 	}
+
 
 	public int getHits() {
 		return hits;
 	}
 
+
 	public void setHits(int hits) {
 		this.hits = hits;
 	}
+
 
 	public String getTheme() {
 		return theme;
 	}
 
+
 	public void setTheme(String theme) {
 		this.theme = theme;
 	}
+
 
 	public String getRegDate() {
 		return regDate;
 	}
 
+
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+
 
 	public int getReplyCount() {
 		return replyCount;
 	}
 
+
 	public void setReplyCount(int replyCount) {
 		this.replyCount = replyCount;
 	}
+
 
 	public int getLocationNo() {
 		return locationNo;
 	}
 
+
 	public void setLocationNo(int locationNo) {
 		this.locationNo = locationNo;
 	}
+
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Restaurant [restaurantNo=" + restaurantNo + ", restaurantName="
+				+ restaurantName + ", category=" + category + ", phoneNo="
+				+ phoneNo + ", description=" + description + ", pictureName="
+				+ pictureName + ", score=" + score + ", hits=" + hits
+				+ ", theme=" + theme + ", regDate=" + regDate + ", replyCount="
+				+ replyCount + ", locationNo=" + locationNo + ", memberId="
+				+ memberId + "]";
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -142,6 +195,8 @@ public class Restaurant implements Serializable {
 				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + hits;
 		result = prime * result + locationNo;
+		result = prime * result
+				+ ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + ((phoneNo == null) ? 0 : phoneNo.hashCode());
 		result = prime * result
 				+ ((pictureName == null) ? 0 : pictureName.hashCode());
@@ -154,6 +209,7 @@ public class Restaurant implements Serializable {
 		result = prime * result + ((theme == null) ? 0 : theme.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -177,6 +233,11 @@ public class Restaurant implements Serializable {
 		if (hits != other.hits)
 			return false;
 		if (locationNo != other.locationNo)
+			return false;
+		if (memberId == null) {
+			if (other.memberId != null)
+				return false;
+		} else if (!memberId.equals(other.memberId))
 			return false;
 		if (phoneNo == null) {
 			if (other.phoneNo != null)
@@ -210,16 +271,6 @@ public class Restaurant implements Serializable {
 		} else if (!theme.equals(other.theme))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Restaurant [restaurantNo=" + restaurantNo + ", restaurantName="
-				+ restaurantName + ", category=" + category + ", phoneNo="
-				+ phoneNo + ", description=" + description + ", pictureName="
-				+ pictureName + ", score=" + score + ", hits=" + hits
-				+ ", theme=" + theme + ", regDate=" + regDate + ", replyCount="
-				+ replyCount + ", locationNo=" + locationNo + "]";
 	}
 	
 }

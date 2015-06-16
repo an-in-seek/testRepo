@@ -104,7 +104,7 @@ public class MemberController {
 		String year = (String)request.getParameter("year");
 		String month = (String)request.getParameter("month");
 		String day = (String)request.getParameter("day");
-		String exbirth = year+"-"+month+"-"+day;
+		String exbirth = year+""+month+""+day;
 		member.setBirth(exbirth);
 		String[] favoriteFood = request.getParameterValues("favoriteFood");
 		String food = "";
@@ -112,7 +112,7 @@ public class MemberController {
 			food ="없음";
 		}else{
 			for(String s :favoriteFood ){
-				food += s+", ";
+				food += s+",";
 			}
 		}	
 			String emailName = (String)request.getParameter("emailName");
@@ -189,7 +189,6 @@ public class MemberController {
 			return url;
 		}
 		String state = m.getState();
-		System.out.println(state);
 		
 		if(m!=null&&!state.equals("탈퇴")){
 			if(password.equals(m.getPassword())){
@@ -278,7 +277,6 @@ public class MemberController {
 			return new ModelAndView("member/info/modify_info.tiles",map);
 		}
 		String phoneNo = phoneCP+"-"+num1+"-"+num2;
-		System.out.println(phoneNo);
 		String zipcode = post1+"-"+post2;
 		if(service.getMemberByEmail(email)!=null&&!email.equals(exEmail)){
 			map.addAttribute("error_message", "이미 가입된 이메일입니다.");
@@ -364,7 +362,6 @@ public class MemberController {
 	@RequestMapping("nickExistCheck.do")
 	@ResponseBody
 	public String nickExistCheck(String nickname){
-		System.out.println(nickname);
 		String result = null;
 		
 		if(service.getMemberByNickname(nickname)!=null){
@@ -372,7 +369,6 @@ public class MemberController {
 		}else{
 			result = "true";
 		}
-		System.out.println(result);
 		return result;
 	}
 
@@ -408,9 +404,12 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView couponTrade(HttpSession session,HttpServletRequest request){
 		Member m = (Member)session.getAttribute("login_info");
+		if(m!=null){
 		int mileage = m.getMileage();
 		request.setAttribute("mileage", mileage);
 		return new ModelAndView("member/info/trade_coupon.tiles");
+		}
+		return new ModelAndView("redirect:index.do");
 	}
 	
 	/********************** 쿠폰 값 요청 ********************/
@@ -444,9 +443,11 @@ public class MemberController {
 		Member m = service.getMemberById(id);
 		m.setMileage(exMileage);
 		service.modifyMileage(m);
-		int mileage = m.getMileage();
+		session.setAttribute("login_info", m);
+		Member m2 = service.getMemberById(id);
+		int mileage = m2.getMileage();
 		request.setAttribute("mileage", mileage);
-		return new ModelAndView("member/info/trade_coupon.tiles");
+		return new ModelAndView("redirect:/member/login/mypage.do");
 	}
 	
 	/**********************닉네임 중복 체크********************/
@@ -470,18 +471,17 @@ public class MemberController {
 	/**********************핸드폰으로 아이디 찾기********************/
 	@RequestMapping("loginIdFind.do")
 	@ResponseBody
-	public ModelAndView loginIdFind(String name, HttpServletRequest request, ModelMap map){
-		Member m = service.getMemberByName(name);
+	public ModelAndView loginIdFind(String nickname, HttpServletRequest request, ModelMap map){
+		Member m = service.getMemberByNickname(nickname);
 		if(m!=null){
+		String state = m.getState();
 		String phone = m.getPhoneNo();
-		System.out.println(phone);
 		String phoneCP =request.getParameter("phoneCP");
 		String num1 = request.getParameter("num1");
 		String num2 = request.getParameter("num2");
 		String exPhone = phoneCP+"-"+num1+"-"+num2;
-			if(phone.equals(exPhone)){
+			if(phone.equals(exPhone)&&!state.equals("탈퇴")){
 				String id = m.getId();
-				System.out.println(id);
 				request.setAttribute("id", id);
 				return new ModelAndView("/WEB-INF/view/member/idFind_success.jsp");
 			}else{
@@ -494,64 +494,24 @@ public class MemberController {
 		}
 	}
 	
-	/**********************핸드폰으로 비밀번호 찾기********************/
-//	@RequestMapping("loginPwFind.do")
-//	@ResponseBody
-//	public ModelAndView loginPwFind(String name, HttpServletRequest request,ModelMap map){
-//		String id = null;
-//		Member m = service.getMemberByName(name);
-//		if(m!=null){
-//		String phone = m.getPhoneNo();
-//		String phoneCP =request.getParameter("phoneCP");
-//		String num1 = request.getParameter("num1");
-//		String num2 = request.getParameter("num2");
-//		String exPhone = phoneCP+"-"+num1+"-"+num2;
-//			if(phone.equals(exPhone)){
-//				id = m.getId();
-//				request.setAttribute("id", id);
-//				return new ModelAndView("/WEB-INF/view/member/pwFind_success.jsp");
-//			}else{
-//				map.addAttribute("error_message","존재하지 않는 정보입니다");
-//				return new ModelAndView("/popup/pwFind.jsp",map);	
-//				}
-//		}else{
-//			map.addAttribute("error_message", "존재하지 않는 정보입니다.");
-//			return new ModelAndView("/popup/pwFind.jsp",map);
-//		}
-//	}
-	
-	/**********************비밀번호 분실시 변경 요청********************/
-//	@RequestMapping("passwordChange.do")
-//	@ResponseBody
-//	public void passwordChange(String password, String passwordCheck, HttpServletRequest request){
-//		if(password!=passwordCheck){
-//			
-//		}else{
-//		String id = request.getParameter("id");
-//		Member m = service.getMemberById(id);
-//		m.setPassword(password);
-//		service.modifyPassword(m);
-//		}
-//		
-//	}
-	
 	/**********************이메일 인증 체크********************/
 	@RequestMapping("sendpw.do")
 	@ResponseBody
-	public ModelAndView sendpw(String id, String name, String emailName,String emailAddress, ModelMap map){
+	public ModelAndView sendpw(String id, String nickname, String emailName,String emailAddress, ModelMap map){
 		ApplicationContext context = new ClassPathXmlApplicationContext("/com/ymz/member/mail/Spring_Mail.xml");
 	    	Member checkId =service.getMemberById(id);
 	    	if(checkId!=null){
-	    		String exName1 = checkId.getName();
+	    		Member checkName = service.getMemberByNickname(nickname);
+	    		String state = checkId.getState();
+	    		String exName1 = checkId.getNickname();
 	    		String exEmail = checkId.getEmail();
-    			Member checkName = service.getMemberByName(name);
-	    		String exName2 = checkName.getName();
-	    		String exEmail2 = checkName.getEmail();
-	    		if(exName1.equals(exName2)){
-	    			String checkEmail = emailName+"@"+emailAddress;
-	    			Member m = service.getMemberByEmail(checkEmail);
+	    		String checkEmail = emailName+"@"+emailAddress;
+	    		Member m = service.getMemberByEmail(checkEmail);
+	    		if(m!=null&&!state.equals("탈퇴")&&checkName!=null){
+	    			String exEmail2 = checkName.getEmail();
+	    			String exName2 = checkName.getNickname();
 	    			String email = m.getEmail();
-	    			if(exEmail.equals(email)&&exEmail2.equals(email)){
+	    			if(exName1.equals(exName2)&&exEmail.equals(email)&&exEmail2.equals(email)){
 	    				EmailSender mm = (EmailSender) context.getBean("EmailSender");
 	    				int password = (int)(Math.random()*(99999-1000+1))+1000;
 	    				String exPassword = Integer.toString(password);
@@ -563,14 +523,16 @@ public class MemberController {
 	    				service.modifyPassword(m);
 	    				return new ModelAndView("/popup/findPw_success.jsp");
 	    			}
-	    				map.addAttribute("error_message", "존재하지 않는 정보입니다(이메일).");
+	    				map.addAttribute("error_message", "존재하지 않는 정보입니다.");
 		    			return new ModelAndView("/popup/pwFind.jsp",map);
 	    			
+	    			
 	    		}
-	    			map.addAttribute("error_message", "존재하지 않는 정보입니다(이름).");
+	    			map.addAttribute("error_message", "존재하지 않는 정보입니다");
 	    			return new ModelAndView("/popup/pwFind.jsp",map);
+	    		
 	    	}else{
-	    		map.addAttribute("error_message", "존재하지 않는 정보입니다.(아이디)");
+	    		map.addAttribute("error_message", "존재하지 않는 정보입니다.");
     			return new ModelAndView("/popup/pwFind.jsp",map);
 		}	
 	    	
@@ -591,17 +553,5 @@ public class MemberController {
 }
 
 
-	/**********************이메일 중복 체크********************/
-//	@RequestMapping("emailExistCheck.do")
-//	@ResponseBody
-//	public String emailExistCheck(@RequestParam String recommend2){
-//		String result = null;
-//		if(recommend2=="" || service.getMemberById(recommend2)!=null){
-//			result = "true";
-//			System.out.println(result);
-//		}else{
-//			result = "false";
-//			System.out.println(result);
-//		}
-//	}
+
 	

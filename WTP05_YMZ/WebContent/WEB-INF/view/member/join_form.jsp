@@ -23,7 +23,34 @@ function openDaumPostcode(){
 		}
 	}).open();
 }
+
+$(document).load(function(){
+	document.registerForm.reset(); 
+})
+
 $(document).ready(function(){
+	
+document.getElementById('id').value="";
+document.getElementById('name').value="";
+document.getElementById('nickname').value="";
+document.getElementById('postcode1').value="";
+document.getElementById('postcode2').value="";
+document.getElementById('address').value="";
+document.getElementById('detailAddress').value="";
+document.getElementById('emailName').value="";
+document.getElementById('emailAddress').value="";
+document.getElementById('selectEmail').selected
+$("#phoneCP option:eq(0)").attr("selected", "selected");
+document.getElementById('num1').value="";
+document.getElementById('num2').value="";
+document.getElementById('recommend').value="";
+$("#selectEmail option:eq(0)").attr("selected","selected");
+$("#year option:eq(0)").attr("selected","selected");
+$("#month option:eq(0)").attr("selected","selected");
+$("#day option:eq(0)").attr("selected","selected");
+$("input:checkbox[name='favoriteFood']").attr("checked", false); /* by NAME */
+$("input:radio[name='sex']").removeAttr("checked");
+
 var idDup = false;//ID 중복여부 체크 - true : 사용할 수 있다(중복아님), false : 사용할 수 없다(중복아님)
 var idExi = true;
 var pwChe = false;
@@ -261,18 +288,27 @@ var emailAddressVal = true;
 			data:{"id":id},
 			dataType:"text",
 			beforeSend:function(){
-				if(!id){//id에 입력된 값이 없으면 전송하지 않는다.
+			if(!id){//id에 입력된 값이 없으면 전송하지 않는다.
+					alert("ID를 입력하세요");
 					return false;
 				}
+			if(idSize<5){
+					$("#idMessage").text("ID는 5자리이상 입력하세요.");
+					return false;
+				}
+			if(!/^[a-zA-Z0-9]{5,12}$/.test(id)){
+					$("#idMessage").text("ID 양식이 맞지 않습니다.");
+					return false
+			}
 			},
 			success:function(ret){
 				if(ret=="false"){
 					alert("중복된 아이디입니다.");
 					document.getElementById('id').value= "";
-					$("#idMessage").text("");
-					$("#idMessage").removeClass("normalMessage");
-					$("#idMessage").addClass("errorMessage");
-					$("#idMessage").text("중복된 아이디입니다.");
+					//$("#idMessage").text("");
+					//$("#idMessage").removeClass("normalMessage");
+					//$("#idMessage").addClass("errorMessage");
+					//$("#idMessage").text("중복된 아이디입니다.");
 					idChe = false;
 				}else{
 					alert("사용가능한 아이디입니다.");
@@ -292,6 +328,7 @@ var emailAddressVal = true;
 	$("#exNick").on("click",function(){
 		check = true;
 		var nickname = $("#nickname").val();
+		var niSize = $("#nickname").val().length;
 		$.ajax({
 			url:"${initParam.rootPath}/member/nickExistCheck.do",
 			data:{"nickname":nickname},
@@ -301,14 +338,22 @@ var emailAddressVal = true;
 					alert("닉네임을 입력해주세요")
 					return false;
 				}
+				if(niSize<2){
+					$("#nickMessage").text("닉네임은 두자리이상 입력하세요.");
+					return false;
+				}
+				if(!/^[가-힣a-zA-Z0-9]{2,8}$/.test(nickname)){
+					$("#nickMessage").text("닉네임 양식이 맞지 않습니다.");
+					return false;
+				}
 			},
 			success:function(ret){
 				if(ret=="false"){
 					alert("중복된 닉네임입니다.")
-					$("#nickMessage").text("");
-					$("#nickMessage").removeClass("normalMessage");
-					$("#nickMessage").addClass("errorMessage");
-					$("#nickMessage").text("중복된 닉네임입니다.");
+					//$("#nickMessage").text("");
+					//$("#nickMessage").removeClass("normalMessage");
+					//$("#nickMessage").addClass("errorMessage");
+					//$("#nickMessage").text("중복된 닉네임입니다.");
 					document.getElementById('nickname').value= "";
 					nickChe = false;
 				}else{
@@ -526,10 +571,12 @@ table{
 	font-size : 15px;
 	width:150px;
 	background:#f0f0f0;
+	padding-left:50px;
 }
 #col2{
-	width:10px;
+	width:20px;
 }
+
 .id_btn{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -555,11 +602,11 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:'Malgun Gothic', dotum;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
-	width:55px;
+	width:65px;
 	text-decoration:none;
 	text-align:center;
 	cursor: pointer;
@@ -589,11 +636,11 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:'Malgun Gothic', dotum;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
-	width:55px;
+	width:65px;
 	text-decoration:none;
 	text-align:center;
 	cursor: pointer;
@@ -623,7 +670,7 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:'Malgun Gothic', dotum;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
@@ -632,7 +679,14 @@ table{
 	text-align:center;
 	cursor: pointer;
 }
+#col5{
+	font-size:5px;
+	font-weight:bold;
+}
 </style>
+<script type="text/javascript">
+           
+</script>
 
 <img src="${initParam.rootPath }/memberImage/header.png" id="header">
 
@@ -643,7 +697,10 @@ table{
 <form method="post" action="${initParam.rootPath }/member/join.do"  id="registerForm" enctype="multipart/form-data" >
 	<table>
 		<tr>
-			<td id="col" align="center">ID</td>
+			<td colspan="4" id="col5" align="left">*는 필수입력사항입니다.</td>
+		</tr>
+		<tr >
+			<td id="col" align="left">*ID</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" name="id" id='id' maxlength='11'> <span id="dupMessageLayer"> </span><span class="errorMessage"><form:errors path="member.id"/></span>
@@ -652,7 +709,7 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">비밀번호</td>
+			<td id="col" align="left">*비밀번호</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="password" id="password" name="password" maxlength='24'>
@@ -660,7 +717,7 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">비밀번호확인</td>
+			<td id="col" align="left">*비밀번호확인</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="password" id="passwordCheck" name="passwordCheck" maxlength='24'>
@@ -669,7 +726,7 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">이름</td>
+			<td id="col"align="left">*이름</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" id="name" name="name" maxlength='10'>
@@ -677,7 +734,7 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">닉네임</td>
+			<td id="col" align="left">*닉네임</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" id="nickname" name="nickname"  maxlength='8'>
@@ -686,11 +743,11 @@ table{
 			</td>	
 		</tr>
 			<tr>
-			<td id="col" align="center">생년월일</td>
+			<td id="col" align="left">*생년월일</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<select name="year" id="year" class="input_text w76" style="vertical-align:middle">
-			<option value="1930" >1930</option><option value="1931" >1931</option><option value="1932" >1932</option><option value=1933 >1933</option><option value=1934 >1934</option><option value=1935 >1935</option><option value=1936 >1936</option><option value=1937 >1937</option><option value=1938 >1938</option><option value=1939 >1939</option><option value=1940 >1940</option><option value=1941 >1941</option><option value=1942 >1942</option><option value=1943 >1943</option><option value=1944 >1944</option><option value=1945 >1945</option><option value=1946 >1946</option><option value=1947 >1947</option><option value=1948 >1948</option><option value=1949 >1949</option><option value=1950 >1950</option><option value=1951 >1951</option><option value=1952 >1952</option><option value=1953 >1953</option><option value=1954 >1954</option><option value=1955 >1955</option><option value=1956 >1956</option><option value=1957 >1957</option><option value=1958 >1958</option><option value=1959 >1959</option><option value=1960 >1960</option><option value=1961 >1961</option><option value=1962 >1962</option><option value=1963 >1963</option><option value=1964 >1964</option><option value=1965 >1965</option><option value=1966 >1966</option><option value=1967 >1967</option><option value=1968 >1968</option><option value=1969 >1969</option><option value=1970 >1970</option><option value=1971 >1971</option><option value=1972 >1972</option><option value=1973 >1973</option><option value=1974 >1974</option><option value=1975 >1975</option><option value=1976 >1976</option><option value=1977 >1977</option><option value=1978 >1978</option><option value=1979 >1979</option><option value=1980 selected>1980</option><option value=1981 >1981</option><option value=1982 >1982</option><option value=1983 >1983</option><option value=1984 >1984</option><option value=1985 >1985</option><option value=1986 >1986</option><option value=1987 >1987</option><option value=1988 >1988</option><option value=1989 >1989</option><option value=1990 >1990</option><option value=1991 >1991</option><option value=1992 >1992</option><option value=1993 >1993</option><option value=1994 >1994</option><option value=1995 >1995</option><option value=1996 >1996</option><option value=1997 >1997</option><option value=1998 >1998</option><option value=1999 >1999</option><option value=2000 >2000</option><option value=2001 >2001</option><option value=2002 >2002</option><option value=2003 >2003</option><option value=2004 >2004</option><option value=2005 >2005</option><option value=2006 >2006</option><option value=2007 >2007</option><option value=2008 >2008</option><option value=2009 >2009</option><option value=2010 >2010</option><option value=2011 >2011</option><option value=2012 >2012</option><option value=2013 >2013</option><option value=2014 >2014</option></select>
+			<option value="1930" >1930</option><option value="1931" >1931</option><option value="1932" >1932</option><option value=1933 >1933</option><option value=1934 >1934</option><option value=1935 >1935</option><option value=1936 >1936</option><option value=1937 >1937</option><option value=1938 >1938</option><option value=1939 >1939</option><option value=1940 >1940</option><option value=1941 >1941</option><option value=1942 >1942</option><option value=1943 >1943</option><option value=1944 >1944</option><option value=1945 >1945</option><option value=1946 >1946</option><option value=1947 >1947</option><option value=1948 >1948</option><option value=1949 >1949</option><option value=1950 >1950</option><option value=1951 >1951</option><option value=1952 >1952</option><option value=1953 >1953</option><option value=1954 >1954</option><option value=1955 >1955</option><option value=1956 >1956</option><option value=1957 >1957</option><option value=1958 >1958</option><option value=1959 >1959</option><option value=1960 >1960</option><option value=1961 >1961</option><option value=1962 >1962</option><option value=1963 >1963</option><option value=1964 >1964</option><option value=1965 >1965</option><option value=1966 >1966</option><option value=1967 >1967</option><option value=1968 >1968</option><option value=1969 >1969</option><option value=1970 >1970</option><option value=1971 >1971</option><option value=1972 >1972</option><option value=1973 >1973</option><option value=1974 >1974</option><option value=1975 >1975</option><option value=1976 >1976</option><option value=1977 >1977</option><option value=1978 >1978</option><option value=1979 >1979</option><option value=1980>1980</option><option value=1981 >1981</option><option value=1982 >1982</option><option value=1983 >1983</option><option value=1984 >1984</option><option value=1985 >1985</option><option value=1986 >1986</option><option value=1987 >1987</option><option value=1988 >1988</option><option value=1989 >1989</option><option value=1990 >1990</option><option value=1991 >1991</option><option value=1992 >1992</option><option value=1993 >1993</option><option value=1994 >1994</option><option value=1995 >1995</option><option value=1996 >1996</option><option value=1997 >1997</option><option value=1998 >1998</option><option value=1999 >1999</option><option value=2000 >2000</option><option value=2001 >2001</option><option value=2002 >2002</option><option value=2003 >2003</option><option value=2004 >2004</option><option value=2005 >2005</option><option value=2006 >2006</option><option value=2007 >2007</option><option value=2008 >2008</option><option value=2009 >2009</option><option value=2010 >2010</option><option value=2011 >2011</option><option value=2012 >2012</option><option value=2013 >2013</option><option value=2014 >2014</option></select>
 			년 
 			<select name="month" id="month" class="input_text w60" style="vertical-align:middle">
 			<option value="01" >01</option><option value=02 >02</option><option value=03 >03</option><option value=04 >04</option><option value=05 >05</option><option value=06 >06</option><option value=07 >07</option><option value=08 >08</option><option value=09 >09</option><option value=10 >10</option><option value=11 >11</option><option value=12 >12</option>			</select>
@@ -701,17 +758,17 @@ table{
 			</td>	
 		</tr>
 			<tr>
-			<td id="col" align="center">성별</td>
+			<td id="col" align="left">*성별</td>
 			<td id="col2"></td>
 			<td id="col3">
 			
 	<!-- for='m':id가 m인 입력 태그에 대한 라벨, id속성-태그의 식별값을 지정 체크박스는 선택하지 않으면 전송하지 않는다. -->
-				<label for="m"> 남성</label> <input type="radio" name="sex" value="b" id="m"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>	
-				<label for="f"> 여성</label> <input type="radio" name="sex" value="g" id="f"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>
+				<label for="m"> 남성</label> <input type="radio" id="sex" name="sex" value="남" id="m"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>	
+				<label for="f"> 여성</label> <input type="radio" id="sex" name="sex" value="여" id="f"><span class="errorMessage"><form:errors path="member.sex"></form:errors></span>
 			</td>	
 		</tr>
 		<tr>
-			<td id="col" align="center">우편번호</td>
+			<td id="col" align="left">*우편번호</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" id="postcode1" name="postcode1"  style="width:50px;"  readonly>
@@ -720,29 +777,29 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">주소</td>
+			<td id="col" align="left">*주소</td>
 			<td id="col2"></td>
 			<td id="col3"><input type="text" id="address" name="address"  style="width:400px;" readonly><span class="errorMessage"><form:errors path="member.address"></form:errors></span>
 			</td>
 		</tr>		
 		<tr>
-			<td id="col" align="center">상세주소</td>
+			<td id="col" align="left">*상세주소</td>
 			<td id="col2"></td>
-			<td id="col3"><input type="text" id="detailAddress" name="detailAddress" maxlength='20' value="${requestScope.detailAddress }" style="width:400px;"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
+			<td id="col3"><input type="text" id="detailAddress" name="detailAddress" maxlength='20' style="width:400px;"><span class="errorMessage"><form:errors path="member.detailAddress"></form:errors></span>
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">이메일</td>
+			<td id="col" align="left">*이메일</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<input type="text" id="emailName" name="emailName" maxlength='11'>@<input type="text" id="emailAddress" name="emailAddress"  maxlength="11">
-				<select name="selectEmail"  style="vertical-align:middle" id="selectEmail">
+				<select class="test" name="selectEmail"  style="vertical-align:middle" id="selectEmail" >
 				<option>직접입력</option><option value="naver.com" >네이버</option><option value="daum.net" >다음</option><option value="nate.com" >네이트</option><option value="google.com" >구글</option><option value="yahoo.com" >야후</option></select>
 				<font size="1">&nbsp;<span id="emailMessage"></span></font>
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">전화번호</td>
+			<td id="col" align="left">*전화번호</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<select name="phoneCP" id="phoneCP" class="input_text w60" style="vertical-align:middle">
@@ -752,24 +809,25 @@ table{
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">좋아하는음식</td>
+			<td id="col" align="left">&nbsp;좋아하는음식</td>
 			<td id="col2"></td>
 			<td id="col3">
 				<c:forEach var="category" items="${map}"> 
-					<label><input type="checkbox" name="favoriteFood" value="${category.key}">${category.value}</label>
+					<label><input type="checkbox" id="favoriteFood" name="favoriteFood" value="${category.key}">${category.value}</label>
 				</c:forEach>
 
 			</td>
 		</tr>
 		<tr>
-			<td id="col" align="center">추천인</td>
+			<td id="col" align="left">&nbsp;추천인</td>
 			<td id="col2"></td>
 			<td id="col3">
-				<input type="text" name="recommend" id="recommend" maxlength='20' value="${requestScope.recommend }">
+				<input type="text" name="recommend" id="recommend" maxlength='20'>
 			</td>
 		</tr>
 		<tr>
-			<td colspan="4" align="right">
+			<td id="col2"></td>
+			<td colspan="4" align="right" id="col3">
 				<input type="submit" class="nick_btn" value="가입">
 				<input type="reset" class="nick_btn" value="다시작성">
 			</td>

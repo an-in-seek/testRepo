@@ -43,8 +43,10 @@ var emailAddressVal = true;
 	document.getElementById('emailAddress').value=emailAddress;
 	
 	var phoneNo = $("#phoneNo").val();
+	var phoneCp = phoneNo.substring(0,3);
 	var num1 = phoneNo.substring(4,8);
 	var num2 = phoneNo.substring(9,13);
+	$("#phoneCP").val(phoneCp).attr("selected", "selected");
 	document.getElementById('num1').value = num1;
 	document.getElementById('num2').value = num2;
 	
@@ -66,9 +68,11 @@ var emailAddressVal = true;
 			nickVal = false;
 			return false;
 		}
-		$("#nickMessage").text("");	
-		$("#nicksMessage").text("사용가능한 닉네임입니다");
+		
+		$("#nicksMessage").text("");
+		$("#nickMessage").text("중복검사 버튼을 눌러주세요."); 
 		nickVal = true;
+	
 	});
 	
 	//이메일 유효성 검사
@@ -172,6 +176,7 @@ var emailAddressVal = true;
 	$("#exNick").on("click",function(){
 		check = true;
 		var nickname = $("#nickname").val();
+		var niSize = $("#nickname").val().length;
 		$.ajax({
 			url:"${initParam.rootPath}/member/nickDuplicateCheck.do",
 			data:{"nickname":nickname},
@@ -181,11 +186,21 @@ var emailAddressVal = true;
 					alert("닉네임을 입력해주세요")
 					return false;
 				}
+				if(niSize<2){
+					$("#nickMessage").text("닉네임은 두자리이상 입력하세요.");
+					return false;
+				}
+				if(!/^[가-힣a-zA-Z0-9]{2,8}$/.test(nickname)){
+					$("#nickMessage").text("닉네임 양식이 맞지 않습니다.");
+					return false;
+				}
 			},
 			success:function(ret){
 				if(ret=="false"){
+					alert("중복된 닉네임입니다.")
+					document.getElementById('nickname').value= "";
 					$("#nicksMessage").text("");
-					$("#nickMessage").text("중복된 닉네임입니다.");
+					$("#nickMessage").text("중복된 닉네임입니다");
 					check = false;
 					nickChe = false;
 				}else{
@@ -318,11 +333,11 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:arial;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
-	width:55px;
+	width:65px;
 	text-decoration:none;
 	text-align:center;
 	cursor: pointer;
@@ -352,11 +367,11 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:arial;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
-	width:55px;
+	width:65px;
 	text-decoration:none;
 	text-align:center;
 	cursor: pointer;
@@ -386,7 +401,7 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:arial;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;

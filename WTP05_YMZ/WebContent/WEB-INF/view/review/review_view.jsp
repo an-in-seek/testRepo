@@ -42,7 +42,6 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 //댓글 신고
 function reportReply(reviewNo, replyNum, pNo, idx){
 	var isCom=confirm("이 댓글을 신고 하시겠습니까?")
-	
 	if(isCom){
 		var content = $("#rContent" + idx).text(); //리플내용
 		$("#reportReviewReplyForm").append("<input type='hidden' name='content' value='"+content+"'>"); // 댓글 내용을 다이얼로그 폼으로 보낸다.
@@ -84,11 +83,11 @@ $(document).ready(function(){
 				if(member.id == '${requestScope.review.memberId}' && member.grade == 'master'){
 					$("#modifyBtn").show();
 				}
+				$("#reportBtn").show();
 				$("#deleteBtn").show();
 			}else if(member.id == '${requestScope.review.memberId}'){	// 글쓴이와 로그인한 회원이 같을 경우
 				$("#modifyBtn").show();
 				$("#deleteBtn").show();
-				$("#reportBtn").show();
 			}else if("${not empty sessionScope.login_info}"){			// 로그인한 사람만 신고버튼이 보인다.
 				$("#reportBtn").show();
 			}
@@ -189,7 +188,7 @@ table#replyTB thead tr{
 table#replyTB tbody tr{
 	font-family: 'Hanna', sans-serif;
 	font-size: 25px;
-	height: 140px;
+	height: 100px;
 }
 
 /* 버튼 꾸미기 */
@@ -267,21 +266,22 @@ div#reportReview_dialog{
 /* 댓글 쓰기 영역 */
 #writeReplyArea{
 	background: #eaeaea;
-	height: 105px;
+	height: 100px;
   	margin-top: 15px;
-  	padding-top: 30px;
+  	padding-top: 10px;
   	border: 1px solid #bfbfbf;
 }
 #writeReplyTB{
 	margin-right : auto; /*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left : auto; /*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
-	margin-top: -10px;
+	margin-top: -2px;
 }
 #repTable{
 	border: 2px solid lavenderblush;
 }
 #reviewContent{
 	padding-left: 10px;
+	padding-top: 10px;
 	padding-right: 10px;
   	margin-top: -10px;
   	margin-bottom: 10px;
@@ -392,8 +392,8 @@ ${requestScope.review.content }<br>
 				<c:when test="${empty sessionScope.login_info }">
 				<tr>
 					<td>
-					<!-- 댓글 작성 영역 -->
-					<textarea name="content" disabled="disabled" id="reply_content" onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">로그인부터 하세요!
+					<!-- 댓글 작성 영역(로그인x) -->
+					<textarea name="content"  disabled="disabled" id="reply_content" onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">로그인부터 하세요!
 					</textarea><br>
 					</td>	
 					<td>
@@ -406,7 +406,7 @@ ${requestScope.review.content }<br>
 				<tr>
 					<td>
 					<!-- 댓글 작성 영역 -->
-					<textarea name="content" id="reply_content" onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">타인을 배려 하는 마음을 담아 댓글을 달아주세요.
+					<textarea name="content" id="reply_content" maxlength="80"  onfocus="focusReply(this)" style="text-align:left; width:800px; height:80px;">타인을 배려 하는 마음을 담아 댓글을 달아주세요.
 내용에 따라 이용약관 및 관련 법률에 의해 임의 조치를 수행 할 수 있습니다.
 					</textarea><br>
 					</td>	

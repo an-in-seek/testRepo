@@ -135,7 +135,7 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:arial;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
@@ -169,7 +169,7 @@ table{
 	display:inline-block;
 	color:#777777;
 	font-family:arial;
-	font-size:9px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	height:20px;
@@ -216,7 +216,7 @@ table{
 
 <form method="post" action="${initParam.rootPath }/member/modify_password.do" id="modifyPassword" enctype="multipart/form-data">
 <h2 align="center">비밀번호 수정 폼</h2>
-		<table style="width:500px; border: 1px solid lightgray">
+		<table style="width:550px; border: 1px solid lightgray">
 			<tr>
 				<td id="col" align="center">기존비밀번호</td>
 				<td id="col2"></td>
@@ -245,13 +245,3 @@ table{
 			</tr>
 		</table>	
 </form>			
-
-
-
-
-
-
-
-
-
-

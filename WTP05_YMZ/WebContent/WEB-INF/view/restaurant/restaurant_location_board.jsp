@@ -14,7 +14,7 @@ a{
 <script type="text/javascript">
 $(document).ready(function(){
 	if("${requestScope.isAdmin}"){
-		$("#newRestaurantTd").append("<a href='${initParam.rootPath }/restaurant/login/admin/addNewRestaurantForm.do'><button style='background-color:gray;border-color:gray;color:white;width:100px;height:30px;'><b>맛집등록</b></button>");
+		$("#newRestaurantTd").append("<form method='post' action='${initParam.rootPath }/restaurant/login/admin/addNewRestaurantForm.do'><input type='submit' value='맛집등록' style='background-color:gray;border-color:gray;color:white;font-weight:bold;width:100px;height:30px;'></form>");
 	}
 	
 	$("a").hover(function(){
@@ -196,7 +196,7 @@ $(document).ready(function(){
 </table>
 <p/>
 <form id="searchForm" action="${initParam.rootPath }/restaurant/boardByLocation.do">
-<input style="width:200px;height:20px;" type="text" id="search" name="searchWord" value="${requestScope.searchWord }">
+<input style="width:200px;height:20px;" type="text" id="search" name="searchWord" value="${requestScope.searchWord }" placeholder="상호명으로 검색">
 <input style="width:50px;height:26px;background-color:gray;border-color:gray;color:white;font-weight:bold;" type="submit" value="검색">
 </form>
 

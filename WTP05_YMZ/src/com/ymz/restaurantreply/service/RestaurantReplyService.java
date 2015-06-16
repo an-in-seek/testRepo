@@ -3,6 +3,7 @@ package com.ymz.restaurantreply.service;
 import java.util.List;
 import java.util.Map;
 
+import com.ymz.member.vo.Member;
 import com.ymz.restaurantreply.vo.RestaurantReply;
 
 public interface RestaurantReplyService {
@@ -16,6 +17,7 @@ public interface RestaurantReplyService {
 	void removeRestaurantReply(RestaurantReply restaurantReply, int number, String userId);
 	//댓글리스트 조회
 	public abstract List selectAllRestaurantReply(int restNumber);
+	
 
 	//댓글 중복검사
 	public abstract RestaurantReply getMemberById(int restaurantNo, String memberId);
