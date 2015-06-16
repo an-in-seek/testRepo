@@ -63,8 +63,13 @@ public class RestaurantReplyServiceImpl implements RestaurantReplyService {
 
 	@Override
 	public List selectAllRestaurantReply(int restNumber) {
-
 		return dao.selectAllRestaurantReply(restNumber);
+	}
+
+	//댓글 중복확인하기
+	@Override
+	public RestaurantReply getMemberById(int restaurantNo, String memberId) {
+		return dao.getMemberById(restaurantNo, memberId);
 	}
 
 	// 송이꺼

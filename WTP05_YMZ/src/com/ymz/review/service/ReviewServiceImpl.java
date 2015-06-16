@@ -103,7 +103,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	/**
-	 * 리뷰 정렬 
+	 * 리뷰 정렬 + 분류 + 검색
 	 */
 	@Override
 	public Map<String, Object> ReviewSortListPaging(int pageNo, String type, String searchType, String query, String category) {

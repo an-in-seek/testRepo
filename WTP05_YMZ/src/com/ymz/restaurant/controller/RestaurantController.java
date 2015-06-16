@@ -1,6 +1,7 @@
 package com.ymz.restaurant.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ymz.common.validator.RestaurantReplyValidator;
 import com.ymz.common.validator.RestaurantValidator;
+import com.ymz.member.service.MemberService;
 import com.ymz.member.vo.Member;
 import com.ymz.restaurant.service.RestaurantService;
 import com.ymz.restaurant.vo.Food;
@@ -39,6 +41,7 @@ public class RestaurantController {
 	//송이꺼
 	@Autowired
 	private RestaurantReplyService replyService;
+	
 	
 	@RequestMapping("/ajax/deleteTempFile.do")
 	public void deleteTempFile(String pictures, HttpServletRequest request) {
@@ -275,7 +278,8 @@ public class RestaurantController {
 		Member member = (Member)session.getAttribute("login_info");
 		restaurantReply.setMemberId(member.getId());
 		restaurantReply.setNickname(member.getNickname());
-		 replyService.registerRestaurantReply(restaurantReply);
+		replyService.registerRestaurantReply(restaurantReply);
+			
 		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantReply.getRestaurantNo();
 	}
 	//댓글 삭제
@@ -305,6 +309,24 @@ public class RestaurantController {
 		return "redirect:/restaurant/restaurantView.do?restaurantNo="+restaurantNo;
 		
 	}
+	//중복체크
+	@RequestMapping("/idDuplicateCheck")
+	@ResponseBody
+	public String idDuplicateCheck(@RequestParam String id, @RequestParam int restaurantNo){
+
+		System.out.println("확인 : "+id);
+		System.out.println("확인 : "+restaurantNo);
+		String result;
+		System.out.println(replyService.getMemberById(restaurantNo, id));
+		if(replyService.getMemberById(restaurantNo, id)==null){
+			result="true";
+		}else{
+			result="false";
+		}
+		return result;
+	}
+	
+	//====================지훈이꺼===============
 	
 	//레스토랑삭제하기
 	@RequestMapping("/login/admin/removeRestaurant.do")

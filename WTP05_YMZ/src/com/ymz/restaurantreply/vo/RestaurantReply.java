@@ -83,14 +83,6 @@ public class RestaurantReply implements Serializable{
 	}
 
 	@Override
-	public String toString() {
-		return "RestaurantReply [number=" + number + ", regDate=" + regDate
-				+ ", content=" + content + ", score=" + score + ", memberId="
-				+ memberId + ", nickname=" + nickname + ", restaurantNo="
-				+ restaurantNo + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -144,5 +136,15 @@ public class RestaurantReply implements Serializable{
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "RestaurantReply [number=" + number + ", regDate=" + regDate
+				+ ", content=" + content + ", score=" + score + ", memberId="
+				+ memberId + ", nickname=" + nickname + ", restaurantNo="
+				+ restaurantNo + "]";
+	}
+	
+	
 	
 }
+

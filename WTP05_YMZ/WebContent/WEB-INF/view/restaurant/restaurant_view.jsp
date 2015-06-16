@@ -131,25 +131,42 @@ $(document).ready(function(){
 		$(this).css("cursor","pointer");
 	});
 //송이꺼-----------------------------------------------------------
-	
-
 
 	//내용 공백일때 경고창
 	 $("#registerBtn").click( function() {
-			if (!$("#content").val()) {
-				$("#content").focus();
-				alert("내용을 입력하세요");
-				return false;
+		var idDup;
+		var id = "${sessionScope.login_info.id}"; 
+		var restaurantNo ="${requestScope.restaurant.restaurantNo}";
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/idDuplicateCheck.do",
+			data:{"id":id,"restaurantNo":restaurantNo},
+			dataType:"text",
+			beforeSend:function(){
+				if(!id){//id에 입력된 값이 없으면 전송하지 않는다.
+					return false;
 				}
-			//평점 선택 안했을 때 경고창
-			else if($("input[type=radio][name=score]:checked").length<1){
-					alert("평점을 선택해");
-				return false;
+				if (!$("#content").val()) {
+					$("#content").focus();
+					alert("내용을 입력하세요");
+					return false;
+				}
+				//평점 선택 안했을 때 경고창
+				if($("input[type=radio][name=score]:checked").length<1){
+					alert("평점을 선택하세요");
+					return false;
+				}
+			},
+			success:function(ret){
+				if(ret=="false"){
+					alert("댓글은 1계정당 1개씩만 등록 할 수 있습니다.");
+					return false;
+				}else{
+					document.registerReplyForm.submit();
+				}
 			}
-		});  
-		
-			//댓글 수정할 때 
-			//내용 빈칸일 때 경고창
+		});
+	});  
+
 		$("#replyModifyBtn").click(function(){
 			if (!$("#ModifyContent").val()) {
 				$("#ModifyContent").focus();
@@ -162,13 +179,17 @@ $(document).ready(function(){
 			}
 		}); 
 
-		
 		$("#reply_reportButton").on("click", function() {
 			alert("로그인을 해야합니다.미구현");
 		});
-		
 	});
 	 	
+//댓글 기본 안내문
+
+	function focusReply(){
+	$("#content").html("");
+}
+
 	function modifyReply(number, restaurantNo){
 		var isUp=confirm("수정하시겠습니까?")
 		if(isUp){
@@ -211,19 +232,40 @@ display:none;
 #replyTable tr {
 	border-right: 1px solid pink;
 	border-left: 1px solid pink;
-	background-color: lavenderblush;
+}
+table#replyTable tbody tr:nth-child(2n){
+background-color: #ffffff;
+}
+table#replyTable tbody tr:nth-child(odd) {
+  	background-color:#ffe4c4;
+}
+table#replyTable thead tr{
+	font-family: 'Hanna', sans-serif;
+	color: #545c72;
+	background: #eaeaea;
+	text-align: center;
+}
+table#replyTable tbody tr{
+	font-family: 'Hanna', sans-serif;
+	font-size: 20px;
+	height:10px;
+}
+
+#replyTable tr td{
+	border-top: 1px solid pink;
+	border-bottom: 1px solid pink;
 }
 .blankTd{
 	border-right: 1px solid white;
 	border-left: 1px solid white;
 	background-color: white;
+	height:0px;
 }
-#replyTable tr td{
-	border-top: 1px solid pink;
-	border-bottom: 1px solid pink;
+
+.nicknameTd:nth-child(odd){
 }
-.nicknameTd{
-border-right: 1px solid pink;
+.ReplyTb{
+background:#ffe4c4;
 }
 </style>
 
@@ -396,6 +438,11 @@ border-right: 1px solid pink;
 	</p>
 <hr>
 	<table id="replyTable" style=" text-align:'center';width:100%;">
+	<thead>
+	<tr>
+		<td colspan="4"><font size="5" color="blue">${requestScope.restaurant.replyCount}</font>개의 댓글이 달렸습니다.</td>
+	</tr>
+	</thead>
 		<c:forEach items="${requestScope.replyList}" var="reply">
 			<tr>	
 				<td class="nicknameTd" style="width:10%">${reply.nickname}</td>
@@ -416,20 +463,18 @@ border-right: 1px solid pink;
 				</td>
 			</tr>
 		
-			<tr>
-				<td class="blankTd" colspan="4"></td>
-			</tr>
+			
 		</c:forEach>
 	</table>
 	<p>
-		<font size="5"><b>댓글쓰기</b></font>
+		<font size="5"><b> 댓글쓰기</b></font>
 	</p>
-	<form method="post" action="${initParam.rootPath}/restaurant/login/registerReply.do" id="registerReplyForm">
-		<table  style="text-align:'center' border='1' width:700px;">
+	<form method="post" action="${initParam.rootPath}/restaurant/login/registerReply.do" id="registerReplyForm" name="registerReplyForm">
+		<table class="ReplyTb" style="border='1' width:800px;">
 		<c:choose>
 			<c:when test="${not empty sessionScope.login_info}">
 				<td>
-				<textarea name="content" id="content"  onfocus="focusReply(this)" style="width: 600px; height: 80px"> 댓글기본내용</textarea>
+				<textarea name="content" id="content"  onfocus="focusReply()" style="width: 900px; height: 80px" >맛있어요~♥</textarea>
 					<input type="hidden"	id="restaurantNo" name="restaurantNo" value="${requestScope.restaurant.restaurantNo }">
 				<p>평점주기
 				 	<label for="1"></label><input type="radio" name="score" value="1" id="1"><span class="star_rating"><span style="width:20%"></span></span>
@@ -440,7 +485,7 @@ border-right: 1px solid pink;
 					</p>
 				</td>
 				<td>
-					<input type="image" src="${initParam.rootPath}/css/images/btn_registry.gif" id="registerBtn" value="등록" onclick="replySubmit()" >
+					<input type="button" src="${initParam.rootPath}/css/images/btn_registry.gif" id="registerBtn" value="등록"  >
 				</td>
 		</c:when>
 			<c:otherwise>

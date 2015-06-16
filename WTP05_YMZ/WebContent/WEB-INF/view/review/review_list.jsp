@@ -391,8 +391,9 @@ button, #searchBtn, #writeBtn{
 						<option value="${category.categoryName}">
 						<c:choose>
 							<c:when test="${category.categoryName == 'title'}">제목</c:when>						
-							<c:when test="${category.categoryName == 'id'}">아이디</c:when>						
+							<c:when test="${category.categoryName == 'content'}">내용</c:when>						
 							<c:when test="${category.categoryName == 'nickname'}">닉네임</c:when>						
+							<c:when test="${category.categoryName == 'id'}">아이디</c:when>						
 						</c:choose>
 						</option>
 					</c:forEach>
