@@ -17,6 +17,9 @@ public interface RestaurantReplyService {
 	//댓글리스트 조회
 	public abstract List selectAllRestaurantReply(int restNumber);
 
+	//댓글 중복검사
+	public abstract RestaurantReply getMemberById(int restaurantNo, String memberId);
+
 
 	
 

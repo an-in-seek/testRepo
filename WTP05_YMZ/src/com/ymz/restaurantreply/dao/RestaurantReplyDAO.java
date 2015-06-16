@@ -33,4 +33,7 @@ public interface RestaurantReplyDAO {
 	public abstract int selectReplyCount(int restaurantNo);
 	//평점 - 맛집정보 리스트에 나오는 평점
 	public abstract double updateScore(double score, int restaurantNo);
+	//댓글중복확인
+	public abstract RestaurantReply getMemberById(int restaurantNo, String memberId);
+	
 }

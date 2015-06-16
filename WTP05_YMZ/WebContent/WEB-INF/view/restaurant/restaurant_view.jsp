@@ -131,28 +131,39 @@ $(document).ready(function(){
 
 	//내용 공백일때 경고창
 	 $("#registerBtn").click( function() {
-			if (!$("#content").val()) {
-				$("#content").focus();
-				alert("내용을 입력하세요");
-				return false;
+		var idDup;
+		var id = "${sessionScope.login_info.id}"; 
+		var restaurantNo ="${requestScope.restaurant.restaurantNo}";
+		$.ajax({
+			url:"${initParam.rootPath}/restaurant/idDuplicateCheck.do",
+			data:{"id":id,"restaurantNo":restaurantNo},
+			dataType:"text",
+			beforeSend:function(){
+				if(!id){//id에 입력된 값이 없으면 전송하지 않는다.
+					return false;
 				}
-			//평점 선택 안했을 때 경고창
-			else if($("input[type=radio][name=score]:checked").length<1){
-					alert("평점을 선택해");
-				return false;
+				if (!$("#content").val()) {
+					$("#content").focus();
+					alert("내용을 입력하세요");
+					return false;
+				}
+				//평점 선택 안했을 때 경고창
+				if($("input[type=radio][name=score]:checked").length<1){
+					alert("평점을 선택하세요");
+					return false;
+				}
+			},
+			success:function(ret){
+				if(ret=="false"){
+					alert("댓글은 1계정당 1개씩만 등록 할 수 있습니다.");
+					return false;
+				}else{
+					document.registerReplyForm.submit();
+				}
 			}
-			if(restaurantNo.getMemberId()==memeber){
-				alert("한개의 계정에는 한개의 댓글만 쓸 수 있습니다.")
-			}
-		});  
-	 /* if(RestaurantNo()의 reply이 
-				member.getId() 가 중복){
-				댓글은 계정당 1개씩만 등록가능합니다.
-				}else if{
-				"/login/registerReply.do"}*/
-		
-			//댓글 수정할 때 
-			//내용 빈칸일 때 경고창
+		});
+	});  
+
 		$("#replyModifyBtn").click(function(){
 			if (!$("#ModifyContent").val()) {
 				$("#ModifyContent").focus();
@@ -220,7 +231,7 @@ display:none;
 	border-left: 1px solid pink;
 }
 table#replyTable tbody tr:nth-child(2n){
-background-color: #fff;
+background-color: #ffffff;
 }
 table#replyTable tbody tr:nth-child(odd) {
   	background-color:#ffe4c4;
@@ -228,7 +239,7 @@ table#replyTable tbody tr:nth-child(odd) {
 table#replyTable thead tr{
 	font-family: 'Hanna', sans-serif;
 	color: #545c72;
-	background: #87cefa;
+	background: #eaeaea;
 	text-align: center;
 }
 table#replyTable tbody tr{
@@ -245,9 +256,13 @@ table#replyTable tbody tr{
 	border-right: 1px solid white;
 	border-left: 1px solid white;
 	background-color: white;
+	height:0px;
 }
-.nicknameTd{
-border-right: 1px solid pink;
+
+.nicknameTd:nth-child(odd){
+}
+.ReplyTb{
+background:#ffe4c4;
 }
 </style>
 
@@ -445,20 +460,18 @@ border-right: 1px solid pink;
 				</td>
 			</tr>
 		
-			<tr>
-				<td class="blankTd" colspan="4"></td>
-			</tr>
+			
 		</c:forEach>
 	</table>
 	<p>
-		<font size="5"><b>댓글쓰기</b></font>
+		<font size="5"><b> 댓글쓰기</b></font>
 	</p>
-	<form method="post" action="${initParam.rootPath}/restaurant/login/registerReply.do" id="registerReplyForm">
-		<table  style="text-align:'center' border='1' width:700px;">
+	<form method="post" action="${initParam.rootPath}/restaurant/login/registerReply.do" id="registerReplyForm" name="registerReplyForm">
+		<table class="ReplyTb" style="border='1' width:800px;">
 		<c:choose>
 			<c:when test="${not empty sessionScope.login_info}">
 				<td>
-				<textarea name="content" id="content"  onfocus="focusReply()" style="width: 600px; height: 80px" >맛있어요~♥</textarea>
+				<textarea name="content" id="content"  onfocus="focusReply()" style="width: 900px; height: 80px" >맛있어요~♥</textarea>
 					<input type="hidden"	id="restaurantNo" name="restaurantNo" value="${requestScope.restaurant.restaurantNo }">
 				<p>평점주기
 				 	<label for="1"></label><input type="radio" name="score" value="1" id="1"><span class="star_rating"><span style="width:20%"></span></span>
@@ -469,7 +482,7 @@ border-right: 1px solid pink;
 					</p>
 				</td>
 				<td>
-					<input type="image" src="${initParam.rootPath}/css/images/btn_registry.gif" id="registerBtn" value="등록" onclick="replySubmit()" >
+					<input type="button" src="${initParam.rootPath}/css/images/btn_registry.gif" id="registerBtn" value="등록"  >
 				</td>
 		</c:when>
 			<c:otherwise>

@@ -32,7 +32,7 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO {
 	// 삭제하기
 	@Override
 	public void deleteRestaurantReply(int number, String userId) {
-		Map map = new HashMap();
+		Map<String, Comparable> map = new HashMap<String, Comparable>();
 		map.put("number", number);
 		map.put("memberId", userId);
 		session.delete(namespace + "deleteRestaurantReply", map);
@@ -82,12 +82,19 @@ public class RestaurantReplyDAOImpl implements RestaurantReplyDAO {
 	@Override
 	public double updateScore(double score, int restaurantNo) {
 
-		Map map = new HashMap();
+		Map<String, Number> map = new HashMap<String, Number>();
 		map.put("score", score);
 		map.put("restaurantNo", restaurantNo);
 		return session.update(namespace + "updateScore", map);
 	}
-
-
+	
+	//댓글 중복검사
+	@Override
+	public RestaurantReply getMemberById(int restaurantNo, String memberId) {
+		RestaurantReply vo = new RestaurantReply();
+		vo.setRestaurantNo(restaurantNo);
+		vo.setMemberId(memberId);
+		return session.selectOne(namespace+"getMemberById", vo);
+	}
 
 }
