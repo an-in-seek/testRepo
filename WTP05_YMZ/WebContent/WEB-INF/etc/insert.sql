@@ -19,19 +19,12 @@ insert into member values('user13', 5555, '아상해씨', '이상해씨', '20100
 insert into member values('user14', 5555, '이상해풀', '이상해풀', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user14@naver.com', '010-9090-9090', '한식', 100000, 'user', '20140510', '가입');
 insert into member values('user15', 5555, '이상해꽃', '이상해꽃', '20100505', '남', '472-901', '경기도 성남시 분당구', '삼평동 유스페이스', 'user15@naver.com', '010-1122-2211', '한식', 100000, 'user', '20140501', '가입');
 
-update member set grade='master' where member_id='master'
-update member set grade='master' 	where member_id='2';
-update member set mileage=11111 	where member_id='2';
-
-
-delete member where member_id='1';
 
 INSERT INTO FIRST_CATEGORY (FIRST_CATEGORY_ID, FIRST_CATEGORY_NAME, FIRST_CATEGORY_INFO) VALUES('F-1',  '유형', '유형 카테고리');
 INSERT INTO FIRST_CATEGORY (FIRST_CATEGORY_ID, FIRST_CATEGORY_NAME, FIRST_CATEGORY_INFO) VALUES('F-2',  '맛집리뷰', '맛집리뷰 게시판에서 사용될 카테고리 정보');
 INSERT INTO FIRST_CATEGORY (FIRST_CATEGORY_ID, FIRST_CATEGORY_NAME, FIRST_CATEGORY_INFO) VALUES('F-3',  '고객센터', '고객센터 게시판에서 사용될 카테고리 정보');
 INSERT INTO FIRST_CATEGORY (FIRST_CATEGORY_ID, FIRST_CATEGORY_NAME, FIRST_CATEGORY_INFO) VALUES('F-4',  '테마', '테마 카테고리');
 INSERT INTO FIRST_CATEGORY (FIRST_CATEGORY_ID, FIRST_CATEGORY_NAME, FIRST_CATEGORY_INFO) VALUES('F-5',  '맛집리뷰', '검색 카테고리');
-
 INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-1', '회원관련', '회원관련 QNA게시물 보기', 'F-3' );
 INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-2', '맛집관련', '맛집정보관련 QNA게시물 보기', 'F-3' );
 INSERT INTO SECOND_CATEGORY (SECOND_CATEGORY_ID,  SECOND_CATEGORY_NAME, SECOND_CATEGORY_INFO, FIRST_CATEGORY_ID) VALUES ('S-3', '리뷰관련', '맛집리뷰관련 QNA게시물 보기', 'F-3' );
@@ -520,6 +513,3 @@ insert into reported_review values(reported_no_seq.nextval, '리뷰', 3, '처리
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 4, '처리중', '사회갈등유발', '20150505', 'user03');
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 5, '미처리', '도배글', '20150505', 'user01');
 insert into reported_review values(reported_no_seq.nextval, '리뷰', 6, '처리중', '도배글', '20150505', 'user02');
-
-insert into reported_reply values(reportedreply_no_seq.nextval, '리뷰', 1, 2,  '안녕하세요1', '처리중', '도배글', '20150505', 'user02');
-insert into reported_reply values(reportedreply_no_seq.nextval, '리뷰', 1, 3,  '안녕하세요2', '처리중', '도배글', '20150505', 'user02');

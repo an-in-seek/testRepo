@@ -6,13 +6,13 @@
 		select	REPORT_NO,
 				CATEGORY,
 				BBS_NO,
-				REPLY_NO,
+				REVIEW_REPLY_NO,
 				content,
 				STATE,
 				REASON,
 				to_char(to_date(reported_date, 'yyyymmdd'), 'yyyy-mm-dd') reported_date, 
 				REPORTER_ID
-		from 	REPORTED_REPLY
+		from 	R_REPLY
 	</sql>
 	
 	<resultMap type="ReportedReply" id="report-resultmap">
@@ -29,9 +29,9 @@
 	
 	<!-- 전체 정보 조회 -->
 	<select id="selectAllReportedReply" parameterType="map" resultMap="report-resultmap">
-	select REPORT_NO, CATEGORY, BBS_NO, REPLY_NO, content, STATE, REASON, reported_date, REPORTER_ID
+	select REPORT_NO, CATEGORY, BBS_NO, REVIEW_REPLY_NO, content, STATE, REASON, reported_date, REPORTER_ID
 	from (
-	select ceil(rownum/#{contentsPerPage}) page, REPORT_NO, CATEGORY, BBS_NO, REPLY_NO, content, STATE, REASON, reported_date, REPORTER_ID
+	select ceil(rownum/#{contentsPerPage}) page, REPORT_NO, CATEGORY, BBS_NO, REVIEW_REPLY_NO, content, STATE, REASON, reported_date, REPORTER_ID
 	from (
 					<include refid="report-select"/>
 					order by REPORT_NO
@@ -43,13 +43,13 @@
 		<!-- DB 데이터 총 개수 -->
 	<select id="selectTotalReportedReplyCount" resultType="_int">
 		select 	count(REPORT_NO) 
-		from 		REPORTED_REPLY
+		from 		R_REPLY
 	</select>
 	
 	
 	<!-- 신고된 게시물 삽입하기 -->
 	<insert id="insertReportedReply" parameterType="ReportedReply">
-		insert into REPORTED_REPLY
+		insert into R_REPLY
 		values (reportedreply_no_seq.nextval, '리뷰', #{reviewNo}, #{replyNo}, #{content}, #{state}, #{reason}, to_char(sysdate, 'yyyymmdd'), #{reporterId})
 	</insert>
 	
