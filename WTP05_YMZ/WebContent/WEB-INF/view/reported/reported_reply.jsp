@@ -15,7 +15,7 @@
 							<td>댓글내용</td>
 							<td width="110">신고사유</td>
 							<td width="110">신고날짜</td>
-							<td width="80">처리상태</td>
+							<!--  <td width="80">처리상태</td> -->
 							<td width="80">신고자</td>
 						</tr>
 					</thead>
@@ -37,7 +37,7 @@
 									</td>
 									<td>${reported.reason}</td>
 									<td>${reported.reportedDate}</td>
-									<td>${reported.state}</td>
+									<!-- <td>${reported.state}</td> -->
 									<td>${reported.reporterId}</td>
 								</tr>
 							</c:forEach>

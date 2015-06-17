@@ -56,6 +56,7 @@
 				  review_no
 		from review_reply r, member m
 		where review_no=#{reviewNo} and r.member_id = m.member_id
+		order by reg_date
 	</select>
 	
 	<!-- 댓글 내용 갖고오기 -->

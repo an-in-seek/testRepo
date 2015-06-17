@@ -14,7 +14,7 @@
 							<td>신고된 게시물 번호</td>
 							<td>신고사유</td>
 							<td>신고날짜</td>
-							<td>처리상태</td>
+							<!--  <td>처리상태</td> -->
 							<td>신고자</td>
 						</tr>
 					</thead>
@@ -26,7 +26,7 @@
 									<td>${reported.reviewNo}</td>
 									<td>${reported.reason}</td>
 									<td>${reported.reportedDate}</td>
-									<td>${reported.state}</td>
+									<!-- <td>${reported.state}</td> -->
 									<td>${reported.reporterId}</td>
 								</tr>
 							</c:forEach>

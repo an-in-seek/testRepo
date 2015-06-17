@@ -389,12 +389,13 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView couponTrade(HttpSession session,HttpServletRequest request){
 		Member m = (Member)session.getAttribute("login_info");
-		if(m!=null){
-		int mileage = m.getMileage();
+		String id = m.getId();
+		Member m2 = service.getMemberById(id);
+		int mileage = m2.getMileage();
 		request.setAttribute("mileage", mileage);
+		session.setAttribute("login_info", m2);
 		return new ModelAndView("member/info/trade_coupon.tiles");
-		}
-		return new ModelAndView("redirect:index.do");
+		
 	}
 	
 	/********************** 쿠폰 값 요청 ********************/
