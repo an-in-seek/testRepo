@@ -150,7 +150,6 @@
 			select ceil(rownum/#{contentsPerPage}) page, member_id, member_password, name, nickname, birth, sex, zipcode, address, detail_address, email, phone_no, favorite_food, mileage, grade, join_date, state
 			from (
 					<include refid="member-select"/>
-					order by member_id
 			)
 		) 
 		where page = #{pageNo}

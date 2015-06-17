@@ -11,10 +11,10 @@
 						<tr align="center">
 							<td width="40">NO</td>
 							<td width="40">분류</td>
-							<td width="80">게시물NO</td>
+							<td width="100">게시물NO</td>
 							<td>댓글내용</td>
 							<td width="110">신고사유</td>
-							<td width="90">신고날짜</td>
+							<td width="110">신고날짜</td>
 							<td width="80">처리상태</td>
 							<td width="80">신고자</td>
 						</tr>

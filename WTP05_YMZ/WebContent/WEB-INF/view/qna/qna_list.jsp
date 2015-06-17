@@ -62,7 +62,7 @@ a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라�
 	float:center;   /*왼쪽으로 띄움 */
 }
 .listTB {
-	width: 800px;
+	width: 900px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 }

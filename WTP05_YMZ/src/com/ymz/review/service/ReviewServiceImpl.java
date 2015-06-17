@@ -145,6 +145,15 @@ public class ReviewServiceImpl implements ReviewService {
 		return map;
 	}
 
+	/**
+	 * 업데이트 마일리지
+	 */
+	@Override
+	public void updateMileage(String id) {
+		dao.updateMileage(id);
+		
+	}
 
+	
 
 }

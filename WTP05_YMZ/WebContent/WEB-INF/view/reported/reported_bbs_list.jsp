@@ -41,7 +41,7 @@
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
 	align:center;
-	width:800px;
+	width:1000px;
 	border: 1;
 }
 .listTB thead tr {

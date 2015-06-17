@@ -61,16 +61,24 @@ public class ReviewDAOImpl implements ReviewDAO{
 	 */
 	@Override
 	public void inputRecommend(Map rmap) {
-		session.insert(namespace+"insertRecommendReview", rmap);
+		session.insert(namespace+"insertRecommendReview", rmap);	
 	}
 
 	/**
-	 * 리뷰 추천
+	 * 리뷰 추천  (+1 시키기)
 	 */
 	public void recommendReview(int reviewNo){
-		session.update(namespace+"recommendReview", reviewNo);
+		session.update(namespace+"recommendReview", reviewNo);	// 추천수 UP!
 	}
 	
+	/**
+	 * 추천 시 마일리지 증가 (+10)
+	 */
+	@Override
+	public void updateMileage(String id) {
+		session.update(namespace+"updateMileage", id);
+	}
+
 	/**
 	 * 리뷰 조회
 	 */

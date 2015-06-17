@@ -61,6 +61,9 @@ public interface ReviewDAO {
 	//회원 아이디(ID)와 일치하는 리뷰 게시물 총 개수
 	public abstract int selectReviewCountById(String memberId);
 
+	// 마일리지 업데이트
+	public abstract void updateMileage(String id);
+
 
 	
 }

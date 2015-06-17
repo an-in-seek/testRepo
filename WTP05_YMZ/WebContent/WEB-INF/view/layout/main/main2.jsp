@@ -39,7 +39,7 @@
   font-family: 'Hanna', sans-serif;
 }
 .bestMonthTB, .todayBestTB{
-	width: 260px;
+	width: 300px;
   	margin-left: auto;
   	margin-right: auto;
   	  

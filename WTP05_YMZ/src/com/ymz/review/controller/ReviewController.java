@@ -178,6 +178,7 @@ public class ReviewController {
 		if(result == 0){									// 추천 테이블에 값이 없으면
 			service.inputRecommend(rmap);					// 추천 테이블에 값 입력
 			service.recommendReview(reviewNo); 				// 리뷰 테이블에 추천 수 증가
+			service.updateMileage(member.getId());
 		}else if(result ==1){								// 중복 추천일 경우 Exception 발생시켜 클라이언트에게 경고창을 띄어준다.
 			throw new ReviewRecommendException("추천은 1번만 가능합니다.");
 		}

@@ -40,5 +40,8 @@ public interface ReviewService {
 	// 아이디(ID)로 리뷰게시물 조회하기
 	Map<String, Object> getReviewListPagingById(int pageNo, String memberId);
 
+	// 마일리지 업데이트
+	public abstract void updateMileage(String id);
+
 	
 }

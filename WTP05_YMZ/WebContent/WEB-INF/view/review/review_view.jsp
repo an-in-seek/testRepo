@@ -41,12 +41,11 @@ function modifyReply(reviewNo, replyNum, pNo, idx){
 
 //댓글 신고
 function reportReply(reviewNo, replyNum, pNo, idx){
-	alert(replyNum);
 	var isCom=confirm("이 댓글을 신고 하시겠습니까?")
 	if(isCom){
 		var content = $("#rContent" + idx).text(); //리플내용
 		$("#reportReviewReplyForm").append("<input type='hidden' name='content' value='"+content+"'>"); // 댓글 내용을 다이얼로그 폼으로 보낸다.
-		$("#reportReviewReplyForm").append("<input type='hidden' name='replyNo' value='"+replyNum+"'>"); // 댓글 번호을 다이얼로그 폼으로 보낸다.
+		$("#reportReviewReplyForm").append("<input type='hidden' name='replyNo' value='"+replyNum+"'>"); // 댓글 번호를 다이얼로그 폼으로 보낸다.
 		$("#reportReply_dialog").dialog({modal:true, resizable: false});
 	}else{
 		return;
