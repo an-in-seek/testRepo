@@ -277,6 +277,7 @@ public class ReviewController {
 		public String reportReviewReply(@ModelAttribute ReportedReply reply, HttpSession session){
 			Member member = (Member)session.getAttribute("login_info");
 			System.out.println("로긴한 회원 : " + member.getId());
+			System.out.println("댓글 번호!!!!!!!! : " + reply.getReplyNo());
 
 			//등록메소드추가
 			reportReplyService.registerReportedReply(reply);

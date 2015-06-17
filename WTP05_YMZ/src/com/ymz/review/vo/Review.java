@@ -3,8 +3,8 @@ package com.ymz.review.vo;
 import java.io.Serializable;
 import java.util.List;
 
-public class Review implements Serializable{
-	
+public class Review implements Serializable {
+
 	private int reviewNo;
 	private String category;
 	private String title;
@@ -12,24 +12,25 @@ public class Review implements Serializable{
 	private int hits;
 	private String content;
 	private int recommend;
-	private int report;             // 비추천수
+	private int report; // 비추천수
 	private String memberId;
-	////////////////////////////////////////////// 참조용 변수들
-	private String nickname;		// 회원 닉네임
-	private int replyCount;			// 댓글 개수
-	private int pageNo = 1;				// 페이지 번호
-	private String sortType;		// 정렬 방식
-	private String searchType;		// 검색 방식
-	private String query;			// 검색어
-	
-	public Review(){
-		
+	// //////////////////////////////////////////// 참조용 변수들
+	private String nickname; // 회원 닉네임
+	private int replyCount; // 댓글 개수
+	private int pageNo = 1; // 페이지 번호
+	private String sortType; // 정렬 방식
+	private String searchType; // 검색 방식
+	private String query; // 검색어
+	private int replyNo; // 리플번호
+
+	public Review() {
+
 	}
 
 	public Review(int reviewNo, String category, String title, String regDate,
 			int hits, String content, int recommend, int report,
 			String memberId, String nickname, int replyCount, int pageNo,
-			String sortType, String searchType, String query) {
+			String sortType, String searchType, String query, int replyNo) {
 		super();
 		this.reviewNo = reviewNo;
 		this.category = category;
@@ -46,6 +47,7 @@ public class Review implements Serializable{
 		this.sortType = sortType;
 		this.searchType = searchType;
 		this.query = query;
+		this.replyNo = replyNo;
 	}
 
 	public int getReviewNo() {
@@ -168,6 +170,14 @@ public class Review implements Serializable{
 		this.query = query;
 	}
 
+	public int getReplyNo() {
+		return replyNo;
+	}
+
+	public void setReplyNo(int replyNo) {
+		this.replyNo = replyNo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -185,6 +195,7 @@ public class Review implements Serializable{
 		result = prime * result + recommend;
 		result = prime * result + ((regDate == null) ? 0 : regDate.hashCode());
 		result = prime * result + replyCount;
+		result = prime * result + replyNo;
 		result = prime * result + report;
 		result = prime * result + reviewNo;
 		result = prime * result
@@ -242,6 +253,8 @@ public class Review implements Serializable{
 			return false;
 		if (replyCount != other.replyCount)
 			return false;
+		if (replyNo != other.replyNo)
+			return false;
 		if (report != other.report)
 			return false;
 		if (reviewNo != other.reviewNo)
@@ -272,8 +285,9 @@ public class Review implements Serializable{
 				+ ", report=" + report + ", memberId=" + memberId
 				+ ", nickname=" + nickname + ", replyCount=" + replyCount
 				+ ", pageNo=" + pageNo + ", sortType=" + sortType
-				+ ", searchType=" + searchType + ", query=" + query + "]";
+				+ ", searchType=" + searchType + ", query=" + query
+				+ ", replyNo=" + replyNo + "]";
 	}
-
+	
 	
 }
