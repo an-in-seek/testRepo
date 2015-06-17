@@ -55,6 +55,10 @@ function reportReply(reviewNo, replyNum, pNo, idx){
 $(document).ready(function(){
 	
 	var reviewNumber = ${requestScope.review.reviewNo};
+	var idid = '${requestScope.review.memberId}';
+	
+	
+	
 	// 새로고침 조회수 증가 막기
 	var c = $.cookie('reviewNo'); // 쿠키 조회
 	$.cookie('reviewNo', '${requestScope.review.reviewNo}'); // 쿠키 reviewNo를 셋팅
@@ -104,10 +108,11 @@ $(document).ready(function(){
 			alert("로그인 후 추천이 가능합니다.");
 			return;
 		}
+		
 		$.ajax({
 			url:"${initParam.rootPath }/review/login/ajax/recommendReview.do", // 요청 url
 			type:"post",
-			data:{reviewNo:reviewNumber}, // 요청 파라미터 id = xxxxxxxx
+			data:{reviewNo:reviewNumber, id:idid}, // 요청 파라미터 id = xxxxxxxx
 			success:function(txt){
 				$("#recommendCount").html("추천수 : " + "<font color='red'>"+txt+"</font>");
 				$("#recommendCountBtn").html("<font color='red' size='5'>"+txt+"</font>");
