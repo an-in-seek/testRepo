@@ -499,8 +499,9 @@ background:#ffe4c4;
 		</c:when>
 			<c:otherwise>
 			<tr>
+			<!-- 비회원일때 댓글창 비활성화 -->
 				<td disabled="disabled">	
-					<textarea name="content" id="content" name="content" disabled="disabled" onfocus="focusReply(this)" style="width: 600px; height: 80px">로그인을 하시오
+					<textarea name="content" id="content" name="content" disabled="disabled" onfocus="focusReply(this)" style="width: 900px; height: 80px">로그인을 하시오
 					</textarea>
 						<input type="hidden"	id="restaurantNo" name="restaurantNo" value="${requestScope.restaurant.restaurantNo }">
 				<p>평점주기
