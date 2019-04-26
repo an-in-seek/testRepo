@@ -7,7 +7,7 @@
 <title>먹자먹자 야 먹자</title>
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery-ui.js"></script>
 <link type="text/css" href="${initParam.rootPath }/css/jquery-ui.css" rel="stylesheet" />	
-<script type="text/javascript" src="/WTP05_YMZ/se2/js/HuskyEZCreator.js" charset="utf-8"></script> 
+<script type="text/javascript" src="/se2/js/HuskyEZCreator.js" charset="utf-8"></script> 
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -15,7 +15,7 @@ $(document).ready(function(){
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef: oEditors,
 		elPlaceHolder: "content",
-		sSkinURI: "/WTP05_YMZ/se2/SmartEditor2Skin.html",
+		sSkinURI: "/se2/SmartEditor2Skin.html",
 		htParams : {
 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 			bUseToolbar : true,

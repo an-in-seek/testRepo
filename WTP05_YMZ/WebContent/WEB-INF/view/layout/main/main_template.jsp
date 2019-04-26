@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 페이버릿 아이콘 적용 -->
+<link href="${initParam.rootPath }/css/images/favicon.png" rel="shortcut icon" type="image/x-icon">
+<link href="${initParam.rootPath }/css/images/favicon.png" rel="icon" type="image/x-icon">
 <title>야먹자~!~!</title>
 <!-- jQuery Library import -->
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery.js"></script>
