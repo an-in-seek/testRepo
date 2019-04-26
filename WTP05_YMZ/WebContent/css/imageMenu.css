@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 .ch-item {
 	width: 100%;
 	height: 100%;
@@ -17,21 +17,21 @@
 }
 
 .ch-img-1 { 
-	background-image: url(/WTP05_YMZ/uploadPhoto/hansik-1.jpg);
+	background-image: url(/uploadPhoto/hansik-1.jpg);
 }
 
 .ch-img-2 { 
-	background-image: url(/WTP05_YMZ/uploadPhoto/yangsik-1.jpg);
+	background-image: url(/uploadPhoto/yangsik-1.jpg);
 }
 
 .ch-img-3 { 
-	background-image: url(/WTP05_YMZ/uploadPhoto/ilsik-1.jpg);
+	background-image: url(/uploadPhoto/ilsik-1.jpg);
 }
 .ch-img-4 { 
-	background-image: url(/WTP05_YMZ/uploadPhoto/jungsik-1.jpg);
+	background-image: url(/uploadPhoto/jungsik-1.jpg);
 }
 .ch-img-5 { 
-	background-image: url(/WTP05_YMZ/uploadPhoto/all-view-1.jpg);
+	background-image: url(/uploadPhoto/all-view-1.jpg);
 }
 
 .ch-info {

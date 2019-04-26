@@ -10,7 +10,7 @@ $(document).ready(function(){
 </script>
 
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 #main{
 	font-family: 'Hanna', sans-serif;
 }

@@ -94,7 +94,7 @@ var pwCheck = false;
 
 </script>
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 table{
 	margin-left: auto;
 	margin-right: auto;

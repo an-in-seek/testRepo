@@ -13,7 +13,7 @@ $(document).ready(function(){
 });
 </script>
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 #right_menu2{				/* 로그인 입력 폼 */
 	width: auto; 
 	height: auto;

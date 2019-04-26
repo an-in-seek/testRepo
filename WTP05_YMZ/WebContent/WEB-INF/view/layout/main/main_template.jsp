@@ -9,7 +9,7 @@
 <script type="text/javascript" src="${initParam.rootPath }/script/jquery.js"></script>
 
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 /*메세지 스타일*/
 .errorMessage{
 	font-size: 12px;

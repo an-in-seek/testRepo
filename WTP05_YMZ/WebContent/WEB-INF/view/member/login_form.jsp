@@ -14,14 +14,14 @@ function pw_pop(){
 $(document).ready(function(){ 
     var numberOfImages=3; 
     var imageNum = Math.round(Math.random()*(numberOfImages-1))+1; 
-    var imgPath=('/WTP05_YMZ/memberImage/'+imageNum+'.png'); 
+    var imgPath=('/memberImage/'+imageNum+'.png'); 
     $('#mainbgs').css('background-image', ('url("'+imgPath+'")')); 
       
     }) 	 
 </script>
 
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 #div{
 	border: 1px steelblue;
 	margin-left:auto;

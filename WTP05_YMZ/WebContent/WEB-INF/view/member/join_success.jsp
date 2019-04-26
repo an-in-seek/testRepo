@@ -11,7 +11,7 @@ function goMain() {
 }
 </script>
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
 
 #table{
 	margin:50px 50px 50px 50px;

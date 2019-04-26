@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 a {
 	color: black;
 }
@@ -318,7 +318,7 @@ ul, li {
 </head>
 <body>
 	<div align="center">
-		<div id="pangyo-map" style="margin-bottom: 33px; border-color: white; width: 642px; height: 426px; background-image: url(http://127.0.0.1:8088/WTP05_YMZ/uploadPhoto/pangyo-map.png);">
+		<div id="pangyo-map" style="margin-bottom: 33px; border-color: white; width: 642px; height: 426px; background-image: url(/uploadPhoto/pangyo-map.png);">
 		
 			<!-- u-space2동 -->
 			<div id="uspace2">

@@ -85,7 +85,7 @@ $(document).ready(function(){
 });
 </script>
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 a.list:link {text-decoration:none; color: #545c72;}/*방문하지 않은 페이지*/
 a.list:visited {text-decoration:none; color: #545c72;}/*방문한 링크 표시*/ 
 a.list:hover {text-decoration:none; color: tomato;}/*링크에 마우스 올라갔을 때*/
@@ -378,9 +378,9 @@ button, #searchBtn, #writeBtn{
 			<td>
 			<form id="categoryForm" action="${initParam.rootPath }/review/reviewList.do" method="get">
 				<select id="category" name="category" style="width: 80px; height: 36px;">
-						<option value="전체">전체</option>
+						<option value="00">전체</option>
 						<c:forEach items="${requestScope.categoryList}" var="c">
-							<option value="${c.categoryName}">${c.categoryName}</option>
+							<option value="${c.categoryId}">${c.categoryName}</option>
 						</c:forEach>
 				</select>
 			</form>

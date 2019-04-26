@@ -3,16 +3,17 @@
 <mapper namespace="review.dao.ReviewMapper">
 
 	<sql id="review-select">
-		select  review_no,
-				category 
-				title, 
-				content, 
-				hits, 
-				recommend, 
-				reg_date, 
-				member_id,
-				(select count(*) from REVIEW_REPLY where review_reply.review_no = review.review_no) reply_count
-		from review
+		select  a.review_no,
+				c.SECOND_CATEGORY_NAME category,
+				a.title, 
+				a.content, 
+				a.hits, 
+				a.recommend, 
+				a.reg_date, 
+				a.member_id,
+				(select count(*) from REVIEW_REPLY where review_reply.review_no = a.review_no) reply_count
+		from review a
+		left outer join SECOND_CATEGORY c on a.category = c.SECOND_CATEGORY_ID
 	</sql>
 	
 	<resultMap type="review" id="review-resultmap">
@@ -156,21 +157,23 @@
 					   review_no, category, title, content, hits, nickname,
 					   recommend, reg_date, member_id, reply_count
 				from (
-						select  review_no, 
-								category,
-								title, 
-								content, 
-								hits, 
-								recommend, 
-								reg_date,
+						select  a.review_no, 
+								c.SECOND_CATEGORY_NAME category,
+								a.title, 
+								a.content, 
+								a.hits, 
+								a.recommend, 
+								a.reg_date,
 								m.member_id member_id,
 								m.nickname nickname,
-								(select count(*) from REVIEW_REPLY where review_reply.review_no = review.review_no) reply_count
-						from 	review, member m
+								(select count(*) from REVIEW_REPLY where review_reply.review_no = a.review_no) reply_count
+						from 	review a
+						left outer join member m on a.member_id = m.member_id 
+						left outer join SECOND_CATEGORY c on a.category = c.SECOND_CATEGORY_ID
 						where 1=1
-						and review.member_id = m.member_id and m.grade != 'master'
+						and m.grade != 'master'
 						<choose>
-							<when test="category!='전체'">
+							<when test="category!='00'">
 								and category=#{category}
 							</when>
 						</choose>
@@ -219,7 +222,7 @@
 		select count(review_no) from review r, member m
 		where 1=1 and r.member_id = m.member_id and m.grade != 'master'
 		<choose>
-						<when test="category!='전체'">
+						<when test="category!='00'">
 								and category=#{category}
 						</when>
 		</choose>

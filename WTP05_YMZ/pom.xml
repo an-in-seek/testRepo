@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion> 
   <groupId>WTP05_YMZ</groupId>
   <artifactId>WTP05_YMZ</artifactId>
   <version>0.0.1-SNAPSHOT</version>
@@ -8,7 +8,7 @@
     <sourceDirectory>src</sourceDirectory>
     <resources>
       <resource> 
-        <directory>src</directory>
+        <directory>src</directory> 
         <excludes>
           <exclude>**/*.java</exclude>
         </excludes>
@@ -19,12 +19,12 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>2.4</version>
         <configuration>
-          <warSourceDirectory>WebContent</warSourceDirectory>
+          <warSourceDirectory>WebContent</warSourceDirectory> 
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
+        <artifactId>maven-compiler-plugin</artifactId> 
         <version>3.1</version>
         <configuration>
           <source>1.8</source>

@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
+<script src='https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js'></script>
 <script type="text/javascript">
 
 /*
@@ -555,7 +555,7 @@ var emailAddressVal = true;
 </script>
 
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 div#table{
 	padding: 20px;
 	font-weight:bold;

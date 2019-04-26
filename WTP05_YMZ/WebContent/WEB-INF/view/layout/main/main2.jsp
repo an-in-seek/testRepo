@@ -6,7 +6,7 @@
 </script>
 
 <style>
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 #main-title {color:#f8f8f8;font-size:70pt;margin-top:20%;}
 .se {font-family: serif;}
 .sa {font-family: sans-serif;}

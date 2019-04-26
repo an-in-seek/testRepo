@@ -1,17 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   
-  <display-name>WTP05_YMZ</display-name>
-  
-  <welcome-file-list>
-    <welcome-file>index.do</welcome-file>
-  </welcome-file-list>
-  
-  <context-param>
-  	<param-name>rootPath</param-name>
-  	<param-value>/WTP05_YMZ</param-value>
-  </context-param>
-  
+	<display-name>WTP05_YMZ</display-name>
+	
+	<welcome-file-list>
+	  <welcome-file>index.do</welcome-file>
+	</welcome-file-list>
+	
+	<context-param>
+		<param-name>rootPath</param-name>
+		<param-value></param-value>
+	</context-param>
+ 
+	<security-constraint>
+	  <web-resource-collection>
+	      <web-resource-name>SSL Forward</web-resource-name>
+	      <url-pattern>/*</url-pattern>
+	  </web-resource-collection>
+	  <user-data-constraint>
+	      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+	  </user-data-constraint>
+	</security-constraint>
+		
+	
+	<security-constraint>
+	    <web-resource-collection>
+	        <web-resource-name>HTTPS or HTTP</web-resource-name>
+	        <url-pattern>/css/*</url-pattern>
+	        <url-pattern>/images/*</url-pattern>
+	        <url-pattern>/memberImage/*</url-pattern>
+	        <url-pattern>/img/*</url-pattern>
+	        <url-pattern>/photo_uploader/*</url-pattern>
+	        <url-pattern>/tempPhoto/*</url-pattern>
+	        <url-pattern>/uploadPhoto/*</url-pattern>
+	    </web-resource-collection>
+	    <user-data-constraint>
+	        <transport-guarantee>NONE</transport-guarantee>
+	    </user-data-constraint>
+	</security-constraint>
+
+
   <!-- The front controller of this Spring Web application, responsible for handling all application requests -->
 	<servlet>
 		<servlet-name>springDispatcherServlet</servlet-name>
@@ -29,7 +57,7 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
-		<!--Spring 제공 EncodingFilter추가-->
+	<!--Spring 제공 EncodingFilter추가-->
 	<filter>
   		<filter-name>encodingFilter</filter-name>
   		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
